@@ -156,6 +156,212 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-FreeRTOS-02-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/FreeRTOS-02-delay/">FreeRTOS-02-delay</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/FreeRTOS-02-delay/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="两种delay"><a href="#两种delay" class="headerlink" title="两种delay"></a>两种delay</h1><p>FreeRTOS有两种自带的delay函数，一个是vTaskDelay和vTaskDelayUntil。二者的区别就是后者专为精确生成延时而设计的。</p>
+<p>在CubeMX自动生成的代码时，都经过一层封装。</p>
+<ul>
+<li>vTaskDelay被封装成了osDelay</li>
+<li>vTaskDelayUntil被封装成了osDelayUntil</li>
+</ul>
+<p>对于osDelay</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************** Generic Wait Functions *******************************/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief   Wait for Timeout (Time Delay)</span></span><br><span class="line"><span class="comment">* @param   millisec      time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelay</span></span><br><span class="line">  TickType_t ticks = millisec / portTICK_PERIOD_MS;</span><br><span class="line">  </span><br><span class="line">  vTaskDelay(ticks ? ticks : <span class="number">1</span>);          <span class="comment">/* Minimum delay = 1 tick */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于vTaskDelayUntil</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief  Delay a task until a specified time</span></span><br><span class="line"><span class="comment">* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the </span></span><br><span class="line"><span class="comment">*          task was last unblocked. PreviousWakeTime must be initialised with the current time</span></span><br><span class="line"><span class="comment">*          prior to its first use (PreviousWakeTime = osKernelSysTick() )</span></span><br><span class="line"><span class="comment">* @param   millisec    time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelayUntil</span></span><br><span class="line">  TickType_t ticks = (millisec / portTICK_PERIOD_MS);</span><br><span class="line">  vTaskDelayUntil((TickType_t *) PreviousWakeTime, ticks ? ticks : <span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  (<span class="keyword">void</span>) PreviousWakeTime;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vTaskDelay的延时指的是从delay函数被调用的一刻开始计数，直到计数（计时）结束；</p>
+<p>而vTaskDelayUntil的延时是从Task离开阻塞态开始，到下一次进入就绪态为止的时常。因此可以精确的控制loop的周期，适合需要更精确计时的场合。</p>
+<p>值得注意的是，后者需要多提供一个参数<code>PreviousWakeTime</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 只要一个延时长度的参数</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 还需要前一个时间点</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7059790.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7059790.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/FreeRTOS-02-delay/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-FreeRTOS-01-pvParameters" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/FreeRTOS-01-pvParameters/">FreeRTOS-01-pvParameters</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/FreeRTOS-01-pvParameters/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:45:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="给task传递参数"><a href="#给task传递参数" class="headerlink" title="给task传递参数"></a>给task传递参数</h1><p>FreeRTOS通过调用xTaskCreate函数来新建task。使用CubeMX生成的代码则是在xTaskCreate的外面包装了一层。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *para = <span class="string">"Hello World for pvParameters.\r\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Create the thread(s) */</span></span><br><span class="line"><span class="comment">/* definition and creation of vTaskBase */</span></span><br><span class="line">osThreadDef(vTaskBase, StartTaskBase, osPriorityNormal, <span class="number">0</span>, <span class="number">128</span>);</span><br><span class="line">vTaskBaseHandle = osThreadCreate(osThread(vTaskBase), (<span class="keyword">void</span>*)para);  <span class="comment">// osThreadCreate内部调用了xTaskCreate函数</span></span><br></pre></td></tr></table></figure>
+
+<p>新建的Task的定义如下，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN Header_StartTaskBase */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Function implementing the vTaskBase thread.</span></span><br><span class="line"><span class="comment">  * @param  argument: Not used </span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="comment">/* USER CODE END Header_StartTaskBase */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartTaskBase</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> * argument)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN StartTaskBase */</span></span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="keyword">uint32_t</span> time_out = <span class="number">1000</span> * <span class="built_in">strlen</span>(argument) * (<span class="number">8</span> + <span class="number">1</span>) / (huart3.Init.BaudRate);  <span class="comment">// round to N Ms</span></span><br><span class="line">  <span class="keyword">for</span>(;;)</span><br><span class="line">  &#123;</span><br><span class="line">    osDelay(<span class="number">500</span>);</span><br><span class="line">    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);</span><br><span class="line">    HAL_UART_Transmit(&amp;huart3, (<span class="keyword">uint8_t</span> *) argument, <span class="built_in">strlen</span>(argument), time_out + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END StartTaskBase */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>xTaskCreate函数的定义如下，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BaseType_t <span class="title">xTaskCreate</span><span class="params">(	TaskFunction_t pxTaskCode,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> pcName,		<span class="comment">/*lint !e971 Unqualified char types are allowed for strings and single characters only. */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> configSTACK_DEPTH_TYPE usStackDepth,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">void</span> * <span class="keyword">const</span> pvParameters,</span></span></span><br><span class="line"><span class="function"><span class="params">                       UBaseType_t uxPriority,</span></span></span><br><span class="line"><span class="function"><span class="params">                       TaskHandle_t * <span class="keyword">const</span> pxCreatedTask )</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该函数的<code>void * const pvParameters</code>参数用来传递参数给Task。</p>
+<p>上面的例子就是初始化一个字符串然后通过pvParameters传递给了新建的Task，并在Task内作为message通过串口打印出来。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7055047.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7055047.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pvparameter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/FreeRTOS-01-pvParameters/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -919,191 +1125,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/01/06/C-01-data-type/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-Warning-01-const" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/29/C-Warning-01-const/">C-Warning-01-const</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/29/C-Warning-01-const/" class="archive-article-date">
-  	<time datetime="2018-12-29T10:02:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="warning-discards-‘const’-qualifiers-from-pointer-target-type"><a href="#warning-discards-‘const’-qualifiers-from-pointer-target-type" class="headerlink" title="warning: discards ‘const’ qualifiers from pointer target type"></a>warning: discards ‘const’ qualifiers from pointer target type</h1><p>首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。</p>
-<p>这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。</p>
-<p><a href="https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type" target="_blank" rel="noopener">https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type</a></p>
-<p><a href="https://blog.csdn.net/qq_36324796/article/details/79021258" target="_blank" rel="noopener">https://blog.csdn.net/qq_36324796/article/details/79021258</a></p>
-<p>另外，关于const修饰，可以参考<a href="https://blog.csdn.net/acorld/article/details/8921374" target="_blank" rel="noopener">https://blog.csdn.net/acorld/article/details/8921374</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">const</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/29/C-Warning-01-const/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Eclipse-01-CopyLine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/29/Eclipse-01-CopyLine/">Eclipse-01-CopyLine</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/29/Eclipse-01-CopyLine/" class="archive-article-date">
-  	<time datetime="2018-12-29T08:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Copy-a-line-in-Eclipse"><a href="#Copy-a-line-in-Eclipse" class="headerlink" title="Copy a line in Eclipse"></a>Copy a line in Eclipse</h1><p>Ctrl+ALT+Down</p>
-<p><a href="https://coderanch.com/t/104462/ide/Editing-Eclipse-shortcut-copy-line" target="_blank" rel="noopener">https://coderanch.com/t/104462/ide/Editing-Eclipse-shortcut-copy-line</a></p>
-<h1 id="short-cut-setting"><a href="#short-cut-setting" class="headerlink" title="short cut setting"></a>short cut setting</h1><p>Go to <code>Windows-Preference-General-Keys</code></p>
-<p>to modify short cuts.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">copy a line</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Eclipse//" class="article-tag-list-link color3">Eclipse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/29/Eclipse-01-CopyLine/">展开全文 >></a>
         </p>
       
 
@@ -2372,6 +2393,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">delay</a>
               </li>
             
             <div class="clearfix"></div>
