@@ -156,6 +156,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-17-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/Numpy-17-serialization/">Numpy-17-serialization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/22/Numpy-17-serialization/" class="archive-article-date">
+  	<time datetime="2018-04-21T15:57:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy的序列化"><a href="#Numpy的序列化" class="headerlink" title="Numpy的序列化"></a>Numpy的序列化</h1><p>Numpy的ndarray对象无法直接使用json直接序列化，需要先转化成有同样层次结构的List对象，然后再序列化为json文件。</p>
+<p>转换成List对象可以使用Numpy自带的.to_list()方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> codecs, json </span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>) <span class="comment"># a 2 by 5 array</span></span><br><span class="line">b = a.tolist() <span class="comment"># nested lists with same data, indices</span></span><br><span class="line">file_path = <span class="string">"/path.json"</span> <span class="comment">## your path variable</span></span><br><span class="line">json.dump(b, codecs.open(file_path, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>), separators=(<span class="string">','</span>, <span class="string">':'</span>), sort_keys=<span class="literal">True</span>, indent=<span class="number">4</span>) <span class="comment">### this saves the array in .json format</span></span><br></pre></td></tr></table></figure>
+
+<p>In order to unjonsify use</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj_text = codecs.open(file_path, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>).read()</span><br><span class="line">b_new = json.loads(obj_text)</span><br><span class="line">a_new = np.array(b_new)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>NumPy array is not JSON serializable</p>
+<p><a href="https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable" target="_blank" rel="noopener">https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">serialization</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/Numpy-17-serialization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Math-03-geometry" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1489,110 +1594,6 @@
 
 
   
-    <article id="post-Math-02-SoftMax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/07/Math-02-SoftMax/">Math-02-SoftMax</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/07/Math-02-SoftMax/" class="archive-article-date">
-  	<time datetime="2018-04-07T05:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h1><p>函数的定义如下，<br>$$<br>\begin{eqnarray}<br>  a^L_j = \frac{e^{z^L_j}}{\sum_k e^{z^L_k}},<br>\tag{1}\end{eqnarray}<br>$$<br>softmax函数的输出有以下特点，</p>
-<ol>
-<li>输出值介于(0, 1]之间；</li>
-<li>输入序列中最大项占序列总和的比例，经过softmax函数后，会大幅度扩大。简言之，大的越大，小的越小。</li>
-</ol>
-<p>代码显示如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> common.functions <span class="keyword">import</span> softmax</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">10</span>,<span class="number">11</span>,<span class="number">9</span>])</span><br><span class="line"></span><br><span class="line">a = x / np.sum(a)</span><br><span class="line">print(<span class="string">"原始比例: &#123;&#125;"</span>.format(a))</span><br><span class="line">b = softmax(x)</span><br><span class="line">print(<span class="string">"Softmax比例: &#123;&#125;"</span>.format(b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].bar(np.arange(<span class="number">3</span>),a)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].bar(np.arange(<span class="number">3</span>),b, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为，</p>
-<p><img src="Math-02-SoftMax%5Csoftmax.png" alt=""></p>
-<h1 id="注意防止溢出"><a href="#注意防止溢出" class="headerlink" title="注意防止溢出"></a>注意防止溢出</h1><p>$$<br>y_j=\frac{e^{a_{k}}}{\sum^{N}<em>{i=1}e^{a</em>{i}}}<br>$$</p>
-<p>应用softmax函数时，应该注意防止分子分母过大带来的计算溢出。</p>
-<p>由于包含指数运算，当a_i绝对值过大时，e^a_i会指数级增大，这就会带来overflow溢出错误。可以注意到其实各元素的a_i的差值并不是很大，处理方法为，分子分母同时除以一个e^C，其中C = Max(a_i)。<br>$$<br>y_{j}=\frac{e^{a_{k}}-C}{\sum^{N}<em>{i=1}e^{a</em>{i}}-C}<br>$$</p>
-<p>$$<br>C=max({a_{i}})<br>$$</p>
-<p>就可以大幅减小计算数值，这样就基本不会发生overflow了。</p>
-<p>事实上，差值过大时，也不用SoftMax函数来增强输出效果了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Softmax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/07/Math-02-SoftMax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -2844,6 +2845,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>

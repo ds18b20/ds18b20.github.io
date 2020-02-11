@@ -156,6 +156,374 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Pandas-01-SeriesDataFrame" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Pandas-01-SeriesDataFrame/">Pandas-01-SeriesDataFrame</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Pandas-01-SeriesDataFrame/" class="archive-article-date">
+  	<time datetime="2018-10-07T12:53:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Pandas基本数据结构"><a href="#Pandas基本数据结构" class="headerlink" title="Pandas基本数据结构"></a>Pandas基本数据结构</h1><p>Series和DataFrame是Pandas的两种基本数据结构，下面分别介绍。</p>
+<h2 id="Pandas-Series类型"><a href="#Pandas-Series类型" class="headerlink" title="Pandas.Series类型"></a>Pandas.Series类型</h2><p>Series类似于一维数组对象，包含一个数组的数据对象(values)，和一个与该数组相关联的数据标签，该标签被称为索引(index)。</p>
+<p>可以使用pandas.Series.values和pandas.Series.index来分别获取数组数据和索引，使用pandas.Series.dtypes来获取数据类型。<br>参考: <a href="https://pda.readthedocs.io/en/latest/chp5.html" target="_blank" rel="noopener">https://pda.readthedocs.io/en/latest/chp5.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入 numpy和pandas</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series, DataFrame</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pd.Series</span></span><br><span class="line">obj = Series([<span class="number">4</span>, <span class="number">7</span>, <span class="number">-5</span>, <span class="number">3</span>])</span><br><span class="line">obj</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0    4</span><br><span class="line">1    7</span><br><span class="line">2   -5</span><br><span class="line">3    3</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>查看values属性，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.values</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([ 4,  7, -5,  3], dtype&#x3D;int64)</span><br></pre></td></tr></table></figure>
+
+<p>查看index属性，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.index</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RangeIndex(start&#x3D;0, stop&#x3D;4, step&#x3D;1)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据类型，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.dtypes</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype(&#39;int64&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>关于Series数据的类型，当所有数据的类型统一时输出就是当前数据的类型；当数据类型不统一时Pandas自动选择能够代表所有类型的数据类型，比如同时包含integer和float时会统一使用float来统一化。</p>
+<p>值得注意的是，当数据中包含string或者nan时，obj.dtypes统一格式为object。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">series = pd.Series([np.nan, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">series.dtypes</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype(&#39;float64&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>添加index，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj2 = Series([<span class="number">4</span>, <span class="number">7</span>, <span class="number">-5</span>, <span class="number">3</span>], index=[<span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>])</span><br><span class="line">obj2</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">a   -5</span><br><span class="line">c    3</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-Series"><a href="#Slice-Series" class="headerlink" title="Slice Series"></a>Slice Series</h3><p>下面测试Pandas的Slice功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用数组slice</span></span><br><span class="line">s = obj2[[<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>上文讲到Series可以看作一维数组，所以可以使用位置来引用。并且Series还可以使用索引值来引用，因此也可以把Series看成字典来处理。可以使用类似key的index来引用，而且可以使用in语法来判断index是否存在。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用索引slice</span></span><br><span class="line">ss = obj2[[<span class="string">'d'</span>, <span class="string">'b'</span>]]</span><br><span class="line">print(ss)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'d'</span> <span class="keyword">in</span> obj2)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>使用布尔值索引，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用布尔数据集slice</span></span><br><span class="line">sss = obj2[obj2&gt;<span class="number">3</span>]</span><br><span class="line">print(sss)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>dict内部数据没有顺序，但是使用dict生成的Series则有顺序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdata = &#123;<span class="string">'Ohio'</span>: <span class="number">35000</span>, <span class="string">'Texas'</span>: <span class="number">71000</span>, <span class="string">'Oregon'</span>: <span class="number">16000</span>, <span class="string">'Utah'</span>: <span class="number">5000</span>&#125;</span><br><span class="line">obj3 = Series(sdata)</span><br><span class="line">obj3</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Ohio      35000</span><br><span class="line">Oregon    16000</span><br><span class="line">Texas     71000</span><br><span class="line">Utah       5000</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加index"><a href="#添加index" class="headerlink" title="添加index"></a>添加index</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">states = [<span class="string">'California'</span>, <span class="string">'Ohio'</span>, <span class="string">'Oregon'</span>, <span class="string">'Texas'</span>]</span><br><span class="line">obj4 = Series(sdata, index=states)</span><br><span class="line">obj4</span><br></pre></td></tr></table></figure>
+
+<p>输出，注意在data中没有对应的California列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California        NaN</span><br><span class="line">Ohio          35000.0</span><br><span class="line">Oregon        16000.0</span><br><span class="line">Texas         71000.0</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下， sdata 中的3个值被放在了合适的位置，但因为没有发现对应于 ‘California’ 的值，就出现了 NaN （不是一个数），这在pandas中被用来标记数据缺失或 NA 值。我使用“missing”或“NA”来表示数度丢失。在pandas中用函数 isnull 和 notnull 来检测数据丢失：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.isnull(obj4)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California     True</span><br><span class="line">Ohio          False</span><br><span class="line">Oregon        False</span><br><span class="line">Texas         False</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>测试notnull，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.notnull(obj4)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California    False</span><br><span class="line">Ohio           True</span><br><span class="line">Oregon         True</span><br><span class="line">Texas          True</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>Series对象内也包含该方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj4.isnull()</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California     True</span><br><span class="line">Ohio          False</span><br><span class="line">Oregon        False</span><br><span class="line">Texas         False</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<h2 id="DataFrame类型"><a href="#DataFrame类型" class="headerlink" title="DataFrame类型"></a>DataFrame类型</h2><p>DataFrame可以看作是一个二维数组结构，它由多个共享同一个行索引的多个数据列组成。各个列有自己的名称和数据类型。下面使用字典来生成一个DataFrame：<br>(注意各dict内的各个数据列必须有相同的长度)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>],</span><br><span class="line">        <span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2001</span>, <span class="number">2002</span>],</span><br><span class="line">        <span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>]&#125;</span><br><span class="line">frame = DataFrame(data)</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop</th>
+      <th>state</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.5</td>
+      <td>Ohio</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.7</td>
+      <td>Ohio</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.6</td>
+      <td>Ohio</td>
+      <td>2002</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.4</td>
+      <td>Nevada</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.9</td>
+      <td>Nevada</td>
+      <td>2002</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="添加columns"><a href="#添加columns" class="headerlink" title="添加columns"></a>添加columns</h3><p>生成DataFrame时，默认包含一定的顺序。另外，可以通过加入columns参数来指定列的排列顺序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame1 = DataFrame(data, columns=[<span class="string">'state'</span>, <span class="string">'year'</span>, <span class="string">'pop'</span>])</span><br><span class="line">frame1</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>1.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>3.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>2.9</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>通过columns属性来查看columns列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame1.columns</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Index([&#39;state&#39;, &#39;year&#39;, &#39;pop&#39;], dtype&#x3D;&#39;object&#39;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加index-1"><a href="#添加index-1" class="headerlink" title="添加index"></a>添加index</h3><p>类似和Series一样，如果你传递了一个行，但在data中没有包含对应名称的列，结果中它会表示为NA值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index 参数用于指定行索引</span></span><br><span class="line">frame2 = DataFrame(data, columns=[<span class="string">'state'</span>, <span class="string">'year'</span>, <span class="string">'pop'</span>, <span class="string">'area'</span>], index=[<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>pop</th>
+      <th>area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>1.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>three</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>3.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>four</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>2.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>five</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>2.9</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>###Slice DataFrame</p>
+<p>和Series一样，在DataFrame中的一列可以通过字典记法或属性来检索：<br>(此时返回的列就是上文所述的一个Series，可以通过type查看)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2[<span class="string">'state'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0      Ohio</span><br><span class="line">1      Ohio</span><br><span class="line">2      Ohio</span><br><span class="line">3    Nevada</span><br><span class="line">4    Nevada</span><br><span class="line">Name: state, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用属性方式，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.state</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0      Ohio</span><br><span class="line">1      Ohio</span><br><span class="line">2      Ohio</span><br><span class="line">3    Nevada</span><br><span class="line">4    Nevada</span><br><span class="line">Name: state, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用字典方式，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(frame2[<span class="string">'state'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandas.core.series.Series</span><br></pre></td></tr></table></figure>
+
+<p>下面是行的索引方法，即取出满足条件的某一行的记录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.ix[<span class="string">'three'</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\Anaconda3\lib\site-packages\ipykernel\__main__.py:1: DeprecationWarning: </span><br><span class="line">.ix is deprecated. Please use</span><br><span class="line">.loc for label based indexing or</span><br><span class="line">.iloc for positional indexing</span><br><span class="line"></span><br><span class="line">See the documentation here:</span><br><span class="line">http:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;indexing.html#ix-indexer-is-deprecated</span><br><span class="line">  if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>最新的方式为使用loc和iloc，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.loc[<span class="string">'three'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用iloc，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.iloc[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Series</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataFrame</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Pandas-01-SeriesDataFrame/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-54-findinlist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1043,121 +1411,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/08/23/Numpy-28-memoryUse/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-09-imshow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/23/Matplotlib-09-imshow/">Matplotlib-09-imshow</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/23/Matplotlib-09-imshow/" class="archive-article-date">
-  	<time datetime="2018-08-23T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="matplotlib-imshow"><a href="#matplotlib-imshow" class="headerlink" title="matplotlib imshow"></a>matplotlib imshow</h1><p>用matplotlib显示cifar10数据集样本时，输出图片颜色怪异，原因在于用于显示的像素值需要转换成[0, 1]之间的浮点数。</p>
-<h2 id="直接显示raw图像："><a href="#直接显示raw图像：" class="headerlink" title="直接显示raw图像："></a>直接显示raw图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_1.png" alt=""></p>
-<h2 id="压缩到-0-1-后的图像："><a href="#压缩到-0-1-后的图像：" class="headerlink" title="压缩到[0, 1]后的图像："></a>压缩到[0, 1]后的图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_2.png" alt=""></p>
-<p>这是因为imshow函数对输入数据的格式和类型有要求：</p>
-<p><code>matplotlib.pyplot.imshow</code>(<em>X</em>, <em>cmap=None</em>, <em>norm=None</em>, <em>aspect=None</em>, <em>interpolation=None</em>, <em>alpha=None</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>origin=None</em>, <em>extent=None</em>, <em>shape=None</em>, <em>filternorm=1</em>, <em>filterrad=4.0</em>, <em>imlim=None</em>, <em>resample=None</em>, <em>url=None</em>, <em>**, *data=None</em>, <em><em>\</em>kwargs</em>)</p>
-<blockquote>
-<p><strong>X</strong> : array-like or PIL image</p>
-<p>The image data. Supported array shapes are:</p>
-<ul>
-<li>(M, N): an image with scalar data. The data is visualized using a colormap.</li>
-<li>(M, N, 3): an image with RGB values (float or uint8).</li>
-<li>(M, N, 4): an image with RGBA values (float or uint8), i.e. including transparency.</li>
-</ul>
-<p>The first two dimensions (M, N) define the rows and columns of the image.</p>
-<p>The RGB(A) values should be in the range [0 .. 1] for floats or [0 .. 255] for integers. Out-of-range values will be clipped to these bounds.</p>
-</blockquote>
-<p>故，作为显示数据的X必须是[0, 1]的float或者[0, 255]的uint8类型。</p>
-<p>另外一个int的例子是，当数据类型是默认的int32类型时，显示颜色不正常：</p>
-<p><img src="Matplotlib-09-imshow%5Cint32.png" alt=""></p>
-<p>改成uint8类型之后，显示颜色变为正常了：</p>
-<p><img src="Matplotlib-09-imshow%5Cuint8.png" alt=""></p>
-<p>变换函数：<code>numpy_data.astype(&#39;uint8&#39;)</code></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat" target="_blank" rel="noopener">https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat</a><br><a href="https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imshow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/23/Matplotlib-09-imshow/">展开全文 >></a>
         </p>
       
 
@@ -2438,6 +2691,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>

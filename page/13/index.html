@@ -156,6 +156,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Math-02-SoftMax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/07/Math-02-SoftMax/">Math-02-SoftMax</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/07/Math-02-SoftMax/" class="archive-article-date">
+  	<time datetime="2018-04-07T05:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h1><p>函数的定义如下，<br>$$<br>\begin{eqnarray}<br>  a^L_j = \frac{e^{z^L_j}}{\sum_k e^{z^L_k}},<br>\tag{1}\end{eqnarray}<br>$$<br>softmax函数的输出有以下特点，</p>
+<ol>
+<li>输出值介于(0, 1]之间；</li>
+<li>输入序列中最大项占序列总和的比例，经过softmax函数后，会大幅度扩大。简言之，大的越大，小的越小。</li>
+</ol>
+<p>代码显示如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> common.functions <span class="keyword">import</span> softmax</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">10</span>,<span class="number">11</span>,<span class="number">9</span>])</span><br><span class="line"></span><br><span class="line">a = x / np.sum(a)</span><br><span class="line">print(<span class="string">"原始比例: &#123;&#125;"</span>.format(a))</span><br><span class="line">b = softmax(x)</span><br><span class="line">print(<span class="string">"Softmax比例: &#123;&#125;"</span>.format(b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].bar(np.arange(<span class="number">3</span>),a)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].bar(np.arange(<span class="number">3</span>),b, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为，</p>
+<p><img src="Math-02-SoftMax%5Csoftmax.png" alt=""></p>
+<h1 id="注意防止溢出"><a href="#注意防止溢出" class="headerlink" title="注意防止溢出"></a>注意防止溢出</h1><p>$$<br>y_j=\frac{e^{a_{k}}}{\sum^{N}<em>{i=1}e^{a</em>{i}}}<br>$$</p>
+<p>应用softmax函数时，应该注意防止分子分母过大带来的计算溢出。</p>
+<p>由于包含指数运算，当a_i绝对值过大时，e^a_i会指数级增大，这就会带来overflow溢出错误。可以注意到其实各元素的a_i的差值并不是很大，处理方法为，分子分母同时除以一个e^C，其中C = Max(a_i)。<br>$$<br>y_{j}=\frac{e^{a_{k}}-C}{\sum^{N}<em>{i=1}e^{a</em>{i}}-C}<br>$$</p>
+<p>$$<br>C=max({a_{i}})<br>$$</p>
+<p>就可以大幅减小计算数值，这样就基本不会发生overflow了。</p>
+<p>事实上，差值过大时，也不用SoftMax函数来增强输出效果了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Softmax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/07/Math-02-SoftMax/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-16-array-init" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1066,117 +1170,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/24/Math-01-DotProduct/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-04-axes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/Matplotlib-04-axes/">Matplotlib-04-axes</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/22/Matplotlib-04-axes/" class="archive-article-date">
-  	<time datetime="2018-03-22T10:35:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Matplotlib-axes"><a href="#Matplotlib-axes" class="headerlink" title="Matplotlib axes"></a>Matplotlib axes</h1><p>从英文本意的角度上理解axes就是axis的复数形式，但是在matplotlib中axes并不是多个轴的意义。</p>
-<p>讲到axes就离不开另一个概念：figure。figure可以理解为画布或者进程，定义一个figure之后就可以显示一个空白的窗口。即使没有特意生成figure，pyplot也会帮你创建一个（figure 1）。</p>
-<p>有了画布，继续画图时就需要决定在哪里，画多大的图。这一部分的设置就靠axes来表示，因为一个axes就是一个不包含坐标轴的画图区域。位置和尺寸均是用占figure整体尺寸的百分比来表示的，其取值为0-1之间的浮点数。</p>
-<p><img src="Matplotlib-04-axes%5Cfig.png" alt=""></p>
-<p>一个官方的例子如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some data to use for the plot</span></span><br><span class="line">dt = <span class="number">0.001</span></span><br><span class="line">t = np.arange(<span class="number">0.0</span>, <span class="number">10.0</span>, dt)</span><br><span class="line">r = np.exp(-t[:<span class="number">1000</span>]/<span class="number">0.05</span>)               <span class="comment"># impulse response</span></span><br><span class="line">x = np.random.randn(len(t))</span><br><span class="line">s = np.convolve(x, r)[:len(x)]*dt  <span class="comment"># colored noise</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the main axes is subplot(111) by default</span></span><br><span class="line">plt.plot(t, s)</span><br><span class="line">plt.axis([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1.1</span>*np.amin(s), <span class="number">2</span>*np.amax(s)])</span><br><span class="line">plt.xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'current (nA)'</span>)</span><br><span class="line">plt.title(<span class="string">'Gaussian colored noise'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is an inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">.65</span>, <span class="number">.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">n, bins, patches = plt.hist(s, <span class="number">400</span>, normed=<span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">'Probability'</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is another inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">0.2</span>, <span class="number">0.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">plt.plot(t[:len(r)], r)</span><br><span class="line">plt.title(<span class="string">'Impulse response'</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">0.2</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>结果为，</p>
-<p><img src="Matplotlib-04-axes%5Caxes.png" alt=""></p>
-<h1 id="隐藏坐标轴"><a href="#隐藏坐标轴" class="headerlink" title="隐藏坐标轴"></a>隐藏坐标轴</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig=plt.figure(frameon=<span class="literal">False</span>)</span><br><span class="line">fig.set_size_inches(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">ax = plt.Axes(fig, [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line">ax.set_axis_off()</span><br><span class="line">fig.add_axes(ax)</span><br><span class="line"></span><br><span class="line">I = mpimg.imread(<span class="string">u"sample.png"</span>)</span><br><span class="line">ax.imshow(I)</span><br><span class="line">fig.savefig(<span class="string">u"sample.jpg"</span>, dpi=<span class="number">32</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>pyplot的基础概念</p>
-<p><a href="http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html</a></p>
-<p>pylab_examples example code: axes_demo.py</p>
-<p><a href="https://matplotlib.org/examples/pylab_examples/axes_demo.html" target="_blank" rel="noopener">https://matplotlib.org/examples/pylab_examples/axes_demo.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">axes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">figure</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/22/Matplotlib-04-axes/">展开全文 >></a>
         </p>
       
 
@@ -2457,6 +2450,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>

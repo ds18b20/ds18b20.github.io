@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>C-Warning-01-const | Hawthorn</title>
+  <title>C-03-WeakFunc | Hawthorn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="warning: discards ‘const’ qualifiers from pointer target type首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。 这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。 https:&#x2F;&#x2F;stackoverflow.com&#x2F;questi">
+  <meta name="description" content="error: redefinition of weak func使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。 123__attribute__(( weak )) void function-name(void)&amp;#123;&amp;#125;&#x2F;&#x2F; or__weak void function-name(void)&amp;#123;&amp;#125;  这时注意不能把重写的函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C-Warning-01-const">
-<meta property="og:url" content="http://yoursite.com/2018/12/29/C-Warning-01-const/index.html">
+<meta property="og:title" content="C-03-WeakFunc">
+<meta property="og:url" content="http://yoursite.com/2020/02/11/C-03-WeakFunc/index.html">
 <meta property="og:site_name" content="Hawthorn">
-<meta property="og:description" content="warning: discards ‘const’ qualifiers from pointer target type首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。 这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。 https:&#x2F;&#x2F;stackoverflow.com&#x2F;questi">
+<meta property="og:description" content="error: redefinition of weak func使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。 123__attribute__(( weak )) void function-name(void)&amp;#123;&amp;#125;&#x2F;&#x2F; or__weak void function-name(void)&amp;#123;&amp;#125;  这时注意不能把重写的函数">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-12-29T10:02:47.000Z">
-<meta property="article:modified_time" content="2018-12-29T10:17:33.799Z">
+<meta property="article:published_time" content="2020-02-11T10:53:30.000Z">
+<meta property="article:modified_time" content="2020-02-11T11:06:36.631Z">
 <meta property="article:author" content="wzx">
 <meta property="article:tag" content="C">
-<meta property="article:tag" content="const">
+<meta property="article:tag" content="weak">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hawthorn" type="application/atom+xml">
@@ -160,31 +160,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C-Warning-01-const" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-C-03-WeakFunc" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C-Warning-01-const
+      C-03-WeakFunc
     </h1>
   
 
         
-        <a href="/2018/12/29/C-Warning-01-const/" class="archive-article-date">
-  	<time datetime="2018-12-29T10:02:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
+        <a href="/2020/02/11/C-03-WeakFunc/" class="archive-article-date">
+  	<time datetime="2020-02-11T10:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="warning-discards-‘const’-qualifiers-from-pointer-target-type"><a href="#warning-discards-‘const’-qualifiers-from-pointer-target-type" class="headerlink" title="warning: discards ‘const’ qualifiers from pointer target type"></a>warning: discards ‘const’ qualifiers from pointer target type</h1><p>首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。</p>
-<p>这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。</p>
-<p><a href="https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type" target="_blank" rel="noopener">https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type</a></p>
-<p><a href="https://blog.csdn.net/qq_36324796/article/details/79021258" target="_blank" rel="noopener">https://blog.csdn.net/qq_36324796/article/details/79021258</a></p>
-<p>另外，关于const修饰，可以参考<a href="https://blog.csdn.net/acorld/article/details/8921374" target="_blank" rel="noopener">https://blog.csdn.net/acorld/article/details/8921374</a></p>
+        <h1 id="error-redefinition-of-weak-func"><a href="#error-redefinition-of-weak-func" class="headerlink" title="error: redefinition of weak func"></a>error: redefinition of <em>weak func</em></h1><p>使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__attribute__(( weak )) <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">__weak <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时注意不能把重写的函数写在同一个c文件里，否则会报错<code>redefinition of function-name</code>。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.microchip.com/forums/m820872.aspx" target="_blank" rel="noopener">https://www.microchip.com/forums/m820872.aspx</a></p>
 
       
 
@@ -223,7 +223,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">const</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">weak</a>
         		</li>
       		
 		</ul>
@@ -290,7 +290,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/12/29/C-Warning-01-const/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2020/02/11/C-03-WeakFunc/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,18 +304,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/06/C-01-data-type/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/11/C-02-WarningofConst/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          C-01-data-type
+          C-02-WarningofConst
         
       </div>
     </a>
   
   
-    <a href="/2018/12/29/Eclipse-01-CopyLine/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Eclipse-01-CopyLine</div>
+    <a href="/2020/02/11/FreeRTOS-02-delay/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FreeRTOS-02-delay</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -1595,6 +1595,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>

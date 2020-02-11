@@ -156,6 +156,143 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DataSerializationFormat-XML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/DataSerializationFormat-XML/">DataSerializationFormat-XML</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/DataSerializationFormat-XML/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>html xhtml xml比较</p>
+<ul>
+<li>html(Hyper Text Markup Language)</li>
+<li>xhtml(eXtensible Hyper Text Markup Language)</li>
+<li>xml(eXtensible Markup Language)</li>
+</ul>
+<p>这三种标记语言都是SGML(Standard Generalized Markup Language)的子集，诞生时间和语法规范有不同。总体来讲，时间上是html-&gt;xhtml-&gt;xml的顺序，语法规范的严格度上讲，xml&gt;xhtml&gt;html。</p>
+<p>下面重点讲解xml和html的区别。</p>
+<h1 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h1><p>eXtensible Markup Language按字面理解：</p>
+<ol>
+<li>可扩展。可以用作任何的场合：配置文件，UI描述文件等。</li>
+<li>是一种标记语言。用来组织文本数据，结构清晰易读。</li>
+</ol>
+<p>应用之一，代替.ini文件写配置文件。方便直观，容易被程序解析（正反序列化）。</p>
+<p><code>既然有了XML那为什么还用JSON呢？</code></p>
+<p>xml功能强大，语法严谨。但是，标记数据时产生很多冗余，这些冗余在网络上进行数据时，浪费大量网络资源。反过来讲，正是这些荣誉信息的存在，xml才更加对人友好。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; ?<span class="attr">xml</span> <span class="attr">version</span>=<span class="string">"1.0"</span> <span class="attr">encoding</span>=<span class="string">"UTF-8"</span>? &gt;</span></span><br><span class="line"><span class="tag">&lt; ?<span class="attr">xml-stylesheet</span> <span class="attr">href</span>=<span class="string">"style.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>? &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">student1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>Tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">student2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>John<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个标准的xml文件包含以下部分：</p>
+<h3 id="xml文件宣言"><a href="#xml文件宣言" class="headerlink" title="xml文件宣言"></a>xml文件宣言</h3><blockquote>
+<p>&lt; ?xml version=”1.0” encoding=”UTF-8”? &gt;</p>
+</blockquote>
+<p>说明这是一个xml文件，以及版本号编码方式。</p>
+<h3 id="样式设定"><a href="#样式设定" class="headerlink" title="样式设定"></a>样式设定</h3><blockquote>
+<p>&lt; ?xml-stylesheet href=”style.css” type=”text/css”? &gt;</p>
+</blockquote>
+<p>用来标示xml的格式化显示的设定。如果要使用xsl样式，需要这样写：</p>
+<blockquote>
+<p>&lt; ? xml-stylesheet href=”style.xsl” type=”text/xsl” ? &gt;</p>
+</blockquote>
+<h3 id="元素和属性"><a href="#元素和属性" class="headerlink" title="元素和属性"></a>元素和属性</h3><blockquote>
+<student1>
+  <name>Tom</name>
+  <math>95</math>
+  <biology>93</biology>
+</student1>
+</blockquote>
+<p>&lt;**&gt;称为标签(tags)，可以包含元素(element)和属性(attributes)两部分。</p>
+<p>起始标签：<code>&lt;元素名 属性=&quot;属性值&quot;&gt;</code>注意要有引号！</p>
+<p>结束标签：<code>&lt;/元素名&gt;</code></p>
+<p>上例中的最高层元素student1称为根元素(root element)</p>
+<h1 id="和html的区别"><a href="#和html的区别" class="headerlink" title="和html的区别"></a>和html的区别</h1><ol>
+<li>xml标签区分大小写，html不区分。</li>
+<li>xml要求起始标签和结束标签必须成对存在，html有时候缺少结束标签也可以解析。</li>
+<li>xml空元素需要在右侧尖括号前加上斜杠(如&lt;example/&gt;)。html中的&lt;br&gt;&lt;img&gt;这类标签自成一个单元，在xml中成为空元素。</li>
+<li>xml把空白当成内容的一部分。html则会过滤掉大部分空白。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>XML入門</p>
+<p><a href="http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/" target="_blank" rel="noopener">http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-XML/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-00-FileClose" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1215,104 +1352,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/07/Java-Eclipse-01-Install/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux-02-install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/07/Linux-02-install/">Git-07-RM</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/07/Linux-02-install/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h1><p><strong>tar zxvf <em>filename.tar.gz</em></strong></p>
-<p>各个参数的意义如下，</p>
-<p>x: 从tar中提取文件</p>
-<p>z: 表示tar包被gzip压缩过，需要用gunzip解压</p>
-<p>v: 显示详细信息</p>
-<p>f: 制定被处理的文件名是filename.tar.gz</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">install application</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/07/Linux-02-install/">展开全文 >></a>
         </p>
       
 
@@ -2593,6 +2632,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>

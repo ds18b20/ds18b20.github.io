@@ -156,6 +156,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-00-Error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/02/TensorFlow-00-Error/">TensorFlow-00-Error</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/02/TensorFlow-00-Error/" class="archive-article-date">
+  	<time datetime="2018-05-02T14:32:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Error-Use-GPU"><a href="#Error-Use-GPU" class="headerlink" title="Error-Use GPU"></a>Error-Use GPU</h1><p>在GPU上运行tensorflow代码时，出现了如下错误提示</p>
+<blockquote>
+<p>ImportError: Could not find ‘cudart64_90.dll’. TensorFlow requires that this DLL be installed in a directory that is named in your %PATH% environment variable.<br>Download and install CUDA 9.0 from this URL: <a href="https://developer.nvidia.com/cuda-toolkit" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit</a></p>
+</blockquote>
+<p>原因是安装的CUDA版本太新（9.1），和tensorflow不匹配，可以通过安装旧版（9.0）来解决这个问题。对应的cuDNN库克需要退回到相应版本。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>ImportError: Could not find ‘cudart64_90.dll’.</p>
+<p><a href="https://github.com/tensorflow/tensorflow/issues/17101" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/issues/17101</a></p>
+<h1 id="Nan-in-summary-histogram-for"><a href="#Nan-in-summary-histogram-for" class="headerlink" title="Nan in summary histogram for:***"></a>Nan in summary histogram for:***</h1><p>这个Error常见于hyper parameter设置不合理导致的梯度消失或者梯度爆炸上，所以可以调整网络结构(W的个数等)或者学习速率来消除。</p>
+<blockquote>
+<p>Usually NaN is a sign of model instability, for example, exploding gradients. It may be unnoticed, loss would just stop shrinking. Trying to log weights summary makes the problem explicit. I suggest you to reduce the learning rate as a first measure. </p>
+</blockquote>
+<p>参考：<a href="https://stackoverflow.com/questions/39854390/nan-in-summary-histogram" target="_blank" rel="noopener">https://stackoverflow.com/questions/39854390/nan-in-summary-histogram</a></p>
+<blockquote>
+<p> The error comes through the learning rate, which is to high for this data set. If you set the learning rate to 0.001 you won’t have this error anymore and can finetune on the cats vs dogs dataset without problems. </p>
+</blockquote>
+<p>参考：<a href="https://github.com/kratzert/finetune_alexnet_with_tensorflow/issues/23" target="_blank" rel="noopener">https://github.com/kratzert/finetune_alexnet_with_tensorflow/issues/23</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/02/TensorFlow-00-Error/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-04-deviceCPUorGPU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1124,111 +1224,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/22/PyCharm-01-StaticMethod/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-17-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/22/Numpy-17-serialization/">Numpy-17-serialization</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/22/Numpy-17-serialization/" class="archive-article-date">
-  	<time datetime="2018-04-21T15:57:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy的序列化"><a href="#Numpy的序列化" class="headerlink" title="Numpy的序列化"></a>Numpy的序列化</h1><p>Numpy的ndarray对象无法直接使用json直接序列化，需要先转化成有同样层次结构的List对象，然后再序列化为json文件。</p>
-<p>转换成List对象可以使用Numpy自带的.to_list()方法。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> codecs, json </span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>) <span class="comment"># a 2 by 5 array</span></span><br><span class="line">b = a.tolist() <span class="comment"># nested lists with same data, indices</span></span><br><span class="line">file_path = <span class="string">"/path.json"</span> <span class="comment">## your path variable</span></span><br><span class="line">json.dump(b, codecs.open(file_path, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>), separators=(<span class="string">','</span>, <span class="string">':'</span>), sort_keys=<span class="literal">True</span>, indent=<span class="number">4</span>) <span class="comment">### this saves the array in .json format</span></span><br></pre></td></tr></table></figure>
-
-<p>In order to unjonsify use</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj_text = codecs.open(file_path, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>).read()</span><br><span class="line">b_new = json.loads(obj_text)</span><br><span class="line">a_new = np.array(b_new)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>NumPy array is not JSON serializable</p>
-<p><a href="https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable" target="_blank" rel="noopener">https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/22/Numpy-17-serialization/">展开全文 >></a>
         </p>
       
 
@@ -2509,6 +2504,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
               </li>
             
             <div class="clearfix"></div>
