@@ -156,6 +156,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL-02-Syntax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/11/SQL-02-Syntax/">SQL-02-Syntax</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/11/SQL-02-Syntax/" class="archive-article-date">
+  	<time datetime="2018-08-11T00:18:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL常用语法"><a href="#MySQL常用语法" class="headerlink" title="MySQL常用语法"></a>MySQL常用语法</h1><p>本篇介绍常用的MySQL语法。</p>
+<h2 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h2><p>创建数据库，创建表</p>
+<h2 id="DROP"><a href="#DROP" class="headerlink" title="DROP"></a>DROP</h2><p>删除数据库，删除表</p>
+<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><p>逐行删除记录</p>
+<h2 id="TRUNCATE"><a href="#TRUNCATE" class="headerlink" title="TRUNCATE"></a>TRUNCATE</h2><p>一次性删除整张表</p>
+<h2 id="grant"><a href="#grant" class="headerlink" title="grant"></a>grant</h2><p><code>grant select, insert, update, delete on database_name.* to &#39;user_name&#39;@&#39;127.0.0.1&#39; identified by &#39;password&#39;;</code><br>英文grant的本意即为：授予，准许<br>上述代码的解释如下，</p>
+<ul>
+<li><code>database_name.*</code>名为database_name的所有表。用*作数据库名和表名的通配符。</li>
+<li><code>&#39;user_name&#39;@&#39;127.0.0.1&#39;</code>host：’127.0.0.1’，可以使用%作通配符，例如’192.168.0.%’</li>
+<li><code>identified by &#39;password&#39;</code>通过密码’password’来授权</li>
+</ul>
+<h2 id="A-sample"><a href="#A-sample" class="headerlink" title="A sample"></a>A sample</h2><p>手动创建SQL脚本来创建数据库和表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">drop database if exists awesome;</span><br><span class="line"></span><br><span class="line">create database awesome;</span><br><span class="line"></span><br><span class="line">use awesome;</span><br><span class="line"></span><br><span class="line">grant select, insert, update, delete on awesome.* to &#39;www-data&#39;@&#39;localhost&#39; identified by &#39;www-data&#39;;</span><br><span class="line"></span><br><span class="line">create table users (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;email&#96; varchar(50) not null,</span><br><span class="line">    &#96;passwd&#96; varchar(50) not null,</span><br><span class="line">    &#96;admin&#96; bool not null,</span><br><span class="line">    &#96;name&#96; varchar(50) not null,</span><br><span class="line">    &#96;image&#96; varchar(500) not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    unique key &#96;idx_email&#96; (&#96;email&#96;),</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">create table blogs (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_name&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_image&#96; varchar(500) not null,</span><br><span class="line">    &#96;name&#96; varchar(50) not null,</span><br><span class="line">    &#96;summary&#96; varchar(200) not null,</span><br><span class="line">    &#96;content&#96; mediumtext not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">create table comments (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;blog_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_name&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_image&#96; varchar(500) not null,</span><br><span class="line">    &#96;content&#96; mediumtext not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+<p>保存为schema.sql<br>然后打开Terminal，运行脚本：<br><code>mysql -u root -p &lt; schema.sql</code>即可按脚本内容自动创建库和表。<br>当表的数量很多时，可以使用代码自动生成脚本然后运行。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.mamicode.com/info-detail-1706157.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-1706157.html</a><br><a href="https://blog.csdn.net/lampsunny/article/details/7410657" target="_blank" rel="noopener">https://blog.csdn.net/lampsunny/article/details/7410657</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Syntax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/11/SQL-02-Syntax/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PyCharm-02-importError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -960,103 +1064,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/15/Matplotlib-08-legend/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-27-MeanbyStep" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/15/Numpy-27-MeanbyStep/">Numpy-27-MeanbyStep</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/15/Numpy-27-MeanbyStep/" class="archive-article-date">
-  	<time datetime="2018-07-15T14:36:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="average-an-array-by-step"><a href="#average-an-array-by-step" class="headerlink" title="average an array by step"></a>average an array by step</h1><p>如果要每隔一个固定长度计算一个序列的平均数，可以考虑把这个序列按要求长度分割，然后求平均数。</p>
-<p>使用Numpy时可以通过reshape方法变换维度，然后在行或者列内求平均即可。如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.mean(arr.reshape(<span class="number">-1</span>, STEP), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/15956309/averaging-over-every-n-elements-of-a-numpy-array" target="_blank" rel="noopener">Averaging over every n elements of a numpy array</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mean</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">step</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/15/Numpy-27-MeanbyStep/">展开全文 >></a>
         </p>
       
 
@@ -2341,6 +2348,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
               </li>
             
             <div class="clearfix"></div>

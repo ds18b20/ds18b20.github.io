@@ -156,6 +156,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-10-assign" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/13/TensorFlow-10-assign/">TensorFlow-10-assign</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/13/TensorFlow-10-assign/" class="archive-article-date">
+  	<time datetime="2018-05-13T14:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h1><p>向一个变量赋值的操作方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x, feed_dict=&#123;x: <span class="number">3</span>&#125;))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
+
+<p>输出为，<code>3和0</code></p>
+<p>注意到，x并没有真正赋值给x，仅仅为了评估而临时赋值给x。</p>
+<p>真正的赋值需要tf.assign方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line">y = tf.assign(x, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x))</span><br><span class="line">    print(sess.run(y))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
+
+<p>输出为，<code>0，1和1</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/34220532/how-to-assign-a-value-to-a-tensorflow-variable" target="_blank" rel="noopener">How to assign a value to a TensorFlow variable?</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">assign</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/13/TensorFlow-10-assign/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-00-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1124,104 +1218,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/03/TensorFlow-05-compareCUPandGPU/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-35-pywin32" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/Python-35-pywin32/">Python-35-pywin32</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/03/Python-35-pywin32/" class="archive-article-date">
-  	<time datetime="2018-05-03T14:10:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="pywin32"><a href="#pywin32" class="headerlink" title="pywin32"></a>pywin32</h1><p>pywin32是一个python下的库，它使得python能够访问Windows API的扩展，提供了齐全的Windows常量、接口、线程以及COM机制等等。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>从此处下载已经编译好的pywin32库：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pywin32" target="_blank" rel="noopener">https://www.lfd.uci.edu/~gohlke/pythonlibs/#pywin32</a></p>
-<p>然后cmd下cd切换到上述库的下载保存位置，然后执行<code>pip install FILE_NAME.whl</code>若没有错误提示，则安装成功。</p>
-<p>##参考</p>
-<p><a href="https://stackoverflow.com/questions/20113456/installing-win32gui-python-module" target="_blank" rel="noopener">https://stackoverflow.com/questions/20113456/installing-win32gui-python-module</a></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>例1.通过类名和标题查找窗口句柄，并获得窗口位置和大小 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line">classname = <span class="string">"MozillaWindowClass"</span></span><br><span class="line">titlename = <span class="string">"百度一下，你就知道 - Mozilla Firefox"</span></span><br><span class="line"><span class="comment">#获取句柄</span></span><br><span class="line">hwnd = win32gui.FindWindow(classname, titlename)</span><br><span class="line"><span class="comment">#获取窗口左上角和右下角坐标</span></span><br><span class="line">left, top, right, bottom = win32gui.GetWindowRect(hwnd)</span><br></pre></td></tr></table></figure>
-
-<p>2.通过父句柄获取子句柄 </p>
-<p>3.鼠标定位与点击 </p>
-<p>4.发送回车键 </p>
-<p>5.关闭窗口 </p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>python和pywin32实现窗口查找、遍历和点击</p>
-<p><a href="https://www.cnblogs.com/zoro-robin/p/5591185.html" target="_blank" rel="noopener">https://www.cnblogs.com/zoro-robin/p/5591185.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pywin32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/03/Python-35-pywin32/">展开全文 >></a>
         </p>
       
 
@@ -2506,6 +2502,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-17-classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/TensorFlow-17-classification/">TensorFlow-17-classification</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/TensorFlow-17-classification/" class="archive-article-date">
+  	<time datetime="2018-05-24T15:02:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="classification"><a href="#classification" class="headerlink" title="classification"></a>classification</h1><p>之前的文章中一直使用的模拟一个二次函数的例子，其实是为了解决一个回归问题(regression)，接下来看一下分类(classification)相关的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data/"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer'</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'Weights'</span>):</span><br><span class="line">            Weights = tf.Variable(tf.random_normal([in_size, out_size]), name=<span class="string">'W'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/Weights'</span>, Weights)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'biases'</span>):</span><br><span class="line">            biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>, name=<span class="string">'b'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/biases'</span>, biases)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">            W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">        <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            outputs = W_m_p</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            outputs = activation_function(W_m_p)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/outputs'</span>, outputs)</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_accuracy</span><span class="params">(xs_val, ys_val)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> prediction</span><br><span class="line">    y_pre = sess.run(prediction, feed_dict=&#123;xs: xs_val&#125;)</span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(y_pre, axis=<span class="number">1</span>), tf.argmax(ys_val, axis=<span class="number">1</span>))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    result = sess.run(accuracy, feed_dict=&#123;xs: xs_val, ys: ys_val&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># real data for placeholder</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">28</span>*<span class="number">28</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add hidden layer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add prediction layer</span></span><br><span class="line">prediction = add_layer(xs, <span class="number">28</span>*<span class="number">28</span>, <span class="number">10</span>, <span class="string">'prediction_layer'</span>, activation_function=tf.nn.softmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">'./graphs/classification'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    xs_batch, ys_batch = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: xs_batch, ys: ys_batch&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        print(compute_accuracy(mnist.test.images, mnist.test.labels))</span><br><span class="line">        summary_result = sess.run(summaries, feed_dict=&#123;xs: xs_batch, ys: ys_batch&#125;)</span><br><span class="line">        writer.add_summary(summary_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.1332</span><br><span class="line">0.3288</span><br><span class="line">0.4689</span><br><span class="line">...</span><br><span class="line">0.8005</span><br><span class="line">0.8045</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><img src="TensorFlow-17-classification%5Cclassification.JPG" alt=""></p>
+<h1 id="tf-cast"><a href="#tf-cast" class="headerlink" title="tf.cast"></a>tf.cast</h1><p>tf.cast(x, dtype, name=None)  将输入x转化成dtype类型。例如，原来x的数据格式是bool，那么将其转化成float以后，就能够将其转化成0和1的序列。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">classification</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tensorboard</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/TensorFlow-17-classification/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-16-tensorboard-hist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1093,100 +1189,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/16/Numpy-23-Numpy2NativeType/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-10-assign" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/13/TensorFlow-10-assign/">TensorFlow-10-assign</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/13/TensorFlow-10-assign/" class="archive-article-date">
-  	<time datetime="2018-05-13T14:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h1><p>向一个变量赋值的操作方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x, feed_dict=&#123;x: <span class="number">3</span>&#125;))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
-
-<p>输出为，<code>3和0</code></p>
-<p>注意到，x并没有真正赋值给x，仅仅为了评估而临时赋值给x。</p>
-<p>真正的赋值需要tf.assign方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line">y = tf.assign(x, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x))</span><br><span class="line">    print(sess.run(y))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
-
-<p>输出为，<code>0，1和1</code></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/34220532/how-to-assign-a-value-to-a-tensorflow-variable" target="_blank" rel="noopener">How to assign a value to a TensorFlow variable?</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">assign</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/13/TensorFlow-10-assign/">展开全文 >></a>
         </p>
       
 
@@ -2471,6 +2473,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
               </li>
             
             <div class="clearfix"></div>
