@@ -156,6 +156,207 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-48-logging" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/11/Python-48-logging/">Python-48-logging</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/11/Python-48-logging/" class="archive-article-date">
+  	<time datetime="2018-08-11T00:25:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python-logging"><a href="#Python-logging" class="headerlink" title="Python logging"></a>Python logging</h1><p>在调试过程中，除了使用print函数打印到终端之外，还可以考虑使用自带的logging模块。<br>相比于直接print到终端，</p>
+<ul>
+<li>logging可以更方便的指定日志等级，比如在release版本中只输出重要信息，而屏蔽大量的调试信息；</li>
+<li>可以指定输出到格式以及输出位置。</li>
+</ul>
+<h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">logger.debug(<span class="string">'Logging debug...'</span>)</span><br><span class="line">logger.info(<span class="string">'Logging info...'</span>)</span><br><span class="line">logger.debug(<span class="string">'Logging debug...'</span>)</span><br><span class="line">logger.warning(<span class="string">'Logging warning...'</span>)</span><br><span class="line">logger.error(<span class="string">'Logging error...'</span>)</span><br><span class="line">logger.critical(<span class="string">'Logging critical...'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INFO:__main__:Logging info...</span><br><span class="line">WARNING:__main__:Logging warning...</span><br><span class="line">ERROR:__main__:Logging error...</span><br><span class="line">CRITICAL:__main__:Logging critical...</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>logging.basicConfig(level=logging.INFO)</code>表示只输出INFO及其以上的日志；<br>level参数改成<code>level=logging.NOTSET</code>表示输出所有；<br>若去掉level参数，默认只输出等于或高于WARNING等级的日志。</p>
+<h1 id="日志格式化"><a href="#日志格式化" class="headerlink" title="日志格式化"></a>日志格式化</h1><p><code>logger.info(&#39;%s opens port %s&#39;, &#39;app&#39;, &#39;8000&#39;)</code><br>输出为：<code>INFO:__main__:app opens port 8000</code></p>
+<h1 id="加入调试信息"><a href="#加入调试信息" class="headerlink" title="加入调试信息"></a>加入调试信息</h1><p>除了level，在logging.basicConfig()中还可以设置日志文件保存位置/文件打开方式，和输出格式。</p>
+<h2 id="format常用格式："><a href="#format常用格式：" class="headerlink" title="format常用格式："></a>format常用格式：</h2><p>%(levelno)s: 打印日志级别的数值<br>%(levelname)s: 打印日志级别名称<br>%(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]<br>%(filename)s: 打印当前执行程序名<br>%(funcName)s: 打印日志的当前函数<br>%(lineno)d: 打印日志的当前行号<br>%(asctime)s: 打印日志的时间<br>%(thread)d: 打印线程ID<br>%(threadName)s: 打印线程名称<br>%(process)d: 打印进程ID<br>%(message)s: 打印日志信息<br>Example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.NOTSET,</span><br><span class="line">                    format=<span class="string">'%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s'</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">'Logging info...'</span>)</span><br><span class="line">logger.debug(<span class="string">'Logging debug...'</span>)</span><br><span class="line">logger.warning(<span class="string">'Logging warning...'</span>)</span><br><span class="line">logger.error(<span class="string">'Logging error...'</span>)</span><br><span class="line">logger.critical(<span class="string">'Logging critical...'</span>)</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">'%s opens port %s'</span>, <span class="string">'app'</span>, <span class="string">'8000'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2018-07-29 15:09:39,614 - test.py[line:7] - INFO: Logging info...</span><br><span class="line">2018-07-29 15:09:39,614 - test.py[line:8] - DEBUG: Logging debug...</span><br><span class="line">2018-07-29 15:09:39,614 - test.py[line:9] - WARNING: Logging warning...</span><br><span class="line">2018-07-29 15:09:39,614 - test.py[line:10] - ERROR: Logging error...</span><br><span class="line">2018-07-29 15:09:39,614 - test.py[line:11] - CRITICAL: Logging critical...</span><br><span class="line">2018-07-29 15:09:39,614 - test.py[line:13] - INFO: app opens port 8000</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logging</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/11/Python-48-logging/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-47-ClassMethod" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/11/Python-47-ClassMethod/">Python-47-ClassMethod</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/11/Python-47-ClassMethod/" class="archive-article-date">
+  	<time datetime="2018-08-11T00:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python-ClassMethod"><a href="#Python-ClassMethod" class="headerlink" title="Python ClassMethod"></a>Python ClassMethod</h1><p>本篇介绍Python的类函数的定义，以及注意事项。</p>
+<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p>类函数的定义方法为在函数上一行加上@classmethod装饰器。<br>并且类函数要求第一个参数不是self，而是cls。这里的cls代表当前类。</p>
+<h2 id="子类继承的注意事项"><a href="#子类继承的注意事项" class="headerlink" title="子类继承的注意事项"></a>子类继承的注意事项</h2><p>注意，当被子类继承时，cls不再是父类，而是子类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(cls)</span>:</span></span><br><span class="line">        d = &#123;<span class="string">'name'</span>: <span class="string">'JJ'</span>, <span class="string">'age'</span>: <span class="number">30</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> cls(**d)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(cls)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> cls.__name__</span><br><span class="line"><span class="comment"># s = Student('LL', 20)</span></span><br><span class="line"><span class="comment"># print(s.name)</span></span><br><span class="line"><span class="comment"># print(s.age)</span></span><br><span class="line"><span class="comment"># print(s.foo().name)</span></span><br><span class="line"><span class="comment"># print(s.foo().age)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boy</span><span class="params">(Student)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(__class__, self).__init__(<span class="string">'LL'</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">b = Boy()</span><br><span class="line"><span class="comment"># print(b.foo().name)</span></span><br><span class="line">print(dir(b))</span><br><span class="line">print(b.bar())</span><br></pre></td></tr></table></figure>
+
+<p>b.bar()返回的是Boy，而非Student</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/carolzhang8406/article/details/6856817" target="_blank" rel="noopener">https://blog.csdn.net/carolzhang8406/article/details/6856817</a></p>
+<blockquote>
+<p>由于classmethod第一个参数传入的是类对象，所以在子类继承后，使用子类调用该类方法，实际传入的对象将是子类对象，而不是父类对象。而staticmethod由于不需要传入类对象，所以它实际执行的还是父类当中的行为。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">class method</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classmethod</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/11/Python-47-ClassMethod/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-02-Syntax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -869,201 +1070,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/24/opencv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-07-TwoLayerNet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/16/DeepLearning-07-TwoLayerNet/">DeepLearning-07-TwoLayerNet</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/16/DeepLearning-07-TwoLayerNet/" class="archive-article-date">
-  	<time datetime="2018-07-16T02:25:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="两层分类神经网络"><a href="#两层分类神经网络" class="headerlink" title="两层分类神经网络"></a>两层分类神经网络</h1><p>代码库：</p>
-<p><a href="https://github.com/ds18b20/DeepLearning/blob/master/classification_2L.py" target="_blank" rel="noopener">https://github.com/ds18b20/DeepLearning/blob/master/classification_2L.py</a></p>
-<p>输出结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">train accuracy: 0.176 test accuracy: 0.180</span><br><span class="line">train accuracy: 0.194 test accuracy: 0.196</span><br><span class="line">train accuracy: 0.382 test accuracy: 0.378</span><br><span class="line">train accuracy: 0.626 test accuracy: 0.635</span><br><span class="line">train accuracy: 0.778 test accuracy: 0.785</span><br><span class="line">train accuracy: 0.800 test accuracy: 0.809</span><br><span class="line">train accuracy: 0.818 test accuracy: 0.825</span><br><span class="line">train accuracy: 0.808 test accuracy: 0.820</span><br><span class="line">train accuracy: 0.854 test accuracy: 0.860</span><br><span class="line">train accuracy: 0.860 test accuracy: 0.864</span><br><span class="line">train accuracy: 0.824 test accuracy: 0.832</span><br><span class="line">train accuracy: 0.855 test accuracy: 0.860</span><br><span class="line">train accuracy: 0.852 test accuracy: 0.852</span><br><span class="line">train accuracy: 0.821 test accuracy: 0.830</span><br><span class="line">train accuracy: 0.873 test accuracy: 0.878</span><br><span class="line">train accuracy: 0.877 test accuracy: 0.881</span><br><span class="line">train accuracy: 0.865 test accuracy: 0.871</span><br><span class="line">train accuracy: 0.886 test accuracy: 0.886</span><br><span class="line">train accuracy: 0.871 test accuracy: 0.878</span><br><span class="line">train accuracy: 0.879 test accuracy: 0.888</span><br></pre></td></tr></table></figure>
-
-<p>以及图表：</p>
-<p><img src="DeepLearning-07-TwoLayerNet%5CTwoLayerNet.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">two layer network</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">classification</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/16/DeepLearning-07-TwoLayerNet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-08-legend" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/15/Matplotlib-08-legend/">Matplotlib-08-legend</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/15/Matplotlib-08-legend/" class="archive-article-date">
-  	<time datetime="2018-07-15T14:49:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="legend"><a href="#legend" class="headerlink" title="legend"></a>legend</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, x, label=<span class="string">'linear'</span>)</span><br><span class="line">plt.plot(x, x**<span class="number">2</span>, label=<span class="string">'quadratic'</span>)</span><br><span class="line">plt.plot(x, x**<span class="number">3</span>, label=<span class="string">'cubic'</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">'x label'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'y label'</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"Simple Plot"</span>)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>得到图像，</p>
-<p><img src="Matplotlib-08-legend%5Clegend.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">legend</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/15/Matplotlib-08-legend/">展开全文 >></a>
         </p>
       
 
@@ -2356,6 +2362,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
             
             <div class="clearfix"></div>

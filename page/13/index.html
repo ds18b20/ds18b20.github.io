@@ -156,6 +156,204 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-03-Session" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/TensorFlow-03-Session/">TensorFlow-03-Session</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/08/TensorFlow-03-Session/" class="archive-article-date">
+  	<time datetime="2018-04-08T04:33:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h1><p>无论是TensorFlow还是Theano都是“符号式”的库，这与传统的逐行编译/解释的编程方式不同，符号式的编程首先定义好各种变量从而建立一个“计算图”，计算图规定了各个变量之间的计算关系。建立好的运算图需要compile以确定其内部细节。即使compile之后，计算图内仍然没有用于处理的数据，需要传入数据来形成数据流。</p>
+<p>大多数的深度学习框架使用的都是符号计算这一套方法，因为符号计算能够提供关键的计算优化、自动求导等功能。</p>
+<h1 id="Seesion会话"><a href="#Seesion会话" class="headerlink" title="Seesion会话"></a>Seesion会话</h1><p>使用TF构建的计算图必须通过Seesion会话才能执行，只定义计算图而不执行Session会话的话，该节点的运算不会被执行。</p>
+<p>例如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">a=tf.constant([[<span class="number">1</span>,<span class="number">2</span>]])  <span class="comment">#定义一个1×2的矩阵</span></span><br><span class="line">b=tf.constant([[<span class="number">2</span>],</span><br><span class="line">               [<span class="number">4</span>]])  <span class="comment">#定义一个2×1的矩阵</span></span><br><span class="line"></span><br><span class="line">c=tf.matmul(a,b)  <span class="comment">#两者dot赋给c节点</span></span><br><span class="line"></span><br><span class="line">sess=tf.Session()  <span class="comment"># 定义一个Seesion实例</span></span><br><span class="line">result=sess.run(c)  <span class="comment"># 执行sess实例</span></span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line">sess.close()  <span class="comment">#关闭session，可有可无，但为了规范起见，还是写上</span></span><br></pre></td></tr></table></figure>
+
+<p>或者使用with上下文自动close</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    result=sess.run(c)</span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，先定义了矩阵a和b，然后c = dot(a, b)，但是并没有开始计算c，而是等到Seesion处的run才开始运算。</p>
+<p>#参考</p>
+<p>一些基本概念-关于符号计算</p>
+<p><a href="http://keras-cn.readthedocs.io/en/latest/for_beginners/concepts/" target="_blank" rel="noopener">http://keras-cn.readthedocs.io/en/latest/for_beginners/concepts/</a></p>
+<p>tensorflow入门之Session</p>
+<p><a href="https://blog.csdn.net/zhangshaoxing1/article/details/68957564" target="_blank" rel="noopener">https://blog.csdn.net/zhangshaoxing1/article/details/68957564</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Session</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/TensorFlow-03-Session/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-02-useGPUs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/TensorFlow-02-useGPUs/">TensorFlow-02-useGPUs</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/08/TensorFlow-02-useGPUs/" class="archive-article-date">
+  	<time datetime="2018-04-08T02:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TensorFlow使用GPU"><a href="#TensorFlow使用GPU" class="headerlink" title="TensorFlow使用GPU"></a>TensorFlow使用GPU</h1><p>没有指定使用CPU还是GPU的时候，TF默认寻找机器中的第一个GPU，并且占用该GPU的所有显存资源。如果没有找到GPU那就使用第一个CPU来运算。</p>
+<blockquote>
+<p>TensorFlow对于设备的表示：”/cpu:0”表示第一块CPU，”/gpu:0”表示第一块GPU，其他情况以此类推。</p>
+</blockquote>
+<p>要显示系统的GPU设备时，可以运行NVIDIA自带的nvidia-smi.exe来查看。一般在路径：<code>C:\Program Files\NVIDIA Corporation\NVSMI</code>下可以看到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA Corporation\NVSMI&gt;nvidia-smi.exe</span><br><span class="line">Sun Apr 08 10:51:55 2018</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 388.13                 Driver Version: 388.13                    |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name            TCC&#x2F;WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage&#x2F;Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|   0  GeForce GTX 960    WDDM  | 00000000:01:00.0  On |                  N&#x2F;A |</span><br><span class="line">| 30%   30C    P8    10W &#x2F; 120W |    267MiB &#x2F;  2048MiB |      9%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|    0      1932    C+G   C:\Windows\system32\Dwm.exe                N&#x2F;A      |</span><br><span class="line">|    0     10660    C+G   ...6)\Google\Chrome\Application\chrome.exe N&#x2F;A      |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用多GPU"><a href="#使用多GPU" class="headerlink" title="使用多GPU"></a>使用多GPU</h1><p>ing</p>
+<h1 id="手动分配GPU资源"><a href="#手动分配GPU资源" class="headerlink" title="手动分配GPU资源"></a>手动分配GPU资源</h1><p>ing</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>TensorFlow中设置GPU</p>
+<p><a href="http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/" target="_blank" rel="noopener">http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPU</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Setting</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/TensorFlow-02-useGPUs/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-01-InstallandSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1013,215 +1211,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/31/Numpy-13-dstack/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-05-3Dplotting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/29/Matplotlib-05-3Dplotting/">Matplotlib-05-3Dplotting</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/29/Matplotlib-05-3Dplotting/" class="archive-article-date">
-  	<time datetime="2018-03-29T14:55:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Matplotlib-3D-plotting"><a href="#Matplotlib-3D-plotting" class="headerlink" title="Matplotlib 3D plotting"></a>Matplotlib 3D plotting</h1><h2 id="3D-scatter-Plot"><a href="#3D-scatter-Plot" class="headerlink" title="3D scatter Plot"></a>3D scatter Plot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string">3D scatterplot</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Demonstration of a basic scatterplot in 3D.</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">randrange</span><span class="params">(n, vmin, vmax)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    Helper function to make an array of random numbers having shape (n, )</span></span><br><span class="line"><span class="string">    with each number distributed Uniform(vmin, vmax).</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> (vmax - vmin)*np.random.rand(n) + vmin</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">111</span>, projection=<span class="string">'3d'</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For each set of style and range settings, plot n random points in the box</span></span><br><span class="line"><span class="comment"># defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].</span></span><br><span class="line"><span class="keyword">for</span> c, m, zlow, zhigh <span class="keyword">in</span> [(<span class="string">'r'</span>, <span class="string">'o'</span>, <span class="number">-50</span>, <span class="number">-25</span>), (<span class="string">'b'</span>, <span class="string">'^'</span>, <span class="number">-30</span>, <span class="number">-5</span>)]:</span><br><span class="line">    xs = randrange(n, <span class="number">23</span>, <span class="number">32</span>)</span><br><span class="line">    ys = randrange(n, <span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line">    zs = randrange(n, zlow, zhigh)</span><br><span class="line">    ax.scatter(xs, ys, zs, c=c, marker=m)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">'X Label'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Y Label'</span>)</span><br><span class="line">ax.set_zlabel(<span class="string">'Z Label'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>绘图得到，</p>
-<p><img src="Matplotlib-05-3Dplotting%5Cscatter.png" alt=""></p>
-<h2 id="3D-Line-Plot"><a href="#3D-Line-Plot" class="headerlink" title="3D Line Plot"></a>3D Line Plot</h2><h2 id="Surface-Plot"><a href="#Surface-Plot" class="headerlink" title="Surface Plot"></a>Surface Plot</h2><h2 id="Wire-frame-plot"><a href="#Wire-frame-plot" class="headerlink" title="Wire-frame plot"></a>Wire-frame plot</h2><h1 id="axis-label"><a href="#axis-label" class="headerlink" title="axis label"></a>axis label</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 軸ラベルの設定</span><br><span class="line">ax.set_xlabel(&quot;X-axis&quot;)</span><br><span class="line">ax.set_ylabel(&quot;Y-axis&quot;)</span><br><span class="line">ax.set_zlabel(&quot;Z-axis&quot;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="http://jakevdp.github.io/mpl_tutorial/tutorial_pages/tut5.html" target="_blank" rel="noopener">Matplotlib Tutorial: 5. 3D plotting</a></p>
-<p><a href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html" target="_blank" rel="noopener">mplot3d tutorial</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">3D Plotting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/29/Matplotlib-05-3Dplotting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-00-Errors" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/29/Numpy-00-Errors/">Numpy-00-Errors</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/29/Numpy-00-Errors/" class="archive-article-date">
-  	<time datetime="2018-03-29T13:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="dtype的选择"><a href="#dtype的选择" class="headerlink" title="dtype的选择"></a>dtype的选择</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># type</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.int)</span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line">x[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line"></span><br><span class="line">y = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.float)</span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br><span class="line">y[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x: [<span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">x: [<span class="number">3</span> <span class="number">0</span>]</span><br><span class="line">y: [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line">y: [ <span class="number">3.14</span>  <span class="number">0.</span>  ]</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，虽然修改x[0]为一个浮点数3.14，但是由于x的类型是np.int，x[0]只保留了3.14的整数部分。</p>
-<p>而y的类型是np.float，修改y[0]为3.14后，小数也能完整保留。</p>
-<h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y).mean()</span><br><span class="line"># or</span><br><span class="line">np.mean(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码会提示bool对象不包含mean方法。</p>
-<blockquote>
-<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
-</blockquote>
-<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp &#x3D; y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y  # type: np.ndarray</span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction<br><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Errors</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/29/Numpy-00-Errors/">展开全文 >></a>
         </p>
       
 
@@ -2514,6 +2503,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
             
             <div class="clearfix"></div>
