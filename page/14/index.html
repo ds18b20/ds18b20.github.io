@@ -156,6 +156,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-13-dstack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/31/Numpy-13-dstack/">Numpy-13-dstack</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/31/Numpy-13-dstack/" class="archive-article-date">
+  	<time datetime="2018-03-31T05:52:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="zip-1d-arrays"><a href="#zip-1d-arrays" class="headerlink" title="zip 1d arrays"></a>zip 1d arrays</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">b = np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="comment"># use zip</span></span><br><span class="line">x = list(zip(a,b))</span><br><span class="line">print(x)</span><br><span class="line"><span class="comment"># use np.dstack</span></span><br><span class="line">y = np.dstack((a,b))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[(0, 3), (1, 4), (2, 5)]</span><br><span class="line">[[[0 3]</span><br><span class="line">  [1 4]</span><br><span class="line">  [2 5]]]</span><br></pre></td></tr></table></figure>
+
+<p>这里np.stack和内建的zip函数可以实现相同的功能。只是，输出的内部数据结构有区别，zip得到的是tuple组成的list，np.stack得到的是一个2维array。</p>
+<h1 id="zip-2d-arrays"><a href="#zip-2d-arrays" class="headerlink" title="zip 2d arrays"></a>zip 2d arrays</h1><h2 id="使用zip"><a href="#使用zip" class="headerlink" title="使用zip"></a>使用zip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x,y &#x3D; np.mgrid[0:5, 0:3]</span><br><span class="line"># use zip</span><br><span class="line">xy &#x3D; [list(zip(x, y)) for x, y in zip(x, y)]</span><br><span class="line"></span><br><span class="line"># change list 2 array</span><br><span class="line">xy_array &#x3D; np.array(xy)</span><br></pre></td></tr></table></figure>
+
+<p>得到list类型的xy：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[(0, 0), (0, 1), (0, 2)], [(1, 0), (1, 1), (1, 2)], [(2, 0), (2, 1), (2, 2)], [(3, 0), (3, 1), (3, 2)], [(4, 0), (4, 1), (4, 2)]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用np-stack"><a href="#使用np-stack" class="headerlink" title="使用np.stack"></a>使用np.stack</h2><p>使用np.dstack时，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x, y &#x3D; np.mgrid[0:5, 0:3]</span><br><span class="line">print(np.dstack((x, y)))</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[[[0 0]</span><br><span class="line">  [0 1]</span><br><span class="line">  [0 2]]</span><br><span class="line"></span><br><span class="line"> [[1 0]</span><br><span class="line">  [1 1]</span><br><span class="line">  [1 2]]</span><br><span class="line"></span><br><span class="line"> [[2 0]</span><br><span class="line">  [2 1]</span><br><span class="line">  [2 2]]</span><br><span class="line"></span><br><span class="line"> [[3 0]</span><br><span class="line">  [3 1]</span><br><span class="line">  [3 2]]</span><br><span class="line"></span><br><span class="line"> [[4 0]</span><br><span class="line">  [4 1]</span><br><span class="line">  [4 2]]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>in Numpy, how to zip two 2-D arrays?</p>
+<p><a href="https://stackoverflow.com/questions/17960441/in-numpy-how-to-zip-two-2-d-arrays" target="_blank" rel="noopener">https://stackoverflow.com/questions/17960441/in-numpy-how-to-zip-two-2-d-arrays</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">zip</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">dstack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/31/Numpy-13-dstack/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Matplotlib-05-3Dplotting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1110,105 +1221,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/17/Java-Eclipse-06-autocomplete/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-06-Package-JUnitTest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/17/Java-06-Package-JUnitTest/">Java-07-Package-JUnitTest</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/17/Java-06-Package-JUnitTest/" class="archive-article-date">
-  	<time datetime="2018-03-17T03:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="导入Unit-Test单元测试"><a href="#导入Unit-Test单元测试" class="headerlink" title="导入Unit Test单元测试"></a>导入Unit Test单元测试</h1><h1 id="JUnit-Test单元测试"><a href="#JUnit-Test单元测试" class="headerlink" title="JUnit Test单元测试"></a>JUnit Test单元测试</h1><p>Eclipse的Package Explore中右键已编辑好的class名，单击 <strong>New &gt; JUnit Test Case</strong>。New JUnit Test Case 向导的第一页将会打开。</p>
-<p>单击 <strong>Next</strong> 接受默认值，出现 Test Methods 对话框，选择要生成测试的一个或多个方法。单击Finish完成，在Package Explore里可以看到生成的JUnit测试的java文件。</p>
-<p>双击打开JUnit测试代码，找到要测试的方法并太你家测试内容。</p>
-<p>下面是一个例子，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Person p = <span class="keyword">new</span> Person(<span class="string">"Joe Q Author"</span>, <span class="number">42</span>, <span class="number">173</span>, <span class="number">82</span>, <span class="string">"Brown"</span>, <span class="string">"MALE"</span>);</span><br><span class="line">  Logger l = Logger.getLogger(Person<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>())</span>;</span><br><span class="line">  l.info(<span class="string">"Name: "</span> + p.getName());</span><br><span class="line">  l.info(<span class="string">"Age:"</span>+ p.getAge());</span><br><span class="line">  l.info(<span class="string">"Height (cm):"</span>+ p.getHeight());</span><br><span class="line">  l.info(<span class="string">"Weight (kg):"</span>+ p.getWeight());</span><br><span class="line">  l.info(<span class="string">"Eye Color:"</span>+ p.getEyeColor());</span><br><span class="line">  l.info(<span class="string">"Gender:"</span>+ p.getGender());</span><br><span class="line">  assertEquals(<span class="string">"Joe Q Author"</span>, p.getName());</span><br><span class="line">  assertEquals(<span class="number">42</span>, p.getAge());</span><br><span class="line">  assertEquals(<span class="number">173</span>, p.getHeight());</span><br><span class="line">  assertEquals(<span class="number">82</span>, p.getWeight());</span><br><span class="line">  assertEquals(<span class="string">"Brown"</span>, p.getEyeColor());</span><br><span class="line">  assertEquals(<span class="string">"MALE"</span>, p.getGender());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h1><p>右键Package Explore中的JUnit测试代码文件，选择 <strong>Run As</strong> &gt; <strong>JUnit Test</strong>。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JUnit Testd</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/17/Java-06-Package-JUnitTest/">展开全文 >></a>
         </p>
       
 
@@ -2509,6 +2521,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-38-chardet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/Python-38-chardet/">Python-38-chardet</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/20/Python-38-chardet/" class="archive-article-date">
+  	<time datetime="2018-05-20T01:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="编码方式检测"><a href="#编码方式检测" class="headerlink" title="编码方式检测"></a>编码方式检测</h1><p>使用charset库的detect方法检测网页的编码方式。</p>
+<p>以下代码是检测本地的文本文件的编码方式的一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> chardet</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path=<span class="string">r"C:\Users\...\unicode.txt"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rawdata = open(path, <span class="string">'rb'</span>).read()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = chardet.detect(rawdata)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result</span><br><span class="line">&#123;<span class="string">'encoding'</span>: <span class="string">'GB2312'</span>, <span class="string">'confidence'</span>: <span class="number">0.99</span>, <span class="string">'language'</span>: <span class="string">'Chinese'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/3323770/character-detection-in-a-text-file-in-python-using-the-universal-encoding-detect" target="_blank" rel="noopener">Character detection in a text file in Python using the Universal Encoding Detector (chardet)</a></p>
+<p><a href="http://zoeyyoung.github.io/python-chardet.html" target="_blank" rel="noopener">http://zoeyyoung.github.io/python-chardet.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charset</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/20/Python-38-chardet/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-24-dotVSmul" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1077,154 +1167,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/05/Python-36-PYTHONPATH/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-07-ObjectDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/TensorFlow-07-ObjectDetection/">TensorFlow-07-ObjectDetection</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/04/TensorFlow-07-ObjectDetection/" class="archive-article-date">
-  	<time datetime="2018-05-04T09:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TensorFlow-Object-Detection"><a href="#TensorFlow-Object-Detection" class="headerlink" title="TensorFlow Object Detection"></a>TensorFlow Object Detection</h1><p>Object Detection是TensorFlow自带的一个模型检测的API</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装参考以下链接，</p>
-<p><a href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md" target="_blank" rel="noopener">https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md</a></p>
-<p>安装过程中遇到了<code>object_detection/protos/*.proto: No such file or directory</code>这个错误。</p>
-<p>原因是使用了3.5版本的protoc，导致无法批量处理*.proto文件。(*代表通配符)</p>
-<p>详见<a href="https://github.com/tensorflow/models/issues/2930" target="_blank" rel="noopener">https://github.com/tensorflow/models/issues/2930</a></p>
-<h1 id="from-deployment-import-model-deploy-ModuleNotFoundError-No-module-named-‘deployment’"><a href="#from-deployment-import-model-deploy-ModuleNotFoundError-No-module-named-‘deployment’" class="headerlink" title="from deployment import model_deploy ModuleNotFoundError: No module named ‘deployment’"></a>from deployment import model_deploy ModuleNotFoundError: No module named ‘deployment’</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，弹出此error，无法导入deployment模块。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>经调查可知deployment模块定义在了models/research/slim/目录下。Python执行时没有查找到此处，所以抛出了这个错误。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li><p>添加系统环境变量，在PYTHONPATH条目内添加<code>\tensorflow\models\research</code> and <code>\tensorflow\models\research\slim</code> 的完整路径。</p>
-</li>
-<li><p>cd到slim/目录下可以看到有setup.py文件，使用这个py文件可以安装slim模块到Anaconda的统一管理第三方模块的site-packages目录下。</p>
-<p>安装方法为，切换到slim/目录下，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"># 这时又抛出了一个错误，提示</span><br><span class="line"># error: could not create &#39;build&#39;: 当文件已存在时，无法创建该文件。</span><br><span class="line"># 解决方法见下文</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>注意，方法1在Linux环境下的命令为，</p>
-<ol>
-<li>If <a href="https://github.com/tensorflow/models" target="_blank" rel="noopener">models</a> is located at /home/tensorflow/models/</li>
-<li>Edit ~/.bashrc and puts<br><code>export PYTHONPATH=&quot;${PYTHONPATH}:/home/tensorflow/models:/home/tensorflow/models/slim/&quot;</code></li>
-</ol>
-<p>经测，方法1在windows下无效，方法2可以完美解决问题。</p>
-<p>安装之后，执行trainer.py，此错误不再抛出。</p>
-<h1 id="error-could-not-create-‘build’-当文件已存在时，无法创建该文件。"><a href="#error-could-not-create-‘build’-当文件已存在时，无法创建该文件。" class="headerlink" title="error: could not create ‘build’: 当文件已存在时，无法创建该文件。"></a>error: could not create ‘build’: 当文件已存在时，无法创建该文件。</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行<code>python setup.py install</code>安装slim模块时，抛出此错误。</p>
-<h2 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h2><p>clone下来的代码库中自带了一个名为BUILD的文件，而install命令需要在当前文件夹下新建一个名为build的目录，此目录名和上述BUILD命名冲突，导致抛出此错误。</p>
-<h2 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h2><p>把BUILD文件重命名为BUILD.bak备份，再执行<code>python setup.py install</code>。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/lgczym/article/details/79272579" target="_blank" rel="noopener">Windows下Tensorflow-silm库使用遇到ImportError: No module named ‘nets’问题的解决方法</a></p>
-<h1 id="TypeError-pred-must-be-a-Tensor-or-a-Python-bool-or-1-or-0-Found-instead-None"><a href="#TypeError-pred-must-be-a-Tensor-or-a-Python-bool-or-1-or-0-Found-instead-None" class="headerlink" title="TypeError: `pred` must be a Tensor, or a Python bool, or 1 or 0. Found instead: None"></a>TypeError: `pred` must be a Tensor, or a Python bool, or 1 or 0. Found instead: None</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，抛出此错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config、</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h2><p>bug</p>
-<h2 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h2><blockquote>
-<p>FILE PATH: object_detection\models\</p>
-<p>change 109 line in ssd_mobilenet_v1_feature_extractor.py:<br>from</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">is_training=<span class="literal">None</span>, regularize_depthwise=<span class="literal">True</span>)):</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">is_training=<span class="literal">True</span>, regularize_depthwise=<span class="literal">True</span>)):</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>注意，目前ssd_mobilenet_v1_feature_extractor.py肯呢个存在于系统的多个目录下，Python调用的是已经安装到Anaconda下的site-packages目录下的.py。所以应该修改此处的.py文件。</p>
-<h1 id="OOM-when-allocating-tensor-with-shape-…"><a href="#OOM-when-allocating-tensor-with-shape-…" class="headerlink" title="OOM when allocating tensor with shape[*, *, …]"></a>OOM when allocating tensor with shape[*, *, …]</h1><h2 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，抛出此错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config、</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h2><p>出现此错误提示，表示GPU内存不足(GPU ran out of memory)，此时可以手动减小batch_size的大小，默认设置为24。目前我用的机器GPU是GTX 960显存为4GB，batch_size减为10时，没有出现此错误。</p>
-<h2 id="内存消耗计算"><a href="#内存消耗计算" class="headerlink" title="内存消耗计算"></a>内存消耗计算</h2><p>[1,144,144,144,128] 矩阵大小为，1 * 144 * 144 * 128 = 382,205,952</p>
-<p>如果数据类型是默认的32bit，则总占用显存为382,205,952 * 4 = 1 528 823,808</p>
-<p>约为1.5G。所以仅仅tensorflow的计算就要消耗1.5G，还有其他显示消耗加到一起，不能超过显卡的物理内存大小。</p>
-<h2 id="解决方法-3"><a href="#解决方法-3" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li><p>增加显卡物理内存，根据计算量大小，把不同层计算分配到合适的GPU上。参见<a href="https://stackoverflow.com/questions/36313934/is-it-possible-to-split-a-network-across-multiple-gpus-in-tensorflow" target="_blank" rel="noopener">[Is it possible to split a network across multiple GPUs in tensorflow?]</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">"/gpu:0"</span>):</span><br><span class="line">  <span class="comment"># Define first layer.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.device(<span class="string">"/gpu:1"</span>):</span><br><span class="line">  <span class="comment"># Define second layer.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define other layers, etc.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>减小浮点数的精度(floating precision <code>tf.float64 -&gt; tf.float32 -&gt; tf.float16</code> )</p>
-</li>
-<li><p>减小batch_size，ssd_mobilenet_v1_pets.config文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">train_config: &#123;</span><br><span class="line">  # HERE</span><br><span class="line">  batch_size: 10</span><br><span class="line">  optimizer &#123;</span><br><span class="line">    rms_prop_optimizer: &#123;</span><br><span class="line">      learning_rate: &#123;</span><br><span class="line">        exponential_decay_learning_rate &#123;</span><br><span class="line">          initial_learning_rate: 0.004</span><br><span class="line">          decay_steps: 800720</span><br><span class="line">          decay_factor: 0.95</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      momentum_optimizer_value: 0.9</span><br><span class="line">      decay: 0.9</span><br><span class="line">      epsilon: 1.0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>##参考</p>
-<p><a href="https://stackoverflow.com/questions/45704280/oom-when-allocating-tensor-with-shape1-144-144-144-128" target="_blank" rel="noopener">OOM when allocating tensor with shape[1,144,144,144,128]</a></p>
-<h1 id="Windows下查看显存"><a href="#Windows下查看显存" class="headerlink" title="Windows下查看显存"></a>Windows下查看显存</h1><p>Win+R运行dxdiag打开<code>DirectX诊断工具</code>，切换到<code>显示</code>选项卡上即可看到显卡相关参数。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Object Detection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/04/TensorFlow-07-ObjectDetection/">展开全文 >></a>
         </p>
       
 
@@ -2525,6 +2467,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

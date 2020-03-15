@@ -156,6 +156,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-FFT-01-sample" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/11/FFT-01-sample/">FFT-01-sample</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/11/FFT-01-sample/" class="archive-article-date">
+  	<time datetime="2018-04-11T13:43:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Sample-code-for-FFT"><a href="#Sample-code-for-FFT" class="headerlink" title="Sample code for FFT"></a>Sample code for FFT</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">iFFT</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ori_array, sampling_period)</span>:</span></span><br><span class="line">        self.__ori_array = ori_array</span><br><span class="line">        self.__count = len(self.__ori_array)</span><br><span class="line">        self.__sampling_period = sampling_period</span><br><span class="line">        self.__interval = self.__sampling_period / self.__count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_ori_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(<span class="number">0</span>, self.__sampling_period, self.__interval)</span><br><span class="line">        y = self.__ori_array</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_fft_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(self.__count / <span class="number">2</span>) / self.__sampling_period</span><br><span class="line">        ft = np.fft.fft(self.__ori_array)</span><br><span class="line">        y = abs(ft[range(int(self.__count / <span class="number">2</span>))] / self.__count)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">period = <span class="number">5</span></span><br><span class="line">interval = <span class="number">0.005</span></span><br><span class="line">time = np.arange(<span class="number">0</span>, period, interval)</span><br><span class="line">array = np.sin(<span class="number">2</span> * np.pi * <span class="number">10</span> * time) + <span class="number">0.5</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">30</span> * time)</span><br><span class="line">sample = iFFT(array, period)</span><br><span class="line">x0, y0 = sample.get_ori_xy()</span><br><span class="line">x1, y1 = sample.get_fft_xy()</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x0, y0, <span class="string">'black'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>), plt.ylabel(<span class="string">'Amplitude'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">plt.plot(x1, y1, <span class="string">'red'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Freq (Hz)'</span>), plt.ylabel(<span class="string">'Amp. Spectrum'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>the output,</p>
+<p><img src="FFT-01-sample%5Cfft.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FFT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sample</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/FFT//" class="article-tag-list-link color4">FFT</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/11/FFT-01-sample/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-03-Session" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1100,117 +1192,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/31/Numpy-14-mgrid/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-13-dstack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/31/Numpy-13-dstack/">Numpy-13-dstack</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/31/Numpy-13-dstack/" class="archive-article-date">
-  	<time datetime="2018-03-31T05:52:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="zip-1d-arrays"><a href="#zip-1d-arrays" class="headerlink" title="zip 1d arrays"></a>zip 1d arrays</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">b = np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="comment"># use zip</span></span><br><span class="line">x = list(zip(a,b))</span><br><span class="line">print(x)</span><br><span class="line"><span class="comment"># use np.dstack</span></span><br><span class="line">y = np.dstack((a,b))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[(0, 3), (1, 4), (2, 5)]</span><br><span class="line">[[[0 3]</span><br><span class="line">  [1 4]</span><br><span class="line">  [2 5]]]</span><br></pre></td></tr></table></figure>
-
-<p>这里np.stack和内建的zip函数可以实现相同的功能。只是，输出的内部数据结构有区别，zip得到的是tuple组成的list，np.stack得到的是一个2维array。</p>
-<h1 id="zip-2d-arrays"><a href="#zip-2d-arrays" class="headerlink" title="zip 2d arrays"></a>zip 2d arrays</h1><h2 id="使用zip"><a href="#使用zip" class="headerlink" title="使用zip"></a>使用zip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x,y &#x3D; np.mgrid[0:5, 0:3]</span><br><span class="line"># use zip</span><br><span class="line">xy &#x3D; [list(zip(x, y)) for x, y in zip(x, y)]</span><br><span class="line"></span><br><span class="line"># change list 2 array</span><br><span class="line">xy_array &#x3D; np.array(xy)</span><br></pre></td></tr></table></figure>
-
-<p>得到list类型的xy：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[(0, 0), (0, 1), (0, 2)], [(1, 0), (1, 1), (1, 2)], [(2, 0), (2, 1), (2, 2)], [(3, 0), (3, 1), (3, 2)], [(4, 0), (4, 1), (4, 2)]]</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用np-stack"><a href="#使用np-stack" class="headerlink" title="使用np.stack"></a>使用np.stack</h2><p>使用np.dstack时，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x, y &#x3D; np.mgrid[0:5, 0:3]</span><br><span class="line">print(np.dstack((x, y)))</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[[[0 0]</span><br><span class="line">  [0 1]</span><br><span class="line">  [0 2]]</span><br><span class="line"></span><br><span class="line"> [[1 0]</span><br><span class="line">  [1 1]</span><br><span class="line">  [1 2]]</span><br><span class="line"></span><br><span class="line"> [[2 0]</span><br><span class="line">  [2 1]</span><br><span class="line">  [2 2]]</span><br><span class="line"></span><br><span class="line"> [[3 0]</span><br><span class="line">  [3 1]</span><br><span class="line">  [3 2]]</span><br><span class="line"></span><br><span class="line"> [[4 0]</span><br><span class="line">  [4 1]</span><br><span class="line">  [4 2]]]</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>in Numpy, how to zip two 2-D arrays?</p>
-<p><a href="https://stackoverflow.com/questions/17960441/in-numpy-how-to-zip-two-2-d-arrays" target="_blank" rel="noopener">https://stackoverflow.com/questions/17960441/in-numpy-how-to-zip-two-2-d-arrays</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">zip</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">dstack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/31/Numpy-13-dstack/">展开全文 >></a>
         </p>
       
 
@@ -2511,6 +2492,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

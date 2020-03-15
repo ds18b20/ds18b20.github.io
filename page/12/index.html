@@ -156,6 +156,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-20-NoneOREmpty" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/Numpy-20-NoneOREmpty/">Numpy-20-NoneOREmpty</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/28/Numpy-20-NoneOREmpty/" class="archive-article-date">
+  	<time datetime="2018-04-28T13:51:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="判断一个对象是None还是Numpy-Array"><a href="#判断一个对象是None还是Numpy-Array" class="headerlink" title="判断一个对象是None还是Numpy Array"></a>判断一个对象是None还是Numpy Array</h1><p>OpenCV的Hough直线检测等函数，返回有时候会是None对象。这时候进行下一步数据处理时就需要判断此返回值是None还是array。</p>
+<p>最直接的想法就是判断是不是等于None：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>或者使用type和isinstance判断：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> type(a) <span class="keyword">is</span> np.ndarray:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>ininstance可以判断是不是一个类的子类，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> isinstance(a, np.ndarray):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<h1 id="判断Array是否为空"><a href="#判断Array是否为空" class="headerlink" title="判断Array是否为空"></a>判断Array是否为空</h1><p>若已知是Numpy Array，要判断内容是否为空的话，可以查看a.size属性。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>ValueError when checking if variable is None or numpy.array</p>
+<p><a href="https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array</a></p>
+<p>How can I check whether the numpy array is empty or not?</p>
+<p><a href="https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not" target="_blank" rel="noopener">https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">None</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">size</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/28/Numpy-20-NoneOREmpty/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-19-float64" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1517,98 +1628,6 @@
 
 
   
-    <article id="post-FFT-01-sample" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/FFT-01-sample/">FFT-01-sample</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/11/FFT-01-sample/" class="archive-article-date">
-  	<time datetime="2018-04-11T13:43:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Sample-code-for-FFT"><a href="#Sample-code-for-FFT" class="headerlink" title="Sample code for FFT"></a>Sample code for FFT</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">iFFT</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ori_array, sampling_period)</span>:</span></span><br><span class="line">        self.__ori_array = ori_array</span><br><span class="line">        self.__count = len(self.__ori_array)</span><br><span class="line">        self.__sampling_period = sampling_period</span><br><span class="line">        self.__interval = self.__sampling_period / self.__count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_ori_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(<span class="number">0</span>, self.__sampling_period, self.__interval)</span><br><span class="line">        y = self.__ori_array</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_fft_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(self.__count / <span class="number">2</span>) / self.__sampling_period</span><br><span class="line">        ft = np.fft.fft(self.__ori_array)</span><br><span class="line">        y = abs(ft[range(int(self.__count / <span class="number">2</span>))] / self.__count)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">period = <span class="number">5</span></span><br><span class="line">interval = <span class="number">0.005</span></span><br><span class="line">time = np.arange(<span class="number">0</span>, period, interval)</span><br><span class="line">array = np.sin(<span class="number">2</span> * np.pi * <span class="number">10</span> * time) + <span class="number">0.5</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">30</span> * time)</span><br><span class="line">sample = iFFT(array, period)</span><br><span class="line">x0, y0 = sample.get_ori_xy()</span><br><span class="line">x1, y1 = sample.get_fft_xy()</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x0, y0, <span class="string">'black'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>), plt.ylabel(<span class="string">'Amplitude'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">plt.plot(x1, y1, <span class="string">'red'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Freq (Hz)'</span>), plt.ylabel(<span class="string">'Amp. Spectrum'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>the output,</p>
-<p><img src="FFT-01-sample%5Cfft.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FFT</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sample</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/FFT//" class="article-tag-list-link color4">FFT</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/FFT-01-sample/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -2880,6 +2899,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

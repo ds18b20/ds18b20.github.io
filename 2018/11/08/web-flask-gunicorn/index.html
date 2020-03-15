@@ -16,7 +16,7 @@
 <meta property="og:description" content="环境准备Flask提供用python写的HTTP应用； gunicorn是一个UNIX下的WFGI HTTP服务器 安装python312sudo apt-get updatesudo apt-get install python3.6  查看版本： 123python3 --version# orpython3 -V  安装pip3aws的EC2平台提供的ubuntu系统默认自带python2。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-11-08T13:44:13.000Z">
-<meta property="article:modified_time" content="2019-08-29T14:53:45.238Z">
+<meta property="article:modified_time" content="2020-03-15T00:36:04.163Z">
 <meta property="article:author" content="wzx">
 <meta property="article:tag" content="flask">
 <meta property="article:tag" content="gunicorn">
@@ -203,7 +203,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www</span><br><span class="line">sudo mkdir appname</span><br></pre></td></tr></table></figure>
 
 <p>新建venv，使用-p参数指定python版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo virtualenv -p &#x2F;usr&#x2F;bin&#x2F;python3.6 venv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv -p 3.5 python35</span><br></pre></td></tr></table></figure>
 
 <p>激活venv：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source venv&#x2F;bin&#x2F;activate</span><br></pre></td></tr></table></figure>
@@ -223,7 +223,7 @@
 <ul>
 <li>根据requirements.txt安装项目依赖</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
 
 <h1 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h1><p>端口转发：外部80端口的请求转发到127.0.0.1:5000上；</p>
 <p>配置过程为：</p>
@@ -238,6 +238,7 @@
 <p>Esc：退出编辑模式</p>
 <p>:wq：保存并退出vim</p>
 </blockquote>
+<p>另外，vim不能Ctrl+C/Ctrl+V，可以选择用nano来编辑。</p>
 <p>软连接到sites-enabled目录下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;setting_file_name &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;setting_file_name</span><br></pre></td></tr></table></figure>
 
@@ -270,6 +271,9 @@
 
 <p>查看gunicorn进程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree -ap|grep gunicorn</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep gunicorn</span><br></pre></td></tr></table></figure>
 
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>通过Gunicorn部署flask应用（阿里云服务器：Ubuntu 16.04）</p>
 <p><a href="https://juejin.im/post/5a5a1408518825733060e232" target="_blank" rel="noopener">https://juejin.im/post/5a5a1408518825733060e232</a></p>
@@ -1707,6 +1711,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

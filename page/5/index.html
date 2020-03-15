@@ -156,6 +156,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Git-11-untrackFile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/01/Git-11-untrackFile/">Git-11-untrackFile</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/01/Git-11-untrackFile/" class="archive-article-date">
+  	<time datetime="2018-09-01T02:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="停止追踪新文件"><a href="#停止追踪新文件" class="headerlink" title="停止追踪新文件"></a>停止追踪新文件</h1><p>修改.gitignore文件来实现忽略对未add的文件的追踪。</p>
+<h1 id="取消对已添加的文件的追踪"><a href="#取消对已添加的文件的追踪" class="headerlink" title="取消对已添加的文件的追踪"></a>取消对已添加的文件的追踪</h1><p>对于已经add的文件，停止对其追踪需要使用<code>git rm --cached &lt;file&gt;</code>来实现。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">untrack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">file</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/01/Git-11-untrackFile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-51-getFunctionNameClassName" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1171,121 +1261,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/08/19/Python-50-URL-XML-encoding/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-49-parseURL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/19/Python-49-parseURL/">Python-49-parseURL</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/19/Python-49-parseURL/" class="archive-article-date">
-  	<time datetime="2018-08-18T15:27:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python解析url"><a href="#Python解析url" class="headerlink" title="Python解析url"></a>Python解析url</h1><p>传入Server的url可以使用Python自带的urllib里的parse来解析。</p>
-<h2 id="解析query获取参数列表"><a href="#解析query获取参数列表" class="headerlink" title="解析query获取参数列表"></a>解析query获取参数列表</h2><p>假设有如下的一个URL字符串：</p>
-<p><code>http://www.example.org/default.html?ct=32&amp;op=92&amp;item=98#anchor</code></p>
-<p>下面的代码可以获取url内的参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"><span class="comment"># Python3 replace `urlparse` with `urllib.parse`.</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://www.example.org/default.html?ct=32&amp;op=92&amp;item=98#anchor"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># split url</span></span><br><span class="line">split_result = parse.urlsplit(url=url)</span><br><span class="line">print(split_result)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'*********************************'</span>)</span><br><span class="line">print(<span class="string">'scheme: &#123;&#125;'</span>.format(split_result.scheme))</span><br><span class="line">print(<span class="string">'netloc: &#123;&#125;'</span>.format(split_result.netloc))</span><br><span class="line">print(<span class="string">'path: &#123;&#125;'</span>.format(split_result.path))</span><br><span class="line">print(<span class="string">'query: &#123;&#125;'</span>.format(split_result.query))</span><br><span class="line">print(<span class="string">'fragment: &#123;&#125;'</span>.format(split_result.fragment))</span><br><span class="line">print(<span class="string">'*********************************'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># parse query string</span></span><br><span class="line">query_string = split_result.query</span><br><span class="line">print(parse.parse_qs(query_string))</span><br></pre></td></tr></table></figure>
-
-<p>解释如下：</p>
-<h3 id="split-url"><a href="#split-url" class="headerlink" title="split url"></a>split url</h3><ul>
-<li>parse.urlsplit方法直接把url拆开成<code>scheme</code>，<code>netloc</code>，<code>path</code>，<code>query</code>，<code>fragment</code>5个部分。<br>其中query就是以string形式保存的参数部分。</li>
-<li>fragment（片段）表示Html中的一个位置标记。例如<code>https://docs.python.org/3/library/urllib.parse.html#url-parsing</code>直接跳转到页面的<code>url-parsing</code>处。<br><code>#fragment</code>不会影响url查询结果，它只会作用于浏览器，告诉浏览器显示的位置。</li>
-</ul>
-<h3 id="parse-query-string"><a href="#parse-query-string" class="headerlink" title="parse query string"></a>parse query string</h3><p>parse.parse_qs(query_string)方法解析string格式的query语句，返回一个dict。</p>
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SplitResult(scheme&#x3D;&#39;http&#39;, netloc&#x3D;&#39;www.example.org&#39;, path&#x3D;&#39;&#x2F;default.html&#39;, query&#x3D;&#39;ct&#x3D;32&amp;op&#x3D;92&amp;item&#x3D;98&#39;, fragment&#x3D;&#39;anchor&#39;)</span><br><span class="line">*********************************</span><br><span class="line">scheme: http</span><br><span class="line">netloc: www.example.org</span><br><span class="line">path: &#x2F;default.html</span><br><span class="line">query: ct&#x3D;32&amp;op&#x3D;92&amp;item&#x3D;98</span><br><span class="line">fragment: anchor</span><br><span class="line">*********************************</span><br><span class="line">&#123;&#39;ct&#39;: [&#39;32&#39;], &#39;op&#39;: [&#39;92&#39;], &#39;item&#39;: [&#39;98&#39;]&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="parse-urlparse-方法"><a href="#parse-urlparse-方法" class="headerlink" title="parse.urlparse()方法"></a>parse.urlparse()方法</h3><p>parse模块下还有一个类似于urlsplit的方法，urlparse。<a href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urlsplit" target="_blank" rel="noopener">https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urlsplit</a><br>urlsplit可以大致作为为urlsplit的替代方法。二者唯一的区别就是urlparse会多得到一个params属性。<br>关于params参见：<a href="https://doriantaylor.com/policy/http-url-path-parameter-syntax" target="_blank" rel="noopener">https://doriantaylor.com/policy/http-url-path-parameter-syntax</a><br><a href="https://tools.ietf.org/html/rfc3986#section-3.3" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc3986#section-3.3</a></p>
-<h2 id="解码汉字和-20"><a href="#解码汉字和-20" class="headerlink" title="解码汉字和%20"></a>解码汉字和%20</h2><p>前一部分解析得到的url的query参数可能包含编码之后得到的字符串，只有通过解码才能得到真实的参数值。解码使用urllib.unquote()，下面是google搜索<code>编码</code>这个词的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.google.co.jp/search?newwindow=1&amp;source=hp&amp;ei=mApxW4jOFs-k-QbomZXwBw&amp;q=%E7%BC%96%E7%A0%81&amp;oq=&amp;gs_l=psy-ab.1.0.35i39k1l6.0.0.0.14626.3.1.0.0.0.0.0.0..1.0....0...1c..64.psy-ab..2.1.219.6...220.gCjXlx2JHRc"</span></span><br><span class="line">print(url)</span><br><span class="line">q = parse.urlparse(url).query  <span class="comment"># 获取query查询字符串</span></span><br><span class="line">print(<span class="string">'query:'</span>, q)</span><br><span class="line">p = parse.unquote(q)  <span class="comment"># 中文字符转换+%20替换</span></span><br><span class="line">print(<span class="string">'parsed query:'</span>, p)</span><br><span class="line"></span><br><span class="line">qs = parse.parse_qs(q, <span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'query dict:'</span>, qs)</span><br></pre></td></tr></table></figure>
-
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.google.co.jp&#x2F;search?newwindow&#x3D;1&amp;source&#x3D;hp&amp;ei&#x3D;mApxW4jOFs-k-QbomZXwBw&amp;</span><br><span class="line">q&#x3D;%E7%BC%96%E7%A0%81&amp;oq&#x3D;&amp;gs_l&#x3D;psy-ab.1.0.35i39k1l6.0.0.0.14626.3.1.0.0.0.0.0.0..</span><br><span class="line">1.0....0...1c..64.psy-ab..2.1.219.6...220.gCjXlx2JHRc</span><br><span class="line">query: newwindow&#x3D;1&amp;source&#x3D;hp&amp;ei&#x3D;mApxW4jOFs-k-QbomZXwBw&amp;q&#x3D;%E7%BC%96%E7%A0%81&amp;oq&#x3D;&amp;</span><br><span class="line">gs_l&#x3D;psy-ab.1.0.35i39k1l6.0.0.0.14626.3.1.0.0.0.0.0.0..1.0....0...1c..64.psy-ab.</span><br><span class="line">.2.1.219.6...220.gCjXlx2JHRc</span><br><span class="line">parsed query: newwindow&#x3D;1&amp;source&#x3D;hp&amp;ei&#x3D;mApxW4jOFs-k-QbomZXwBw&amp;q&#x3D;编码&amp;oq&#x3D;&amp;gs_l&#x3D;ps</span><br><span class="line">y-ab.1.0.35i39k1l6.0.0.0.14626.3.1.0.0.0.0.0.0..1.0....0...1c..64.psy-ab..2.1.21</span><br><span class="line">9.6...220.gCjXlx2JHRc</span><br><span class="line">query dict: &#123;&#39;gs_l&#39;: [&#39;psy-ab.1.0.35i39k1l6.0.0.0.14626.3.1.0.0.0.0.0.0..1.0....</span><br><span class="line">0...1c..64.psy-ab..2.1.219.6...220.gCjXlx2JHRc&#39;], &#39;ei&#39;: [&#39;mApxW4jOFs-k-QbomZXwBw</span><br><span class="line">&#39;], &#39;newwindow&#39;: [&#39;1&#39;], &#39;source&#39;: [&#39;hp&#39;], &#39;oq&#39;: [&#39;&#39;], &#39;q&#39;: [&#39;编码&#39;]&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/stemon/p/6602185.html" target="_blank" rel="noopener">https://www.cnblogs.com/stemon/p/6602185.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">URL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">urllib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">parse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/19/Python-49-parseURL/">展开全文 >></a>
         </p>
       
 
@@ -2586,6 +2561,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

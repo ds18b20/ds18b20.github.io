@@ -156,6 +156,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-40-ClassConstructor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/21/Python-40-ClassConstructor/">Python-40-ClassConstructor</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/21/Python-40-ClassConstructor/" class="archive-article-date">
+  	<time datetime="2018-06-21T14:09:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类的构造函数"><a href="#类的构造函数" class="headerlink" title="类的构造函数"></a>类的构造函数</h1><p>Python中新建一个类时，首先一般会在类下加入构造函数块<code>def __init__()</code>。</p>
+<p>首先构造函数也是函数，在子类中可以被重写。和普通函数一样，重写之后的构造函数会把父类的构造函数覆盖。</p>
+<p>如果在父类的构造函数中初始化了一些属性，而且在子类中没有显式地调用父类的构造函数，会导致在子类中无法找到父类属性的问题。</p>
+<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会抛出错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;class_test.py&quot;, line 36, in &lt;module&gt;</span><br><span class="line">    a.demo()</span><br><span class="line">  File &quot;class_test.py&quot;, line 19, in demo</span><br><span class="line">    print(self.name)</span><br><span class="line">AttributeError: &#39;Child&#39; object has no attribute &#39;name&#39;</span><br></pre></td></tr></table></figure>
+
+<h1 id="调用父类构造函数"><a href="#调用父类构造函数" class="headerlink" title="调用父类构造函数"></a>调用父类构造函数</h1><p>调用父类构造函数有两种方式：</p>
+<h2 id="调用未绑定的超类构造方法"><a href="#调用未绑定的超类构造方法" class="headerlink" title="调用未绑定的超类构造方法"></a>调用未绑定的超类构造方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        Parent.__init__(self)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
+
+<p>正常输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用super函数"><a href="#使用super函数" class="headerlink" title="使用super函数"></a>使用super函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Child, self).__init__()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>值得注意的是，如果子类中没有定义构造函数，则会自动继承父类的构造函数，这跟普通函数的继承一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="comment"># def __init__(self):</span></span><br><span class="line">        <span class="comment"># super(Child, self).__init__()</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
+
+<p>输出也是，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/nerrissa/articles/5607291.html" target="_blank" rel="noopener">python中子类调用父类的初始化方法</a></p>
+<p><a href="https://www.jianshu.com/p/452e0fadd144" target="_blank" rel="noopener">Python中子类初始化父类构造方法</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">constructor</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/21/Python-40-ClassConstructor/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DeepLearning-05-Regression" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1061,132 +1176,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/30/TensorFlow-19-KernalVisualization/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-18-dropout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/TensorFlow-18-dropout/">TensorFlow-18-dropout</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/26/TensorFlow-18-dropout/" class="archive-article-date">
-  	<time datetime="2018-05-26T07:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="sklearn-dataset"><a href="#sklearn-dataset" class="headerlink" title="sklearn dataset"></a>sklearn dataset</h1><p>以下代码展示了sklearn库自带的dataset的内容，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># load data</span></span><br><span class="line">digits = load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br><span class="line"></span><br><span class="line">print(X.shape)</span><br><span class="line">print(y.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show full dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show train dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X_train[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y_train[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># show test dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X_test[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y_test[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>输出的X和y的尺寸分别为，<code>(1797, 64)</code>和<code>(1797,)</code></p>
-<p>可知，总共1797个样本，每个样本包括image部分和对应的label。</p>
-<p>image是被flaten的1*64的行向量，要显示的话需要reshape成8*8。label是1797ge元素组成的一维向量。</p>
-<p>输出的图像如下，首先是整体样本的前5个样本：</p>
-<p><img src="TensorFlow-18-dropout%5Cdataset_1.png" alt=""></p>
-<p>然后是split得到的train和test的前5个样本：</p>
-<p><img src="TensorFlow-18-dropout%5Cdataset_2.png" alt=""></p>
-<p><img src="TensorFlow-18-dropout%5Cdataset_3.png" alt=""></p>
-<p>可以看到，得到的train和test样本已经得到了shaffle。</p>
-<h1 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h1><p>神经网络由于配置不当会导致<code>过拟合</code>(over fitting)，即训练得到的Weights和biases对训练样本适应的很好(过好)，但是对测试样本适应得不好的现象。出现over fitting之后神经网络的通用性降低，当应用于具体实例时不能准确预测。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># load data</span></span><br><span class="line">digits = load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br><span class="line">y = LabelBinarizer().fit_transform(y)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer'</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'Weights'</span>):</span><br><span class="line">            Weights = tf.Variable(tf.random_normal([in_size, out_size]), name=<span class="string">'W'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/Weights'</span>, Weights)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'biases'</span>):</span><br><span class="line">            biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>, name=<span class="string">'b'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/biases'</span>, biases)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">            W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">        <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            outputs = W_m_p</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            outputs = activation_function(W_m_p)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/outputs'</span>, outputs)</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># real data for placeholder</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">64</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add hidden layer</span></span><br><span class="line">layer_1 = add_layer(xs, <span class="number">64</span>, <span class="number">100</span>, <span class="string">'hidden_layer_1'</span>, activation_function=tf.nn.tanh)</span><br><span class="line"><span class="comment"># add prediction layer</span></span><br><span class="line">prediction = add_layer(layer_1, <span class="number">100</span>, <span class="number">10</span>, <span class="string">'prediction_layer'</span>, activation_function=tf.nn.softmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Session</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">train_writer = tf.summary.FileWriter(<span class="string">'./graphs/dropout/train'</span>, sess.graph)</span><br><span class="line">test_writer = tf.summary.FileWriter(<span class="string">'./graphs/dropout/test'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: X_train, ys: y_train&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># print(compute_accuracy(mnist.test.images, mnist.test.labels))</span></span><br><span class="line">        train_result = sess.run(summaries, feed_dict=&#123;xs: X_train, ys: y_train&#125;)</span><br><span class="line">        test_result = sess.run(summaries, feed_dict=&#123;xs: X_test, ys: y_test&#125;)</span><br><span class="line">        train_writer.add_summary(train_result, global_step=step)</span><br><span class="line">        test_writer.add_summary(test_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>上例中给中间层指定了100个节点，有意让其发生<code>过拟合</code>，而且没有加入dropout层。结果如下，</p>
-<p><img src="TensorFlow-18-dropout%5Cdropout_1.JPG" alt=""></p>
-<p>可以看到，随着学习步数的增加，train和test的loss差距开始变大，这就意味着该W和b对训练集有很好的预测，而对测试集适应性不佳。</p>
-<p>为了解决over fitting，可以给网络中添加drop out层，即人为地切断层中的某一些连接，从而抑制W和b过于适应于训练样本。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">		W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">	<span class="keyword">with</span> tf.name_scope(<span class="string">'Dropout'</span>):</span><br><span class="line">		W_m_p = tf.nn.dropout(W_m_p, keep_prob)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>以及</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">	<span class="comment"># keep_prob代表保留比例</span></span><br><span class="line">    keep_prob = tf.placeholder(dtype=tf.float32, name=<span class="string">'keep_prob4dropout'</span>)</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">64</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>train的时候给keep_prob这个placeholder赋值0.6，生成Summary的时候赋1即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: X_train, ys: y_train, keep_prob: <span class="number">0.6</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># print(compute_accuracy(mnist.test.images, mnist.test.labels))</span></span><br><span class="line">        train_result = sess.run(summaries, feed_dict=&#123;xs: X_train, ys: y_train, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        test_result = sess.run(summaries, feed_dict=&#123;xs: X_test, ys: y_test, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        train_writer.add_summary(train_result, global_step=step)</span><br><span class="line">        test_writer.add_summary(test_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>生成的计算图中也就新增加了dropout层，如下：</p>
-<p><img src="TensorFlow-18-dropout%5Cdropout_2.png" alt=""></p>
-<p>此时，loss输出如下：</p>
-<p><img src="TensorFlow-18-dropout%5Cdropout_3.JPG" alt=""></p>
-<p>同dropout前相比，over fitting得到大幅改善。</p>
-<p><strong>注意</strong>：运行时可能会报错<code>Nan in summary histogram for:</code>，参见文章<code>TensorFlow-00-Error</code>来调整超参数。</p>
-<p>完整代码参见我的<a href="https://github.com/ds18b20/TensorFlow/blob/master/tutorial/08-dropout.py" target="_blank" rel="noopener">Github</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dropout</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sklearn</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dataset</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/26/TensorFlow-18-dropout/">展开全文 >></a>
         </p>
       
 
@@ -2487,6 +2476,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

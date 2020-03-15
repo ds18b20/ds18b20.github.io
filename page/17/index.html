@@ -156,6 +156,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-30-multiprocessing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-30-multiprocessing/">Python-30-multiprocessing</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-30-multiprocessing/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:14:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>进程中可以包含多个线程，多个任务并行处理时可以多进程，也可以多线程来实现。</p>
+<h1 id="Python中实现多进程"><a href="#Python中实现多进程" class="headerlink" title="Python中实现多进程"></a>Python中实现多进程</h1><p>Unix/Linux中通过os.fork()实现创建子进程。</p>
+<p>由于windows系统没有fork调用，故跨平台应用时，可使用multiprocessing模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Child process</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run child process %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">'test'</span>,))</span><br><span class="line">    print(<span class="string">'Child process start.'</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'Child process end.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通过向Process函数内传入执行的函数和参数，并用start方法开始执行，用join方法等待子进程结束再往下运行。</p>
+<p>执行结果为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">8808.</span></span><br><span class="line">Child process will start.</span><br><span class="line">Run child process test (<span class="number">7680</span>)...</span><br><span class="line">Child process end.</span><br></pre></td></tr></table></figure>
+
+<h1 id="进程池pool"><a href="#进程池pool" class="headerlink" title="进程池pool"></a>进程池pool</h1><p>使用Pool启动大量进程，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run task %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds.'</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    print(<span class="string">'Waiting for all subprocesses done...'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'All subprocesses done.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>join方法等待所有子进程执行完毕，在join之前必须加入close方法，使之后不能继续添加新的process。</p>
+<p>执行结果为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">4916.</span></span><br><span class="line">Waiting <span class="keyword">for</span> all subprocesses done...</span><br><span class="line">Run task <span class="number">0</span> (<span class="number">6708</span>)...</span><br><span class="line">Run task <span class="number">1</span> (<span class="number">800</span>)...</span><br><span class="line">Run task <span class="number">2</span> (<span class="number">8420</span>)...</span><br><span class="line">Run task <span class="number">3</span> (<span class="number">9724</span>)...</span><br><span class="line">Task <span class="number">2</span> runs <span class="number">1.16</span> seconds.</span><br><span class="line">Run task <span class="number">4</span> (<span class="number">8420</span>)...</span><br><span class="line">Task <span class="number">0</span> runs <span class="number">1.88</span> seconds.</span><br><span class="line">Task <span class="number">1</span> runs <span class="number">1.93</span> seconds.</span><br><span class="line">Task <span class="number">3</span> runs <span class="number">1.92</span> seconds.</span><br><span class="line">Task <span class="number">4</span> runs <span class="number">0.79</span> seconds.</span><br><span class="line">All subprocesses done.</span><br></pre></td></tr></table></figure>
+
+<p>可知，Pool(4)新建了4个进程，其中task 0-3是立刻执行。而task 4则要等待0-3中某一个执行完毕才能开始，因为pool中只开了4个槽，无法同时容纳5个进程。</p>
+<p>不指定的话，pool默认为CPU的内核数目。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>廖雪峰Python3教程</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">multiprocessing</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">pool</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-30-multiprocessing/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-29-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -801,6 +912,10 @@
 <p>重命名文件夹</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv folderA folderB</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="进程查看"><a href="#进程查看" class="headerlink" title="进程查看"></a>进程查看</h1><p><code>ps aux | grep **</code></p>
+<p>**处为进程包含的关键词，比如python</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Ubuntu 命令行教程</p>
 <p><a href="http://teliute.org/linux/Tecli/lesson5/lesson5.html" target="_blank" rel="noopener">http://teliute.org/linux/Tecli/lesson5/lesson5.html</a></p>
 
@@ -1191,107 +1306,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/21/Python-27-CustomizeClass/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-00-Tips/">Python-00-Tips</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-00-Tips/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="a-b-b-a-b"><a href="#a-b-b-a-b" class="headerlink" title="a, b = b, a + b"></a>a, b = b, a + b</h1><p><code>a, b = b, a + b</code>等价于</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = (b, a + b)</span><br><span class="line">a = t[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 这里代入的a没有被更新</span></span><br><span class="line">b = t[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>而不是像C语言中，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"><span class="comment"># a被上面一行更新了</span></span><br><span class="line">b = a + b</span><br></pre></td></tr></table></figure>
-
-<p>这个技巧在Python中可以<strong>用于交换两个变量</strong>，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-
-<p>仅仅一行就实现了C语言中三行的功能。</p>
-<h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>判断一个元素是否存在于一个序列中，可以使用循环查询来实现。其实Python有个in的语法，可以更方便地达到目的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=range(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> <span class="keyword">in</span> a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">'male'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b <span class="keyword">in</span> [<span class="string">'male'</span>, <span class="string">'female'</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tips</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-00-Tips/">展开全文 >></a>
         </p>
       
 
@@ -2592,6 +2606,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>

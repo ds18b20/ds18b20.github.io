@@ -156,6 +156,127 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-Eclipse-02-ShortKeys" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">Java-Eclipse-02-ShortKeys</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/11/Java-Eclipse-02-ShortKeys/" class="archive-article-date">
+  	<time datetime="2018-03-11T14:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This article shows short keys in eclipse.</p>
+<h1 id="content-assist"><a href="#content-assist" class="headerlink" title="content assist"></a>content assist</h1><p>输入关键字，按<code>Alt+/</code>即可显示内容助理(content assist)。双击所需的内容可以自动填充相关代码，非常方便。</p>
+<p>比如class定义时，class内部输入main，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后按下<code>Alt+/</code>，按照提示选择<code>main method</code>，则会自动填充以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>set here:</p>
+<p><em>Window&gt;Preferences&gt;Java&gt;Editor&gt;Content Assist&gt;Advanced</em> </p>
+<p>reference:</p>
+<p>Eclipse自动补全+常用快捷键</p>
+<p><a href="http://blog.csdn.net/bd_matto/article/details/50899032" target="_blank" rel="noopener">http://blog.csdn.net/bd_matto/article/details/50899032</a></p>
+<p>In my case</p>
+<p><a href="https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse" target="_blank" rel="noopener">https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse</a></p>
+<h1 id="copy-to-up-below"><a href="#copy-to-up-below" class="headerlink" title="copy to up/below"></a>copy to up/below</h1><p><code>Ctrl+Alt+UP/DOWN</code></p>
+<p>如果此快捷键和Ubuntu的屏幕切换快捷键冲突的话,参考下面的链接修改Ubuntu快捷键：</p>
+<p><a href="http://blog.csdn.net/hanshileiai/article/details/46412641" target="_blank" rel="noopener">http://blog.csdn.net/hanshileiai/article/details/46412641</a></p>
+<p>Alt+F2键调出命令框，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down &quot;[&#39;&#39;]&quot;</span><br><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up &quot;[&#39;&#39;]&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="自动format"><a href="#自动format" class="headerlink" title="自动format"></a>自动format</h1><p><code>Ctrl+Shift+F</code>将一段未format的代码自动缩进。</p>
+<p>或者选择代码段，右键—Source code—Format也可以实现相同的功能。</p>
+<h1 id="检查-amp-添加未导入的类"><a href="#检查-amp-添加未导入的类" class="headerlink" title="检查&amp;添加未导入的类"></a>检查&amp;添加未导入的类</h1><p>假设在代码块中用到了外部的某个类，但是忘记在头部添加导入语句时，代码块的相应部分会有红色下划线提示。这就需要查找并引用缺失的引用，可以手动查找并添加，或者可以快捷键直接导入。</p>
+<p><code>Ctrl+Shift+O</code></p>
+<p>有重复的类时，会提示选择。</p>
+<h1 id="快速修复"><a href="#快速修复" class="headerlink" title="快速修复"></a>快速修复</h1><p><code>Ctrl+1</code>快速对错误提供修改建议。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">short keys</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1188,117 +1309,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/10/Crawler-01-SeleniumInstall/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-30-multiprocessing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-30-multiprocessing/">Python-30-multiprocessing</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-30-multiprocessing/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:14:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>进程中可以包含多个线程，多个任务并行处理时可以多进程，也可以多线程来实现。</p>
-<h1 id="Python中实现多进程"><a href="#Python中实现多进程" class="headerlink" title="Python中实现多进程"></a>Python中实现多进程</h1><p>Unix/Linux中通过os.fork()实现创建子进程。</p>
-<p>由于windows系统没有fork调用，故跨平台应用时，可使用multiprocessing模块。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Child process</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run child process %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">'test'</span>,))</span><br><span class="line">    print(<span class="string">'Child process start.'</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'Child process end.'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>通过向Process函数内传入执行的函数和参数，并用start方法开始执行，用join方法等待子进程结束再往下运行。</p>
-<p>执行结果为，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">8808.</span></span><br><span class="line">Child process will start.</span><br><span class="line">Run child process test (<span class="number">7680</span>)...</span><br><span class="line">Child process end.</span><br></pre></td></tr></table></figure>
-
-<h1 id="进程池pool"><a href="#进程池pool" class="headerlink" title="进程池pool"></a>进程池pool</h1><p>使用Pool启动大量进程，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run task %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds.'</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    print(<span class="string">'Waiting for all subprocesses done...'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'All subprocesses done.'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>join方法等待所有子进程执行完毕，在join之前必须加入close方法，使之后不能继续添加新的process。</p>
-<p>执行结果为，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">4916.</span></span><br><span class="line">Waiting <span class="keyword">for</span> all subprocesses done...</span><br><span class="line">Run task <span class="number">0</span> (<span class="number">6708</span>)...</span><br><span class="line">Run task <span class="number">1</span> (<span class="number">800</span>)...</span><br><span class="line">Run task <span class="number">2</span> (<span class="number">8420</span>)...</span><br><span class="line">Run task <span class="number">3</span> (<span class="number">9724</span>)...</span><br><span class="line">Task <span class="number">2</span> runs <span class="number">1.16</span> seconds.</span><br><span class="line">Run task <span class="number">4</span> (<span class="number">8420</span>)...</span><br><span class="line">Task <span class="number">0</span> runs <span class="number">1.88</span> seconds.</span><br><span class="line">Task <span class="number">1</span> runs <span class="number">1.93</span> seconds.</span><br><span class="line">Task <span class="number">3</span> runs <span class="number">1.92</span> seconds.</span><br><span class="line">Task <span class="number">4</span> runs <span class="number">0.79</span> seconds.</span><br><span class="line">All subprocesses done.</span><br></pre></td></tr></table></figure>
-
-<p>可知，Pool(4)新建了4个进程，其中task 0-3是立刻执行。而task 4则要等待0-3中某一个执行完毕才能开始，因为pool中只开了4个槽，无法同时容纳5个进程。</p>
-<p>不指定的话，pool默认为CPU的内核数目。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>廖雪峰Python3教程</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">multiprocessing</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">pool</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-30-multiprocessing/">展开全文 >></a>
         </p>
       
 
@@ -2599,6 +2609,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
             
             <div class="clearfix"></div>
