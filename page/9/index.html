@@ -156,6 +156,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-19-KernalVisualization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/30/TensorFlow-19-KernalVisualization/">TensorFlow-19-KernelVisualization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/30/TensorFlow-19-KernalVisualization/" class="archive-article-date">
+  	<time datetime="2018-05-30T14:17:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TF-kernel-visualization"><a href="#TF-kernel-visualization" class="headerlink" title="TF kernel visualization"></a>TF kernel visualization</h1><p>下面的代码使用MNIST手写识别的例子来试验kernel的可视化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line"></span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data/"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_accuracy</span><span class="params">(xs_val, ys_val)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> prediction</span><br><span class="line">    y_pre = sess.run(prediction, feed_dict=&#123;xs: xs_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(y_pre, axis=<span class="number">1</span>), tf.argmax(ys_val, axis=<span class="number">1</span>))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    result = sess.run(accuracy, feed_dict=&#123;xs: xs_val, ys: ys_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.truncated_normal(shape, stddev=<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bias_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.constant(<span class="number">0.1</span>, shape=shape)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define conv layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W)</span>:</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="comment"># padding: SAME size with input</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define pooling layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool_2x2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="comment"># ksize=[1, width, height, 1]</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.max_pool(x, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">28</span>*<span class="number">28</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sample count * width * height * channel</span></span><br><span class="line">    x_image = tf.reshape(xs, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</span><br><span class="line">    image_summary = tf.summary.image(<span class="string">"images_summary"</span>, x_image, max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_1'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 1</span></span><br><span class="line">    <span class="comment"># kernal count: 32</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv1 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>], <span class="string">'W_for_Conv_Layer_1'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 1, 32] to [32, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">"kernels_1"</span>, tf.transpose(W_conv1, perm=[<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]), max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv1 = bias_variable([<span class="number">32</span>], <span class="string">'bias_for_Conv_Layer_1'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv1 = conv2d(x_image, W_conv1) + b_conv1  <span class="comment"># output size -1*28*28*32</span></span><br><span class="line">        h_conv1 = tf.nn.relu(h_conv1)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 28, 28, 32] to [-1, 32, 28, 28]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_1'</span>):</span><br><span class="line">    h_pool1 = max_pool_2x2(h_conv1)  <span class="comment"># output size -1*14*14*32</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 32] to [-1, 32, 14, 14]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_2'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 32</span></span><br><span class="line">    <span class="comment"># kernal count: 64</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv2 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>], <span class="string">'W_for_Conv_Layer_2'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 32, 64] to [32*64, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">'kernels_2'</span>, tf.reshape(tf.transpose(W_conv2, perm=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>]), [<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv2 = bias_variable([<span class="number">64</span>], <span class="string">'bias_2'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv2 = conv2d(h_pool1, W_conv2) + b_conv2  <span class="comment"># output size -1*14*14*64</span></span><br><span class="line">        h_conv2 = tf.nn.relu(h_conv2)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 64] to [-1, 64, 14, 14]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_2'</span>, tf.reshape(tf.transpose(h_conv2, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_2'</span>):</span><br><span class="line">    h_pool2 = max_pool_2x2(h_conv2)  <span class="comment"># output size -1*7*7*64</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 7, 7, 64] to [-1, 64, 7, 7]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_2'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_1'</span>):</span><br><span class="line">    W_fc1 = weight_variable([<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>, <span class="number">1024</span>], <span class="string">'W_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    b_fc1 = bias_variable([<span class="number">1024</span>], <span class="string">'bias_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    h_pool2_flat = tf.reshape(h_pool2, [<span class="number">-1</span>, <span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>])  <span class="comment"># shape: [7, 7, 64]--&gt;[-1, 7*7*64]</span></span><br><span class="line">    h_fc1 = tf.matmul(h_pool2_flat, W_fc1) + b_fc1</span><br><span class="line">    h_fc1 = tf.nn.relu(h_fc1)</span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc1_hist = tf.summary.histogram(<span class="string">"W_fc1"</span>, W_fc1)</span><br><span class="line">    b_fc1_hist = tf.summary.histogram(<span class="string">"b_fc1"</span>, b_fc1)</span><br><span class="line"></span><br><span class="line">    keep_prob = tf.placeholder(dtype=tf.float32, name=<span class="string">'keep_prob4dropout'</span>)</span><br><span class="line">    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_2'</span>):</span><br><span class="line">    W_fc2 = weight_variable([<span class="number">1024</span>, <span class="number">10</span>], <span class="string">'W_for_Fully_Connected_layer_2'</span>)</span><br><span class="line">    b_fc2 = bias_variable([<span class="number">10</span>], <span class="string">'bias_for_Fully_Connected_layer_2'</span>)</span><br><span class="line"></span><br><span class="line">    prediction = tf.matmul(h_fc1_drop, W_fc2) + b_fc2</span><br><span class="line">    prediction = tf.nn.softmax(prediction)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc2_hist = tf.summary.histogram(<span class="string">"W_fc2"</span>, W_fc2)</span><br><span class="line">    b_fc2_hist = tf.summary.histogram(<span class="string">"b_fc2"</span>, b_fc2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.AdamOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">'./graphs/cnn_'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    xs_batch, ys_batch = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">0.6</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        print(compute_accuracy(mnist.test.images[:<span class="number">100</span>], mnist.test.labels[:<span class="number">100</span>]))</span><br><span class="line">        summary_result = sess.run(summaries, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        writer.add_summary(summary_result, global_step=step)</span><br><span class="line">        writer.flush()</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意，<code>tf.summary.image(&#39;max_pool_2&#39;, tf.reshape(tf.transpose(h_conv1, perm=[0, 3, 1, 2]), [-1, 7, 7, 1]), max_outputs=4)</code></p>
+<p>参数2要求是一个Tensor，而且要求此Tensor满足：</p>
+<blockquote>
+<p>Tensor must be 4-D with last dim 1, 3, or 4</p>
+</blockquote>
+<p>这就需要把需要可视化的Tensor转换，聚合维度才能添加到summary中显示。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://qiita.com/FukuharaYohei/items/fae6896e041235033454" target="_blank" rel="noopener">【TensorBoard入門:image編】TensorFlow画像処理を見える化して理解を深める</a></p>
+<p><a href="http://robromijnders.github.io/tensorflow_basic/" target="_blank" rel="noopener">http://robromijnders.github.io/tensorflow_basic/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kernel visualization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/30/TensorFlow-19-KernalVisualization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-18-dropout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1165,117 +1260,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/20/TensorFlow-12-variable/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-11-constant" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/20/TensorFlow-11-constant/">TensorFlow-11-constant</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/20/TensorFlow-11-constant/" class="archive-article-date">
-  	<time datetime="2018-05-20T09:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="constant-in-tensorflow"><a href="#constant-in-tensorflow" class="headerlink" title="constant in tensorflow"></a>constant in tensorflow</h1><p>定义一个constant最简单的方式就是调用tf.constant方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># basic</span></span><br><span class="line">a = tf.constant(<span class="number">2</span>, name=<span class="string">'ax'</span>)</span><br><span class="line">b = tf.constant(<span class="number">3</span>, name=<span class="string">'bx'</span>)</span><br><span class="line">x = tf.add(a, b, name=<span class="string">'add'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>还有类似Numpy的zeros/zeros_like和ones/ones_like的方式生成全0或全1的张量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># zeros/zeros_like</span></span><br><span class="line">z = tf.zeros([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'z'</span>)</span><br><span class="line">zl = tf.zeros_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'zl'</span>)</span><br><span class="line">zz = tf.multiply(z, zl, name=<span class="string">'multiply'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ones/ones_like</span></span><br><span class="line">o = tf.ones([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'o'</span>)</span><br><span class="line">ol = tf.ones_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'ol'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>还可以使用tf.fill向指定形状的张量内填入数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fill array with a value</span></span><br><span class="line">f = tf.fill(dims=[<span class="number">2</span>, <span class="number">3</span>], value=<span class="number">6</span>, name=<span class="string">'f'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>生成等距张量类似Numpy的range和linspace</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sequences</span></span><br><span class="line"><span class="comment"># start must be float</span></span><br><span class="line"><span class="comment"># [s, e] both s and e are included!!!</span></span><br><span class="line">ls = tf.linspace(start=<span class="number">1.0</span>, stop=<span class="number">10</span>, num=<span class="number">10</span>, name=<span class="string">'ls'</span>)</span><br><span class="line">rg = tf.range(<span class="number">3</span>, name=<span class="string">'rg'</span>) <span class="comment"># [0, 1, 2] same to Numpy</span></span><br></pre></td></tr></table></figure>
-
-<p>生成随机张量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># random</span></span><br><span class="line">rn = tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">1.0</span>, stddev=<span class="number">1.0</span>, dtype=tf.float32, name=<span class="string">'rn'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>关于随机张量，还有以下多种生成函数：</p>
-<ul>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_normal" target="_blank" rel="noopener"><code>tf.random_normal</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/truncated_normal" target="_blank" rel="noopener"><code>tf.truncated_normal</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_uniform" target="_blank" rel="noopener"><code>tf.random_uniform</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_shuffle" target="_blank" rel="noopener"><code>tf.random_shuffle</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_crop" target="_blank" rel="noopener"><code>tf.random_crop</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/multinomial" target="_blank" rel="noopener"><code>tf.multinomial</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_gamma" target="_blank" rel="noopener"><code>tf.random_gamma</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/set_random_seed" target="_blank" rel="noopener"><code>tf.set_random_seed</code></a></li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tensorflow.org/api_guides/python/constant_op" target="_blank" rel="noopener">https://www.tensorflow.org/api_guides/python/constant_op</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">constant</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/20/TensorFlow-11-constant/">展开全文 >></a>
         </p>
       
 

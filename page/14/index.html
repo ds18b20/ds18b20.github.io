@@ -156,6 +156,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-14-mgrid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/31/Numpy-14-mgrid/">Numpy-14-mgrid</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/31/Numpy-14-mgrid/" class="archive-article-date">
+  	<time datetime="2018-03-31T06:16:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="generate-mesh-grid-array"><a href="#generate-mesh-grid-array" class="headerlink" title="generate mesh grid array"></a>generate mesh grid array</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x,y = np.mgrid[<span class="number">0</span>:<span class="number">5</span>, <span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">print(x)</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+
+<p>return:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[[0 0 0]</span><br><span class="line"> [1 1 1]</span><br><span class="line"> [2 2 2]</span><br><span class="line"> [3 3 3]</span><br><span class="line"> [4 4 4]]</span><br><span class="line">[[0 1 2]</span><br><span class="line"> [0 1 2]</span><br><span class="line"> [0 1 2]</span><br><span class="line"> [0 1 2]</span><br><span class="line"> [0 1 2]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">X,Y  = np.mgrid[<span class="number">-2</span>:<span class="number">2</span>:<span class="number">0.5</span>, <span class="number">-2</span>:<span class="number">2</span>:<span class="number">0.5</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>,<span class="number">5</span>),dpi=<span class="number">80</span>)</span><br><span class="line">plt.quiver(X,Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>you can get,</p>
+<p><img src="Numpy-14-mgrid%5Cmgrid.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># X:</span></span><br><span class="line">[[<span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span>  <span class="number">-2.</span> ]</span><br><span class="line"> [<span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span> <span class="number">-1.5</span>]</span><br><span class="line"> [<span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span>  <span class="number">-1.</span> ]</span><br><span class="line"> [<span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span> <span class="number">-0.5</span>]</span><br><span class="line"> [ <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span>   <span class="number">0.</span> ]</span><br><span class="line"> [ <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>  <span class="number">0.5</span>]</span><br><span class="line"> [ <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span>   <span class="number">1.</span> ]</span><br><span class="line"> [ <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>  <span class="number">1.5</span>]]</span><br><span class="line"><span class="comment"># Y:</span></span><br><span class="line">[[<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]</span><br><span class="line"> [<span class="number">-2.</span>  <span class="number">-1.5</span> <span class="number">-1.</span>  <span class="number">-0.5</span>  <span class="number">0.</span>   <span class="number">0.5</span>  <span class="number">1.</span>   <span class="number">1.5</span>]]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mgrid</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/31/Numpy-14-mgrid/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-13-dstack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1121,106 +1224,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/17/Java-08-FileNotFoundException/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-06-autocomplete" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/17/Java-Eclipse-06-autocomplete/">Java-Eclipse-06-autocomplete</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/17/Java-Eclipse-06-autocomplete/" class="archive-article-date">
-  	<time datetime="2018-03-17T06:45:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h1><p>默认情况下，Eclipse仅支持逗号后的自动补全，即输入逗号之后，根据逗号前面的内容提供用于补全的候选内容。</p>
-<p>其实可以修改一下设置实现任何字母后的自动补全提示。</p>
-<p>设置方法：</p>
-<p>Eclipse窗口 &gt; Windows &gt; Preferences &gt; Java &gt; Editor &gt; Content Assist</p>
-<p>右侧下方找到Auto Activation，在Auto activation triggers for Java:设置处可以看到默认只有一个逗号。这就是只有逗号能触发自动补全的原因。</p>
-<p>在逗号后面紧接着继续输入想要触发的字母就可以了。一般可以把大小写字母全部补上，即abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-<p>这样虽然方便，但是个人以为大写字母后的补全不常见，所以只加入了所有的小写字母。</p>
-<p>另外，Auto activation delay也最好根据电脑性能做调整，数值太小会占用太多系统资源。这里，我设置的是300 ms延迟。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Complete</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-06-autocomplete/">展开全文 >></a>
         </p>
       
 

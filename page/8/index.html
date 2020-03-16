@@ -156,6 +156,338 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DeepLearning-06-LoadMNIST" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/23/DeepLearning-06-LoadMNIST/">DeepLearning-06-LoadMNIST</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/23/DeepLearning-06-LoadMNIST/" class="archive-article-date">
+  	<time datetime="2018-06-23T03:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="FILE-FORMATS-FOR-THE-MNIST-DATABASE"><a href="#FILE-FORMATS-FOR-THE-MNIST-DATABASE" class="headerlink" title="FILE FORMATS FOR THE MNIST DATABASE"></a>FILE FORMATS FOR THE MNIST DATABASE</h2><p>The data is stored in a very simple file format designed for storing vectors and multidimensional matrices. General info on this format is given at the end of this page, but you don’t need to read that to use the data files.</p>
+<p>All the integers in the files are stored in the MSB first (high endian) format used by most non-Intel processors. Users of Intel processors and other low-endian machines must flip the bytes of the header.</p>
+<p>There are 4 files:</p>
+<p><code>train-images-idx3-ubyte: training set images</code><br><code>train-labels-idx1-ubyte: training set labels</code><br><code>t10k-images-idx3-ubyte:  test set images</code><br><code>t10k-labels-idx1-ubyte:  test set labels</code></p>
+<p>The training set contains 60000 examples, and the test set 10000 examples.</p>
+<p>The first 5000 examples of the test set are taken from the original NIST training set. The last 5000 are taken from the original NIST test set. The first 5000 are cleaner and easier than the last 5000.</p>
+<h3 id="TRAINING-SET-LABEL-FILE-train-labels-idx1-ubyte"><a href="#TRAINING-SET-LABEL-FILE-train-labels-idx1-ubyte" class="headerlink" title="TRAINING SET LABEL FILE (train-labels-idx1-ubyte):"></a>TRAINING SET LABEL FILE (train-labels-idx1-ubyte):</h3><table>
+<thead>
+<tr>
+<th align="right">[offset]</th>
+<th align="right">[type]</th>
+<th align="right">[value]</th>
+<th align="right">[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0000</td>
+<td align="right">32 bit integer</td>
+<td align="right">0x00000801(2049) magic number</td>
+<td align="right">(MSB first)</td>
+</tr>
+<tr>
+<td align="right">0004</td>
+<td align="right">32 bit integer</td>
+<td align="right">60000</td>
+<td align="right">number of items</td>
+</tr>
+<tr>
+<td align="right">0008</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+<tr>
+<td align="right">0009</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+<tr>
+<td align="right">……..</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">xxxx</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+</tbody></table>
+<p><code>The labels values are 0 to 9.</code></p>
+<h3 id="TRAINING-SET-IMAGE-FILE-train-images-idx3-ubyte"><a href="#TRAINING-SET-IMAGE-FILE-train-images-idx3-ubyte" class="headerlink" title="TRAINING SET IMAGE FILE (train-images-idx3-ubyte):"></a>TRAINING SET IMAGE FILE (train-images-idx3-ubyte):</h3><table>
+<thead>
+<tr>
+<th align="right">[offset]</th>
+<th align="right">[type]</th>
+<th align="right">[value]</th>
+<th align="right">[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0000</td>
+<td align="right">32 bit integer</td>
+<td align="right">0x00000803(2051) magic number</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">0004</td>
+<td align="right">32 bit integer</td>
+<td align="right">60000</td>
+<td align="right">number of images</td>
+</tr>
+<tr>
+<td align="right">0008</td>
+<td align="right">32 bit integer</td>
+<td align="right">28</td>
+<td align="right">number of rows</td>
+</tr>
+<tr>
+<td align="right">0012</td>
+<td align="right">32 bit integer</td>
+<td align="right">28</td>
+<td align="right">number of columns</td>
+</tr>
+<tr>
+<td align="right">0016</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+<tr>
+<td align="right">0017</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+<tr>
+<td align="right">……..</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">xxxx</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+</tbody></table>
+<p>Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</p>
+<h3 id="TEST-SET-LABEL-FILE-t10k-labels-idx1-ubyte"><a href="#TEST-SET-LABEL-FILE-t10k-labels-idx1-ubyte" class="headerlink" title="TEST SET LABEL FILE (t10k-labels-idx1-ubyte):"></a>TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</h3><table>
+<thead>
+<tr>
+<th align="right">[offset]</th>
+<th align="right">[type]</th>
+<th align="right">[value]</th>
+<th align="right">[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0000</td>
+<td align="right">32 bit integer</td>
+<td align="right">0x00000801(2049) magic number</td>
+<td align="right">(MSB first)</td>
+</tr>
+<tr>
+<td align="right">0004</td>
+<td align="right">32 bit integer</td>
+<td align="right">10000</td>
+<td align="right">number of items</td>
+</tr>
+<tr>
+<td align="right">0008</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+<tr>
+<td align="right">0009</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+<tr>
+<td align="right">……..</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">xxxx</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">label</td>
+</tr>
+</tbody></table>
+<p><code>The labels values are 0 to 9.</code></p>
+<h3 id="TEST-SET-IMAGE-FILE-t10k-images-idx3-ubyte"><a href="#TEST-SET-IMAGE-FILE-t10k-images-idx3-ubyte" class="headerlink" title="TEST SET IMAGE FILE (t10k-images-idx3-ubyte):"></a>TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</h3><table>
+<thead>
+<tr>
+<th align="right">[offset]</th>
+<th align="right">[type]</th>
+<th align="right">[value]</th>
+<th align="right">[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0000</td>
+<td align="right">32 bit integer</td>
+<td align="right">0x00000803(2051) magic number</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">0004</td>
+<td align="right">32 bit integer</td>
+<td align="right">10000</td>
+<td align="right">number of images</td>
+</tr>
+<tr>
+<td align="right">0008</td>
+<td align="right">32 bit integer</td>
+<td align="right">28</td>
+<td align="right">number of rows</td>
+</tr>
+<tr>
+<td align="right">0012</td>
+<td align="right">32 bit integer</td>
+<td align="right">28</td>
+<td align="right">number of columns</td>
+</tr>
+<tr>
+<td align="right">0016</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+<tr>
+<td align="right">0017</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+<tr>
+<td align="right">……..</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">xxxx</td>
+<td align="right">unsigned byte</td>
+<td align="right">??</td>
+<td align="right">pixel</td>
+</tr>
+</tbody></table>
+<p>Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black). </p>
+<hr>
+<h2 id="THE-IDX-FILE-FORMAT"><a href="#THE-IDX-FILE-FORMAT" class="headerlink" title="THE IDX FILE FORMAT"></a>THE IDX FILE FORMAT</h2><p>the IDX file format is a simple format for vectors and multidimensional matrices of various numerical types.</p>
+<p>The basic format is</p>
+<p><code>magic number</code><br><code>size in dimension 0</code><br><code>size in dimension 1</code><br><code>size in dimension 2</code><br><code>.....</code><br><code>size in dimension N</code><br><code>data</code></p>
+<p>The magic number is an integer (MSB first). The first 2 bytes are always 0.</p>
+<p>The third byte codes the type of the data:<br>0x08: unsigned byte<br>0x09: signed byte<br>0x0B: short (2 bytes)<br>0x0C: int (4 bytes)<br>0x0D: float (4 bytes)<br>0x0E: double (8 bytes)</p>
+<p>The 4-th byte codes the number of dimensions of the vector/matrix: 1 for vectors, 2 for matrices….</p>
+<p>The sizes in each dimension are 4-byte integers (MSB first, high endian, like in most non-Intel processors).</p>
+<p>The data is stored like in a C array, i.e. the index in the last dimension changes the fastest. </p>
+<hr>
+<p>Happy hacking.</p>
+<hr>
+<h1 id="load-by-loop"><a href="#load-by-loop" class="headerlink" title="load by loop"></a>load by loop</h1><p>循环加载数据集，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loader</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path, count)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        初始化加载器</span></span><br><span class="line"><span class="string">        path: 数据文件路径</span></span><br><span class="line"><span class="string">        count: 文件中的样本个数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.path = path</span><br><span class="line">        self.count = count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_file_content</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        读取文件内容</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        f = open(self.path, <span class="string">'rb'</span>)</span><br><span class="line">        content = f.read()</span><br><span class="line">        f.close()</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_int</span><span class="params">(self, byte)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        将unsigned byte字符转换为整数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> struct.unpack(<span class="string">'B'</span>, byte)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_picture</span><span class="params">(self, content, index)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，从文件中获取图像</span></span><br><span class="line"><span class="string">        TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</span></span><br><span class="line"><span class="string">        [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">        0000     32 bit integer  0x00000803(2051) magic number</span></span><br><span class="line"><span class="string">        0004     32 bit integer  10000            number of images</span></span><br><span class="line"><span class="string">        0008     32 bit integer  28               number of rows</span></span><br><span class="line"><span class="string">        0012     32 bit integer  28               number of columns</span></span><br><span class="line"><span class="string">        0016     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        0017     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        ........</span></span><br><span class="line"><span class="string">        xxxx     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        start = index * <span class="number">28</span> * <span class="number">28</span> + <span class="number">16</span></span><br><span class="line">        picture = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">            picture.append([])</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">                <span class="comment"># picture[i].append(self.to_int(content[start + i * 28 + j]))</span></span><br><span class="line">                picture[i].append(content[start + i * <span class="number">28</span> + j])</span><br><span class="line">        <span class="keyword">return</span> picture</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_one_sample</span><span class="params">(self, picture)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，将图像转化为样本的输入向量</span></span><br><span class="line"><span class="string">        数据降维，[[a,b],...,[c,d]] -&gt; [a,b,...,c,d]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        sample = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">                sample.append(picture[i][j])</span><br><span class="line">        <span class="keyword">return</span> sample</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        加载数据文件，获得全部样本的输入向量</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        content = self.get_file_content()</span><br><span class="line">        data_set = []</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(self.count):</span><br><span class="line">            data_set.append(</span><br><span class="line">                self.get_one_sample(</span><br><span class="line">                    self.get_picture(content, index)))</span><br><span class="line">        <span class="keyword">return</span> data_set</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        加载数据文件，获得全部样本的标签向量</span></span><br><span class="line"><span class="string">        TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</span></span><br><span class="line"><span class="string">        [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">        0000     32 bit integer  0x00000801(2049) magic number (MSB first)</span></span><br><span class="line"><span class="string">        0004     32 bit integer  10000            number of items</span></span><br><span class="line"><span class="string">        0008     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        0009     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        ........</span></span><br><span class="line"><span class="string">        xxxx     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        The labels values are 0 to 9.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        content = self.get_file_content()</span><br><span class="line">        labels = []</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(self.count):</span><br><span class="line">            labels.append(self.norm(content[index + <span class="number">8</span>]))</span><br><span class="line">        <span class="keyword">return</span> labels</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm</span><span class="params">(self, label)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，将一个值转换为10维标签向量</span></span><br><span class="line"><span class="string">        数据降维，[[a,b],...,[c,d]] -&gt; [a,b,...,c,d]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        label_vec = []</span><br><span class="line">        <span class="comment"># label_value = self.to_int(label)</span></span><br><span class="line">        label_value = label</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span> i == label_value:</span><br><span class="line">                label_vec.append(<span class="number">0.9</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                label_vec.append(<span class="number">0.1</span>)</span><br><span class="line">        <span class="keyword">return</span> label_vec</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_training_data_set</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获得训练数据集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_loader = ImageLoader(<span class="string">'train-images.idx3-ubyte'</span>, <span class="number">10000</span>)</span><br><span class="line">    label_loader = LabelLoader(<span class="string">'train-labels.idx1-ubyte'</span>, <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">return</span> image_loader.load(), label_loader.load()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_test_data_set</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获得测试数据集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_loader = ImageLoader(<span class="string">'t10k-images.idx3-ubyte'</span>, <span class="number">5000</span>)</span><br><span class="line">    label_loader = LabelLoader(<span class="string">'t10k-labels.idx1-ubyte'</span>, <span class="number">5000</span>)</span><br><span class="line">    <span class="keyword">return</span> image_loader.load(), label_loader.load()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    images, labels = get_training_data_set()</span><br><span class="line">    img = np.array(images[<span class="number">0</span>]).reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    end_time = time.time()</span><br><span class="line">    print(<span class="string">'Run time: &#123;&#125;'</span>.format(end_time-start_time))</span><br><span class="line">    print(<span class="string">'image shape: &#123;&#125;, label shape: &#123;&#125;'</span>.format((len(images),len(images[<span class="number">0</span>])), len(labels)))</span><br><span class="line">    print(img[<span class="number">14</span>])</span><br><span class="line">    plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>打印结果，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Run time: 2.680000066757202</span><br><span class="line">image shape: (10000, 784), label shape: 10000</span><br><span class="line">[  0   0   0   0   0   0   0   0   0   0   0   0   0  81 240 253 253 119</span><br><span class="line">  25   0   0   0   0   0   0   0   0   0]</span><br></pre></td></tr></table></figure>
+
+<h1 id="load-by-Numpy"><a href="#load-by-Numpy" class="headerlink" title="load by Numpy"></a>load by Numpy</h1><p>使用Numpy加载，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="comment"># from bpVec import *</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loader</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        initialize Loader</span></span><br><span class="line"><span class="string">        path: file path</span></span><br><span class="line"><span class="string">        count: sample count</span></span><br><span class="line"><span class="string">        data_type: data type</span></span><br><span class="line"><span class="string">        dims: data dimensions</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.path = path</span><br><span class="line">        self.data_type = <span class="literal">None</span></span><br><span class="line">        self.dims = <span class="literal">None</span></span><br><span class="line">        self.shape = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_raw</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">""" A function that can read MNIST's idx file format into numpy arrays.</span></span><br><span class="line"><span class="string">        The MNIST data files can be downloaded from here:</span></span><br><span class="line"><span class="string">        http://yann.lecun.com/exdb/mnist/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        This relies on the fact that the MNIST dataset consistently uses</span></span><br><span class="line"><span class="string">        unsigned char types with their data segments.</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        Reference:</span></span><br><span class="line"><span class="string">        https://gist.github.com/tylerneylon/ce60e8a06e7506ac45788443f7269e40</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">with</span> open(self.path, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            zero, self.data_type, self.dims = struct.unpack(<span class="string">'&gt;HBB'</span>, f.read(<span class="number">4</span>))</span><br><span class="line">            self.shape = tuple(struct.unpack(<span class="string">'&gt;I'</span>, f.read(<span class="number">4</span>))[<span class="number">0</span>] <span class="keyword">for</span> d <span class="keyword">in</span> range(self.dims))</span><br><span class="line">            <span class="keyword">return</span> np.fromstring(f.read(), dtype = np.uint8).reshape(self.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self, norm=False)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        convert data to vector</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> norm == <span class="literal">True</span>:</span><br><span class="line">            ret = self.load_raw() / <span class="number">255</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ret = self.load_raw()</span><br><span class="line">        <span class="keyword">if</span> self.dims &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> ret.reshape(self.shape[<span class="number">0</span>], <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Get all images</span></span><br><span class="line"><span class="string">    TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</span></span><br><span class="line"><span class="string">    [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">    0000     32 bit integer  0x00000803(2051) magic number</span></span><br><span class="line"><span class="string">    0004     32 bit integer  10000            number of images</span></span><br><span class="line"><span class="string">    0008     32 bit integer  28               number of rows</span></span><br><span class="line"><span class="string">    0012     32 bit integer  28               number of columns</span></span><br><span class="line"><span class="string">    0016     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    0017     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    ........</span></span><br><span class="line"><span class="string">    xxxx     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        super(ImageLoader, self).__init__(path)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_one_image</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span> self.dims &gt; <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.load_raw()[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show_one_image</span><span class="params">(self, image)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        plt show one image</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        plt.imshow(image, cmap=<span class="string">'gray'</span>)</span><br><span class="line">        plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Get all labels</span></span><br><span class="line"><span class="string">    Convert labels to one-hot vectors</span></span><br><span class="line"><span class="string">    TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</span></span><br><span class="line"><span class="string">    [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">    0000     32 bit integer  0x00000801(2049) magic number (MSB first)</span></span><br><span class="line"><span class="string">    0004     32 bit integer  10000            number of items</span></span><br><span class="line"><span class="string">    0008     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    0009     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    ........</span></span><br><span class="line"><span class="string">    xxxx     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    The labels values are 0 to 9.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        super(LabelLoader, self).__init__(path)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm</span><span class="params">(self, label, label_count=<span class="number">10</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        (sample_count, )--&gt;(sample_count, label_count)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        row_count = self.shape[<span class="number">0</span>]</span><br><span class="line">        column_count = label_count</span><br><span class="line">        label_one_hot = np.zeros((row_count, column_count))</span><br><span class="line">        </span><br><span class="line">        label_one_hot[range(row_count), self.load()] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> label_one_hot</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_training_data_set</span><span class="params">(sample_count=<span class="number">100</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    get training data set</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_population = ImageLoader(<span class="string">'train-images.idx3-ubyte'</span>).load()</span><br><span class="line">    label_population = LabelLoader(<span class="string">'train-labels.idx1-ubyte'</span>).load()</span><br><span class="line">    <span class="keyword">assert</span> len(image_population) == len(label_population)</span><br><span class="line">    population_count = len(image_population)</span><br><span class="line">    index = np.random.choice(population_count, sample_count)</span><br><span class="line">    <span class="keyword">return</span> image_population[index], label_population[index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_test_data_set</span><span class="params">(sample_count=<span class="number">50</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    get test data set</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_population = ImageLoader(<span class="string">'t10k-images.idx3-ubyte'</span>).load()</span><br><span class="line">    label_population = LabelLoader(<span class="string">'t10k-labels.idx1-ubyte'</span>).load()</span><br><span class="line">    <span class="keyword">assert</span> len(image_population) == len(label_population)</span><br><span class="line">    population_count = len(image_population)</span><br><span class="line">    index = np.random.choice(population_count, sample_count)</span><br><span class="line">    <span class="keyword">return</span> image_population[index], label_population[index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    images, labels = get_training_data_set(<span class="number">10000</span>)</span><br><span class="line">    img = np.array(images[<span class="number">0</span>]).reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    end_time = time.time()</span><br><span class="line">    print(<span class="string">'Run time: &#123;&#125;'</span>.format(end_time-start_time))</span><br><span class="line">    print(<span class="string">'image shape: &#123;&#125;, label shape: &#123;&#125;'</span>.format(images.shape, labels.shape))</span><br><span class="line">    print(img[<span class="number">14</span>])</span><br><span class="line">    plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>打印结果，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Run time: 0.0839998722076416</span><br><span class="line">image shape: (10000, 784), label shape: (10000,)</span><br><span class="line">[  0   0   0   0   0   0   0   0   0   0   0   0  93 253 253 255 253 253</span><br><span class="line"> 241  39   0   0   0   0   0   0   0   0]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">THE MNIST DATABASE of handwritten digits</a></p>
+<p><a href="https://github.com/hanbt/learn_dl/blob/master/mnist.py" target="_blank" rel="noopener">https://github.com/hanbt/learn_dl/blob/master/mnist.py</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">load data</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MNIST</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/23/DeepLearning-06-LoadMNIST/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-40-ClassConstructor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1081,101 +1413,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/06/01/Python-39-OpenEncoding/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-19-KernalVisualization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/30/TensorFlow-19-KernalVisualization/">TensorFlow-19-KernelVisualization</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/30/TensorFlow-19-KernalVisualization/" class="archive-article-date">
-  	<time datetime="2018-05-30T14:17:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TF-kernel-visualization"><a href="#TF-kernel-visualization" class="headerlink" title="TF kernel visualization"></a>TF kernel visualization</h1><p>下面的代码使用MNIST手写识别的例子来试验kernel的可视化。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line"></span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data/"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_accuracy</span><span class="params">(xs_val, ys_val)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> prediction</span><br><span class="line">    y_pre = sess.run(prediction, feed_dict=&#123;xs: xs_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(y_pre, axis=<span class="number">1</span>), tf.argmax(ys_val, axis=<span class="number">1</span>))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    result = sess.run(accuracy, feed_dict=&#123;xs: xs_val, ys: ys_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.truncated_normal(shape, stddev=<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bias_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.constant(<span class="number">0.1</span>, shape=shape)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define conv layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W)</span>:</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="comment"># padding: SAME size with input</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define pooling layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool_2x2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="comment"># ksize=[1, width, height, 1]</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.max_pool(x, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">28</span>*<span class="number">28</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sample count * width * height * channel</span></span><br><span class="line">    x_image = tf.reshape(xs, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</span><br><span class="line">    image_summary = tf.summary.image(<span class="string">"images_summary"</span>, x_image, max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_1'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 1</span></span><br><span class="line">    <span class="comment"># kernal count: 32</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv1 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>], <span class="string">'W_for_Conv_Layer_1'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 1, 32] to [32, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">"kernels_1"</span>, tf.transpose(W_conv1, perm=[<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]), max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv1 = bias_variable([<span class="number">32</span>], <span class="string">'bias_for_Conv_Layer_1'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv1 = conv2d(x_image, W_conv1) + b_conv1  <span class="comment"># output size -1*28*28*32</span></span><br><span class="line">        h_conv1 = tf.nn.relu(h_conv1)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 28, 28, 32] to [-1, 32, 28, 28]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_1'</span>):</span><br><span class="line">    h_pool1 = max_pool_2x2(h_conv1)  <span class="comment"># output size -1*14*14*32</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 32] to [-1, 32, 14, 14]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_2'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 32</span></span><br><span class="line">    <span class="comment"># kernal count: 64</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv2 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>], <span class="string">'W_for_Conv_Layer_2'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 32, 64] to [32*64, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">'kernels_2'</span>, tf.reshape(tf.transpose(W_conv2, perm=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>]), [<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv2 = bias_variable([<span class="number">64</span>], <span class="string">'bias_2'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv2 = conv2d(h_pool1, W_conv2) + b_conv2  <span class="comment"># output size -1*14*14*64</span></span><br><span class="line">        h_conv2 = tf.nn.relu(h_conv2)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 64] to [-1, 64, 14, 14]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_2'</span>, tf.reshape(tf.transpose(h_conv2, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_2'</span>):</span><br><span class="line">    h_pool2 = max_pool_2x2(h_conv2)  <span class="comment"># output size -1*7*7*64</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 7, 7, 64] to [-1, 64, 7, 7]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_2'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_1'</span>):</span><br><span class="line">    W_fc1 = weight_variable([<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>, <span class="number">1024</span>], <span class="string">'W_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    b_fc1 = bias_variable([<span class="number">1024</span>], <span class="string">'bias_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    h_pool2_flat = tf.reshape(h_pool2, [<span class="number">-1</span>, <span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>])  <span class="comment"># shape: [7, 7, 64]--&gt;[-1, 7*7*64]</span></span><br><span class="line">    h_fc1 = tf.matmul(h_pool2_flat, W_fc1) + b_fc1</span><br><span class="line">    h_fc1 = tf.nn.relu(h_fc1)</span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc1_hist = tf.summary.histogram(<span class="string">"W_fc1"</span>, W_fc1)</span><br><span class="line">    b_fc1_hist = tf.summary.histogram(<span class="string">"b_fc1"</span>, b_fc1)</span><br><span class="line"></span><br><span class="line">    keep_prob = tf.placeholder(dtype=tf.float32, name=<span class="string">'keep_prob4dropout'</span>)</span><br><span class="line">    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_2'</span>):</span><br><span class="line">    W_fc2 = weight_variable([<span class="number">1024</span>, <span class="number">10</span>], <span class="string">'W_for_Fully_Connected_layer_2'</span>)</span><br><span class="line">    b_fc2 = bias_variable([<span class="number">10</span>], <span class="string">'bias_for_Fully_Connected_layer_2'</span>)</span><br><span class="line"></span><br><span class="line">    prediction = tf.matmul(h_fc1_drop, W_fc2) + b_fc2</span><br><span class="line">    prediction = tf.nn.softmax(prediction)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc2_hist = tf.summary.histogram(<span class="string">"W_fc2"</span>, W_fc2)</span><br><span class="line">    b_fc2_hist = tf.summary.histogram(<span class="string">"b_fc2"</span>, b_fc2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.AdamOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">'./graphs/cnn_'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    xs_batch, ys_batch = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">0.6</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        print(compute_accuracy(mnist.test.images[:<span class="number">100</span>], mnist.test.labels[:<span class="number">100</span>]))</span><br><span class="line">        summary_result = sess.run(summaries, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        writer.add_summary(summary_result, global_step=step)</span><br><span class="line">        writer.flush()</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>注意，<code>tf.summary.image(&#39;max_pool_2&#39;, tf.reshape(tf.transpose(h_conv1, perm=[0, 3, 1, 2]), [-1, 7, 7, 1]), max_outputs=4)</code></p>
-<p>参数2要求是一个Tensor，而且要求此Tensor满足：</p>
-<blockquote>
-<p>Tensor must be 4-D with last dim 1, 3, or 4</p>
-</blockquote>
-<p>这就需要把需要可视化的Tensor转换，聚合维度才能添加到summary中显示。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://qiita.com/FukuharaYohei/items/fae6896e041235033454" target="_blank" rel="noopener">【TensorBoard入門:image編】TensorFlow画像処理を見える化して理解を深める</a></p>
-<p><a href="http://robromijnders.github.io/tensorflow_basic/" target="_blank" rel="noopener">http://robromijnders.github.io/tensorflow_basic/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kernel visualization</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/30/TensorFlow-19-KernalVisualization/">展开全文 >></a>
         </p>
       
 

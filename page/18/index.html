@@ -156,6 +156,153 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-27-CustomizeClass" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/21/Python-27-CustomizeClass/">Python-27-CustomizeClass</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/21/Python-27-CustomizeClass/" class="archive-article-date">
+  	<time datetime="2018-02-21T12:37:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="class中的特殊函数"><a href="#class中的特殊函数" class="headerlink" title="class中的特殊函数"></a>class中的特殊函数</h1><p>在类定义中加入<strong>__slots__属性</strong>可以限制添加到类的属性，加入<strong>__len__()方法</strong>可以让len()函数作用到此类的实例上。比如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">23</span></span><br><span class="line">len(Student())</span><br></pre></td></tr></table></figure>
+
+<p>其实Python的class中还有很多这样有特殊用途的函数，利用这些特殊函数就可以定制属于自己的类。</p>
+<h1 id="定制一个自己的类"><a href="#定制一个自己的类" class="headerlink" title="定制一个自己的类"></a>定制一个自己的类</h1><h2 id="str"><a href="#str" class="headerlink" title="__str__()"></a>__str__()</h2><p>此方法可以友好地显示实例的信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self._name = name</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Student object(name: %s)'</span> % self._name</span><br><span class="line">    </span><br><span class="line">print(Student(<span class="string">'John'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>输出友好的print显示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student object(name: John)</span><br></pre></td></tr></table></figure>
+
+<p>但是不加print时，显示&lt;<strong>main</strong>.Student at 0x3dbbfb0&gt;，仍然不是很完美。需要加上一句，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self._name = name</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Student object(name: %s)'</span> % self._name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line">Student(<span class="string">'John'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果同上。原因在于，对用户显示用的是__str__()方法，而对程序开发者返回使用的是__repr__()方法。通过<code>__repr__ = __str__</code>实现对用户的显示。</p>
+<h2 id="iter"><a href="#iter" class="headerlink" title="__iter__()"></a>__iter__()</h2><p>要想对一个实例实现类似for * in *的迭代方式，比如迭代list或tuple，就需要在calss内添加__iter__()方法。</p>
+<p>其实，可以dir(list)，可以发现list就包含此方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="comment"># 实例本身就是迭代的对象，故返回本身</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">if</span> self.a &gt; <span class="number">10000</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration()</span><br><span class="line">        <span class="keyword">return</span> self.a</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> Fib():</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<h2 id="getitem"><a href="#getitem" class="headerlink" title="__getitem__()"></a>__getitem__()</h2><p>用于按位置取元素。类似于list[n]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 实例本身就是迭代的对象，故返回本身</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">return</span> self.a</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line">s = Fib()</span><br><span class="line">s[<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="getattr"><a href="#getattr" class="headerlink" title="__getattr__"></a>__getattr__</h2><p>使用此方法实现链式调用，进而实现动态化调用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">        self._path = path</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self._path, path))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">path = <span class="string">'www.google.com'</span></span><br><span class="line">c = Chain(path)</span><br><span class="line">c.user.account.net</span><br></pre></td></tr></table></figure>
+
+<p>有参数的时候，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">        self._path = path</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">users</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/users:%s'</span> % (self._path, name))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attr)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self._path, attr))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">path = <span class="string">'www.google.com'</span></span><br><span class="line">c = Chain(path)</span><br><span class="line"><span class="comment"># c.users.repos</span></span><br><span class="line">c.users(<span class="string">'michael'</span>).repos</span><br></pre></td></tr></table></figure>
+
+<h2 id="call"><a href="#call" class="headerlink" title="\call__"></a><em>\</em>call__</h2><p>实现直接运行实例，instance name()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'My name is %s.'</span> % self.name)</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line">s()</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">My name <span class="keyword">is</span> Tom.</span><br></pre></td></tr></table></figure>
+
+<p>通过callable(ins)来判断对象ins是不是函数。</p>
+<h2 id="eq"><a href="#eq" class="headerlink" title="__eq__"></a>__eq__</h2><p>一般的数值，布尔对象可以直接进行<code>==</code>操作，而自定义的对象并不可以。通过__eq__方法可以使<code>==</code>操作可以直接作用在自定义对象上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> other <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> isinstance(other, Person):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="comment"># return self.name == other.name and self.age == other.age and self.score == other.score</span></span><br><span class="line">        <span class="keyword">return</span> self.__dict__ == other.__dict__</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__ne__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> self.__eq__(other)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Person(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line">b = Person(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line"><span class="comment"># b = Person('Jerry', 10, 90)</span></span><br><span class="line"></span><br><span class="line">print(a == b)</span><br><span class="line">print(dir(Person))</span><br></pre></td></tr></table></figure>
+
+<p>上例中<code>return self.name == other.name and self.age == other.age and self.score == other.score</code>可以用<code>self.__dict__ == other.__dict__</code>更简洁地实现。</p>
+<p>输出，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>从object继承，自定义一个类Foo的话，默认也会有__eq__方法，但是没有定义其==操作的对象时，只有在两个对象id相同时候(a=b)，才会输出<code>True</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = Foo(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line">n = Foo(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line"><span class="comment"># n = m</span></span><br><span class="line"></span><br><span class="line">print(m == n)</span><br><span class="line">print(dir(Foo))</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>参考，</p>
+<p><a href="https://qiita.com/adatchey/items/1f9acb3e2b66914a435b" target="_blank" rel="noopener">Pythonのクラスで<strong>eq</strong>などを汎用的に実装する</a></p>
+<h2 id="add"><a href="#add" class="headerlink" title="__add__"></a>__add__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = AAA(<span class="number">3</span>)</span><br><span class="line">n = AAA(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">print(m + n)</span><br></pre></td></tr></table></figure>
+
+<p>输出项加后的结果<code>8</code>。a + b计算过程中，<code>__add__方法</code>定义了前向计算，a中包含该方法，所以可以实现该假发运算。</p>
+<h2 id="radd"><a href="#radd" class="headerlink" title="__radd__"></a>__radd__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="comment"># return X(self.x + other.x)</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="comment"># return X(self.x + other.x)</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = X(<span class="number">5</span>)</span><br><span class="line"><span class="comment"># b = X(10)</span></span><br><span class="line">b = Y(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(a + b)</span><br></pre></td></tr></table></figure>
+
+<p>输出项加后的结果<code>15</code>。反向加法，上例a + b中a没有定义<code>__add__方法</code>，然后会检查b中有没有定义<code>__radd__方法</code>如果有，即可实现加法运算。</p>
+<p>参考，</p>
+<p><a href="https://blog.csdn.net/baidu_21088863/article/details/52214914" target="_blank" rel="noopener">python核心编程学习笔记-2016-08-15-01-左加法<strong>add</strong>和右加法__radd</a></p>
+<p> <a href="https://blog.csdn.net/u011019726/article/details/77834602" target="_blank" rel="noopener">python <strong>add</strong>和<strong>radd</strong></a> </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/zhanghongfeng/p/7227452.html" target="_blank" rel="noopener">流畅的python学习笔记：第十三章：重载运算符<strong>add</strong>,<strong>iadd</strong>,<strong>radd</strong>,<strong>mul</strong>,<strong>rmul</strong>,<strong>neg</strong>,<strong>eq</strong>,<strong>invert</strong>,<strong>pos</strong></a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Customize Class</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/21/Python-27-CustomizeClass/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1048,118 +1195,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/18/Python-20-PartialFunction/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-19-decorator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/18/Python-19-decorator/">Python-19-decorator</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/18/Python-19-decorator/" class="archive-article-date">
-  	<time datetime="2018-02-18T11:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h1><p>对于现有函数，如果需要增加某些功能，但又不想对原有逻辑做更改。这时候就可以用装饰器(decorator)来实现。</p>
-<p>其实现思路为把既有函数打包到一个新函数内(闭包)，在新函数内新增某些功能，然后通过调用新函数来执行员函数+新增功能。</p>
-<p>即使这样，也需要对代码做大量修改，如用新函数替换原函数。在Python中可以使用语法糖@来简单实现，把@加到员函数的定义之前即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        print(<span class="string">'call %s():'</span> % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
-
-<p>本质上是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; log(foo)</span><br><span class="line">x()</span><br></pre></td></tr></table></figure>
-
-<p><code>@functools.wraps(func)</code>的目的是，加上@log后函数foo的属性就变成wrapper的属性了，通过wraps函数来让foo保持自身属性。</p>
-<h1 id="带参数的装饰器"><a href="#带参数的装饰器" class="headerlink" title="带参数的装饰器"></a>带参数的装饰器</h1><p>log也可以自带参数，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(para)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @functools.wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            print(<span class="string">'call %s() with %s'</span> % (func.__name__, para))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">	<span class="keyword">return</span> decorator</span><br><span class="line"><span class="meta">@log('text')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log('abc')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
-
-<p>还可以加入判断，实现带或者不带参数都可以的，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(para)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(para, str):</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">            @functools.wraps(func)</span></span><br><span class="line">            <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">                print(<span class="string">'call %s() with %s'</span> % (func.__name__, para))</span><br><span class="line">                <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">            <span class="keyword">return</span> wrapper</span><br><span class="line">        <span class="keyword">return</span> decorator</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 从输出结果可以看到，这里的print先执行</span></span><br><span class="line">        <span class="comment"># 最后bar()时才输出'World'</span></span><br><span class="line">        print(type(para))</span><br><span class="line"><span class="meta">        @functools.wraps(para)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> para(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    </span><br><span class="line"><span class="meta">@log('text')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
-
-<p>输出为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">function</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">call</span> <span class="title">foo</span><span class="params">()</span> <span class="title">with</span> <span class="title">text</span></span></span><br><span class="line"><span class="class"><span class="title">Hello</span></span></span><br><span class="line"><span class="class"><span class="title">World</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="常用实例"><a href="#常用实例" class="headerlink" title="常用实例"></a>常用实例</h1><p>计算函数运行时间的例子，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time, functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metric</span><span class="params">(fn)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(fn)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        ret = fn(*args, **kw)</span><br><span class="line">        end = time.time()</span><br><span class="line">        print(<span class="string">'%s executed in %s ms'</span> % (fn.__name__, (end - start)))</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="meta">@metric</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fast</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.0012</span>)</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line"></span><br><span class="line"><span class="meta">@metric</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">slow</span><span class="params">(x, y, z)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.1234</span>)</span><br><span class="line">    <span class="keyword">return</span> x * y * z;</span><br><span class="line"></span><br><span class="line">f = fast(<span class="number">11</span>, <span class="number">22</span>)</span><br><span class="line">s = slow(<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fast executed <span class="keyword">in</span> <span class="number">0.002000093460083008</span> ms</span><br><span class="line">slow executed <span class="keyword">in</span> <span class="number">0.12399983406066895</span> ms</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Decorator</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/18/Python-19-decorator/">展开全文 >></a>
         </p>
       
 

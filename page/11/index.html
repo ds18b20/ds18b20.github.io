@@ -156,6 +156,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-36-PYTHONPATH" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/05/Python-36-PYTHONPATH/">Python-36-PYTHONPATH</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/05/Python-36-PYTHONPATH/" class="archive-article-date">
+  	<time datetime="2018-05-04T22:03:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python的模块化编程"><a href="#Python的模块化编程" class="headerlink" title="Python的模块化编程"></a>Python的模块化编程</h1><p>和其他编程语言相似，Python也支持模块化编程。一般一个程序文件就是一个模块，Python中就是一个个的.py文件，其他语言比如Java中的.java文件或者编译后的.class文件。在模块之上使用包来管理，简单来讲就是多个功能相关联的模块组成一个包。Java中把.class文件打包生成.jr作为包来供外部调用，而Python直接定义一个特殊的文件夹作为包来调用。</p>
+<p>为了使Python能正确识别这些文件夹作为包，需要了解一下Python中对于包的规定。</p>
+<h2 id="Python查找模块的路径"><a href="#Python查找模块的路径" class="headerlink" title="Python查找模块的路径"></a>Python查找模块的路径</h2><p>Python环境下调用sys.path可以查看当前Python的搜索路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Python <span class="number">3.5</span><span class="number">.4</span> |Anaconda, Inc.| (default, Nov  <span class="number">8</span> <span class="number">2017</span>, <span class="number">14</span>:<span class="number">34</span>:<span class="number">30</span>) [MSC v<span class="number">.1900</span> <span class="number">64</span> bi</span><br><span class="line">t (AMD64)] on win32</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\Users\\usr\\Anaconda3'</span>,...]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到第一个路径是<code>&#39;&#39;</code>，这意味着<code>相对路径下的当前路径</code>也在搜索路径之内。</p>
+<p>如果当前路径下没有找到所需的模块，则会按列表顺序继续查找，直到找到目标模块。如果没有找到，则会抛出错误。</p>
+<p>更改查找列表有两种方式：</p>
+<ol>
+<li>导入sys模块，通过sys.path.append(),sys.path.insert()等方法来修改。这种修改只适用于当前程序运行期间，重启之后修改失效。</li>
+<li>在系统环境变量中直接修改/新建PYTHONPATH，这种方式的设置永久有效。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Python中的PYTHONPATH环境变量</p>
+<p><a href="http://www.cnblogs.com/geeklove01/p/7912435.html" target="_blank" rel="noopener">http://www.cnblogs.com/geeklove01/p/7912435.html</a></p>
+<p>Python的模块引用和查找路径</p>
+<p><a href="https://www.cnblogs.com/qingspace/p/5284480.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingspace/p/5284480.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PYTHONPATH</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/05/Python-36-PYTHONPATH/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-07-ObjectDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1084,101 +1184,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/30/Python-33-argparse/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-07-subplotsDemo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/30/Matplotlib-07-subplotsDemo/">Matplotlib-07-subplotsDemo</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/30/Matplotlib-07-subplotsDemo/" class="archive-article-date">
-  	<time datetime="2018-04-30T03:49:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="subplots-demo"><a href="#subplots-demo" class="headerlink" title="subplots demo"></a>subplots demo</h1><p>Official subplots demo,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Examples illustrating the use of plt.subplots().</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This function creates a figure and a grid of subplots with a single call, while</span></span><br><span class="line"><span class="string">providing reasonable control over how the individual plots are created.  For</span></span><br><span class="line"><span class="string">very refined tuning of subplot creation, you can still use add_subplot()</span></span><br><span class="line"><span class="string">directly on a new figure.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># Simple data to display in various forms</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">400</span>)</span><br><span class="line">y = np.sin(x ** <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plt.close(<span class="string">'all'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Just a figure and one subplot</span></span><br><span class="line">f, ax = plt.subplots()</span><br><span class="line">ax.plot(x, y)</span><br><span class="line">ax.set_title(<span class="string">'Simple plot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, unpack the axes array immediately</span></span><br><span class="line">f, (ax1, ax2) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing Y axis'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Three subplots sharing both x/y axes</span></span><br><span class="line">f, (ax1, ax2, ax3) = plt.subplots(<span class="number">3</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing both axes'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots close to each other and hide x ticks for</span></span><br><span class="line"><span class="comment"># all but bottom plot.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0</span>)</span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> f.axes[:<span class="number">-1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># row and column sharing</span></span><br><span class="line">f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, sharex=<span class="string">'col'</span>, sharey=<span class="string">'row'</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing x per column, y per row'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line">ax4.plot(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four axes, returned as a 2-d array</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; hide x ticks for top plots and y ticks for right plots</span></span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[<span class="number">0</span>, :]], visible=<span class="literal">False</span>)</span><br><span class="line">plt.setp([a.get_yticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[:, <span class="number">1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four polar axes</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, subplot_kw=dict(projection=<span class="string">'polar'</span>))</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots farther from each other.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">subplots</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/30/Matplotlib-07-subplotsDemo/">展开全文 >></a>
         </p>
       
 
