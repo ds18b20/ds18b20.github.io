@@ -156,6 +156,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-39-OpenEncoding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/01/Python-39-OpenEncoding/">Python-39-OpenEncoding</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/01/Python-39-OpenEncoding/" class="archive-article-date">
+  	<time datetime="2018-06-01T13:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="open-file-with-specified-encoding"><a href="#open-file-with-specified-encoding" class="headerlink" title="open file with specified encoding"></a>open file with specified encoding</h1><p>Python下直接用默认的open方法打开文件时，默认会使用系统默认的编码方式处理。如果包含默认编码方式无法打开的字符，会抛出错误：UnicodeDecodeError: ‘gbk’ codec can’t decode byte…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = open(<span class="string">r'Text_data/1342-0.txt'</span>, <span class="string">'r'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<p>处理办法为，如果已知文件的编码方式，使用open方法时可以直接指定encoding参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = open(<span class="string">r'Text_data/1342-0.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'UTF-8'</span>).read()</span><br></pre></td></tr></table></figure>
+
+<p>如果不知道文件使用的哪种编码方式，可以参考上一篇文章介绍的chardet库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chardet</span><br><span class="line"></span><br><span class="line">path=<span class="string">r"C:\Users\...\unicode.txt"</span></span><br><span class="line">rawdata = open(path, <span class="string">'rb'</span>).read()</span><br><span class="line">result = chardet.detect(rawdata)</span><br></pre></td></tr></table></figure>
+
+<p>然后再指定encoding参数。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/arctique/p/5699620.html" target="_blank" rel="noopener">https://www.cnblogs.com/arctique/p/5699620.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">open</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encoding</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/01/Python-39-OpenEncoding/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-19-KernalVisualization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1088,178 +1187,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/20/TensorFlow-13-placeholder/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-12-variable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/20/TensorFlow-12-variable/">TensorFlow-12-variable</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/20/TensorFlow-12-variable/" class="archive-article-date">
-  	<time datetime="2018-05-20T10:08:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="variable-in-tensorflow"><a href="#variable-in-tensorflow" class="headerlink" title="variable in tensorflow"></a>variable in tensorflow</h1><p>变量是一种特殊的张量的存在，用于暂存运算的状态。变量在TF中要<strong>显式地</strong>定义才能正确地当作变量而不是普通的张量来处理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># basic</span></span><br><span class="line">state = tf.Variable(<span class="number">0</span>, name=<span class="string">'state'</span>)</span><br><span class="line"><span class="comment"># print(state.name)</span></span><br><span class="line">one = tf.constant(<span class="number">1</span>, name=<span class="string">'one_con'</span>)</span><br><span class="line"><span class="comment"># update = tf.assign_add(state, one, name='assign_add')</span></span><br><span class="line">new_value = tf.add(state, one, name=<span class="string">'new_val'</span>)</span><br><span class="line">update = tf.assign(state, new_value, name=<span class="string">'assign'</span>)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># show in Tensorboard</span></span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">"./graphs"</span>, sess.graph)</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        print(sess.run(update))</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<p>1</p>
-<p>2</p>
-<p>3</p>
-<p>可视化效果如下：</p>
-<p><img src="TensorFlow-12-variable%5Cvariable.png" alt=""></p>
-<h1 id="tf-assign-amp-tf-assign-add"><a href="#tf-assign-amp-tf-assign-add" class="headerlink" title="tf.assign &amp; tf.assign_add"></a>tf.assign &amp; tf.assign_add</h1><p>tf.assign用于给Variable赋值，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tf.assign(</span><br><span class="line">    ref,</span><br><span class="line">    value,</span><br><span class="line">    validate_shape=<span class="literal">None</span>,</span><br><span class="line">    use_locking=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>tf.assign_add可以对已存在的Variable做加法运算，此运算也可以直接使用<code>+</code>实现，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line"></span><br><span class="line">    a = w + <span class="number">1.0</span></span><br><span class="line">    print(<span class="string">'a:'</span>, sess.run(a))</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">a: [[ 1.  2.  3.  4.]</span><br><span class="line"> [ 5.  6.  7.  8.]</span><br><span class="line"> [ 9. 10. 11. 12.]]</span><br></pre></td></tr></table></figure>
-
-<p>或者，使用tf.assign_add时</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># a = tf.assign_add(w, 1.0)  # 注意这里会报错，提示形状不匹配</span></span><br><span class="line">    a = w.assign_add(np.ones((<span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line">    print(<span class="string">'a:'</span>, sess.run(a))</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">a: [[ 1.  2.  3.  4.]</span><br><span class="line"> [ 5.  6.  7.  8.]</span><br><span class="line"> [ 9. 10. 11. 12.]]</span><br></pre></td></tr></table></figure>
-
-<h1 id="tf-Variable-amp-tf-get-variable"><a href="#tf-Variable-amp-tf-get-variable" class="headerlink" title="tf.Variable &amp;  tf.get_variable"></a>tf.Variable &amp;  tf.get_variable</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ol>
-<li><p>tf.Variable()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(&lt;initial-value&gt;, name=&lt;optional-name&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>用于生成一个初始值为initial-value的变量。必须指定初始化值</p>
-</li>
-<li><p>tf.get_variable()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.get_variable(name, shape=<span class="literal">None</span>, dtype=tf.float32, initializer=<span class="literal">None</span>, regularizer=<span class="literal">None</span>, trainable=<span class="literal">True</span>, collections=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
-
-<p>获取已存在的变量（要求不仅名字，而且初始化方法等各个参数都一样），如果不存在，就新建一个。 </p>
-</li>
-</ol>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相比于tf.Variable，tf.get_variable会检查当前命名空间内是否存在相同name属性的variable，如果存在则检查是否设置为变量共享，如果没有设置则会抛出错误提示name重复。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line">new_w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line">    print(<span class="string">'new_w:'</span>, sess.run(new_w))</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">new_w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br></pre></td></tr></table></figure>
-
-<p>相比之下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b = tf.get_variable(name=<span class="string">'bias'</span>, shape=(<span class="number">3</span>,), dtype=tf.float32)</span><br><span class="line">new_b = tf.get_variable(name=<span class="string">'bias'</span>, shape=(<span class="number">3</span>,), dtype=tf.float32)</span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'b:'</span>, sess.run(b))</span><br><span class="line">    print(<span class="string">'new_b:'</span>, sess.run(new_b))</span><br></pre></td></tr></table></figure>
-
-<p>则会报错，提示name重复，是否要共享变量？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Variable bias already exists, disallowed. Did you mean to set reuse&#x3D;True or reuse&#x3D;tf.AUTO_REUSE in VarScope?</span><br></pre></td></tr></table></figure>
-
-<p>综上，应该优先选择使用tf.get_variable方法来避免name重复导致的一些意料之外的bug。</p>
-<h2 id="tf-get-variable的应用"><a href="#tf-get-variable的应用" class="headerlink" title="tf.get_variable的应用"></a>tf.get_variable的应用</h2><p>为了避免上述错误，有两种应用方式：</p>
-<ol>
-<li>使用<code>tf.variable_scope()</code>来分隔命名空间；</li>
-<li>使用<code>reuse=True</code>参数来让相同name的variable实现共享</li>
-</ol>
-<h3 id="tf-variable-scope-添加命名空间"><a href="#tf-variable-scope-添加命名空间" class="headerlink" title="tf.variable_scope()添加命名空间"></a>tf.variable_scope()添加命名空间</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"foo"</span>):</span><br><span class="line">    v = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>]) <span class="comment">#v.name == "foo/v:0"</span></span><br></pre></td></tr></table></figure>
-
-<p>就是给variable外面套上一个level更高的name。</p>
-<h3 id="reuse-True共享变量"><a href="#reuse-True共享变量" class="headerlink" title="reuse=True共享变量"></a>reuse=True共享变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    a = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># a.name == "one/v:0"</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    b = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># 创建两个名字一样的变量会报错</span></span><br></pre></td></tr></table></figure>
-
-<p>在相同的命名空间<code>one</code>内存在两个<code>v</code>变量，导致报错<code>ValueError: Variable one/v already exists</code> 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    a = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># a.name == "one/v:0"</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>, reuse = <span class="literal">True</span>):  <span class="comment"># 注意reuse的作用。</span></span><br><span class="line">    c = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># c.name == "one/v:0" 成功共享，因为设置了reuse</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> a == c  <span class="comment"># Assertion is true, they refer to the same object.</span></span><br></pre></td></tr></table></figure>
-
-<p>再看一下tf.Variable方法，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with tf.variable_scope(&quot;two&quot;):</span><br><span class="line">    d &#x3D; tf.get_variable(&quot;v&quot;, [1])  # d.name &#x3D;&#x3D; &quot;two&#x2F;v:0&quot;</span><br><span class="line">    e &#x3D; tf.Variable(1, name&#x3D;&quot;v&quot;, expected_shape&#x3D;[1])  # e.name &#x3D;&#x3D; &quot;two&#x2F;v_1:0&quot;</span><br><span class="line"></span><br><span class="line">assert d &#x3D;&#x3D; e  # AssertionError: they are different objects</span><br></pre></td></tr></table></figure>
-
-<p>提示： <code>AssertionError</code></p>
-<p>在命名空间<code>two</code>内，在定义v之后，又使用tf.Variable来定义了相同名字<code>v</code>的变量。由于tf.Variable不会检查命名重复，所以后面定义的v会被系统自动修改为<code>v_1</code>。</p>
-<p><a href="https://blog.csdn.net/u012223913/article/details/78533910" target="_blank" rel="noopener">https://blog.csdn.net/u012223913/article/details/78533910</a></p>
-<h1 id="tf-variable-scope和tf-name-scope"><a href="#tf-variable-scope和tf-name-scope" class="headerlink" title="tf.variable_scope和tf.name_scope"></a>tf.variable_scope和tf.name_scope</h1><p>tf.variable_scope</p>
-<p>可以分隔命名空间，对tf.get_variable得到的变量有效，对tf.Variable的变量也有效。</p>
-<p>tf.name_scope</p>
-<p>可以分隔命名空间，对tf.get_variable得到的变量<code>无效</code>，对tf.Variable的变量有效。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'V1'</span>):</span><br><span class="line">    a1 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a2 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'V2'</span>):</span><br><span class="line">    a3 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a4 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(a1.name)</span><br><span class="line">    print(a2.name)</span><br><span class="line">    print(a3.name)</span><br><span class="line">    print(a4.name)</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">V1&#x2F;a1:0</span><br><span class="line">V1&#x2F;a2:0</span><br><span class="line">V2&#x2F;a1:0</span><br><span class="line">V2&#x2F;a2:0</span><br></pre></td></tr></table></figure>
-
-<p>使用tf.name_scope，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'V1'</span>):  <span class="comment"># 使用tf.name_scope</span></span><br><span class="line">    a1 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a2 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'V2'</span>):  <span class="comment"># 使用tf.name_scope</span></span><br><span class="line">    a3 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a4 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(a1.name)</span><br><span class="line">    print(a2.name)</span><br><span class="line">    print(a3.name)</span><br><span class="line">    print(a4.name)</span><br></pre></td></tr></table></figure>
-
-<p>输出报错，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Variable a1 already exists, disallowed. Did you mean to set reuse&#x3D;True or reuse&#x3D;tf.AUTO_REUSE in VarScope?</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://blog.csdn.net/UESTC_C2_403/article/details/72328815" target="_blank" rel="noopener">https://blog.csdn.net/UESTC_C2_403/article/details/72328815</a></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>关于共享变量，参考：</p>
-<p><a href="https://www.tensorflow.org/guide/variables?hl=zh-cn" target="_blank" rel="noopener">https://www.tensorflow.org/guide/variables?hl=zh-cn</a></p>
-<p><a href="http://jermmy.xyz/2017/08/25/2017-8-25-learn-tensorflow-shared-variables/" target="_blank" rel="noopener">http://jermmy.xyz/2017/08/25/2017-8-25-learn-tensorflow-shared-variables/</a></p>
-<p><a href="https://www.cnblogs.com/Charles-Wan/p/6200446.html" target="_blank" rel="noopener">https://www.cnblogs.com/Charles-Wan/p/6200446.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">variable</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/20/TensorFlow-12-variable/">展开全文 >></a>
         </p>
       
 
@@ -2564,6 +2491,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
               </li>
             
             <div class="clearfix"></div>

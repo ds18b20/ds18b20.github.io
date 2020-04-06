@@ -156,6 +156,175 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL-02-Select" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/SQL-02-Select/">SQL-02-Select</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/14/SQL-02-Select/" class="archive-article-date">
+  	<time datetime="2018-04-14T01:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>select用于从数据库中按条件查询，返回一个二维表，这个二维表包含列名和每一行的数据。</p>
+<h2 id="基本查询命令"><a href="#基本查询命令" class="headerlink" title="基本查询命令"></a>基本查询命令</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>上述命令返回<code>&lt;表名&gt;</code>的所有列。</p>
+<p>实际上，<code>FROM 表名</code>部分不是必需的，比如，</p>
+<p><code>SELECT 1+1;</code></p>
+<p>返回结果统一是一个二维表，列名：1+1，值：2</p>
+<p>故可以使用这个小trick检测数据库是否连接成功。</p>
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件<span class="number">1</span>&gt; <span class="keyword">AND</span> &lt;条件<span class="number">2</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>例如<code>SELECT * FROM students WHERE score &gt;= 80 AND gender = &#39;M&#39;;</code></p>
+<h2 id="投影查询"><a href="#投影查询" class="headerlink" title="投影查询"></a>投影查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span>, 列<span class="number">2</span>, 列<span class="number">3</span> <span class="keyword">FROM</span> ...</span><br><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span> 别名<span class="number">1</span>, 列<span class="number">2</span> 别名<span class="number">2</span>, 列<span class="number">3</span> 别名<span class="number">3</span> <span class="keyword">FROM</span> ...</span><br></pre></td></tr></table></figure>
+
+<p>指定列名返回结果；</p>
+<p>还可以给列重新命名。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名<span class="number">1</span>&gt; &lt;列名<span class="number">2</span>&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名&gt; <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在基本查询语句后加上<code>ORDER BY &lt;列名&gt;</code>，默认为从低到高排序；</p>
+<p>加上多个列名来实现多重排序；</p>
+<p>加上<code>DESC</code>来从高到低排序。</p>
+<h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> ...；</span><br></pre></td></tr></table></figure>
+
+<p>除了COUNT()之外还有其他聚合函数，</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUM</td>
+<td>计算某一列的合计值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>计算某一列的平均值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>计算某一列的最大值</td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>计算某一列的最小值</td>
+</tr>
+</tbody></table>
+<p>注意，MAX和MIN并不局限于数值类型。如果是字符串类型，MAX返回排序最后的字符，MIN相反。</p>
+<p>另外，聚合查询的WHERE条件如果没有匹配到任何结果，那么COUNT会返回0，而MAX/MIN/AVG/SUM会返回null。</p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = <span class="number">2</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = n;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用GROUP BY分组功能简化上述操作，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">GROUP</span> <span class="keyword">BY</span> class_id;</span><br></pre></td></tr></table></figure>
+
+<p>同样，GROUP BY后可以加多个分组列名，实现多重分组。</p>
+<p><strong>注意：聚合查询的&lt;查询列&gt;中，只能放入分组的列，即GROUP BY后面的列。</strong></p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>SQL允许同时从多张表中查询数据，语法为，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> &lt;表<span class="number">1</span>&gt; &lt;表<span class="number">2</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>返回结果是一个二维表，<strong>行数为表1和表2行数的乘积，列数为二者的和。</strong></p>
+<p>为了避免各表中的列名重复，可以使用上文中投影查询中提到的方法，给列重命名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    students.id <span class="keyword">sid</span>,</span><br><span class="line">    students.name,</span><br><span class="line">    students.gender,</span><br><span class="line">    students.score,</span><br><span class="line">    classes.id cid,</span><br><span class="line">    classes.name cname</span><br><span class="line"><span class="keyword">FROM</span> students, classes;</span><br></pre></td></tr></table></figure>
+
+<p>也可以给表更名，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.id <span class="keyword">sid</span>,</span><br><span class="line">    s.name,</span><br><span class="line">    s.gender,</span><br><span class="line">    s.score,</span><br><span class="line">    c.id cid,</span><br><span class="line">    c.name cname</span><br><span class="line"><span class="keyword">FROM</span> students s, classes c;</span><br></pre></td></tr></table></figure>
+
+<p>加上判断语句，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.id <span class="keyword">sid</span>,</span><br><span class="line">    s.name,</span><br><span class="line">    s.gender,</span><br><span class="line">    s.score,</span><br><span class="line">    c.id cid,</span><br><span class="line">    c.name cname</span><br><span class="line"><span class="keyword">FROM</span> students s, classes c</span><br><span class="line"><span class="keyword">WHERE</span> s.gender = <span class="string">'M'</span> <span class="keyword">AND</span> c.id = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.id, s.name, s.class_id, c.name class_name, s.gender, s.score</span><br><span class="line"><span class="keyword">FROM</span> students s</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> classes c</span><br><span class="line"><span class="keyword">ON</span> s.class_id = c.id;</span><br></pre></td></tr></table></figure>
+
+<p>INNER JOIN查询的写法是：</p>
+<ol>
+<li>先确定主表，仍然使用<code>FROM &lt;表1&gt;</code>的语法；</li>
+<li>再确定需要连接的表，使用<code>INNER JOIN &lt;表2&gt;</code>的语法；</li>
+<li>然后确定连接条件，使用<code>ON &lt;条件...&gt;</code>，这里的条件是<code>s.class_id = c.id</code>，表示<code>students</code>表的<code>class_id</code>列与<code>classes</code>表的<code>id</code>列相同的行需要连接；</li>
+<li>可选：加上<code>WHERE</code>子句、<code>ORDER BY</code>等子句。</li>
+</ol>
+<p>ing。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>连接查询</p>
+<p><a href="https://liaoxuefeng.com/wiki/001508284671805d39d23243d884b8b99f440bfae87b0f4000/001509167103179399448cb200549bdab7651a5e9167597000" target="_blank" rel="noopener">https://liaoxuefeng.com/wiki/001508284671805d39d23243d884b8b99f440bfae87b0f4000/001509167103179399448cb200549bdab7651a5e9167597000</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">select</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/14/SQL-02-Select/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1280,104 +1449,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/31/Numpy-15-ravel-flatten-reshape/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-32-zip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/31/Python-32-zip/">Python-32-zip</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/31/Python-32-zip/" class="archive-article-date">
-  	<time datetime="2018-03-31T06:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">b = (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">y = list(zip(a, b))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0, 3), (1, 4), (2, 5)]</span><br></pre></td></tr></table></figure>
-
-<p>a和b长度不同时，按较短的序列长度来组合。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(a,b))</span><br><span class="line">[(<span class="number">0</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">5</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(b,a))</span><br><span class="line">[(<span class="number">3</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">5</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
-
-<h1 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = list(zip(*y))</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0, 1, 2), (3, 4, 5)]</span><br></pre></td></tr></table></figure>
-
-<p>可以看到这就是上面输入的a和b。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">zip</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/31/Python-32-zip/">展开全文 >></a>
         </p>
       
 
@@ -2682,6 +2753,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
               </li>
             
             <div class="clearfix"></div>
