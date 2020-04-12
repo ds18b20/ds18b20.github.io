@@ -156,6 +156,347 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-54-findinlist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Python-54-findinlist/">Python-54-findinlist</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Python-54-findinlist/" class="archive-article-date">
+  	<time datetime="2018-10-07T12:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="find-in-list"><a href="#find-in-list" class="headerlink" title="find in list"></a>find in list</h1><p>在Python中常会遇到，如何判断某一元素是否在list中；或者从一个list中找到某个元素的位置。</p>
+<h2 id="判断元素是否存在"><a href="#判断元素是否存在" class="headerlink" title="判断元素是否存在"></a>判断元素是否存在</h2><p>最常用的方法是使用<code>in</code>语法，例如<code>2 in [1, 2, 3]</code>。</p>
+<h2 id="筛选出目标元素"><a href="#筛选出目标元素" class="headerlink" title="筛选出目标元素"></a>筛选出目标元素</h2><p>可以使用列表生成的方式列出目标，如果不为空则包含目标元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">matches = [x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> fulfills_some_condition(x)]</span><br><span class="line">matches = (x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> x &gt; <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中第一种方法在Python3中完全可以使用filter方法来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matches = filter(fulfills_some_condition, lst)</span><br></pre></td></tr></table></figure>
+
+<h2 id="找出第一个符合条件的元素"><a href="#找出第一个符合条件的元素" class="headerlink" title="找出第一个符合条件的元素"></a>找出第一个符合条件的元素</h2><p>可以loop所有元素直到找到目标元素，否则抛出异常。或者可以使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next(x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...)</span><br></pre></td></tr></table></figure>
+
+<p>它会返回第一个目标元素，否则抛出错误<code>StopIteration</code>。亦或者，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next((x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...), [default value])</span><br></pre></td></tr></table></figure>
+
+<h2 id="找出目标元素的位置"><a href="#找出目标元素的位置" class="headerlink" title="找出目标元素的位置"></a>找出目标元素的位置</h2><p>使用list的index方法可以返回目标第一次出现时的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">4</span>) <span class="comment"># =&gt; ValueError</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，不能返回后续出现的相同元素。这时可以使用enumerate方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[idx <span class="keyword">for</span> idx, x <span class="keyword">in</span> enumerate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>]) <span class="keyword">if</span> x==<span class="number">2</span>] <span class="comment"># =&gt; [1, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>以下是原回答：</p>
+<p>As for your first question: that code is perfectly fine and should work if <code>item</code> equals one of the elements inside <code>myList</code>. Maybe you try to find a string that does not <em>exactly</em> match one of the items or maybe you are using a float value which suffers from inaccuracy.</p>
+<p>As for your second question: There’s actually several possible ways if “finding” things in lists.</p>
+<h3 id="Checking-if-something-is-inside"><a href="#Checking-if-something-is-inside" class="headerlink" title="Checking if something is inside"></a>Checking if something is inside</h3><p>This is the use case you describe: Checking whether something is inside a list or not. As you know, you can use the <code>in</code> operator for that:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment"># =&gt; True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Filtering-a-collection"><a href="#Filtering-a-collection" class="headerlink" title="Filtering a collection"></a>Filtering a collection</h3><p>That is, finding all elements in a sequence that meet a certain condition. You can use list comprehension or generator expressions for that:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">matches = [x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> fulfills_some_condition(x)]</span><br><span class="line">matches = (x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> x &gt; <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The latter will return a <em>generator</em> which you can imagine as a sort of lazy list that will only be built as soon as you iterate through it. By the way, the first one is exactly equivalent to</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matches = filter(fulfills_some_condition, lst)</span><br></pre></td></tr></table></figure>
+
+<p>in Python 2. Here you can see higher-order functions at work. In Python 3, <code>filter</code> doesn’t return a list, but a generator-like object.</p>
+<h3 id="Finding-the-first-occurrence"><a href="#Finding-the-first-occurrence" class="headerlink" title="Finding the first occurrence"></a>Finding the first occurrence</h3><p>If you only want the first thing that matches a condition (but you don’t know what it is yet), it’s fine to use a for loop (possibly using the <code>else</code> clause as well, which is not really well-known). You can also use</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next(x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...)</span><br></pre></td></tr></table></figure>
+
+<p>which will return the first match or raise a <code>StopIteration</code> if none is found. Alternatively, you can use</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next((x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...), [default value])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Finding-the-location-of-an-item"><a href="#Finding-the-location-of-an-item" class="headerlink" title="Finding the location of an item"></a>Finding the location of an item</h3><p>For lists, there’s also the <code>index</code> method that can sometimes be useful if you want to know <em>where</em> a certain element is in the list:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">4</span>) <span class="comment"># =&gt; ValueError</span></span><br></pre></td></tr></table></figure>
+
+<p>However, note that if you have duplicates, <code>.index</code> always returns the lowest index:……</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br></pre></td></tr></table></figure>
+
+<p>If there are duplicates and you want all the indexes then you can use <code>enumerate()</code> instead:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[i <span class="keyword">for</span> i,x <span class="keyword">in</span> enumerate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>]) <span class="keyword">if</span> x==<span class="number">2</span>] <span class="comment"># =&gt; [1, 3]</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/9542738/python-find-in-list" target="_blank" rel="noopener">find in list</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">find in list</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Python-54-findinlist/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-29-numpy-stack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/03/Numpy-29-numpy-stack/">Numpy-29-numpy-stack</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/03/Numpy-29-numpy-stack/" class="archive-article-date">
+  	<time datetime="2018-09-03T13:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-stack"><a href="#Numpy-stack" class="headerlink" title="Numpy.stack"></a>Numpy.stack</h1><p>numpy.stack(arrays, axis=0)实现沿着指定新轴axis连接多个序列arrays。</p>
+<p>参数：</p>
+<ul>
+<li>arrays 需要合并的多个序列，要求序列拥有完全相同的shape</li>
+<li>axis 指定合并所沿轴的位置，要求int类型。axis=-1意味着最后一个纬度方向。<br>返回：<br>返回比输入序列增加了一个纬度的新序列。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import numpy as np</span><br><span class="line">&gt;&gt;&gt; a &#x3D; np.array([1,2,3])</span><br><span class="line">&gt;&gt;&gt; b &#x3D; np.array([4,5,6])</span><br><span class="line">&gt;&gt;&gt; a.shape</span><br><span class="line">(3,)</span><br><span class="line">&gt;&gt;&gt; b.shape</span><br><span class="line">(3,)</span><br><span class="line"># 注意把多个序列外加到一个tuple内</span><br><span class="line">&gt;&gt;&gt; np.stack(a,b)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  File &quot;&#x2F;anaconda3&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;numpy&#x2F;core&#x2F;shape_base.py&quot;, line 356, in stack</span><br><span class="line">    axis &#x3D; normalize_axis_index(axis, result_ndim)</span><br><span class="line">TypeError: only size-1 arrays can be converted to Python scalars</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b))</span><br><span class="line">array([[1, 2, 3],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;0)</span><br><span class="line">array([[1, 2, 3],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;0).shape</span><br><span class="line">(2, 3)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1)</span><br><span class="line">array([[1, 4],</span><br><span class="line">       [2, 5],</span><br><span class="line">       [3, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1).shape</span><br><span class="line">(3, 2)</span><br></pre></td></tr></table></figure>
+
+<p>[1，2，3]和[4，5，6]在axis=0轴上连接后得到新序列形状为shape=(2, 3)。新序列的形状2，3中，2表示两个序列连接，而且是在0轴位置上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;np.arange(12).reshape(3,4)</span><br><span class="line">&gt;&gt;&gt; b&#x3D;np.arange(12).reshape(3,4)+1</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11]])</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([[ 1,  2,  3,  4],</span><br><span class="line">       [ 5,  6,  7,  8],</span><br><span class="line">       [ 9, 10, 11, 12]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b))</span><br><span class="line">array([[[ 0,  1,  2,  3],</span><br><span class="line">        [ 4,  5,  6,  7],</span><br><span class="line">        [ 8,  9, 10, 11]],</span><br><span class="line"></span><br><span class="line">       [[ 1,  2,  3,  4],</span><br><span class="line">        [ 5,  6,  7,  8],</span><br><span class="line">        [ 9, 10, 11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b)).shape</span><br><span class="line">(2, 3, 4)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1)</span><br><span class="line">array([[[ 0,  1,  2,  3],</span><br><span class="line">        [ 1,  2,  3,  4]],</span><br><span class="line"></span><br><span class="line">       [[ 4,  5,  6,  7],</span><br><span class="line">        [ 5,  6,  7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 8,  9, 10, 11],</span><br><span class="line">        [ 9, 10, 11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1).shape</span><br><span class="line">(3, 2, 4)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;2)</span><br><span class="line">array([[[ 0,  1],</span><br><span class="line">        [ 1,  2],</span><br><span class="line">        [ 2,  3],</span><br><span class="line">        [ 3,  4]],</span><br><span class="line"></span><br><span class="line">       [[ 4,  5],</span><br><span class="line">        [ 5,  6],</span><br><span class="line">        [ 6,  7],</span><br><span class="line">        [ 7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 8,  9],</span><br><span class="line">        [ 9, 10],</span><br><span class="line">        [10, 11],</span><br><span class="line">        [11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;2).shape</span><br><span class="line">(3, 4, 2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11]])</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([[ 1,  2,  3,  4],</span><br><span class="line">       [ 5,  6,  7,  8],</span><br><span class="line">       [ 9, 10, 11, 12]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并前"><a href="#合并前" class="headerlink" title="合并前"></a>合并前</h3><p>a各元素的下标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, 0) (0, 1) (0, 2) (0, 3)</span><br><span class="line">(1, 0) (1, 1) (1, 2) (1, 3)</span><br><span class="line">(2, 0) (2, 1) (2, 2) (2, 3)</span><br></pre></td></tr></table></figure>
+
+<p>b各元素的下标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, 0) (0, 1) (0, 2) (0, 3)</span><br><span class="line">(1, 0) (1, 1) (1, 2) (1, 3)</span><br><span class="line">(2, 0) (2, 1) (2, 2) (2, 3)</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>numpy.stack((a, b), axis=1)在轴axis=1处合并时，<br>a各元素的下标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;0&#96;, 0) (0, &#96;0&#96;, 1) (0, &#96;0&#96;, 2) (0, &#96;0&#96;, 3)</span><br><span class="line">(1, &#96;0&#96;, 0) (1, &#96;0&#96;, 1) (1, &#96;0&#96;, 2) (1, &#96;0&#96;, 3)</span><br><span class="line">(2, &#96;0&#96;, 0) (2, &#96;0&#96;, 1) (2, &#96;0&#96;, 2) (2, &#96;0&#96;, 3)</span><br></pre></td></tr></table></figure>
+
+<p>b各元素的下标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;1&#96;, 0) (0, &#96;1&#96;, 1) (0, &#96;1&#96;, 2) (0, &#96;1&#96;, 3)</span><br><span class="line">(1, &#96;1&#96;, 0) (1, &#96;1&#96;, 1) (1, &#96;1&#96;, 2) (1, &#96;1&#96;, 3)</span><br><span class="line">(2, &#96;1&#96;, 0) (2, &#96;1&#96;, 1) (2, &#96;1&#96;, 2) (2, &#96;1&#96;, 3)</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并后"><a href="#合并后" class="headerlink" title="合并后"></a>合并后</h3><p>合并之后，先排满axis=0位置，然后排axis=1位置0-&gt;1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;0&#96;, 0) (0, &#96;0&#96;, 1) (0, &#96;0&#96;, 2) (0, &#96;0&#96;, 3)</span><br><span class="line">(0, &#96;1&#96;, 0) (0, &#96;1&#96;, 1) (0, &#96;1&#96;, 2) (0, &#96;1&#96;, 3)</span><br><span class="line">(1, &#96;0&#96;, 0) (1, &#96;0&#96;, 1) (1, &#96;0&#96;, 2) (1, &#96;0&#96;, 3)</span><br><span class="line">(1, &#96;1&#96;, 0) (1, &#96;1&#96;, 1) (1, &#96;1&#96;, 2) (1, &#96;1&#96;, 3)</span><br><span class="line">(2, &#96;0&#96;, 0) (2, &#96;0&#96;, 1) (2, &#96;0&#96;, 2) (2, &#96;0&#96;, 3)</span><br><span class="line">(2, &#96;1&#96;, 0) (2, &#96;1&#96;, 1) (2, &#96;1&#96;, 2) (2, &#96;1&#96;, 3)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/qq_17550379/article/details/78934529" target="_blank" rel="noopener">https://blog.csdn.net/qq_17550379/article/details/78934529</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/03/Numpy-29-numpy-stack/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-53-class-method-decorator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/01/Python-53-class-method-decorator/">Python-53-class-method-decorator</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/01/Python-53-class-method-decorator/" class="archive-article-date">
+  	<time datetime="2018-09-01T03:38:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="class-method-decorator"><a href="#class-method-decorator" class="headerlink" title="class method decorator"></a>class method decorator</h1><p>Python 装饰器装饰类中的方法</p>
+<p>decorator中调用被装饰的函数时，在调用函数的参数列表最前面加入self参数的话，下文中就可以直接调用class中的方法self.func()了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">catch_exception</span><span class="params">(origin_func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            u = origin_func(self, *args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> u</span><br><span class="line">        <span class="keyword">except</span> Exception:</span><br><span class="line">            self.revive() <span class="comment">#不用顾虑，直接调用原来的类的方法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'an Exception raised.'</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">revive</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'revive from exception.'</span>)</span><br><span class="line">        <span class="comment"># do something to restore</span></span><br><span class="line"><span class="meta">    @catch_exception</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read_value</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'here I will do something.'</span>)</span><br><span class="line">        <span class="comment"># do something.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://kingname.info/2017/04/17/decorate-for-method/" target="_blank" rel="noopener">https://kingname.info/2017/04/17/decorate-for-method/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">class method decorator</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/01/Python-53-class-method-decorator/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PyCharm-06-TODO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -846,309 +1187,9 @@
 
 
   
-    <article id="post-SQL-MySQL-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/19/SQL-MySQL-error/">SQL-MySQL-error</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/19/SQL-MySQL-error/" class="archive-article-date">
-  	<time datetime="2018-08-18T15:43:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL-error-code-1062"><a href="#MySQL-error-code-1062" class="headerlink" title="MySQL error code 1062"></a>MySQL error code 1062</h1><p>使用Python管理MySQL时出现了<code>pymysql.err.IntegrityError: (1062, &quot;Duplicate entry...</code>的错误。<br>说明规定不能重复的字段内出现了重复值。<br>比如<code>unique key idx_email (email)</code>就规定email字段的值不可重复，当此处值发生重复时就会报错。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.rathishkumar.in/2016/01/how-to-solve-mysql-error-code-1062.html" target="_blank" rel="noopener">https://www.rathishkumar.in/2016/01/how-to-solve-mysql-error-code-1062.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">error</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/19/SQL-MySQL-error/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-04-Drop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/19/SQL-04-Drop/">SQL-04-Drop</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/19/SQL-04-Drop/" class="archive-article-date">
-  	<time datetime="2018-08-18T15:38:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL-删除数据库-表"><a href="#MySQL-删除数据库-表" class="headerlink" title="MySQL 删除数据库/表"></a>MySQL 删除数据库/表</h1><p>注意：执行删除数据库的命令会直接删除该数据库的所有数据，故删除之前应做好备份工作。</p>
-<h2 id="使用drop方式"><a href="#使用drop方式" class="headerlink" title="使用drop方式"></a>使用drop方式</h2><p>登入SQL环境下可以使用drop命令删除数据库：<br>mysql&gt;<code>drop database &lt;database name&gt;</code></p>
-<p>mysql&gt;<code>drop table &lt;table name&gt;</code></p>
-<h2 id="使用mysqladmin删除"><a href="#使用mysqladmin删除" class="headerlink" title="使用mysqladmin删除"></a>使用mysqladmin删除</h2><p>这种方式不要求进入SQL环境，直接在Terminal下实现：<br>[root@host]# <code>mysqladmin -u root -p drop &lt;databese name&gt;</code><br>接下来会提示输入密码，并且确认是否确定删除。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">drop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">table</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/19/SQL-04-Drop/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyCharm-04-shorcut-Mac" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/19/PyCharm-04-shorcut-Mac/">PyCharm-04-shorcut-Mac</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/19/PyCharm-04-shorcut-Mac/" class="archive-article-date">
-  	<time datetime="2018-08-18T15:34:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PyCharm-shortcuts-in-Mac"><a href="#PyCharm-shortcuts-in-Mac" class="headerlink" title="PyCharm shortcuts in Mac"></a>PyCharm shortcuts in Mac</h1><h2 id="常用命令如下："><a href="#常用命令如下：" class="headerlink" title="常用命令如下："></a>常用命令如下：</h2><p>⌘B 跳转到变量/方法的定义处<br>⇧⇧ 双击Shift键 搜索所有内容<br>⌥Space 在浮动窗口打开选中的方法/类的定义<br>⌘Y 在浮动窗口打开光标所在的方法/类的定义</p>
-<p>注：Windows下Ctrl+Q来查看方法/类的定义</p>
-<h2 id="Mac键盘符号和修饰键说明"><a href="#Mac键盘符号和修饰键说明" class="headerlink" title="Mac键盘符号和修饰键说明"></a>Mac键盘符号和修饰键说明</h2><p>⌘ Command</p>
-<p>⇧ Shift</p>
-<p>⌥ Option</p>
-<p>⌃ Control</p>
-<p>↩︎ Return/Enter</p>
-<p>⌫ Delete</p>
-<p>⌦ 向前删除键（Fn+Delete）</p>
-<p>↑ 上箭头</p>
-<p>↓ 下箭头</p>
-<p>← 左箭头</p>
-<p>→ 右箭头</p>
-<p>⇞ Page Up（Fn+↑）</p>
-<p>⇟ Page Down（Fn+↓）</p>
-<p>Home Fn + ←</p>
-<p>End Fn + →</p>
-<p>⇥ 右制表符（Tab键）</p>
-<p>⇤ 左制表符（Shift+Tab）</p>
-<p>⎋ Escape (Esc)</p>
-        
-          <a class="article-more-a" href="/2018/08/19/PyCharm-04-shorcut-Mac/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">shortcut</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Mac</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/19/PyCharm-04-shorcut-Mac/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2425,6 +2466,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
               </li>
             
             <div class="clearfix"></div>

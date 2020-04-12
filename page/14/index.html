@@ -156,6 +156,315 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-16-array-init" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/01/Numpy-16-array-init/">Numpy-16-array-init</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/01/Numpy-16-array-init/" class="archive-article-date">
+  	<time datetime="2018-04-01T04:20:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Initial-array-with-zeros-ones-empty"><a href="#Initial-array-with-zeros-ones-empty" class="headerlink" title="Initial array with zeros/ones/empty"></a>Initial array with zeros/ones/empty</h1><blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html" target="_blank" rel="noopener"><code>numpy.zeros</code></a></p>
+<p>Return a new array of given shape and type, filled with zeros.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ones.html" target="_blank" rel="noopener"><code>numpy.ones</code></a></p>
+<p>Return a new array of given shape and type, filled with ones.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" target="_blank" rel="noopener"><code>numpy.empty</code></a></p>
+<p>Return a new array of given shape and type, without initializing entries.</p>
+</blockquote>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>initialize a numpy array</p>
+<p><a href="https://stackoverflow.com/questions/4535374/initialize-a-numpy-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/4535374/initialize-a-numpy-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array Init</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/01/Numpy-16-array-init/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Matplotlib-06-arrow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/01/Matplotlib-06-arrow/">Matplotlib-06-arrow</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/01/Matplotlib-06-arrow/" class="archive-article-date">
+  	<time datetime="2018-04-01T03:01:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib显示箭头"><a href="#matplotlib显示箭头" class="headerlink" title="matplotlib显示箭头"></a>matplotlib显示箭头</h1><p>梯度下降法中要可视化显示梯度变化情况时，通过matplotlib可以直观地输出结果。<br>以下是实现方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>,<span class="number">5</span>),dpi=<span class="number">80</span>)</span><br><span class="line">ax = plt.axes()</span><br><span class="line">ax.set_xlim(<span class="number">-10</span>, <span class="number">10</span>)</span><br><span class="line">ax.set_ylim(<span class="number">-10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">ax.arrow( <span class="number">-0.0</span>, <span class="number">-0.0</span>, <span class="number">1.0</span>, <span class="number">-1.0</span>, fc=<span class="string">"k"</span>, ec=<span class="string">"k"</span>, head_width=<span class="number">0.5</span>, head_length=<span class="number">0.5</span> )</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Matplotlib-06-arrow/arrow.png" alt="png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">arrow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/01/Matplotlib-06-arrow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-15-ravel-flatten-reshape" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/31/Numpy-15-ravel-flatten-reshape/">Numpy-15-ravel-flatten-reshape</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/31/Numpy-15-ravel-flatten-reshape/" class="archive-article-date">
+  	<time datetime="2018-03-31T07:27:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>从结果上看，三者都可以实现把一个多维的array压平为一维。ravel和flatten的区别在于是返回拷贝(copy)还是返回视图(view)，对copy做的修改不会影响原array。</p>
+<p>添加内容中。。。</p>
+<h1 id="ravel"><a href="#ravel" class="headerlink" title="ravel"></a>ravel</h1><h1 id="flatten"><a href="#flatten" class="headerlink" title="flatten"></a>flatten</h1><h1 id="reshape-1"><a href="#reshape-1" class="headerlink" title="reshape(-1)"></a>reshape(-1)</h1><p><code>array.reshape(x, -1)</code>只关注行数x，列数自动计算。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>numpy 辨异 （五）—— numpy.ravel() vs numpy.flatten()</p>
+<p><a href="https://blog.csdn.net/lanchunhui/article/details/50354978" target="_blank" rel="noopener">https://blog.csdn.net/lanchunhui/article/details/50354978</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flatten</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ravel</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reshape</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/31/Numpy-15-ravel-flatten-reshape/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-32-zip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -897,357 +1206,9 @@
 
 
   
-    <article id="post-Java-11-WrapperClasses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/Java-11-WrapperClasses/">Java-11-WrapperClasses</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/18/Java-11-WrapperClasses/" class="archive-article-date">
-  	<time datetime="2018-03-18T11:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p>Java虽然是支持面向对象的编程，但是还是沿用了一些面向过程的习惯，比如Java的8种基本数据类型并不支持面向对象的编程。这8种基本数据类型没有对象的基本特征–属性和方法，比如一个int变量，不能查看它的属性，也不能调用它的方法。</p>
-<p>这在OOP程序的编程中，由于不统一会带来一些不便。为了解决这个问题，Java引入了包装类的概念，即给每个基本数据类型设计了相应的类（包装类），也称为外覆类或者数据类型类。</p>
-<p><strong>基本数据类型和包装类的对应关系</strong></p>
-<table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>对应的包装类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-</tr>
-<tr>
-<td>int</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>char</td>
-<td>Character</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-</tr>
-</tbody></table>
-<p>每个包装类的对象可以封装一个相应的基本类型的数据，并提供了其它一些有用的方法。包装类对象一经创建，其内容（所封装的基本类型数据值）不可改变。</p>
-<p>基本类型和对应的包装类可以进行<strong>相互转换</strong>：</p>
-<ul>
-<li>装箱：基本类型 &gt; 包装类，如int基本类型转Integer类</li>
-<li>拆箱：基本类型 &gt; 包装类，如Integer类转int基本类型</li>
-</ul>
-<p>例子，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestWrapperClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestWrapperClass.int2integer();</span><br><span class="line">        TestWrapperClass.str2int();</span><br><span class="line">        TestWrapperClass.int2str();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 手动装箱</span></span><br><span class="line">    <span class="comment">// 手动拆箱</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2integer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        Integer obj = <span class="keyword">new</span> Integer(m); <span class="comment">// 手动装箱</span></span><br><span class="line">        <span class="keyword">int</span> n = obj.intValue(); <span class="comment">// 手动拆箱</span></span><br><span class="line">        System.out.println(<span class="string">"n = "</span> + n);</span><br><span class="line">        Integer obj1 = <span class="keyword">new</span> Integer(<span class="number">500</span>);</span><br><span class="line">        System.out.println(<span class="string">"obj equals obj1? "</span> + obj.equals(obj1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// string to int</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">str2int</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str[] = &#123; <span class="string">"123"</span>, <span class="string">"123abc"</span>, <span class="string">"abc123"</span>, <span class="string">"abcxyz"</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (String str1 : str) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> m = Integer.parseInt(str1, <span class="number">10</span>);</span><br><span class="line">                System.out.println(str1 + <span class="string">" 可以转换为整数 "</span> + m);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(str1 + <span class="string">" 无法转换为整数"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// int to string</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2str</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        String s = Integer.toString(m);</span><br><span class="line">        System.out.println(<span class="string">"s = "</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h1><p>Java1.5之后的版本支持自动装箱自动拆箱。这里的自动表现在，基本类型可以直接赋值给对应的包装类型，反之亦然。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">Integer obj = m; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="keyword">int</span> n = obj; <span class="comment">// 自动拆箱</span></span><br><span class="line">System.out.println(<span class="string">"n = "</span> + n);</span><br></pre></td></tr></table></figure>
-
-<p>虽然有自动功能，考虑到代码的可读性，推荐使用手动装箱拆箱。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java包装类、拆箱和装箱详解</p>
-<p><a href="https://www.cnblogs.com/ok932343846/p/6749488.html" target="_blank" rel="noopener">https://www.cnblogs.com/ok932343846/p/6749488.html</a></p>
-<p>Java装箱和拆箱–<strong>这篇比较全面深入地讲解了常见的注意事项</strong></p>
-<p><a href="https://www.cnblogs.com/lsohvaen001/p/7823067.html" target="_blank" rel="noopener">https://www.cnblogs.com/lsohvaen001/p/7823067.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wrapper Classes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/18/Java-11-WrapperClasses/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-10-Str2Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/Java-10-Str2Int/">Java-10-Str2Int</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/18/Java-10-Str2Int/" class="archive-article-date">
-  	<time datetime="2018-03-18T09:58:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-convert-String-to-Integer"><a href="#Java-convert-String-to-Integer" class="headerlink" title="Java convert String to Integer"></a>Java convert String to Integer</h1><p>从java.lang包中的Integer类调用parseInt方法，<code>Integer.parseInt(&quot;Numeric String&quot;)</code>。</p>
-<p><strong>注意：</strong>在使用之前必须判断要转换的字符串是不是“数字的”。</p>
-<p>此外，java.lang是Java的核心组件，包含了Java中最基础的类：包括基本Object类、Class类、String类、基本类型的包装类、基本的数学类等等最基本的类。</p>
-<p><img src="Java-10-Str2Int%5Clang.png" alt="lang.png"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>How do I convert a String to an int in Java?</p>
-<p><a href="https://stackoverflow.com/questions/5585779/how-do-i-convert-a-string-to-an-int-in-java" target="_blank" rel="noopener">https://stackoverflow.com/questions/5585779/how-do-i-convert-a-string-to-an-int-in-java</a></p>
-<p>How to check if a String is numeric in Java</p>
-<p><a href="https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java" target="_blank" rel="noopener">https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java</a></p>
-<p>java.lang - 不用import</p>
-<p><a href="http://www.cnblogs.com/zedosu/p/6518124.html" target="_blank" rel="noopener">http://www.cnblogs.com/zedosu/p/6518124.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">String to integer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/18/Java-10-Str2Int/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-09-ioRedirection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/17/Java-09-ioRedirection/">Java-09-ioRedirection</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/17/Java-09-ioRedirection/" class="archive-article-date">
-  	<time datetime="2018-03-17T14:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="io重定向"><a href="#io重定向" class="headerlink" title="io重定向"></a>io重定向</h1><p>一个简单的例子，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PrintStream ps = <span class="keyword">new</span> PrintStream(<span class="string">"./log.txt"</span>);</span><br><span class="line">System.setOut(ps); <span class="comment">// 设置使用新的输出流</span></span><br><span class="line">System.out.println(<span class="string">"我会出现在项目根目录下的log.txt文件中~"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>ing…</p>
-<h1 id="back-to-standard-io"><a href="#back-to-standard-io" class="headerlink" title="back to standard io"></a>back to standard io</h1><p>You can get hold of the file descriptor for standard out through <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileDescriptor.html#out" target="_blank" rel="noopener"><code>FileDescriptor.out</code></a>. To reset standard out to print to console, you do</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));</span><br></pre></td></tr></table></figure>
-
-<p>Another way is to simply hold on to the original object, as follows:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PrintStream stdout = System.out;</span><br><span class="line">System.setOut(<span class="keyword">new</span> PrintStream(logFile));</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">System.setOut(stdout);                   <span class="comment">// reset to standard output</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java基础-重定向输出流</p>
-<p><a href="http://blog.csdn.net/Young4Dream/article/details/68948947" target="_blank" rel="noopener">http://blog.csdn.net/Young4Dream/article/details/68948947</a></p>
-<p>Resetting Standard output Stream</p>
-<p><a href="https://stackoverflow.com/questions/5339499/resetting-standard-output-stream" target="_blank" rel="noopener">https://stackoverflow.com/questions/5339499/resetting-standard-output-stream</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">io Redirection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/17/Java-09-ioRedirection/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2524,6 +2485,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
               </li>
             
             <div class="clearfix"></div>

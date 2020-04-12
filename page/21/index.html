@@ -156,6 +156,588 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LaTeX-Math" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/14/LaTeX-Math/">LaTeX-Math</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/14/LaTeX-Math/" class="archive-article-date">
+  	<time datetime="2018-01-14T01:18:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>\LaTeX可以排版公式与文字，这篇文章只介绍与数学公式相关的排版。更具体地说是写到Markdown文件中的LaTeX公式。</p>
+<p><code>原生hexo并不支持数学公式，需要安装插件 mathJax。mathJax 是一款运行于浏览器中的开源数学符号渲染引擎，使用 mathJax 可以方便的在浏览器中嵌入数学公式。mathJax 使用网络字体产生高质量的排版，因此可适应各种分辨率，它的显示是基于文本的而非图片，因此显示效果更好。这些公式可以被搜索引擎使用，因此公式里的符号一样可以被搜索引擎检索到。</code></p>
+<h1 id="mathJax的安装和配置"><a href="#mathJax的安装和配置" class="headerlink" title="mathJax的安装和配置"></a>mathJax的安装和配置</h1><p>安装命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-math --save</span><br></pre></td></tr></table></figure>
+
+<p>打开站点配置文件_config.yml，添加配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Plugin</span><br><span class="line">## Docs: https:&#x2F;&#x2F;www.mathjax.org&#x2F;</span><br><span class="line">math:</span><br><span class="line">  engine: &#39;mathjax&#39; # or &#39;katex&#39;</span><br><span class="line">  mathjax:</span><br><span class="line">    # src: custom_mathjax_source</span><br><span class="line">    config:</span><br><span class="line">      # MathJax config</span><br></pre></td></tr></table></figure>
+
+<p>打开主题配置文件，如next的配置文件\themes\hexo-theme-next-master_config.yml，修改mathJax项为true：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">mathjax:</span><br><span class="line">  enable: true</span><br><span class="line">  per_page: false</span><br><span class="line">  cdn: &#x2F;&#x2F;cdn.bootcss.com&#x2F;mathjax&#x2F;2.7.1&#x2F;latest.js?config&#x3D;TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure>
+
+<p>另外可以在文章开头通过js代码来临时应用mathJax插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;</span><br><span class="line">   src&#x3D;&quot;http:&#x2F;&#x2F;cdn.mathjax.org&#x2F;mathjax&#x2F;latest&#x2F;MathJax.js?config&#x3D;TeX-AMS-MML_HTMLorMML&quot;&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="显示区域"><a href="#显示区域" class="headerlink" title="显示区域"></a>显示区域</h2><p>LaTeX公式有两种，</p>
+<p>一种是嵌入到正文中，用<code>$公示内容$</code>定义；</p>
+<p>另一种单独成行显示，用<code>$$公示内容$$</code>定义。</p>
+<p>例如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我们定义$f(x) &#x3D; \sum_&#123;i&#x3D;0&#125;^&#123;N&#125;\int_&#123;a&#125;^&#123;b&#125; g(t,i) \text&#123; d&#125;t$. (行内公式)</span><br><span class="line"></span><br><span class="line">或者定义$f(x)$如下（行间公式）: </span><br><span class="line">$$f(x) &#x3D; \sum_&#123;i&#x3D;0&#125;^&#123;N&#125;\int_&#123;a&#125;^&#123;b&#125; g(t,i) \text&#123; d&#125;t&#123;6&#125;\tag&#123;1&#125;$$</span><br></pre></td></tr></table></figure>
+
+<p>得到结果为</p>
+<p>我们定义$f(x) = \sum_{i=0}^{N} \int_{a}^{b} g(t,i) \text{ d}t$ . (行内公式)</p>
+<p>或者定义$f(x)$如下（行间公式）:<br>$$f(x) = \sum_{i=0}^{N} \int_{a}^{b} g(t,i) \text{ d}t{6} \tag{1}$$</p>
+<h2 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h2><p>用^表示上标，用_表示下标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$f(x) &#x3D; a_1x^n + a_2x^&#123;n-1&#125; + a_3x^&#123;n-2&#125;$$</span><br></pre></td></tr></table></figure>
+
+<p>显示为$f(x) = a_1x^n + a_2x^{n-1} + a_3x^{n-2}​$</p>
+<p>左右两侧都有上下标时，使用<code>\sideset</code>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\sideset&#123;^n_k&#125;&#123;^x_y&#125;a$$</span><br></pre></td></tr></table></figure>
+
+<p>显示结果为$\sideset{^n_k}{^x_y}a$</p>
+<h2 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h2><p>在markdown语法中，大括号<code>{}</code>有特殊意义，如果要显示括号，可以使用反斜杠<code>\</code>转义<code>\brace</code>和<code>rbrace</code>来显示大括号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$$\&#123;x*y\&#125;$$</span><br><span class="line">$$\lbracex*y\rbrace$$</span><br></pre></td></tr></table></figure>
+
+<p>显示为</p>
+<p>$$false$$<br>$$\lbrace{x</em>y}\rbrace$$</p>
+<p>单纯使用<code>\lbrace</code>和<code>\rbrace</code>显示的大括号并不会随着公式内容自动缩放。要实现自动缩放需要添加上<code>\left</code>和<code>\right</code>来修饰。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\left \lbrace \sum_&#123;i&#x3D;0&#125;^n i^3 &#x3D; \frac&#123;(n^2+n)(n+6)&#125;&#123;9&#125; \right \rbrace$$</span><br></pre></td></tr></table></figure>
+
+<p>显示为</p>
+<p>$$\left \lbrace \sum_{i=0}^n i^3 = \frac{(n^2+n)(n+6)}{9} \right \rbrace$$</p>
+<p>不然则会显示为</p>
+<p>$$\lbrace \sum_{i=0}^n i^3 = \frac{(n^2+n)(n+6)}{9} \rbrace$$</p>
+<h2 id="分数"><a href="#分数" class="headerlink" title="分数"></a>分数</h2><p>使用语法<code>\frac</code>或者<code>\over</code>来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$\frac &#123;x+1&#125;&#123;y-2&#125;$</span><br><span class="line">$ x+1 \over y-2 $</span><br></pre></td></tr></table></figure>
+
+<p>显示结果为$\frac {x+1}{y-2}$和$ x+1 \over y-2 $</p>
+<h2 id="开方"><a href="#开方" class="headerlink" title="开方"></a>开方</h2><p>开方语法为<code>\sqrt</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ \sqrt&#123;x^5&#125; $</span><br><span class="line">$ \sqrt[3]&#123;\frac xy&#125; $</span><br></pre></td></tr></table></figure>
+
+<p>分别显示为：$ \sqrt{x^5} $和 $ \sqrt[3]{\frac xy} $</p>
+<h2 id="求和与积分"><a href="#求和与积分" class="headerlink" title="求和与积分"></a>求和与积分</h2><p>求和用<code>\sum</code>，后面常跟着上下标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ \sum_&#123;i&#x3D;0&#125;^n $</span><br></pre></td></tr></table></figure>
+
+<p>显示为$ \sum_{i=0}^n $</p>
+<p>积分用<code>\int</code>，后面也是常跟着上下标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ \int_1^\infty $</span><br><span class="line">$ \iint_1^\infty $</span><br></pre></td></tr></table></figure>
+
+<p>显示为$ \int_1^\infty $和$ \iint_1^\infty $</p>
+<h2 id="极限"><a href="#极限" class="headerlink" title="极限"></a>极限</h2><p>极限使用<code>\lim</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ \lim_&#123;x \to 0&#125; $</span><br></pre></td></tr></table></figure>
+
+<p>显示为$ \lim_{x \to 0} $</p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>表格样式lcr表示居中，|加入一条竖线，\hline表示行间横线，列之间用&amp;分隔，行之间用\分隔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$\begin&#123;array&#125;&#123;c|lcr&#125;</span><br><span class="line">n &amp; \text&#123;Left&#125; &amp; \text&#123;Center&#125; &amp; \text&#123;Right&#125; \\\\</span><br><span class="line">\hline</span><br><span class="line">1 &amp; 1.97 &amp; 5 &amp; 12 \\\\</span><br><span class="line">2 &amp; -11 &amp; 19 &amp; -80 \\\\</span><br><span class="line">3 &amp; 70 &amp; 209 &amp; 1+i \\\\</span><br><span class="line">\end&#123;array&#125;$$</span><br></pre></td></tr></table></figure>
+
+<p>显示为<br>$$<br>\begin{array}{c|lcr}<br>n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\<br>\hline<br>1 &amp; 1.97 &amp; 5 &amp; 12 \\<br>2 &amp; -11 &amp; 19 &amp; -80 \\<br>3 &amp; 70 &amp; 209 &amp; 1+i \\<br>\end{array}<br>$$</p>
+<h2 id="常用公式命令汇总"><a href="#常用公式命令汇总" class="headerlink" title="常用公式命令汇总"></a>常用公式命令汇总</h2><h3 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>显示</th>
+<th></th>
+<th>命令</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\alpha</code></td>
+<td>α</td>
+<td></td>
+<td><code>\beta</code></td>
+<td>β</td>
+</tr>
+<tr>
+<td><code>\gamma</code></td>
+<td>γ</td>
+<td></td>
+<td><code>\delta</code></td>
+<td>δ</td>
+</tr>
+<tr>
+<td><code>\epsilon</code></td>
+<td>ϵ</td>
+<td></td>
+<td><code>\zeta</code></td>
+<td>ζ</td>
+</tr>
+<tr>
+<td><code>\eta</code></td>
+<td>η</td>
+<td></td>
+<td><code>\theta</code></td>
+<td>θ</td>
+</tr>
+<tr>
+<td><code>\iota</code></td>
+<td>ι</td>
+<td></td>
+<td><code>\kappa</code></td>
+<td>κ</td>
+</tr>
+<tr>
+<td><code>\lambda</code></td>
+<td>λ</td>
+<td></td>
+<td><code>\mu</code></td>
+<td>μ</td>
+</tr>
+<tr>
+<td><code>\xi</code></td>
+<td>ξ</td>
+<td></td>
+<td><code>\nu</code></td>
+<td>ν</td>
+</tr>
+<tr>
+<td><code>\pi</code></td>
+<td>π</td>
+<td></td>
+<td><code>\rho</code></td>
+<td>ρ</td>
+</tr>
+<tr>
+<td><code>\sigma</code></td>
+<td>σ</td>
+<td></td>
+<td><code>\tau</code></td>
+<td>τ</td>
+</tr>
+<tr>
+<td><code>\upsilon</code></td>
+<td>υ</td>
+<td></td>
+<td><code>\phi</code></td>
+<td>ϕ</td>
+</tr>
+<tr>
+<td><code>\chi</code></td>
+<td>χ</td>
+<td></td>
+<td><code>\psi</code></td>
+<td>ψ</td>
+</tr>
+<tr>
+<td><code>\omega</code></td>
+<td>ω</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>如果要改成大写字母，把命令的首字母变成大写字母即可。例如<code>\Gamma</code>的显示结果为$\Gamma$。如果要使用斜体的Gamma，可在Gamma命令前加上var，例如<code>\varGamma</code>的显示结果为$\varGamma$。</p>
+<h3 id="和号和积分号"><a href="#和号和积分号" class="headerlink" title="和号和积分号"></a>和号和积分号</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>显示</th>
+<th></th>
+<th>命令</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\sum</code></td>
+<td>∑</td>
+<td></td>
+<td><code>\int</code></td>
+<td>∫</td>
+</tr>
+<tr>
+<td><code>\sum_{i=1}^{N}</code></td>
+<td>∑Ni=1</td>
+<td></td>
+<td><code>\int_{a}^{b}</code></td>
+<td>∫ba</td>
+</tr>
+<tr>
+<td><code>\prod</code></td>
+<td>∏</td>
+<td></td>
+<td><code>\iint</code></td>
+<td>∬</td>
+</tr>
+<tr>
+<td><code>\prod_{i=1}^{N}</code></td>
+<td>∏Ni=1</td>
+<td></td>
+<td><code>\iint_{a}^{b}</code></td>
+<td>∬ba</td>
+</tr>
+<tr>
+<td><code>\bigcup</code></td>
+<td>⋃</td>
+<td></td>
+<td><code>\bigcap</code></td>
+<td>⋂</td>
+</tr>
+<tr>
+<td><code>\bigcup_{i=1}^{N}</code></td>
+<td>⋃Ni=1</td>
+<td></td>
+<td><code>\bigcap_{i=1}^{N}</code></td>
+<td>⋂Ni=1</td>
+</tr>
+</tbody></table>
+<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p>使用<code>$$\begin{matrix}...\end{matrix}$$</code>来显示矩阵。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">    \begin&#123;matrix&#125;</span><br><span class="line">    1 &amp; x &amp; x^2 \\\</span><br><span class="line">    1 &amp; y &amp; y^2 \\\</span><br><span class="line">    1 &amp; z &amp; z^2 \\\</span><br><span class="line">    \end&#123;matrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>得到显示<br>$$<br>\begin{matrix}<br>    1 &amp; x &amp; x^2 \<br>    1 &amp; y &amp; y^2 \<br>    1 &amp; z &amp; z^2<br>\end{matrix}<br>$$<br>若要显示矩阵外的各种括号，可以</p>
+<p>替换<code>matrix</code>为<code>pmatrix</code> , <code>bmatrix</code> , <code>Bmatrix</code>, <code>vmatrix</code> , <code>Vmatrix</code>:<br>$$<br>\begin{pmatrix}1 &amp; 2 &amp; 3  \end{pmatrix}\<br>\begin{bmatrix}1 &amp; 2 &amp; 3  \end{bmatrix}\<br>\begin{Bmatrix}1 &amp; 2 &amp; 3  \end{Bmatrix}\<br>\begin{vmatrix}1 &amp; 2 &amp; 3  \end{vmatrix}\<br>\begin{Vmatrix}1 &amp; 2 &amp; 3  \end{Vmatrix}<br>$$<br>若要在矩阵中添加省略用的点，可以使用<code>\cdots</code>$\cdots$,<code>\cdots</code>$\cdots$,<code>\vdots</code>$\vdots$，例如，<br>$$<br>\begin{pmatrix}<br> 1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \<br> 1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \<br> \vdots  &amp; \vdots&amp; \vdots &amp; \ddots &amp; \vdots \<br> 1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n<br> \end{pmatrix}<br>$$</p>
+<p>多个矩阵组成等式时，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">\left[</span><br><span class="line">\begin&#123;matrix&#125;</span><br><span class="line">V_A \\\</span><br><span class="line">V_B \\\</span><br><span class="line">V_C</span><br><span class="line">\end&#123;matrix&#125;</span><br><span class="line">\right] &#x3D;</span><br><span class="line">\left[</span><br><span class="line">\begin&#123;matrix&#125;</span><br><span class="line">1 &amp; 0 &amp; L \\\</span><br><span class="line">-cosψ &amp; sinψ &amp; L \\\</span><br><span class="line">-cosψ &amp; -sinψ &amp; L</span><br><span class="line">\end&#123;matrix&#125;</span><br><span class="line">\right]</span><br><span class="line">\left[</span><br><span class="line">\begin&#123;matrix&#125;</span><br><span class="line">V_x \\\</span><br><span class="line">V_y \\\</span><br><span class="line">W</span><br><span class="line">\end&#123;matrix&#125;</span><br><span class="line">\right]</span><br></pre></td></tr></table></figure>
+
+<p>显示为<br>$$<br>\left[<br>\begin{matrix}<br>V_A \<br>V_B \<br>V_C<br>\end{matrix}<br>\right]=<br>\left[<br>\begin{matrix}<br>1 &amp; 0 &amp; L \<br>-cosψ &amp; sinψ &amp; L \<br>-cosψ &amp; -sinψ &amp; L<br>\end{matrix}<br>\right]<br>\left[<br>\begin{matrix}<br>V_x \<br>V_y \<br>W<br>\end{matrix}<br>\right]<br>$$</p>
+<h3 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>显示</th>
+<th></th>
+<th>命令</th>
+<th align="left">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\sqrt[3]{2}</code></td>
+<td>$\sqrt[3]{2}$</td>
+<td></td>
+<td><code>\sqrt{2}</code></td>
+<td align="left">$\sqrt{2}$</td>
+</tr>
+<tr>
+<td><code>x^{3}</code></td>
+<td>$x^{3}$</td>
+<td></td>
+<td><code>x_{3}</code></td>
+<td align="left">$x_{3}$</td>
+</tr>
+<tr>
+<td><code>\lim_{x \to 0}</code></td>
+<td>$\lim_{x \to 0}$</td>
+<td></td>
+<td><code>\frac{1}{2}</code></td>
+<td align="left">$\frac{1}{2}$</td>
+</tr>
+</tbody></table>
+<h3 id="添加公式代号"><a href="#添加公式代号" class="headerlink" title="添加公式代号"></a>添加公式代号</h3><p>在命令的最后加上<code>\tag{}</code>即可。例如<code>\frac{1}{2} = 0.5\tag{1}</code>显示结果为,<br>$$<br>\frac{1}{2} = 0.5\tag{1}<br>$$</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/bendanban/article/details/44196101" target="_blank" rel="noopener">http://blog.csdn.net/bendanban/article/details/44196101</a></p>
+<p><a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference</a></p>
+<p><a href="http://stevenshi.me/2017/06/26/hexo-insert-formula/" target="_blank" rel="noopener">http://stevenshi.me/2017/06/26/hexo-insert-formula/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LaTeX</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Hexo-Markdown//" class="article-tag-list-link color4">Hexo&Markdown</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/14/LaTeX-Math/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-KalmanFilter-01-Covariance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/KalmanFilter-01-Covariance/">KalmanFilter-01-Covariance</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/11/KalmanFilter-01-Covariance/" class="archive-article-date">
+  	<time datetime="2018-01-11T13:59:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从方差说起"><a href="#从方差说起" class="headerlink" title="从方差说起"></a>从方差说起</h1><p>首先回顾一下统计学中最常见的几个概念：均值，标准差，方差。</p>
+<ul>
+<li><p>均值<br>$$<br>\bar{X}=\frac{\sum_{i=1}^n  X_{i}}{n}<br>$$<br>​</p>
+</li>
+<li><p>标准差<br>$$<br>s=\sqrt{\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}}<br>$$<br>​</p>
+</li>
+<li><p>方差<br>$$<br>s^2=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$</p>
+</li>
+</ul>
+<p>样本均值X是总体均值U的最优估计值。虽然可以用其他样本统计量来估计总体的均值，比如样本中位数，众数或中列数。但是样本均值通常能提供最优的估计性。理由之一，多个样本的均值拥有比其他统计量更好的一致性（更小的标准差）。理由之二，样本均值X是总体均值U的一个无偏估计量，这意味着样本均值分布的中心趋近于总体均值的中心。（参考《初级统计学》著者: 特里奥拉）</p>
+<p>标准差表示样本中各点到均值的距离的平均，即可以用来评价样本数据的离散程度。标准差越大意味着，离散程度越大，数据分布不集中。标准差公式中分母使用n-1而不是n，这样可以以较小的样本集来更好地逼近总体的标准差，即统计学上的“无偏估计”。方差=标准差的平方</p>
+<p>代码实现：</p>
+<p>直接按公式实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">sample_avr = np.average(sample)</span><br><span class="line">diff = sample - sample_avr</span><br><span class="line">sigma2 = (diff * diff).sum() / (len(sample)<span class="number">-1</span>)</span><br><span class="line">print(pow(sigma2, (<span class="number">1</span>/<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>或者直接用Numpy的内置函数实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">print(np.std(array))</span><br><span class="line"><span class="comment"># 非偏估计，用ddof参数指定</span></span><br><span class="line">print(np.std(array, ddof=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差的意义"><a href="#协方差的意义" class="headerlink" title="协方差的意义"></a>协方差的意义</h1><p>通过上面对方差的介绍，可以注意到方差（标准差）只能用来描述一维数据。而具体环境中遇到的数据通常是二维甚至是多维度的，这时候描述这组数据就不应该只是单独计算各组数据的方差，因为各组数据之间很可能包含某种程度的关联。可以通过<code>协方差</code>来反映这种相关关系的程度。</p>
+<p>我们已经知道方差的定义如下：<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$<br>拆开平方，<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (X_{i}-\bar{X})}{n-1}<br>$$<br>再把分子的后项换成第二维度的Y，得到<br>$$<br>var(x,y)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (Y_{i}-\bar{Y})}{n-1}<br>$$<br>※顺便说一下方差的英文是variance，协方差的英文是covariance。</p>
+<p> 由上述定义可知，<br>$$<br>cov(X,X) = var(X)<br>$$</p>
+<p>$$<br>cov(X,Y) = cov(Y,X)<br>$$</p>
+<p>代码实现：</p>
+<p>按定义实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sample_avr = np.average(array)</span><br><span class="line">diff = array - sample_avr</span><br><span class="line">sigma2_m = (diff * diff).sum() / (len(array)<span class="number">-1</span>)</span><br><span class="line">print(<span class="string">'manual var=&#123;&#125;'</span>.format(sigma2_m))</span><br></pre></td></tr></table></figure>
+
+<p>Numpy函数实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sigma2_a = np.var(array, ddof=<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'auto var=&#123;&#125;'</span>.format(sigma2_a))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>单个协方差用于表示两个维度间的相关关系，当维度增多时就需要多个协方差。数据集的维度为n时，就需要$\frac{n*(n-1)}{2}$个协方差。这些协方差通过矩阵来组织时，就称为协方差矩阵。<br>$$<br>C_{n\times n}=(c_{i,j},c_{i,j}=cov(Dim_{i},Dim_{j}))<br>$$</p>
+<p>$$<br>C =<br>\begin{pmatrix}<br>cov(x,x) &amp; cov(x,y) &amp; cov(x,z) \<br>cov(y,x) &amp; cov(y,y) &amp; cov(y,z) \<br>cov(z,x) &amp; cov(z,y) &amp; cov(z,z) \<br> \end{pmatrix}<br>$$<br>在此也可看到，协方差矩阵是个对称矩阵，且其对角线上是各维度上的方差。</p>
+<p>Py代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证ndArray协方差矩阵</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample_num = <span class="number">10</span></span><br><span class="line">sample_dim = <span class="number">3</span></span><br><span class="line">sample = np.random.randn(sample_num, sample_dim)</span><br><span class="line"></span><br><span class="line">dim0 = sample[:,<span class="number">0</span>]</span><br><span class="line">dim1 = sample[:,<span class="number">1</span>]</span><br><span class="line">dim2 = sample[:,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">dim0_mean = np.average(dim0)</span><br><span class="line">dim1_mean = np.average(dim1)</span><br><span class="line">dim2_mean = np.average(dim2)</span><br><span class="line"></span><br><span class="line">cov01 = ((dim0 - dim0_mean) * (dim1 - dim1_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov02 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov12 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(cov01,cov02,cov12)</span><br></pre></td></tr></table></figure>
+
+<p>直接Numpy函数实现如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证numpy.var-std-cov</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array2 = np.array([[<span class="number">0</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">0</span>]]).T</span><br><span class="line">cov_a = np.cov(array2)</span><br><span class="line">print(<span class="string">'auto cov='</span>)</span><br><span class="line">print(cov_a)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅谈协方差矩阵<a href="http://pinkyjie.com/2010/08/31/covariance/" target="_blank" rel="noopener">http://pinkyjie.com/2010/08/31/covariance/</a></p>
+<p>在线LaTeX编辑<a href="http://latex.codecogs.com/eqneditor/editor.php" target="_blank" rel="noopener">https://www.cnblogs.com/GarfieldEr007/p/5577727.html</a></p>
+<p>numpy.cov：<a href="https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Covariance</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Kalman-Filter//" class="article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/11/KalmanFilter-01-Covariance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-10-Stash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/08/Git-10-Stash/">Git-08-Stash</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/08/Git-10-Stash/" class="archive-article-date">
+  	<time datetime="2018-01-08T11:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-Stash"><a href="#Git-Stash" class="headerlink" title="Git Stash"></a>Git Stash</h1><p>If you are working on a branch called <strong>Ver1.0</strong>, and you find a bug in file <strong>AAA</strong> on <strong>master branch</strong> that need to be fixed immediately.</p>
+<p>You can create a new <strong>bug branch</strong> from master, work on this <strong>bug branch</strong> to fix the bug, commit it and switch to master branch and merge the modification. If you commit them all, you will get too many unuseful commits.</p>
+<p>But when you want to add/commit, some modification will be add/commit to <strong>bug branch</strong> if <strong>Ver1.0</strong> is NOT clean. This modification is not what the <strong>bug branch</strong> should have.</p>
+<p>Before you switch to another branch, note that if your working directory or staging area has uncommitted changes that conflict with the branch you’re checking out, Git won’t let you switch branches. So, keep it CLEAN.</p>
+<p>Or, you can stash working directory to <strong>Ver1.0</strong> branch by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+
+<p>If you enter <code>git status</code>, you will find the working area is already CLEAN. All modification should be added, but don’n need to be committed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># on branch Ver1.0</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"># create branch bug from master</span><br><span class="line">git checkout master</span><br><span class="line">git checkout -b bug</span><br><span class="line"></span><br><span class="line">### fix the bug ###</span><br><span class="line">git add AAA</span><br><span class="line">git commit AAA -m &quot;fix bug&quot;</span><br><span class="line"></span><br><span class="line"># merge&#x2F;del bug</span><br><span class="line">git checkout master</span><br><span class="line">git merge bug</span><br><span class="line">git branch -d bug</span><br><span class="line"></span><br><span class="line"># switch to branch Ver1.0</span><br><span class="line">git checkout Ver1.0</span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"># or</span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;0&#125;</span><br><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
+
+<p>Reference:</p>
+<p><a href="https://segmentfault.com/q/1010000000156026" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000156026</a></p>
+<p><a href="https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stash</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/08/Git-10-Stash/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Git-09-Push" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -897,358 +1479,9 @@
 
 
   
-    <article id="post-Git-02-BasicCommand" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-02-BasicCommand/">Git-02-BasicCommand</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-02-BasicCommand/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:31:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Basic-Command"><a href="#Git-Basic-Command" class="headerlink" title="Git Basic Command"></a>Git Basic Command</h1><p>Basic commands for Git.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># enter Your Directory</span><br><span class="line">cd Your Directory</span><br><span class="line"></span><br><span class="line"># back to parent directory</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line"># back to the last directory</span><br><span class="line">cd -</span><br><span class="line"></span><br><span class="line"># present working directory</span><br><span class="line">pwd</span><br><span class="line"></span><br><span class="line"># list up folders&#x2F;files</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line"># make a directory [dev]</span><br><span class="line">mkdir dev</span><br><span class="line"></span><br><span class="line"># delete a directory [dev]</span><br><span class="line">rm -rf dev</span><br></pre></td></tr></table></figure>
-
-<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p>When using Git,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add YourFileName.py</span><br><span class="line">git add yourfilename.py</span><br><span class="line">git add YourFileName.PY</span><br></pre></td></tr></table></figure>
-
-<p>are different commands.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Basic Command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-02-BasicCommand/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-01-GitSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-01-GitSetting/">Git-01-GitSetting</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-01-GitSetting/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:29:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Installation-and-Setting"><a href="#Git-Installation-and-Setting" class="headerlink" title="Git Installation and Setting"></a>Git Installation and Setting</h1><h2 id="Git-installation"><a href="#Git-installation" class="headerlink" title="Git installation"></a>Git installation</h2><p>For Windows:</p>
-<ol>
-<li>Download Git-scm from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></li>
-<li>Install</li>
-<li>Open <code>Git bash</code> from Windows start menu</li>
-</ol>
-<p>If a command line window pops up, the installation is success.</p>
-<h2 id="Set-user-name-amp-email"><a href="#Set-user-name-amp-email" class="headerlink" title="Set user name &amp; email"></a>Set user name &amp; email</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;Your Email@example.com&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Add-SSH-key-to-your-server"><a href="#Add-SSH-key-to-your-server" class="headerlink" title="Add SSH key to your server"></a>Add SSH key to your server</h2><ol>
-<li><p>Open Git Bash</p>
-</li>
-<li><p>Check if existing SSH keys are present:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Lists the files in your .ssh directory, if they exist</span><br><span class="line">cd ~&#x2F;.ssh</span><br><span class="line">ls</span><br><span class="line"># or use ls ~&#x2F;.ssh</span><br></pre></td></tr></table></figure>
-
-<p>If public and private key pair like <code>id_rsa  id_rsa.pub</code> exist, </p>
-<p>you already have a SSH key.</p>
-<p><code>id_rsa</code> is your private key, and <code>id_rsa.pub</code> is your public key. If you are using Mac OS, you can find them at <code>home/.ssh/</code>. If you are using Windows, they are at <code>C:\Documents and Settings\your-username.ssh\</code> or  <code>C:\Users\your-username.ssh</code>.</p>
-</li>
-<li><p>Generate SSH key</p>
-<p>If SSH keys do not exist, generate keys by:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># -t: key type</span><br><span class="line"># -C: Your Email</span><br><span class="line">ssh-keygen -t rsa -C &quot;Your Email@gmail.com&quot;</span><br><span class="line"># to generate more than one key pairs</span><br><span class="line">$ ssh-keygen -t rsa -C &quot;Email&quot; -f new_key_name</span><br></pre></td></tr></table></figure>
-
-<p>If you don’t want to set password, press SPACE for 3 times.</p>
-</li>
-<li><p>Add your SSH key to the ssh-agent</p>
-<ul>
-<li><p>show your public key:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>You will get the contents of your public key:</p>
-<blockquote>
-<p>ssh-rsa AAAB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322+Au/9yy9oaABBRCrHN/yo88BC0AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322klCi0/aEBBc02N+JJP <a href="mailto:john@example.com">john@example.com</a></p>
-</blockquote>
-</li>
-<li><p>give your public key to Server Administrator or upload it to your Github Server.</p>
-<p>To copy public key quickly:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># on Mac</span><br><span class="line">pbcopy &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br><span class="line"># on Windows</span><br><span class="line">clip &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>Open your Github, and go to <code>Settings -&gt; SSH and GPG keys -&gt; SSH keys -&gt; New SSH key</code></p>
-<p>Select a <code>Title</code>, and paste your public key to <code>Key</code> area.</p>
-</li>
-<li><p>Verify your setting:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Attempts to ssh to Github</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi username! You&#39;ve successfully authenticated, but GitHub does not # provide shell access.</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>it means your setting is OK.</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="Change-communication-protocol"><a href="#Change-communication-protocol" class="headerlink" title="Change communication protocol"></a>Change communication protocol</h2><p>To change protocol from <code>https</code> to <code>ssh</code>:</p>
-<ol>
-<li><p>show present setting</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (fetch)</p>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (push)</p>
-</blockquote>
-<p>you are using <code>hhttps</code>.</p>
-</li>
-<li><p>sign in to your Github account to <code>ssh</code> url.</p>
-<blockquote>
-<p><a href="mailto:git@github.com">git@github.com</a>:someaccount/someproject.git</p>
-</blockquote>
-<p>Then use:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:someaccount&#x2F;someproject.git</span><br></pre></td></tr></table></figure>
-
-<p>to change the setting.</p>
-<p>At last use<code>git remote -v</code> to confirm your new setting.</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-01-GitSetting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-00-SourceTreeError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-00-SourceTreeError/">Git-00-SourceTreeError</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-00-SourceTreeError/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:27:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SourceTree-error"><a href="#SourceTree-error" class="headerlink" title="SourceTree error"></a>SourceTree error</h1><p>Mark some bug/error when using Git soft SourceTree.</p>
-<h2 id="“Authentication-via-SSH-keys-failed”"><a href="#“Authentication-via-SSH-keys-failed”" class="headerlink" title="“Authentication via SSH keys failed”"></a>“Authentication via SSH keys failed”</h2><p>When using SourceTree to clone a project from github, you may get this error of “通过SSH密钥认证失败”, or “Authentication via SSH keys failed”. </p>
-<p>Just change the setting like:</p>
-<p><code>Tool -&gt; Option -&gt; SSH client Setting</code> and change SSH client to <code>OpenSSH</code>.</p>
-<p><code>工具-&gt;选项-&gt;SSH客户端配置</code> ,将SSH客户端选择OpenSSH, 再确认.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SourceTree</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-00-SourceTreeError/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2525,6 +2758,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
               </li>
             
             <div class="clearfix"></div>
