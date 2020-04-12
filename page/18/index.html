@@ -156,6 +156,362 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-02-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Java-02-Install/">Java-02-Install</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Java-02-Install/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="install-java-on-ubuntu"><a href="#install-java-on-ubuntu" class="headerlink" title="install java on ubuntu"></a>install java on ubuntu</h1><p>You have 2 ways to install java on you ubuntu machine.</p>
+<h2 id="by-ppa-源"><a href="#by-ppa-源" class="headerlink" title="by ppa(源)"></a>by ppa(源)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># add ppa</span><br><span class="line">sudo add-apt-repository ppa:webupd8team&#x2F;java</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># install oracle-java-installer</span><br><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+
+<h2 id="set-default-version"><a href="#set-default-version" class="headerlink" title="set default version"></a>set default version</h2><p>set jdk8 as your default jdk:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>If you already have a  jdk7 and installed jdk8, you can change between 7 and 8 by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk8 切换到jdk7</span><br><span class="line">sudo update-java-alternatives -s java-7-oracle</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk7 切换到jdk8</span><br><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>Test if jdk is installed properly,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+<h1 id="by-downloading-package"><a href="#by-downloading-package" class="headerlink" title="by downloading package"></a>by downloading package</h1><ol>
+<li><p>download .gz package from oracle HP.</p>
+</li>
+<li><p>make directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+
+<p>unzip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-7u60-linux-x64.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>modify enviroment variable</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>add,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set oracle jdk environment</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60  ## 这里要注意目录要换成自己解压的jdk 目录</span><br><span class="line">export JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre  </span><br><span class="line">export CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib  </span><br><span class="line">export PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>make modification effective,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>change default jdk version</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javac 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;jar jar &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;jar 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javah javah &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javah 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javap javap &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javap 300</span><br></pre></td></tr></table></figure>
+
+<p>and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+
+<p>If meesages are shown like bellow:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">There is only one alternative in link group java (providing &#x2F;usr&#x2F;bin&#x2F;java):</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java</span><br></pre></td></tr></table></figure>
+
+<p>there is no need to change version.</p>
+</li>
+<li><p>test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h1 id="install-on-windows"><a href="#install-on-windows" class="headerlink" title="install on windows"></a>install on windows</h1><p>参考这篇文章：</p>
+<p>Windows环境下JDK安装与环境变量配置详细的图文教程</p>
+<p><a href="http://www.cnblogs.com/liuhongfeng/p/4177568.html" target="_blank" rel="noopener">http://www.cnblogs.com/liuhongfeng/p/4177568.html</a></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Ubuntu 安装 JDK8 的两种方式</p>
+<p><a href="https://www.cnblogs.com/smiler/p/6939913.html" target="_blank" rel="noopener">https://www.cnblogs.com/smiler/p/6939913.html</a></p>
+<p>修改linux默认jdk版本</p>
+<p><a href="https://www.cnblogs.com/onetwo/p/5095481.html" target="_blank" rel="noopener">https://www.cnblogs.com/onetwo/p/5095481.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">install</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Java-02-Install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-Eclipse-01-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Java-Eclipse-01-Install/">Java-Eclipse-01-Install</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Java-Eclipse-01-Install/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This article shows how to install eclipse on ubuntu.</p>
+<h2 id="Download-amp-unzip"><a href="#Download-amp-unzip" class="headerlink" title="Download &amp; unzip"></a>Download &amp; unzip</h2><p>Download installation from home page, and unzip file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar zxvf eclipse-jee-mars-2-linux-gtk-x86_64.tar.gz -C &#x2F;usr&#x2F;***&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h1><p>Double click unzipped file <em>eclipse_inst</em> to start installation.</p>
+<p>Select directory to install.</p>
+<h1 id="Add-icon-to-dash"><a href="#Add-icon-to-dash" class="headerlink" title="Add icon to dash"></a>Add icon to dash</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># change to dash directory</span><br><span class="line">cd &#x2F;usr&#x2F;share&#x2F;applications</span><br><span class="line"></span><br><span class="line"># add a new file: eclipse.desktop</span><br><span class="line"># and edit</span><br><span class="line">sudo gedit eclipse.desktop</span><br></pre></td></tr></table></figure>
+
+<p>Add these contents:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[DesktopEntry]</span><br><span class="line"></span><br><span class="line">Encoding&#x3D;UTF-8</span><br><span class="line"></span><br><span class="line">Name&#x3D;Eclipse</span><br><span class="line"></span><br><span class="line">Comment&#x3D;Eclipse</span><br><span class="line"></span><br><span class="line">Exec&#x3D;*Your installation path*</span><br><span class="line"></span><br><span class="line">Icon&#x3D;*Your icon path*</span><br><span class="line"></span><br><span class="line">Terminal&#x3D;false</span><br><span class="line"></span><br><span class="line">StartupNotify&#x3D;true</span><br><span class="line"></span><br><span class="line">Type&#x3D;Application</span><br><span class="line"></span><br><span class="line">Categories&#x3D;Application;Development;</span><br></pre></td></tr></table></figure>
+
+<p>Then, make it excutable,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod u+x eclipse.desktop</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Ubuntu16.04LTS傻瓜式安装Eclipse图文详情加注释</p>
+<p><a href="http://blog.csdn.net/qq_37549757/article/details/56012895" target="_blank" rel="noopener">http://blog.csdn.net/qq_37549757/article/details/56012895</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">install</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Java-Eclipse-01-Install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-02-install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Linux-02-install/">Git-07-RM</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Linux-02-install/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h1><p><strong>tar zxvf <em>filename.tar.gz</em></strong></p>
+<p>各个参数的意义如下，</p>
+<p>x: 从tar中提取文件</p>
+<p>z: 表示tar包被gzip压缩过，需要用gunzip解压</p>
+<p>v: 显示详细信息</p>
+<p>f: 制定被处理的文件名是filename.tar.gz</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">install application</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Linux-02-install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux-03-unzip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -902,333 +1258,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/21/ME-01-LinearGuide/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-24-slot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-24-slot/">Python-24-slot</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-24-slot/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:30:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="绑定属性和方法"><a href="#绑定属性和方法" class="headerlink" title="绑定属性和方法"></a>绑定属性和方法</h1><p>Python是一种动态语言，允许在运行过程中给类和对象添加属性和方法。</p>
-<h2 id="针对实例"><a href="#针对实例" class="headerlink" title="针对实例"></a>针对实例</h2><p>对于某一个实例做的修改只对当前实例有效，其他实例不受影响。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="comment"># 注意需要引用Methodtype函数</span></span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MethodType</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"><span class="comment"># 具体添加</span></span><br><span class="line">s.set_score = MethodType(set_score, s)</span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，</p>
-<p>一是，新创建一个实例，并不会包含上述修改。</p>
-<p>二是，给实例添加方法的时候，如果直接把新函数赋值给实例，会导致函数出错。把实参赋给self了</p>
-<h2 id="针对类"><a href="#针对类" class="headerlink" title="针对类"></a>针对类</h2><p>针对类做的修改会影响到所有新创建的实例。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改类的attribute</span></span><br><span class="line">Student.name = <span class="string">'Tom'</span></span><br><span class="line">print(Student.name)</span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"></span><br><span class="line">Student.set_score = set_score</span><br><span class="line"></span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br><span class="line"></span><br><span class="line">s2 = Student()</span><br><span class="line">print(s2.name)</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line">Tom</span><br><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br><span class="line">Tom</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，给类添加的方法对旧的实例仍然有效。但是新修改的类属性，并不能覆盖旧的实例的属性。</p>
-<h1 id="slot"><a href="#slot" class="headerlink" title="__slot__"></a>__slot__</h1><p>既然可以任意时刻添加属性到类中，有时候就需要给业已添加的属性加上限制。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">  __slot__ = (name, age)</span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加age没有问题</span></span><br><span class="line">s.age = <span class="number">25</span></span><br><span class="line"><span class="comment"># 添加score出错</span></span><br><span class="line"><span class="comment"># 因为不在__slot__内</span></span><br><span class="line">s.score = <span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>值得注意的是</strong>，继承的子类不受父类的slot设置。除非在子类中也加入了slot，这样子类允许定义的属性就是父类slot+子类slot的和集。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">__slot__</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-24-slot/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-23-TypeIsinstance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-23-TypeIsinstance/">Python-23-TypeIsinstance</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-23-TypeIsinstance/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:28:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="type"><a href="#type" class="headerlink" title="type"></a>type</h1><p>type()函数用来判断对象的类型。基本类型/指向函数或者类的对象都可以使用type函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本类型</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(<span class="number">12</span>)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(<span class="string">'a'</span>)</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">str</span>'&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"># 函数或者类</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(foo)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">function</span>'&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>实际上type(a)返回的是a对应的class类型。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(<span class="string">'abc'</span>)==str</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<p>像上面那样判断基本类型，可以直接用内制的class名。但是要判断一个对象是否是函数应该怎么写呢？ <code>type(foo) == ?</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> types</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(fn)==types.FunctionType</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(abs)==types.BuiltinFunctionType</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(<span class="keyword">lambda</span> x: x)==types.LambdaType</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type((x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)))==types.GeneratorType</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<p>通过引入types模块来判断。</p>
-<p>使用type()有一定的局限性，即无法追溯到类型的父类。这时候可以使用isinstance函数</p>
-<h1 id="isinstance"><a href="#isinstance" class="headerlink" title="isinstance"></a>isinstance</h1><p>isinstance不仅可以判断对象是不是其类本身，还可以判断其是否属于其父类下。</p>
-<p>所以，isinstance也可以用来判断基本类型，覆盖了type的部分功能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断父类</span></span><br><span class="line"><span class="comment"># object -&gt; Animal -&gt; Dog -&gt; Husky</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Animal()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = Dog()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h = Husky()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(h, Husky)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(h, Dog)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断基本类型</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(<span class="number">123</span>, int)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(<span class="string">b'a'</span>, bytes)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 还可以判断多个</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], (list, tuple))</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="others"><a href="#others" class="headerlink" title="others"></a>others</h1><h2 id="dir-object"><a href="#dir-object" class="headerlink" title="dir(object)"></a>dir(object)</h2><p>返回object的所有属性和方法。</p>
-<p>注意class和instance的返回结果可能不一样。于init函数的存在，instance的属性可能会多一些。</p>
-<h2 id="hasattr-object-attribute"><a href="#hasattr-object-attribute" class="headerlink" title="hasattr(object, attribute)"></a>hasattr(object, attribute)</h2><p>用来判断object是否包含属性attribute。另外还有setattr()函数和getattr()函数。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">type</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">isinstance</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-23-TypeIsinstance/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-22-package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-22-package/">Python-22-package</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-22-package/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:27:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="模块的概念"><a href="#模块的概念" class="headerlink" title="模块的概念"></a>模块的概念</h1><p>Python中一个.py文件就是一个模块。例如，abc.py是名为abc的模块。</p>
-<h1 id="组织模块"><a href="#组织模块" class="headerlink" title="组织模块"></a>组织模块</h1><p>通过包(package)来组织模块，来方便调用，避免模块名字的冲突。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myPackage</span><br><span class="line">├─ __init__.py</span><br><span class="line">├─ abc.py</span><br><span class="line">└─ xyz.py</span><br></pre></td></tr></table></figure>
-
-<p>新建目录myPackage，并在其下方新建一个名为__init__.py的文件。此文件可以为空，有这个文件存在Python就会把这个目录当成一个包，否则只是当作普通的文件夹来处理。</p>
-<p>__init__.py本身也是一个模块，它的模块名就是myPackage。</p>
-<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>模块中的函数或变量加上前缀_时，变成非公开的(private)，否则默认为公开的(public)。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 作用域</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_private_1</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Hello, %s'</span> % name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_private_2</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Hi, %s'</span> % name)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">public</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(name) &gt; <span class="number">3</span>:</span><br><span class="line">        _private_1(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        _private_2(name)</span><br><span class="line"></span><br><span class="line">public(<span class="string">'Jim'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这样，外部不需要调用的函数全部定义成private，只有外部需要引用的函数才定义成public。</p>
-<h1 id="模块的导入"><a href="#模块的导入" class="headerlink" title="模块的导入"></a>模块的导入</h1><p>使用<code>import ModuleName</code>来导入。</p>
-<p>模块的搜索顺序为：首先在当前目录下搜索，如果没有则去搜索所有已安装的内置模块和第三方模块。这些模块的路径保存在sys模块的path变量中，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\ProgramData\\Anaconda3\\python36.zip'</span>,...]</span><br></pre></td></tr></table></figure>
-
-<p>如果要添加新的搜索路径，可以有两种方法：</p>
-<p>一是，运行Python环境，修改sys.path。这种修改只在运行时有效，运行结束后失效。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path.append(<span class="string">'/Users/michael/my_py_scripts'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>二是，设置环境变量PYTHONPATH，运行结束不会失效。</p>
-<p>参见文章<a href="https://www.cnblogs.com/qiyeshublog/archive/2012/01/24/2329162.html" target="_blank" rel="noopener">https://www.cnblogs.com/qiyeshublog/archive/2012/01/24/2329162.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">package</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-22-package/">展开全文 >></a>
         </p>
       
 
@@ -2557,6 +2586,34 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
               </li>
             
             <div class="clearfix"></div>

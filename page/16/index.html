@@ -156,6 +156,323 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-Eclipse-05-AutoGenerate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">Java-Eclipse-05-AutoGenerate</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-Eclipse-05-AutoGenerate/" class="archive-article-date">
+  	<time datetime="2018-03-17T02:37:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动代码生成器"><a href="#自动代码生成器" class="headerlink" title="自动代码生成器"></a>自动代码生成器</h1><p>使用Eclipse可以给Java代码自动填充代码，比如getter和setter。</p>
+<p>选择class名，右键，然后单击 <strong>Source &gt; Generate Getters and Setters…</strong>。快捷键是Alt+Shift+S</p>
+<p>对话框打开时，单击 <strong>Select All</strong>。<strong>插入点可以选择 **Last member</strong> 并单击 <strong>OK</strong>。</p>
+<p>会按照已经定义的class属性自动填充各属性对应的setter和getter。</p>
+<p>此外，Source选项下面还有好多方便功能，比如Format可以地洞格式化代码块。</p>
+<p>还有调整方法的数序等等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Generate</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-06-Package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/Java-06-Package/">Java-06-Package</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/Java-06-Package/" class="archive-article-date">
+  	<time datetime="2018-03-15T14:43:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="打包-package-类"><a href="#打包-package-类" class="headerlink" title="打包(package)类"></a>打包(package)类</h1><p>Java程序是由每个类互相调用实现功能的，当类数量较多时，怎样合理管理这些类是一个问题。</p>
+<p>Java中类拥有自己专属的名称，为了保持调用的准确性，每个命名空间中类的命名必须具有唯一性。<br>但是当项目较大时，很难保证class的名字不重复。因此引入package的概念来定义命名空间，避免导入时带来的冲突。</p>
+<p>class在package提供的命名空间内不可重复，但是在其外面可以重复。</p>
+<h2 id="定义包"><a href="#定义包" class="headerlink" title="定义包"></a>定义包</h2><p>定义包使用package关键字，其后跟着包的名称，最后需要分号来结尾。包<br>的名称约定用分层的方式定义，即，<br>package orgType.orgName.appName.compoName;</p>
+<p>这个包定义可分解为不同的部分：</p>
+<ul>
+<li>orgType 是组织类型，比如 com、org 或 net。</li>
+<li>orgName 是组织的域名称，比如 makotojava、oracle 或 ibm。</li>
+<li>appName 是应用程序的缩写名称。</li>
+<li>compoName 是组件的名称。</li>
+</ul>
+<h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>导入包使用import关键字，后面跟着要导入的包名，也是以分号结尾。对应于包的定义方式，包的导入也是分层实现，<br>直到能精确定位到类。</p>
+<p>import com.makotojava.Abc;</p>
+<p>导入所有的类时，可以<code>import com.makotojava.*;</code><br>但是并不推荐这样书写，会降低代码的可读性。</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Java 语言基础<br><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/Java-06-Package/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-05-StringChar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/14/Java-05-StringChar/">Java-05-StringChar</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/14/Java-05-StringChar/" class="archive-article-date">
+  	<time datetime="2018-03-14T12:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据类型之字符串和字符</p>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
+<li>字符串用双引号括起来表示</li>
+<li>字符串内要显示”等特殊符号时，需要用反斜杠实现转义(escape)</li>
+</ul>
+<p>注意，使用<code>System.out.print()</code>函数输出字符串时，可以把字符串和数字相加，被加到数字也会变成字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>sum of 111</code></p>
+<p>字符串/String/文字列</p>
+<h1 id="Char"><a href="#Char" class="headerlink" title="Char"></a>Char</h1><ul>
+<li>字符用单引号括起来表示</li>
+<li>只能包含一个字符，转义符(反斜杠)也可以包含进去</li>
+</ul>
+<p>字符串的本质就是integer，具体数值可以查询ASII表。所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">'a'</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>100</code></p>
+<p>如果不想数字变成字符串，而是以计算结果表示，则应给数字部分加上括号，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + (<span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>sum of 3</code></p>
+<p>字符/Char/文字</p>
+<h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><p>无论是String还是Char都可以使用标准输出函数System.out.print()或者System.out.println()来输出。二者不同的是，带ln的输出时末尾自动换行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Char</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/14/Java-05-StringChar/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-Eclipse-04-TabSpaces" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -892,373 +1209,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/11/Java-00-Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataSerializationFormat-Compare" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/DataSerializationFormat-Compare/">DataSerializationFormat-Compare</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/DataSerializationFormat-Compare/" class="archive-article-date">
-  	<time datetime="2018-03-10T04:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>compare csv/xml/json</p>
-<ul>
-<li>flat</li>
-<li>csv(character separated values)</li>
-<li>xml(eXtensible Hyper Text Markup Language)</li>
-<li>json(javascript object notation)</li>
-</ul>
-<p>之后使用时，继续添加各项内容。。。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>第1回 進化するフォーマット｜CSV、XML、JSON…データフォーマットの変遷について考える</p>
-<p><a href="https://www.gixo.jp/blog/3965/" target="_blank" rel="noopener">https://www.gixo.jp/blog/3965/</a></p>
-<p>还有自己的另一篇关于在Python中实现数据序列化的文章</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-Compare/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-31-MultiProcessApply" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-31-MultiProcessApply/">Python-31-MultiProcessApply</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-31-MultiProcessApply/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:54:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Python synchronous &amp; asynchronous</p>
-<p>Python的多进程实现中，会用到Pool开启一个进程池。当要启动进程池中的进程时，有两种方法：一是apply()，另一个是apply_async()。最直观的理解就是，apply是阻塞的，而apply_sync是非阻塞的。</p>
-<h1 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h1><p>阻塞，意味着子进程按照顺序依次执行，前一个进程未结束时，后一个进程并不会执行。</p>
-<p>父进程会等待所有子进程执行完毕再执行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>执行结果为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Parent process 6248 start</span><br><span class="line">Child process 0(7432) start</span><br><span class="line">Task 0 runs 1.50 seconds</span><br><span class="line">Child process 1(6476) start</span><br><span class="line">Task 1 runs 2.38 seconds</span><br><span class="line">Child process 2(7064) start</span><br><span class="line">Task 2 runs 2.14 seconds</span><br><span class="line">Child process 3(3820) start</span><br><span class="line">Task 3 runs 0.75 seconds</span><br><span class="line">Child process 4(7432) start</span><br><span class="line">Task 4 runs 2.97 seconds</span><br><span class="line">Wait for all task done</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 10.12 seconds</span><br></pre></td></tr></table></figure>
-
-<p>这等价于按顺序新建5个进程，再依次执行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    p = multiprocessing.Process(target=task, args=(i,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure>
-
-<p><code>join()</code>方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。</p>
-<h1 id="apply-sync"><a href="#apply-sync" class="headerlink" title="apply_sync"></a>apply_sync</h1><p>非阻塞，意味着一定数目的子进程同时开始运行。</p>
-<p>按照顺序依次执行，前一个进程未结束时，后一个进程并不会执行。</p>
-<h2 id="等待子进程结束join"><a href="#等待子进程结束join" class="headerlink" title="等待子进程结束join()"></a>等待子进程结束join()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    <span class="comment"># 此处父进程等待Pool中所有子进程结束</span></span><br><span class="line">    p.join()</span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>Pool对象调用join函数等待所有子进程执行完毕再继续下面的代码。</p>
-<p>得到的输出为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Parent process 4332 start</span><br><span class="line">Wait for all task done</span><br><span class="line">Child process 0(3000) start</span><br><span class="line">Child process 1(1728) start</span><br><span class="line">Child process 2(4568) start</span><br><span class="line">Child process 3(9368) start</span><br><span class="line">Task 3 runs 0.06 seconds</span><br><span class="line">Child process 4(9368) start</span><br><span class="line">Task 1 runs 2.41 seconds</span><br><span class="line">Task 2 runs 2.59 seconds</span><br><span class="line">Task 0 runs 2.80 seconds</span><br><span class="line">Task 4 runs 2.90 seconds</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 3.48 seconds</span><br></pre></td></tr></table></figure>
-
-<h2 id="不等待子进程结束"><a href="#不等待子进程结束" class="headerlink" title="不等待子进程结束"></a>不等待子进程结束</h2><p>如果不需要等待子进程，父进程会很快执行完毕。如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    <span class="comment"># p.join()</span></span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>把join注释掉之后，开启进程池之后，父进程继续向下执行，直到结束都还没来得及切换到子进程。</p>
-<p>结果如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process 7868 start</span><br><span class="line">Wait for all task done</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 0.10 seconds</span><br></pre></td></tr></table></figure>
-
-<p>如果让父进程再等待一段时间，比如加上sleep，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">p.close()</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">parent_end = time.time()</span><br><span class="line">print(<span class="string">'All tasks done'</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Parent process 10180 start</span><br><span class="line">Wait for all task done</span><br><span class="line">Child process 0(9860) start</span><br><span class="line">Child process 1(9168) start</span><br><span class="line">Child process 2(7608) start</span><br><span class="line">Child process 3(8148) start</span><br><span class="line">Task 2 runs 0.81 seconds</span><br><span class="line">Child process 4(7608) start</span><br><span class="line">Task 4 runs 0.01 seconds</span><br><span class="line">Task 1 runs 1.49 seconds</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 2.19 seconds</span><br></pre></td></tr></table></figure>
-
-<p>可知，Task 3还没来得及执行，父进程就结束了，整个程序也退出了。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>多进程</p>
-<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431927781401bb47ccf187b24c3b955157bb12c5882d000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431927781401bb47ccf187b24c3b955157bb12c5882d000</a></p>
-<p>python多进程apply与apply_async的区别</p>
-<p><a href="https://www.jianshu.com/p/0a55507f9d9e?open_source=weibo_search" target="_blank" rel="noopener">https://www.jianshu.com/p/0a55507f9d9e?open_source=weibo_search</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apply</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multiprocess</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">apply_async</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-31-MultiProcessApply/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataSerializationFormat-XML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/DataSerializationFormat-XML/">DataSerializationFormat-XML</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/DataSerializationFormat-XML/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>html xhtml xml比较</p>
-<ul>
-<li>html(Hyper Text Markup Language)</li>
-<li>xhtml(eXtensible Hyper Text Markup Language)</li>
-<li>xml(eXtensible Markup Language)</li>
-</ul>
-<p>这三种标记语言都是SGML(Standard Generalized Markup Language)的子集，诞生时间和语法规范有不同。总体来讲，时间上是html-&gt;xhtml-&gt;xml的顺序，语法规范的严格度上讲，xml&gt;xhtml&gt;html。</p>
-<p>下面重点讲解xml和html的区别。</p>
-<h1 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h1><p>eXtensible Markup Language按字面理解：</p>
-<ol>
-<li>可扩展。可以用作任何的场合：配置文件，UI描述文件等。</li>
-<li>是一种标记语言。用来组织文本数据，结构清晰易读。</li>
-</ol>
-<p>应用之一，代替.ini文件写配置文件。方便直观，容易被程序解析（正反序列化）。</p>
-<p><code>既然有了XML那为什么还用JSON呢？</code></p>
-<p>xml功能强大，语法严谨。但是，标记数据时产生很多冗余，这些冗余在网络上进行数据时，浪费大量网络资源。反过来讲，正是这些荣誉信息的存在，xml才更加对人友好。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; ?<span class="attr">xml</span> <span class="attr">version</span>=<span class="string">"1.0"</span> <span class="attr">encoding</span>=<span class="string">"UTF-8"</span>? &gt;</span></span><br><span class="line"><span class="tag">&lt; ?<span class="attr">xml-stylesheet</span> <span class="attr">href</span>=<span class="string">"style.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>? &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">student1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>Tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">student2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>John<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student2</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>一个标准的xml文件包含以下部分：</p>
-<h3 id="xml文件宣言"><a href="#xml文件宣言" class="headerlink" title="xml文件宣言"></a>xml文件宣言</h3><blockquote>
-<p>&lt; ?xml version=”1.0” encoding=”UTF-8”? &gt;</p>
-</blockquote>
-<p>说明这是一个xml文件，以及版本号编码方式。</p>
-<h3 id="样式设定"><a href="#样式设定" class="headerlink" title="样式设定"></a>样式设定</h3><blockquote>
-<p>&lt; ?xml-stylesheet href=”style.css” type=”text/css”? &gt;</p>
-</blockquote>
-<p>用来标示xml的格式化显示的设定。如果要使用xsl样式，需要这样写：</p>
-<blockquote>
-<p>&lt; ? xml-stylesheet href=”style.xsl” type=”text/xsl” ? &gt;</p>
-</blockquote>
-<h3 id="元素和属性"><a href="#元素和属性" class="headerlink" title="元素和属性"></a>元素和属性</h3><blockquote>
-<student1>
-  <name>Tom</name>
-  <math>95</math>
-  <biology>93</biology>
-</student1>
-</blockquote>
-<p>&lt;**&gt;称为标签(tags)，可以包含元素(element)和属性(attributes)两部分。</p>
-<p>起始标签：<code>&lt;元素名 属性=&quot;属性值&quot;&gt;</code>注意要有引号！</p>
-<p>结束标签：<code>&lt;/元素名&gt;</code></p>
-<p>上例中的最高层元素student1称为根元素(root element)</p>
-<h1 id="和html的区别"><a href="#和html的区别" class="headerlink" title="和html的区别"></a>和html的区别</h1><ol>
-<li>xml标签区分大小写，html不区分。</li>
-<li>xml要求起始标签和结束标签必须成对存在，html有时候缺少结束标签也可以解析。</li>
-<li>xml空元素需要在右侧尖括号前加上斜杠(如&lt;example/&gt;)。html中的&lt;br&gt;&lt;img&gt;这类标签自成一个单元，在xml中成为空元素。</li>
-<li>xml把空白当成内容的一部分。html则会过滤掉大部分空白。</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>XML入門</p>
-<p><a href="http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/" target="_blank" rel="noopener">http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-XML/">展开全文 >></a>
         </p>
       
 
@@ -2587,6 +2537,34 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
               </li>
             
             <div class="clearfix"></div>

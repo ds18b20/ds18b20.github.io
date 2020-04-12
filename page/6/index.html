@@ -156,6 +156,314 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PyCharm-05-ndarray" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/01/PyCharm-05-ndarray/">PyCharm-05-ndarray</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/01/PyCharm-05-ndarray/" class="archive-article-date">
+  	<time datetime="2018-09-01T01:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis=<span class="number">1</span>) == y).mean()</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">np.mean(y_hat.argmax(axis=<span class="number">1</span>) == y)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会提示bool对象不包含mean方法。</p>
+<blockquote>
+<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
+</blockquote>
+<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp = y_hat.argmax(axis=<span class="number">1</span>) == y  <span class="comment"># type: np.ndarray</span></span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction<br><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ndarray</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/01/PyCharm-05-ndarray/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-28-memoryUse" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/23/Numpy-28-memoryUse/">Numpy-28-memoryUse</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/23/Numpy-28-memoryUse/" class="archive-article-date">
+  	<time datetime="2018-08-23T14:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-ndarray-memory-use"><a href="#Numpy-ndarray-memory-use" class="headerlink" title="Numpy.ndarray memory use"></a>Numpy.ndarray memory use</h1><p>使用Numpy进行科学计算时，经常需要预估数据所占的内存容量，从而避免Memory错误。</p>
+<ul>
+<li>要查看各对象的内存占用可以使用sys模块的getsizeof方法。</li>
+<li>要查看Numpy对象内部的元素所占的空间可以使用numpy.ndarray.nbytes来查看所有数组占用的空间大小；使用numpy.ndarray.itemsize来查看单个元素占用的空间大小。</li>
+</ul>
+<h2 id="sys-getsizeof"><a href="#sys-getsizeof" class="headerlink" title="sys.getsizeof"></a>sys.getsizeof</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位整型</span></span><br><span class="line">ai32 = np.array([], dtype=np.int32)</span><br><span class="line">bi32 = np.arange(<span class="number">1</span>, dtype=np.int32)</span><br><span class="line">ci32 = np.arange(<span class="number">5</span>, dtype=np.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位整型</span></span><br><span class="line">ai64 = np.array([], dtype=np.int64)</span><br><span class="line">bi64 = np.arange(<span class="number">1</span>, dtype=np.int64)</span><br><span class="line">ci64 = np.arange(<span class="number">5</span>, dtype=np.int64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位浮点数</span></span><br><span class="line">af32 = np.array([], dtype=np.float32)</span><br><span class="line">bf32 = np.arange(<span class="number">1</span>, dtype=np.float32)</span><br><span class="line">cf32 = np.arange(<span class="number">5</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位浮点数</span></span><br><span class="line">af64 = np.array([], dtype=np.float64)</span><br><span class="line">bf64 = np.arange(<span class="number">1</span>, dtype=np.float64)</span><br><span class="line">cf64 = np.arange(<span class="number">5</span>, dtype=np.float64)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int32 number: %s"</span> % sys.getsizeof(ai32))</span><br><span class="line">print(<span class="string">"size of 1 int32 number: %s"</span> % sys.getsizeof(bi32))</span><br><span class="line">print(<span class="string">"size of 5 int32 numbers: %s"</span> % sys.getsizeof(ci32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int64 number: %s"</span> % sys.getsizeof(ai64))</span><br><span class="line">print(<span class="string">"size of 1 int64 number: %s"</span> % sys.getsizeof(bi64))</span><br><span class="line">print(<span class="string">"size of 5 int64 numbers: %s"</span> % sys.getsizeof(ci64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float32 number: %s"</span> % sys.getsizeof(af32))</span><br><span class="line">print(<span class="string">"size of 1 float32 number: %s"</span> % sys.getsizeof(bf32))</span><br><span class="line">print(<span class="string">"size of 5 float32 numbers: %s"</span> % sys.getsizeof(cf32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float64 number: %s"</span> % sys.getsizeof(af64))</span><br><span class="line">print(<span class="string">"size of 1 float64 number: %s"</span> % sys.getsizeof(bf64))</span><br><span class="line">print(<span class="string">"size of 5 float64 numbers: %s"</span> % sys.getsizeof(cf64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 chars: %s"</span> % sys.getsizeof(<span class="string">''</span>))</span><br><span class="line">print(<span class="string">"size of 1 chars: %s"</span> % sys.getsizeof(<span class="string">'1'</span>))</span><br><span class="line">print(<span class="string">"size of 5 chars: %s"</span> % sys.getsizeof(<span class="string">'12345'</span>), end=<span class="string">'\n\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>打印输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">size of 0 int32 number: 96</span><br><span class="line">size of 1 int32 number: 100</span><br><span class="line">size of 5 int32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 int64 number: 96</span><br><span class="line">size of 1 int64 number: 104</span><br><span class="line">size of 5 int64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 float32 number: 96</span><br><span class="line">size of 1 float32 number: 100</span><br><span class="line">size of 5 float32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 float64 number: 96</span><br><span class="line">size of 1 float64 number: 104</span><br><span class="line">size of 5 float64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 chars: 49</span><br><span class="line">size of 1 chars: 50</span><br><span class="line">size of 5 chars: 54</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7" target="_blank" rel="noopener">https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7</a><br><a href="https://www.draketo.de/english/python-memory-numpy-list-array" target="_blank" rel="noopener">https://www.draketo.de/english/python-memory-numpy-list-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">memory use</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/23/Numpy-28-memoryUse/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Matplotlib-09-imshow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/23/Matplotlib-09-imshow/">Matplotlib-09-imshow</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/23/Matplotlib-09-imshow/" class="archive-article-date">
+  	<time datetime="2018-08-23T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib-imshow"><a href="#matplotlib-imshow" class="headerlink" title="matplotlib imshow"></a>matplotlib imshow</h1><p>用matplotlib显示cifar10数据集样本时，输出图片颜色怪异，原因在于用于显示的像素值需要转换成[0, 1]之间的浮点数。</p>
+<h2 id="直接显示raw图像："><a href="#直接显示raw图像：" class="headerlink" title="直接显示raw图像："></a>直接显示raw图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_1.png" alt=""></p>
+<h2 id="压缩到-0-1-后的图像："><a href="#压缩到-0-1-后的图像：" class="headerlink" title="压缩到[0, 1]后的图像："></a>压缩到[0, 1]后的图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_2.png" alt=""></p>
+<p>这是因为imshow函数对输入数据的格式和类型有要求：</p>
+<p><code>matplotlib.pyplot.imshow</code>(<em>X</em>, <em>cmap=None</em>, <em>norm=None</em>, <em>aspect=None</em>, <em>interpolation=None</em>, <em>alpha=None</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>origin=None</em>, <em>extent=None</em>, <em>shape=None</em>, <em>filternorm=1</em>, <em>filterrad=4.0</em>, <em>imlim=None</em>, <em>resample=None</em>, <em>url=None</em>, <em>**, *data=None</em>, <em><em>\</em>kwargs</em>)</p>
+<blockquote>
+<p><strong>X</strong> : array-like or PIL image</p>
+<p>The image data. Supported array shapes are:</p>
+<ul>
+<li>(M, N): an image with scalar data. The data is visualized using a colormap.</li>
+<li>(M, N, 3): an image with RGB values (float or uint8).</li>
+<li>(M, N, 4): an image with RGBA values (float or uint8), i.e. including transparency.</li>
+</ul>
+<p>The first two dimensions (M, N) define the rows and columns of the image.</p>
+<p>The RGB(A) values should be in the range [0 .. 1] for floats or [0 .. 255] for integers. Out-of-range values will be clipped to these bounds.</p>
+</blockquote>
+<p>故，作为显示数据的X必须是[0, 1]的float或者[0, 255]的uint8类型。</p>
+<p>另外一个int的例子是，当数据类型是默认的int32类型时，显示颜色不正常：</p>
+<p><img src="Matplotlib-09-imshow%5Cint32.png" alt=""></p>
+<p>改成uint8类型之后，显示颜色变为正常了：</p>
+<p><img src="Matplotlib-09-imshow%5Cuint8.png" alt=""></p>
+<p>变换函数：<code>numpy_data.astype(&#39;uint8&#39;)</code></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat" target="_blank" rel="noopener">https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat</a><br><a href="https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imshow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/23/Matplotlib-09-imshow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-MySQL-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -974,297 +1282,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/08/11/Python-48-logging/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-47-ClassMethod" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/11/Python-47-ClassMethod/">Python-47-ClassMethod</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/11/Python-47-ClassMethod/" class="archive-article-date">
-  	<time datetime="2018-08-11T00:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-ClassMethod"><a href="#Python-ClassMethod" class="headerlink" title="Python ClassMethod"></a>Python ClassMethod</h1><p>本篇介绍Python的类函数的定义，以及注意事项。</p>
-<h2 id="classmethod"><a href="#classmethod" class="headerlink" title="@classmethod"></a>@classmethod</h2><p>类函数的定义方法为在函数上一行加上@classmethod装饰器。<br>并且类函数要求第一个参数不是self，而是cls。这里的cls代表当前类。</p>
-<h2 id="子类继承的注意事项"><a href="#子类继承的注意事项" class="headerlink" title="子类继承的注意事项"></a>子类继承的注意事项</h2><p>注意，当被子类继承时，cls不再是父类，而是子类。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(cls)</span>:</span></span><br><span class="line">        d = &#123;<span class="string">'name'</span>: <span class="string">'JJ'</span>, <span class="string">'age'</span>: <span class="number">30</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> cls(**d)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(cls)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> cls.__name__</span><br><span class="line"><span class="comment"># s = Student('LL', 20)</span></span><br><span class="line"><span class="comment"># print(s.name)</span></span><br><span class="line"><span class="comment"># print(s.age)</span></span><br><span class="line"><span class="comment"># print(s.foo().name)</span></span><br><span class="line"><span class="comment"># print(s.foo().age)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boy</span><span class="params">(Student)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(__class__, self).__init__(<span class="string">'LL'</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">b = Boy()</span><br><span class="line"><span class="comment"># print(b.foo().name)</span></span><br><span class="line">print(dir(b))</span><br><span class="line">print(b.bar())</span><br></pre></td></tr></table></figure>
-
-<p>b.bar()返回的是Boy，而非Student</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/carolzhang8406/article/details/6856817" target="_blank" rel="noopener">https://blog.csdn.net/carolzhang8406/article/details/6856817</a></p>
-<blockquote>
-<p>由于classmethod第一个参数传入的是类对象，所以在子类继承后，使用子类调用该类方法，实际传入的对象将是子类对象，而不是父类对象。而staticmethod由于不需要传入类对象，所以它实际执行的还是父类当中的行为。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">class method</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">classmethod</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/11/Python-47-ClassMethod/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-02-Syntax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/11/SQL-02-Syntax/">SQL-02-Syntax</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/11/SQL-02-Syntax/" class="archive-article-date">
-  	<time datetime="2018-08-11T00:18:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL常用语法"><a href="#MySQL常用语法" class="headerlink" title="MySQL常用语法"></a>MySQL常用语法</h1><p>本篇介绍常用的MySQL语法。</p>
-<h2 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h2><p>创建数据库，创建表</p>
-<h2 id="DROP"><a href="#DROP" class="headerlink" title="DROP"></a>DROP</h2><p>删除数据库，删除表</p>
-<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><p>逐行删除记录</p>
-<h2 id="TRUNCATE"><a href="#TRUNCATE" class="headerlink" title="TRUNCATE"></a>TRUNCATE</h2><p>一次性删除整张表</p>
-<h2 id="grant"><a href="#grant" class="headerlink" title="grant"></a>grant</h2><p><code>grant select, insert, update, delete on database_name.* to &#39;user_name&#39;@&#39;127.0.0.1&#39; identified by &#39;password&#39;;</code><br>英文grant的本意即为：授予，准许<br>上述代码的解释如下，</p>
-<ul>
-<li><code>database_name.*</code>名为database_name的所有表。用*作数据库名和表名的通配符。</li>
-<li><code>&#39;user_name&#39;@&#39;127.0.0.1&#39;</code>host：’127.0.0.1’，可以使用%作通配符，例如’192.168.0.%’</li>
-<li><code>identified by &#39;password&#39;</code>通过密码’password’来授权</li>
-</ul>
-<h2 id="A-sample"><a href="#A-sample" class="headerlink" title="A sample"></a>A sample</h2><p>手动创建SQL脚本来创建数据库和表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">drop database if exists awesome;</span><br><span class="line"></span><br><span class="line">create database awesome;</span><br><span class="line"></span><br><span class="line">use awesome;</span><br><span class="line"></span><br><span class="line">grant select, insert, update, delete on awesome.* to &#39;www-data&#39;@&#39;localhost&#39; identified by &#39;www-data&#39;;</span><br><span class="line"></span><br><span class="line">create table users (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;email&#96; varchar(50) not null,</span><br><span class="line">    &#96;passwd&#96; varchar(50) not null,</span><br><span class="line">    &#96;admin&#96; bool not null,</span><br><span class="line">    &#96;name&#96; varchar(50) not null,</span><br><span class="line">    &#96;image&#96; varchar(500) not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    unique key &#96;idx_email&#96; (&#96;email&#96;),</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">create table blogs (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_name&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_image&#96; varchar(500) not null,</span><br><span class="line">    &#96;name&#96; varchar(50) not null,</span><br><span class="line">    &#96;summary&#96; varchar(200) not null,</span><br><span class="line">    &#96;content&#96; mediumtext not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">create table comments (</span><br><span class="line">    &#96;id&#96; varchar(50) not null,</span><br><span class="line">    &#96;blog_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_id&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_name&#96; varchar(50) not null,</span><br><span class="line">    &#96;user_image&#96; varchar(500) not null,</span><br><span class="line">    &#96;content&#96; mediumtext not null,</span><br><span class="line">    &#96;created_at&#96; real not null,</span><br><span class="line">    key &#96;idx_created_at&#96; (&#96;created_at&#96;),</span><br><span class="line">    primary key (&#96;id&#96;)</span><br><span class="line">) engine&#x3D;innodb default charset&#x3D;utf8;</span><br></pre></td></tr></table></figure>
-
-<p>保存为schema.sql<br>然后打开Terminal，运行脚本：<br><code>mysql -u root -p &lt; schema.sql</code>即可按脚本内容自动创建库和表。<br>当表的数量很多时，可以使用代码自动生成脚本然后运行。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.mamicode.com/info-detail-1706157.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-1706157.html</a><br><a href="https://blog.csdn.net/lampsunny/article/details/7410657" target="_blank" rel="noopener">https://blog.csdn.net/lampsunny/article/details/7410657</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Syntax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/11/SQL-02-Syntax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyCharm-02-importError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/PyCharm-02-importError/">PyCharm-02-importError</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/PyCharm-02-importError/" class="archive-article-date">
-  	<time datetime="2018-08-07T14:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="同目录下的py文件无法import"><a href="#同目录下的py文件无法import" class="headerlink" title="同目录下的py文件无法import"></a>同目录下的py文件无法import</h1><p>目录FFF下新建两个.py文件：a.py和b.py。</p>
-<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在b.py内尝试<code>import a.py</code>，结果提示错误无法找到a.py。</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm不会将当前文件目录加入source_path内，所以需要手动加入。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><img src="PyCharm-02-importError%5Cimport.png" alt=""></p>
-<p>Pycharm的导航栏内右击目录–&gt;Mark Directory as–&gt;Source Root即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">import local</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/PyCharm-02-importError/">展开全文 >></a>
         </p>
       
 
@@ -2593,6 +2610,34 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
               </li>
             
             <div class="clearfix"></div>

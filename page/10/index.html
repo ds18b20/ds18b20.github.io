@@ -156,6 +156,352 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Math-05-FFT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/Math-05-FFT/">Math-05-FFT</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/Math-05-FFT/" class="archive-article-date">
+  	<time datetime="2018-05-25T12:32:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h1><p>在频域上处理信号时，最常用的就是FFT(快速傅立叶变换)。时域信号转换成频域信号后可以直观地看到频率分布，并且在频域上更容易进行时域上的滤波、卷积等操作。</p>
+<h2 id="截取完整周期"><a href="#截取完整周期" class="headerlink" title="截取完整周期"></a>截取完整周期</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sampling_rate = <span class="number">8000</span>  <span class="comment"># sampling frequency</span></span><br><span class="line">fft_size = <span class="number">512</span>  <span class="comment"># sample count</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> / sampling_rate)  <span class="comment"># 8000 pts in [0, 1.0)</span></span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">156.25</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">234.375</span> * t)</span><br><span class="line">xs = x[: fft_size]</span><br><span class="line">xf = np.fft.rfft(xs)</span><br><span class="line">freqs = np.linspace(<span class="number">0</span>, sampling_rate / <span class="number">2</span>, int(fft_size / <span class="number">2</span>) + <span class="number">1</span>)</span><br><span class="line"><span class="comment"># xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))</span></span><br><span class="line">xfp = <span class="number">2</span> * np.abs(xf) / fft_size</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># show Time domain</span></span><br><span class="line">plt.subplot(<span class="number">211</span>)</span><br><span class="line">plt.plot(t[: fft_size], xs)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show frequency domain</span></span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">plt.plot(freqs, xfp, <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.75</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p><img src="Math-05-FFT%5CFFT_1.png" alt=""></p>
+<p><code>x = np.sin(2 * np.pi * 156.25 * t) + 2 * np.sin(2 * np.pi * 234.375 * t)</code>生成156.25Hz和234.375Hz的混合信号。</p>
+<p><strong>注意</strong>，此处选择的频率156.25Hz和234.375Hz看似很奇怪，实际上是特意计算得到的。</p>
+<p>采样频率8000，采样点512时，采样时长<code>512点*1/8000s=0.064s</code>，对应的频率分辨率f0=15.625Hz。上述选择的频率点156.25Hz和234.375Hz分别是f0的10倍和15倍。</p>
+<p><code>xs = x[: fft_size]</code>截取长度为fft_size=512长的样本。</p>
+<p><code>xf = np.fft.rfft(xs)</code>对样本xs做fft变换。<br><code>freqs = np.linspace(0, sampling_rate / 2, int(fft_size / 2) + 1)</code>生成频域的频率系列作为横轴。</p>
+<p><code>xfp = 2 * np.abs(xf) / fft_size</code>上述得到的xf仍然是复数形式，经过np.abs方法得到xf的绝对值xfs。</p>
+<p><code>xfp = 2 * np.abs(xf) / fft_size</code>计算单边振幅，双边都显示时，不用乘2。</p>
+<h2 id="截取不完整周期"><a href="#截取不完整周期" class="headerlink" title="截取不完整周期"></a>截取不完整周期</h2><p>把采样样本改成<code>x = np.sin(2 * np.pi * 200 * t) + 2 * np.sin(2 * np.pi * 300 * t)</code>，即200Hz和300Hz的合并信号。同样地fft之后得到，</p>
+<p><img src="Math-05-FFT%5CFFT_2.png" alt=""></p>
+<p>同上方完整截取得到的FFT比较，可以发现主波峰的高度变小，而主峰外的频率值相应的变大了。这意味着本来应该集中在主峰上的能量分散到了周围频率上，这个频率被称为频谱泄露。</p>
+<blockquote>
+<p>出现频谱泄漏的原因在于fft_size个取样点无法放下整数个200Hz和300Hz的波形。 </p>
+</blockquote>
+<blockquote>
+<p>频谱泄漏的解释</p>
+<p>我们只能在有限的时间段中对信号进行测量，无法知道在测量范围之外的信号是怎样的。因此只能对测量范围之外的信号进行假设。而傅立叶变换的假设很简单：测量范围之外的信号是所测量到的信号的重复。</p>
+<p>现在考虑512点FFT，从信号中取出的512个数据就是FFT的测量范围，它计算的是这512个数据一直重复的波形的频谱。显然如果512个数据包含整数个周期的话，那么得到的结果就是原始信号的频谱，而如果不是整数周期的话，得到的频谱就是如下波形的频谱，这里假设对50Hz的正弦波进行512点FFT：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>/<span class="number">8000</span>)</span><br><span class="line">x = np.sin(<span class="number">2</span>*np.pi*<span class="number">50</span>*t)[:<span class="number">512</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(np.hstack([x,x]))</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Math-05-FFT%5CFFT_3.png" alt=""></p>
+</blockquote>
+<p>由于截取的样本不是完整的周期的整数倍，可以看到波形在两段的连接处发生了突变。而突变处伴随着非常广泛的频谱，从而导致FFT的结果出现了频谱泄露。另一种解释是，要用傅立叶级数模拟突变处的曲线非常困难，需要多种频谱来配合使用，在FFT结果上表现出来了频谱泄露(spectral leakage)。</p>
+<h2 id="窗函数"><a href="#窗函数" class="headerlink" title="窗函数"></a>窗函数</h2><p>截取不完整周期时，可以通过给截取的片段加窗来优化FFT。</p>
+<p>由于截取的周期不完整导致头尾相接处出现了突变，那么可以让头尾部人为地衰减来让连接处变得更加平滑。</p>
+<p>常用的窗口函数有Hanning窗函数和Hamming窗函数。</p>
+<p>Hanning函数的定义如下：<br>$$<br>w(n) = 0.5 - 0.5 \cos\left(\frac{2\pi{n}}{M-1}\right)<br>\qquad 0 \leq n \leq M-1<br>$$<br>Hamming函数的定义如下：<br>$$<br>w(n) = 0.54 - 0.46 \cos\left(\frac{2\pi{n}}{M-1}\right)<br>\qquad 0 \leq n \leq M-1<br>$$<br>这两种window的曲线对比如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fft_size = <span class="number">512</span></span><br><span class="line">a = np.hanning(fft_size)</span><br><span class="line">b = np.hamming(fft_size)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(a, <span class="string">'m'</span>, label=<span class="string">"Hanning"</span>)</span><br><span class="line">plt.plot(b, <span class="string">'g'</span>, label=<span class="string">"Hamming"</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Pts"</span>)</span><br><span class="line">plt.title(<span class="string">u"Hanning &amp; Hamming window"</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Math-05-FFT%5CFFT_4.png" alt=""></p>
+<p><a href="https://archive.lib.msu.edu/crcmath/math/math/a/a279.htm" target="_blank" rel="noopener">https://archive.lib.msu.edu/crcmath/math/math/a/a279.htm</a></p>
+<p>上面的200Hz和300Hz的混合信号经过窗函数处理之后，再做FFT如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">xs = x[: fft_size]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Multiply by Hanning window</span></span><br><span class="line">xs = xs * np.hanning(fft_size)</span><br><span class="line">xf = np.fft.rfft(xs)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<p><img src="Math-05-FFT%5CFFT_5.png" alt=""></p>
+<p>可以看到加窗之后FFT的能量更加集中到了200Hz和300Hz附近，频谱泄露得到了较好的改善。</p>
+<p><strong>注意</strong>，Hanning窗本身就有能量衰减，如上图所示，振幅变成了初始信号的一半。所以，要显示正确的振幅(能量)，在FFT的结果上继续乘以2即可。</p>
+<h1 id="iFFT"><a href="#iFFT" class="headerlink" title="iFFT"></a>iFFT</h1><p>下面开始用FFT来实现一个低通滤波器。</p>
+<p>上述代码稍作修改加入1000Hz的一个noise，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">noise = np.sin(<span class="number">2</span> * np.pi * <span class="number">1000</span> * t)</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">x = x + noise</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>得到的曲线如下，</p>
+<p><img src="Math-05-FFT%5CFFT_6.png" alt=""></p>
+<p>尝试对此信号进行低通滤波，包含了加窗–FFT–iFFT–去窗的过程，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sampling_rate = <span class="number">8000</span></span><br><span class="line">fft_size = <span class="number">512</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> / sampling_rate)</span><br><span class="line">noise = np.sin(<span class="number">2</span> * np.pi * <span class="number">1000</span> * t)</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">x = x + noise</span><br><span class="line">x_slice = x[: fft_size]</span><br><span class="line">x_slice = x_slice * np.hanning(fft_size)</span><br><span class="line">print(<span class="string">'xs shape: '</span>, x_slice.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fft</span></span><br><span class="line">x_fft = np.fft.fft(x_slice)</span><br><span class="line">print(<span class="string">'xf shape: '</span>, x_fft.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># half spectrum to show</span></span><br><span class="line">half_freq = sampling_rate / <span class="number">2</span></span><br><span class="line">freq_count = int(fft_size / <span class="number">2</span>) + <span class="number">1</span></span><br><span class="line">freqs = np.linspace(<span class="number">0</span>, half_freq, freq_count)</span><br><span class="line"><span class="comment"># xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># half spectrum *2</span></span><br><span class="line"><span class="comment"># Hanning window *2</span></span><br><span class="line">x_fft_power = <span class="number">2</span> * <span class="number">2</span> * np.abs(x_fft) / fft_size</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">231</span>)</span><br><span class="line">plt.plot(t[:fft_size], x_slice)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">234</span>)</span><br><span class="line">plt.plot(freqs, x_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># low pass filter</span></span><br><span class="line">low_f = int(<span class="number">500</span> * fft_size / sampling_rate)</span><br><span class="line">x_fft[low_f:-low_f] = <span class="number">0</span></span><br><span class="line"><span class="comment"># print('x_fft shape: ', x_fft.shape)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># p = 2 * 2 * np.abs(x_fft) / fft_size</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># plt.subplot(224)</span></span><br><span class="line"><span class="comment"># plt.plot(freqs, p[:freq_count], 'm')</span></span><br><span class="line"><span class="comment"># plt.xlabel(u"Filtered Frequency/Hz")</span></span><br><span class="line"><span class="comment"># plt.title(u"Spectrum")</span></span><br><span class="line"></span><br><span class="line">x_fft_ifft = np.fft.ifft(x_fft)</span><br><span class="line">real = x_fft_ifft.real</span><br><span class="line">print(<span class="string">'x_real shape: '</span>, real.shape)</span><br><span class="line"></span><br><span class="line">x_fft_ifft_fft = np.fft.fft(x_fft_ifft)</span><br><span class="line">x_fft_ifft_fft_power = <span class="number">2</span> * <span class="number">2</span> * np.abs(x_fft_ifft_fft) / fft_size</span><br><span class="line">print(<span class="string">'x_fft_ifft_fft_power shape: '</span>, x_fft_ifft_fft_power.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">232</span>)</span><br><span class="line">plt.plot(t[: fft_size], real)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Filtered Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">235</span>)</span><br><span class="line">plt.plot(freqs, x_fft_ifft_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Filtered Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># unwindow</span></span><br><span class="line">real_unwindow = real / (np.hanning(fft_size) + <span class="number">1e-10</span>)</span><br><span class="line">real_unwindow_fft = np.fft.fft(real_unwindow)</span><br><span class="line"></span><br><span class="line"><span class="comment"># double power</span></span><br><span class="line">real_unwindow_fft_power = <span class="number">2</span> * np.abs(real_unwindow_fft) / fft_size</span><br><span class="line">print(<span class="string">'real_unwindow_fft shape: '</span>, real_unwindow_fft.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">233</span>)</span><br><span class="line">plt.plot(t[: fft_size], real_unwindow)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"unwindow Filtered Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">236</span>)</span><br><span class="line">plt.plot(freqs, real_unwindow_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"unwindow Filtered Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.75</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<p><img src="Math-05-FFT%5CFFT_7.png" alt=""></p>
+<p>因为信号已经被window处理过了，当对滤波之后的信号进行还原时，会发现除以window后，信号的前后边沿会发生异常放大。</p>
+<p><img src="Math-05-FFT%5CFFT_8.png" alt=""></p>
+<p>这明显不是先要的结果，原因在于window的两端包含了极小量，除以这小极小量会给结果带来极大的误差。</p>
+<p>所以，对于周期信号，可以直接截取完整周期来做FFT。如果没有完整周期的数据，可以先使用上述窗口函数来处理，再做FFT。其实加窗只是在没有其他办法时的一个小trick。</p>
+<p><a href="https://www.edaboard.com/showthread.php?168721-How-to-reconstruct-each-frequency-components-by-inverse-FFT" target="_blank" rel="noopener">https://www.edaboard.com/showthread.php?168721-How-to-reconstruct-each-frequency-components-by-inverse-FFT</a></p>
+<p><a href="https://stackoverflow.com/questions/40668206/recovering-signal-after-fourier-filter-with-hanning-window" target="_blank" rel="noopener">https://stackoverflow.com/questions/40668206/recovering-signal-after-fourier-filter-with-hanning-window</a></p>
+<p>对于大部分采集自自然界的数据，可以认为是非周期信号，可以不加窗直接做FFT处理。</p>
+<p>所以对于上面的例子，直接FFT–频域截取–iFFT，得到</p>
+<p><img src="Math-05-FFT%5CFFT_9.png" alt=""></p>
+<h1 id="快速卷积"><a href="#快速卷积" class="headerlink" title="快速卷积"></a>快速卷积</h1><p>可以使用FFT来加速卷积运算。具体地，</p>
+<blockquote>
+<p>我们知道，信号x经过系统h之后的输出y是x和h的卷积，虽然卷积的计算方法很简单，但是当x和h都很长的时候，卷积计算是非常耗费时间的。因此对于比较长的系统h，需要找到比直接计算卷积更快的方法。</p>
+<p>信号系统理论中有这样一个规律：时域的卷积等于频域的乘积，因此要计算时域的卷积，可以将时域信号转换为频域信号，进行乘积运算之后再将结果转换为时域信号，实现快速卷积。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">def fft_convolve(a,b):</span><br><span class="line">    n &#x3D; len(a)+len(b)-1</span><br><span class="line">    N &#x3D; 2**(int(np.log2(n))+1)</span><br><span class="line">    A &#x3D; np.fft.fft(a, N)</span><br><span class="line">    B &#x3D; np.fft.fft(b, N)</span><br><span class="line">    return np.fft.ifft(A*B)[:n]</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    a &#x3D; np.random.rand(128)</span><br><span class="line">    b &#x3D; np.random.rand(128)</span><br><span class="line">    c &#x3D; np.convolve(a,b)</span><br><span class="line"></span><br><span class="line">    print np.sum(np.abs(c - fft_convolve(a,b)))</span><br></pre></td></tr></table></figure>
+
+<p>速度测试如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import timeit</span><br><span class="line">&gt;&gt;&gt; setup&#x3D;&quot;&quot;&quot;import numpy as np</span><br><span class="line">a&#x3D;np.random.rand(10000)</span><br><span class="line">b&#x3D;np.random.rand(10000)</span><br><span class="line">from spectrum_fft_convolve import fft_convolve&quot;&quot;&quot;</span><br><span class="line">&gt;&gt;&gt; timeit.timeit(&quot;np.convolve(a,b)&quot;,setup, number&#x3D;10)</span><br><span class="line">1.852900578146091</span><br><span class="line">&gt;&gt;&gt; timeit.timeit(&quot;fft_convolve(a,b)&quot;,setup, number&#x3D;10)</span><br><span class="line">0.19475575806416145</span><br></pre></td></tr></table></figure>
+
+<p>参考链接：<a href="https://wizardforcel.gitbooks.io/hyry-studio-scipy/content/20.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/hyry-studio-scipy/content/20.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FFT</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/Math-05-FFT/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-17-classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/TensorFlow-17-classification/">TensorFlow-17-classification</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/TensorFlow-17-classification/" class="archive-article-date">
+  	<time datetime="2018-05-24T15:02:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="classification"><a href="#classification" class="headerlink" title="classification"></a>classification</h1><p>之前的文章中一直使用的模拟一个二次函数的例子，其实是为了解决一个回归问题(regression)，接下来看一下分类(classification)相关的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data/"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer'</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'Weights'</span>):</span><br><span class="line">            Weights = tf.Variable(tf.random_normal([in_size, out_size]), name=<span class="string">'W'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/Weights'</span>, Weights)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'biases'</span>):</span><br><span class="line">            biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>, name=<span class="string">'b'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/biases'</span>, biases)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">            W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">        <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            outputs = W_m_p</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            outputs = activation_function(W_m_p)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/outputs'</span>, outputs)</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_accuracy</span><span class="params">(xs_val, ys_val)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> prediction</span><br><span class="line">    y_pre = sess.run(prediction, feed_dict=&#123;xs: xs_val&#125;)</span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(y_pre, axis=<span class="number">1</span>), tf.argmax(ys_val, axis=<span class="number">1</span>))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    result = sess.run(accuracy, feed_dict=&#123;xs: xs_val, ys: ys_val&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># real data for placeholder</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">28</span>*<span class="number">28</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add hidden layer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># add prediction layer</span></span><br><span class="line">prediction = add_layer(xs, <span class="number">28</span>*<span class="number">28</span>, <span class="number">10</span>, <span class="string">'prediction_layer'</span>, activation_function=tf.nn.softmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">'./graphs/classification'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    xs_batch, ys_batch = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: xs_batch, ys: ys_batch&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        print(compute_accuracy(mnist.test.images, mnist.test.labels))</span><br><span class="line">        summary_result = sess.run(summaries, feed_dict=&#123;xs: xs_batch, ys: ys_batch&#125;)</span><br><span class="line">        writer.add_summary(summary_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.1332</span><br><span class="line">0.3288</span><br><span class="line">0.4689</span><br><span class="line">...</span><br><span class="line">0.8005</span><br><span class="line">0.8045</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><img src="TensorFlow-17-classification%5Cclassification.JPG" alt=""></p>
+<h1 id="tf-cast"><a href="#tf-cast" class="headerlink" title="tf.cast"></a>tf.cast</h1><p>tf.cast(x, dtype, name=None)  将输入x转化成dtype类型。例如，原来x的数据格式是bool，那么将其转化成float以后，就能够将其转化成0和1的序列。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">classification</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tensorboard</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/TensorFlow-17-classification/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-16-tensorboard-hist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/23/TensorFlow-16-tensorboard-hist/">TensorFlow-16-tensorboard-hist</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/23/TensorFlow-16-tensorboard-hist/" class="archive-article-date">
+  	<time datetime="2018-05-23T14:35:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="add-histogram"><a href="#add-histogram" class="headerlink" title="add histogram"></a>add histogram</h1><p>前一篇文章中使用<code>tf.summary.FileWriter(&#39;./graphs&#39;, sess.graph)</code>来生成graph。在浏览器中打开后，上方只有一个GRAPH栏目。这一篇主要介绍如何给计算图中的关键节点添加histogram。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer'</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'Weights'</span>):</span><br><span class="line">            Weights = tf.Variable(tf.random_normal([in_size, out_size]), name = <span class="string">'W'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/Weights'</span>, Weights)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'biases'</span>):</span><br><span class="line">            biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>, name=<span class="string">'b'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/biases'</span>, biases)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">            W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">        <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            outputs = W_m_p</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            outputs = activation_function(W_m_p)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/outputs'</span>, outputs)</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># real data for placeholder</span></span><br><span class="line">x_data = np.linspace(<span class="number">-1</span>, <span class="number">1</span>, <span class="number">300</span>)[:, np.newaxis]</span><br><span class="line">noise = np.random.normal(<span class="number">0</span>, <span class="number">0.05</span>, x_data.shape)</span><br><span class="line">y_data = np.square(x_data) - <span class="number">0.5</span> + noise</span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">1</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">1</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add hidden layer</span></span><br><span class="line">layer_1 = add_layer(xs, <span class="number">1</span>, <span class="number">10</span>, <span class="string">'layer_1'</span>, activation_function=tf.nn.relu)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add prediction layer</span></span><br><span class="line">prediction = add_layer(layer_1, <span class="number">10</span>, <span class="number">1</span>, <span class="string">'prediction_layer'</span>, activation_function=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, loss)</span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    summaries = tf.summary.merge_all()</span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">'./graphs/hist'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># start training</span></span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        sess.run(train_step, feed_dict=&#123;xs: x_data, ys: y_data&#125;)</span><br><span class="line">        <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">            summary_result = sess.run(summaries, feed_dict=&#123;xs: x_data, ys: y_data&#125;)</span><br><span class="line">            writer.add_summary(summary_result, global_step=step)</span><br><span class="line">    print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以在其下方加上 <code>tf.summary.histogram(&#39;name&#39;, variable)</code>，然后加上<code>summaries = tf.summary.merge_all()</code>来定义合并变量操作，并一次性生成所有摘要，最后把此summaries摘要添加到事件日志中。</p>
+<p><img src="TensorFlow-16-tensorboard-hist%5Chist.JPG" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tensorboard</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">histogram</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/23/TensorFlow-16-tensorboard-hist/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-15-tensorboard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -905,361 +1251,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/19/Numpy-24-dotVSmul/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-23-Numpy2NativeType" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/Numpy-23-Numpy2NativeType/">Numpy-23-Numpy2NativeType</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/16/Numpy-23-Numpy2NativeType/" class="archive-article-date">
-  	<time datetime="2018-05-16T12:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Convert-Numpy-to-Python-native-type"><a href="#Convert-Numpy-to-Python-native-type" class="headerlink" title="Convert Numpy to Python native type"></a>Convert Numpy to Python native type</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.sum(a)</span><br></pre></td></tr></table></figure>
-
-<p>使用item方法可以把Numpy类型转换成Python原生类型。</p>
-<p>但是转换只能是以单个元素为单位，不能整体转换。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(b.item())</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">b</span>.<span class="title">item</span><span class="params">()</span></span></span><br><span class="line"><span class="class">6</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">a</span>.<span class="title">item</span><span class="params">()</span></span></span><br><span class="line"><span class="class"><span class="title">Traceback</span> <span class="params">(most recent call last)</span>:</span></span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: can only convert an array of size <span class="number">1</span> to a Python scalar</span><br><span class="line">    </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line"><span class="meta">... </span>   print(type(i),type(i.item()))</span><br><span class="line">...</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/9452775/converting-numpy-dtypes-to-native-python-types" target="_blank" rel="noopener">Converting numpy dtypes to native python types</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Native type</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/Numpy-23-Numpy2NativeType/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-10-assign" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/13/TensorFlow-10-assign/">TensorFlow-10-assign</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/13/TensorFlow-10-assign/" class="archive-article-date">
-  	<time datetime="2018-05-13T14:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h1><p>向一个变量赋值的操作方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x, feed_dict=&#123;x: <span class="number">3</span>&#125;))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
-
-<p>输出为，<code>3和0</code></p>
-<p>注意到，x并没有真正赋值给x，仅仅为了评估而临时赋值给x。</p>
-<p>真正的赋值需要tf.assign方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = tf.Variable(<span class="number">0</span>)</span><br><span class="line">y = tf.assign(x, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(sess.run(x))</span><br><span class="line">    print(sess.run(y))</span><br><span class="line">    print(sess.run(x))</span><br></pre></td></tr></table></figure>
-
-<p>输出为，<code>0，1和1</code></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/34220532/how-to-assign-a-value-to-a-tensorflow-variable" target="_blank" rel="noopener">How to assign a value to a TensorFlow variable?</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">assign</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/13/TensorFlow-10-assign/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-00-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/12/TensorFlow-00-basic/">TensorFlow-00-basic</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/12/TensorFlow-00-basic/" class="archive-article-date">
-  	<time datetime="2018-05-12T13:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p>TensorFlow基本思想是利用计算图来处理数据，把处理过程分成了两个独立的部分：定义计算图，执行计算图。官方表述为TensorFlow程序(tf.Graph)和TensorFlow运行时(tf.Session)。</p>
-<p>当使用Estimator时，可以不涉及到具体的Graph和Session部分，这些都由Estimator在内部实现好了。</p>
-<h1 id="图-Graph"><a href="#图-Graph" class="headerlink" title="图(Graph)"></a>图(Graph)</h1><p>计算图是一个由一系列TensorFlow命令组成的图，这些命令分成两种对象：</p>
-<ul>
-<li>指令(op)：图的节点。描述张量如何被INPUT和OUTPUT。</li>
-<li>张量：图的边线。表示流经图的数据值，大多数的TF函数都会返回tf.Tensor</li>
-</ul>
-<h2 id="指令-op"><a href="#指令-op" class="headerlink" title="指令(op)"></a>指令(op)</h2><p>见其他文章介绍</p>
-<h2 id="张量-tf-Tensor"><a href="#张量-tf-Tensor" class="headerlink" title="张量(tf.Tensor)"></a>张量(tf.Tensor)</h2><p>TF中的核心数据单位是张量(tf.Tensor)，张量就是一个基本数据类型的n维矩阵。张量的阶就是矩阵的维度，这也类似于Numpy中的np.ndarray。</p>
-<p>tf.Tensor只是Graph的一个组成部分，不具有值，只是代表了流经图上边线的数据的属性。<code>tf.Tensor</code> 有以下属性：</p>
-<ul>
-<li>数据类型（例如 <code>float32</code>，<code>int32</code> 或 <code>string</code>）</li>
-<li>形状</li>
-</ul>
-<p>特殊张量有以下几种：</p>
-<ul>
-<li><code>tf.Variable</code>变量</li>
-<li><code>tf.constant</code>常量</li>
-<li><code>tf.placeholder</code>占位符</li>
-<li><code>tf.SparseTensor</code></li>
-</ul>
-<p>除了<code>tf.Variable</code>，其他张量是不可变化的。</p>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant([[<span class="number">3.0</span>, <span class="number">4.0</span>]], dtype=tf.float32)</span><br><span class="line">b = tf.constant(<span class="number">4.0</span>)  <span class="comment"># 默认也是tf.float32</span></span><br><span class="line"></span><br><span class="line">total = a + b</span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(total)</span><br></pre></td></tr></table></figure>
-
-<p>tf.constant()指令表示构建一个常量节点，这个节点没有输入值，而会把传递给构造函数的值(如上述代码中的[[3, 4]])输出。</p>
-<p>代码执行结果，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Const:0"</span>, shape=(<span class="number">1</span>, <span class="number">2</span>), dtype=float32)</span><br><span class="line">Tensor(<span class="string">"Const_1:0"</span>, shape=(), dtype=float32)</span><br><span class="line">Tensor(<span class="string">"add:0"</span>, shape=(<span class="number">1</span>, <span class="number">2</span>), dtype=float32)</span><br></pre></td></tr></table></figure>
-
-<p>如上所述，Tensor不具有具体值，打印出的a/b/total并不是具体的值[[3, 4]]等，而是图中定义的<strong>张量的特征</strong>。</p>
-<p>从打印结果可知，每个指令都有它的名称，这个名称不是由人定义，而是根据生成它所用的指令自动生成的。名称由<code>指令名</code>和<code>索引号码</code>组成，如上述<code>&quot;Const:0&quot;</code>前半部分Const表示由tf.contant指令生成的第0个节点。</p>
-<p>常量包含以下几种：Constants, Sequences and Random Values，TF提供了生成它们的各种方法，参见<a href="https://www.tensorflow.org/api_guides/python/constant_op" target="_blank" rel="noopener">https://www.tensorflow.org/api_guides/python/constant_op</a></p>
-<h3 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h3><p>占位符表示暂时不提供参数，但是承诺之后会提供。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(dtype=tf.float32, shape=(<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">y = tf.matmul(x, x)</span><br><span class="line">z = tf.multiply(x, x)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(x, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br><span class="line">    print(sess.run(y, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br><span class="line">    print(sess.run(z, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br></pre></td></tr></table></figure>
-
-<p>可以使用Session的run方法里的feed_dict给占位符提供参数。不只是占位符，feed_dict参数可以给图中任意张量赋值，从而覆盖原来的张量。</p>
-<p>注意，如果没有给占位符提供值，则会报错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor &#39;Placeholder&#39; with dtype float and shape [3,3]</span><br></pre></td></tr></table></figure>
-
-<p>而且，如果feed_dict的shape如果不匹配也会报错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Cannot feed value of shape (3, 4) for Tensor &#39;Placeholder:0&#39;, which has shape &#39;(3, 3)&#39;</span><br></pre></td></tr></table></figure>
-
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量和其他Tensor的区别之一为Variable可变(mutable)，有assign方法，而其他Tensor是不可改变的。</p>
-<p>详见<a href="https://blog.csdn.net/silent56_th/article/details/75577974" target="_blank" rel="noopener">https://blog.csdn.net/silent56_th/article/details/75577974</a></p>
-<p>构建变量的最佳方式为tf.get_variable方法，此函数需要指定变量名称和形状。而具体的初始值则不必给出。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_variable = tf.get_variable(<span class="string">"my_variable"</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, initializer=tf.zeros_initializer)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码创建了一个名称为my_variable形状为[1,2,3]的变量，默认数据类型为tf.float32，默认初始化方法为glorot_uniform_initializer。关于tf.glorot_uniform_initializer可以参见<a href="https://stackoverflow.com/questions/37350131/what-is-the-default-variable-initializer-in-tensorflow" target="_blank" rel="noopener">https://stackoverflow.com/questions/37350131/what-is-the-default-variable-initializer-in-tensorflow</a></p>
-<p><a href="https://www.tensorflow.org/api_docs/python/tf/get_variable" target="_blank" rel="noopener">From the documentation</a>:</p>
-<blockquote>
-<p>If initializer is <code>None</code> (the default), the default initializer passed in the variable scope will be used. If that one is <code>None</code> too, a <code>glorot_uniform_initializer</code> will be used.</p>
-</blockquote>
-<p>The <a href="https://github.com/tensorflow/tensorflow/blob/6bfbcf31dce9a59acfcad51d905894b082989012/tensorflow/python/ops/init_ops.py#L527" target="_blank" rel="noopener"><code>glorot_uniform_initializer</code></a> function initializes values from a uniform distribution.</p>
-<p>也可以将 <code>tf.Variable</code> 初始化为 <code>tf.Tensor</code> 的值。这时不应指定形状，如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">other_variable = tf.get_variable(<span class="string">"other_variable"</span>, dtype=tf.int32, initializer=tf.constant([<span class="number">23</span>, <span class="number">42</span>]))</span><br></pre></td></tr></table></figure>
-
-<p>除了tf.get_variable方法，还可以使用tf.Variable方法，简单讲后者的实现更为底层。详见<a href="https://stackoverflow.com/questions/37098546/difference-between-variable-and-get-variable-in-tensorflow" target="_blank" rel="noopener">https://stackoverflow.com/questions/37098546/difference-between-variable-and-get-variable-in-tensorflow</a></p>
-<p>而且，前者包含检查命名空间是否已存在相同变量名的功能。参见另一篇专门介绍variable的文章。</p>
-<p>变量必须初始化之后才能使用，一次性初始化所有变量使用方法tf.global_variables_initializer() ，当然也可以单独对某个变量初始化。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># all</span></span><br><span class="line">session.run(tf.global_variables_initializer())</span><br><span class="line"><span class="comment"># single</span></span><br><span class="line">session.run(my_variable.initializer)</span><br><span class="line"><span class="comment"># 查询未初始化变量</span></span><br><span class="line">print(session.run(tf.report_uninitialized_variables()))</span><br></pre></td></tr></table></figure>
-
-<p>使用变量时，可以当作普通tf.Tensor来加入运算。为变量赋值，请使用 <code>assign</code>、<code>assign_add</code> 方法以及 <code>tf.Variable</code> 类中的友元。例如，以下就是调用这些方法的方式： </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v = tf.get_variable(<span class="string">"v"</span>, shape=(), initializer=tf.zeros_initializer())</span><br><span class="line">assignment = v.assign_add(<span class="number">1</span>)</span><br><span class="line">tf.global_variables_initializer().run()</span><br><span class="line">sess.run(assignment)  <span class="comment"># or assignment.op.run(), or assignment.eval()</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h1><p>要评估(查看)张量，需要实例化一个tf.Session对象。会话会封装TensorFlow运行时的状态，并运行TF指令。当使用tf.Session.run请求一个节点的输出张量时，TF会回溯整个计算图，并计算所有的作为请求节点输入的节点，将这些节点的输出传递给请求节点，运算并返回结果。</p>
-<p>下面的命令创建一个tf.Session对象，然后运行命令run来评估total张量。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess = tf.Session()</span><br><span class="line">print(sess.run(total))</span><br></pre></td></tr></table></figure>
-
-<p>可以同时传递多个张量给tf.Session.run</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(&#123;<span class="string">'ab'</span>: (a, b), <span class="string">'total'</span>: total&#125;))</span><br></pre></td></tr></table></figure>
-
-<p>每当调用Session.run评估张量时，可以理解成输出此刻计算图的一个切面。比如下面的例子，每次调用run(vec)都会生成一组新的随机数，所以两次生成的随机数不同，但是后一次的结果用在+1和+2两次运算中，后一次的随机数列本身并没有发生变化。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    vec = tf.random_uniform(shape=(<span class="number">3</span>,))</span><br><span class="line">    out1 = vec + <span class="number">1</span></span><br><span class="line">    out2 = vec + <span class="number">2</span></span><br><span class="line">    print(sess.run(vec))</span><br><span class="line">    print(sess.run(vec))</span><br><span class="line">    print(sess.run((out1, out2)))</span><br></pre></td></tr></table></figure>
-
-<p>输出结果，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0.35078466</span> <span class="number">0.6768017</span>  <span class="number">0.9873116</span> ]</span><br><span class="line">[<span class="number">0.7337662</span>  <span class="number">0.9636233</span>  <span class="number">0.79608345</span>]</span><br><span class="line">(array([<span class="number">1.8347821</span>, <span class="number">1.1241153</span>, <span class="number">1.2593273</span>], dtype=float32), array([<span class="number">2.8347821</span>, <span class="number">2.1241155</span>, <span class="number">2.2593274</span>], dtype=float32))</span><br></pre></td></tr></table></figure>
-
-<h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><p>TF提供了一个将计算图可视化的工具Tensorboard，继续上方的代码，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant([[<span class="number">3.0</span>, <span class="number">4.0</span>]], dtype=tf.float32)</span><br><span class="line">b = tf.constant(<span class="number">4.0</span>)  <span class="comment"># 默认也是tf.float32</span></span><br><span class="line"></span><br><span class="line">total = a + b</span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(total)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">'./'</span>, sess.graph)</span><br><span class="line">    writer.add_graph(tf.get_default_graph())</span><br></pre></td></tr></table></figure>
-
-<p>会在当前目录下生成<code>events.out.tfevents.*</code>文件，该目录下cmd执行<code>tensorboard --logdir .</code>按照输出提示在浏览器中打开指定地址即可查看到可视化界面。如下所示，</p>
-<p><img src="TensorFlow-00-basic%5Cboard.png" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.tensorflow.org/programmers_guide/low_level_intro" target="_blank" rel="noopener">使用低级别 TensorFlow API (TensorFlow Core) 开始编程</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Basic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/12/TensorFlow-00-basic/">展开全文 >></a>
         </p>
       
 
@@ -2588,6 +2579,34 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
               </li>
             
             <div class="clearfix"></div>
