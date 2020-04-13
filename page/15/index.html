@@ -156,6 +156,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-05-3Dplotting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/29/Matplotlib-05-3Dplotting/">Matplotlib-05-3Dplotting</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/29/Matplotlib-05-3Dplotting/" class="archive-article-date">
+  	<time datetime="2018-03-29T14:55:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Matplotlib-3D-plotting"><a href="#Matplotlib-3D-plotting" class="headerlink" title="Matplotlib 3D plotting"></a>Matplotlib 3D plotting</h1><h2 id="3D-scatter-Plot"><a href="#3D-scatter-Plot" class="headerlink" title="3D scatter Plot"></a>3D scatter Plot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string">3D scatterplot</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Demonstration of a basic scatterplot in 3D.</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">randrange</span><span class="params">(n, vmin, vmax)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    Helper function to make an array of random numbers having shape (n, )</span></span><br><span class="line"><span class="string">    with each number distributed Uniform(vmin, vmax).</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> (vmax - vmin)*np.random.rand(n) + vmin</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">111</span>, projection=<span class="string">'3d'</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For each set of style and range settings, plot n random points in the box</span></span><br><span class="line"><span class="comment"># defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].</span></span><br><span class="line"><span class="keyword">for</span> c, m, zlow, zhigh <span class="keyword">in</span> [(<span class="string">'r'</span>, <span class="string">'o'</span>, <span class="number">-50</span>, <span class="number">-25</span>), (<span class="string">'b'</span>, <span class="string">'^'</span>, <span class="number">-30</span>, <span class="number">-5</span>)]:</span><br><span class="line">    xs = randrange(n, <span class="number">23</span>, <span class="number">32</span>)</span><br><span class="line">    ys = randrange(n, <span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line">    zs = randrange(n, zlow, zhigh)</span><br><span class="line">    ax.scatter(xs, ys, zs, c=c, marker=m)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">'X Label'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Y Label'</span>)</span><br><span class="line">ax.set_zlabel(<span class="string">'Z Label'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>绘图得到，</p>
+<p><img src="Matplotlib-05-3Dplotting%5Cscatter.png" alt=""></p>
+<h2 id="3D-Line-Plot"><a href="#3D-Line-Plot" class="headerlink" title="3D Line Plot"></a>3D Line Plot</h2><h2 id="Surface-Plot"><a href="#Surface-Plot" class="headerlink" title="Surface Plot"></a>Surface Plot</h2><h2 id="Wire-frame-plot"><a href="#Wire-frame-plot" class="headerlink" title="Wire-frame plot"></a>Wire-frame plot</h2><h1 id="axis-label"><a href="#axis-label" class="headerlink" title="axis label"></a>axis label</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 軸ラベルの設定</span><br><span class="line">ax.set_xlabel(&quot;X-axis&quot;)</span><br><span class="line">ax.set_ylabel(&quot;Y-axis&quot;)</span><br><span class="line">ax.set_zlabel(&quot;Z-axis&quot;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="http://jakevdp.github.io/mpl_tutorial/tutorial_pages/tut5.html" target="_blank" rel="noopener">Matplotlib Tutorial: 5. 3D plotting</a></p>
+<p><a href="https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html" target="_blank" rel="noopener">mplot3d tutorial</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">3D Plotting</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/29/Matplotlib-05-3Dplotting/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-00-Errors" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1109,176 +1209,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/17/Java-06-Package-JUnitTest/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-06-Package-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/17/Java-06-Package-Class/">Java-06-package-Class</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/17/Java-06-Package-Class/" class="archive-article-date">
-  	<time datetime="2018-03-17T03:26:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类的成员"><a href="#类的成员" class="headerlink" title="类的成员"></a>类的成员</h1><h2 id="成员的访问权限"><a href="#成员的访问权限" class="headerlink" title="成员的访问权限"></a>成员的访问权限</h2><ul>
-<li>private</li>
-<li>(default)</li>
-<li>protected</li>
-<li>public</li>
-</ul>
-<p>比较难记，参考 <a href="https://www.cnblogs.com/jingmengxintang/p/5898900.html" target="_blank" rel="noopener">https://www.cnblogs.com/jingmengxintang/p/5898900.html</a><br>另外需要验证实例是否可以访问类的private成员。</p>
-<p>类的成员包括属性和方法</p>
-<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>属性定义了类的状态，定义方式如下，</p>
-<p><code>accessSpecifier dataType variableName [= initialValue];</code></p>
-<p>accessSpecifier：访问权限</p>
-<p>dataType：类型</p>
-<p>variableName：属性名</p>
-<p>initialValue：初始化值</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>方法定义了类的行为，分为<strong>构造方法</strong>和<strong>其他方法</strong>。</p>
-<p><strong>构造方法</strong>仅用于创建对象的实例，它的书写有三点要求：</p>
-<ol>
-<li>构造方法的accessSpecifier必须和类的相同</li>
-<li>构造方法名必须和类名相同</li>
-<li>不能含有返回类型，void也不可</li>
-</ol>
-<p>构造方法内，要对实例的属性进行赋值时需要<code>this.attribute</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span>  weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age, <span class="keyword">int</span> height, <span class="keyword">int</span> weight String eyeColor, String gender)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.height = height;</span><br><span class="line">    <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyeColor;</span><br><span class="line">    <span class="keyword">this</span>.gender = gender;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>其他方法的命名不要求和class一致，而且可以有自己的返回值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">       name = value;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>注意如果一个方法没有返回值，也必须加上void关键字，以告知编译器。</p>
-<p>非构造方法又可以分为两类：<strong>静态方法</strong>和<strong>实例方法</strong>。</p>
-<p>静态方法直接通过类调用；而实例方法必须先生成一个实例，然后由实例调用。</p>
-<h1 id="Eclipse操作"><a href="#Eclipse操作" class="headerlink" title="Eclipse操作"></a>Eclipse操作</h1><h2 id="创建package"><a href="#创建package" class="headerlink" title="创建package"></a>创建package</h2><p>单击 <strong>File &gt; New &gt; Package</strong> 启动 Java Package 向导，将 <code>com.makotojava.intro</code> 键入到 Name 文本框中并单击<strong>Finish</strong>。可以在 Package Explorer 中看到创建的新包。</p>
-<h2 id="声明class"><a href="#声明class" class="headerlink" title="声明class"></a>声明class</h2><p>右键上述新建的package，选择 <strong>New &gt; Class…</strong>。New Class 对话框将会打开。</p>
-<p>在 Name 文本框中，键入 <code>Person</code>，然后单击 <strong>Finish</strong>。</p>
-<h2 id="添加class的属性"><a href="#添加class的属性" class="headerlink" title="添加class的属性"></a>添加class的属性</h2><p>得到，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加class的方法"><a href="#添加class的方法" class="headerlink" title="添加class的方法"></a>添加class的方法</h2><p>包括构造方法和其他方法。</p>
-<p>其他方法中的getter和setter可以由Eclipse快捷添加，右键 &gt; source &gt; generate getter and setter 设置相应选项即可。</p>
-<p>得到，</p>
-<pre><code>package com.makotojava.intro;
-
-public class Person {
-    private String name;
-    private int age;
-    private int height;
-    private int weight;
-    private String eyeColor;
-    private String gender;
-
-    public Person(String name, int age, int height, int weight, String eyeColor, String gender) {
-        this.name = name;
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
-        this.eyeColor = eyeColor;
-        this.gender = gender;
-    }
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    ...
-}</code></pre><p>}</p>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>包含构造方法的类定义<br><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
-<p>java构造方法与方法的区别<br><a href="http://blog.csdn.net/lvshihua/article/details/38409121" target="_blank" rel="noopener">http://blog.csdn.net/lvshihua/article/details/38409121</a></p>
-<p>Java 语言基础</p>
-<p><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/17/Java-06-Package-Class/">展开全文 >></a>
         </p>
       
 
@@ -2635,6 +2565,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
             
             <div class="clearfix"></div>

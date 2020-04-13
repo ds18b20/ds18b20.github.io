@@ -156,6 +156,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-06-installCUDA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/03/TensorFlow-06-installCUDA/">TensorFlow-06-installCUDA</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/03/TensorFlow-06-installCUDA/" class="archive-article-date">
+  	<time datetime="2018-05-03T14:58:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Install-CUDA"><a href="#Install-CUDA" class="headerlink" title="Install CUDA"></a>Install CUDA</h1><p>Install CUDA for tensorflow following this article:</p>
+<p><a href="https://blog.csdn.net/weixin_36368407/article/details/54177380" target="_blank" rel="noopener">https://blog.csdn.net/weixin_36368407/article/details/54177380</a></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>1.8.0版本的TF只能支持到CUDA9.0，最新的9.1版本无法运行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CUDA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/03/TensorFlow-06-installCUDA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-05-compareCUPandGPU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1055,191 +1142,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/28/Numpy-20-NoneOREmpty/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-19-float64" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/22/Numpy-19-float64/">Numpy-19-float64</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/22/Numpy-19-float64/" class="archive-article-date">
-  	<time datetime="2018-04-22T01:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy的数据类型"><a href="#Numpy的数据类型" class="headerlink" title="Numpy的数据类型"></a>Numpy的数据类型</h1><p>Numpy中最大能表示的浮点数为float64，超过这个数值的结算结果会导致overflow溢出。</p>
-<p>以下为Numpy官方对于Data types的定义：</p>
-<p>NumPy supports a much greater variety of numerical types than Python does. This section shows which are available, and how to modify an array’s data-type.</p>
-<table>
-<thead>
-<tr>
-<th>Data type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>bool_</code></td>
-<td>Boolean (True or False) stored as a byte</td>
-</tr>
-<tr>
-<td><code>int_</code></td>
-<td>Default integer type (same as C <code>long</code>; normally either <code>int64</code> or <code>int32</code>)</td>
-</tr>
-<tr>
-<td>intc</td>
-<td>Identical to C <code>int</code> (normally <code>int32</code> or <code>int64</code>)</td>
-</tr>
-<tr>
-<td>intp</td>
-<td>Integer used for indexing (same as C <code>ssize_t</code>; normally either <code>int32</code> or <code>int64</code>)</td>
-</tr>
-<tr>
-<td>int8</td>
-<td>Byte (-128 to 127)</td>
-</tr>
-<tr>
-<td>int16</td>
-<td>Integer (-32768 to 32767)</td>
-</tr>
-<tr>
-<td>int32</td>
-<td>Integer (-2147483648 to 2147483647)</td>
-</tr>
-<tr>
-<td>int64</td>
-<td>Integer (-9223372036854775808 to 9223372036854775807)</td>
-</tr>
-<tr>
-<td>uint8</td>
-<td>Unsigned integer (0 to 255)</td>
-</tr>
-<tr>
-<td>uint16</td>
-<td>Unsigned integer (0 to 65535)</td>
-</tr>
-<tr>
-<td>uint32</td>
-<td>Unsigned integer (0 to 4294967295)</td>
-</tr>
-<tr>
-<td>uint64</td>
-<td>Unsigned integer (0 to 18446744073709551615)</td>
-</tr>
-<tr>
-<td><code>float_</code></td>
-<td>Shorthand for <code>float64</code>.</td>
-</tr>
-<tr>
-<td>float16</td>
-<td>Half precision float: sign bit, 5 bits exponent, 10 bits mantissa</td>
-</tr>
-<tr>
-<td>float32</td>
-<td>Single precision float: sign bit, 8 bits exponent, 23 bits mantissa</td>
-</tr>
-<tr>
-<td>float64</td>
-<td>Double precision float: sign bit, 11 bits exponent, 52 bits mantissa</td>
-</tr>
-<tr>
-<td><code>complex_</code></td>
-<td>Shorthand for <code>complex128</code>.</td>
-</tr>
-<tr>
-<td>complex64</td>
-<td>Complex number, represented by two 32-bit floats (real and imaginary components)</td>
-</tr>
-<tr>
-<td>complex128</td>
-<td>Complex number, represented by two 64-bit floats (real and imaginary components)</td>
-</tr>
-</tbody></table>
-<p><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html</a></p>
-<h1 id="float64的表示范围"><a href="#float64的表示范围" class="headerlink" title="float64的表示范围"></a>float64的表示范围</h1><p>注意到float64的取值范围为Double precision float: sign bit, 11 bits exponent, 52 bits mantissa</p>
-<p>exponent: 指数</p>
-<p>mantissa: 尾数</p>
-<p>故，float64能表示的最大范围约为+-2*2^2048</p>
-<p>具体计算过程参考链接：</p>
-<p>关于float，double等表示的数值范围的计算</p>
-<p><a href="https://blog.csdn.net/wlimin0523/article/details/34420515" target="_blank" rel="noopener">https://blog.csdn.net/wlimin0523/article/details/34420515</a></p>
-<p>实际测试过程中，np.exp(709)输出正常，np.exp(710)输出inf，已经溢出。</p>
-<p>故使用numpy做e的指数运算时，不能超过709。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">float64</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/22/Numpy-19-float64/">展开全文 >></a>
         </p>
       
 
@@ -2596,6 +2498,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
             
             <div class="clearfix"></div>

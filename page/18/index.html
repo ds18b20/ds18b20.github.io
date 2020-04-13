@@ -156,6 +156,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-29-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-29-serialization/">Python-29-serialization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-29-serialization/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:11:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>在程序运行的过程中，所有的变量都保存在内存中。程序结束后，所有变量都被操作系统回收。</p>
+<p>为了保存中间产生的数据，需要把内存中的变量转换成可以存储或者传输的数据。这个过程就叫做数据的序列化，即serialization，在Python中称为pickling。</p>
+<p>序列化之后的数据可以存储到磁盘里，或者通过网络传输到其他机器上。反过来的过程叫反序列化，unpickling</p>
+<h1 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h1><p>通过倒入pickle模块来实现。</p>
+<h2 id="pickle-dumps-o"><a href="#pickle-dumps-o" class="headerlink" title="pickle.dumps(o)"></a>pickle.dumps(o)</h2><p>把对象o序列化成一个bytes。</p>
+<p>反序列化使用pickle.loads()</p>
+<h2 id="pickle-dump-o-f"><a href="#pickle-dump-o-f" class="headerlink" title="pickle.dump(o, f)"></a>pickle.dump(o, f)</h2><p>把对象o序列化并保存到一个file-like-object中。</p>
+<p>反序列化使用pickle.load()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use pickle</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = dict(name=<span class="string">'Bob'</span>, age=<span class="number">28</span>, score=<span class="number">95</span>)</span><br><span class="line">    pickle.dump(d, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = pickle.load(f)</span><br><span class="line">    print(d)</span><br></pre></td></tr></table></figure>
+
+<p>注意，文件的打开方式为wb，因为pickle生成的是bytes类型的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(type(f))</span><br><span class="line"><span class="comment"># 得到&lt;class '_io.BufferedReader'&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(type(f))</span><br><span class="line"><span class="comment"># 得到&lt;class '_io.TextIOWrapper'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，通过python序列化后的bytes文件只能被python解析。而且不同版本的python可能也不兼容，故暂存重要数据时不要使用。</p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>若要在不同编程语言之间传递数据，需要把对象序列化为标准格式，例如XML和JSON。相比之下JSON更为流行，速度更快。</p>
+<p><strong>JSON本身就是一个字符串。</strong></p>
+<h2 id="json-dumps-o"><a href="#json-dumps-o" class="headerlink" title="json.dumps(o)"></a>json.dumps(o)</h2><p>把对象o序列化成一个str。</p>
+<p>反序列化使用pickle.loads()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">d = dict(name=<span class="string">'Bob'</span>, age=<span class="number">28</span>, score=<span class="number">95</span>)</span><br><span class="line"><span class="comment"># json.dumps(d)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="json-dump-o-f"><a href="#json-dump-o-f" class="headerlink" title="json.dump(o, f)"></a>json.dump(o, f)</h2><p>把对象o序列化并保存到一个file-like-object中。</p>
+<p>反序列化使用pickle.load()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此处最好指定编码类型</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(d, f)</span><br><span class="line"><span class="comment"># 此处最好指定编码类型</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(json.load(f))</span><br></pre></td></tr></table></figure>
+
+<p>JSON标准规定JSON编码是UTF-8</p>
+<p>顺便说一下，对于编码类型的名称，uft-8/utf8/utf8都可以。</p>
+<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p>通过上述例子，可以知道dict可以简单地序列化为一个str。但是对于自己创建的类生成的实例，json模块并不知道怎样处理。这时需要指定转换的方法，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line">        self.__score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">student2dict</span><span class="params">(std)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'name'</span>: std._Student__name,</span><br><span class="line">        <span class="string">'age'</span>: std._Student__age,</span><br><span class="line">        <span class="string">'score'</span>: std._Student__score,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dict2student</span><span class="params">(d)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Student(d[<span class="string">'name'</span>], d[<span class="string">'age'</span>], d[<span class="string">'score'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 序列化</span></span><br><span class="line">s = Student(<span class="string">'Bob'</span>, <span class="number">28</span>, <span class="number">96</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 或者用lambda表达式</span></span><br><span class="line">    json.dump(s, f,default=student2dict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反序列化</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 得到的是dict对象</span></span><br><span class="line">    print(json.load(f))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(json.load(f, object_hook=dict2student))</span><br></pre></td></tr></table></figure>
+
+<p>#处可以使用lambda表达式简写为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.dump(s, f,default=<span class="keyword">lambda</span> obj: obj.__dict__)</span><br></pre></td></tr></table></figure>
+
+<p>因为除了定义了__slot__之外的类的实例都包含__dict__属性。</p>
+<p>Likewise，load函数也可以添加object_hook函数来生成Student实例。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Json module</p>
+<p><a href="https://docs.python.jp/3/library/json.html#module-json" target="_blank" rel="noopener">https://docs.python.jp/3/library/json.html#module-json</a></p>
+<p>Tutorial</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143192607210600a668b5112e4a979dd20e4661cc9c97000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143192607210600a668b5112e4a979dd20e4661cc9c97000</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">serialization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-29-serialization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-02-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1170,94 +1296,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/21/Python-00-Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ME-01-LinearGuide" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/ME-01-LinearGuide/">ME-01-LinearGuide</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/ME-01-LinearGuide/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:33:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="有限ストロークタイプ"><a href="#有限ストロークタイプ" class="headerlink" title="有限ストロークタイプ"></a>有限ストロークタイプ</h1><h2 id="構造："><a href="#構造：" class="headerlink" title="構造："></a>構造：</h2><p>有限ストロークタイプ保持器が有り</p>
-<h2 id="特徴："><a href="#特徴：" class="headerlink" title="特徴："></a>特徴：</h2><p>鋼球の循環抵抗がないため摺動抵抗値の変動がきわめて小さく、立軸使用でも軽くてなめらかな摺動を実現できる。</p>
-<p><img src="/ME-01-LinearGuide/LinearGuide.gif" alt="/ME-01-LinearGuide/LinearGuide.gif"></p>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a href="http://www.ikont.co.jp/product/chocudo/chc26.html" target="_blank" rel="noopener">http://www.ikont.co.jp/product/chocudo/chc26.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linear Guide</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ME//" class="article-tag-list-link color3">ME</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/ME-01-LinearGuide/">展开全文 >></a>
         </p>
       
 
@@ -2614,6 +2652,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
             
             <div class="clearfix"></div>

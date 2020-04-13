@@ -156,6 +156,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ESP32-Arduino-00-Error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/13/ESP32-Arduino-00-Error/">ESP32-Arduino-00-Error</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/13/ESP32-Arduino-00-Error/" class="archive-article-date">
+  	<time datetime="2020-04-12T23:59:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="A-fatal-error-occurred-Failed-to-connect-to-ESP32-Invalid-head-of-packet-0x08"><a href="#A-fatal-error-occurred-Failed-to-connect-to-ESP32-Invalid-head-of-packet-0x08" class="headerlink" title="A fatal error occurred: Failed to connect to ESP32: Invalid head of packet (0x08)"></a>A fatal error occurred: Failed to connect to ESP32: Invalid head of packet (0x08)</h1><p>由于已经向设备里烧录了microPython，切换成Arduino开发时会出现无法烧写程序的现象。</p>
+<p>解决办法：使用初始化工具擦除Flash。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esptool.py --port com10 erase_flash</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/espressif/arduino-esp32/issues/485" target="_blank" rel="noopener">https://github.com/espressif/arduino-esp32/issues/485</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Arduino</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/13/ESP32-Arduino-00-Error/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-STM32-02-Timer-APB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1104,95 +1201,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/15/Linux-04-shell/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-SQLite-02-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/10/SQL-SQLite-02-tips/">SQL-SQLite-02-tips</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/10/SQL-SQLite-02-tips/" class="archive-article-date">
-  	<time datetime="2020-03-10T08:23:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SQLite-Tips"><a href="#SQLite-Tips" class="headerlink" title="SQLite Tips"></a>SQLite Tips</h1><h2 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h2><p><code>sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 140736583877568 and this is thread id 123145388748800</code></p>
-<p>解决方法，</p>
-<p><code># check_same_threadをFalseにする
-conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)</code></p>
-<p>参考，<a href="https://it.masahiro.me/2019/07/post-2339" target="_blank" rel="noopener">https://it.masahiro.me/2019/07/post-2339</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">SQLite</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/10/SQL-SQLite-02-tips/">展开全文 >></a>
         </p>
       
 
@@ -2549,6 +2557,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
               </li>
             
             <div class="clearfix"></div>
