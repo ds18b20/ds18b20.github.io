@@ -156,6 +156,319 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL-MySQL-Setup-Mac" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/01/SQL-MySQL-Setup-Mac/">SQL-MySQL-Setup-Mac</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/01/SQL-MySQL-Setup-Mac/" class="archive-article-date">
+  	<time datetime="2018-08-01T11:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL的安装和配置"><a href="#MySQL的安装和配置" class="headerlink" title="MySQL的安装和配置"></a>MySQL的安装和配置</h1><p>这篇主要记录在Mac平台上安装MySQL的过程。</p>
+<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><p>到MySQL官网下载Community版的Mac安装文件。<br>我自己下载的是.dmg文件，双击打开可以看到一个pkg文件，双击这个pkg文件打开。<br>最后一直点下一步知道安装结束。</p>
+<h2 id="停止MySQL服务"><a href="#停止MySQL服务" class="headerlink" title="停止MySQL服务"></a>停止MySQL服务</h2><p>如果已经启动来MySQL服务，需要先打开Mac的<code>系统偏好设置</code>。</p>
+<p>在最下面找到MySQL的设置按钮，进入设置并关闭MySQL服务。</p>
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><p>安装后默认没有设置密码，Terminal内键入：<code>/usr/local/mysql/bin/mysqladmin -u root password</code><br>按照提示两次键入root账户的密码。</p>
+<p>为防止遗忘，此处设置为root。</p>
+<h2 id="添加系统环境变量"><a href="#添加系统环境变量" class="headerlink" title="添加系统环境变量"></a>添加系统环境变量</h2><p>此时，Terminal内键入<code>mysql</code>会提示找不到命令的错误信息：<code>-bash: mysql: command not found</code>，因为$PATH系统变量内没有记录MySQL的安装目录。</p>
+<blockquote>
+<p>查看 $PATH的方法：</p>
+<p>echo $PATH</p>
+<p>/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</p>
+</blockquote>
+<p>解决方法：</p>
+<ol>
+<li>在Terminal内<code>export PATH=&quot;/usr/local/mysql/bin:$PATH&quot;</code>，但是关闭Terminal后设置消失。</li>
+<li>If you modify the PATH variable in a Terminal session by exporting it (e.g. export PATH=”/usr/local/mysql/bin:$PATH” it will be expired in the next session.<br>So either edit the file ~/.bash_profile or edit /private/etc/paths if you need this PATH for other users also.<br>修改文件的具体操作如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>添加两行，<br><code>alias mysql=’/usr/local/mysql/bin/mysql’</code><br><code>alias mysqladmin=’/usr/local/mysql/bin/mysqladmin’</code> </p>
+<p>或者添加<code>export PATH=&quot;/usr/local/mysql/bin:$PATH&quot;</code><br>然后保存。</p>
+<p>再次查看 $PATH确认MySQL所在目录已经被添加：<br><code>echo $PATH</code></p>
+<p><code>/usr/local/mysql/bin:/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</code></p>
+<p><strong>重启终端</strong>输入mysql即可显示欢迎界面。</p>
+<h2 id="修改默认字符集"><a href="#修改默认字符集" class="headerlink" title="修改默认字符集"></a>修改默认字符集</h2><p>涉及到多语言问题时，为了防止显示乱码需要修改默认字符集。<br>首先，检查安装后的默认设置。<br>Terminal内键入mysql进入mysql环境，然后键入<code>show variables like &#39;%char%&#39;;</code><br>得到如下结果，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                     |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8                                                      |</span><br><span class="line">| character_set_connection | utf8                                                      |</span><br><span class="line">| character_set_database   | latin1                                                    |</span><br><span class="line">| character_set_filesystem | binary                                                    |</span><br><span class="line">| character_set_results    | utf8                                                      |</span><br><span class="line">| character_set_server     | latin1                                                    |</span><br><span class="line">| character_set_system     | utf8                                                      |</span><br><span class="line">| character_sets_dir       | &#x2F;usr&#x2F;local&#x2F;mysql-5.6.41-macos10.13-x86_64&#x2F;share&#x2F;charsets&#x2F; |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">8 rows in set (0.03 sec)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到haracter_set_database和character_set_server并不是utf8字符集。接下来要把这两项修改成utf8格式。<br>首先，在系统便好设置里关闭MySQL服务，然后修改配置文件。<br>Mac下MySQL的默认配置文件位置在<code>/etc/my.cnf</code>或者<code>/etc/mysql/my.cnf</code>。<br>如果没有的话，需要从<code>/usr/local/mysql/support-files/my-default.cnf</code>处拷贝过来：<br><code>sudo cp /usr/local/mysql/support-files/my-default.cnf /etc/my.cnf</code><br>然后<code>sudo vi /etc/my.cnf</code>，做如下修改：<br>[client]部分加入：<br><code>default-character-set=utf8</code></p>
+<p>[mysqld]部分加入：<br><code>character-set-server=utf8</code></p>
+<p>修改完毕之后记得重启MySQL服务。</p>
+<p>这时再次查看设置：<code>mysql&gt; show variables like &#39;%char%&#39;;</code><br>得到，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                     |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8                                                      |</span><br><span class="line">| character_set_connection | utf8                                                      |</span><br><span class="line">| character_set_database   | utf8                                                      |</span><br><span class="line">| character_set_filesystem | binary                                                    |</span><br><span class="line">| character_set_results    | utf8                                                      |</span><br><span class="line">| character_set_server     | utf8                                                      |</span><br><span class="line">| character_set_system     | utf8                                                      |</span><br><span class="line">| character_sets_dir       | &#x2F;usr&#x2F;local&#x2F;mysql-5.6.41-macos10.13-x86_64&#x2F;share&#x2F;charsets&#x2F; |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">8 rows in set (0.02 sec)</span><br></pre></td></tr></table></figure>
+
+<p>修改my.conf配置文件时可以同时修改一下内容：<br>[mysqld]<br><code>default-storage-engine = INNODB</code><br><code>collation-server = utf8_general_ci</code></p>
+<h2 id="忘记初始密码时的操作"><a href="#忘记初始密码时的操作" class="headerlink" title="忘记初始密码时的操作"></a>忘记初始密码时的操作</h2><p><a href="https://blog.csdn.net/u014410695/article/details/50630233" target="_blank" rel="noopener">https://blog.csdn.net/u014410695/article/details/50630233</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://apple.stackexchange.com/questions/287476/the-new-created-terminal-can-not-find-the-file-use-which-in-mac" target="_blank" rel="noopener">https://apple.stackexchange.com/questions/287476/the-new-created-terminal-can-not-find-the-file-use-which-in-mac</a><br><a href="https://www.cnblogs.com/mfmdaoyou/p/7233394.html" target="_blank" rel="noopener">https://www.cnblogs.com/mfmdaoyou/p/7233394.html</a><br><a href="https://blog.csdn.net/Waleking/article/details/7620983" target="_blank" rel="noopener">https://blog.csdn.net/Waleking/article/details/7620983</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Mac</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">setup</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/01/SQL-MySQL-Setup-Mac/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-44-coroutine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/24/Python-44-coroutine/">Python-44-coroutine</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/24/Python-44-coroutine/" class="archive-article-date">
+  	<time datetime="2018-07-24T00:31:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python-实现协程-coroutine"><a href="#Python-实现协程-coroutine" class="headerlink" title="Python 实现协程(coroutine)"></a>Python 实现协程(coroutine)</h1><p>一个简单的实现，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def printer():</span><br><span class="line">    counter &#x3D; 0</span><br><span class="line">    while True:</span><br><span class="line">        string &#x3D; (yield)</span><br><span class="line">        print(&quot;[&#123;0&#125;] &#123;1&#125;&quot;.format(counter, string))</span><br><span class="line">        counter +&#x3D; 1</span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    p &#x3D; printer()</span><br><span class="line">    # p.__next__()</span><br><span class="line">    next(p)</span><br><span class="line"></span><br><span class="line">    p.send(&quot;Hello&quot;)</span><br><span class="line">    p.send(&quot;World&quot;)</span><br><span class="line">    p.send(&quot;!&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码使用生成器（yield）实现了协程（coroutine）。<br>主程序通过send函数唤起子程序并且传入数据，子程序的逻辑为保持死循环接受string并打印。<br>子程序接收到数据并打印之后，用yield把自己挂起，然后返回主程序。</p>
+<p>还需要继续学习。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.hsfzxjy.site/python-generator-coroutine/" target="_blank" rel="noopener">Python “黑魔法” 之 Generator Coroutines</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">coroutine</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/24/Python-44-coroutine/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-opencv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/24/opencv/">opencv</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/24/opencv/" class="archive-article-date">
+  	<time datetime="2018-07-24T00:27:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="cv2-WINDOW"><a href="#cv2-WINDOW" class="headerlink" title="cv2.WINDOW_"></a>cv2.WINDOW_</h1><p>Python: cv2.namedWindow(winname[, flags])</p>
+<ul>
+<li>name: name of the window</li>
+<li>flags: flags of the window<ul>
+<li>WINDOW_NORMAL user can resize the window (no constraint)</li>
+<li>WINDOW_AUTOSIZE the window size is automatically adjusted to fit the displayed image, and you cannot change the window size manually.</li>
+<li>WINDOW_OPENGL</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.opencv.org/2.4/modules/highgui/doc/user_interface.html?highlight=namedwindow#cv2.namedWindow" target="_blank" rel="noopener">Opencv User Interface</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">WINDOW</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/opencv//" class="article-tag-list-link color2">opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/24/opencv/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DeepLearning-07-TwoLayerNet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -795,538 +1108,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/06/24/Python-42-immutable/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-41-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/23/Python-41-struct/">Python-41-struct</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/23/Python-41-struct/" class="archive-article-date">
-  	<time datetime="2018-06-23T11:03:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/leomei91/p/7602603.html" target="_blank" rel="noopener">python学习之struct模块</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struct</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/23/Python-41-struct/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-06-LoadMNIST" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/23/DeepLearning-06-LoadMNIST/">DeepLearning-06-LoadMNIST</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/23/DeepLearning-06-LoadMNIST/" class="archive-article-date">
-  	<time datetime="2018-06-23T03:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="FILE-FORMATS-FOR-THE-MNIST-DATABASE"><a href="#FILE-FORMATS-FOR-THE-MNIST-DATABASE" class="headerlink" title="FILE FORMATS FOR THE MNIST DATABASE"></a>FILE FORMATS FOR THE MNIST DATABASE</h2><p>The data is stored in a very simple file format designed for storing vectors and multidimensional matrices. General info on this format is given at the end of this page, but you don’t need to read that to use the data files.</p>
-<p>All the integers in the files are stored in the MSB first (high endian) format used by most non-Intel processors. Users of Intel processors and other low-endian machines must flip the bytes of the header.</p>
-<p>There are 4 files:</p>
-<p><code>train-images-idx3-ubyte: training set images</code><br><code>train-labels-idx1-ubyte: training set labels</code><br><code>t10k-images-idx3-ubyte:  test set images</code><br><code>t10k-labels-idx1-ubyte:  test set labels</code></p>
-<p>The training set contains 60000 examples, and the test set 10000 examples.</p>
-<p>The first 5000 examples of the test set are taken from the original NIST training set. The last 5000 are taken from the original NIST test set. The first 5000 are cleaner and easier than the last 5000.</p>
-<h3 id="TRAINING-SET-LABEL-FILE-train-labels-idx1-ubyte"><a href="#TRAINING-SET-LABEL-FILE-train-labels-idx1-ubyte" class="headerlink" title="TRAINING SET LABEL FILE (train-labels-idx1-ubyte):"></a>TRAINING SET LABEL FILE (train-labels-idx1-ubyte):</h3><table>
-<thead>
-<tr>
-<th align="right">[offset]</th>
-<th align="right">[type]</th>
-<th align="right">[value]</th>
-<th align="right">[description]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">0000</td>
-<td align="right">32 bit integer</td>
-<td align="right">0x00000801(2049) magic number</td>
-<td align="right">(MSB first)</td>
-</tr>
-<tr>
-<td align="right">0004</td>
-<td align="right">32 bit integer</td>
-<td align="right">60000</td>
-<td align="right">number of items</td>
-</tr>
-<tr>
-<td align="right">0008</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-<tr>
-<td align="right">0009</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-<tr>
-<td align="right">……..</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">xxxx</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-</tbody></table>
-<p><code>The labels values are 0 to 9.</code></p>
-<h3 id="TRAINING-SET-IMAGE-FILE-train-images-idx3-ubyte"><a href="#TRAINING-SET-IMAGE-FILE-train-images-idx3-ubyte" class="headerlink" title="TRAINING SET IMAGE FILE (train-images-idx3-ubyte):"></a>TRAINING SET IMAGE FILE (train-images-idx3-ubyte):</h3><table>
-<thead>
-<tr>
-<th align="right">[offset]</th>
-<th align="right">[type]</th>
-<th align="right">[value]</th>
-<th align="right">[description]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">0000</td>
-<td align="right">32 bit integer</td>
-<td align="right">0x00000803(2051) magic number</td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">0004</td>
-<td align="right">32 bit integer</td>
-<td align="right">60000</td>
-<td align="right">number of images</td>
-</tr>
-<tr>
-<td align="right">0008</td>
-<td align="right">32 bit integer</td>
-<td align="right">28</td>
-<td align="right">number of rows</td>
-</tr>
-<tr>
-<td align="right">0012</td>
-<td align="right">32 bit integer</td>
-<td align="right">28</td>
-<td align="right">number of columns</td>
-</tr>
-<tr>
-<td align="right">0016</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-<tr>
-<td align="right">0017</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-<tr>
-<td align="right">……..</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">xxxx</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-</tbody></table>
-<p>Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</p>
-<h3 id="TEST-SET-LABEL-FILE-t10k-labels-idx1-ubyte"><a href="#TEST-SET-LABEL-FILE-t10k-labels-idx1-ubyte" class="headerlink" title="TEST SET LABEL FILE (t10k-labels-idx1-ubyte):"></a>TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</h3><table>
-<thead>
-<tr>
-<th align="right">[offset]</th>
-<th align="right">[type]</th>
-<th align="right">[value]</th>
-<th align="right">[description]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">0000</td>
-<td align="right">32 bit integer</td>
-<td align="right">0x00000801(2049) magic number</td>
-<td align="right">(MSB first)</td>
-</tr>
-<tr>
-<td align="right">0004</td>
-<td align="right">32 bit integer</td>
-<td align="right">10000</td>
-<td align="right">number of items</td>
-</tr>
-<tr>
-<td align="right">0008</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-<tr>
-<td align="right">0009</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-<tr>
-<td align="right">……..</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">xxxx</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">label</td>
-</tr>
-</tbody></table>
-<p><code>The labels values are 0 to 9.</code></p>
-<h3 id="TEST-SET-IMAGE-FILE-t10k-images-idx3-ubyte"><a href="#TEST-SET-IMAGE-FILE-t10k-images-idx3-ubyte" class="headerlink" title="TEST SET IMAGE FILE (t10k-images-idx3-ubyte):"></a>TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</h3><table>
-<thead>
-<tr>
-<th align="right">[offset]</th>
-<th align="right">[type]</th>
-<th align="right">[value]</th>
-<th align="right">[description]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">0000</td>
-<td align="right">32 bit integer</td>
-<td align="right">0x00000803(2051) magic number</td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">0004</td>
-<td align="right">32 bit integer</td>
-<td align="right">10000</td>
-<td align="right">number of images</td>
-</tr>
-<tr>
-<td align="right">0008</td>
-<td align="right">32 bit integer</td>
-<td align="right">28</td>
-<td align="right">number of rows</td>
-</tr>
-<tr>
-<td align="right">0012</td>
-<td align="right">32 bit integer</td>
-<td align="right">28</td>
-<td align="right">number of columns</td>
-</tr>
-<tr>
-<td align="right">0016</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-<tr>
-<td align="right">0017</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-<tr>
-<td align="right">……..</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td align="right">xxxx</td>
-<td align="right">unsigned byte</td>
-<td align="right">??</td>
-<td align="right">pixel</td>
-</tr>
-</tbody></table>
-<p>Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black). </p>
-<hr>
-<h2 id="THE-IDX-FILE-FORMAT"><a href="#THE-IDX-FILE-FORMAT" class="headerlink" title="THE IDX FILE FORMAT"></a>THE IDX FILE FORMAT</h2><p>the IDX file format is a simple format for vectors and multidimensional matrices of various numerical types.</p>
-<p>The basic format is</p>
-<p><code>magic number</code><br><code>size in dimension 0</code><br><code>size in dimension 1</code><br><code>size in dimension 2</code><br><code>.....</code><br><code>size in dimension N</code><br><code>data</code></p>
-<p>The magic number is an integer (MSB first). The first 2 bytes are always 0.</p>
-<p>The third byte codes the type of the data:<br>0x08: unsigned byte<br>0x09: signed byte<br>0x0B: short (2 bytes)<br>0x0C: int (4 bytes)<br>0x0D: float (4 bytes)<br>0x0E: double (8 bytes)</p>
-<p>The 4-th byte codes the number of dimensions of the vector/matrix: 1 for vectors, 2 for matrices….</p>
-<p>The sizes in each dimension are 4-byte integers (MSB first, high endian, like in most non-Intel processors).</p>
-<p>The data is stored like in a C array, i.e. the index in the last dimension changes the fastest. </p>
-<hr>
-<p>Happy hacking.</p>
-<hr>
-<h1 id="load-by-loop"><a href="#load-by-loop" class="headerlink" title="load by loop"></a>load by loop</h1><p>循环加载数据集，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loader</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path, count)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        初始化加载器</span></span><br><span class="line"><span class="string">        path: 数据文件路径</span></span><br><span class="line"><span class="string">        count: 文件中的样本个数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.path = path</span><br><span class="line">        self.count = count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_file_content</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        读取文件内容</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        f = open(self.path, <span class="string">'rb'</span>)</span><br><span class="line">        content = f.read()</span><br><span class="line">        f.close()</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">to_int</span><span class="params">(self, byte)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        将unsigned byte字符转换为整数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> struct.unpack(<span class="string">'B'</span>, byte)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_picture</span><span class="params">(self, content, index)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，从文件中获取图像</span></span><br><span class="line"><span class="string">        TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</span></span><br><span class="line"><span class="string">        [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">        0000     32 bit integer  0x00000803(2051) magic number</span></span><br><span class="line"><span class="string">        0004     32 bit integer  10000            number of images</span></span><br><span class="line"><span class="string">        0008     32 bit integer  28               number of rows</span></span><br><span class="line"><span class="string">        0012     32 bit integer  28               number of columns</span></span><br><span class="line"><span class="string">        0016     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        0017     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        ........</span></span><br><span class="line"><span class="string">        xxxx     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">        Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        start = index * <span class="number">28</span> * <span class="number">28</span> + <span class="number">16</span></span><br><span class="line">        picture = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">            picture.append([])</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">                <span class="comment"># picture[i].append(self.to_int(content[start + i * 28 + j]))</span></span><br><span class="line">                picture[i].append(content[start + i * <span class="number">28</span> + j])</span><br><span class="line">        <span class="keyword">return</span> picture</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_one_sample</span><span class="params">(self, picture)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，将图像转化为样本的输入向量</span></span><br><span class="line"><span class="string">        数据降维，[[a,b],...,[c,d]] -&gt; [a,b,...,c,d]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        sample = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">28</span>):</span><br><span class="line">                sample.append(picture[i][j])</span><br><span class="line">        <span class="keyword">return</span> sample</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        加载数据文件，获得全部样本的输入向量</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        content = self.get_file_content()</span><br><span class="line">        data_set = []</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(self.count):</span><br><span class="line">            data_set.append(</span><br><span class="line">                self.get_one_sample(</span><br><span class="line">                    self.get_picture(content, index)))</span><br><span class="line">        <span class="keyword">return</span> data_set</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        加载数据文件，获得全部样本的标签向量</span></span><br><span class="line"><span class="string">        TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</span></span><br><span class="line"><span class="string">        [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">        0000     32 bit integer  0x00000801(2049) magic number (MSB first)</span></span><br><span class="line"><span class="string">        0004     32 bit integer  10000            number of items</span></span><br><span class="line"><span class="string">        0008     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        0009     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        ........</span></span><br><span class="line"><span class="string">        xxxx     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">        The labels values are 0 to 9.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        content = self.get_file_content()</span><br><span class="line">        labels = []</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(self.count):</span><br><span class="line">            labels.append(self.norm(content[index + <span class="number">8</span>]))</span><br><span class="line">        <span class="keyword">return</span> labels</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm</span><span class="params">(self, label)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        内部函数，将一个值转换为10维标签向量</span></span><br><span class="line"><span class="string">        数据降维，[[a,b],...,[c,d]] -&gt; [a,b,...,c,d]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        label_vec = []</span><br><span class="line">        <span class="comment"># label_value = self.to_int(label)</span></span><br><span class="line">        label_value = label</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span> i == label_value:</span><br><span class="line">                label_vec.append(<span class="number">0.9</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                label_vec.append(<span class="number">0.1</span>)</span><br><span class="line">        <span class="keyword">return</span> label_vec</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_training_data_set</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获得训练数据集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_loader = ImageLoader(<span class="string">'train-images.idx3-ubyte'</span>, <span class="number">10000</span>)</span><br><span class="line">    label_loader = LabelLoader(<span class="string">'train-labels.idx1-ubyte'</span>, <span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">return</span> image_loader.load(), label_loader.load()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_test_data_set</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获得测试数据集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_loader = ImageLoader(<span class="string">'t10k-images.idx3-ubyte'</span>, <span class="number">5000</span>)</span><br><span class="line">    label_loader = LabelLoader(<span class="string">'t10k-labels.idx1-ubyte'</span>, <span class="number">5000</span>)</span><br><span class="line">    <span class="keyword">return</span> image_loader.load(), label_loader.load()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    images, labels = get_training_data_set()</span><br><span class="line">    img = np.array(images[<span class="number">0</span>]).reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    end_time = time.time()</span><br><span class="line">    print(<span class="string">'Run time: &#123;&#125;'</span>.format(end_time-start_time))</span><br><span class="line">    print(<span class="string">'image shape: &#123;&#125;, label shape: &#123;&#125;'</span>.format((len(images),len(images[<span class="number">0</span>])), len(labels)))</span><br><span class="line">    print(img[<span class="number">14</span>])</span><br><span class="line">    plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>打印结果，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Run time: 2.680000066757202</span><br><span class="line">image shape: (10000, 784), label shape: 10000</span><br><span class="line">[  0   0   0   0   0   0   0   0   0   0   0   0   0  81 240 253 253 119</span><br><span class="line">  25   0   0   0   0   0   0   0   0   0]</span><br></pre></td></tr></table></figure>
-
-<h1 id="load-by-Numpy"><a href="#load-by-Numpy" class="headerlink" title="load by Numpy"></a>load by Numpy</h1><p>使用Numpy加载，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="comment"># from bpVec import *</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loader</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        initialize Loader</span></span><br><span class="line"><span class="string">        path: file path</span></span><br><span class="line"><span class="string">        count: sample count</span></span><br><span class="line"><span class="string">        data_type: data type</span></span><br><span class="line"><span class="string">        dims: data dimensions</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.path = path</span><br><span class="line">        self.data_type = <span class="literal">None</span></span><br><span class="line">        self.dims = <span class="literal">None</span></span><br><span class="line">        self.shape = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_raw</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">""" A function that can read MNIST's idx file format into numpy arrays.</span></span><br><span class="line"><span class="string">        The MNIST data files can be downloaded from here:</span></span><br><span class="line"><span class="string">        http://yann.lecun.com/exdb/mnist/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        This relies on the fact that the MNIST dataset consistently uses</span></span><br><span class="line"><span class="string">        unsigned char types with their data segments.</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        Reference:</span></span><br><span class="line"><span class="string">        https://gist.github.com/tylerneylon/ce60e8a06e7506ac45788443f7269e40</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">with</span> open(self.path, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            zero, self.data_type, self.dims = struct.unpack(<span class="string">'&gt;HBB'</span>, f.read(<span class="number">4</span>))</span><br><span class="line">            self.shape = tuple(struct.unpack(<span class="string">'&gt;I'</span>, f.read(<span class="number">4</span>))[<span class="number">0</span>] <span class="keyword">for</span> d <span class="keyword">in</span> range(self.dims))</span><br><span class="line">            <span class="keyword">return</span> np.fromstring(f.read(), dtype = np.uint8).reshape(self.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(self, norm=False)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        convert data to vector</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> norm == <span class="literal">True</span>:</span><br><span class="line">            ret = self.load_raw() / <span class="number">255</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ret = self.load_raw()</span><br><span class="line">        <span class="keyword">if</span> self.dims &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> ret.reshape(self.shape[<span class="number">0</span>], <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Get all images</span></span><br><span class="line"><span class="string">    TEST SET IMAGE FILE (t10k-images-idx3-ubyte):</span></span><br><span class="line"><span class="string">    [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">    0000     32 bit integer  0x00000803(2051) magic number</span></span><br><span class="line"><span class="string">    0004     32 bit integer  10000            number of images</span></span><br><span class="line"><span class="string">    0008     32 bit integer  28               number of rows</span></span><br><span class="line"><span class="string">    0012     32 bit integer  28               number of columns</span></span><br><span class="line"><span class="string">    0016     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    0017     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    ........</span></span><br><span class="line"><span class="string">    xxxx     unsigned byte   ??               pixel</span></span><br><span class="line"><span class="string">    Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        super(ImageLoader, self).__init__(path)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_one_image</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span> self.dims &gt; <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.load_raw()[index]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show_one_image</span><span class="params">(self, image)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        plt show one image</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        plt.imshow(image, cmap=<span class="string">'gray'</span>)</span><br><span class="line">        plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签数据加载器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabelLoader</span><span class="params">(Loader)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Get all labels</span></span><br><span class="line"><span class="string">    Convert labels to one-hot vectors</span></span><br><span class="line"><span class="string">    TEST SET LABEL FILE (t10k-labels-idx1-ubyte):</span></span><br><span class="line"><span class="string">    [offset] [type]          [value]          [description]</span></span><br><span class="line"><span class="string">    0000     32 bit integer  0x00000801(2049) magic number (MSB first)</span></span><br><span class="line"><span class="string">    0004     32 bit integer  10000            number of items</span></span><br><span class="line"><span class="string">    0008     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    0009     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    ........</span></span><br><span class="line"><span class="string">    xxxx     unsigned byte   ??               label</span></span><br><span class="line"><span class="string">    The labels values are 0 to 9.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        super(LabelLoader, self).__init__(path)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">norm</span><span class="params">(self, label, label_count=<span class="number">10</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        (sample_count, )--&gt;(sample_count, label_count)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        row_count = self.shape[<span class="number">0</span>]</span><br><span class="line">        column_count = label_count</span><br><span class="line">        label_one_hot = np.zeros((row_count, column_count))</span><br><span class="line">        </span><br><span class="line">        label_one_hot[range(row_count), self.load()] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> label_one_hot</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_training_data_set</span><span class="params">(sample_count=<span class="number">100</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    get training data set</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_population = ImageLoader(<span class="string">'train-images.idx3-ubyte'</span>).load()</span><br><span class="line">    label_population = LabelLoader(<span class="string">'train-labels.idx1-ubyte'</span>).load()</span><br><span class="line">    <span class="keyword">assert</span> len(image_population) == len(label_population)</span><br><span class="line">    population_count = len(image_population)</span><br><span class="line">    index = np.random.choice(population_count, sample_count)</span><br><span class="line">    <span class="keyword">return</span> image_population[index], label_population[index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_test_data_set</span><span class="params">(sample_count=<span class="number">50</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    get test data set</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_population = ImageLoader(<span class="string">'t10k-images.idx3-ubyte'</span>).load()</span><br><span class="line">    label_population = LabelLoader(<span class="string">'t10k-labels.idx1-ubyte'</span>).load()</span><br><span class="line">    <span class="keyword">assert</span> len(image_population) == len(label_population)</span><br><span class="line">    population_count = len(image_population)</span><br><span class="line">    index = np.random.choice(population_count, sample_count)</span><br><span class="line">    <span class="keyword">return</span> image_population[index], label_population[index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    images, labels = get_training_data_set(<span class="number">10000</span>)</span><br><span class="line">    img = np.array(images[<span class="number">0</span>]).reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    end_time = time.time()</span><br><span class="line">    print(<span class="string">'Run time: &#123;&#125;'</span>.format(end_time-start_time))</span><br><span class="line">    print(<span class="string">'image shape: &#123;&#125;, label shape: &#123;&#125;'</span>.format(images.shape, labels.shape))</span><br><span class="line">    print(img[<span class="number">14</span>])</span><br><span class="line">    plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>打印结果，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Run time: 0.0839998722076416</span><br><span class="line">image shape: (10000, 784), label shape: (10000,)</span><br><span class="line">[  0   0   0   0   0   0   0   0   0   0   0   0  93 253 253 255 253 253</span><br><span class="line"> 241  39   0   0   0   0   0   0   0   0]</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">THE MNIST DATABASE of handwritten digits</a></p>
-<p><a href="https://github.com/hanbt/learn_dl/blob/master/mnist.py" target="_blank" rel="noopener">https://github.com/hanbt/learn_dl/blob/master/mnist.py</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">load data</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MNIST</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/23/DeepLearning-06-LoadMNIST/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-40-ClassConstructor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/21/Python-40-ClassConstructor/">Python-40-ClassConstructor</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/21/Python-40-ClassConstructor/" class="archive-article-date">
-  	<time datetime="2018-06-21T14:09:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类的构造函数"><a href="#类的构造函数" class="headerlink" title="类的构造函数"></a>类的构造函数</h1><p>Python中新建一个类时，首先一般会在类下加入构造函数块<code>def __init__()</code>。</p>
-<p>首先构造函数也是函数，在子类中可以被重写。和普通函数一样，重写之后的构造函数会把父类的构造函数覆盖。</p>
-<p>如果在父类的构造函数中初始化了一些属性，而且在子类中没有显式地调用父类的构造函数，会导致在子类中无法找到父类属性的问题。</p>
-<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
-
-<p>上述代码会抛出错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;class_test.py&quot;, line 36, in &lt;module&gt;</span><br><span class="line">    a.demo()</span><br><span class="line">  File &quot;class_test.py&quot;, line 19, in demo</span><br><span class="line">    print(self.name)</span><br><span class="line">AttributeError: &#39;Child&#39; object has no attribute &#39;name&#39;</span><br></pre></td></tr></table></figure>
-
-<h1 id="调用父类构造函数"><a href="#调用父类构造函数" class="headerlink" title="调用父类构造函数"></a>调用父类构造函数</h1><p>调用父类构造函数有两种方式：</p>
-<h2 id="调用未绑定的超类构造方法"><a href="#调用未绑定的超类构造方法" class="headerlink" title="调用未绑定的超类构造方法"></a>调用未绑定的超类构造方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        Parent.__init__(self)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
-
-<p>正常输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用super函数"><a href="#使用super函数" class="headerlink" title="使用super函数"></a>使用super函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Child, self).__init__()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>值得注意的是，如果子类中没有定义构造函数，则会自动继承父类的构造函数，这跟普通函数的继承一样。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载器基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'parent'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.attr_p)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(Parent)</span>:</span></span><br><span class="line">    <span class="comment"># def __init__(self):</span></span><br><span class="line">        <span class="comment"># super(Child, self).__init__()</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">        print(<span class="string">'OK'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = Child()</span><br><span class="line">    a.demo()</span><br></pre></td></tr></table></figure>
-
-<p>输出也是，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parent</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/nerrissa/articles/5607291.html" target="_blank" rel="noopener">python中子类调用父类的初始化方法</a></p>
-<p><a href="https://www.jianshu.com/p/452e0fadd144" target="_blank" rel="noopener">Python中子类初始化父类构造方法</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">constructor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/21/Python-40-ClassConstructor/">展开全文 >></a>
         </p>
       
 
@@ -2687,6 +2468,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
               </li>
             
             <div class="clearfix"></div>
