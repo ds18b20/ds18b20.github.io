@@ -156,6 +156,187 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-43-webserver" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/Python-43-webserver/">Python-43-webserver</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/24/Python-43-webserver/" class="archive-article-date">
+  	<time datetime="2018-06-24T14:26:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="simple-web-server"><a href="#simple-web-server" class="headerlink" title="simple web server"></a>simple web server</h1><p>使用python自带的http模块可以快速地实现http web server。</p>
+<p>在目录下执行<code>python -m http.server 80</code>，如果该目录下已经有index.html文件的话，在浏览器内输入<code>localhost</code>或者<code>localhost:80</code>即可看到index.html的内容。</p>
+<p><img src="Python-43-webserver%5Cwebserver.JPG" alt=""></p>
+<p>结束时，按下Ctrl+C来终止服务。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/harry-xiaojun/p/6739003.html" target="_blank" rel="noopener">python3 使用SimpleHTTPServer搭建web服务器</a></p>
+<p><a href="https://www.cnblogs.com/asis/p/6842996.html" target="_blank" rel="noopener">Python3实现简单的http server</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web server</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/24/Python-43-webserver/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-42-immutable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/Python-42-immutable/">Python-42-immutable</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/24/Python-42-immutable/" class="archive-article-date">
+  	<time datetime="2018-06-23T19:32:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="不可变变量-error"><a href="#不可变变量-error" class="headerlink" title="不可变变量 error"></a>不可变变量 error</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=<span class="string">'123'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">0</span>]=<span class="string">'a'</span></span><br></pre></td></tr></table></figure>
+
+<p>当尝试对string的元素进行修改时，抛出错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: &#39;str&#39; object does not support item assignment</span><br></pre></td></tr></table></figure>
+
+<p>这是因为string类型和Int，float一样是immutable，即不可变变量。</p>
+<p>相对应地，list属于可变变量。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">immutable</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/24/Python-42-immutable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-41-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1245,192 +1426,9 @@
 
 
   
-    <article id="post-DeepLearning-00-VectorNorms" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-00-VectorNorms/">DeepLearning-00-VectorNorms</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-00-VectorNorms/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:01:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="vector-normalization"><a href="#vector-normalization" class="headerlink" title="vector normalization"></a>vector <em>normalization</em></h1><p>常见的向量正则化(vector <em>normalization</em> )有两种方式：L1正则化和L2正则化。</p>
-<p>对于向量$\vec w=[w_0, w_1, …w_n]$，有L1正则化为：<br>$$<br>{\lVert\vec w\rVert_1} =|w_1| + |w_2|+…+|w_n|<br>$$<br>L2正则化为：<br>$$<br>{\lVert\vec w\rVert_2} =\sqrt {w_1^2 + w_2^2+…+w_n^2}<br>$$<br>在简单的二维情况下，图形化之后可以看到，</p>
-<p><img src="DeepLearning-00-VectorNorms/norms.png" alt=""></p>
-<p>L2正则化的结果可以用蓝色线段的斜边表示，而L1正则化的结果是两个直角边的和，可知L1大于L2。</p>
-<h1 id="固定长度时L1和L2的图形化"><a href="#固定长度时L1和L2的图形化" class="headerlink" title="固定长度时L1和L2的图形化"></a>固定长度时L1和L2的图形化</h1><p><img src="DeepLearning-00-VectorNorms/norms.png" alt=""></p>
-<p>上图中绿色的圆表示L2距离固定的情况，红色的菱形表示L1距离固定的情况。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://youtu.be/5fN2J8wYnfw" target="_blank" rel="noopener">https://youtu.be/5fN2J8wYnfw</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vector normalization</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-00-VectorNorms/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vocabulary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/06/Vocabulary/">Vocabulary</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/06/Vocabulary/" class="archive-article-date">
-  	<time datetime="2018-06-06T13:59:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><p>finite difference approximation 查分逼近</p>
-<p>numerical gradient 数值微分</p>
-<p>partial derivative 偏导数</p>
-<p>diagonal matrix 对角阵<br>    除了主对角线上的元素外其他元素均为0的矩阵<br>    对角线上元素相等的对角阵：数量阵<br>    对角线上全为1的矩阵：单位阵</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vocabulary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Common//" class="article-tag-list-link color2">Common</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/06/Vocabulary/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2767,6 +2765,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
               </li>
             
             <div class="clearfix"></div>

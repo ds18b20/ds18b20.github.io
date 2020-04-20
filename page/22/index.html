@@ -156,6 +156,235 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KalmanFilter-01-Covariance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/KalmanFilter-01-Covariance/">KalmanFilter-01-Covariance</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/11/KalmanFilter-01-Covariance/" class="archive-article-date">
+  	<time datetime="2018-01-11T13:59:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从方差说起"><a href="#从方差说起" class="headerlink" title="从方差说起"></a>从方差说起</h1><p>首先回顾一下统计学中最常见的几个概念：均值，标准差，方差。</p>
+<ul>
+<li><p>均值<br>$$<br>\bar{X}=\frac{\sum_{i=1}^n  X_{i}}{n}<br>$$<br>​</p>
+</li>
+<li><p>标准差<br>$$<br>s=\sqrt{\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}}<br>$$<br>​</p>
+</li>
+<li><p>方差<br>$$<br>s^2=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$</p>
+</li>
+</ul>
+<p>样本均值X是总体均值U的最优估计值。虽然可以用其他样本统计量来估计总体的均值，比如样本中位数，众数或中列数。但是样本均值通常能提供最优的估计性。理由之一，多个样本的均值拥有比其他统计量更好的一致性（更小的标准差）。理由之二，样本均值X是总体均值U的一个无偏估计量，这意味着样本均值分布的中心趋近于总体均值的中心。（参考《初级统计学》著者: 特里奥拉）</p>
+<p>标准差表示样本中各点到均值的距离的平均，即可以用来评价样本数据的离散程度。标准差越大意味着，离散程度越大，数据分布不集中。标准差公式中分母使用n-1而不是n，这样可以以较小的样本集来更好地逼近总体的标准差，即统计学上的“无偏估计”。方差=标准差的平方</p>
+<p>代码实现：</p>
+<p>直接按公式实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">sample_avr = np.average(sample)</span><br><span class="line">diff = sample - sample_avr</span><br><span class="line">sigma2 = (diff * diff).sum() / (len(sample)<span class="number">-1</span>)</span><br><span class="line">print(pow(sigma2, (<span class="number">1</span>/<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>或者直接用Numpy的内置函数实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">print(np.std(array))</span><br><span class="line"><span class="comment"># 非偏估计，用ddof参数指定</span></span><br><span class="line">print(np.std(array, ddof=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差的意义"><a href="#协方差的意义" class="headerlink" title="协方差的意义"></a>协方差的意义</h1><p>通过上面对方差的介绍，可以注意到方差（标准差）只能用来描述一维数据。而具体环境中遇到的数据通常是二维甚至是多维度的，这时候描述这组数据就不应该只是单独计算各组数据的方差，因为各组数据之间很可能包含某种程度的关联。可以通过<code>协方差</code>来反映这种相关关系的程度。</p>
+<p>我们已经知道方差的定义如下：<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$<br>拆开平方，<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (X_{i}-\bar{X})}{n-1}<br>$$<br>再把分子的后项换成第二维度的Y，得到<br>$$<br>var(x,y)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (Y_{i}-\bar{Y})}{n-1}<br>$$<br>※顺便说一下方差的英文是variance，协方差的英文是covariance。</p>
+<p> 由上述定义可知，<br>$$<br>cov(X,X) = var(X)<br>$$</p>
+<p>$$<br>cov(X,Y) = cov(Y,X)<br>$$</p>
+<p>代码实现：</p>
+<p>按定义实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sample_avr = np.average(array)</span><br><span class="line">diff = array - sample_avr</span><br><span class="line">sigma2_m = (diff * diff).sum() / (len(array)<span class="number">-1</span>)</span><br><span class="line">print(<span class="string">'manual var=&#123;&#125;'</span>.format(sigma2_m))</span><br></pre></td></tr></table></figure>
+
+<p>Numpy函数实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sigma2_a = np.var(array, ddof=<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'auto var=&#123;&#125;'</span>.format(sigma2_a))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>单个协方差用于表示两个维度间的相关关系，当维度增多时就需要多个协方差。数据集的维度为n时，就需要$\frac{n*(n-1)}{2}$个协方差。这些协方差通过矩阵来组织时，就称为协方差矩阵。<br>$$<br>C_{n\times n}=(c_{i,j},c_{i,j}=cov(Dim_{i},Dim_{j}))<br>$$</p>
+<p>$$<br>C =<br>\begin{pmatrix}<br>cov(x,x) &amp; cov(x,y) &amp; cov(x,z) \<br>cov(y,x) &amp; cov(y,y) &amp; cov(y,z) \<br>cov(z,x) &amp; cov(z,y) &amp; cov(z,z) \<br> \end{pmatrix}<br>$$<br>在此也可看到，协方差矩阵是个对称矩阵，且其对角线上是各维度上的方差。</p>
+<p>Py代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证ndArray协方差矩阵</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample_num = <span class="number">10</span></span><br><span class="line">sample_dim = <span class="number">3</span></span><br><span class="line">sample = np.random.randn(sample_num, sample_dim)</span><br><span class="line"></span><br><span class="line">dim0 = sample[:,<span class="number">0</span>]</span><br><span class="line">dim1 = sample[:,<span class="number">1</span>]</span><br><span class="line">dim2 = sample[:,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">dim0_mean = np.average(dim0)</span><br><span class="line">dim1_mean = np.average(dim1)</span><br><span class="line">dim2_mean = np.average(dim2)</span><br><span class="line"></span><br><span class="line">cov01 = ((dim0 - dim0_mean) * (dim1 - dim1_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov02 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov12 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(cov01,cov02,cov12)</span><br></pre></td></tr></table></figure>
+
+<p>直接Numpy函数实现如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证numpy.var-std-cov</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array2 = np.array([[<span class="number">0</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">0</span>]]).T</span><br><span class="line">cov_a = np.cov(array2)</span><br><span class="line">print(<span class="string">'auto cov='</span>)</span><br><span class="line">print(cov_a)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅谈协方差矩阵<a href="http://pinkyjie.com/2010/08/31/covariance/" target="_blank" rel="noopener">http://pinkyjie.com/2010/08/31/covariance/</a></p>
+<p>在线LaTeX编辑<a href="http://latex.codecogs.com/eqneditor/editor.php" target="_blank" rel="noopener">https://www.cnblogs.com/GarfieldEr007/p/5577727.html</a></p>
+<p>numpy.cov：<a href="https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Covariance</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Kalman-Filter//" class="article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/11/KalmanFilter-01-Covariance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-10-Stash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/08/Git-10-Stash/">Git-08-Stash</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/08/Git-10-Stash/" class="archive-article-date">
+  	<time datetime="2018-01-08T11:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-Stash"><a href="#Git-Stash" class="headerlink" title="Git Stash"></a>Git Stash</h1><p>If you are working on a branch called <strong>Ver1.0</strong>, and you find a bug in file <strong>AAA</strong> on <strong>master branch</strong> that need to be fixed immediately.</p>
+<p>You can create a new <strong>bug branch</strong> from master, work on this <strong>bug branch</strong> to fix the bug, commit it and switch to master branch and merge the modification. If you commit them all, you will get too many unuseful commits.</p>
+<p>But when you want to add/commit, some modification will be add/commit to <strong>bug branch</strong> if <strong>Ver1.0</strong> is NOT clean. This modification is not what the <strong>bug branch</strong> should have.</p>
+<p>Before you switch to another branch, note that if your working directory or staging area has uncommitted changes that conflict with the branch you’re checking out, Git won’t let you switch branches. So, keep it CLEAN.</p>
+<p>Or, you can stash working directory to <strong>Ver1.0</strong> branch by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+
+<p>If you enter <code>git status</code>, you will find the working area is already CLEAN. All modification should be added, but don’n need to be committed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># on branch Ver1.0</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"># create branch bug from master</span><br><span class="line">git checkout master</span><br><span class="line">git checkout -b bug</span><br><span class="line"></span><br><span class="line">### fix the bug ###</span><br><span class="line">git add AAA</span><br><span class="line">git commit AAA -m &quot;fix bug&quot;</span><br><span class="line"></span><br><span class="line"># merge&#x2F;del bug</span><br><span class="line">git checkout master</span><br><span class="line">git merge bug</span><br><span class="line">git branch -d bug</span><br><span class="line"></span><br><span class="line"># switch to branch Ver1.0</span><br><span class="line">git checkout Ver1.0</span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"># or</span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;0&#125;</span><br><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
+
+<p>Reference:</p>
+<p><a href="https://segmentfault.com/q/1010000000156026" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000156026</a></p>
+<p><a href="https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stash</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/08/Git-10-Stash/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Git-09-Push" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -992,263 +1221,9 @@
 
 
   
-    <article id="post-Git-01-GitSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-01-GitSetting/">Git-01-GitSetting</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-01-GitSetting/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:29:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Installation-and-Setting"><a href="#Git-Installation-and-Setting" class="headerlink" title="Git Installation and Setting"></a>Git Installation and Setting</h1><h2 id="Git-installation"><a href="#Git-installation" class="headerlink" title="Git installation"></a>Git installation</h2><p>For Windows:</p>
-<ol>
-<li>Download Git-scm from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></li>
-<li>Install</li>
-<li>Open <code>Git bash</code> from Windows start menu</li>
-</ol>
-<p>If a command line window pops up, the installation is success.</p>
-<h2 id="Set-user-name-amp-email"><a href="#Set-user-name-amp-email" class="headerlink" title="Set user name &amp; email"></a>Set user name &amp; email</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;Your Email@example.com&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Add-SSH-key-to-your-server"><a href="#Add-SSH-key-to-your-server" class="headerlink" title="Add SSH key to your server"></a>Add SSH key to your server</h2><ol>
-<li><p>Open Git Bash</p>
-</li>
-<li><p>Check if existing SSH keys are present:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Lists the files in your .ssh directory, if they exist</span><br><span class="line">cd ~&#x2F;.ssh</span><br><span class="line">ls</span><br><span class="line"># or use ls ~&#x2F;.ssh</span><br></pre></td></tr></table></figure>
-
-<p>If public and private key pair like <code>id_rsa  id_rsa.pub</code> exist, </p>
-<p>you already have a SSH key.</p>
-<p><code>id_rsa</code> is your private key, and <code>id_rsa.pub</code> is your public key. If you are using Mac OS, you can find them at <code>home/.ssh/</code>. If you are using Windows, they are at <code>C:\Documents and Settings\your-username.ssh\</code> or  <code>C:\Users\your-username.ssh</code>.</p>
-</li>
-<li><p>Generate SSH key</p>
-<p>If SSH keys do not exist, generate keys by:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># -t: key type</span><br><span class="line"># -C: Your Email</span><br><span class="line">ssh-keygen -t rsa -C &quot;Your Email@gmail.com&quot;</span><br><span class="line"># to generate more than one key pairs</span><br><span class="line">$ ssh-keygen -t rsa -C &quot;Email&quot; -f new_key_name</span><br></pre></td></tr></table></figure>
-
-<p>If you don’t want to set password, press SPACE for 3 times.</p>
-</li>
-<li><p>Add your SSH key to the ssh-agent</p>
-<ul>
-<li><p>show your public key:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>You will get the contents of your public key:</p>
-<blockquote>
-<p>ssh-rsa AAAB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322+Au/9yy9oaABBRCrHN/yo88BC0AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322klCi0/aEBBc02N+JJP <a href="mailto:john@example.com">john@example.com</a></p>
-</blockquote>
-</li>
-<li><p>give your public key to Server Administrator or upload it to your Github Server.</p>
-<p>To copy public key quickly:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># on Mac</span><br><span class="line">pbcopy &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br><span class="line"># on Windows</span><br><span class="line">clip &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>Open your Github, and go to <code>Settings -&gt; SSH and GPG keys -&gt; SSH keys -&gt; New SSH key</code></p>
-<p>Select a <code>Title</code>, and paste your public key to <code>Key</code> area.</p>
-</li>
-<li><p>Verify your setting:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Attempts to ssh to Github</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi username! You&#39;ve successfully authenticated, but GitHub does not # provide shell access.</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>it means your setting is OK.</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="Change-communication-protocol"><a href="#Change-communication-protocol" class="headerlink" title="Change communication protocol"></a>Change communication protocol</h2><p>To change protocol from <code>https</code> to <code>ssh</code>:</p>
-<ol>
-<li><p>show present setting</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (fetch)</p>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (push)</p>
-</blockquote>
-<p>you are using <code>hhttps</code>.</p>
-</li>
-<li><p>sign in to your Github account to <code>ssh</code> url.</p>
-<blockquote>
-<p><a href="mailto:git@github.com">git@github.com</a>:someaccount/someproject.git</p>
-</blockquote>
-<p>Then use:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:someaccount&#x2F;someproject.git</span><br></pre></td></tr></table></figure>
-
-<p>to change the setting.</p>
-<p>At last use<code>git remote -v</code> to confirm your new setting.</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-01-GitSetting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-00-SourceTreeError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-00-SourceTreeError/">Git-00-SourceTreeError</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-00-SourceTreeError/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:27:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SourceTree-error"><a href="#SourceTree-error" class="headerlink" title="SourceTree error"></a>SourceTree error</h1><p>Mark some bug/error when using Git soft SourceTree.</p>
-<h2 id="“Authentication-via-SSH-keys-failed”"><a href="#“Authentication-via-SSH-keys-failed”" class="headerlink" title="“Authentication via SSH keys failed”"></a>“Authentication via SSH keys failed”</h2><p>When using SourceTree to clone a project from github, you may get this error of “通过SSH密钥认证失败”, or “Authentication via SSH keys failed”. </p>
-<p>Just change the setting like:</p>
-<p><code>Tool -&gt; Option -&gt; SSH client Setting</code> and change SSH client to <code>OpenSSH</code>.</p>
-<p><code>工具-&gt;选项-&gt;SSH客户端配置</code> ,将SSH客户端选择OpenSSH, 再确认.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SourceTree</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-00-SourceTreeError/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/21/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/23/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/21/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/23/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2585,6 +2560,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
               </li>
             
             <div class="clearfix"></div>

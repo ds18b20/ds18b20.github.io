@@ -156,6 +156,247 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-07-ClassCompile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Java-07-ClassCompile/">Java-07-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Java-07-ClassCompile/" class="archive-article-date">
+  	<time datetime="2018-03-13T11:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Java中类的编译 </p>
+<h2 id="多个类并列存在"><a href="#多个类并列存在" class="headerlink" title="多个类并列存在"></a>多个类并列存在</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Command line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br></pre></td></tr></table></figure>
+
+<p>编译得到A.class B.class 和 C.class三个字节码文件。</p>
+<h2 id="内部类-nested-class"><a href="#内部类-nested-class" class="headerlink" title="内部类 nested class"></a>内部类 nested class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// </span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后会生成两个.class文件：A.class和A$B.class</p>
+<h2 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h2><p>编译后也是生成两个.class文件：A.class和A$1.class</p>
+<p>(还没学习到)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>一个.java源文件中可以有多个类吗？（内部类除外）有什么条件？</p>
+<p><a href="http://blog.csdn.net/wikijava/article/details/4064688" target="_blank" rel="noopener">http://blog.csdn.net/wikijava/article/details/4064688</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Compile</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Java-07-ClassCompile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-04-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Java-04-Class/">Java-04-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Java-04-Class/" class="archive-article-date">
+  	<time datetime="2018-03-13T11:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Java中的类 </p>
+<p>还是从最经典的例子开始，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为HelloWorld的类。</p>
+<p>针对java文件中只能有一个public类的问题，网上有人这么回答：</p>
+<blockquote>
+<p>每个编译单元(文件)只能有一个public类。这么做的意思是，每个编 </p>
+<p>译单元只能有一个公开的接口，而这个接口就由其public类来表示。</p>
+<p>我想这或是从软件架构设计和安全性设计上得出的结论。或者说是java的设计者们从这方面的考虑。或许这真的是一个规范，但我没有找到相关资料</p>
+<p>不晓得到底有没有这一说话。如果有请知道的同行给出资料来源？</p>
+</blockquote>
+<p><a href="http://topic.csdn.net/t/20060528/22/4784755.html" target="_blank" rel="noopener">http://topic.csdn.net/t/20060528/22/4784755.html</a></p>
+<h2 id="java包含public类时"><a href="#java包含public类时" class="headerlink" title=".java包含public类时"></a>.java包含public类时</h2><p>另外，需要注意的是，包含public类的java源文件必须以public类的名字来命名。</p>
+<p>上面的HelloWorld的例子中，如果把java文件名换成其他，则编译器会报错。</p>
+<p><code>名为xxx的公开类必须在名为xxx.java的文件中声明。</code></p>
+<p>而且，一个java文件中最多只能包含一个public类。</p>
+<p>作为Java的一种设计思想，使public类名和java文件名统一，便于从其他类中调用。</p>
+<h2 id="java不包含public类时"><a href="#java不包含public类时" class="headerlink" title=".java不包含public类时"></a>.java不包含public类时</h2><p>java源文件中可以不包含public类，这时java文件名可以不和其中的任一类名一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*C3.java*/</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C2</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Command line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br><span class="line">&gt;&gt;&gt; java C2</span><br></pre></td></tr></table></figure>
+
+<p>这时，正常输出Hello World.</p>
+<p>反而是运行java C3会报错，因为没有定义C3类，提示找不到该类。</p>
+<p>从上亦可以，main函数不一定非得包含在public类中也可以运行。</p>
+<p>《深入jvm第二版》中有这样一句话：</p>
+<blockquote>
+<p>Java虚拟机实例通过调用某个类的main()来运行一个Java程序，而这个main()必须是public static void 并接收一个字符串数组作为参数，任何拥有这样一个main()的类都可以作为Java程序的起点。</p>
+</blockquote>
+<p>并没有说拥有main()方法的类一定要是public类。</p>
+<p>参考：</p>
+<p>浅谈为什么一个java源文件中只能有一个public类？</p>
+<p><a href="http://blog.csdn.net/bareheadzzq/article/details/6562211" target="_blank" rel="noopener">http://blog.csdn.net/bareheadzzq/article/details/6562211</a></p>
+<h1 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h1><p>main函数中，<br>public定义了函数的访问权限，表示在任何场合都可以被引用，这样JVM就可以找到main方法从而运行javac程序。</p>
+<p>static表示此方法是静态的，是类的方法。可以使用<code>类名.方法名</code>的方式调用。<br>不需要初始化得到实例，再调用实例的方法。</p>
+<p>void和C语言中的规定相同，表示函数没有返回值。</p>
+<p>String[] args表示参数args是一个字符串数组，用于给main函数传递参数。<br>例如，命令行下运行java ClassName xyz abc<br>在main函数体内就可以使用args字符串数组了。<br>args[0]表示第一个元素，即xyz</p>
+<p>String[] args和String args[]运行结果一样，但是应使用前者来避免阅读代码的人的歧义和误读（此处还需深入理解）</p>
+<p>参考：</p>
+<p>在java中public void与public static void有什么区别 ?<br><a href="https://www.zhihu.com/question/39965419" target="_blank" rel="noopener">https://www.zhihu.com/question/39965419</a></p>
+<h2 id="print-println"><a href="#print-println" class="headerlink" title="print/println"></a>print/println</h2><p>此外Java还提供了print函数，和println函数的区别是，println默认在输出的最后加上了换行。</p>
+<p>无论是print还是println，参数内都可以传入运算表达式或者变量。如，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.print(<span class="number">1</span>+<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line">System.out.println(str);</span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/java/java-tutorial.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Java-04-Class/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-03-name" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1048,243 +1289,9 @@
 
 
   
-    <article id="post-Python-04-dict-get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-04-dict-get/">Python-04-dict-get</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-04-dict-get/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里记录一下，dict获取键值的两种方法，dict[‘key’]和dict.get(‘key’)</p>
-<h1 id="dict-‘key’"><a href="#dict-‘key’" class="headerlink" title="dict[‘key’]"></a>dict[‘key’]</h1><p>有key键存在时，返回键的值；</p>
-<p>key键不存在时，返回KeyError</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># KeyError</span></span><br><span class="line">dataDict[<span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
-
-<h1 id="dict-get-‘key’"><a href="#dict-get-‘key’" class="headerlink" title="dict.get(‘key’)"></a>dict.get(‘key’)</h1><p>有key键存在时，返回键的值；</p>
-<p>key键不存在时，返回None(默认)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># 返回23</span></span><br><span class="line">dataDict.get(<span class="string">'a'</span>)</span><br><span class="line"><span class="comment"># 返回None</span></span><br><span class="line">dataDict.get(<span class="string">'c'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>完整用法为，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict.get(key, default=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>key – 字典中要查找的键。</li>
-<li>default – 如果指定键的值不存在时，返回该默认值。</li>
-</ul>
-<p>故可以通过dict.get()方法检验键是否存在，而且不会抛出Error。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">get</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-04-dict-get/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-csv2DictList" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-00-csv2DictList/">Python-00-csv2DictList</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-00-csv2DictList/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:25:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇主要是关于csv文件和dict/list类型数据的互相转换。</p>
-<p>涉及到了以下常用的5种场景：</p>
-<ol>
-<li>将一个二重列表[[],[]]写入到csv文件中</li>
-<li>从csv文件中读取返回为列表</li>
-<li>将一字典写入到csv文件中</li>
-<li>从csv文件中读取一个字典</li>
-<li>从csv文件中读取一个计数字典(统计各key出现的次数)</li>
-<li>嵌套多个字典的列表写到csv中</li>
-</ol>
-<h1 id="list-2-csv"><a href="#list-2-csv" class="headerlink" title="list 2 csv"></a>list 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一个二重列表写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createListCSV</span><span class="params">(fileName=<span class="string">""</span>, dataList=[])</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> dataList:</span><br><span class="line">            csvWriter.writerow(data)</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-2-list"><a href="#csv-2-list" class="headerlink" title="csv 2 list"></a>csv 2 list</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从文本文件中读取返回为列表的形式</span></span><br><span class="line"><span class="comment"># 输入：文件名称，分隔符（默认,）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readListCSV</span><span class="params">(fileName=<span class="string">""</span>, splitsymbol=<span class="string">","</span>)</span>:</span></span><br><span class="line">    dataList = []</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataList.append(tmpList)</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataList</span><br></pre></td></tr></table></figure>
-
-<h1 id="dict-2-csv"><a href="#dict-2-csv" class="headerlink" title="dict 2 csv"></a>dict 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一字典写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据字典</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDictCSV</span><span class="params">(fileName=<span class="string">""</span>, dataDict=&#123;&#125;)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> dataDict.iteritems():</span><br><span class="line">            csvWriter.writerow([k,v])</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-2-dict"><a href="#csv-2-dict" class="headerlink" title="csv 2 dict"></a>csv 2 dict</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex,valueIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>, valueIndex=<span class="number">1</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataDict[tmpList[keyIndex]] = tmpList[valueIndex]</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-get-key-num"><a href="#csv-get-key-num" class="headerlink" title="csv get key num."></a>csv get key num.</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个计数字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            <span class="keyword">if</span> dataDict.get(tmpList[keyIndex]) == <span class="literal">None</span>:</span><br><span class="line">                dataDict[tmpList[keyIndex]] = <span class="number">0</span></span><br><span class="line">            dataDict[tmpList[keyIndex]] = dataDict.get(tmpList[keyIndex]) + <span class="number">1</span></span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
-
-<h1 id="nested-list-2-csv"><a href="#nested-list-2-csv" class="headerlink" title="nested list 2 csv"></a>nested list 2 csv</h1><p>嵌套多个字典的列表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my_list = [&#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Bordeaux'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Sunderland'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Lewis Baker'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'England'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Baker'</span>, <span class="string">'players.player_id'</span>: <span class="string">'9574'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Lewis'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'25/04/1995'</span>, <span class="string">'players.team'</span>: <span class="string">'Vitesse'</span>&#125;</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure>
-
-<p>转 csv的代码，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># write nested list of dict to csv</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nestedlist2csv</span><span class="params">(list, out_file)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(out_file, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        w = csv.writer(f)</span><br><span class="line">        fieldnames=list[<span class="number">0</span>].keys()  <span class="comment"># solve the problem to automatically write the header</span></span><br><span class="line">        w.writerow(fieldnames)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> list:</span><br><span class="line">            w.writerow(row.values())</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="输出csv中包含空白行的问题"><a href="#输出csv中包含空白行的问题" class="headerlink" title="输出csv中包含空白行的问题"></a>输出csv中包含空白行的问题</h1><p>问题在于这一句：open(fileName, “w”)</p>
-<p>在后面加入参数<code>newline=&#39;&#39;</code>即可解决。</p>
-<p>得到：open(fileName, “w”, newline=’’)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>python列表、字典与csv</p>
-<p><a href="https://www.cnblogs.com/moye13/p/5291156.html" target="_blank" rel="noopener">https://www.cnblogs.com/moye13/p/5291156.html</a></p>
-<p>pythonでcsvファイルを整形したいが、一行間隔で空行を出力してしまいハマった話</p>
-<p><a href="http://helloworldryo.hatenablog.com/entry/2014/05/07/031628" target="_blank" rel="noopener">http://helloworldryo.hatenablog.com/entry/2014/05/07/031628</a></p>
-<p>csv文件与字典，列表等之间的转换小结【Python】</p>
-<p><a href="https://segmentfault.com/a/1190000007092479" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007092479</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-00-csv2DictList/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2621,6 +2628,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,199 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-21-reshape" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/02/Numpy-21-reshape/">Numpy-21-reshape</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/02/Numpy-21-reshape/" class="archive-article-date">
+  	<time datetime="2018-05-01T22:20:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="shape"><a href="#shape" class="headerlink" title="shape"></a>shape</h1><p>修改ndarray的shape属性可以直接实现尺寸的转换，而且是当前ndarray直接起效。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.shape = (<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="reshape"><a href="#reshape" class="headerlink" title="reshape"></a>reshape</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.reshape([<span class="number">2</span>, <span class="number">5</span>])</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+
+<p>reshape只是复制原数列并作变形，返回另一个数列，所以需要接受此返回值。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reshape</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shape</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/02/Numpy-21-reshape/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-34-sysargv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/30/Python-34-sysargv/">Python-34-sysargv</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/30/Python-34-sysargv/" class="archive-article-date">
+  	<time datetime="2018-04-30T13:23:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv"></a>sys.argv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> argv == <span class="literal">None</span>:</span><br><span class="line">        print(<span class="string">'Hello world'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(argv)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main(sys.argv)</span><br><span class="line">    print(type(sys.argv))</span><br></pre></td></tr></table></figure>
+
+<p>sys.argv是命令行下python命令后的所有参数的集合，这个集合组成了一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\iPythonFiles&gt;python arg.py -v</span><br><span class="line">[&#39;arg.py&#39;, &#39;-v&#39;]</span><br><span class="line">&lt;class &#39;list&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sys</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">argv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/30/Python-34-sysargv/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-33-argparse" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1057,328 +1250,9 @@
 
 
   
-    <article id="post-SQL-03-Commit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/SQL-03-Commit/">SQL-03-Commit</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/15/SQL-03-Commit/" class="archive-article-date">
-  	<time datetime="2018-04-15T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SQL语言分类"><a href="#SQL语言分类" class="headerlink" title="SQL语言分类"></a>SQL语言分类</h1><p>按照COMMIT和ROLLBACK的用法来分类时，SQL语言可以分成DDL，DML和DCL三大类。</p>
-<ol>
-<li><p>DDL（Data Definition Language） 数据定义语言</p>
-<p>用于定义和管理 SQL 数据库中的所有对象的语言 。</p>
-<p>CREATE—创建表</p>
-<p>ALTER—修改表</p>
-<p>DROP—删除表</p>
-</li>
-<li><p>DML（Data Manipulation Language） 数据操纵语言</p>
-<p>SQL中具体操作数据的语言。 </p>
-<p>INSERT—数据的插入</p>
-<p>DELETE—数据的删除</p>
-<p>UPDATE—数据的修改</p>
-<p>SELECT—数据的查询</p>
-</li>
-<li><p>DCL（Data Control Language）数据控制语言</p>
-<p>用来授予或回收访问数据库的某种特权，并控制数据库操纵事务发生的时间及效果，对数据库实行监视等。</p>
-<p>GRANT—授权。</p>
-<p>ROLLBACK—回滚</p>
-<p>COMMIT—提交。 </p>
-</li>
-</ol>
-<h1 id="需要Commit的情况"><a href="#需要Commit的情况" class="headerlink" title="需要Commit的情况"></a>需要Commit的情况</h1><p>在上述DML语言之后，需要执行COMMIT / ROLLBACK把数据从内存写到硬盘上。具体说来，DML语句执行之后数据转移到回滚段(除了SELECT)，等待用户进行提交(COMMIT)或者回滚(ROLLBACK)后，放在回滚段中的数据会被清除。<strong>Commit可以使用Python的上下文功能来实现，具体见参考2。</strong></p>
-<p>SELECT语句执行后，数据暂存在共享池。当其他人查询相同数据时，可以直接从共享池中提取，而不用重新从数据库中查询，从而提高了查询速度。</p>
-<h1 id="Commit方式"><a href="#Commit方式" class="headerlink" title="Commit方式"></a>Commit方式</h1><p>提交(COMMIT)数据有三种类型：</p>
-<ol>
-<li><p>显式提交</p>
-<p>直接显式的写出COMMIT命令来完成提交</p>
-</li>
-<li><p>隐式提交</p>
-<p>用SQL命令间接完成的提交为隐式提交。这些命令是：</p>
-<p>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME</p>
-</li>
-<li><p>自动提交</p>
-<p>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，</p>
-<p>系统将自动进行提交，这就是自动提交。其格式为： SQL&gt;SET AUTOCOMMIT ON；</p>
-</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>COMMIT和ROLLBACK的用法</p>
-<p><a href="https://blog.csdn.net/yjtgod/article/details/9447379" target="_blank" rel="noopener">https://blog.csdn.net/yjtgod/article/details/9447379</a></p>
-<p>You do have to commit after inserting:</p>
-<p><a href="https://stackoverflow.com/questions/22488763/sqlite-insert-query-not-working-with-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/22488763/sqlite-insert-query-not-working-with-python</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">commit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/15/SQL-03-Commit/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-SQLite-01-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/14/SQL-SQLite-01-basic/">Python-SQL-01-SQLite</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/14/SQL-SQLite-01-basic/" class="archive-article-date">
-  	<time datetime="2018-04-14T13:27:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h1><p>SQLite是一个开源的嵌入式数据库，由于其数据库就是一个单独的文件，方便嵌入到各种应用程序中。而且SQLite本身是由C编写而成，所以速度快，体积小。</p>
-<p>主要特点如下，</p>
-<ul>
-<li><p>不需要一个单独的服务器进程或操作的系统（无服务器的）。</p>
-</li>
-<li><p>SQLite 不需要配置，这意味着不需要安装或管理。</p>
-</li>
-<li><p>一个完整的 SQLite 数据库是存储在一个单一的跨平台的磁盘文件。</p>
-</li>
-<li><p>SQLite 是非常小的，是轻量级的，完全配置时小于 400KiB，省略可选功能配置时小于250KiB。</p>
-</li>
-<li><p>SQLite 是自给自足的，这意味着不需要任何外部的依赖。</p>
-</li>
-<li><p>SQLite 事务是完全兼容 ACID 的，允许从多个进程或线程安全访问。</p>
-</li>
-<li><p>SQLite 支持 SQL92（SQL2）标准的大多数查询语言的功能。</p>
-</li>
-<li><p>SQLite 使用 ANSI-C 编写的，并提供了简单和易于使用的 API。</p>
-</li>
-<li><p>SQLite 可在 UNIX（Linux, Mac OS-X, Android, iOS）和 Windows（Win32, WinCE, WinRT）中运行。</p>
-<p><a href="https://wizardforcel.gitbooks.io/tutorialspoint-db/content/sqlite/61.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/tutorialspoint-db/content/sqlite/61.html</a></p>
-</li>
-</ul>
-<h1 id="SQLite命令"><a href="#SQLite命令" class="headerlink" title="SQLite命令"></a>SQLite命令</h1><p>与关系型数据库进行交互的标准SQLite命令类似于SQL命令。主要有CREATE，SELECT，INSERT，UPDATE，DELETE，和DROP。根据它们的操作性质可以分为以下三类：</p>
-<h2 id="DDL-数据定义语言"><a href="#DDL-数据定义语言" class="headerlink" title="DDL - 数据定义语言"></a>DDL - 数据定义语言</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CREATE</td>
-<td>创建一个新的表，一个表的视图，或者数据库中的其他对象。</td>
-</tr>
-<tr>
-<td>ALTER</td>
-<td>修改数据库中的某个已有的数据库对象，比如一个表。</td>
-</tr>
-<tr>
-<td>DROP</td>
-<td>删除整个表，或者表的视图，或者数据库中的其他对象。</td>
-</tr>
-</tbody></table>
-<h2 id="DML-数据操作语言"><a href="#DML-数据操作语言" class="headerlink" title="DML - 数据操作语言"></a>DML - 数据操作语言</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>INSERT</td>
-<td>创建一条记录。</td>
-</tr>
-<tr>
-<td>UPDATE</td>
-<td>修改记录。</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>删除记录。</td>
-</tr>
-</tbody></table>
-<h2 id="DQL-数据查询语言"><a href="#DQL-数据查询语言" class="headerlink" title="DQL - 数据查询语言"></a>DQL - 数据查询语言</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SELECT</td>
-<td>从一个或多个表中检索某些记录。</td>
-</tr>
-</tbody></table>
-<h1 id="Python操作SQLite"><a href="#Python操作SQLite" class="headerlink" title="Python操作SQLite"></a>Python操作SQLite</h1><p>Python发行版本默认内置了操作SQLite的库sqlite3，使用前直接<code>import sqlite3</code>即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line">conn = sqlite3.connect(<span class="string">'sqlite_test.db'</span>)</span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"></span><br><span class="line">com = <span class="string">"SELECT COUNT(*) FROM sqlite_master WHERE type=\'table\' AND name=\'%s\'"</span> % <span class="string">'shop'</span></span><br><span class="line">print(com)</span><br><span class="line"></span><br><span class="line">cursor.execute(com)</span><br><span class="line">values = cursor.fetchall()</span><br><span class="line">print(values)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
-
-<p>操作数据库之前需要连接到数据库文件，这样的一个连接称为一个Connection。</p>
-<p>成功连接到数据库之后，要执行SQL语句需要先打开游标(cursor)，通过游标执行语句。</p>
-<p>操作完成之后必须关闭cursor和connect。<strong>关于cursor详见参考</strong></p>
-<p>像上面的例子中，查询语句包含参数时，可以使用？通配，并在逗号后按顺序加上参数组成的tuple。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line">conn = sqlite3.connect(<span class="string">'sqlite_test.db'</span>)</span><br><span class="line"></span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"></span><br><span class="line">cursor.execute(<span class="string">"SELECT COUNT(*) FROM sqlite_master WHERE type=? AND name=?"</span>, (<span class="string">'table'</span>, <span class="string">'shop'</span>))</span><br><span class="line">values = cursor.fetchall()</span><br><span class="line">print(values)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
-
-<p>或者使用python自带的字符串格式化方法format来实现类似效果。</p>
-<h2 id="判断表是否存在"><a href="#判断表是否存在" class="headerlink" title="判断表是否存在"></a>判断表是否存在</h2><p>由于一个数据库文件中可以存储多个表，故有时需要判断某个表时候已经创建，这时候可以使用上面例子中的语句来实现。</p>
-<p><code>SELECT COUNT(*) FROM sqlite_master WHERE type=&#39;table&#39; AND name=&#39;&lt;Table Name&gt;&#39;</code></p>
-<p>返回结果为[(1,)]时，则该表<Table Name>已经存在。</p>
-<p>类似地，如果要返回保存表的数目，可以去掉AND后面的name条件，<code>SELECT COUNT(*) FROM sqlite_master WHERE type=&#39;table&#39;</code></p>
-<p><strong>注意，出现引号嵌套时，注意是否需要对引号进行转义处理。</strong></p>
-<h2 id="sqlite-master表"><a href="#sqlite-master表" class="headerlink" title="sqlite_master表"></a>sqlite_master表</h2><p>上文中已经出现了sqlite_master这个表名，它储存了数据库中描述表的关键信息。</p>
-<h2 id="添加表"><a href="#添加表" class="headerlink" title="添加表"></a>添加表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> &lt;表名&gt; (<span class="keyword">id</span> <span class="built_in">varchar</span>(<span class="number">20</span>) PRIMARY <span class="keyword">KEY</span>, <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> &lt;表名&gt;</span><br></pre></td></tr></table></figure>
-
-<p>DROP TABLE会删除表的结构和储存的数据，而且属于SQL中的DDL，执行不需要COMMIT。执行后不能恢复，所以此命令要慎用。删除储存的数据时候可以使用TRUNCATE或者DELETE命令。<strong>详见参考部分内容</strong></p>
-<h2 id="插入行"><a href="#插入行" class="headerlink" title="插入行"></a>插入行</h2><p>语法为<code>INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)]  VALUES (value1, value2, value3,...valueN)</code></p>
-<p>或者插入完整的一行，<code>INSERT INTO TABLE_NAME VALUES (value1,value2,value3,...valueN)</code>，此时要注意value的顺序。</p>
-<h2 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h2><p>语法<code>DELETE FROM 表名称 WHERE 列名称 = 值</code></p>
-<p>删除所有行时，可以<code>DELETE FROM table_name</code>。虽然所有行内容被删除，但是表的结构，属性和索引都是完整的。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>在SqlServer存储过程中使用Cursor（游标）操作记录</p>
-<p><a href="https://blog.csdn.net/yixiaotian1988/article/details/7907431" target="_blank" rel="noopener">https://blog.csdn.net/yixiaotian1988/article/details/7907431</a></p>
-<p>Sql中truncate，delete以及drop的区别</p>
-<p><a href="https://www.cnblogs.com/baibo123/p/7906070.html" target="_blank" rel="noopener">https://www.cnblogs.com/baibo123/p/7906070.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">SQLite</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/14/SQL-SQLite-01-basic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2715,6 +2589,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
               </li>
             
             <div class="clearfix"></div>

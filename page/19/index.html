@@ -156,6 +156,241 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux-01-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Linux-01-command/">Git-07-RM</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Linux-01-command/" class="archive-article-date">
+  	<time datetime="2018-03-07T13:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="list"><a href="#list" class="headerlink" title="list"></a>list</h1><p>ls</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
+
+<p>加入<code>-l</code>参数，用来显示详细信息，包括日期、大小、权限、所有者等信息。</p>
+<h1 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h1><p>rm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 直接rm 文件夹</span><br><span class="line">rm foldername</span><br></pre></td></tr></table></figure>
+<p>以上命令仅限于文件夹为空的情况。</p>
+<p>当文件夹不为空时，加上参数-rf即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 加上参数-rf</span><br><span class="line">rm -rf foldername</span><br></pre></td></tr></table></figure>
+
+<p>-r表示向下递归，无论有多少下级目录，一并删除。</p>
+<p>-f表示强行删除，没有提示信息。</p>
+<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># add a new file</span><br><span class="line">touch filename</span><br><span class="line"># new as root</span><br><span class="line">sudo touch filename</span><br></pre></td></tr></table></figure>
+
+<h1 id="编辑文件"><a href="#编辑文件" class="headerlink" title="编辑文件"></a>编辑文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># edit by gedit</span><br><span class="line">sudo gedit filename</span><br></pre></td></tr></table></figure>
+
+<h1 id="移动文件"><a href="#移动文件" class="headerlink" title="移动文件"></a>移动文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mv 源 目的地</span><br><span class="line">mv source destination</span><br></pre></td></tr></table></figure>
+
+<h1 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h1><p>上述mv命令同样可以实现重命名的功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mv 原名 新名</span><br><span class="line">mv oldname newname</span><br></pre></td></tr></table></figure>
+
+<h1 id="拷贝文件"><a href="#拷贝文件" class="headerlink" title="拷贝文件"></a>拷贝文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cp [选项] 源文件或目录 目标文件或目录 </span><br><span class="line">cp -i abc.c &#x2F;usr&#x2F;ds18b20</span><br></pre></td></tr></table></figure>
+
+<p>-i参数，当目标目录存在同名文件时，询问是否覆盖。</p>
+<p>-r参数，当源是目录时，向下复制整个目录。</p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>链接分为<strong>软链接</strong>和<strong>硬链接</strong>两种</p>
+<p>软链接类似windows下的快捷方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ln -s 源文件 目标文件</span><br><span class="line">ln -s filename &#x2F;usr&#x2F;local&#x2F;bin&#x2F;less</span><br></pre></td></tr></table></figure>
+
+<p>硬链接完整地复制一份源文件到目标地址。</p>
+<p>去掉-s参数得到的就是硬链接。</p>
+<p>无论是软链接还是硬链接，源地址的文件和目标地址的文件都能保持同步。</p>
+<h1 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h1><p>重命名文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename ori-name dest-name</span><br></pre></td></tr></table></figure>
+
+<p>重命名文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv folderA folderB</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="进程查看"><a href="#进程查看" class="headerlink" title="进程查看"></a>进程查看</h1><p><code>ps aux | grep **</code></p>
+<p>**处为进程包含的关键词，比如python</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Ubuntu 命令行教程</p>
+<p><a href="http://teliute.org/linux/Tecli/lesson5/lesson5.html" target="_blank" rel="noopener">http://teliute.org/linux/Tecli/lesson5/lesson5.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Basic Command</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Linux-01-command/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-01-WhatisJava" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/06/Java-01-WhatisJava/">Java-01-What is Java</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/06/Java-01-WhatisJava/" class="archive-article-date">
+  	<time datetime="2018-03-06T12:25:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="What-is-Java"><a href="#What-is-Java" class="headerlink" title="What is Java"></a>What is Java</h1><p>Java technology is both a programming language and a platform.</p>
+<p>Java programs are compiled and interpreted. Compilation translate Java code to an intermediate language called Java bytecode.  bytecode is in turn parsed and run(interpreted) by the Java Virtual Machine(JVM)-a translator between Java language and a underlying operating system and hardware. A compiled Java bytecode can run on any system that has a version of JVM.</p>
+<p>The Java platform is a software-only platform that can run on top of most hardware platforms. It consists of the JVM and the Java API.</p>
+<p>Java Platform comes in 3 versions:</p>
+<ul>
+<li>Java SE(Java Platform, Standard Edition) for desktop and sever applications.</li>
+<li>Java EE(Java Platform, Enterprise Edition) for web and enterprise applications.</li>
+<li>Java ME(Java Platform, Micro Edition) for applications running on resource-constrained devices(embedded device).</li>
+</ul>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>New to Java programming</p>
+<p><a href="https://www.ibm.com/developerworks/java/newto/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/java/newto/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Start</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/06/Java-01-WhatisJava/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-28-unittest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1013,216 +1248,9 @@
 
 
   
-    <article id="post-Python-25-property" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/20/Python-25-property/">Python-25-property</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/20/Python-25-property/" class="archive-article-date">
-  	<time datetime="2018-02-20T12:11:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="property装饰"><a href="#property装饰" class="headerlink" title="property装饰"></a>property装饰</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">a = Student()</span><br><span class="line">a.name = <span class="string">'Tom'</span></span><br></pre></td></tr></table></figure>
-
-<p>像这样直接操作属性很方便，但是这样写出的代码可靠性不高。因为内部属性更容易被误操作，而且没有实现参数检查。</p>
-<p>比较标准的做法是，在class内创建函数，用于读写内部属性。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">if</span> value &gt;= <span class="number">0</span> <span class="keyword">and</span> value&lt;=<span class="number">100</span>:</span><br><span class="line">                self._score = value</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.get_score())</span><br></pre></td></tr></table></figure>
-
-<p>这样虽然没有问题，但是调用函数毕竟没有<strong>直接操作属性</strong>方便。</p>
-<p>这时可以使用@property装饰器来用直接操作的形式实现相同的结果。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">if</span> value &gt;= <span class="number">0</span> <span class="keyword">and</span> value&lt;=<span class="number">100</span>:</span><br><span class="line">                self._score = value</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line">s.score = <span class="number">95</span></span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
-
-<p>形式上很简单地直接操作了属性，但是实际上在内部也实现了参数检查。</p>
-<h1 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a>只读属性</h1><p>通过不定义@***.setter来实现只读属性。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">love</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._love</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 这句会报错</span></span><br><span class="line">s.love = <span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p>上述代码中的love是只读属性，故不可以修改。</p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Screen</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">width</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._width</span><br><span class="line"><span class="meta">    @width.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">width</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(value, int):</span><br><span class="line">                self._width = value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'width must be an integer!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">height</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._height</span><br><span class="line"><span class="meta">    @height.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">height</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(value, int):</span><br><span class="line">                self._height = value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'height must be an integer!'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">resolution</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._width * self._height</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试:</span></span><br><span class="line">s = Screen()</span><br><span class="line">s.width = <span class="number">1024</span></span><br><span class="line">s.height = <span class="number">768</span></span><br><span class="line">print(<span class="string">'resolution ='</span>, s.resolution)</span><br><span class="line"><span class="keyword">if</span> s.resolution == <span class="number">786432</span>:</span><br><span class="line">    print(<span class="string">'测试通过!'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">property decorator</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/20/Python-25-property/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-21-ClassAttrInstanceAttr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/19/Python-21-ClassAttrInstanceAttr/">Python-21-ClassAttrInstanceAttr</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/19/Python-21-ClassAttrInstanceAttr/" class="archive-article-date">
-  	<time datetime="2018-02-19T13:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    name = <span class="string">'Student'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部引用</span></span><br><span class="line">Student.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内部引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    name = <span class="string">'Student'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">innerFunc</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(Student.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">Student.name = <span class="string">'abc'</span></span><br></pre></td></tr></table></figure>
-
-<p>类的属性，无论是内部引用还是外部引用，都要使用<code>Class.attribute</code>的方式。</p>
-<h1 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span></span></span><br><span class="line">        self.name = 'Student'</span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部引用</span></span><br><span class="line">s.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内部引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span></span></span><br><span class="line">        self.name = 'Student'</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="comment"># 只是演示，不推荐这样</span></span><br><span class="line">s.name = <span class="string">'abc'</span></span><br></pre></td></tr></table></figure>
-
-<p>实例的属性，内部引用使用<code>self.attribute</code>，外部引用时使用<code>instance.attribute</code>的方式。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>实现每创建一个实例，计数加一的功能：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        <span class="comment"># 此处就是引用了Class的属性</span></span><br><span class="line">        Student.count += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 测试:</span></span><br><span class="line"><span class="keyword">if</span> Student.count != <span class="number">0</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    bart = Student(<span class="string">'Bart'</span>)</span><br><span class="line">    <span class="keyword">if</span> Student.count != <span class="number">1</span>:</span><br><span class="line">        print(<span class="string">'测试失败!'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lisa = Student(<span class="string">'Bart'</span>)</span><br><span class="line">        <span class="keyword">if</span> Student.count != <span class="number">2</span>:</span><br><span class="line">            print(<span class="string">'测试失败!'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'Students:'</span>, Student.count)</span><br><span class="line">            print(<span class="string">'测试通过!'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>由于count是Class属性，故引用时需要Student.count的方式。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class Attribute</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Instance Attribute</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/19/Python-21-ClassAttrInstanceAttr/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/18/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/20/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/18/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/20/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2559,6 +2587,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
               </li>
             
             <div class="clearfix"></div>
