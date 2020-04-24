@@ -156,6 +156,265 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-04-axes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/Matplotlib-04-axes/">Matplotlib-04-axes</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/22/Matplotlib-04-axes/" class="archive-article-date">
+  	<time datetime="2018-03-22T10:35:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Matplotlib-axes"><a href="#Matplotlib-axes" class="headerlink" title="Matplotlib axes"></a>Matplotlib axes</h1><p>从英文本意的角度上理解axes就是axis的复数形式，但是在matplotlib中axes并不是多个轴的意义。</p>
+<p>讲到axes就离不开另一个概念：figure。figure可以理解为画布或者进程，定义一个figure之后就可以显示一个空白的窗口。即使没有特意生成figure，pyplot也会帮你创建一个（figure 1）。</p>
+<p>有了画布，继续画图时就需要决定在哪里，画多大的图。这一部分的设置就靠axes来表示，因为一个axes就是一个不包含坐标轴的画图区域。位置和尺寸均是用占figure整体尺寸的百分比来表示的，其取值为0-1之间的浮点数。</p>
+<p><img src="Matplotlib-04-axes%5Cfig.png" alt=""></p>
+<p>一个官方的例子如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some data to use for the plot</span></span><br><span class="line">dt = <span class="number">0.001</span></span><br><span class="line">t = np.arange(<span class="number">0.0</span>, <span class="number">10.0</span>, dt)</span><br><span class="line">r = np.exp(-t[:<span class="number">1000</span>]/<span class="number">0.05</span>)               <span class="comment"># impulse response</span></span><br><span class="line">x = np.random.randn(len(t))</span><br><span class="line">s = np.convolve(x, r)[:len(x)]*dt  <span class="comment"># colored noise</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the main axes is subplot(111) by default</span></span><br><span class="line">plt.plot(t, s)</span><br><span class="line">plt.axis([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1.1</span>*np.amin(s), <span class="number">2</span>*np.amax(s)])</span><br><span class="line">plt.xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'current (nA)'</span>)</span><br><span class="line">plt.title(<span class="string">'Gaussian colored noise'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is an inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">.65</span>, <span class="number">.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">n, bins, patches = plt.hist(s, <span class="number">400</span>, normed=<span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">'Probability'</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is another inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">0.2</span>, <span class="number">0.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">plt.plot(t[:len(r)], r)</span><br><span class="line">plt.title(<span class="string">'Impulse response'</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">0.2</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果为，</p>
+<p><img src="Matplotlib-04-axes%5Caxes.png" alt=""></p>
+<h1 id="隐藏坐标轴"><a href="#隐藏坐标轴" class="headerlink" title="隐藏坐标轴"></a>隐藏坐标轴</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig=plt.figure(frameon=<span class="literal">False</span>)</span><br><span class="line">fig.set_size_inches(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">ax = plt.Axes(fig, [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line">ax.set_axis_off()</span><br><span class="line">fig.add_axes(ax)</span><br><span class="line"></span><br><span class="line">I = mpimg.imread(<span class="string">u"sample.png"</span>)</span><br><span class="line">ax.imshow(I)</span><br><span class="line">fig.savefig(<span class="string">u"sample.jpg"</span>, dpi=<span class="number">32</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>pyplot的基础概念</p>
+<p><a href="http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html</a></p>
+<p>pylab_examples example code: axes_demo.py</p>
+<p><a href="https://matplotlib.org/examples/pylab_examples/axes_demo.html" target="_blank" rel="noopener">https://matplotlib.org/examples/pylab_examples/axes_demo.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">axes</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">figure</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/22/Matplotlib-04-axes/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-11-WrapperClasses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/18/Java-11-WrapperClasses/">Java-11-WrapperClasses</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/18/Java-11-WrapperClasses/" class="archive-article-date">
+  	<time datetime="2018-03-18T11:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p>Java虽然是支持面向对象的编程，但是还是沿用了一些面向过程的习惯，比如Java的8种基本数据类型并不支持面向对象的编程。这8种基本数据类型没有对象的基本特征–属性和方法，比如一个int变量，不能查看它的属性，也不能调用它的方法。</p>
+<p>这在OOP程序的编程中，由于不统一会带来一些不便。为了解决这个问题，Java引入了包装类的概念，即给每个基本数据类型设计了相应的类（包装类），也称为外覆类或者数据类型类。</p>
+<p><strong>基本数据类型和包装类的对应关系</strong></p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>对应的包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<p>每个包装类的对象可以封装一个相应的基本类型的数据，并提供了其它一些有用的方法。包装类对象一经创建，其内容（所封装的基本类型数据值）不可改变。</p>
+<p>基本类型和对应的包装类可以进行<strong>相互转换</strong>：</p>
+<ul>
+<li>装箱：基本类型 &gt; 包装类，如int基本类型转Integer类</li>
+<li>拆箱：基本类型 &gt; 包装类，如Integer类转int基本类型</li>
+</ul>
+<p>例子，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestWrapperClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestWrapperClass.int2integer();</span><br><span class="line">        TestWrapperClass.str2int();</span><br><span class="line">        TestWrapperClass.int2str();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 手动装箱</span></span><br><span class="line">    <span class="comment">// 手动拆箱</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2integer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        Integer obj = <span class="keyword">new</span> Integer(m); <span class="comment">// 手动装箱</span></span><br><span class="line">        <span class="keyword">int</span> n = obj.intValue(); <span class="comment">// 手动拆箱</span></span><br><span class="line">        System.out.println(<span class="string">"n = "</span> + n);</span><br><span class="line">        Integer obj1 = <span class="keyword">new</span> Integer(<span class="number">500</span>);</span><br><span class="line">        System.out.println(<span class="string">"obj equals obj1? "</span> + obj.equals(obj1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// string to int</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">str2int</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str[] = &#123; <span class="string">"123"</span>, <span class="string">"123abc"</span>, <span class="string">"abc123"</span>, <span class="string">"abcxyz"</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (String str1 : str) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> m = Integer.parseInt(str1, <span class="number">10</span>);</span><br><span class="line">                System.out.println(str1 + <span class="string">" 可以转换为整数 "</span> + m);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(str1 + <span class="string">" 无法转换为整数"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// int to string</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2str</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        String s = Integer.toString(m);</span><br><span class="line">        System.out.println(<span class="string">"s = "</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h1><p>Java1.5之后的版本支持自动装箱自动拆箱。这里的自动表现在，基本类型可以直接赋值给对应的包装类型，反之亦然。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">Integer obj = m; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="keyword">int</span> n = obj; <span class="comment">// 自动拆箱</span></span><br><span class="line">System.out.println(<span class="string">"n = "</span> + n);</span><br></pre></td></tr></table></figure>
+
+<p>虽然有自动功能，考虑到代码的可读性，推荐使用手动装箱拆箱。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java包装类、拆箱和装箱详解</p>
+<p><a href="https://www.cnblogs.com/ok932343846/p/6749488.html" target="_blank" rel="noopener">https://www.cnblogs.com/ok932343846/p/6749488.html</a></p>
+<p>Java装箱和拆箱–<strong>这篇比较全面深入地讲解了常见的注意事项</strong></p>
+<p><a href="https://www.cnblogs.com/lsohvaen001/p/7823067.html" target="_blank" rel="noopener">https://www.cnblogs.com/lsohvaen001/p/7823067.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wrapper Classes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/18/Java-11-WrapperClasses/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-10-Str2Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1003,227 +1262,6 @@ public class Person {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/15/Java-06-Package/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-05-StringChar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/14/Java-05-StringChar/">Java-05-StringChar</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/14/Java-05-StringChar/" class="archive-article-date">
-  	<time datetime="2018-03-14T12:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>数据类型之字符串和字符</p>
-<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
-<li>字符串用双引号括起来表示</li>
-<li>字符串内要显示”等特殊符号时，需要用反斜杠实现转义(escape)</li>
-</ul>
-<p>注意，使用<code>System.out.print()</code>函数输出字符串时，可以把字符串和数字相加，被加到数字也会变成字符串。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p>输出，<code>sum of 111</code></p>
-<p>字符串/String/文字列</p>
-<h1 id="Char"><a href="#Char" class="headerlink" title="Char"></a>Char</h1><ul>
-<li>字符用单引号括起来表示</li>
-<li>只能包含一个字符，转义符(反斜杠)也可以包含进去</li>
-</ul>
-<p>字符串的本质就是integer，具体数值可以查询ASII表。所以</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">'a'</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p>输出，<code>100</code></p>
-<p>如果不想数字变成字符串，而是以计算结果表示，则应给数字部分加上括号，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + (<span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-
-<p>输出，<code>sum of 3</code></p>
-<p>字符/Char/文字</p>
-<h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><p>无论是String还是Char都可以使用标准输出函数System.out.print()或者System.out.println()来输出。二者不同的是，带ln的输出时末尾自动换行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Char</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/14/Java-05-StringChar/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-04-TabSpaces" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">Java-Eclipse-03-CheckStyle</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/13/Java-Eclipse-04-TabSpaces/" class="archive-article-date">
-  	<time datetime="2018-03-13T13:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>新版Eclipse默认Tab不转换为Spaces，为了各编辑器统一起见，推荐替换Tab为4个spaces。</p>
-<h1 id="设置方法"><a href="#设置方法" class="headerlink" title="设置方法"></a>设置方法</h1><p>需要修改两个部分，公共设置和Java语言部分</p>
-<h2 id="公共部分"><a href="#公共部分" class="headerlink" title="公共部分"></a>公共部分</h2><p>Preference–&gt;General-&gt;Editors–&gt;Text Editors，勾上Insert spaces for tabs。</p>
-<h2 id="Java语言设置"><a href="#Java语言设置" class="headerlink" title="Java语言设置"></a>Java语言设置</h2><p>Java–&gt;Code Style–&gt;Formatter–&gt;New 新建一份文件，将Indentation 中的 Tab policy改为Spaces only。</p>
-<p>以后如果添加了其他语言，同样需要在各语言下修改此设置。</p>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p>使用eclipse中Tab格式兼容问题</p>
-<p><a href="http://blog.csdn.net/backend_research/article/details/53332454" target="_blank" rel="noopener">http://blog.csdn.net/backend_research/article/details/53332454</a></p>
-<h1 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h1><p>包括自动添加类的注释之类的方便功能。。。</p>
-<p><a href="http://blog.csdn.net/hotdust/article/details/52205867" target="_blank" rel="noopener">http://blog.csdn.net/hotdust/article/details/52205867</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Tab</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spaces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">展开全文 >></a>
         </p>
       
 
@@ -2600,6 +2638,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,209 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-22-package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/21/Python-22-package/">Python-22-package</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/21/Python-22-package/" class="archive-article-date">
+  	<time datetime="2018-02-21T12:27:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="模块的概念"><a href="#模块的概念" class="headerlink" title="模块的概念"></a>模块的概念</h1><p>Python中一个.py文件就是一个模块。例如，abc.py是名为abc的模块。</p>
+<h1 id="组织模块"><a href="#组织模块" class="headerlink" title="组织模块"></a>组织模块</h1><p>通过包(package)来组织模块，来方便调用，避免模块名字的冲突。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myPackage</span><br><span class="line">├─ __init__.py</span><br><span class="line">├─ abc.py</span><br><span class="line">└─ xyz.py</span><br></pre></td></tr></table></figure>
+
+<p>新建目录myPackage，并在其下方新建一个名为__init__.py的文件。此文件可以为空，有这个文件存在Python就会把这个目录当成一个包，否则只是当作普通的文件夹来处理。</p>
+<p>__init__.py本身也是一个模块，它的模块名就是myPackage。</p>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>模块中的函数或变量加上前缀_时，变成非公开的(private)，否则默认为公开的(public)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 作用域</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_private_1</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Hello, %s'</span> % name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_private_2</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Hi, %s'</span> % name)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">public</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(name) &gt; <span class="number">3</span>:</span><br><span class="line">        _private_1(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        _private_2(name)</span><br><span class="line"></span><br><span class="line">public(<span class="string">'Jim'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样，外部不需要调用的函数全部定义成private，只有外部需要引用的函数才定义成public。</p>
+<h1 id="模块的导入"><a href="#模块的导入" class="headerlink" title="模块的导入"></a>模块的导入</h1><p>使用<code>import ModuleName</code>来导入。</p>
+<p>模块的搜索顺序为：首先在当前目录下搜索，如果没有则去搜索所有已安装的内置模块和第三方模块。这些模块的路径保存在sys模块的path变量中，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\ProgramData\\Anaconda3\\python36.zip'</span>,...]</span><br></pre></td></tr></table></figure>
+
+<p>如果要添加新的搜索路径，可以有两种方法：</p>
+<p>一是，运行Python环境，修改sys.path。这种修改只在运行时有效，运行结束后失效。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path.append(<span class="string">'/Users/michael/my_py_scripts'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>二是，设置环境变量PYTHONPATH，运行结束不会失效。</p>
+<p>参见文章<a href="https://www.cnblogs.com/qiyeshublog/archive/2012/01/24/2329162.html" target="_blank" rel="noopener">https://www.cnblogs.com/qiyeshublog/archive/2012/01/24/2329162.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">package</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/21/Python-22-package/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-26-MultipleIheritance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/20/Python-26-MultipleIheritance/">Python-26-MultipleIheritance</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/20/Python-26-MultipleIheritance/" class="archive-article-date">
+  	<time datetime="2018-02-20T14:39:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="python多重继承"><a href="#python多重继承" class="headerlink" title="python多重继承"></a>python多重继承</h1><p>如果对象可以用多种方式分组，当把这些分组统一在一个体系下标识时，分组个数会呈指数级增长。这给组织逻辑带来很大挑战，而且不便于理解。</p>
+<p>可以使用多重继承(Multiple Inheritance)来代替复杂的单一继承关系。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主线大类:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mammal</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 功能类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnableMixIn</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Running...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyableMixIn</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Flying...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多重继承</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Mammal, RunnableMixIn)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">h = dog()</span><br><span class="line">h.run()</span><br></pre></td></tr></table></figure>
+
+<h1 id="具体应用原则"><a href="#具体应用原则" class="headerlink" title="具体应用原则"></a>具体应用原则</h1><p>设计多重继承关系时，可以采用如下原则：</p>
+<p>主线继承采用单一继承，例如Mammal和Bird单一继承自Animal。</p>
+<p>而如果需要给对象搭配“混入”一些功能，则可以加入多重继承。比如，上面例子中给Dog添加Run的功能。习惯上为了便于识别，命名时在最后加上MixIn。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Multiple Inheritance</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/20/Python-26-MultipleIheritance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-25-property" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1122,242 +1325,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/16/Python-15-FunctionParameter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-14-HighOrderFunction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/16/Python-14-HighOrderFunction/">Python-14-HighOrderFunction</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/16/Python-14-HighOrderFunction/" class="archive-article-date">
-  	<time datetime="2018-02-16T03:50:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Python High Order Function</p>
-<p>参数中包含另一个函数的函数被称为高阶函数（High Order Function）。</p>
-<h1 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 函数名作为参数使用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_f</span><span class="params">(x, y, f)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> f(x) + f(y)</span><br><span class="line"></span><br><span class="line">print(add_f(<span class="number">1</span>, <span class="number">-1</span>, abs))</span><br></pre></td></tr></table></figure>
-
-<h1 id="常用built-in高阶函数"><a href="#常用built-in高阶函数" class="headerlink" title="常用built-in高阶函数"></a>常用built-in高阶函数</h1><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>对已有序列中的每个元素做处理，得到同样大小的新序列。</p>
-<p><img src="Python-14-HighOrderFunction/map.png" alt="Python-14-HighOrderFunction/map.png"></p>
-<p>单个序列：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x*x</span></span><br><span class="line">list(map(<span class="keyword">lambda</span> x:x*x, range(<span class="number">5</span>)))</span><br></pre></td></tr></table></figure>
-
-<p>两个序列：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="comment"># x*y</span></span><br><span class="line">list(map(<span class="keyword">lambda</span> x,y:x*y, a,b)</span><br></pre></td></tr></table></figure>
-
-<p>三个序列类似，同样可以实现。</p>
-<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>对序列的前两个元素做函数运算，得到的结果和第三个元素一起做相同的函数运算。重复这个操作直到序列的最后一个元素，最后输出一个运算结果。</p>
-<p>注意，reduce中的函数必须是双目运算。</p>
-<p><img src="Python-14-HighOrderFunction/reduce.png" alt="Python-14-HighOrderFunction/reduce.png"></p>
-<p><img src="Python-14-HighOrderFunction/reduce1.png" alt="Python-14-HighOrderFunction/reduce1.png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">reduce(<span class="keyword">lambda</span> x,y:x*y, a)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码实现了简单的求和运算，当然可以直接用sum()实现。</p>
-<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><p>对序列进行筛选，输出符合筛选条件的新序列。新列表为原序列的一部分。</p>
-<p><img src="Python-14-HighOrderFunction/filter.png" alt="Python-14-HighOrderFunction/filter.png"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># &gt;1</span></span><br><span class="line">list(filter(<span class="keyword">lambda</span> x,x&gt;<span class="number">1</span>, a)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码，输出所有大于1的元素组成的新序列。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/guigujun/p/6134828.html" target="_blank" rel="noopener">https://www.cnblogs.com/guigujun/p/6134828.html</a></p>
-<p><a href="https://www.python-course.eu/python3_lambda.php" target="_blank" rel="noopener">https://www.python-course.eu/python3_lambda.php</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Function</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">High Order</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/16/Python-14-HighOrderFunction/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-ListHalfOpen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/13/Python-00-ListHalfOpen/">Python-00-ListHalfOpen</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/13/Python-00-ListHalfOpen/" class="archive-article-date">
-  	<time datetime="2018-02-13T13:27:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-列表的两点思考"><a href="#Python-列表的两点思考" class="headerlink" title="Python 列表的两点思考"></a>Python 列表的两点思考</h1><p>Python定义列表(list)时，可以直接用中括号把列表包含的所有元素添加进来，并用逗号隔开。</p>
-<p>当内部元素较多，而且有某种规律时，另一种通过range()函数生成的方式更为直接。</p>
-<p>在使用range(START,END,STEP)时得到的数组包含START，但是不包含END,即左闭右开（前闭后开）。</p>
-<p>当引用列表内元素的时候，第一个元素用下标0表示。多数程序设计语言都是从0开始定位。</p>
-<p>左闭右开 <code>range(start, end)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(range(<span class="number">2</span>, <span class="number">8</span>))</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br></pre></td></tr></table></figure>
-
-<p>上述结果可知，包含2不包含8。这其中的原因，自己思考外加网上的观点如下，</p>
-<ol>
-<li>对于[START, END]，COUNT&lt;&gt;END - START，而是COUNT = END - START + 1，这就给书写和理解带来了困扰。同理(START, END)也不直观。<br>而左开右闭和左闭右开则没有这个问题，COUNT = END - START 更符合正常人类的思考方式</li>
-<li>针对上述的一点补充，划分序列时<br>[1,2),[3,4),[5,6)显然比[1,2],(3,4),[5,6]美观。</li>
-<li>另一点右侧不可为闭的原因是，计算机硬件中迭代器对于比较谁大谁小的运算很麻烦，而判断两者是否相等却很容易做到。<br>这时，如果需要遍历一个闭区间[0, n]，那么需要迭代器实现比较大小的操作。即：i = 0; while(i &lt;= n) do {process(i); i++;} 。而很多抽象的迭代器无法比较大小。<br>如果要遍历一个左开右闭区间(0, n]，则只需要迭代器支持比较相等的操作即可。即：i = 0; while(i != n) do {process(i); i++;}</li>
-</ol>
-<h1 id="第一个元素下标从0开始"><a href="#第一个元素下标从0开始" class="headerlink" title="第一个元素下标从0开始"></a>第一个元素下标从0开始</h1><p>C语言中要获得数组a中元素的地址时候，如果数组下标从0开始，那么&amp;a[b]可以直接写成&amp;a+b<em>sizeof(</em>a)</p>
-<p>不然，如果下标从1开始，那么&amp;a[b]必须写成&amp;a+(b-1)<em>sizeof(</em>a)</p>
-<p>另外C语言中用for语句遍历数组时也是左开右闭原则。</p>
-<p>for(i=1;i&lt;n;i++){}</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>python中的细节—左闭右开原则 - CSDN</p>
-<p><a href="http://blog.csdn.net/HDOJ_lin/article/details/78831868" target="_blank" rel="noopener">http://blog.csdn.net/HDOJ_lin/article/details/78831868</a></p>
-<p>为什么 Python 里面的 range 不包含上界？ - vczh的回答 - 知乎</p>
-<p><a href="https://www.zhihu.com/question/24883243/answer/29315532" target="_blank" rel="noopener">https://www.zhihu.com/question/24883243/answer/29315532</a></p>
-<p>评论区 - cppblog</p>
-<p><a href="http://www.cppblog.com/woaidongmao/archive/2008/12/25/70343.aspx" target="_blank" rel="noopener">http://www.cppblog.com/woaidongmao/archive/2008/12/25/70343.aspx</a></p>
-<p>python中的细节—左闭右开原则</p>
-<p><a href="http://blog.csdn.net/HDOJ_lin/article/details/78831868" target="_blank" rel="noopener">http://blog.csdn.net/HDOJ_lin/article/details/78831868</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Half Open</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/13/Python-00-ListHalfOpen/">展开全文 >></a>
         </p>
       
 
@@ -2734,6 +2701,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
               </li>
             
             <div class="clearfix"></div>

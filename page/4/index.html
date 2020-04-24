@@ -156,6 +156,198 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DeepLearning-08-PruneNN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/DeepLearning-08-PruneNN/">DeepLearning-08-PruneNN</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/01/DeepLearning-08-PruneNN/" class="archive-article-date">
+  	<time datetime="2019-03-01T14:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="prune-fully-connected-layer"><a href="#prune-fully-connected-layer" class="headerlink" title="prune fully connected layer"></a>prune fully connected layer</h1><p>首先，初次训练2000次，得到一个有一定精度的模型。</p>
+<p><img src="DeepLearning-08-PruneNN%5C1st_train.png" alt=""></p>
+<p>然后，使用threshold = 0.05来prune这个模型。具体是把所有<code>&lt;threshold</code>的W参数强制改成0。得到一个sparse的模型：</p>
+<p><img src="DeepLearning-08-PruneNN%5C1st_train_prune.png" alt=""></p>
+<p>之后，继续对该模型训练2000次，然后得到一个恢复一定程度的模型：</p>
+<p><img src="DeepLearning-08-PruneNN%5C2nd_train.png" alt=""></p>
+<p>最后，可以同样对现在的模型prune一定的参数，同样使用threshold = 0.05，得到：</p>
+<p><img src="DeepLearning-08-PruneNN%5C2nd_train_prune.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">prune neural network</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/01/DeepLearning-08-PruneNN/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-C-01-data-type" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/06/C-01-data-type/">C-01-data-type</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/06/C-01-data-type/" class="archive-article-date">
+  	<time datetime="2019-01-06T05:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="data-type-in-STM32"><a href="#data-type-in-STM32" class="headerlink" title="data type in STM32"></a>data type in STM32</h1><p>在stdint.h 里放着C语言的标准表达方式</p>
+<p>下面截取第36行开始的内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span>  <span class="keyword">char</span>         <span class="keyword">int8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span> short <span class="keyword">int</span>     <span class="keyword">int16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span>  <span class="keyword">int</span>          <span class="keyword">int32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span> __int64       <span class="keyword">int64_t</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">char</span>         <span class="keyword">uint8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> short <span class="keyword">int</span>    <span class="keyword">uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">int</span>          <span class="keyword">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span>  __int64     <span class="keyword">uint64_t</span>;</span><br></pre></td></tr></table></figure>
+
+<p>另外，在stm32f10x.h 有如下定义，可能是为了向下兼容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint32_t</span>   u32;<span class="comment">///32位</span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint16_t</span>   u16;<span class="comment">///16位</span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint8_t</span>     u8;<span class="comment">///8位</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/weibo1230123/article/details/80703788" target="_blank" rel="noopener">https://blog.csdn.net/weibo1230123/article/details/80703788</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STM32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">data type</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/06/C-01-data-type/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Eclipse-01-CopyLine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1056,193 +1248,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/11/08/web-flask-gunicorn/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web-PuTTY" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/04/web-PuTTY/">web-PuTTY</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/04/web-PuTTY/" class="archive-article-date">
-  	<time datetime="2018-11-04T12:42:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PuTTY连接EC2主机"><a href="#PuTTY连接EC2主机" class="headerlink" title="PuTTY连接EC2主机"></a>PuTTY连接EC2主机</h1><p>命令行下连接到远程EC2主机的方法：</p>
-<p>参考连接，<a href="https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/putty.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/putty.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PuTTY</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/04/web-PuTTY/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web-filezilla" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/04/web-filezilla/">web-filezilla</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/04/web-filezilla/" class="archive-article-date">
-  	<time datetime="2018-11-04T12:32:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="filezilla"><a href="#filezilla" class="headerlink" title="filezilla"></a>filezilla</h1><p>打开Filezilla-编辑-设置</p>
-<p><img src="web-filezilla%5Csetting.png" alt=""></p>
-<p>具体配置：</p>
-<p><img src="web-filezilla%5Ca.jpg" alt=""></p>
-<p>连接-SFTP-添加密钥文件（选择aws上下载到的pem密钥文件）</p>
-<p>连接：</p>
-<p><img src="web-filezilla%5Cconnect.jpg" alt=""></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>amazon服务器下使用FileZilla上传文件到服务器</p>
-<p><a href="https://blog.csdn.net/zhanlurbh/article/details/51895263" target="_blank" rel="noopener">https://blog.csdn.net/zhanlurbh/article/details/51895263</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">filezilla</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/04/web-filezilla/">展开全文 >></a>
         </p>
       
 
@@ -2619,6 +2624,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
               </li>
             
             <div class="clearfix"></div>

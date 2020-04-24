@@ -156,6 +156,281 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-00-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/TensorFlow-00-basic/">TensorFlow-00-basic</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/TensorFlow-00-basic/" class="archive-article-date">
+  	<time datetime="2018-05-12T13:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p>TensorFlow基本思想是利用计算图来处理数据，把处理过程分成了两个独立的部分：定义计算图，执行计算图。官方表述为TensorFlow程序(tf.Graph)和TensorFlow运行时(tf.Session)。</p>
+<p>当使用Estimator时，可以不涉及到具体的Graph和Session部分，这些都由Estimator在内部实现好了。</p>
+<h1 id="图-Graph"><a href="#图-Graph" class="headerlink" title="图(Graph)"></a>图(Graph)</h1><p>计算图是一个由一系列TensorFlow命令组成的图，这些命令分成两种对象：</p>
+<ul>
+<li>指令(op)：图的节点。描述张量如何被INPUT和OUTPUT。</li>
+<li>张量：图的边线。表示流经图的数据值，大多数的TF函数都会返回tf.Tensor</li>
+</ul>
+<h2 id="指令-op"><a href="#指令-op" class="headerlink" title="指令(op)"></a>指令(op)</h2><p>见其他文章介绍</p>
+<h2 id="张量-tf-Tensor"><a href="#张量-tf-Tensor" class="headerlink" title="张量(tf.Tensor)"></a>张量(tf.Tensor)</h2><p>TF中的核心数据单位是张量(tf.Tensor)，张量就是一个基本数据类型的n维矩阵。张量的阶就是矩阵的维度，这也类似于Numpy中的np.ndarray。</p>
+<p>tf.Tensor只是Graph的一个组成部分，不具有值，只是代表了流经图上边线的数据的属性。<code>tf.Tensor</code> 有以下属性：</p>
+<ul>
+<li>数据类型（例如 <code>float32</code>，<code>int32</code> 或 <code>string</code>）</li>
+<li>形状</li>
+</ul>
+<p>特殊张量有以下几种：</p>
+<ul>
+<li><code>tf.Variable</code>变量</li>
+<li><code>tf.constant</code>常量</li>
+<li><code>tf.placeholder</code>占位符</li>
+<li><code>tf.SparseTensor</code></li>
+</ul>
+<p>除了<code>tf.Variable</code>，其他张量是不可变化的。</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant([[<span class="number">3.0</span>, <span class="number">4.0</span>]], dtype=tf.float32)</span><br><span class="line">b = tf.constant(<span class="number">4.0</span>)  <span class="comment"># 默认也是tf.float32</span></span><br><span class="line"></span><br><span class="line">total = a + b</span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(total)</span><br></pre></td></tr></table></figure>
+
+<p>tf.constant()指令表示构建一个常量节点，这个节点没有输入值，而会把传递给构造函数的值(如上述代码中的[[3, 4]])输出。</p>
+<p>代码执行结果，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tensor(<span class="string">"Const:0"</span>, shape=(<span class="number">1</span>, <span class="number">2</span>), dtype=float32)</span><br><span class="line">Tensor(<span class="string">"Const_1:0"</span>, shape=(), dtype=float32)</span><br><span class="line">Tensor(<span class="string">"add:0"</span>, shape=(<span class="number">1</span>, <span class="number">2</span>), dtype=float32)</span><br></pre></td></tr></table></figure>
+
+<p>如上所述，Tensor不具有具体值，打印出的a/b/total并不是具体的值[[3, 4]]等，而是图中定义的<strong>张量的特征</strong>。</p>
+<p>从打印结果可知，每个指令都有它的名称，这个名称不是由人定义，而是根据生成它所用的指令自动生成的。名称由<code>指令名</code>和<code>索引号码</code>组成，如上述<code>&quot;Const:0&quot;</code>前半部分Const表示由tf.contant指令生成的第0个节点。</p>
+<p>常量包含以下几种：Constants, Sequences and Random Values，TF提供了生成它们的各种方法，参见<a href="https://www.tensorflow.org/api_guides/python/constant_op" target="_blank" rel="noopener">https://www.tensorflow.org/api_guides/python/constant_op</a></p>
+<h3 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h3><p>占位符表示暂时不提供参数，但是承诺之后会提供。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(dtype=tf.float32, shape=(<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">y = tf.matmul(x, x)</span><br><span class="line">z = tf.multiply(x, x)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(x, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br><span class="line">    print(sess.run(y, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br><span class="line">    print(sess.run(z, feed_dict=&#123;x: np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>可以使用Session的run方法里的feed_dict给占位符提供参数。不只是占位符，feed_dict参数可以给图中任意张量赋值，从而覆盖原来的张量。</p>
+<p>注意，如果没有给占位符提供值，则会报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor &#39;Placeholder&#39; with dtype float and shape [3,3]</span><br></pre></td></tr></table></figure>
+
+<p>而且，如果feed_dict的shape如果不匹配也会报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Cannot feed value of shape (3, 4) for Tensor &#39;Placeholder:0&#39;, which has shape &#39;(3, 3)&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量和其他Tensor的区别之一为Variable可变(mutable)，有assign方法，而其他Tensor是不可改变的。</p>
+<p>详见<a href="https://blog.csdn.net/silent56_th/article/details/75577974" target="_blank" rel="noopener">https://blog.csdn.net/silent56_th/article/details/75577974</a></p>
+<p>构建变量的最佳方式为tf.get_variable方法，此函数需要指定变量名称和形状。而具体的初始值则不必给出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_variable = tf.get_variable(<span class="string">"my_variable"</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, initializer=tf.zeros_initializer)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码创建了一个名称为my_variable形状为[1,2,3]的变量，默认数据类型为tf.float32，默认初始化方法为glorot_uniform_initializer。关于tf.glorot_uniform_initializer可以参见<a href="https://stackoverflow.com/questions/37350131/what-is-the-default-variable-initializer-in-tensorflow" target="_blank" rel="noopener">https://stackoverflow.com/questions/37350131/what-is-the-default-variable-initializer-in-tensorflow</a></p>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/get_variable" target="_blank" rel="noopener">From the documentation</a>:</p>
+<blockquote>
+<p>If initializer is <code>None</code> (the default), the default initializer passed in the variable scope will be used. If that one is <code>None</code> too, a <code>glorot_uniform_initializer</code> will be used.</p>
+</blockquote>
+<p>The <a href="https://github.com/tensorflow/tensorflow/blob/6bfbcf31dce9a59acfcad51d905894b082989012/tensorflow/python/ops/init_ops.py#L527" target="_blank" rel="noopener"><code>glorot_uniform_initializer</code></a> function initializes values from a uniform distribution.</p>
+<p>也可以将 <code>tf.Variable</code> 初始化为 <code>tf.Tensor</code> 的值。这时不应指定形状，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">other_variable = tf.get_variable(<span class="string">"other_variable"</span>, dtype=tf.int32, initializer=tf.constant([<span class="number">23</span>, <span class="number">42</span>]))</span><br></pre></td></tr></table></figure>
+
+<p>除了tf.get_variable方法，还可以使用tf.Variable方法，简单讲后者的实现更为底层。详见<a href="https://stackoverflow.com/questions/37098546/difference-between-variable-and-get-variable-in-tensorflow" target="_blank" rel="noopener">https://stackoverflow.com/questions/37098546/difference-between-variable-and-get-variable-in-tensorflow</a></p>
+<p>而且，前者包含检查命名空间是否已存在相同变量名的功能。参见另一篇专门介绍variable的文章。</p>
+<p>变量必须初始化之后才能使用，一次性初始化所有变量使用方法tf.global_variables_initializer() ，当然也可以单独对某个变量初始化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># all</span></span><br><span class="line">session.run(tf.global_variables_initializer())</span><br><span class="line"><span class="comment"># single</span></span><br><span class="line">session.run(my_variable.initializer)</span><br><span class="line"><span class="comment"># 查询未初始化变量</span></span><br><span class="line">print(session.run(tf.report_uninitialized_variables()))</span><br></pre></td></tr></table></figure>
+
+<p>使用变量时，可以当作普通tf.Tensor来加入运算。为变量赋值，请使用 <code>assign</code>、<code>assign_add</code> 方法以及 <code>tf.Variable</code> 类中的友元。例如，以下就是调用这些方法的方式： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v = tf.get_variable(<span class="string">"v"</span>, shape=(), initializer=tf.zeros_initializer())</span><br><span class="line">assignment = v.assign_add(<span class="number">1</span>)</span><br><span class="line">tf.global_variables_initializer().run()</span><br><span class="line">sess.run(assignment)  <span class="comment"># or assignment.op.run(), or assignment.eval()</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h1><p>要评估(查看)张量，需要实例化一个tf.Session对象。会话会封装TensorFlow运行时的状态，并运行TF指令。当使用tf.Session.run请求一个节点的输出张量时，TF会回溯整个计算图，并计算所有的作为请求节点输入的节点，将这些节点的输出传递给请求节点，运算并返回结果。</p>
+<p>下面的命令创建一个tf.Session对象，然后运行命令run来评估total张量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess = tf.Session()</span><br><span class="line">print(sess.run(total))</span><br></pre></td></tr></table></figure>
+
+<p>可以同时传递多个张量给tf.Session.run</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(&#123;<span class="string">'ab'</span>: (a, b), <span class="string">'total'</span>: total&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>每当调用Session.run评估张量时，可以理解成输出此刻计算图的一个切面。比如下面的例子，每次调用run(vec)都会生成一组新的随机数，所以两次生成的随机数不同，但是后一次的结果用在+1和+2两次运算中，后一次的随机数列本身并没有发生变化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    vec = tf.random_uniform(shape=(<span class="number">3</span>,))</span><br><span class="line">    out1 = vec + <span class="number">1</span></span><br><span class="line">    out2 = vec + <span class="number">2</span></span><br><span class="line">    print(sess.run(vec))</span><br><span class="line">    print(sess.run(vec))</span><br><span class="line">    print(sess.run((out1, out2)))</span><br></pre></td></tr></table></figure>
+
+<p>输出结果，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0.35078466</span> <span class="number">0.6768017</span>  <span class="number">0.9873116</span> ]</span><br><span class="line">[<span class="number">0.7337662</span>  <span class="number">0.9636233</span>  <span class="number">0.79608345</span>]</span><br><span class="line">(array([<span class="number">1.8347821</span>, <span class="number">1.1241153</span>, <span class="number">1.2593273</span>], dtype=float32), array([<span class="number">2.8347821</span>, <span class="number">2.1241155</span>, <span class="number">2.2593274</span>], dtype=float32))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><p>TF提供了一个将计算图可视化的工具Tensorboard，继续上方的代码，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant([[<span class="number">3.0</span>, <span class="number">4.0</span>]], dtype=tf.float32)</span><br><span class="line">b = tf.constant(<span class="number">4.0</span>)  <span class="comment"># 默认也是tf.float32</span></span><br><span class="line"></span><br><span class="line">total = a + b</span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(total)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">'./'</span>, sess.graph)</span><br><span class="line">    writer.add_graph(tf.get_default_graph())</span><br></pre></td></tr></table></figure>
+
+<p>会在当前目录下生成<code>events.out.tfevents.*</code>文件，该目录下cmd执行<code>tensorboard --logdir .</code>按照输出提示在浏览器中打开指定地址即可查看到可视化界面。如下所示，</p>
+<p><img src="TensorFlow-00-basic%5Cboard.png" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.tensorflow.org/programmers_guide/low_level_intro" target="_blank" rel="noopener">使用低级别 TensorFlow API (TensorFlow Core) 开始编程</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Basic</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/TensorFlow-00-basic/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-09-TFadd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/TensorFlow-09-TFadd/">TensorFlow-09-TFadd</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/TensorFlow-09-TFadd/" class="archive-article-date">
+  	<time datetime="2018-05-12T04:17:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tf-add和-的区别"><a href="#tf-add和-的区别" class="headerlink" title="tf.add和+的区别"></a>tf.add和+的区别</h1><p>tensorflow中定义运算图结构时，加法运算可以用tf.add表示，也可以直接使用加法运算符+表示。</p>
+<p>从结果上讲，两种方式的实现结果相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">x_data = np.random.rand(<span class="number">100</span>).astype(np.float32)</span><br><span class="line">y_data = <span class="number">0.5</span> * x_data + <span class="number">0.3</span></span><br><span class="line"></span><br><span class="line">Weights = tf.Variable(tf.random_uniform([<span class="number">1</span>], <span class="number">-1</span>, <span class="number">1</span>))</span><br><span class="line">biases = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">tf.reset_default_graph()</span><br><span class="line">dtype = tf.int32</span><br><span class="line">a = tf.placeholder(dtype)</span><br><span class="line">b = tf.placeholder(dtype)</span><br><span class="line"><span class="comment"># c = a+b</span></span><br><span class="line">c = tf.add(a, b)</span><br><span class="line">print(tf.get_default_graph().as_graph_def())</span><br><span class="line"></span><br><span class="line">print(dir(tf.Tensor))</span><br></pre></td></tr></table></figure>
+
+<p>返回结果，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"Placeholder"</span></span><br><span class="line">  op: <span class="string">"Placeholder"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"dtype"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"shape"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      shape &#123;</span><br><span class="line">        unknown_rank: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"Placeholder_1"</span></span><br><span class="line">  op: <span class="string">"Placeholder"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"dtype"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"shape"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      shape &#123;</span><br><span class="line">        unknown_rank: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">node &#123;</span><br><span class="line">  <span class="comment"># 注意这里</span></span><br><span class="line">  name: <span class="string">"Add"</span></span><br><span class="line">  op: <span class="string">"Add"</span></span><br><span class="line">  input: <span class="string">"Placeholder"</span></span><br><span class="line">  input: <span class="string">"Placeholder_1"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"T"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">versions &#123;</span><br><span class="line">  producer: <span class="number">26</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="string">'OVERLOADABLE_OPERATORS'</span>, <span class="string">'__abs__'</span>, <span class="string">'__add__'</span>, <span class="string">'__and__'</span>, <span class="string">'__array_priority__'</span>, <span class="string">'__bool__'</span>, <span class="string">'__class__'</span>, <span class="string">'__copy__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__div__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__floordiv__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__invert__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__matmul__'</span>, <span class="string">'__mod__'</span>, <span class="string">'__module__'</span>, <span class="string">'__mul__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__neg__'</span>, <span class="string">'__new__'</span>, <span class="string">'__nonzero__'</span>, <span class="string">'__or__'</span>, <span class="string">'__pow__'</span>, <span class="string">'__radd__'</span>, <span class="string">'__rand__'</span>, <span class="string">'__rdiv__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__rfloordiv__'</span>, <span class="string">'__rmatmul__'</span>, <span class="string">'__rmod__'</span>, <span class="string">'__rmul__'</span>, <span class="string">'__ror__'</span>, <span class="string">'__rpow__'</span>, <span class="string">'__rsub__'</span>, <span class="string">'__rtruediv__'</span>, <span class="string">'__rxor__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__sub__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__truediv__'</span>, <span class="string">'__weakref__'</span>, <span class="string">'__xor__'</span>, <span class="string">'_add_consumer'</span>, <span class="string">'_as_node_def_input'</span>, <span class="string">'_as_tf_output'</span>, <span class="string">'_c_api_shape'</span>, <span class="string">'_get_input_ops_without_shapes'</span>, <span class="string">'_override_operator'</span>, <span class="string">'_rank'</span>, <span class="string">'_shape'</span>, <span class="string">'_shape_as_list'</span>, <span class="string">'_shape_tuple'</span>, <span class="string">'_tf_api_names'</span>, <span class="string">'consumers'</span>, <span class="string">'device'</span>, <span class="string">'dtype'</span>, <span class="string">'eval'</span>, <span class="string">'get_shape'</span>, <span class="string">'graph'</span>, <span class="string">'name'</span>, <span class="string">'op'</span>, <span class="string">'set_shape'</span>, <span class="string">'shape'</span>, <span class="string">'value_index'</span>]</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果把<code>c = tf.add(a, b)</code>换成<code>c = a+b</code>，tensor量c的node类型名会变成”add”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"add"</span></span><br><span class="line">  op: <span class="string">"Add"</span></span><br><span class="line">  input: <span class="string">"Placeholder"</span></span><br><span class="line">  input: <span class="string">"Placeholder_1"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"T"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>参考链接1中的解释：</p>
+<blockquote>
+<p>There’s no difference in precision between <code>a+b</code> and <code>tf.add(a, b)</code>. The former translates to <code>a.__add__(b)</code> which gets mapped to <code>tf.add</code> by means of <a href="https://github.com/tensorflow/tensorflow/blob/c43a32d5d0929170a057862e2cd0b59308421444/tensorflow/python/ops/math_ops.py#L845" target="_blank" rel="noopener">following line</a> in math_ops.py</p>
+<p><code>_OverrideBinaryOperatorHelper(gen_math_ops.add, &quot;add&quot;)</code></p>
+<p>The only difference is that node name in the underlying Graph is <code>add</code> instead of <code>Add</code>. </p>
+</blockquote>
+<p>参考链接2中解释了，在x和y中至少有一个是tf.Tensor时，<code>x + y</code>才等价于<code>tf.add(x, y)</code>。这种情况下会生成一个TensorFlow op，而二者中的非Tensor量会被自动转换成tf.Tensor。若二者都不是tf.Tensor量，比如两个Numpy Array，那么不会生成TensorFlow op。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/37900780/in-tensorflow-what-is-the-difference-between-tf-add-and-operator" target="_blank" rel="noopener">In tensorflow what is the difference between tf.add and operator (+)?</a></p>
+<p><a href="https://stackoverflow.com/questions/35094899/tensorflow-operator-overloading" target="_blank" rel="noopener">TensorFlow operator overloading</a></p>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types" target="_blank" rel="noopener">3.3.7. Emulating numeric types</a></p>
+<p>关于重载可以参见<code>Python-27-CustomizeClass</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">add</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">+</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/TensorFlow-09-TFadd/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-22-flatnonzero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -947,219 +1222,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/03/Python-35-pywin32/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-00-Error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/TensorFlow-00-Error/">TensorFlow-00-Error</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/02/TensorFlow-00-Error/" class="archive-article-date">
-  	<time datetime="2018-05-02T14:32:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Error-Use-GPU"><a href="#Error-Use-GPU" class="headerlink" title="Error-Use GPU"></a>Error-Use GPU</h1><p>在GPU上运行tensorflow代码时，出现了如下错误提示</p>
-<blockquote>
-<p>ImportError: Could not find ‘cudart64_90.dll’. TensorFlow requires that this DLL be installed in a directory that is named in your %PATH% environment variable.<br>Download and install CUDA 9.0 from this URL: <a href="https://developer.nvidia.com/cuda-toolkit" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit</a></p>
-</blockquote>
-<p>原因是安装的CUDA版本太新（9.1），和tensorflow不匹配，可以通过安装旧版（9.0）来解决这个问题。对应的cuDNN库克需要退回到相应版本。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>ImportError: Could not find ‘cudart64_90.dll’.</p>
-<p><a href="https://github.com/tensorflow/tensorflow/issues/17101" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/issues/17101</a></p>
-<h1 id="Nan-in-summary-histogram-for"><a href="#Nan-in-summary-histogram-for" class="headerlink" title="Nan in summary histogram for:***"></a>Nan in summary histogram for:***</h1><p>这个Error常见于hyper parameter设置不合理导致的梯度消失或者梯度爆炸上，所以可以调整网络结构(W的个数等)或者学习速率来消除。</p>
-<blockquote>
-<p>Usually NaN is a sign of model instability, for example, exploding gradients. It may be unnoticed, loss would just stop shrinking. Trying to log weights summary makes the problem explicit. I suggest you to reduce the learning rate as a first measure. </p>
-</blockquote>
-<p>参考：<a href="https://stackoverflow.com/questions/39854390/nan-in-summary-histogram" target="_blank" rel="noopener">https://stackoverflow.com/questions/39854390/nan-in-summary-histogram</a></p>
-<blockquote>
-<p> The error comes through the learning rate, which is to high for this data set. If you set the learning rate to 0.001 you won’t have this error anymore and can finetune on the cats vs dogs dataset without problems. </p>
-</blockquote>
-<p>参考：<a href="https://github.com/kratzert/finetune_alexnet_with_tensorflow/issues/23" target="_blank" rel="noopener">https://github.com/kratzert/finetune_alexnet_with_tensorflow/issues/23</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/TensorFlow-00-Error/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-04-deviceCPUorGPU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/">TensorFlow-04-deviceCPUorGPU</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/" class="archive-article-date">
-  	<time datetime="2018-05-02T12:52:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CPU-or-GPU"><a href="#CPU-or-GPU" class="headerlink" title="CPU or GPU?"></a>CPU or GPU?</h1><p>若要判断CPU和GPU是否可用，可以使用以下方法：</p>
-<h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><p>To find out which device is used, you can enable log device placement like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess &#x3D; tf.Session(config&#x3D;tf.ConfigProto(log_device_placement&#x3D;True))</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p>Apart from using <code>sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))</code> which is outlined in other answers as well as in TF official <a href="https://www.tensorflow.org/tutorials/using_gpu" target="_blank" rel="noopener">documentation</a>, you can try to assign a computation to the gpu and see whether you have an error.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">with tf.device(&#39;&#x2F;gpu:0&#39;):</span><br><span class="line">    a &#x3D; tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape&#x3D;[2, 3], name&#x3D;&#39;a&#39;)</span><br><span class="line">    b &#x3D; tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape&#x3D;[3, 2], name&#x3D;&#39;b&#39;)</span><br><span class="line">    c &#x3D; tf.matmul(a, b)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    print (sess.run(c))</span><br></pre></td></tr></table></figure>
-
-<p>Here</p>
-<ul>
-<li>“/cpu:0”: The CPU of your machine.</li>
-<li>“/gpu:0”: The GPU of your machine, if you have one.</li>
-</ul>
-<p>If you have a gpu and can use it, you will see the result. Otherwise you will see an error with a long stacktrace. In the end you will have something like this:</p>
-<blockquote>
-<p>Cannot assign a device to node ‘MatMul’: Could not satisfy explicit device specification ‘/device:GPU:0’ because no devices matching that specification are registered in this process</p>
-</blockquote>
-<p>实测结果如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow) C:\Users\username\PycharmProjects\DeepGTA5&gt;python GTA5_11_tensorflow</span><br><span class="line">_test.py</span><br><span class="line">2018-05-02 21:42:08.599200: I T:\src\github\tensorflow\tensorflow\core\platform\</span><br><span class="line">cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow bi</span><br><span class="line">nary was not compiled to use: AVX2</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1327, in _do_call</span><br><span class="line">    return fn(*args)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1310, in _run_fn</span><br><span class="line">    self._extend_graph()</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1358, in _extend_graph</span><br><span class="line">    graph_def.SerializeToString(), status)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\errors_impl.py&quot;, line 516, in __exit__</span><br><span class="line">    c_api.TF_GetCode(self.status.status))</span><br><span class="line">tensorflow.python.framework.errors_impl.InvalidArgumentError: Cannot assign a de</span><br><span class="line">vice for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0</span><br><span class="line">but available devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make</span><br><span class="line"> sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;GTA5_11_tensorflow_test.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    print (sess.run(c))</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 905, in run</span><br><span class="line">    run_metadata_ptr)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1140, in _run</span><br><span class="line">    feed_dict_tensor, options, run_metadata)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1321, in _do_run</span><br><span class="line">    run_metadata)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1340, in _do_call</span><br><span class="line">    raise type(e)(node_def, op, message)</span><br><span class="line">tensorflow.python.framework.errors_impl.InvalidArgumentError: Cannot assign a de</span><br><span class="line">vice for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0</span><br><span class="line">but available devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make</span><br><span class="line"> sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br><span class="line"></span><br><span class="line">Caused by op &#39;MatMul&#39;, defined at:</span><br><span class="line">  File &quot;GTA5_11_tensorflow_test.py&quot;, line 8, in &lt;module&gt;</span><br><span class="line">    c &#x3D; tf.matmul(a, b)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\ops\math_ops.py&quot;, line 2108, in matmul</span><br><span class="line">    a, b, transpose_a&#x3D;transpose_a, transpose_b&#x3D;transpose_b, name&#x3D;name)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\ops\gen_math_ops.py&quot;, line 4492, in mat_mul</span><br><span class="line">    name&#x3D;name)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\op_def_library.py&quot;, line 787, in _apply_op_helper</span><br><span class="line">    op_def&#x3D;op_def)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\ops.py&quot;, line 3290, in create_op</span><br><span class="line">    op_def&#x3D;op_def)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\ops.py&quot;, line 1654, in __init__</span><br><span class="line">    self._traceback &#x3D; self._graph._extract_stack()  # pylint: disable&#x3D;protected-</span><br><span class="line">access</span><br><span class="line"></span><br><span class="line">InvalidArgumentError (see above for traceback): Cannot assign a device for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0 but available</span><br><span class="line">devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br></pre></td></tr></table></figure>
-
-<p>stacktrace提示CPU:0可用，但是代码中指定的是GPU:0，而GPU不可用。</p>
-<blockquote>
-<p>InvalidArgumentError (see above for traceback): Cannot assign a device for operation ‘MatMul’: Operation was explicitly assigned to /device:GPU:0 but available devices are [ /job:localhost/replica:0/task:0/device:CPU:0 ]. Make sure the device specification refers to a valid device.</p>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>How to tell if tensorflow is using gpu acceleration from inside python shell?</p>
-<p><a href="https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell" target="_blank" rel="noopener">https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPU</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CPU</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/">展开全文 >></a>
         </p>
       
 
@@ -2536,6 +2598,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
               </li>
             
             <div class="clearfix"></div>
