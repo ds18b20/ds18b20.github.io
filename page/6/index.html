@@ -156,6 +156,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Pandas-02-concat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Pandas-02-concat/">Pandas-02-concat</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Pandas-02-concat/" class="archive-article-date">
+  	<time datetime="2018-10-07T13:34:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pandas-concat"><a href="#pandas-concat" class="headerlink" title="pandas.concat"></a>pandas.concat</h1><p>函数定义如下：</p>
+<blockquote>
+<p>pandas.concat</p>
+<p><code>pandas.concat</code>(<em>objs</em>, <em>axis=0</em>, <em>join=’outer’</em>, <em>join_axes=None</em>, <em>ignore_index=False</em>, <em>keys=None</em>, <em>levels=None</em>, <em>names=None</em>, <em>verify_integrity=False</em>, <em>sort=None</em>, <em>copy=True</em>)<a href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/reshape/concat.py#L21-L226" target="_blank" rel="noopener">[source]</a></p>
+<p>Concatenate pandas objects along a particular axis with optional set logic along the other axes.</p>
+<p>Can also add a layer of hierarchical indexing on the concatenation axis, which may be useful if the labels are the same (or overlapping) on the passed axis number.</p>
+</blockquote>
+<p>值得注意的是，要组合concat的数组要先组成一个tuple或者list然后传递给<em>objs</em>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frames = [df1, df2, df3]</span><br><span class="line">result = pd.concat(frames)</span><br></pre></td></tr></table></figure>
+
+<p>分开传入时会报错。</p>
+<h2 id="ignore-index"><a href="#ignore-index" class="headerlink" title="ignore_index"></a>ignore_index</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s_3 = pd.concat((s_1, s_2), ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样可以clear掉原有的index，并填上默认的index。</p>
+<p>或者，可以使用reset_index方法来重置index。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result2= result.reset_index()</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.concat.html#pandas-concat" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.concat.html#pandas-concat</a></p>
+<p><a href="https://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="noopener">https://blog.csdn.net/stevenkwong/article/details/52528616</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Pandas-02-concat/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Pandas-01-SeriesDataFrame" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1312,105 +1415,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/09/01/PyCharm-05-ndarray/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-28-memoryUse" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/23/Numpy-28-memoryUse/">Numpy-28-memoryUse</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/23/Numpy-28-memoryUse/" class="archive-article-date">
-  	<time datetime="2018-08-23T14:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-ndarray-memory-use"><a href="#Numpy-ndarray-memory-use" class="headerlink" title="Numpy.ndarray memory use"></a>Numpy.ndarray memory use</h1><p>使用Numpy进行科学计算时，经常需要预估数据所占的内存容量，从而避免Memory错误。</p>
-<ul>
-<li>要查看各对象的内存占用可以使用sys模块的getsizeof方法。</li>
-<li>要查看Numpy对象内部的元素所占的空间可以使用numpy.ndarray.nbytes来查看所有数组占用的空间大小；使用numpy.ndarray.itemsize来查看单个元素占用的空间大小。</li>
-</ul>
-<h2 id="sys-getsizeof"><a href="#sys-getsizeof" class="headerlink" title="sys.getsizeof"></a>sys.getsizeof</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位整型</span></span><br><span class="line">ai32 = np.array([], dtype=np.int32)</span><br><span class="line">bi32 = np.arange(<span class="number">1</span>, dtype=np.int32)</span><br><span class="line">ci32 = np.arange(<span class="number">5</span>, dtype=np.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位整型</span></span><br><span class="line">ai64 = np.array([], dtype=np.int64)</span><br><span class="line">bi64 = np.arange(<span class="number">1</span>, dtype=np.int64)</span><br><span class="line">ci64 = np.arange(<span class="number">5</span>, dtype=np.int64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位浮点数</span></span><br><span class="line">af32 = np.array([], dtype=np.float32)</span><br><span class="line">bf32 = np.arange(<span class="number">1</span>, dtype=np.float32)</span><br><span class="line">cf32 = np.arange(<span class="number">5</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位浮点数</span></span><br><span class="line">af64 = np.array([], dtype=np.float64)</span><br><span class="line">bf64 = np.arange(<span class="number">1</span>, dtype=np.float64)</span><br><span class="line">cf64 = np.arange(<span class="number">5</span>, dtype=np.float64)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int32 number: %s"</span> % sys.getsizeof(ai32))</span><br><span class="line">print(<span class="string">"size of 1 int32 number: %s"</span> % sys.getsizeof(bi32))</span><br><span class="line">print(<span class="string">"size of 5 int32 numbers: %s"</span> % sys.getsizeof(ci32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int64 number: %s"</span> % sys.getsizeof(ai64))</span><br><span class="line">print(<span class="string">"size of 1 int64 number: %s"</span> % sys.getsizeof(bi64))</span><br><span class="line">print(<span class="string">"size of 5 int64 numbers: %s"</span> % sys.getsizeof(ci64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float32 number: %s"</span> % sys.getsizeof(af32))</span><br><span class="line">print(<span class="string">"size of 1 float32 number: %s"</span> % sys.getsizeof(bf32))</span><br><span class="line">print(<span class="string">"size of 5 float32 numbers: %s"</span> % sys.getsizeof(cf32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float64 number: %s"</span> % sys.getsizeof(af64))</span><br><span class="line">print(<span class="string">"size of 1 float64 number: %s"</span> % sys.getsizeof(bf64))</span><br><span class="line">print(<span class="string">"size of 5 float64 numbers: %s"</span> % sys.getsizeof(cf64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 chars: %s"</span> % sys.getsizeof(<span class="string">''</span>))</span><br><span class="line">print(<span class="string">"size of 1 chars: %s"</span> % sys.getsizeof(<span class="string">'1'</span>))</span><br><span class="line">print(<span class="string">"size of 5 chars: %s"</span> % sys.getsizeof(<span class="string">'12345'</span>), end=<span class="string">'\n\n'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">size of 0 int32 number: 96</span><br><span class="line">size of 1 int32 number: 100</span><br><span class="line">size of 5 int32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 int64 number: 96</span><br><span class="line">size of 1 int64 number: 104</span><br><span class="line">size of 5 int64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 float32 number: 96</span><br><span class="line">size of 1 float32 number: 100</span><br><span class="line">size of 5 float32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 float64 number: 96</span><br><span class="line">size of 1 float64 number: 104</span><br><span class="line">size of 5 float64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 chars: 49</span><br><span class="line">size of 1 chars: 50</span><br><span class="line">size of 5 chars: 54</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7" target="_blank" rel="noopener">https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7</a><br><a href="https://www.draketo.de/english/python-memory-numpy-list-array" target="_blank" rel="noopener">https://www.draketo.de/english/python-memory-numpy-list-array</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">memory use</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/23/Numpy-28-memoryUse/">展开全文 >></a>
         </p>
       
 
@@ -2799,6 +2803,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">float</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
             
             <div class="clearfix"></div>
