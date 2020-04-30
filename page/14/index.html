@@ -156,6 +156,498 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-07-subplotsDemo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/30/Matplotlib-07-subplotsDemo/">Matplotlib-07-subplotsDemo</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/30/Matplotlib-07-subplotsDemo/" class="archive-article-date">
+  	<time datetime="2018-04-30T03:49:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="subplots-demo"><a href="#subplots-demo" class="headerlink" title="subplots demo"></a>subplots demo</h1><p>Official subplots demo,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Examples illustrating the use of plt.subplots().</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This function creates a figure and a grid of subplots with a single call, while</span></span><br><span class="line"><span class="string">providing reasonable control over how the individual plots are created.  For</span></span><br><span class="line"><span class="string">very refined tuning of subplot creation, you can still use add_subplot()</span></span><br><span class="line"><span class="string">directly on a new figure.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># Simple data to display in various forms</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">400</span>)</span><br><span class="line">y = np.sin(x ** <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plt.close(<span class="string">'all'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Just a figure and one subplot</span></span><br><span class="line">f, ax = plt.subplots()</span><br><span class="line">ax.plot(x, y)</span><br><span class="line">ax.set_title(<span class="string">'Simple plot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, unpack the axes array immediately</span></span><br><span class="line">f, (ax1, ax2) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing Y axis'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Three subplots sharing both x/y axes</span></span><br><span class="line">f, (ax1, ax2, ax3) = plt.subplots(<span class="number">3</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing both axes'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots close to each other and hide x ticks for</span></span><br><span class="line"><span class="comment"># all but bottom plot.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0</span>)</span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> f.axes[:<span class="number">-1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># row and column sharing</span></span><br><span class="line">f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, sharex=<span class="string">'col'</span>, sharey=<span class="string">'row'</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing x per column, y per row'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line">ax4.plot(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four axes, returned as a 2-d array</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; hide x ticks for top plots and y ticks for right plots</span></span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[<span class="number">0</span>, :]], visible=<span class="literal">False</span>)</span><br><span class="line">plt.setp([a.get_yticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[:, <span class="number">1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four polar axes</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, subplot_kw=dict(projection=<span class="string">'polar'</span>))</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots farther from each other.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">subplots</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/30/Matplotlib-07-subplotsDemo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-20-NoneOREmpty" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/Numpy-20-NoneOREmpty/">Numpy-20-NoneOREmpty</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/28/Numpy-20-NoneOREmpty/" class="archive-article-date">
+  	<time datetime="2018-04-28T13:51:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="判断一个对象是None还是Numpy-Array"><a href="#判断一个对象是None还是Numpy-Array" class="headerlink" title="判断一个对象是None还是Numpy Array"></a>判断一个对象是None还是Numpy Array</h1><p>OpenCV的Hough直线检测等函数，返回有时候会是None对象。这时候进行下一步数据处理时就需要判断此返回值是None还是array。</p>
+<p>最直接的想法就是判断是不是等于None：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>或者使用type和isinstance判断：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> type(a) <span class="keyword">is</span> np.ndarray:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>ininstance可以判断是不是一个类的子类，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> isinstance(a, np.ndarray):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<h1 id="判断Array是否为空"><a href="#判断Array是否为空" class="headerlink" title="判断Array是否为空"></a>判断Array是否为空</h1><p>若已知是Numpy Array，要判断内容是否为空的话，可以查看a.size属性。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>ValueError when checking if variable is None or numpy.array</p>
+<p><a href="https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array</a></p>
+<p>How can I check whether the numpy array is empty or not?</p>
+<p><a href="https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not" target="_blank" rel="noopener">https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">None</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">size</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/28/Numpy-20-NoneOREmpty/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-19-float64" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/Numpy-19-float64/">Numpy-19-float64</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/22/Numpy-19-float64/" class="archive-article-date">
+  	<time datetime="2018-04-22T01:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy的数据类型"><a href="#Numpy的数据类型" class="headerlink" title="Numpy的数据类型"></a>Numpy的数据类型</h1><p>Numpy中最大能表示的浮点数为float64，超过这个数值的结算结果会导致overflow溢出。</p>
+<p>以下为Numpy官方对于Data types的定义：</p>
+<p>NumPy supports a much greater variety of numerical types than Python does. This section shows which are available, and how to modify an array’s data-type.</p>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool_</code></td>
+<td>Boolean (True or False) stored as a byte</td>
+</tr>
+<tr>
+<td><code>int_</code></td>
+<td>Default integer type (same as C <code>long</code>; normally either <code>int64</code> or <code>int32</code>)</td>
+</tr>
+<tr>
+<td>intc</td>
+<td>Identical to C <code>int</code> (normally <code>int32</code> or <code>int64</code>)</td>
+</tr>
+<tr>
+<td>intp</td>
+<td>Integer used for indexing (same as C <code>ssize_t</code>; normally either <code>int32</code> or <code>int64</code>)</td>
+</tr>
+<tr>
+<td>int8</td>
+<td>Byte (-128 to 127)</td>
+</tr>
+<tr>
+<td>int16</td>
+<td>Integer (-32768 to 32767)</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>Integer (-2147483648 to 2147483647)</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>Integer (-9223372036854775808 to 9223372036854775807)</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>Unsigned integer (0 to 255)</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>Unsigned integer (0 to 65535)</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>Unsigned integer (0 to 4294967295)</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>Unsigned integer (0 to 18446744073709551615)</td>
+</tr>
+<tr>
+<td><code>float_</code></td>
+<td>Shorthand for <code>float64</code>.</td>
+</tr>
+<tr>
+<td>float16</td>
+<td>Half precision float: sign bit, 5 bits exponent, 10 bits mantissa</td>
+</tr>
+<tr>
+<td>float32</td>
+<td>Single precision float: sign bit, 8 bits exponent, 23 bits mantissa</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>Double precision float: sign bit, 11 bits exponent, 52 bits mantissa</td>
+</tr>
+<tr>
+<td><code>complex_</code></td>
+<td>Shorthand for <code>complex128</code>.</td>
+</tr>
+<tr>
+<td>complex64</td>
+<td>Complex number, represented by two 32-bit floats (real and imaginary components)</td>
+</tr>
+<tr>
+<td>complex128</td>
+<td>Complex number, represented by two 64-bit floats (real and imaginary components)</td>
+</tr>
+</tbody></table>
+<p><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html</a></p>
+<h1 id="float64的表示范围"><a href="#float64的表示范围" class="headerlink" title="float64的表示范围"></a>float64的表示范围</h1><p>注意到float64的取值范围为Double precision float: sign bit, 11 bits exponent, 52 bits mantissa</p>
+<p>exponent: 指数</p>
+<p>mantissa: 尾数</p>
+<p>故，float64能表示的最大范围约为+-2*2^2048</p>
+<p>具体计算过程参考链接：</p>
+<p>关于float，double等表示的数值范围的计算</p>
+<p><a href="https://blog.csdn.net/wlimin0523/article/details/34420515" target="_blank" rel="noopener">https://blog.csdn.net/wlimin0523/article/details/34420515</a></p>
+<p>实际测试过程中，np.exp(709)输出正常，np.exp(710)输出inf，已经溢出。</p>
+<p>故使用numpy做e的指数运算时，不能超过709。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">float64</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/Numpy-19-float64/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-18-astype" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/Numpy-18-astype/">Numpy-18-astype</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/22/Numpy-18-astype/" class="archive-article-date">
+  	<time datetime="2018-04-22T01:11:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-astype"><a href="#Numpy-astype" class="headerlink" title="Numpy.astype"></a>Numpy.astype</h1><p>Numpy的的整数类型默认为’int32’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.dtype</span><br><span class="line">dtype(<span class="string">'int32'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>默认为<code>dtype(&#39;int32&#39;)</code></p>
+<p>要更改ndArray的data类型时，使用.astype()方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a&gt;<span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">False</span>, <span class="literal">False</span>],</span><br><span class="line">       [<span class="literal">False</span>, <span class="literal">False</span>,  <span class="literal">True</span>,  <span class="literal">True</span>],</span><br><span class="line">       [ <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = b.astype(np.int)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>b输出为，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[False False False False]</span><br><span class="line"> [False False  True  True]</span><br><span class="line"> [ True  True  True  True]]</span><br></pre></td></tr></table></figure>
+
+<p>b经过.astype()函数之后，得到c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[0 0 0 0]</span><br><span class="line"> [0 0 1 1]</span><br><span class="line"> [1 1 1 1]]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">astype</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/Numpy-18-astype/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PyCharm-01-StaticMethod" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -942,585 +1434,6 @@
 
 
   
-    <article id="post-SQL-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/14/SQL-01-Basic/">SQL-01-Basic</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/14/SQL-01-Basic/" class="archive-article-date">
-  	<time datetime="2018-04-13T23:44:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基础知识总结"><a href="#基础知识总结" class="headerlink" title="基础知识总结"></a>基础知识总结</h1><p><code>为什么需要数据库</code></p>
-<p>这应该属于数据存储和查询下的一个子问题，数据存储到介质上之后还需要考虑如何快速精准地查询。这时候一般的存储方式，比如csv就会带来以下问题：</p>
-<ol>
-<li>读取和解析数据格式，需要编写查询用的代码</li>
-<li>不同程序访问数据的借口不同，代码复用性不高</li>
-<li>数据量增大之后，查询出目标数据需要复杂的逻辑处理</li>
-<li>大规模数据在普通存取过程中需要先把所有数据读入内存，这就客观上限制了文件的大小</li>
-</ol>
-<p>为了解决这个问题，一中标准化的数据存储和查询方式就出现了。他提供了一套标准化的访问接口，编写代码时候，只要提供符合规定的语句即可。数据库（具体说，应该是数据库管理软件）内部会解析语句并返回结果。</p>
-<p><code>数据模型</code></p>
-<p>目前有三种常见数据模型：</p>
-<ul>
-<li>层次模型</li>
-<li>网状模型</li>
-<li>关系模型</li>
-</ul>
-<p>其中，关系模型应用最为广泛，是目前的主流。</p>
-<p><code>SQL</code></p>
-<p>SQL是Structured Query Language的简写，也就是上文中提到的标准化的查询数据库的语句。</p>
-<h1 id="数据库的存储方式"><a href="#数据库的存储方式" class="headerlink" title="数据库的存储方式"></a>数据库的存储方式</h1><h2 id="表-table"><a href="#表-table" class="headerlink" title="表(table)"></a>表(table)</h2><p>存储某类数据的集合，比如用户信息、订单详情、产品目录等。</p>
-<p><code>表名</code>，同一个数据库内表的名称是独一无二的，不同数据库中可以包含相同的表名。</p>
-<p><code>模式(schema)</code>，定义了数据库/表的特性，比如存储了什么数据，数据如何分解等等。</p>
-<h2 id="列-column"><a href="#列-column" class="headerlink" title="列(column)"></a>列(column)</h2><p>列又称为字段，用来存储某一种数据类型，可以类比为Excel里的列。值得注意的是，SQL查询数据是按列查询的，这一点可以在下一篇select的文章中看到。</p>
-<p>数据存储类型</p>
-<p>数据库表中的每个列都要求有名称和数据类型。Each column in a database table is required to have a name and a data type.</p>
-<p>下面的表格列出了 SQL 中通用的数据类型：</p>
-<table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CHARACTER(n)</td>
-<td>字符/字符串。固定长度 n。</td>
-</tr>
-<tr>
-<td>VARCHAR(n) 或CHARACTER VARYING(n)</td>
-<td>字符/字符串。可变长度。最大长度 n。</td>
-</tr>
-<tr>
-<td>BINARY(n)</td>
-<td>二进制串。固定长度 n。</td>
-</tr>
-<tr>
-<td>BOOLEAN</td>
-<td>存储 TRUE 或 FALSE 值</td>
-</tr>
-<tr>
-<td>VARBINARY(n) 或BINARY VARYING(n)</td>
-<td>二进制串。可变长度。最大长度 n。</td>
-</tr>
-<tr>
-<td>INTEGER(p)</td>
-<td>整数值（没有小数点）。精度 p。</td>
-</tr>
-<tr>
-<td>SMALLINT</td>
-<td>整数值（没有小数点）。精度 5。</td>
-</tr>
-<tr>
-<td>INTEGER</td>
-<td>整数值（没有小数点）。精度 10。</td>
-</tr>
-<tr>
-<td>BIGINT</td>
-<td>整数值（没有小数点）。精度 19。</td>
-</tr>
-<tr>
-<td>DECIMAL(p,s)</td>
-<td>精确数值，精度 p，小数点后位数 s。例如：decimal(5,2) 是一个小数点前有 3 位数小数点后有 2 位数的数字。</td>
-</tr>
-<tr>
-<td>NUMERIC(p,s)</td>
-<td>精确数值，精度 p，小数点后位数 s。（与 DECIMAL 相同）</td>
-</tr>
-<tr>
-<td>FLOAT(p)</td>
-<td>近似数值，尾数精度 p。一个采用以 10 为基数的指数计数法的浮点数。该类型的 size 参数由一个指定最小精度的单一数字组成。</td>
-</tr>
-<tr>
-<td>REAL</td>
-<td>近似数值，尾数精度 7。</td>
-</tr>
-<tr>
-<td>FLOAT</td>
-<td>近似数值，尾数精度 16。</td>
-</tr>
-<tr>
-<td>DOUBLE PRECISION</td>
-<td>近似数值，尾数精度 16。</td>
-</tr>
-<tr>
-<td>DATE</td>
-<td>存储年、月、日的值。</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>存储小时、分、秒的值。</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>存储年、月、日、小时、分、秒的值。</td>
-</tr>
-<tr>
-<td>INTERVAL</td>
-<td>由一些整数字段组成，代表一段时间，取决于区间的类型。</td>
-</tr>
-<tr>
-<td>ARRAY</td>
-<td>元素的固定长度的有序集合</td>
-</tr>
-<tr>
-<td>MULTISET</td>
-<td>元素的可变长度的无序集合</td>
-</tr>
-<tr>
-<td>XML</td>
-<td>存储 XML 数据</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="SQL-数据类型快速参考"><a href="#SQL-数据类型快速参考" class="headerlink" title="SQL 数据类型快速参考"></a>SQL 数据类型快速参考</h2><p>然而，不同的数据库对数据类型的定义有所不同。</p>
-<p>下面的表格显示了各种不同的数据库平台上一些数据类型的通用名称：</p>
-<table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>Access</th>
-<th>SQLServer</th>
-<th>Oracle</th>
-<th>MySQL</th>
-<th>PostgreSQL</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><em>boolean</em></td>
-<td>Yes/No</td>
-<td>Bit</td>
-<td>Byte</td>
-<td>N/A</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td><em>integer</em></td>
-<td>Number (integer)</td>
-<td>Int</td>
-<td>Number</td>
-<td>IntInteger</td>
-<td>IntInteger</td>
-</tr>
-<tr>
-<td><em>float</em></td>
-<td>Number (single)</td>
-<td>FloatReal</td>
-<td>Number</td>
-<td>Float</td>
-<td>Numeric</td>
-</tr>
-<tr>
-<td><em>currency</em></td>
-<td>Currency</td>
-<td>Money</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Money</td>
-</tr>
-<tr>
-<td><em>string (fixed)</em></td>
-<td>N/A</td>
-<td>Char</td>
-<td>Char</td>
-<td>Char</td>
-<td>Char</td>
-</tr>
-<tr>
-<td><em>string (variable)</em></td>
-<td>Text (&lt;256)Memo (65k+)</td>
-<td>Varchar</td>
-<td>VarcharVarchar2</td>
-<td>Varchar</td>
-<td>Varchar</td>
-</tr>
-<tr>
-<td><em>binary object</em></td>
-<td>OLE Object Memo</td>
-<td>Binary (fixed up to 8K)Varbinary (&lt;8K)Image (&lt;2GB)</td>
-<td>LongRaw</td>
-<td>BlobText</td>
-<td>BinaryVarbinary</td>
-</tr>
-</tbody></table>
-<p>值得注意的是，即使数据类型名称相同，在不同数据库系统中的尺寸和细节也有所区别。</p>
-<h2 id="行-row"><a href="#行-row" class="headerlink" title="行(row)"></a>行(row)</h2><p>SQL数据是按行存储的，类似于Excel的一行数据。<strong>(查询的时候是按列查询的)</strong></p>
-<p>行有时候也被称作记录(record)，但是标准叫法还是行(row)。</p>
-<h2 id="主键-primary-key"><a href="#主键-primary-key" class="headerlink" title="主键(primary key)"></a>主键(primary key)</h2><p>表的每一行必须有一列或者多列可以唯一标识自己，不然也就无法快速精准定位到目标位置。常见的方法是设计一个id列唯一标识某一行，或者主id加从id的方式来复合定位。此时主id可以作为类别(可以重复)，从id细分到每行数据。</p>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>单行注释使用两个<code>-- 注释</code>表示，</p>
-<p>多行注释使用<code>/*注释*/</code>来表示。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>SQL 通用数据类型</p>
-<p><a href="http://www.runoob.com/sql/sql-datatypes-general.html" target="_blank" rel="noopener">http://www.runoob.com/sql/sql-datatypes-general.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/14/SQL-01-Basic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-FFT-01-sample" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/FFT-01-sample/">FFT-01-sample</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/11/FFT-01-sample/" class="archive-article-date">
-  	<time datetime="2018-04-11T13:43:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Sample-code-for-FFT"><a href="#Sample-code-for-FFT" class="headerlink" title="Sample code for FFT"></a>Sample code for FFT</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">iFFT</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ori_array, sampling_period)</span>:</span></span><br><span class="line">        self.__ori_array = ori_array</span><br><span class="line">        self.__count = len(self.__ori_array)</span><br><span class="line">        self.__sampling_period = sampling_period</span><br><span class="line">        self.__interval = self.__sampling_period / self.__count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_ori_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(<span class="number">0</span>, self.__sampling_period, self.__interval)</span><br><span class="line">        y = self.__ori_array</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_fft_xy</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = np.arange(self.__count / <span class="number">2</span>) / self.__sampling_period</span><br><span class="line">        ft = np.fft.fft(self.__ori_array)</span><br><span class="line">        y = abs(ft[range(int(self.__count / <span class="number">2</span>))] / self.__count)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">period = <span class="number">5</span></span><br><span class="line">interval = <span class="number">0.005</span></span><br><span class="line">time = np.arange(<span class="number">0</span>, period, interval)</span><br><span class="line">array = np.sin(<span class="number">2</span> * np.pi * <span class="number">10</span> * time) + <span class="number">0.5</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">30</span> * time)</span><br><span class="line">sample = iFFT(array, period)</span><br><span class="line">x0, y0 = sample.get_ori_xy()</span><br><span class="line">x1, y1 = sample.get_fft_xy()</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x0, y0, <span class="string">'black'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>), plt.ylabel(<span class="string">'Amplitude'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">plt.plot(x1, y1, <span class="string">'red'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Freq (Hz)'</span>), plt.ylabel(<span class="string">'Amp. Spectrum'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>the output,</p>
-<p><img src="FFT-01-sample%5Cfft.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FFT</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sample</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/FFT//" class="article-tag-list-link color4">FFT</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/FFT-01-sample/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-03-Session" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/08/TensorFlow-03-Session/">TensorFlow-03-Session</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/08/TensorFlow-03-Session/" class="archive-article-date">
-  	<time datetime="2018-04-08T04:33:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h1><p>无论是TensorFlow还是Theano都是“符号式”的库，这与传统的逐行编译/解释的编程方式不同，符号式的编程首先定义好各种变量从而建立一个“计算图”，计算图规定了各个变量之间的计算关系。建立好的运算图需要compile以确定其内部细节。即使compile之后，计算图内仍然没有用于处理的数据，需要传入数据来形成数据流。</p>
-<p>大多数的深度学习框架使用的都是符号计算这一套方法，因为符号计算能够提供关键的计算优化、自动求导等功能。</p>
-<h1 id="Seesion会话"><a href="#Seesion会话" class="headerlink" title="Seesion会话"></a>Seesion会话</h1><p>使用TF构建的计算图必须通过Seesion会话才能执行，只定义计算图而不执行Session会话的话，该节点的运算不会被执行。</p>
-<p>例如，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">a=tf.constant([[<span class="number">1</span>,<span class="number">2</span>]])  <span class="comment">#定义一个1×2的矩阵</span></span><br><span class="line">b=tf.constant([[<span class="number">2</span>],</span><br><span class="line">               [<span class="number">4</span>]])  <span class="comment">#定义一个2×1的矩阵</span></span><br><span class="line"></span><br><span class="line">c=tf.matmul(a,b)  <span class="comment">#两者dot赋给c节点</span></span><br><span class="line"></span><br><span class="line">sess=tf.Session()  <span class="comment"># 定义一个Seesion实例</span></span><br><span class="line">result=sess.run(c)  <span class="comment"># 执行sess实例</span></span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line">sess.close()  <span class="comment">#关闭session，可有可无，但为了规范起见，还是写上</span></span><br></pre></td></tr></table></figure>
-
-<p>或者使用with上下文自动close</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    result=sess.run(c)</span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码中，先定义了矩阵a和b，然后c = dot(a, b)，但是并没有开始计算c，而是等到Seesion处的run才开始运算。</p>
-<p>#参考</p>
-<p>一些基本概念-关于符号计算</p>
-<p><a href="http://keras-cn.readthedocs.io/en/latest/for_beginners/concepts/" target="_blank" rel="noopener">http://keras-cn.readthedocs.io/en/latest/for_beginners/concepts/</a></p>
-<p>tensorflow入门之Session</p>
-<p><a href="https://blog.csdn.net/zhangshaoxing1/article/details/68957564" target="_blank" rel="noopener">https://blog.csdn.net/zhangshaoxing1/article/details/68957564</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Session</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/08/TensorFlow-03-Session/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-02-useGPUs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/08/TensorFlow-02-useGPUs/">TensorFlow-02-useGPUs</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/08/TensorFlow-02-useGPUs/" class="archive-article-date">
-  	<time datetime="2018-04-08T02:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TensorFlow使用GPU"><a href="#TensorFlow使用GPU" class="headerlink" title="TensorFlow使用GPU"></a>TensorFlow使用GPU</h1><p>没有指定使用CPU还是GPU的时候，TF默认寻找机器中的第一个GPU，并且占用该GPU的所有显存资源。如果没有找到GPU那就使用第一个CPU来运算。</p>
-<blockquote>
-<p>TensorFlow对于设备的表示：”/cpu:0”表示第一块CPU，”/gpu:0”表示第一块GPU，其他情况以此类推。</p>
-</blockquote>
-<p>要显示系统的GPU设备时，可以运行NVIDIA自带的nvidia-smi.exe来查看。一般在路径：<code>C:\Program Files\NVIDIA Corporation\NVSMI</code>下可以看到。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA Corporation\NVSMI&gt;nvidia-smi.exe</span><br><span class="line">Sun Apr 08 10:51:55 2018</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 388.13                 Driver Version: 388.13                    |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name            TCC&#x2F;WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage&#x2F;Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|   0  GeForce GTX 960    WDDM  | 00000000:01:00.0  On |                  N&#x2F;A |</span><br><span class="line">| 30%   30C    P8    10W &#x2F; 120W |    267MiB &#x2F;  2048MiB |      9%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|    0      1932    C+G   C:\Windows\system32\Dwm.exe                N&#x2F;A      |</span><br><span class="line">|    0     10660    C+G   ...6)\Google\Chrome\Application\chrome.exe N&#x2F;A      |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用多GPU"><a href="#使用多GPU" class="headerlink" title="使用多GPU"></a>使用多GPU</h1><p>ing</p>
-<h1 id="手动分配GPU资源"><a href="#手动分配GPU资源" class="headerlink" title="手动分配GPU资源"></a>手动分配GPU资源</h1><p>ing</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>TensorFlow中设置GPU</p>
-<p><a href="http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/" target="_blank" rel="noopener">http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPU</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Setting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/08/TensorFlow-02-useGPUs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
@@ -1643,11 +1556,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">const</a>
+                <a href="javascript:void(0)" class="js-tag color1">basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1656,6 +1565,38 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">data type</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">const</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">struct</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1679,11 +1620,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
+                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
+                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1719,6 +1660,50 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
               </li>
              
@@ -1735,6 +1720,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -1743,11 +1736,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
+                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
+                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1783,6 +1776,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">file</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Stash</a>
               </li>
              
@@ -1795,11 +1796,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">file</a>
+                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1811,15 +1812,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Start</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1859,11 +1852,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
+                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
+                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1891,11 +1884,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1931,7 +1924,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1944,6 +1937,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Softmax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1975,6 +1972,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">axes</a>
               </li>
              
@@ -1983,7 +1984,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1995,15 +1996,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
+                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">imshow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2075,15 +2072,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zip</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dstack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2115,6 +2112,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">float64</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shape</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">None</a>
               </li>
              
@@ -2127,27 +2132,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">float64</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shape</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flatnonzero</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Native type</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2164,6 +2153,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2187,19 +2184,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">choice</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Office</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Word</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">choice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2219,11 +2216,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">apply</a>
+                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
+                <a href="javascript:void(0)" class="js-tag color1">apply</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2239,6 +2236,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
@@ -2247,19 +2248,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">TODO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">close</a>
+                <a href="javascript:void(0)" class="js-tag color2">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">errors</a>
+                <a href="javascript:void(0)" class="js-tag color1">close</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2283,11 +2280,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">get</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">get</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2303,11 +2300,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">is</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2327,15 +2328,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
+                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Closure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2379,15 +2376,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">property decorator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multiple Inheritance</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2451,10 +2448,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
@@ -2475,6 +2468,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">URL</a>
               </li>
              
@@ -2484,10 +2481,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">parse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2535,6 +2528,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">open3d</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Raspberry Pi</a>
               </li>
              
@@ -2555,14 +2556,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">database</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
@@ -2571,7 +2564,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">select</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">commit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2587,10 +2600,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">commit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -2603,15 +2612,55 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SWD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SolidWorks</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+                <a href="javascript:void(0)" class="js-tag color2">CubeMX</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2619,11 +2668,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2687,6 +2740,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">reduce_sum</a>
               </li>
              
@@ -2699,11 +2756,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
+                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2715,15 +2772,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">domain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2732,6 +2781,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2744,6 +2797,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">deployment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2760,130 +2821,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">delay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">weak</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">smb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atof</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">APB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">printf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">float</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
             
             <div class="clearfix"></div>

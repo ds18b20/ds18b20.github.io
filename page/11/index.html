@@ -156,6 +156,479 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-19-KernalVisualization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/30/TensorFlow-19-KernalVisualization/">TensorFlow-19-KernelVisualization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/30/TensorFlow-19-KernalVisualization/" class="archive-article-date">
+  	<time datetime="2018-05-30T14:17:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TF-kernel-visualization"><a href="#TF-kernel-visualization" class="headerlink" title="TF kernel visualization"></a>TF kernel visualization</h1><p>下面的代码使用MNIST手写识别的例子来试验kernel的可视化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line"></span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data/"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_accuracy</span><span class="params">(xs_val, ys_val)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> prediction</span><br><span class="line">    y_pre = sess.run(prediction, feed_dict=&#123;xs: xs_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(y_pre, axis=<span class="number">1</span>), tf.argmax(ys_val, axis=<span class="number">1</span>))</span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    result = sess.run(accuracy, feed_dict=&#123;xs: xs_val, ys: ys_val, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.truncated_normal(shape, stddev=<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define weight</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bias_variable</span><span class="params">(shape, name)</span>:</span></span><br><span class="line">    initial = tf.constant(<span class="number">0.1</span>, shape=shape)</span><br><span class="line">    <span class="keyword">return</span> tf.Variable(initial, name=name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define conv layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W)</span>:</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="comment"># padding: SAME size with input</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># define pooling layer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool_2x2</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="comment"># ksize=[1, width, height, 1]</span></span><br><span class="line">    <span class="comment"># strides=[1,x_movement,y_movement,1]</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.max_pool(x, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">28</span>*<span class="number">28</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sample count * width * height * channel</span></span><br><span class="line">    x_image = tf.reshape(xs, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</span><br><span class="line">    image_summary = tf.summary.image(<span class="string">"images_summary"</span>, x_image, max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_1'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 1</span></span><br><span class="line">    <span class="comment"># kernal count: 32</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv1 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>], <span class="string">'W_for_Conv_Layer_1'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 1, 32] to [32, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">"kernels_1"</span>, tf.transpose(W_conv1, perm=[<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]), max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv1 = bias_variable([<span class="number">32</span>], <span class="string">'bias_for_Conv_Layer_1'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv1 = conv2d(x_image, W_conv1) + b_conv1  <span class="comment"># output size -1*28*28*32</span></span><br><span class="line">        h_conv1 = tf.nn.relu(h_conv1)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 28, 28, 32] to [-1, 32, 28, 28]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_1'</span>):</span><br><span class="line">    h_pool1 = max_pool_2x2(h_conv1)  <span class="comment"># output size -1*14*14*32</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 32] to [-1, 32, 14, 14]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [32], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_1'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convolutional layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv_layer_2'</span>):</span><br><span class="line">    <span class="comment"># kernal width: 5</span></span><br><span class="line">    <span class="comment"># kernal height: 5</span></span><br><span class="line">    <span class="comment"># kernal channel: 32</span></span><br><span class="line">    <span class="comment"># kernal count: 64</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'weights'</span>):</span><br><span class="line">        W_conv2 = weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>], <span class="string">'W_for_Conv_Layer_2'</span>)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [5, 5, 32, 64] to [32*64, 5, 5, 1]</span></span><br><span class="line">        tf.summary.image(<span class="string">'kernels_2'</span>, tf.reshape(tf.transpose(W_conv2, perm=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>]), [<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'bias'</span>):</span><br><span class="line">        b_conv2 = bias_variable([<span class="number">64</span>], <span class="string">'bias_2'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'activations'</span>):</span><br><span class="line">        h_conv2 = conv2d(h_pool1, W_conv2) + b_conv2  <span class="comment"># output size -1*14*14*64</span></span><br><span class="line">        h_conv2 = tf.nn.relu(h_conv2)</span><br><span class="line">        <span class="comment"># Transpose Tensor dimensions from [-1, 14, 14, 64] to [-1, 64, 14, 14]</span></span><br><span class="line">        <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">        tf.summary.image(<span class="string">'activations_2'</span>, tf.reshape(tf.transpose(h_conv2, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">1</span>]),</span><br><span class="line">                         max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max pool layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'max_pool_layer_2'</span>):</span><br><span class="line">    h_pool2 = max_pool_2x2(h_conv2)  <span class="comment"># output size -1*7*7*64</span></span><br><span class="line">    <span class="comment"># Transpose Tensor dimensions from [-1, 7, 7, 64] to [-1, 64, 7, 7]</span></span><br><span class="line">    <span class="comment"># Merge dimension [-1] and [64], and show image</span></span><br><span class="line">    tf.summary.image(<span class="string">'max_pool_2'</span>, tf.reshape(tf.transpose(h_conv1, perm=[<span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]), [<span class="number">-1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">1</span>]),</span><br><span class="line">                     max_outputs=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 1</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_1'</span>):</span><br><span class="line">    W_fc1 = weight_variable([<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>, <span class="number">1024</span>], <span class="string">'W_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    b_fc1 = bias_variable([<span class="number">1024</span>], <span class="string">'bias_for_Fully_Connected_layer_1'</span>)</span><br><span class="line">    h_pool2_flat = tf.reshape(h_pool2, [<span class="number">-1</span>, <span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>])  <span class="comment"># shape: [7, 7, 64]--&gt;[-1, 7*7*64]</span></span><br><span class="line">    h_fc1 = tf.matmul(h_pool2_flat, W_fc1) + b_fc1</span><br><span class="line">    h_fc1 = tf.nn.relu(h_fc1)</span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc1_hist = tf.summary.histogram(<span class="string">"W_fc1"</span>, W_fc1)</span><br><span class="line">    b_fc1_hist = tf.summary.histogram(<span class="string">"b_fc1"</span>, b_fc1)</span><br><span class="line"></span><br><span class="line">    keep_prob = tf.placeholder(dtype=tf.float32, name=<span class="string">'keep_prob4dropout'</span>)</span><br><span class="line">    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fully connected layer 2</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'fully_connected_layer_2'</span>):</span><br><span class="line">    W_fc2 = weight_variable([<span class="number">1024</span>, <span class="number">10</span>], <span class="string">'W_for_Fully_Connected_layer_2'</span>)</span><br><span class="line">    b_fc2 = bias_variable([<span class="number">10</span>], <span class="string">'bias_for_Fully_Connected_layer_2'</span>)</span><br><span class="line"></span><br><span class="line">    prediction = tf.matmul(h_fc1_drop, W_fc2) + b_fc2</span><br><span class="line">    prediction = tf.nn.softmax(prediction)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Also add histograms to TensorBoard</span></span><br><span class="line">    W_fc2_hist = tf.summary.histogram(<span class="string">"W_fc2"</span>, W_fc2)</span><br><span class="line">    b_fc2_hist = tf.summary.histogram(<span class="string">"b_fc2"</span>, b_fc2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.AdamOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">'./graphs/cnn_'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    xs_batch, ys_batch = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">0.6</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        print(compute_accuracy(mnist.test.images[:<span class="number">100</span>], mnist.test.labels[:<span class="number">100</span>]))</span><br><span class="line">        summary_result = sess.run(summaries, feed_dict=&#123;xs: xs_batch, ys: ys_batch, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        writer.add_summary(summary_result, global_step=step)</span><br><span class="line">        writer.flush()</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意，<code>tf.summary.image(&#39;max_pool_2&#39;, tf.reshape(tf.transpose(h_conv1, perm=[0, 3, 1, 2]), [-1, 7, 7, 1]), max_outputs=4)</code></p>
+<p>参数2要求是一个Tensor，而且要求此Tensor满足：</p>
+<blockquote>
+<p>Tensor must be 4-D with last dim 1, 3, or 4</p>
+</blockquote>
+<p>这就需要把需要可视化的Tensor转换，聚合维度才能添加到summary中显示。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://qiita.com/FukuharaYohei/items/fae6896e041235033454" target="_blank" rel="noopener">【TensorBoard入門:image編】TensorFlow画像処理を見える化して理解を深める</a></p>
+<p><a href="http://robromijnders.github.io/tensorflow_basic/" target="_blank" rel="noopener">http://robromijnders.github.io/tensorflow_basic/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kernel visualization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/30/TensorFlow-19-KernalVisualization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-18-dropout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/TensorFlow-18-dropout/">TensorFlow-18-dropout</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/26/TensorFlow-18-dropout/" class="archive-article-date">
+  	<time datetime="2018-05-26T07:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="sklearn-dataset"><a href="#sklearn-dataset" class="headerlink" title="sklearn dataset"></a>sklearn dataset</h1><p>以下代码展示了sklearn库自带的dataset的内容，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># load data</span></span><br><span class="line">digits = load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br><span class="line"></span><br><span class="line">print(X.shape)</span><br><span class="line">print(y.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show full dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show train dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X_train[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y_train[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># show test dataset</span></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    plt.subplot(<span class="number">1</span>, <span class="number">5</span>, i+<span class="number">1</span>)</span><br><span class="line">    plt.imshow(X_test[i].reshape(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">    plt.title(<span class="string">u"Digit: %s"</span> % y_test[i])</span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">1</span>, wspace=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>输出的X和y的尺寸分别为，<code>(1797, 64)</code>和<code>(1797,)</code></p>
+<p>可知，总共1797个样本，每个样本包括image部分和对应的label。</p>
+<p>image是被flaten的1*64的行向量，要显示的话需要reshape成8*8。label是1797ge元素组成的一维向量。</p>
+<p>输出的图像如下，首先是整体样本的前5个样本：</p>
+<p><img src="TensorFlow-18-dropout%5Cdataset_1.png" alt=""></p>
+<p>然后是split得到的train和test的前5个样本：</p>
+<p><img src="TensorFlow-18-dropout%5Cdataset_2.png" alt=""></p>
+<p><img src="TensorFlow-18-dropout%5Cdataset_3.png" alt=""></p>
+<p>可以看到，得到的train和test样本已经得到了shaffle。</p>
+<h1 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h1><p>神经网络由于配置不当会导致<code>过拟合</code>(over fitting)，即训练得到的Weights和biases对训练样本适应的很好(过好)，但是对测试样本适应得不好的现象。出现over fitting之后神经网络的通用性降低，当应用于具体实例时不能准确预测。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># load data</span></span><br><span class="line">digits = load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br><span class="line">y = LabelBinarizer().fit_transform(y)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer'</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'Weights'</span>):</span><br><span class="line">            Weights = tf.Variable(tf.random_normal([in_size, out_size]), name=<span class="string">'W'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/Weights'</span>, Weights)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'biases'</span>):</span><br><span class="line">            biases = tf.Variable(tf.zeros([<span class="number">1</span>, out_size]) + <span class="number">0.1</span>, name=<span class="string">'b'</span>)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/biases'</span>, biases)</span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">            W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">        <span class="keyword">if</span> activation_function <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            outputs = W_m_p</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            outputs = activation_function(W_m_p)</span><br><span class="line">            tf.summary.histogram(layer_name + <span class="string">'/outputs'</span>, outputs)</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># real data for placeholder</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">64</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># add hidden layer</span></span><br><span class="line">layer_1 = add_layer(xs, <span class="number">64</span>, <span class="number">100</span>, <span class="string">'hidden_layer_1'</span>, activation_function=tf.nn.tanh)</span><br><span class="line"><span class="comment"># add prediction layer</span></span><br><span class="line">prediction = add_layer(layer_1, <span class="number">100</span>, <span class="number">10</span>, <span class="string">'prediction_layer'</span>, activation_function=tf.nn.softmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss function</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">    cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line">    tf.summary.scalar(<span class="string">'loss'</span>, cross_entropy)</span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'train'</span>):</span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate=<span class="number">0.1</span>).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Session</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line">summaries = tf.summary.merge_all()</span><br><span class="line">train_writer = tf.summary.FileWriter(<span class="string">'./graphs/dropout/train'</span>, sess.graph)</span><br><span class="line">test_writer = tf.summary.FileWriter(<span class="string">'./graphs/dropout/test'</span>, sess.graph)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: X_train, ys: y_train&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># print(compute_accuracy(mnist.test.images, mnist.test.labels))</span></span><br><span class="line">        train_result = sess.run(summaries, feed_dict=&#123;xs: X_train, ys: y_train&#125;)</span><br><span class="line">        test_result = sess.run(summaries, feed_dict=&#123;xs: X_test, ys: y_test&#125;)</span><br><span class="line">        train_writer.add_summary(train_result, global_step=step)</span><br><span class="line">        test_writer.add_summary(test_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上例中给中间层指定了100个节点，有意让其发生<code>过拟合</code>，而且没有加入dropout层。结果如下，</p>
+<p><img src="TensorFlow-18-dropout%5Cdropout_1.JPG" alt=""></p>
+<p>可以看到，随着学习步数的增加，train和test的loss差距开始变大，这就意味着该W和b对训练集有很好的预测，而对测试集适应性不佳。</p>
+<p>为了解决over fitting，可以给网络中添加drop out层，即人为地切断层中的某一些连接，从而抑制W和b过于适应于训练样本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_layer</span><span class="params">(inputs, in_size, out_size, layer_name, activation_function=None)</span>:</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">with</span> tf.name_scope(<span class="string">'W_m_p'</span>):</span><br><span class="line">		W_m_p = tf.matmul(inputs, Weights) + biases</span><br><span class="line">	<span class="keyword">with</span> tf.name_scope(<span class="string">'Dropout'</span>):</span><br><span class="line">		W_m_p = tf.nn.dropout(W_m_p, keep_prob)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>以及</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># placeholder for inputs data</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'inputs'</span>):</span><br><span class="line">	<span class="comment"># keep_prob代表保留比例</span></span><br><span class="line">    keep_prob = tf.placeholder(dtype=tf.float32, name=<span class="string">'keep_prob4dropout'</span>)</span><br><span class="line">    xs = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">64</span>], name=<span class="string">'x_inputs'</span>)</span><br><span class="line">    ys = tf.placeholder(dtype=tf.float32, shape=[<span class="literal">None</span>, <span class="number">10</span>], name=<span class="string">'y_inputs'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>train的时候给keep_prob这个placeholder赋值0.6，生成Summary的时候赋1即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start training</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    sess.run(train_step, feed_dict=&#123;xs: X_train, ys: y_train, keep_prob: <span class="number">0.6</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">50</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># print(compute_accuracy(mnist.test.images, mnist.test.labels))</span></span><br><span class="line">        train_result = sess.run(summaries, feed_dict=&#123;xs: X_train, ys: y_train, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        test_result = sess.run(summaries, feed_dict=&#123;xs: X_test, ys: y_test, keep_prob: <span class="number">1</span>&#125;)</span><br><span class="line">        train_writer.add_summary(train_result, global_step=step)</span><br><span class="line">        test_writer.add_summary(test_result, global_step=step)</span><br><span class="line">print(<span class="string">'OK'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>生成的计算图中也就新增加了dropout层，如下：</p>
+<p><img src="TensorFlow-18-dropout%5Cdropout_2.png" alt=""></p>
+<p>此时，loss输出如下：</p>
+<p><img src="TensorFlow-18-dropout%5Cdropout_3.JPG" alt=""></p>
+<p>同dropout前相比，over fitting得到大幅改善。</p>
+<p><strong>注意</strong>：运行时可能会报错<code>Nan in summary histogram for:</code>，参见文章<code>TensorFlow-00-Error</code>来调整超参数。</p>
+<p>完整代码参见我的<a href="https://github.com/ds18b20/TensorFlow/blob/master/tutorial/08-dropout.py" target="_blank" rel="noopener">Github</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dropout</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sklearn</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dataset</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/26/TensorFlow-18-dropout/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Math-04-DistanceFromPoint2Line" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/Math-04-DistanceFromPoint2Line/">Math-04-DistanceFromPoint2Line</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/Math-04-DistanceFromPoint2Line/" class="archive-article-date">
+  	<time datetime="2018-05-25T12:34:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="点到直线的距离"><a href="#点到直线的距离" class="headerlink" title="点到直线的距离"></a>点到直线的距离</h1><p>已知直线上的两点和直线外的一点，计算点到直线的距离。</p>
+<h2 id="向量法"><a href="#向量法" class="headerlink" title="向量法"></a>向量法</h2><p>可以先转换成两个向量：<strong>a</strong>和<strong>b</strong>，这时计算点到直线的距离可以先算出向量<strong>c</strong>的坐标表示，然后距离向量<strong>e</strong>=<strong>a</strong>-<strong>c</strong>，最后对向量<strong>e</strong>取模即可得到距离。</p>
+<p><img src="C:/Users/ds18b20/PycharmProjects/Hexo/source/_posts/Math-04-DistanceFromPoint2Line/diatance.jpg" alt=""><br>$$<br>c = acos\theta\dfrac{b} {|b|}<br>$$</p>
+<p>$$<br>= \dfrac{(a·b)} {|b|}\dfrac{b} {|b|}<br>$$</p>
+<p><a href="https://blog.csdn.net/tracing/article/details/46563383" target="_blank" rel="noopener">https://blog.csdn.net/tracing/article/details/46563383</a></p>
+<h2 id="向量叉乘"><a href="#向量叉乘" class="headerlink" title="向量叉乘"></a>向量叉乘</h2><p>平面上两个向量(<strong>x</strong>, <strong>y</strong>)叉乘得到的结果也是一个向量<strong>z</strong>，<strong>z</strong>的方向垂直于<strong>xy</strong>平面，模等于xy组成的平行四边形的面积。利用这一点可以很方便地计算点到直线的距离，即用平行四边形的面积除以底边的长度。<br>$$<br>d =\dfrac{ |AB\times AC|}{|AB|}<br>$$</p>
+<p>$$<br>V_1(x_1, y_1)\times V_2(x_2, y_2) =x_1y_2 – x_2y_1<br>$$</p>
+<p><a href="https://blog.csdn.net/zxj1988/article/details/6260576" target="_blank" rel="noopener">https://blog.csdn.net/zxj1988/article/details/6260576</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>点乘与叉乘的数学公式</p>
+<p><a href="http://gjunwei.blog.sohu.com/58747706.html" target="_blank" rel="noopener">http://gjunwei.blog.sohu.com/58747706.html</a></p>
+<p><a href="http://www.waitingfy.com/archives/320" target="_blank" rel="noopener">http://www.waitingfy.com/archives/320</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Distance from point to line</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/Math-04-DistanceFromPoint2Line/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Math-05-FFT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/Math-05-FFT/">Math-05-FFT</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/Math-05-FFT/" class="archive-article-date">
+  	<time datetime="2018-05-25T12:32:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h1><p>在频域上处理信号时，最常用的就是FFT(快速傅立叶变换)。时域信号转换成频域信号后可以直观地看到频率分布，并且在频域上更容易进行时域上的滤波、卷积等操作。</p>
+<h2 id="截取完整周期"><a href="#截取完整周期" class="headerlink" title="截取完整周期"></a>截取完整周期</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sampling_rate = <span class="number">8000</span>  <span class="comment"># sampling frequency</span></span><br><span class="line">fft_size = <span class="number">512</span>  <span class="comment"># sample count</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> / sampling_rate)  <span class="comment"># 8000 pts in [0, 1.0)</span></span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">156.25</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">234.375</span> * t)</span><br><span class="line">xs = x[: fft_size]</span><br><span class="line">xf = np.fft.rfft(xs)</span><br><span class="line">freqs = np.linspace(<span class="number">0</span>, sampling_rate / <span class="number">2</span>, int(fft_size / <span class="number">2</span>) + <span class="number">1</span>)</span><br><span class="line"><span class="comment"># xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))</span></span><br><span class="line">xfp = <span class="number">2</span> * np.abs(xf) / fft_size</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># show Time domain</span></span><br><span class="line">plt.subplot(<span class="number">211</span>)</span><br><span class="line">plt.plot(t[: fft_size], xs)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># show frequency domain</span></span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">plt.plot(freqs, xfp, <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.75</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p><img src="Math-05-FFT%5CFFT_1.png" alt=""></p>
+<p><code>x = np.sin(2 * np.pi * 156.25 * t) + 2 * np.sin(2 * np.pi * 234.375 * t)</code>生成156.25Hz和234.375Hz的混合信号。</p>
+<p><strong>注意</strong>，此处选择的频率156.25Hz和234.375Hz看似很奇怪，实际上是特意计算得到的。</p>
+<p>采样频率8000，采样点512时，采样时长<code>512点*1/8000s=0.064s</code>，对应的频率分辨率f0=15.625Hz。上述选择的频率点156.25Hz和234.375Hz分别是f0的10倍和15倍。</p>
+<p><code>xs = x[: fft_size]</code>截取长度为fft_size=512长的样本。</p>
+<p><code>xf = np.fft.rfft(xs)</code>对样本xs做fft变换。<br><code>freqs = np.linspace(0, sampling_rate / 2, int(fft_size / 2) + 1)</code>生成频域的频率系列作为横轴。</p>
+<p><code>xfp = 2 * np.abs(xf) / fft_size</code>上述得到的xf仍然是复数形式，经过np.abs方法得到xf的绝对值xfs。</p>
+<p><code>xfp = 2 * np.abs(xf) / fft_size</code>计算单边振幅，双边都显示时，不用乘2。</p>
+<h2 id="截取不完整周期"><a href="#截取不完整周期" class="headerlink" title="截取不完整周期"></a>截取不完整周期</h2><p>把采样样本改成<code>x = np.sin(2 * np.pi * 200 * t) + 2 * np.sin(2 * np.pi * 300 * t)</code>，即200Hz和300Hz的合并信号。同样地fft之后得到，</p>
+<p><img src="Math-05-FFT%5CFFT_2.png" alt=""></p>
+<p>同上方完整截取得到的FFT比较，可以发现主波峰的高度变小，而主峰外的频率值相应的变大了。这意味着本来应该集中在主峰上的能量分散到了周围频率上，这个频率被称为频谱泄露。</p>
+<blockquote>
+<p>出现频谱泄漏的原因在于fft_size个取样点无法放下整数个200Hz和300Hz的波形。 </p>
+</blockquote>
+<blockquote>
+<p>频谱泄漏的解释</p>
+<p>我们只能在有限的时间段中对信号进行测量，无法知道在测量范围之外的信号是怎样的。因此只能对测量范围之外的信号进行假设。而傅立叶变换的假设很简单：测量范围之外的信号是所测量到的信号的重复。</p>
+<p>现在考虑512点FFT，从信号中取出的512个数据就是FFT的测量范围，它计算的是这512个数据一直重复的波形的频谱。显然如果512个数据包含整数个周期的话，那么得到的结果就是原始信号的频谱，而如果不是整数周期的话，得到的频谱就是如下波形的频谱，这里假设对50Hz的正弦波进行512点FFT：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>/<span class="number">8000</span>)</span><br><span class="line">x = np.sin(<span class="number">2</span>*np.pi*<span class="number">50</span>*t)[:<span class="number">512</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(np.hstack([x,x]))</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Math-05-FFT%5CFFT_3.png" alt=""></p>
+</blockquote>
+<p>由于截取的样本不是完整的周期的整数倍，可以看到波形在两段的连接处发生了突变。而突变处伴随着非常广泛的频谱，从而导致FFT的结果出现了频谱泄露。另一种解释是，要用傅立叶级数模拟突变处的曲线非常困难，需要多种频谱来配合使用，在FFT结果上表现出来了频谱泄露(spectral leakage)。</p>
+<h2 id="窗函数"><a href="#窗函数" class="headerlink" title="窗函数"></a>窗函数</h2><p>截取不完整周期时，可以通过给截取的片段加窗来优化FFT。</p>
+<p>由于截取的周期不完整导致头尾相接处出现了突变，那么可以让头尾部人为地衰减来让连接处变得更加平滑。</p>
+<p>常用的窗口函数有Hanning窗函数和Hamming窗函数。</p>
+<p>Hanning函数的定义如下：<br>$$<br>w(n) = 0.5 - 0.5 \cos\left(\frac{2\pi{n}}{M-1}\right)<br>\qquad 0 \leq n \leq M-1<br>$$<br>Hamming函数的定义如下：<br>$$<br>w(n) = 0.54 - 0.46 \cos\left(\frac{2\pi{n}}{M-1}\right)<br>\qquad 0 \leq n \leq M-1<br>$$<br>这两种window的曲线对比如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fft_size = <span class="number">512</span></span><br><span class="line">a = np.hanning(fft_size)</span><br><span class="line">b = np.hamming(fft_size)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(a, <span class="string">'m'</span>, label=<span class="string">"Hanning"</span>)</span><br><span class="line">plt.plot(b, <span class="string">'g'</span>, label=<span class="string">"Hamming"</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Pts"</span>)</span><br><span class="line">plt.title(<span class="string">u"Hanning &amp; Hamming window"</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Math-05-FFT%5CFFT_4.png" alt=""></p>
+<p><a href="https://archive.lib.msu.edu/crcmath/math/math/a/a279.htm" target="_blank" rel="noopener">https://archive.lib.msu.edu/crcmath/math/math/a/a279.htm</a></p>
+<p>上面的200Hz和300Hz的混合信号经过窗函数处理之后，再做FFT如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">xs = x[: fft_size]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Multiply by Hanning window</span></span><br><span class="line">xs = xs * np.hanning(fft_size)</span><br><span class="line">xf = np.fft.rfft(xs)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<p><img src="Math-05-FFT%5CFFT_5.png" alt=""></p>
+<p>可以看到加窗之后FFT的能量更加集中到了200Hz和300Hz附近，频谱泄露得到了较好的改善。</p>
+<p><strong>注意</strong>，Hanning窗本身就有能量衰减，如上图所示，振幅变成了初始信号的一半。所以，要显示正确的振幅(能量)，在FFT的结果上继续乘以2即可。</p>
+<h1 id="iFFT"><a href="#iFFT" class="headerlink" title="iFFT"></a>iFFT</h1><p>下面开始用FFT来实现一个低通滤波器。</p>
+<p>上述代码稍作修改加入1000Hz的一个noise，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">noise = np.sin(<span class="number">2</span> * np.pi * <span class="number">1000</span> * t)</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">x = x + noise</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>得到的曲线如下，</p>
+<p><img src="Math-05-FFT%5CFFT_6.png" alt=""></p>
+<p>尝试对此信号进行低通滤波，包含了加窗–FFT–iFFT–去窗的过程，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - * -coding: utf-8- * -</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">sampling_rate = <span class="number">8000</span></span><br><span class="line">fft_size = <span class="number">512</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> / sampling_rate)</span><br><span class="line">noise = np.sin(<span class="number">2</span> * np.pi * <span class="number">1000</span> * t)</span><br><span class="line">x = np.sin(<span class="number">2</span> * np.pi * <span class="number">200</span> * t) + <span class="number">2</span> * np.sin(<span class="number">2</span> * np.pi * <span class="number">300</span> * t)</span><br><span class="line">x = x + noise</span><br><span class="line">x_slice = x[: fft_size]</span><br><span class="line">x_slice = x_slice * np.hanning(fft_size)</span><br><span class="line">print(<span class="string">'xs shape: '</span>, x_slice.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fft</span></span><br><span class="line">x_fft = np.fft.fft(x_slice)</span><br><span class="line">print(<span class="string">'xf shape: '</span>, x_fft.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># half spectrum to show</span></span><br><span class="line">half_freq = sampling_rate / <span class="number">2</span></span><br><span class="line">freq_count = int(fft_size / <span class="number">2</span>) + <span class="number">1</span></span><br><span class="line">freqs = np.linspace(<span class="number">0</span>, half_freq, freq_count)</span><br><span class="line"><span class="comment"># xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># half spectrum *2</span></span><br><span class="line"><span class="comment"># Hanning window *2</span></span><br><span class="line">x_fft_power = <span class="number">2</span> * <span class="number">2</span> * np.abs(x_fft) / fft_size</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">231</span>)</span><br><span class="line">plt.plot(t[:fft_size], x_slice)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">234</span>)</span><br><span class="line">plt.plot(freqs, x_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># low pass filter</span></span><br><span class="line">low_f = int(<span class="number">500</span> * fft_size / sampling_rate)</span><br><span class="line">x_fft[low_f:-low_f] = <span class="number">0</span></span><br><span class="line"><span class="comment"># print('x_fft shape: ', x_fft.shape)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># p = 2 * 2 * np.abs(x_fft) / fft_size</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># plt.subplot(224)</span></span><br><span class="line"><span class="comment"># plt.plot(freqs, p[:freq_count], 'm')</span></span><br><span class="line"><span class="comment"># plt.xlabel(u"Filtered Frequency/Hz")</span></span><br><span class="line"><span class="comment"># plt.title(u"Spectrum")</span></span><br><span class="line"></span><br><span class="line">x_fft_ifft = np.fft.ifft(x_fft)</span><br><span class="line">real = x_fft_ifft.real</span><br><span class="line">print(<span class="string">'x_real shape: '</span>, real.shape)</span><br><span class="line"></span><br><span class="line">x_fft_ifft_fft = np.fft.fft(x_fft_ifft)</span><br><span class="line">x_fft_ifft_fft_power = <span class="number">2</span> * <span class="number">2</span> * np.abs(x_fft_ifft_fft) / fft_size</span><br><span class="line">print(<span class="string">'x_fft_ifft_fft_power shape: '</span>, x_fft_ifft_fft_power.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">232</span>)</span><br><span class="line">plt.plot(t[: fft_size], real)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"Filtered Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">235</span>)</span><br><span class="line">plt.plot(freqs, x_fft_ifft_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"Filtered Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># unwindow</span></span><br><span class="line">real_unwindow = real / (np.hanning(fft_size) + <span class="number">1e-10</span>)</span><br><span class="line">real_unwindow_fft = np.fft.fft(real_unwindow)</span><br><span class="line"></span><br><span class="line"><span class="comment"># double power</span></span><br><span class="line">real_unwindow_fft_power = <span class="number">2</span> * np.abs(real_unwindow_fft) / fft_size</span><br><span class="line">print(<span class="string">'real_unwindow_fft shape: '</span>, real_unwindow_fft.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">233</span>)</span><br><span class="line">plt.plot(t[: fft_size], real_unwindow)</span><br><span class="line">plt.xlabel(<span class="string">u"Time/s"</span>)</span><br><span class="line">plt.title(<span class="string">u"unwindow Filtered Wave"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">236</span>)</span><br><span class="line">plt.plot(freqs, real_unwindow_fft_power[:freq_count], <span class="string">'m'</span>)</span><br><span class="line">plt.xlabel(<span class="string">u"unwindow Filtered Frequency/Hz"</span>)</span><br><span class="line">plt.title(<span class="string">u"Spectrum"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.75</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得到，</p>
+<p><img src="Math-05-FFT%5CFFT_7.png" alt=""></p>
+<p>因为信号已经被window处理过了，当对滤波之后的信号进行还原时，会发现除以window后，信号的前后边沿会发生异常放大。</p>
+<p><img src="Math-05-FFT%5CFFT_8.png" alt=""></p>
+<p>这明显不是先要的结果，原因在于window的两端包含了极小量，除以这小极小量会给结果带来极大的误差。</p>
+<p>所以，对于周期信号，可以直接截取完整周期来做FFT。如果没有完整周期的数据，可以先使用上述窗口函数来处理，再做FFT。其实加窗只是在没有其他办法时的一个小trick。</p>
+<p><a href="https://www.edaboard.com/showthread.php?168721-How-to-reconstruct-each-frequency-components-by-inverse-FFT" target="_blank" rel="noopener">https://www.edaboard.com/showthread.php?168721-How-to-reconstruct-each-frequency-components-by-inverse-FFT</a></p>
+<p><a href="https://stackoverflow.com/questions/40668206/recovering-signal-after-fourier-filter-with-hanning-window" target="_blank" rel="noopener">https://stackoverflow.com/questions/40668206/recovering-signal-after-fourier-filter-with-hanning-window</a></p>
+<p>对于大部分采集自自然界的数据，可以认为是非周期信号，可以不加窗直接做FFT处理。</p>
+<p>所以对于上面的例子，直接FFT–频域截取–iFFT，得到</p>
+<p><img src="Math-05-FFT%5CFFT_9.png" alt=""></p>
+<h1 id="快速卷积"><a href="#快速卷积" class="headerlink" title="快速卷积"></a>快速卷积</h1><p>可以使用FFT来加速卷积运算。具体地，</p>
+<blockquote>
+<p>我们知道，信号x经过系统h之后的输出y是x和h的卷积，虽然卷积的计算方法很简单，但是当x和h都很长的时候，卷积计算是非常耗费时间的。因此对于比较长的系统h，需要找到比直接计算卷积更快的方法。</p>
+<p>信号系统理论中有这样一个规律：时域的卷积等于频域的乘积，因此要计算时域的卷积，可以将时域信号转换为频域信号，进行乘积运算之后再将结果转换为时域信号，实现快速卷积。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">def fft_convolve(a,b):</span><br><span class="line">    n &#x3D; len(a)+len(b)-1</span><br><span class="line">    N &#x3D; 2**(int(np.log2(n))+1)</span><br><span class="line">    A &#x3D; np.fft.fft(a, N)</span><br><span class="line">    B &#x3D; np.fft.fft(b, N)</span><br><span class="line">    return np.fft.ifft(A*B)[:n]</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    a &#x3D; np.random.rand(128)</span><br><span class="line">    b &#x3D; np.random.rand(128)</span><br><span class="line">    c &#x3D; np.convolve(a,b)</span><br><span class="line"></span><br><span class="line">    print np.sum(np.abs(c - fft_convolve(a,b)))</span><br></pre></td></tr></table></figure>
+
+<p>速度测试如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import timeit</span><br><span class="line">&gt;&gt;&gt; setup&#x3D;&quot;&quot;&quot;import numpy as np</span><br><span class="line">a&#x3D;np.random.rand(10000)</span><br><span class="line">b&#x3D;np.random.rand(10000)</span><br><span class="line">from spectrum_fft_convolve import fft_convolve&quot;&quot;&quot;</span><br><span class="line">&gt;&gt;&gt; timeit.timeit(&quot;np.convolve(a,b)&quot;,setup, number&#x3D;10)</span><br><span class="line">1.852900578146091</span><br><span class="line">&gt;&gt;&gt; timeit.timeit(&quot;fft_convolve(a,b)&quot;,setup, number&#x3D;10)</span><br><span class="line">0.19475575806416145</span><br></pre></td></tr></table></figure>
+
+<p>参考链接：<a href="https://wizardforcel.gitbooks.io/hyry-studio-scipy/content/20.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/hyry-studio-scipy/content/20.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FFT</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/Math-05-FFT/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-17-classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -816,408 +1289,6 @@
 
 
   
-    <article id="post-TensorFlow-11-constant" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/20/TensorFlow-11-constant/">TensorFlow-11-constant</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/20/TensorFlow-11-constant/" class="archive-article-date">
-  	<time datetime="2018-05-20T09:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="constant-in-tensorflow"><a href="#constant-in-tensorflow" class="headerlink" title="constant in tensorflow"></a>constant in tensorflow</h1><p>定义一个constant最简单的方式就是调用tf.constant方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># basic</span></span><br><span class="line">a = tf.constant(<span class="number">2</span>, name=<span class="string">'ax'</span>)</span><br><span class="line">b = tf.constant(<span class="number">3</span>, name=<span class="string">'bx'</span>)</span><br><span class="line">x = tf.add(a, b, name=<span class="string">'add'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>还有类似Numpy的zeros/zeros_like和ones/ones_like的方式生成全0或全1的张量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># zeros/zeros_like</span></span><br><span class="line">z = tf.zeros([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'z'</span>)</span><br><span class="line">zl = tf.zeros_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'zl'</span>)</span><br><span class="line">zz = tf.multiply(z, zl, name=<span class="string">'multiply'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ones/ones_like</span></span><br><span class="line">o = tf.ones([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'o'</span>)</span><br><span class="line">ol = tf.ones_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'ol'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>还可以使用tf.fill向指定形状的张量内填入数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fill array with a value</span></span><br><span class="line">f = tf.fill(dims=[<span class="number">2</span>, <span class="number">3</span>], value=<span class="number">6</span>, name=<span class="string">'f'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>生成等距张量类似Numpy的range和linspace</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sequences</span></span><br><span class="line"><span class="comment"># start must be float</span></span><br><span class="line"><span class="comment"># [s, e] both s and e are included!!!</span></span><br><span class="line">ls = tf.linspace(start=<span class="number">1.0</span>, stop=<span class="number">10</span>, num=<span class="number">10</span>, name=<span class="string">'ls'</span>)</span><br><span class="line">rg = tf.range(<span class="number">3</span>, name=<span class="string">'rg'</span>) <span class="comment"># [0, 1, 2] same to Numpy</span></span><br></pre></td></tr></table></figure>
-
-<p>生成随机张量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># random</span></span><br><span class="line">rn = tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">1.0</span>, stddev=<span class="number">1.0</span>, dtype=tf.float32, name=<span class="string">'rn'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>关于随机张量，还有以下多种生成函数：</p>
-<ul>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_normal" target="_blank" rel="noopener"><code>tf.random_normal</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/truncated_normal" target="_blank" rel="noopener"><code>tf.truncated_normal</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_uniform" target="_blank" rel="noopener"><code>tf.random_uniform</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_shuffle" target="_blank" rel="noopener"><code>tf.random_shuffle</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_crop" target="_blank" rel="noopener"><code>tf.random_crop</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/multinomial" target="_blank" rel="noopener"><code>tf.multinomial</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_gamma" target="_blank" rel="noopener"><code>tf.random_gamma</code></a></li>
-<li><a href="https://www.tensorflow.org/api_docs/python/tf/set_random_seed" target="_blank" rel="noopener"><code>tf.set_random_seed</code></a></li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tensorflow.org/api_guides/python/constant_op" target="_blank" rel="noopener">https://www.tensorflow.org/api_guides/python/constant_op</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">constant</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/20/TensorFlow-11-constant/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-38-chardet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/20/Python-38-chardet/">Python-38-chardet</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/20/Python-38-chardet/" class="archive-article-date">
-  	<time datetime="2018-05-20T01:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="编码方式检测"><a href="#编码方式检测" class="headerlink" title="编码方式检测"></a>编码方式检测</h1><p>使用charset库的detect方法检测网页的编码方式。</p>
-<p>以下代码是检测本地的文本文件的编码方式的一个例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> chardet</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path=<span class="string">r"C:\Users\...\unicode.txt"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rawdata = open(path, <span class="string">'rb'</span>).read()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = chardet.detect(rawdata)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result</span><br><span class="line">&#123;<span class="string">'encoding'</span>: <span class="string">'GB2312'</span>, <span class="string">'confidence'</span>: <span class="number">0.99</span>, <span class="string">'language'</span>: <span class="string">'Chinese'</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/3323770/character-detection-in-a-text-file-in-python-using-the-universal-encoding-detect" target="_blank" rel="noopener">Character detection in a text file in Python using the Universal Encoding Detector (chardet)</a></p>
-<p><a href="http://zoeyyoung.github.io/python-chardet.html" target="_blank" rel="noopener">http://zoeyyoung.github.io/python-chardet.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charset</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/20/Python-38-chardet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-24-dotVSmul" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/19/Numpy-24-dotVSmul/">Numpy-24-dotVSmul</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/19/Numpy-24-dotVSmul/" class="archive-article-date">
-  	<time datetime="2018-05-18T23:55:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Calculation-speed-up-by-Numpy"><a href="#Calculation-speed-up-by-Numpy" class="headerlink" title="Calculation speed up by Numpy"></a>Calculation speed up by Numpy</h1><p>有两个矩阵a和b，二者有相同的列数。<br>$$<br>a=\left[<br>\begin{matrix}<br>a &amp; b &amp; c\<br>d &amp; e &amp; f<br>\end{matrix}<br>\right]<br>\<br>b=\left[<br>\begin{matrix}<br>1 &amp; 2 &amp; 3 \<br>4 &amp; 5 &amp; 6 \<br>7 &amp; 8 &amp; 9 \<br>10 &amp; 11 &amp; 12<br>\end{matrix}<br>\right]<br>$$<br>矩阵a和b的L2距离的计算结果是一个a.shape[0] * b.shape[0]的新矩阵。<br>$$<br>\begin{array}{c|lcr}<br>n &amp; \text{[1, 2, 3]} &amp; \text{[4, 5, 6]} &amp; \text{[7, 8, 9]} &amp; \text{[10, 11, 12]} \\<br>\hline<br>[a, b, c ]  &amp;\sqrt{ (a-1)^2+(b-2)^2+(c-3)^2} &amp; … &amp; … &amp; … \\<br>[d, e, f ]  &amp; … &amp; … &amp; … &amp; \sqrt{ (d-10)^2+(e-11)^2+(f-12)^2}<br>\end{array}<br>$$<br>具体计算时，有以下几种方式：</p>
-<h2 id="直接按照定义"><a href="#直接按照定义" class="headerlink" title="直接按照定义"></a>直接按照定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">substract = a - b</span><br><span class="line">sum_square = sum(substract**<span class="number">2</span>)</span><br><span class="line">sum_sqrt = sqrt(sum_square)</span><br></pre></td></tr></table></figure>
-
-<p>但是由于a和b的形状不同，所以计算前要进行reshape操作。</p>
-<p>上面的例子中，a的形状为[2, 3]，b的形状为[3, 3]。要进行计算，可以把a的形状reshape为[2, 1, 3]，这样a - b的形状为[2, 3, 3]。</p>
-<p>当a和b的尺寸过大时，用这种方法计算会带来巨大的内存消耗。</p>
-<h2 id="拆开-a-b-2"><a href="#拆开-a-b-2" class="headerlink" title="拆开(a-b)**2"></a>拆开(a-b)**2</h2><p>首先有<br>$$<br>(a-b)^2 = a^2 + b^2 -2ab<br>$$<br>然后<br>$$<br>\sum(a-b)^2 = \sum{a^2} + \sum{b^2} -2\sum{ab}<br>$$</p>
-<h2 id="继续加速计算ab"><a href="#继续加速计算ab" class="headerlink" title="继续加速计算ab"></a>继续加速计算ab</h2><p>sum(ab, axis=-1)的element-wise运算仍然可以使用np.dot方法来对计算进行加速。</p>
-<p><code>a * 1 + b * 2 + c * 3</code>可以转换成<code>[a, b, c]</code>点乘<code>[1, 2, 3].T</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        start_time = time.time()</span><br><span class="line">        ret = func(*args, **kwargs)</span><br><span class="line">        elapsed_time = time.time() - start_time</span><br><span class="line">        print(<span class="string">'function [&#123;&#125;] finished in &#123;&#125; ms'</span>.format(</span><br><span class="line">            func.__name__, int(elapsed_time * <span class="number">1000</span>)))</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    row = a.shape[<span class="number">0</span>]</span><br><span class="line">    ret = np.sum(a.reshape(row, <span class="number">1</span>, <span class="number">-1</span>) * b, axis=<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul_dot</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    ret = np.dot(a, b.T)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    a = np.random.randn(<span class="number">50</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    b = np.random.randn(<span class="number">500</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    print(mul(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    print(mul_dot(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function [mul] finished in 435 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br><span class="line">function [mul_dot] finished in 13 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">speed</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dot vs multiply</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/19/Numpy-24-dotVSmul/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-23-Numpy2NativeType" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/Numpy-23-Numpy2NativeType/">Numpy-23-Numpy2NativeType</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/16/Numpy-23-Numpy2NativeType/" class="archive-article-date">
-  	<time datetime="2018-05-16T12:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Convert-Numpy-to-Python-native-type"><a href="#Convert-Numpy-to-Python-native-type" class="headerlink" title="Convert Numpy to Python native type"></a>Convert Numpy to Python native type</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.sum(a)</span><br></pre></td></tr></table></figure>
-
-<p>使用item方法可以把Numpy类型转换成Python原生类型。</p>
-<p>但是转换只能是以单个元素为单位，不能整体转换。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(b.item())</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">b</span>.<span class="title">item</span><span class="params">()</span></span></span><br><span class="line"><span class="class">6</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">a</span>.<span class="title">item</span><span class="params">()</span></span></span><br><span class="line"><span class="class"><span class="title">Traceback</span> <span class="params">(most recent call last)</span>:</span></span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: can only convert an array of size <span class="number">1</span> to a Python scalar</span><br><span class="line">    </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line"><span class="meta">... </span>   print(type(i),type(i.item()))</span><br><span class="line">...</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">numpy</span>.<span class="title">int32</span>'&gt; &lt;<span class="title">class</span> '<span class="title">int</span>'&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/9452775/converting-numpy-dtypes-to-native-python-types" target="_blank" rel="noopener">Converting numpy dtypes to native python types</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Native type</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/Numpy-23-Numpy2NativeType/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1340,11 +1411,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">const</a>
+                <a href="javascript:void(0)" class="js-tag color1">basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1353,6 +1420,38 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">data type</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">const</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">struct</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1376,11 +1475,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
+                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
+                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1416,6 +1515,50 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
               </li>
              
@@ -1432,6 +1575,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -1440,11 +1591,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
+                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
+                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1480,6 +1631,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">file</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Stash</a>
               </li>
              
@@ -1492,11 +1651,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">file</a>
+                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1508,15 +1667,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Start</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1556,11 +1707,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
+                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
+                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1588,11 +1739,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1628,7 +1779,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1641,6 +1792,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Softmax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1672,6 +1827,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">axes</a>
               </li>
              
@@ -1680,7 +1839,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1692,15 +1851,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
+                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">imshow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1772,15 +1927,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zip</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dstack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1812,6 +1967,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">float64</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shape</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">None</a>
               </li>
              
@@ -1824,27 +1987,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">float64</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shape</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flatnonzero</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Native type</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1861,6 +2008,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1884,19 +2039,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">choice</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Office</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Word</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">choice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1916,11 +2071,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">apply</a>
+                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
+                <a href="javascript:void(0)" class="js-tag color1">apply</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1936,6 +2091,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
@@ -1944,19 +2103,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">TODO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">close</a>
+                <a href="javascript:void(0)" class="js-tag color2">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">errors</a>
+                <a href="javascript:void(0)" class="js-tag color1">close</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1980,11 +2135,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">get</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">get</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2000,11 +2155,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">is</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2024,15 +2183,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
+                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Closure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2076,15 +2231,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">property decorator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multiple Inheritance</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2148,10 +2303,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
@@ -2172,6 +2323,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">URL</a>
               </li>
              
@@ -2181,10 +2336,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">parse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2232,6 +2383,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">open3d</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Raspberry Pi</a>
               </li>
              
@@ -2252,14 +2411,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">database</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
@@ -2268,7 +2419,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">select</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">commit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2284,10 +2455,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">commit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -2300,15 +2467,55 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SWD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SolidWorks</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+                <a href="javascript:void(0)" class="js-tag color2">CubeMX</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2316,11 +2523,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2384,6 +2595,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">reduce_sum</a>
               </li>
              
@@ -2396,11 +2611,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
+                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2412,15 +2627,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">domain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2429,6 +2636,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2441,6 +2652,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">deployment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2457,130 +2676,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">delay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">weak</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">smb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atof</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">APB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">printf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">float</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
             
             <div class="clearfix"></div>

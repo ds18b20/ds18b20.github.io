@@ -156,6 +156,473 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-Eclipse-06-autocomplete" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-Eclipse-06-autocomplete/">Java-Eclipse-06-autocomplete</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-Eclipse-06-autocomplete/" class="archive-article-date">
+  	<time datetime="2018-03-17T06:45:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h1><p>默认情况下，Eclipse仅支持逗号后的自动补全，即输入逗号之后，根据逗号前面的内容提供用于补全的候选内容。</p>
+<p>其实可以修改一下设置实现任何字母后的自动补全提示。</p>
+<p>设置方法：</p>
+<p>Eclipse窗口 &gt; Windows &gt; Preferences &gt; Java &gt; Editor &gt; Content Assist</p>
+<p>右侧下方找到Auto Activation，在Auto activation triggers for Java:设置处可以看到默认只有一个逗号。这就是只有逗号能触发自动补全的原因。</p>
+<p>在逗号后面紧接着继续输入想要触发的字母就可以了。一般可以把大小写字母全部补上，即abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+<p>这样虽然方便，但是个人以为大写字母后的补全不常见，所以只加入了所有的小写字母。</p>
+<p>另外，Auto activation delay也最好根据电脑性能做调整，数值太小会占用太多系统资源。这里，我设置的是300 ms延迟。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Complete</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-06-autocomplete/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-06-Package-JUnitTest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-06-Package-JUnitTest/">Java-07-Package-JUnitTest</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-06-Package-JUnitTest/" class="archive-article-date">
+  	<time datetime="2018-03-17T03:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="导入Unit-Test单元测试"><a href="#导入Unit-Test单元测试" class="headerlink" title="导入Unit Test单元测试"></a>导入Unit Test单元测试</h1><h1 id="JUnit-Test单元测试"><a href="#JUnit-Test单元测试" class="headerlink" title="JUnit Test单元测试"></a>JUnit Test单元测试</h1><p>Eclipse的Package Explore中右键已编辑好的class名，单击 <strong>New &gt; JUnit Test Case</strong>。New JUnit Test Case 向导的第一页将会打开。</p>
+<p>单击 <strong>Next</strong> 接受默认值，出现 Test Methods 对话框，选择要生成测试的一个或多个方法。单击Finish完成，在Package Explore里可以看到生成的JUnit测试的java文件。</p>
+<p>双击打开JUnit测试代码，找到要测试的方法并太你家测试内容。</p>
+<p>下面是一个例子，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Person p = <span class="keyword">new</span> Person(<span class="string">"Joe Q Author"</span>, <span class="number">42</span>, <span class="number">173</span>, <span class="number">82</span>, <span class="string">"Brown"</span>, <span class="string">"MALE"</span>);</span><br><span class="line">  Logger l = Logger.getLogger(Person<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>())</span>;</span><br><span class="line">  l.info(<span class="string">"Name: "</span> + p.getName());</span><br><span class="line">  l.info(<span class="string">"Age:"</span>+ p.getAge());</span><br><span class="line">  l.info(<span class="string">"Height (cm):"</span>+ p.getHeight());</span><br><span class="line">  l.info(<span class="string">"Weight (kg):"</span>+ p.getWeight());</span><br><span class="line">  l.info(<span class="string">"Eye Color:"</span>+ p.getEyeColor());</span><br><span class="line">  l.info(<span class="string">"Gender:"</span>+ p.getGender());</span><br><span class="line">  assertEquals(<span class="string">"Joe Q Author"</span>, p.getName());</span><br><span class="line">  assertEquals(<span class="number">42</span>, p.getAge());</span><br><span class="line">  assertEquals(<span class="number">173</span>, p.getHeight());</span><br><span class="line">  assertEquals(<span class="number">82</span>, p.getWeight());</span><br><span class="line">  assertEquals(<span class="string">"Brown"</span>, p.getEyeColor());</span><br><span class="line">  assertEquals(<span class="string">"MALE"</span>, p.getGender());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h1><p>右键Package Explore中的JUnit测试代码文件，选择 <strong>Run As</strong> &gt; <strong>JUnit Test</strong>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JUnit Testd</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-06-Package-JUnitTest/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-06-Package-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-06-Package-Class/">Java-06-package-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-06-Package-Class/" class="archive-article-date">
+  	<time datetime="2018-03-17T03:26:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类的成员"><a href="#类的成员" class="headerlink" title="类的成员"></a>类的成员</h1><h2 id="成员的访问权限"><a href="#成员的访问权限" class="headerlink" title="成员的访问权限"></a>成员的访问权限</h2><ul>
+<li>private</li>
+<li>(default)</li>
+<li>protected</li>
+<li>public</li>
+</ul>
+<p>比较难记，参考 <a href="https://www.cnblogs.com/jingmengxintang/p/5898900.html" target="_blank" rel="noopener">https://www.cnblogs.com/jingmengxintang/p/5898900.html</a><br>另外需要验证实例是否可以访问类的private成员。</p>
+<p>类的成员包括属性和方法</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>属性定义了类的状态，定义方式如下，</p>
+<p><code>accessSpecifier dataType variableName [= initialValue];</code></p>
+<p>accessSpecifier：访问权限</p>
+<p>dataType：类型</p>
+<p>variableName：属性名</p>
+<p>initialValue：初始化值</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>方法定义了类的行为，分为<strong>构造方法</strong>和<strong>其他方法</strong>。</p>
+<p><strong>构造方法</strong>仅用于创建对象的实例，它的书写有三点要求：</p>
+<ol>
+<li>构造方法的accessSpecifier必须和类的相同</li>
+<li>构造方法名必须和类名相同</li>
+<li>不能含有返回类型，void也不可</li>
+</ol>
+<p>构造方法内，要对实例的属性进行赋值时需要<code>this.attribute</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span>  weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age, <span class="keyword">int</span> height, <span class="keyword">int</span> weight String eyeColor, String gender)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.height = height;</span><br><span class="line">    <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyeColor;</span><br><span class="line">    <span class="keyword">this</span>.gender = gender;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其他方法的命名不要求和class一致，而且可以有自己的返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">       name = value;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>注意如果一个方法没有返回值，也必须加上void关键字，以告知编译器。</p>
+<p>非构造方法又可以分为两类：<strong>静态方法</strong>和<strong>实例方法</strong>。</p>
+<p>静态方法直接通过类调用；而实例方法必须先生成一个实例，然后由实例调用。</p>
+<h1 id="Eclipse操作"><a href="#Eclipse操作" class="headerlink" title="Eclipse操作"></a>Eclipse操作</h1><h2 id="创建package"><a href="#创建package" class="headerlink" title="创建package"></a>创建package</h2><p>单击 <strong>File &gt; New &gt; Package</strong> 启动 Java Package 向导，将 <code>com.makotojava.intro</code> 键入到 Name 文本框中并单击<strong>Finish</strong>。可以在 Package Explorer 中看到创建的新包。</p>
+<h2 id="声明class"><a href="#声明class" class="headerlink" title="声明class"></a>声明class</h2><p>右键上述新建的package，选择 <strong>New &gt; Class…</strong>。New Class 对话框将会打开。</p>
+<p>在 Name 文本框中，键入 <code>Person</code>，然后单击 <strong>Finish</strong>。</p>
+<h2 id="添加class的属性"><a href="#添加class的属性" class="headerlink" title="添加class的属性"></a>添加class的属性</h2><p>得到，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加class的方法"><a href="#添加class的方法" class="headerlink" title="添加class的方法"></a>添加class的方法</h2><p>包括构造方法和其他方法。</p>
+<p>其他方法中的getter和setter可以由Eclipse快捷添加，右键 &gt; source &gt; generate getter and setter 设置相应选项即可。</p>
+<p>得到，</p>
+<pre><code>package com.makotojava.intro;
+
+public class Person {
+    private String name;
+    private int age;
+    private int height;
+    private int weight;
+    private String eyeColor;
+    private String gender;
+
+    public Person(String name, int age, int height, int weight, String eyeColor, String gender) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.eyeColor = eyeColor;
+        this.gender = gender;
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    ...
+}</code></pre><p>}</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>包含构造方法的类定义<br><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+<p>java构造方法与方法的区别<br><a href="http://blog.csdn.net/lvshihua/article/details/38409121" target="_blank" rel="noopener">http://blog.csdn.net/lvshihua/article/details/38409121</a></p>
+<p>Java 语言基础</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-06-Package-Class/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-Eclipse-05-AutoGenerate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">Java-Eclipse-05-AutoGenerate</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-Eclipse-05-AutoGenerate/" class="archive-article-date">
+  	<time datetime="2018-03-17T02:37:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动代码生成器"><a href="#自动代码生成器" class="headerlink" title="自动代码生成器"></a>自动代码生成器</h1><p>使用Eclipse可以给Java代码自动填充代码，比如getter和setter。</p>
+<p>选择class名，右键，然后单击 <strong>Source &gt; Generate Getters and Setters…</strong>。快捷键是Alt+Shift+S</p>
+<p>对话框打开时，单击 <strong>Select All</strong>。<strong>插入点可以选择 **Last member</strong> 并单击 <strong>OK</strong>。</p>
+<p>会按照已经定义的class属性自动填充各属性对应的setter和getter。</p>
+<p>此外，Source选项下面还有好多方便功能，比如Format可以地洞格式化代码块。</p>
+<p>还有调整方法的数序等等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Generate</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-06-Package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -820,425 +1287,6 @@
 
 
   
-    <article id="post-Java-Eclipse-03-CheckStyle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-Eclipse-03-CheckStyle/">Java-Eclipse-03-CheckStyle</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-Eclipse-03-CheckStyle/" class="archive-article-date">
-  	<time datetime="2018-03-11T14:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This article is about <em>Eclipse Checkstyle</em>.</p>
-<h1 id="setting"><a href="#setting" class="headerlink" title="setting"></a>setting</h1><p>Eclipse -&gt; Preferences -&gt; Checkstyle</p>
-<p>select <em>Google Checks</em> or <em>Sun checks</em></p>
-<p>Right click project name, select <em>Checkstyle active for this project</em></p>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>使用 Eclipse Checkstyle Plugin</p>
-<p><a href="http://www.importnew.com/24350.html" target="_blank" rel="noopener">http://www.importnew.com/24350.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">check style</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-Eclipse-03-CheckStyle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-02-ShortKeys" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">Java-Eclipse-02-ShortKeys</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-Eclipse-02-ShortKeys/" class="archive-article-date">
-  	<time datetime="2018-03-11T14:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This article shows short keys in eclipse.</p>
-<h1 id="content-assist"><a href="#content-assist" class="headerlink" title="content assist"></a>content assist</h1><p>输入关键字，按<code>Alt+/</code>即可显示内容助理(content assist)。双击所需的内容可以自动填充相关代码，非常方便。</p>
-<p>比如class定义时，class内部输入main，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后按下<code>Alt+/</code>，按照提示选择<code>main method</code>，则会自动填充以下内容：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>set here:</p>
-<p><em>Window&gt;Preferences&gt;Java&gt;Editor&gt;Content Assist&gt;Advanced</em> </p>
-<p>reference:</p>
-<p>Eclipse自动补全+常用快捷键</p>
-<p><a href="http://blog.csdn.net/bd_matto/article/details/50899032" target="_blank" rel="noopener">http://blog.csdn.net/bd_matto/article/details/50899032</a></p>
-<p>In my case</p>
-<p><a href="https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse" target="_blank" rel="noopener">https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse</a></p>
-<h1 id="copy-to-up-below"><a href="#copy-to-up-below" class="headerlink" title="copy to up/below"></a>copy to up/below</h1><p><code>Ctrl+Alt+UP/DOWN</code></p>
-<p>如果此快捷键和Ubuntu的屏幕切换快捷键冲突的话,参考下面的链接修改Ubuntu快捷键：</p>
-<p><a href="http://blog.csdn.net/hanshileiai/article/details/46412641" target="_blank" rel="noopener">http://blog.csdn.net/hanshileiai/article/details/46412641</a></p>
-<p>Alt+F2键调出命令框，输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down &quot;[&#39;&#39;]&quot;</span><br><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up &quot;[&#39;&#39;]&quot;</span><br></pre></td></tr></table></figure>
-
-<h1 id="自动format"><a href="#自动format" class="headerlink" title="自动format"></a>自动format</h1><p><code>Ctrl+Shift+F</code>将一段未format的代码自动缩进。</p>
-<p>或者选择代码段，右键—Source code—Format也可以实现相同的功能。</p>
-<h1 id="检查-amp-添加未导入的类"><a href="#检查-amp-添加未导入的类" class="headerlink" title="检查&amp;添加未导入的类"></a>检查&amp;添加未导入的类</h1><p>假设在代码块中用到了外部的某个类，但是忘记在头部添加导入语句时，代码块的相应部分会有红色下划线提示。这就需要查找并引用缺失的引用，可以手动查找并添加，或者可以快捷键直接导入。</p>
-<p><code>Ctrl+Shift+O</code></p>
-<p>有重复的类时，会提示选择。</p>
-<h1 id="快速修复"><a href="#快速修复" class="headerlink" title="快速修复"></a>快速修复</h1><p><code>Ctrl+1</code>快速对错误提供修改建议。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">short keys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-00-Tips/">Java-00-3-Tips</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-00-Tips/" class="archive-article-date">
-  	<time datetime="2018-03-11T03:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="运行-class-bytecode"><a href="#运行-class-bytecode" class="headerlink" title="运行.class bytecode"></a>运行.class bytecode</h1><p>命令行下使用<code>java .class</code>运行.class字节码。</p>
-<p>注意：不可以带后缀名。</p>
-<h1 id="Java命名规范"><a href="#Java命名规范" class="headerlink" title="Java命名规范"></a>Java命名规范</h1><p>fileName</p>
-<p>folderName</p>
-<p>niceToMeetYou</p>
-<p>统一使用驼峰式书写规范。</p>
-<h1 id="JLabel背景颜色"><a href="#JLabel背景颜色" class="headerlink" title="JLabel背景颜色"></a>JLabel背景颜色</h1><p>给JLabel对象添加背景颜色时，需要</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set up textJLabel</span></span><br><span class="line">textJLabel = <span class="keyword">new</span> JLabel();</span><br><span class="line">textJLabel.setBackground(Color.MAGENTA);</span><br></pre></td></tr></table></figure>
-
-<p>这样并不能正常显示bg颜色，因为还没设置opaque(不透明显示)，且默认为transparent(透明显示)。</p>
-<p>故需要添加一行，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set up textJLabel</span></span><br><span class="line">textJLabel = <span class="keyword">new</span> JLabel();</span><br><span class="line"><span class="comment">// opaque</span></span><br><span class="line">textJLabel.setOpaque(<span class="keyword">true</span>);</span><br><span class="line">textJLabel.setBackground(Color.MAGENTA);</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tips</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-00-Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataSerializationFormat-Compare" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/DataSerializationFormat-Compare/">DataSerializationFormat-Compare</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/DataSerializationFormat-Compare/" class="archive-article-date">
-  	<time datetime="2018-03-10T04:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>compare csv/xml/json</p>
-<ul>
-<li>flat</li>
-<li>csv(character separated values)</li>
-<li>xml(eXtensible Hyper Text Markup Language)</li>
-<li>json(javascript object notation)</li>
-</ul>
-<p>之后使用时，继续添加各项内容。。。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>第1回 進化するフォーマット｜CSV、XML、JSON…データフォーマットの変遷について考える</p>
-<p><a href="https://www.gixo.jp/blog/3965/" target="_blank" rel="noopener">https://www.gixo.jp/blog/3965/</a></p>
-<p>还有自己的另一篇关于在Python中实现数据序列化的文章</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-Compare/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
@@ -1361,11 +1409,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">const</a>
+                <a href="javascript:void(0)" class="js-tag color1">basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1374,6 +1418,38 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">data type</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">const</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">struct</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,11 +1473,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
+                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
+                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1437,6 +1513,50 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
               </li>
              
@@ -1453,6 +1573,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -1461,11 +1589,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
+                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
+                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1501,6 +1629,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">file</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Stash</a>
               </li>
              
@@ -1513,11 +1649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">file</a>
+                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1529,15 +1665,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Start</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1577,11 +1705,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
+                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
+                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1609,11 +1737,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1649,7 +1777,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1662,6 +1790,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Softmax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1693,6 +1825,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">axes</a>
               </li>
              
@@ -1701,7 +1837,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1713,15 +1849,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
+                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">imshow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1793,15 +1925,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zip</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dstack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1833,6 +1965,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">float64</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shape</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">None</a>
               </li>
              
@@ -1845,27 +1985,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">float64</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shape</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flatnonzero</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Native type</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1882,6 +2006,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1905,19 +2037,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">choice</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Office</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Word</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">choice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1937,11 +2069,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">apply</a>
+                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
+                <a href="javascript:void(0)" class="js-tag color1">apply</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1957,6 +2089,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
@@ -1965,19 +2101,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">TODO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">close</a>
+                <a href="javascript:void(0)" class="js-tag color2">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">errors</a>
+                <a href="javascript:void(0)" class="js-tag color1">close</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2001,11 +2133,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">get</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">get</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2021,11 +2153,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">is</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2045,15 +2181,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
+                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Closure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2097,15 +2229,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">property decorator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multiple Inheritance</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2169,10 +2301,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
@@ -2193,6 +2321,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">URL</a>
               </li>
              
@@ -2202,10 +2334,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">parse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2253,6 +2381,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">open3d</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Raspberry Pi</a>
               </li>
              
@@ -2273,14 +2409,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">database</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
@@ -2289,7 +2417,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">select</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">commit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2305,10 +2453,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">commit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -2321,15 +2465,55 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SWD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SolidWorks</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+                <a href="javascript:void(0)" class="js-tag color2">CubeMX</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2337,11 +2521,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2405,6 +2593,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">reduce_sum</a>
               </li>
              
@@ -2417,11 +2609,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
+                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2433,15 +2625,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">domain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2450,6 +2634,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2462,6 +2650,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">deployment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2478,130 +2674,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">delay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">weak</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">smb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atof</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">APB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">printf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">float</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
             
             <div class="clearfix"></div>

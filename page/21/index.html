@@ -156,6 +156,559 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-19-decorator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/18/Python-19-decorator/">Python-19-decorator</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/18/Python-19-decorator/" class="archive-article-date">
+  	<time datetime="2018-02-18T11:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h1><p>对于现有函数，如果需要增加某些功能，但又不想对原有逻辑做更改。这时候就可以用装饰器(decorator)来实现。</p>
+<p>其实现思路为把既有函数打包到一个新函数内(闭包)，在新函数内新增某些功能，然后通过调用新函数来执行员函数+新增功能。</p>
+<p>即使这样，也需要对代码做大量修改，如用新函数替换原函数。在Python中可以使用语法糖@来简单实现，把@加到员函数的定义之前即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        print(<span class="string">'call %s():'</span> % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
+
+<p>本质上是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; log(foo)</span><br><span class="line">x()</span><br></pre></td></tr></table></figure>
+
+<p><code>@functools.wraps(func)</code>的目的是，加上@log后函数foo的属性就变成wrapper的属性了，通过wraps函数来让foo保持自身属性。</p>
+<h1 id="带参数的装饰器"><a href="#带参数的装饰器" class="headerlink" title="带参数的装饰器"></a>带参数的装饰器</h1><p>log也可以自带参数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(para)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @functools.wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            print(<span class="string">'call %s() with %s'</span> % (func.__name__, para))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">	<span class="keyword">return</span> decorator</span><br><span class="line"><span class="meta">@log('text')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log('abc')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
+
+<p>还可以加入判断，实现带或者不带参数都可以的，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(para)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(para, str):</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">            @functools.wraps(func)</span></span><br><span class="line">            <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">                print(<span class="string">'call %s() with %s'</span> % (func.__name__, para))</span><br><span class="line">                <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">            <span class="keyword">return</span> wrapper</span><br><span class="line">        <span class="keyword">return</span> decorator</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 从输出结果可以看到，这里的print先执行</span></span><br><span class="line">        <span class="comment"># 最后bar()时才输出'World'</span></span><br><span class="line">        print(type(para))</span><br><span class="line"><span class="meta">        @functools.wraps(para)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> para(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    </span><br><span class="line"><span class="meta">@log('text')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@log</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'World'</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
+
+<p>输出为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">function</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">call</span> <span class="title">foo</span><span class="params">()</span> <span class="title">with</span> <span class="title">text</span></span></span><br><span class="line"><span class="class"><span class="title">Hello</span></span></span><br><span class="line"><span class="class"><span class="title">World</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="常用实例"><a href="#常用实例" class="headerlink" title="常用实例"></a>常用实例</h1><p>计算函数运行时间的例子，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time, functools</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metric</span><span class="params">(fn)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(fn)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        ret = fn(*args, **kw)</span><br><span class="line">        end = time.time()</span><br><span class="line">        print(<span class="string">'%s executed in %s ms'</span> % (fn.__name__, (end - start)))</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="meta">@metric</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fast</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.0012</span>)</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line"></span><br><span class="line"><span class="meta">@metric</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">slow</span><span class="params">(x, y, z)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.1234</span>)</span><br><span class="line">    <span class="keyword">return</span> x * y * z;</span><br><span class="line"></span><br><span class="line">f = fast(<span class="number">11</span>, <span class="number">22</span>)</span><br><span class="line">s = slow(<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fast executed <span class="keyword">in</span> <span class="number">0.002000093460083008</span> ms</span><br><span class="line">slow executed <span class="keyword">in</span> <span class="number">0.12399983406066895</span> ms</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Decorator</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/18/Python-19-decorator/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-18-ListDel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/16/Python-18-ListDel/">Python-18-ListDel</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/16/Python-18-ListDel/" class="archive-article-date">
+  	<time datetime="2018-02-16T13:00:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="List-pop-pos"><a href="#List-pop-pos" class="headerlink" title="List.pop(pos)"></a>List.pop(pos)</h1><p>弹出序列中pos位置的元素，并<strong>返回</strong>此元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = a.pop(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="List-remove-x"><a href="#List-remove-x" class="headerlink" title="List.remove(x)"></a>List.remove(x)</h1><p>从List中删除第一个x</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.remove(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="del-List-pos"><a href="#del-List-pos" class="headerlink" title="del List[pos]"></a>del List[pos]</h1><p>从List中删除pos位置的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> a[<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Delete</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/16/Python-18-ListDel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-17-str-format" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/16/Python-17-str-format/">Python-17-str-format</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/16/Python-17-str-format/" class="archive-article-date">
+  	<time datetime="2018-02-16T07:45:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="格式化操作符"><a href="#格式化操作符" class="headerlink" title="格式化操作符 %"></a>格式化操作符 %</h1><p>针对各种类型的数据，有不同的操作符</p>
+<table>
+<thead>
+<tr>
+<th align="left">格式化符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">%c</td>
+<td>转换成字符（ASCII 码值，或者长度为一的字符串）</td>
+</tr>
+<tr>
+<td align="left">%r</td>
+<td>优先用repr()函数进行字符串转换</td>
+</tr>
+<tr>
+<td align="left">%s</td>
+<td>优先用str()函数进行字符串转换</td>
+</tr>
+<tr>
+<td align="left">%d / %i</td>
+<td>转成有符号十进制数</td>
+</tr>
+<tr>
+<td align="left">%u</td>
+<td>转成无符号十进制数</td>
+</tr>
+<tr>
+<td align="left">%o</td>
+<td>转成无符号八进制数</td>
+</tr>
+<tr>
+<td align="left">%x / %X</td>
+<td>转成无符号十六进制数（x / X 代表转换后的十六进制字符的大小写）</td>
+</tr>
+<tr>
+<td align="left">%e / %E</td>
+<td>转成科学计数法（e / E控制输出e / E）</td>
+</tr>
+<tr>
+<td align="left">%f / %F</td>
+<td>转成浮点数（小数部分自然截断）</td>
+</tr>
+<tr>
+<td align="left">%g / %G</td>
+<td>%e和%f / %E和%F 的简写</td>
+</tr>
+<tr>
+<td align="left">%%</td>
+<td>输出% （格式化字符串里面包括百分号，那么必须使用%%）</td>
+</tr>
+</tbody></table>
+<p>其中 %s 和 %r 的区别需要特别强调一下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">"Hello\tWill\n"</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"%s"</span> % string)</span><br><span class="line">print(<span class="string">"%r"</span> % string)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello	Will</span><br><span class="line"></span><br><span class="line"><span class="string">'Hello\tWill\n'</span></span><br></pre></td></tr></table></figure>
+
+<p>区别一目了然，其实差异来自于str()和repr()两个函数之间的差别：</p>
+<ul>
+<li>str()得到的字符串是面向用户的，具有较好的可读性</li>
+<li>repr()得到的字符串是面向机器的<ul>
+<li>通常（不是所有）repr()得到的效果是：obj == eval(repr(obj))</li>
+</ul>
+</li>
+</ul>
+<p>注意，同时输出多个对象时，需先组成一个tuple来使用。</p>
+<h1 id="格式化操作符辅助符"><a href="#格式化操作符辅助符" class="headerlink" title="格式化操作符辅助符"></a>格式化操作符辅助符</h1><p>结合上述格式化操作符一起使用：</p>
+<table>
+<thead>
+<tr>
+<th><strong>辅助符号</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*****</td>
+<td>定义宽度或者小数点精度</td>
+</tr>
+<tr>
+<td><strong>-</strong></td>
+<td>用做左对齐</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>在正数前面显示加号(+)</td>
+</tr>
+<tr>
+<td><strong>#</strong></td>
+<td>在八进制数前面显示零(0)，在十六进制前面显示”0x”或者”0X”（取决于用的是”x”还是”X”）</td>
+</tr>
+<tr>
+<td><strong>0</strong></td>
+<td>显示的数字前面填充”0”而不是默认的空格</td>
+</tr>
+<tr>
+<td><strong>(var)</strong></td>
+<td>映射变量（通常用来处理字段类型的参数）</td>
+</tr>
+<tr>
+<td><strong>m.n</strong></td>
+<td>m 是显示的最小总宽度，n 是小数点后的位数（如果可用的话）</td>
+</tr>
+</tbody></table>
+<p>例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"%d to hex is %x"</span> %(num, num)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"%d to hex is %X"</span> %(num, num)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"%d to hex is %#x"</span> %(num, num)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"%d to hex is %#X"</span> %(num, num) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 浮点数</span></span><br><span class="line">f = <span class="number">3.1415926</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"value of f is: %.4f"</span> %f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定宽度和对齐</span></span><br><span class="line">students = [&#123;<span class="string">"name"</span>:<span class="string">"Wilber"</span>, <span class="string">"age"</span>:<span class="number">27</span>&#125;, &#123;<span class="string">"name"</span>:<span class="string">"Will"</span>, <span class="string">"age"</span>:<span class="number">28</span>&#125;, &#123;<span class="string">"name"</span>:<span class="string">"June"</span>, <span class="string">"age"</span>:<span class="number">27</span>&#125;]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"name: %10s, age: %10d"</span> %(students[<span class="number">0</span>][<span class="string">"name"</span>], students[<span class="number">0</span>][<span class="string">"age"</span>])</span><br><span class="line"><span class="keyword">print</span> <span class="string">"name: %-10s, age: %-10d"</span> %(students[<span class="number">1</span>][<span class="string">"name"</span>], students[<span class="number">1</span>][<span class="string">"age"</span>])</span><br><span class="line"><span class="keyword">print</span> <span class="string">"name: %*s, age: %0*d"</span> %(<span class="number">10</span>, students[<span class="number">2</span>][<span class="string">"name"</span>], <span class="number">10</span>, students[<span class="number">2</span>][<span class="string">"age"</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># dict参数</span></span><br><span class="line"><span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line"><span class="keyword">print</span> <span class="string">"%(name)s is %(age)d years old"</span> %student</span><br></pre></td></tr></table></figure>
+
+<p>对于Python的格式化操作符，不仅可以接受tuple类型的参数，也可以支持dict，象上面代码的最后一部分，那么格式化字符串中就可以直接使用”%(key)s”（这里的s根据具体类型改变）的方式表示dict中对应的value了。</p>
+<h1 id="字符串模板"><a href="#字符串模板" class="headerlink" title="字符串模板"></a>字符串模板</h1><p>目前还未使用过，用前需要先引入string模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> Template</span><br><span class="line"></span><br><span class="line">s = Template(<span class="string">"Hi, $name! $name is learning $language"</span>)</span><br><span class="line"><span class="keyword">print</span> s.substitute(name=<span class="string">"Wilber"</span>, language=<span class="string">"Python"</span>)</span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">"name"</span>: <span class="string">"Will"</span>, <span class="string">"language"</span>: <span class="string">"C#"</span>&#125;</span><br><span class="line"><span class="keyword">print</span> s.substitute(d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用$$表示$符号</span></span><br><span class="line">s = Template(<span class="string">"This book ($bname) is 17$$"</span>)</span><br><span class="line"><span class="keyword">print</span> s.substitute(bname=<span class="string">"TCP/IP"</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串内建函数format"><a href="#字符串内建函数format" class="headerlink" title="字符串内建函数format()"></a>字符串内建函数format()</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>从Python 2.6开始新增字符串格式化函数format，使用{}当作操作符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 位置参数</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"&#123;0&#125; is &#123;1&#125; years old"</span>.format(<span class="string">"Wilber"</span>, <span class="number">28</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"&#123;&#125; is &#123;&#125; years old"</span>.format(<span class="string">"Wilber"</span>, <span class="number">28</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Hi, &#123;0&#125;! &#123;0&#125; is &#123;1&#125; years old"</span>.format(<span class="string">"Wilber"</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键字参数</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"&#123;name&#125; is &#123;age&#125; years old"</span>.format(name = <span class="string">"Wilber"</span>, age = <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下标参数</span></span><br><span class="line">li = [<span class="string">"Wilber"</span>, <span class="number">28</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"&#123;0[0]&#125; is &#123;0[1]&#125; years old"</span>.format(li)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 填充与对齐</span></span><br><span class="line"><span class="comment"># ^、&lt;、&gt;分别是居中、左对齐、右对齐，后面带宽度</span></span><br><span class="line"><span class="comment"># :号后面带填充的字符，只能是一个字符，不指定的话默认是用空格填充</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:&gt;8&#125;'</span>.format(<span class="string">'3.14'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:&lt;8&#125;'</span>.format(<span class="string">'3.14'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:^8&#125;'</span>.format(<span class="string">'3.14'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:0&gt;8&#125;'</span>.format(<span class="string">'3.14'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:a&gt;8&#125;'</span>.format(<span class="string">'3.14'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浮点数精度</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:.4f&#125;'</span>.format(<span class="number">3.1415926</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:0&gt;10.4f&#125;'</span>.format(<span class="number">3.1415926</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进制</span></span><br><span class="line"><span class="comment"># b、d、o、x分别是二进制、十进制、八进制、十六进制</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:b&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:d&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:o&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:x&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:#x&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:#X&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 千位分隔符</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:,&#125;'</span>.format(<span class="number">15700000000</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="use-Tuple-or-Dict"><a href="#use-Tuple-or-Dict" class="headerlink" title="use Tuple or Dict"></a>use Tuple or Dict</h2><p>可以使用tuple或dict来做format的参数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Format with tuple</span></span><br><span class="line">tmp_tuple = (<span class="string">'val0'</span>, <span class="number">23.5</span>)</span><br><span class="line">print(<span class="string">"Format string with &#123;0[0]&#125;, &#123;0[1]&#125;"</span>.format(tmp_tuple))</span><br><span class="line">print(<span class="string">"Format string with &#123;&#125;, &#123;&#125;"</span>.format(*tmp_tuple))</span><br><span class="line">print(<span class="string">"Format string with &#123;1&#125;, &#123;0&#125;"</span>.format(*tmp_tuple))</span><br><span class="line">print(<span class="string">"Format string with &#123;0&#125;, &#123;1&#125;, &#123;0&#125;"</span>.format(*tmp_tuple))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Format with dict</span></span><br><span class="line"><span class="comment"># 注意此处key不能是纯数字的字符串，参见参考链接3</span></span><br><span class="line"><span class="comment"># 因为dict并不要求key必须是str，参见链接4</span></span><br><span class="line">tmp_dict_0 = &#123;<span class="string">'val0'</span>: <span class="number">23.5</span>, <span class="string">'val1'</span>: <span class="string">'xxx'</span>&#125;</span><br><span class="line">tmp_dict_1 = &#123;<span class="string">'val0'</span>: <span class="number">12.6</span>, <span class="string">'val1'</span>: <span class="string">'yyy'</span>&#125;</span><br><span class="line">print(<span class="string">"Format string with &#123;0[val0]&#125;, &#123;1[val0]&#125;"</span>.format(tmp_dict_0, tmp_dict_1))</span><br><span class="line">print(<span class="string">"Format string with &#123;0[val0]:0.3f&#125;"</span>.format(tmp_dict_0))</span><br><span class="line">print(<span class="string">"Format string with &#123;val0:0.3f&#125;"</span>.format(**tmp_dict_0))</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Format string with val0, 23.5</span><br><span class="line">Format string with val0, 23.5</span><br><span class="line">Format string with 23.5, val0</span><br><span class="line">Format string with val0, 23.5, val0</span><br><span class="line">Format string with 23.5, 12.6</span><br><span class="line">Format string with 23.500</span><br><span class="line">Format string with 23.500</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用类的属性"><a href="#使用类的属性" class="headerlink" title="使用类的属性"></a>使用类的属性</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, gender)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.gender = gender</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&#123;self.name&#125; is a &#123;self.age&#125; years old &#123;self.gender&#125;'</span>.format(self=self)</span><br><span class="line"></span><br><span class="line">str(Person(<span class="string">'Tom'</span>, <span class="number">26</span>, <span class="string">'man'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>&#39;Tom is a 26 years old man&#39;</code></p>
+<h1 id="str的内建函数"><a href="#str的内建函数" class="headerlink" title="str的内建函数"></a>str的内建函数</h1><p>通过 dir(str) 来查看。</p>
+<p>其中就有在其他文章中写的str.strip()函数。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/wilber2013/p/4641616.html" target="_blank" rel="noopener">Python格式化字符串</a></p>
+<p><a href="https://www.cnblogs.com/wongbingming/p/6848701.html" target="_blank" rel="noopener">Python强大的格式化format</a></p>
+<p><a href="https://stackoverflow.com/questions/11130790/string-formatting-str-format-with-a-dictionary-key-which-is-a-str-of-a-num" target="_blank" rel="noopener">String formatting [str.format()] with a dictionary key which is a str() of a number</a></p>
+<p><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries" target="_blank" rel="noopener">5.5. Dictionaries：</a></p>
+<blockquote>
+<p>Unlike sequences, which are indexed by a range of numbers, dictionaries are indexed by <em>keys</em>, which can be any immutable type; strings and numbers can always be keys. Tuples can be used as keys if they contain only strings, numbers, or tuples; if a tuple contains any mutable object either directly or indirectly, it cannot be used as a key. You can’t use lists as keys, since lists can be modified in place using index assignments, slice assignments, or methods like <code>append()</code> and <code>extend()</code>. </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Format</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/16/Python-17-str-format/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-16-closure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/16/Python-16-closure/">Python-16-closure</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/16/Python-16-closure/" class="archive-article-date">
+  	<time datetime="2018-02-16T05:45:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文从基础开始学习一下Python的闭包。</p>
+<p>首先是如何用代码实现，然后是闭包的一些属性，最后是原理上如何实现。</p>
+<h1 id="怎样实现闭包"><a href="#怎样实现闭包" class="headerlink" title="怎样实现闭包"></a>怎样实现闭包</h1><p>通俗地讲，在一个函数A内嵌套另一个函数B，嵌入的函数B内包含了外部函数A的局部变量x，即实现了闭包。这闭包的局部变量x在外部函数A返回后，仍继续存在，并且可被内嵌函数B继续调用。</p>
+<p>一个例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过函数generate_linear_func(1, 2)返回linear(x)函数</span></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 返回到的linear_1_2就是内建linear(x)的一个引用，地址相同</span></span><br><span class="line">print(<span class="string">"id(linear_1_2): %X"</span> % id(linear_1_2))</span><br><span class="line"><span class="comment"># 向linear(x)函数传入参数10</span></span><br><span class="line">print(<span class="string">"a*x+b = %d"</span> % linear_1_2(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id(a, b): <span class="number">6</span>D576340, <span class="number">6</span>D576360</span><br><span class="line">id(linear): <span class="number">6328</span>D90</span><br><span class="line">id(linear_1_2): <span class="number">6328</span>D90</span><br><span class="line">a*x+b = <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>当移除函数generate_linear_func时，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 从内存中移除generate_linear_func</span></span><br><span class="line"><span class="keyword">del</span> generate_linear_func</span><br><span class="line">print(<span class="string">"a*x+b = %d"</span> % linear_1_2(<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<p>仍然可以顺利调用linear_1_2()得到包含有a和b的返回结果。说明函数generate_linear_func(a, b)的局部变量并未被清除，而是以某种方式保存了下来。</p>
+<h1 id="闭包函数的-closure-属性和cell对象"><a href="#闭包函数的-closure-属性和cell对象" class="headerlink" title="闭包函数的__closure__属性和cell对象"></a>闭包函数的__closure__属性和cell对象</h1><p>闭包的时候，返回函数也是一个对象，这个对象的属性中包含一个名为__closure__的属性。它定义了一个包含cell对象的tuple，tuple中的元素保存了闭包了的变量值。</p>
+<p>例如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 元素个数</span></span><br><span class="line">print(<span class="string">"len(cell): %d"</span> % len(linear_1_2.__closure__))</span><br><span class="line"><span class="comment"># 迭代显示各元素</span></span><br><span class="line"><span class="keyword">for</span> i, j <span class="keyword">in</span> enumerate(linear_1_2.__closure__):</span><br><span class="line">    print(<span class="string">"cell[%d]: %d"</span> % (i, j.cell_contents))</span><br></pre></td></tr></table></figure>
+
+<p>如果内建函数并未使用外部函数的局部变量，那么_<em>closure_</em> = None</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x**<span class="number">2</span></span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(linear_1_2.__closure__)</span><br></pre></td></tr></table></figure>
+
+<h1 id="闭包的内部原理"><a href="#闭包的内部原理" class="headerlink" title="闭包的内部原理"></a>闭包的内部原理</h1><p>关于Python中闭包的具体实现原理，可以参见<a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html" target="_blank" rel="noopener">Python闭包详解</a> 。文中通过分析Python编译后生成的字节码(code object)来分析其内部运作机制。待学习。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅显理解 Python 闭包</p>
+<p><a href="https://serholiu.com/python-closures" target="_blank" rel="noopener">https://serholiu.com/python-closures</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Function</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Closure</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/16/Python-16-closure/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-15-FunctionParameter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -843,425 +1396,6 @@
 
 
   
-    <article id="post-Python-10-ListComprehension" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/07/Python-10-ListComprehension/">Python-10-ListComprehension</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/07/Python-10-ListComprehension/" class="archive-article-date">
-  	<time datetime="2018-02-07T14:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Python list comprehension</p>
-<p>列表生成(list comprehension)是一种Python内置的生成式，使用它可以快速方便地创建新的list。</p>
-<p>最简单的创建list的方式，你可能想到：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前闭后开</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(range(<span class="number">1</span>, <span class="number">11</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line"><span class="meta">... </span>   L.append(x * x)</span><br></pre></td></tr></table></figure>
-
-<p>使用列表生成式时，可以</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>)]</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
-
-<p>for之后可以加上if判断，例如这就可以只做偶数的平方</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>) <span class="keyword">if</span> x%<span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">64</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
-
-<p>还可以使用双层循环，实现全排列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[m + n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABC'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'XYZ'</span>]</span><br><span class="line">[<span class="string">'AX'</span>, <span class="string">'AY'</span>, <span class="string">'AZ'</span>, <span class="string">'BX'</span>, <span class="string">'BY'</span>, <span class="string">'BZ'</span>, <span class="string">'CX'</span>, <span class="string">'CY'</span>, <span class="string">'CZ'</span>]</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">List Comprehension</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/07/Python-10-ListComprehension/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-09-is" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/06/Python-09-is/">Python-09-is</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/06/Python-09-is/" class="archive-article-date">
-  	<time datetime="2018-02-06T13:46:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基础准备"><a href="#基础准备" class="headerlink" title="基础准备"></a>基础准备</h1><p>Python对象包括三个基本要素：id，type和value。其中id用来唯一标示一个对象；type用于标示对象的类型，<code>这里注意一下type()和isinstance()的区别</code>；而value是对象的值。</p>
-<p><code>还有，可以参考一下可变量和不可变量。</code></p>
-<h1 id="和is的区别"><a href="#和is的区别" class="headerlink" title="==和is的区别"></a>==和is的区别</h1><p>简单地讲，<code>a is b</code>用来判断a和b是不是指向同一个对象，依据id()来判断。</p>
-<p>而<code>a == b</code>是判断a和b的value是否相等。比如1 == 1.0，但是id(1) &lt;&gt;id(1.0)</p>
-<p>另外，由于数组是可变对象，故两个包含相同数据的数组==，但不是is</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>在Python中is和==都是用来比较两个对象是否“相等”，但是具体使用上二者区别较大。</p>
-<ul>
-<li>is用于比较两个对象是否完全相同，即二者是不是同一个对象。对于Python来讲就是判断二者的id是否相同。</li>
-<li>==用于比较二者的内容是否相同，而对象的地址可以不相同。对于Python来讲，做==运算时，默认调用对象的__eq__()方法。</li>
-</ul>
-<p>下面的例子中采用引用赋值，id不变所以is的结果为True：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; b &#x3D; a</span><br><span class="line">&gt;&gt;&gt; b is a </span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; b &#x3D;&#x3D; a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">4399987272</span><br><span class="line">&gt;&gt;&gt; id(b)</span><br><span class="line">4399987272</span><br></pre></td></tr></table></figure>
-
-<p>当进行copy赋值时，id不同所以is的结果也变为False：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; b &#x3D; a.copy()</span><br><span class="line">&gt;&gt;&gt; b is a</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; b &#x3D;&#x3D; a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">4399987592</span><br><span class="line">&gt;&gt;&gt; id(b)</span><br><span class="line">4399987464</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="使用区别"><a href="#使用区别" class="headerlink" title="使用区别"></a>使用区别</h2><p>判断内容是否相同时，当让可以直接使用==运算符，这也是最常见的，但是当相比之下is的运算速度更快。这是因为is不能重载，不像==运算需要调用对象内部的eq方法，这就避免了调用函数带来的开销。<br>综上，使用is可以提高执行速度，比如is最常用在判断是不是None：<br><code>a is None</code><br>否逻辑为：<br><code>a is not None</code></p>
-<hr>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>命令行下Python会对较小的整数对象(范围：[-5, 256])进行缓存，下次调用时直接从混存中获取，此时is和==的结果都是True：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; b&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; a&#x3D;&#x3D;b</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a is b</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; x&#x3D;1</span><br><span class="line">&gt;&gt;&gt; y&#x3D;1</span><br><span class="line">&gt;&gt;&gt; x&#x3D;&#x3D;y</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; x is y</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
-
-<p>当整数当取值超过上述范围时，缓存不再有效：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; m&#x3D;257</span><br><span class="line">&gt;&gt;&gt; n&#x3D;257</span><br><span class="line">&gt;&gt;&gt; m&#x3D;&#x3D;n</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; m is n</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
-
-<p>另外，在Pycharm中运行或者保存到文件再运行的话，isye不成立，因为解释器进行了一部分优化。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1、is 比较两个对象的 id 值是否相等，是否指向同一个内存地址；<br>2、== 比较的是两个对象的内容是否相等，值是否相等；<br>3、小整数对象[-5,256]在全局解释器范围内被放入缓存供重复使用；<br>4、is 运算符比 == 效率高，在变量和None进行比较时，应该使用 is。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/kiko0o0/p/8135184.html" target="_blank" rel="noopener">Python 中的比较：is 与 ==</a></p>
-<p><a href="https://stackoverflow.com/questions/3588776/how-is-eq-handled-in-python-and-in-what-order" target="_blank" rel="noopener">How is <strong>eq</strong> handled in Python and in what order?</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">is</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/06/Python-09-is/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-12-ma" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/06/Numpy-12-ma/">Numpy-12-ma</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/06/Numpy-12-ma/" class="archive-article-date">
-  	<time datetime="2018-02-06T13:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="掩码数组"><a href="#掩码数组" class="headerlink" title="掩码数组"></a>掩码数组</h1><p>Numpy的ma模块用于把ndarray的一部分mask掉，ndarray长度不变但被mask的地方变成制定的fill_value。</p>
-<p>例如[1,2,3]用[0,1,0]来mask之后得到[1,–,3]</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成元数据的ndarray</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">-1</span>,<span class="number">8</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>, <span class="number">-1</span>,  <span class="number">8</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成mask数组的ndarray</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mask = a&gt;<span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mask</span><br><span class="line">array([<span class="literal">False</span>, <span class="literal">False</span>,  <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>],dtype=bool)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成掩码数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx=np.ma.array(a,mask=mask)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx</span><br><span class="line">masked_array(data = [<span class="number">1</span> <span class="number">2</span> -- -- -- <span class="number">-1</span> --],</span><br><span class="line">             mask = [<span class="literal">False</span> <span class="literal">False</span>  <span class="literal">True</span>  <span class="literal">True</span>  <span class="literal">True</span> <span class="literal">False</span>  <span class="literal">True</span>],</span><br><span class="line">       fill_value = <span class="number">999999</span>)</span><br><span class="line"><span class="comment"># 掩码数组包含三个属性</span></span><br><span class="line"><span class="comment">#  data表示原始数据</span></span><br><span class="line"><span class="comment">#  mask表示生成掩码用的mask数组</span></span><br><span class="line"><span class="comment">#  fill_value表示替换值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.data</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>, <span class="number">-1</span>,  <span class="number">8</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.mask</span><br><span class="line">array([<span class="literal">False</span>, <span class="literal">False</span>,  <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>],dtype=bool)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.fill_value</span><br><span class="line"><span class="number">999999</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .filled()来显示替换后的掩码数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.filled()</span><br><span class="line">array([     <span class="number">1</span>,      <span class="number">2</span>, <span class="number">999999</span>, <span class="number">999999</span>, <span class="number">999999</span>,     <span class="number">-1</span>, <span class="number">999999</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">0</span>] <span class="keyword">is</span> np.ma.masked</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">2</span>] <span class="keyword">is</span> np.ma.masked</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以指定元素修改masked属性</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">0</span>]=np.ma.masked</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.filled()</span><br><span class="line">array([<span class="number">999999</span>,      <span class="number">2</span>, <span class="number">999999</span>, <span class="number">999999</span>, <span class="number">999999</span>,     <span class="number">-1</span>, <span class="number">999999</span>])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>同样适用于多维数组，mask数组也必须和元数据尺寸相同。</p>
-<p>np.ma.asarray(x)把x转换成掩码数组，但不进行具体掩码操作。相当于初始化</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/baoqian1993/article/details/52116510" target="_blank" rel="noopener">http://blog.csdn.net/baoqian1993/article/details/52116510</a></p>
-<p><a href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ma</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/06/Numpy-12-ma/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-11-cumsum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/Numpy-11-cumsum/">Numpy-11-cumsum</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/Numpy-11-cumsum/" class="archive-article-date">
-  	<time datetime="2018-02-05T14:41:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-cumsum"><a href="#Numpy-cumsum" class="headerlink" title="Numpy.cumsum"></a>Numpy.cumsum</h1><p>输入Array，返回由各位置处的累加和组成的新Array。</p>
-<p>numpy.cumsum(a, axis=None, dtype=None, out=None)</p>
-<p>a: 输入ndarray</p>
-<p>axis: 指定计算所在的维度</p>
-<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a)</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">21</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a, dtype=float)     <span class="comment"># specifies type of output value(s)</span></span><br><span class="line">array([  <span class="number">1.</span>,   <span class="number">3.</span>,   <span class="number">6.</span>,  <span class="number">10.</span>,  <span class="number">15.</span>,  <span class="number">21.</span>])</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">0</span>)      <span class="comment"># sum over rows for each of the 3 columns</span></span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">1</span>)      <span class="comment"># sum over columns for each of the 2 rows</span></span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">9</span>, <span class="number">15</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">cumsum</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/Numpy-11-cumsum/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
@@ -1384,11 +1518,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">const</a>
+                <a href="javascript:void(0)" class="js-tag color1">basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,6 +1527,38 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">data type</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">const</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">weak</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atof</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">struct</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,11 +1582,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
+                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">activation function</a>
+                <a href="javascript:void(0)" class="js-tag color3">pooling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1460,6 +1622,50 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">delay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
               </li>
              
@@ -1476,6 +1682,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -1484,11 +1698,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
+                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Basic Command</a>
+                <a href="javascript:void(0)" class="js-tag color2">Local Repository</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1524,6 +1738,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">file</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Stash</a>
               </li>
              
@@ -1536,11 +1758,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">untrack</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">file</a>
+                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1552,15 +1774,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Start</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Tips</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1600,11 +1814,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
+                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">io Redirection</a>
+                <a href="javascript:void(0)" class="js-tag color3">String to integer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1632,11 +1846,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Auto Generate</a>
+                <a href="javascript:void(0)" class="js-tag color4">Auto Complete</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1672,7 +1886,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1685,6 +1899,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Softmax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linear Guide</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1716,6 +1934,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">axes</a>
               </li>
              
@@ -1724,7 +1946,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linestyle</a>
+                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1736,15 +1958,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
+                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">imshow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">legend</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1816,15 +2034,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">zip</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dstack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mgrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1856,6 +2074,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">float64</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shape</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">None</a>
               </li>
              
@@ -1868,27 +2094,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">float64</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shape</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">flatnonzero</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Native type</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1905,6 +2115,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mean</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">fromstring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">frombuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1928,19 +2146,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">choice</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">replace</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Office</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Word</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">choice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">replace</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1960,11 +2178,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">apply</a>
+                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">save memory</a>
+                <a href="javascript:void(0)" class="js-tag color1">apply</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1980,6 +2198,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
@@ -1988,19 +2210,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ndarray</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">TODO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">close</a>
+                <a href="javascript:void(0)" class="js-tag color2">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">errors</a>
+                <a href="javascript:void(0)" class="js-tag color1">close</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2024,11 +2242,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">os</a>
+                <a href="javascript:void(0)" class="js-tag color4">get</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">get</a>
+                <a href="javascript:void(0)" class="js-tag color3">os</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2044,11 +2262,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">is</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">List Comprehension</a>
+                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2068,15 +2290,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Generator</a>
+                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Closure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Parameter</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2120,15 +2338,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">property decorator</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multiple Inheritance</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Customize Class</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2192,10 +2410,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">immutable</a>
               </li>
              
@@ -2216,6 +2430,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">URL</a>
               </li>
              
@@ -2225,10 +2443,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">parse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2276,6 +2490,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">open3d</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Raspberry Pi</a>
               </li>
              
@@ -2296,14 +2518,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">database</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">cpu</a>
               </li>
              
@@ -2312,7 +2526,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">smb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">select</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">commit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2328,10 +2562,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">commit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -2344,15 +2574,55 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">APB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">printf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">float</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SWD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">debug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SolidWorks</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+                <a href="javascript:void(0)" class="js-tag color2">CubeMX</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2360,11 +2630,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+                <a href="javascript:void(0)" class="js-tag color4">GPU</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2428,6 +2702,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">reduce_sum</a>
               </li>
              
@@ -2440,11 +2718,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">kernel visualization</a>
+                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vocabulary</a>
+                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2456,15 +2734,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">domain</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2473,6 +2743,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">filezilla</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2485,6 +2759,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">deployment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2501,130 +2783,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FreeRTOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">pvparameter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">delay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">weak</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NAS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">smb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pyserial</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">uPyCraft</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">uPython</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">firmware</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">WiFi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">stdlib</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atof</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">atoi</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Timer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Interrupt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HAL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">APB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Arduino</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Touch Sensor</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">sscanf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">espnow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TrueStudio</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">printf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">float</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MPU6050</a>
               </li>
             
             <div class="clearfix"></div>
