@@ -156,6 +156,660 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-08-legend" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/Matplotlib-08-legend/">Matplotlib-08-legend</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/Matplotlib-08-legend/" class="archive-article-date">
+  	<time datetime="2018-07-15T14:49:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="legend"><a href="#legend" class="headerlink" title="legend"></a>legend</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, x, label=<span class="string">'linear'</span>)</span><br><span class="line">plt.plot(x, x**<span class="number">2</span>, label=<span class="string">'quadratic'</span>)</span><br><span class="line">plt.plot(x, x**<span class="number">3</span>, label=<span class="string">'cubic'</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">'x label'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'y label'</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"Simple Plot"</span>)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得到图像，</p>
+<p><img src="Matplotlib-08-legend%5Clegend.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">legend</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/15/Matplotlib-08-legend/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-27-MeanbyStep" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/Numpy-27-MeanbyStep/">Numpy-27-MeanbyStep</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/Numpy-27-MeanbyStep/" class="archive-article-date">
+  	<time datetime="2018-07-15T14:36:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="average-an-array-by-step"><a href="#average-an-array-by-step" class="headerlink" title="average an array by step"></a>average an array by step</h1><p>如果要每隔一个固定长度计算一个序列的平均数，可以考虑把这个序列按要求长度分割，然后求平均数。</p>
+<p>使用Numpy时可以通过reshape方法变换维度，然后在行或者列内求平均即可。如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.mean(arr.reshape(<span class="number">-1</span>, STEP), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/15956309/averaging-over-every-n-elements-of-a-numpy-array" target="_blank" rel="noopener">Averaging over every n elements of a numpy array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mean</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">step</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/15/Numpy-27-MeanbyStep/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-26-mean4bool" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/08/Numpy-26-mean4bool/">Numpy-26-mean4bool</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/08/Numpy-26-mean4bool/" class="archive-article-date">
+  	<time datetime="2018-07-08T14:41:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y).mean()</span><br><span class="line"># or</span><br><span class="line">np.mean(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会提示bool对象不包含mean方法。</p>
+<blockquote>
+<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
+</blockquote>
+<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp &#x3D; y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y  # type: np.ndarray</span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">bool</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mean</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/08/Numpy-26-mean4bool/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-25-fromstringfrombuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/25/Numpy-25-fromstringfrombuffer/">Numpy-25-fromstringfrombuffer</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/25/Numpy-25-fromstringfrombuffer/" class="archive-article-date">
+  	<time datetime="2018-06-25T13:25:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="np-fromstring"><a href="#np-fromstring" class="headerlink" title="np.fromstring"></a>np.fromstring</h1><h1 id="np-frombuffer"><a href="#np-frombuffer" class="headerlink" title="np.frombuffer"></a>np.frombuffer</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/22236749/numpy-what-is-the-difference-between-frombuffer-and-fromstring" target="_blank" rel="noopener">NumPy - What is the difference between frombuffer and fromstring?</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">fromstring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">frombuffer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/25/Numpy-25-fromstringfrombuffer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-43-webserver" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/Python-43-webserver/">Python-43-webserver</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/24/Python-43-webserver/" class="archive-article-date">
+  	<time datetime="2018-06-24T14:26:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="simple-web-server"><a href="#simple-web-server" class="headerlink" title="simple web server"></a>simple web server</h1><p>使用python自带的http模块可以快速地实现http web server。</p>
+<p>在目录下执行<code>python -m http.server 80</code>，如果该目录下已经有index.html文件的话，在浏览器内输入<code>localhost</code>或者<code>localhost:80</code>即可看到index.html的内容。</p>
+<p><img src="Python-43-webserver%5Cwebserver.JPG" alt=""></p>
+<p>结束时，按下Ctrl+C来终止服务。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/harry-xiaojun/p/6739003.html" target="_blank" rel="noopener">python3 使用SimpleHTTPServer搭建web服务器</a></p>
+<p><a href="https://www.cnblogs.com/asis/p/6842996.html" target="_blank" rel="noopener">Python3实现简单的http server</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web server</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/24/Python-43-webserver/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-42-immutable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/Python-42-immutable/">Python-42-immutable</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/24/Python-42-immutable/" class="archive-article-date">
+  	<time datetime="2018-06-23T19:32:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="不可变变量-error"><a href="#不可变变量-error" class="headerlink" title="不可变变量 error"></a>不可变变量 error</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s=<span class="string">'123'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">0</span>]=<span class="string">'a'</span></span><br></pre></td></tr></table></figure>
+
+<p>当尝试对string的元素进行修改时，抛出错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: &#39;str&#39; object does not support item assignment</span><br></pre></td></tr></table></figure>
+
+<p>这是因为string类型和Int，float一样是immutable，即不可变变量。</p>
+<p>相对应地，list属于可变变量。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">immutable</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/24/Python-42-immutable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-41-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/23/Python-41-struct/">Python-41-struct</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/23/Python-41-struct/" class="archive-article-date">
+  	<time datetime="2018-06-23T11:03:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/leomei91/p/7602603.html" target="_blank" rel="noopener">python学习之struct模块</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struct</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/23/Python-41-struct/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DeepLearning-06-LoadMNIST" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -744,707 +1398,9 @@
 
 
   
-    <article id="post-DeepLearning-04-BackPropagation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-04-BackPropagation/">DeepLearning-04-BackPropagation</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-04-BackPropagation/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>深度学习算法主要包括两部分：</p>
-<ul>
-<li>前向计算</li>
-<li>反向传播</li>
-</ul>
-<p>代入权重矩阵W和偏置矩阵b得到预测值$y=f(W,x)+b$ ，通过Loss函数得到当前预测的误差大小。反向计算$L=Loss(W,b)$得到误差值L对于权重矩阵和偏置矩阵b的梯度gradient，利用gradient来更新W和b使得误差值L逐步减小。</p>
-<h1 id="Back-Propagation"><a href="#Back-Propagation" class="headerlink" title="Back Propagation"></a>Back Propagation</h1><p>反向传播把复杂的运算转换成一个个简单的运算节点Dot。然后反向对各个参数求梯度时，整体的复杂求导运算就可以简化为各个节点Dot的链式求导。</p>
-<h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>gradient distrabuter<br>$y=a+b$，此时y处的梯度$ \frac {\partial L} {\partial y}$直接不加改变地传递到a和b上。</p>
-<h2 id="mul"><a href="#mul" class="headerlink" title="mul"></a>mul</h2><p>gradient switcher<br>$y=a*b$，此时y处的梯度$ \frac {\partial L} {\partial y}$传递到a时需要乘以b，传递到b时需要乘以a。</p>
-<h2 id="max"><a href="#max" class="headerlink" title="max"></a>max</h2><p>gradient router<br>$y=max(a, b)$，此时y处的梯度$ \frac {\partial L} {\partial y}$直接传递到a或者b上。故a等于y处传来的梯度，b等于0；或者a等于0，而b等于y处传来的梯度。</p>
-<h2 id="vector-or-matrix-production"><a href="#vector-or-matrix-production" class="headerlink" title="vector or matrix production"></a>vector or matrix production</h2><p>对于$Y = W \cdot X$，结合Y的形状可以帮助推断$\frac {\partial Y}{\partial X}$，$\frac {\partial Y}{\partial W}$的形状。</p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><p>下面针对一个简单的2层神经网络来尝试一下梯度的反向传播。</p>
-<p><img src="DeepLearning-04-BackPropagation/bp.JPG" alt=""></p>
-<p>约定$\boldsymbol{x} \in \mathbb{R}^x$</p>
-<p><strong>输入</strong>：样本为$(\boldsymbol{x}, y)$，设特征$\boldsymbol{x} \in \mathbb{R}^x$，$y’$为y维的离散的标签。</p>
-<p><strong>第一层</strong>：<br>$$<br>\boldsymbol{z} = \boldsymbol{W}^{(1)} \boldsymbol{x}<br>$$<br>其中$\boldsymbol{W}^{(1)} \in \mathbb{R}^{h \times x}$，得到$\boldsymbol{z} \in \mathbb{R}^h$。</p>
-<p>第一层的非线性变换：<br>$$<br>\boldsymbol{h} = \phi (\boldsymbol{z})<br>$$<br>对$\boldsymbol{z}$按元素通过$\phi()$，得到和$\boldsymbol{z}$尺寸相同的$\boldsymbol{h} \in \mathbb{R}^h$。</p>
-<p><strong>第二层</strong>：<br>$$<br>\boldsymbol{o} = \boldsymbol{W}^{(2)} \boldsymbol{h}<br>$$<br>其中$\boldsymbol{W}^{(2)} \in \mathbb{R}^{y \times h}$，得到$\boldsymbol{o} \in \mathbb{R}^y$。注意o和样本中的标签$y’$尺寸相同。</p>
-<p><strong>损失函数</strong>：<br>$$<br>L = \ell(\boldsymbol{o}, y^\prime)<br>$$<br>根据计算输出$\boldsymbol{o}$和样本$y’$计算误差(损失)。可以有平方和误差，交叉熵误差等方式。</p>
-<p><strong>正则化误差</strong>：<br>$$<br>s = \frac {\lambda}{2}\sum_{i}|\boldsymbol{W}^{(i)}|_F^2<br>$$<br>本例中采用了L2误差项(F=2)，其中$\lambda$是超参数。表示对一个权重矩阵的所有元素求平方和，然后对所有矩阵做相同处理再相加，最后乘以lambda除以2，得到s。</p>
-<p>最终误差为，<br>$$<br>J=L+s<br>$$<br>所以最后的问题归结为，如何得到一组权重矩阵W，使得J(也被称为目标函数)有最小值。得到了这组权重W就完成了对模型的训练。</p>
-<h2 id="模型计算图"><a href="#模型计算图" class="headerlink" title="模型计算图"></a>模型计算图</h2><h3 id="正向传播"><a href="#正向传播" class="headerlink" title="正向传播"></a>正向传播</h3><p>在反向求梯度之前，需要先做一次正向传播，即从输入开始按照上面定义的计算图的方向，计算并存储各个节点的输出。这些节点的输出值在反向传播中会出现在梯度公式里，后面会有介绍。</p>
-<h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>由上文中的模型可知，J是关于$\boldsymbol{W}^{(1)}$和$\boldsymbol{W}^{(2)}$的函数。要使得J取到最小值，需要计算J对于W的梯度$\partial J/\partial \boldsymbol{W}^{(1)}$、$\partial J/\partial \boldsymbol{W}^{(2)}$，然后按照梯度的反方向更新W，经过N次迭代之后，理论上J就可以取到最小值。</p>
-<p>为了表述方便，输入输出$\mathsf{X}, \mathsf{Y}, \mathsf{Z}$为任意形状的张量，有函数$\mathsf{Y}=f(\mathsf{X})$和$\mathsf{Z}=f(\mathsf{Y})$。根据链式求导法则有，<br>$$<br>\frac{\partial \mathsf{Z}}{\partial \mathsf{X}} = \text{prod}(\frac{\partial \mathsf{Z}}{\partial \mathsf{Y}}, \frac{\partial \mathsf{Y}}{\partial \mathsf{X}})<br>$$<br>下面，针对上文的模型进行反向传播求梯度。</p>
-<p><strong>J对L和s的梯度：</strong></p>
-<p><img src="DeepLearning-04-BackPropagation/bp_JL_Js.JPG" alt=""></p>
-<p>正则化误差$J=L+s$，且J、L和s均为标量。故J对L和s求梯度有<br>$$<br>\frac{\partial J}{\partial L} = 1,<br>$$</p>
-<p>$$<br>\frac{\partial J}{\partial s} = 1.<br>$$</p>
-<p><strong>J对o的梯度：</strong></p>
-<p><img src="DeepLearning-04-BackPropagation/bp_Jo.JPG" alt=""><br>$$<br>\frac{\partial J}{\partial \boldsymbol{o}}<br>= \text{prod}(\frac{\partial J}{\partial L}, \frac{\partial L}{\partial \boldsymbol{o}})<br>= \frac{\partial L}{\partial \boldsymbol{o}}<br>$$<br>此处，J是标量，$\boldsymbol{o}$是尺寸为$\boldsymbol{o} \in \mathbb{R}^y$的向量。</p>
-<p><strong>s对W的梯度：</strong><br>$$<br>\frac{\partial s}{\partial \boldsymbol{W}^{(1)}} = \lambda \boldsymbol{W}^{(1)},<br>$$</p>
-<p>$$<br>\frac{\partial s}{\partial \boldsymbol{W}^{(2)}} = \lambda \boldsymbol{W}^{(2)}.<br>$$</p>
-<p><strong>J对W2的梯度：</strong></p>
-<p>可以看到有两条从J到W2的路径，所以J 对W2的梯度应该分别对每条路径求梯度，然后把二者相加。</p>
-<p><img src="DeepLearning-04-BackPropagation/bp_JW2.JPG" alt=""></p>
-<p>路径一：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(2)}}<br>= \text{prod}( \frac{\partial L}{\partial \boldsymbol{o}}, \frac{\partial \boldsymbol{o}}{\partial \boldsymbol{W}^{(2)}})<br>$$<br>等号左边，J是标量，W2尺寸为(y, h)，故有$\frac{\partial J}{\partial \boldsymbol{W}^{(2)}} \in \mathbb{R}^{y \times h}$；</p>
-<p>等号右边第一项，L是标量，o尺寸为(y,)，故有$\frac{\partial L}{\partial \boldsymbol{o}} \in \mathbb{R}^{y}$；</p>
-<p>等号右边第二项，o尺寸为(y,)，W2尺寸为(y, h)。要得到$\mathbb{R}^{y \times h} = \text{prod}(\mathbb{R}^{y}, \mathbb{R}^{??})$，可知此处prod为矩阵点乘，而且尺寸变换方式为，(y, h) = (y, 1)dot(1, h)，故有$\frac{\partial \boldsymbol{o}}{\partial \boldsymbol{W}^{(2)}} \in \mathbb{R}^{1 \times h}$。<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(2)}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{o}}, \frac{\partial \boldsymbol{o}}{\partial \boldsymbol{W}^{(2)}})<br>= \frac{\partial J}{\partial \boldsymbol{o}} \boldsymbol{h}^\top<br>$$<br>路径二：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(2)}}<br>= \text{prod}( \frac{\partial J}{\partial \boldsymbol{s}}, \frac{\partial \boldsymbol{s}}{\partial \boldsymbol{W}^{(2)}})<br>$$<br>跟上面的思考方式相同，等号左边尺寸为(y, h)，等号右边第一项尺寸为标量，第二项尺寸为(y, h)。<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(2)}}<br>= \text{prod}(\frac{\partial J}{\partial s}, \frac{\partial s}{\partial \boldsymbol{W}^{(2)}})<br>= \lambda \boldsymbol{W}^{(2)}<br>$$<br>最后，两条路径相加之后得到：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(2)}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{o}}, \frac{\partial \boldsymbol{o}}{\partial \boldsymbol{W}^{(2)}}) + \text{prod}(\frac{\partial J}{\partial s}, \frac{\partial s}{\partial \boldsymbol{W}^{(2)}})<br>= \frac{\partial J}{\partial \boldsymbol{o}} \boldsymbol{h}^\top + \lambda \boldsymbol{W}^{(2)}<br>$$<br><strong>J对W1的梯度：</strong></p>
-<p><img src="DeepLearning-04-BackPropagation/bp_JW1.JPG" alt=""></p>
-<p>继续反向传播，求J对h的梯度。等号左边尺寸为(h, )，等号右边第一项(y, )，第二项(y, h)。要使等式成立，那么应该是(h, y)dot(y, )，所以有：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{h}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{o}}, \frac{\partial \boldsymbol{o}}{\partial \boldsymbol{h}})<br>= {\boldsymbol{W}^{(2)}}^\top \frac{\partial J}{\partial \boldsymbol{o}}<br>$$<br>继续反向传播，求J对于z的梯度。等号左边尺寸为(h, )，等号右边第一项(h, )，第二项$\partial J/\partial \boldsymbol{z}$直接$\phi$对z求导为标量或者broadcast后的(h, )。要使等式成立，那么应该是(h,  )$\odot$(h,  )，所以有：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{z}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{h}}, \frac{\partial \boldsymbol{h}}{\partial \boldsymbol{z}})<br>= \frac{\partial J}{\partial \boldsymbol{h}} \odot \phi^\prime(\boldsymbol{z})<br>$$<br>继续反向传播，求J对于W1的梯度。等号左边尺寸为(h, x)，等号右边第一项(h,  )，第二项(x, )。要使等式成立，那么应该是(h, 1)dot(1, x)，所以有：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(1)}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{z}}, \frac{\partial \boldsymbol{z}}{\partial \boldsymbol{W}^{(1)}})<br>= \frac{\partial J}{\partial \boldsymbol{z}} x^\top<br>$$<br>由于J到W1也有两条路径，所以也要把两条路径的梯度相加：<br>$$<br>\frac{\partial J}{\partial \boldsymbol{W}^{(1)}}<br>= \text{prod}(\frac{\partial J}{\partial \boldsymbol{z}}, \frac{\partial \boldsymbol{z}}{\partial \boldsymbol{W}^{(1)}}) + \text{prod}(\frac{\partial J}{\partial s}, \frac{\partial s}{\partial \boldsymbol{W}^{(1)}})<br>= \frac{\partial J}{\partial \boldsymbol{z}} \boldsymbol{x}^\top + \lambda \boldsymbol{W}^{(1)}.<br>$$<br>注意，</p>
-<ul>
-<li>上述反向传播过程中，每个节点的的梯度值都需要存储下来，以为继续向深处传播时，会用到之前计算的梯度。这样就不必重新计算，从而节省了宝贵的计算时间。</li>
-<li>另外，反向传播时会用到中间变量h、z等的值，而这些值就是通过前向传播计算得到的。所以，反向传播依赖于正向传播得到的节点输出值。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.youtube.com/watch?v=xPFbbLxegH0&t=3011s" target="_blank" rel="noopener">动手学深度学习第十三课：正向传播、反向传播和通过时间反向传播</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Back Propagation</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-04-BackPropagation/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-03-SVM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-03-SVM/">DeepLearning-03-SVM</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-03-SVM/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:02:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h1>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-03-SVM/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-02-ActivationFunction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-02-ActivationFunction/">DeepLearning-02-ActivationFunction</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-02-ActivationFunction/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:01:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p>关于输出层的激活函数，依据实现目的有多种选择。</p>
-<p>当神经网络用于二分类问题时，输出层使用Step函数。</p>
-<p>用于多分类问题时候，输出层使用Softmax激活函数。</p>
-<p>用于回归问题时，输出层采用恒等函数，即不做输出变换直接输出本身。</p>
-<p>分类问题：对于离散量的预测输出，如明天是否下雨；</p>
-<p>回归问题：对于连续量的预测输出，如明天的气温或者降水概率。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">activation function</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-02-ActivationFunction/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-01-pooling" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-01-pooling/">DeepLearning-01-pooling</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-01-pooling/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:01:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h1><p>一个简单的pooling的实现方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">a=np.zeros((<span class="number">9</span>,<span class="number">9</span>),dtype=<span class="string">"uint8"</span>)</span><br><span class="line">print(a)</span><br><span class="line">b=np.ones((<span class="number">7</span>,<span class="number">7</span>),dtype=<span class="string">"uint8"</span>)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">a[<span class="number">1</span>:<span class="number">9</span><span class="number">-1</span>,<span class="number">1</span>:<span class="number">9</span><span class="number">-1</span>]=b</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
-
-<p>上述例子中，元矩阵为一个7*7的方阵。现在需要在其周围添加一个厚度为1的pooling区。</p>
-<p>实现思路如下，</p>
-<ol>
-<li>已知方阵为7<em>7，pooling厚度为1，故pooling后 的尺寸应该为(7+1*2)\</em>(7+1*2)，即9*9 。故新建一个9*9的zeros方阵。</li>
-<li>向其中1:1到9-1:9-1 的区域填入元方阵。</li>
-<li>输出修改后的zeros方阵即可。</li>
-</ol>
-<p>结果如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 9*9零矩阵a</span></span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># b</span></span><br><span class="line">[[<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># a</span></span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pooling</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-01-pooling/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DeepLearning-00-VectorNorms" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/16/DeepLearning-00-VectorNorms/">DeepLearning-00-VectorNorms</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/16/DeepLearning-00-VectorNorms/" class="archive-article-date">
-  	<time datetime="2018-06-16T05:01:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="vector-normalization"><a href="#vector-normalization" class="headerlink" title="vector normalization"></a>vector <em>normalization</em></h1><p>常见的向量正则化(vector <em>normalization</em> )有两种方式：L1正则化和L2正则化。</p>
-<p>对于向量$\vec w=[w_0, w_1, …w_n]$，有L1正则化为：<br>$$<br>{\lVert\vec w\rVert_1} =|w_1| + |w_2|+…+|w_n|<br>$$<br>L2正则化为：<br>$$<br>{\lVert\vec w\rVert_2} =\sqrt {w_1^2 + w_2^2+…+w_n^2}<br>$$<br>在简单的二维情况下，图形化之后可以看到，</p>
-<p><img src="DeepLearning-00-VectorNorms/norms.png" alt=""></p>
-<p>L2正则化的结果可以用蓝色线段的斜边表示，而L1正则化的结果是两个直角边的和，可知L1大于L2。</p>
-<h1 id="固定长度时L1和L2的图形化"><a href="#固定长度时L1和L2的图形化" class="headerlink" title="固定长度时L1和L2的图形化"></a>固定长度时L1和L2的图形化</h1><p><img src="DeepLearning-00-VectorNorms/norms.png" alt=""></p>
-<p>上图中绿色的圆表示L2距离固定的情况，红色的菱形表示L1距离固定的情况。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://youtu.be/5fN2J8wYnfw" target="_blank" rel="noopener">https://youtu.be/5fN2J8wYnfw</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vector normalization</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/16/DeepLearning-00-VectorNorms/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vocabulary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/06/Vocabulary/">Vocabulary</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/06/Vocabulary/" class="archive-article-date">
-  	<time datetime="2018-06-06T13:59:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><p>finite difference approximation 查分逼近</p>
-<p>numerical gradient 数值微分</p>
-<p>partial derivative 偏导数</p>
-<p>diagonal matrix 对角阵<br>    除了主对角线上的元素外其他元素均为0的矩阵<br>    对角线上元素相等的对角阵：数量阵<br>    对角线上全为1的矩阵：单位阵</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vocabulary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Common//" class="article-tag-list-link color2">Common</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/06/Vocabulary/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-39-OpenEncoding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/01/Python-39-OpenEncoding/">Python-39-OpenEncoding</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/01/Python-39-OpenEncoding/" class="archive-article-date">
-  	<time datetime="2018-06-01T13:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="open-file-with-specified-encoding"><a href="#open-file-with-specified-encoding" class="headerlink" title="open file with specified encoding"></a>open file with specified encoding</h1><p>Python下直接用默认的open方法打开文件时，默认会使用系统默认的编码方式处理。如果包含默认编码方式无法打开的字符，会抛出错误：UnicodeDecodeError: ‘gbk’ codec can’t decode byte…</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = open(<span class="string">r'Text_data/1342-0.txt'</span>, <span class="string">'r'</span>).read()</span><br></pre></td></tr></table></figure>
-
-<p>处理办法为，如果已知文件的编码方式，使用open方法时可以直接指定encoding参数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = open(<span class="string">r'Text_data/1342-0.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'UTF-8'</span>).read()</span><br></pre></td></tr></table></figure>
-
-<p>如果不知道文件使用的哪种编码方式，可以参考上一篇文章介绍的chardet库。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chardet</span><br><span class="line"></span><br><span class="line">path=<span class="string">r"C:\Users\...\unicode.txt"</span></span><br><span class="line">rawdata = open(path, <span class="string">'rb'</span>).read()</span><br><span class="line">result = chardet.detect(rawdata)</span><br></pre></td></tr></table></figure>
-
-<p>然后再指定encoding参数。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/arctique/p/5699620.html" target="_blank" rel="noopener">https://www.cnblogs.com/arctique/p/5699620.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">open</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encoding</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/01/Python-39-OpenEncoding/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1989,10 +1945,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">figure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2829,6 +2781,42 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">multiple subplots</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">suptitle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tight layout</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">hasattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">getattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">clip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">noezero</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">where</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,720 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-36-nonezero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-36-nonezero/">Numpy-36-nonezero</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-36-nonezero/" class="archive-article-date">
+  	<time datetime="2020-05-06T13:42:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>可以看作是一个特化的where方法，限定condition为<em>不等于0</em>。找到满足condition的所有元素的位置并返回。</p>
+<blockquote>
+<p> numpy.nonzero(a)</p>
+<p> Return the indices of the elements that are non-zero.</p>
+<p> Returns a tuple of arrays, one for each dimension of <em>a</em>, containing the indices of the non-zero elements in that dimension. The values in <em>a</em> are always tested and returned in row-major, C-style order. The corresponding non-zero values can be obtained with:</p>
+</blockquote>
+<p>验证如下：</p>
+<p>首先生成一个3X3的随机数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">array([[<span class="number">-0.46079926</span>,  <span class="number">0.71230588</span>, <span class="number">-0.45910822</span>],</span><br><span class="line">       [ <span class="number">0.02227204</span>,  <span class="number">0.69423378</span>,  <span class="number">1.09299065</span>],</span><br><span class="line">       [<span class="number">-0.49647728</span>, <span class="number">-1.18294834</span>,  <span class="number">0.5020136</span> ]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=np.nonzero(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。这一点也和where相同。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">noezero</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-36-nonezero/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-35-where" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-35-where/">Numpy-35-where</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-35-where/" class="archive-article-date">
+  	<time datetime="2020-05-06T13:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>where方法通过给定condition，找到在原ndArray中满足condition的所有元素的位置并返回。</p>
+<blockquote>
+<p> numpy.where(condition[, x, y])</p>
+<p> Return elements chosen from x or y depending on condition.</p>
+</blockquote>
+<p>验证如下：</p>
+<p>首先生成一个3X3的随机数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">-1.15670308</span>, <span class="number">-1.61458477</span>, <span class="number">-0.56441277</span>],</span><br><span class="line">       [<span class="number">-2.31218808</span>, <span class="number">-1.73006636</span>,  <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">-0.46809921</span>, <span class="number">-2.32801438</span>,  <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>如果只有condition参数，则返回所有符合该condition的元素所在的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b=np.where(a&gt;<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">(array([<span class="number">1</span>, <span class="number">2</span>]), array([<span class="number">2</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。</p>
+<h2 id="附带运算"><a href="#附带运算" class="headerlink" title="附带运算"></a>附带运算</h2><p>如果在后面加上可选的两个参数则可以根据condition返回一个新的数组。</p>
+<p>其原理等同于<code>[xv if c else yv for c, xv, yv in zip(condition, x, y)]</code></p>
+<p>具体例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.where(a&gt;<span class="number">0</span>, a, -a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1.15670308</span>, <span class="number">1.61458477</span>, <span class="number">0.56441277</span>],</span><br><span class="line">       [<span class="number">2.31218808</span>, <span class="number">1.73006636</span>, <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">0.46809921</span>, <span class="number">2.32801438</span>, <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">where</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-35-where/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-34-clip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-34-clip/">Numpy-34-clip</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-34-clip/" class="archive-article-date">
+  	<time datetime="2020-05-06T13:21:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-clip"><a href="#Numpy-clip" class="headerlink" title="Numpy.clip"></a>Numpy.clip</h1><p>clip方法定义如下，</p>
+<blockquote>
+<p>numpy.clip(a, a_min, a_max, out=None)<br>Clip (limit) the values in an array.</p>
+</blockquote>
+<blockquote>
+<p>Given an interval, values outside the interval are clipped to the interval edges. For example, if an interval of [0, 1] is specified, values smaller than 0 become 0, and values larger than 1 become 1.</p>
+</blockquote>
+<p>a：输入矩阵<br>a_min：interval最小值<br>a_max：interval最大值<br>out：如果设为out=a，则表示in-place clip</p>
+<p>具体例子如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.arange(<span class="number">12</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.clip(x, <span class="number">3</span>, <span class="number">9</span>)</span><br><span class="line">array([<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+
+<p>设定下边界为3，上边界为9。</p>
+<p>那么小于3的强制改写为3，大于9的强制改写为9。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.clip.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.clip.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">clip</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-34-clip/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-33-tile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-33-tile/">Numpy-33-tile</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-33-tile/" class="archive-article-date">
+  	<time datetime="2020-05-06T12:46:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-tile"><a href="#Numpy-tile" class="headerlink" title="Numpy.tile"></a>Numpy.tile</h1><blockquote>
+<p><code>numpy.tile(A, reps)</code></p>
+<p>Construct an array by repeating A the number of times given by reps.</p>
+</blockquote>
+<p>将一个ndarray A重复reps次并返回。<code>tile</code>意为<code>瓷砖，瓦片</code></p>
+<p>reps可以是integer，也可以是数组来表示在多个多个维度上的重复。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.tile(a, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"></span><br><span class="line">array([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=np.tile(a,(<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line"></span><br><span class="line">array([[<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line"></span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tile.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy/reference/generated/numpy.tile.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tile</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-33-tile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Matplotlib-10-titles" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Matplotlib-10-titles/">Matplotlib-10-titles</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Matplotlib-10-titles/" class="archive-article-date">
+  	<time datetime="2020-05-06T10:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="主标题-suptitle-和subplot标题"><a href="#主标题-suptitle-和subplot标题" class="headerlink" title="主标题(suptitle)和subplot标题"></a>主标题(suptitle)和subplot标题</h1><p>下面的sample code可以同时显示主标题和个分图的标题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    fig.subplots_adjust(wspace=<span class="number">5</span>)</span><br><span class="line">    fig.suptitle(<span class="string">"Title for whole figure"</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">    ax = plt.subplot(<span class="string">"211"</span>)</span><br><span class="line">    ax.set_title(<span class="string">"Title for first plot"</span>)</span><br><span class="line">    ax.plot(data)</span><br><span class="line"></span><br><span class="line">    ax = plt.subplot(<span class="string">"212"</span>)</span><br><span class="line">    ax.set_title(<span class="string">"Title for second plot"</span>)</span><br><span class="line">    ax.plot(data)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># plt.tight_layout()</span></span><br><span class="line">    fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0.0</span>, <span class="number">1</span>, <span class="number">0.9</span>])</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>输出如下Graph，</p>
+<p><img src="Matplotlib-10-titles%5Ctitles.png" alt="titles"></p>
+<p>值得注意的是，如果单纯使用<code>plt.tight_layout()</code>，会导致主标题和subplot的标题严重重叠！</p>
+<p><img src="Matplotlib-10-titles%5Coverlap.png" alt="overlap"></p>
+<p>改为<code>fig.tight_layout(rect=[0.0, 0.0, 1.0, 0.9])</code>即可。原因是默认情况下，自动调整只会考虑ticklabels, axis labels, and titles等元素，而没有考虑suptitle。因此需要手动指定rect(rectangle)。其中rect的指定顺序为左–下–右–上，数值为归一化的0到1之间的float数。</p>
+<p><code>rect=[0.0, 0.0, 1.0, 0.9]</code>表示在 <code>[左0.0][下0.0]</code>到<code>[右1.0][上0.9]</code>范围内做tight调整，上方余下0.1给suptitle。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/8248467/matplotlib-tight-layout-doesnt-take-into-account-figure-suptitle" target="_blank" rel="noopener">https://stackoverflow.com/questions/8248467/matplotlib-tight-layout-doesnt-take-into-account-figure-suptitle</a></p>
+<p><a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.tight_layout.html" target="_blank" rel="noopener">https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.tight_layout.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">suptitle</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">tight layout</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Matplotlib-10-titles/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Matplotlib-07-multiple-plots" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Matplotlib-07-multiple-plots/">Matplotlib-07-multiple-plots</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Matplotlib-07-multiple-plots/" class="archive-article-date">
+  	<time datetime="2020-05-06T04:18:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Matplotlib-Multiple-Subplots"><a href="#Matplotlib-Multiple-Subplots" class="headerlink" title="Matplotlib Multiple Subplots"></a>Matplotlib Multiple Subplots</h1><p>两种方式绘制多图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">plt.figure(<span class="number">0</span>)</span><br><span class="line">ax_1 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">0</span>), colspan=<span class="number">3</span>)</span><br><span class="line">ax_1.set_title(<span class="string">'ax_1'</span>)  <span class="comment"># 使用set_title方法显示title</span></span><br><span class="line">ax_2 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">0</span>), colspan=<span class="number">2</span>)</span><br><span class="line">ax_3 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">2</span>), rowspan=<span class="number">2</span>)</span><br><span class="line">ax_4 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">0</span>))</span><br><span class="line">ax_5 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">plt.figure(<span class="number">1</span>)</span><br><span class="line">ax_a = plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">ax_a.set_title(<span class="string">'ax_a'</span>)  <span class="comment"># 使用set_title方法显示title</span></span><br><span class="line">ax_b = plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>第一个Figure：</p>
+<p><img src="Matplotlib-07-multiple-subplots%5Cax_1.png" alt="ax_1"></p>
+<p>第二个Figure：</p>
+<p><img src="Matplotlib-07-multiple-subplots%5Cax_a.png" alt="ax_a"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/37424530/how-to-make-more-than-10-subplots-in-a-figure/37444059" target="_blank" rel="noopener">https://stackoverflow.com/questions/37424530/how-to-make-more-than-10-subplots-in-a-figure/37444059</a></p>
+<p>关于plt中的figure/ax等部分等关系介绍如下：<br><a href="https://www.cnblogs.com/nju2014/p/5620776.html" target="_blank" rel="noopener">https://www.cnblogs.com/nju2014/p/5620776.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multiple subplots</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Matplotlib-07-multiple-plots/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-58-hasattr-getattr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Python-58-hasattr-getattr/">Python-58-hasattr-getattr</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Python-58-hasattr-getattr/" class="archive-article-date">
+  	<time datetime="2020-05-06T00:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="示例的属性"><a href="#示例的属性" class="headerlink" title="示例的属性"></a>示例的属性</h1><p>这里的属性可以是class attribute，也可以是instance attribute（包括后续赋给的attribute）。</p>
+<p>下面使用内置hasattr方法来判断是否包含指定attribute的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(hasattr(foo, <span class="string">'code'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'name'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'volume'</span>))  <span class="comment"># False</span></span><br><span class="line">print(hasattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<p>然后是使用内置getattr方法来获取指定attribute的value的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'code'</span>))  <span class="comment"># 23</span></span><br><span class="line">print(getattr(foo, <span class="string">'name'</span>))  <span class="comment"># demo</span></span><br><span class="line">print(getattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># 89</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'volume'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>最后一行尝试获取volume属性，由于foo中没有这个属性解释器会抛出错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#39;Foo&#39; object has no attribute &#39;volume&#39;</span><br></pre></td></tr></table></figure>
+
+<p>为了避免错误打断程序向下运行，可以给不存在的属性添加一个默认值。如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(getattr(foo, <span class="string">'volume'</span>, <span class="string">'default_volume'</span>))  <span class="comment"># default_volume</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.python-izm.com/advanced/hasattr/" target="_blank" rel="noopener">https://www.python-izm.com/advanced/hasattr/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hasattr</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">getattr</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Python-58-hasattr-getattr/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Blender-01-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -447,672 +1161,9 @@
 
 
   
-    <article id="post-STM32-04-SWD-debug" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/STM32-04-SWD-debug/">STM32-04-SWD-debug</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/30/STM32-04-SWD-debug/" class="archive-article-date">
-  	<time datetime="2020-04-30T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="STM使用SWD方式debug"><a href="#STM使用SWD方式debug" class="headerlink" title="STM使用SWD方式debug"></a>STM使用SWD方式debug</h1><p>Discovery以及Nucleo的ST-Link的SWD接线方式如下，</p>
-<p><img src="STM32-04-SWD-debug%5CSWD.gif" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SWD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">debug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/30/STM32-04-SWD-debug/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sensor-MPU6050" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/26/Sensor-MPU6050/">Sensor-MPU6050</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/26/Sensor-MPU6050/" class="archive-article-date">
-  	<time datetime="2020-04-26T11:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MPU6050"><a href="#MPU6050" class="headerlink" title="MPU6050"></a>MPU6050</h1><p>通过I2C接口可以读取到温度计/加速度计(XYZ)/陀螺仪(XYZ)的数值，其中温度计和加速度计的数值可以直接使用(当然如果需要的话也可以提前做校准)，而陀螺仪的数值必须要校准后才能使用。</p>
-<p>原因是传感器上电之后，陀螺仪数值是一个相对不为0 的数值(偏差)，使用之前必须对这个偏差进行补偿。比如，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g_x_raw: -1399</span><br><span class="line">g_y_raw: 400</span><br><span class="line">g_z_raw: -233</span><br></pre></td></tr></table></figure>
-
-<p>可以在上电之后首先记录多个数值，取平均之后作为补偿值进行校准。</p>
-<p>参考，</p>
-<p><a href="https://www.icxbk.com/ask/detail/19901.html" target="_blank" rel="noopener">https://www.icxbk.com/ask/detail/19901.html</a></p>
-<p><a href="https://forum.arduino.cc/index.php?topic=194358.0" target="_blank" rel="noopener">https://forum.arduino.cc/index.php?topic=194358.0</a></p>
-<p><a href="https://www.i2cdevlib.com/forums/topic/10-why-is-the-dmp-yaw-stable/" target="_blank" rel="noopener">https://www.i2cdevlib.com/forums/topic/10-why-is-the-dmp-yaw-stable/</a></p>
-<h1 id="关于精度计算"><a href="#关于精度计算" class="headerlink" title="关于精度计算"></a>关于精度计算</h1><p>参考<a href="https://blog.csdn.net/u013636775/article/details/69668860" target="_blank" rel="noopener">https://blog.csdn.net/u013636775/article/details/69668860</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MPU6050</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Sensor//" class="article-tag-list-link color2">Sensor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/26/Sensor-MPU6050/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32-03-Printf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/24/STM32-03-Printf/">STM32-03-Printf</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/24/STM32-03-Printf/" class="archive-article-date">
-  	<time datetime="2020-04-24T05:51:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Use-printf-in-TrueStudio"><a href="#Use-printf-in-TrueStudio" class="headerlink" title="Use printf in TrueStudio"></a>Use printf in TrueStudio</h1><p>在TrueStudio中直接使用printf函数打印到串口，需要按照以下步骤设置：</p>
-<ol>
-<li><p>确认在项目包含的有效目录(比如main.c同目录)下有syscalls.c源文件；</p>
-</li>
-<li><p>在main.c中作为Private includes，添加<code>#include &lt;stdio.h&gt;</code>；</p>
-</li>
-<li><p>在main.c中作为Private define，添加如下代码段：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __GNUC__ */</span></span></span><br><span class="line"><span class="keyword">void</span> __io_putchar(<span class="keyword">uint8_t</span> ch) &#123;</span><br><span class="line">  HAL_UART_Transmit(&amp;huart3, &amp;ch, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意，此处<code>huart3</code>改成项目对应的外设变量。</p>
-</li>
-</ol>
-<p>然后就可以在main.c中使用printf函数打印输出到串口了。如果在其他c文件中使用，同样需要在文件头部添加<code>#include &lt;stdio.h&gt;</code>。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">TrueStudio</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">printf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/24/STM32-03-Printf/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32-03-Printf-Float" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/24/STM32-03-Printf-Float/">STM32-03-Printf-Float</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/24/STM32-03-Printf-Float/" class="archive-article-date">
-  	<time datetime="2020-04-24T05:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="print-float-with-printf-in-TrueStudio"><a href="#print-float-with-printf-in-TrueStudio" class="headerlink" title="print float with printf in TrueStudio"></a>print float with printf in TrueStudio</h1><p>默认情况下，在TrueStudio中新生成的项目中无法使用printf打印出float数值，返回的结果显示为空白。</p>
-<p>要解决这个问题，需要如下方式修改设置。</p>
-<p>右击项目名–选择属性–C/C++ Build–Settings–Tool Settings–C Linker</p>
-<p>在Command里面添加命令<code>-u _printf_float</code>。</p>
-<p>修改后的设置如下所示，</p>
-<p><img src="https://community.st.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0680X000006qgNo&operationContext=CHATTER&contentId=05T0X00000Ntk5E&page=0" alt="float"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://community.st.com/s/question/0D50X00009XkYay/how-to-print-float-value-with-printf-in-truestudio-" target="_blank" rel="noopener">https://community.st.com/s/question/0D50X00009XkYay/how-to-print-float-value-with-printf-in-truestudio-</a></p>
-<p><a href="https://www.openstm32.org/forumthread2108" target="_blank" rel="noopener">https://www.openstm32.org/forumthread2108</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">TrueStudio</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">printf</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">float</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/24/STM32-03-Printf-Float/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-06-sscanf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/20/C-06-sscanf/">C-06-sscanf</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/20/C-06-sscanf/" class="archive-article-date">
-  	<time datetime="2020-04-20T10:14:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="sscanf"><a href="#sscanf" class="headerlink" title="sscanf"></a>sscanf</h1><p>用一句话来解释sscanf的话，sscanf实现了和sprintf相反功能 的一个函数，而且这两个函数都位于string.h下。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">string</span> the_string = <span class="string">"foo -3.6 fum dum 17"</span>;</span><br><span class="line"><span class="built_in">sscanf</span>(the_string, <span class="string">"foo %f fum dum %d"</span>, f, i);</span><br></pre></td></tr></table></figure>
-
-<p>上面的例子，就从<code>the_string</code>中解析得到了两个变量<code>f</code>和<code>i</code>。</p>
-<p>详见，<a href="http://docs.roxen.com/(en)/pike/7.0/tutorial/strings/sscanf.xml" target="_blank" rel="noopener">http://docs.roxen.com/(en)/pike/7.0/tutorial/strings/sscanf.xml</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sscanf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/20/C-06-sscanf/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-Arduino-02-espnow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/20/ESP32-Arduino-02-espnow/">ESP32-Arduino-02-espnow</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/20/ESP32-Arduino-02-espnow/" class="archive-article-date">
-  	<time datetime="2020-04-20T09:58:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ESPNOW双向通信"><a href="#ESPNOW双向通信" class="headerlink" title="ESPNOW双向通信"></a>ESPNOW双向通信</h1><p>使用ESPNOW协议前，值得注意的是</p>
-<ul>
-<li>传输内容长度有限制，不超过250字节</li>
-<li>无需提前连接WiFi热点</li>
-</ul>
-<p>在Arduino给出的例子中使用到了Mater-Slave的说法。其实在通信时并没有区分主从关系，这里的命名是为了将AP模式下的设备作为接收方；而把STATION模式下的设备作为发送方。而且配置AP热点的目的也只是为了让发送方根据热点名（SSID）获得MAC地址。</p>
-<p>不配置AP直接点对点通信的例子 参见</p>
-<p><a href="https://randomnerdtutorials.com/esp-now-two-way-communication-esp32/" target="_blank" rel="noopener">https://randomnerdtutorials.com/esp-now-two-way-communication-esp32/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Arduino</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">espnow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/20/ESP32-Arduino-02-espnow/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-Arduino-01-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/18/ESP32-Arduino-01-delay/">ESP32-Arduino-01-delay</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/18/ESP32-Arduino-01-delay/" class="archive-article-date">
-  	<time datetime="2020-04-18T05:41:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ets-delay-us"><a href="#ets-delay-us" class="headerlink" title="ets_delay_us()"></a>ets_delay_us()</h1><p>The ROM function ets_delay_us() (defined in rom/ets_sys.h) will allow you to busy-wait a specified number of uS.</p>
-<p>Note that this is busy-waiting – it does not allow other tasks to run, it just burns CPU cycles.</p>
-<p>这是一个以循环空指令方式实现us级延时的函数，函数定义在rom/ets_sys.h中。</p>
-<p>参考，<a href="https://esp32developer.com/programming-in-c-c/delays/delays" target="_blank" rel="noopener">https://esp32developer.com/programming-in-c-c/delays/delays</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Arduino</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/18/ESP32-Arduino-01-delay/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1657,10 +1708,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">figure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2497,6 +2544,42 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">multiple subplots</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">suptitle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tight layout</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">hasattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">getattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">clip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">noezero</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">where</a>
               </li>
             
             <div class="clearfix"></div>

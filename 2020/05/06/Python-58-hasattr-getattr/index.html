@@ -6,21 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Matplotlib-07-subplotsDemo | Hawthorn</title>
+  <title>Python-58-hasattr-getattr | Hawthorn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="subplots demoOfficial subplots demo, 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081&quot;&quot;&quot;Example">
+  <meta name="description" content="示例的属性这里的属性可以是class attribute，也可以是instance attribute（包括后续赋给的attribute）。 下面使用内置hasattr方法来判断是否包含指定attribute的例子： 123456789101112class Foo():    class_attr &#x3D; 89    def __init__(self):        self.code &#x3D; 23">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Matplotlib-07-subplotsDemo">
-<meta property="og:url" content="http://yoursite.com/2018/04/30/Matplotlib-07-subplotsDemo/index.html">
+<meta property="og:title" content="Python-58-hasattr-getattr">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/Python-58-hasattr-getattr/index.html">
 <meta property="og:site_name" content="Hawthorn">
-<meta property="og:description" content="subplots demoOfficial subplots demo, 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081&quot;&quot;&quot;Example">
+<meta property="og:description" content="示例的属性这里的属性可以是class attribute，也可以是instance attribute（包括后续赋给的attribute）。 下面使用内置hasattr方法来判断是否包含指定attribute的例子： 123456789101112class Foo():    class_attr &#x3D; 89    def __init__(self):        self.code &#x3D; 23">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-04-30T03:49:14.000Z">
-<meta property="article:modified_time" content="2018-04-30T03:51:13.855Z">
+<meta property="article:published_time" content="2020-05-06T00:39:33.000Z">
+<meta property="article:modified_time" content="2020-05-06T02:21:16.673Z">
 <meta property="article:author" content="wzx">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Matplotlib">
-<meta property="article:tag" content="subplots">
+<meta property="article:tag" content="hasattr">
+<meta property="article:tag" content="getattr">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hawthorn" type="application/atom+xml">
@@ -161,29 +160,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Matplotlib-07-subplotsDemo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python-58-hasattr-getattr" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Matplotlib-07-subplotsDemo
+      Python-58-hasattr-getattr
     </h1>
   
 
         
-        <a href="/2018/04/30/Matplotlib-07-subplotsDemo/" class="archive-article-date">
-  	<time datetime="2018-04-30T03:49:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
+        <a href="/2020/05/06/Python-58-hasattr-getattr/" class="archive-article-date">
+  	<time datetime="2020-05-06T00:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="subplots-demo"><a href="#subplots-demo" class="headerlink" title="subplots demo"></a>subplots demo</h1><p>Official subplots demo,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Examples illustrating the use of plt.subplots().</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This function creates a figure and a grid of subplots with a single call, while</span></span><br><span class="line"><span class="string">providing reasonable control over how the individual plots are created.  For</span></span><br><span class="line"><span class="string">very refined tuning of subplot creation, you can still use add_subplot()</span></span><br><span class="line"><span class="string">directly on a new figure.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># Simple data to display in various forms</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">400</span>)</span><br><span class="line">y = np.sin(x ** <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plt.close(<span class="string">'all'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Just a figure and one subplot</span></span><br><span class="line">f, ax = plt.subplots()</span><br><span class="line">ax.plot(x, y)</span><br><span class="line">ax.set_title(<span class="string">'Simple plot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, unpack the axes array immediately</span></span><br><span class="line">f, (ax1, ax2) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing Y axis'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Three subplots sharing both x/y axes</span></span><br><span class="line">f, (ax1, ax2, ax3) = plt.subplots(<span class="number">3</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing both axes'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots close to each other and hide x ticks for</span></span><br><span class="line"><span class="comment"># all but bottom plot.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0</span>)</span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> f.axes[:<span class="number">-1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># row and column sharing</span></span><br><span class="line">f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, sharex=<span class="string">'col'</span>, sharey=<span class="string">'row'</span>)</span><br><span class="line">ax1.plot(x, y)</span><br><span class="line">ax1.set_title(<span class="string">'Sharing x per column, y per row'</span>)</span><br><span class="line">ax2.scatter(x, y)</span><br><span class="line">ax3.scatter(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line">ax4.plot(x, <span class="number">2</span> * y ** <span class="number">2</span> - <span class="number">1</span>, color=<span class="string">'r'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four axes, returned as a 2-d array</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; hide x ticks for top plots and y ticks for right plots</span></span><br><span class="line">plt.setp([a.get_xticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[<span class="number">0</span>, :]], visible=<span class="literal">False</span>)</span><br><span class="line">plt.setp([a.get_yticklabels() <span class="keyword">for</span> a <span class="keyword">in</span> axarr[:, <span class="number">1</span>]], visible=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Four polar axes</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, subplot_kw=dict(projection=<span class="string">'polar'</span>))</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].plot(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [0,0]'</span>)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].scatter(x, y)</span><br><span class="line">axarr[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [0,1]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].plot(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Axis [1,0]'</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].scatter(x, y ** <span class="number">2</span>)</span><br><span class="line">axarr[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Axis [1,1]'</span>)</span><br><span class="line"><span class="comment"># Fine-tune figure; make subplots farther from each other.</span></span><br><span class="line">f.subplots_adjust(hspace=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+        <h1 id="示例的属性"><a href="#示例的属性" class="headerlink" title="示例的属性"></a>示例的属性</h1><p>这里的属性可以是class attribute，也可以是instance attribute（包括后续赋给的attribute）。</p>
+<p>下面使用内置hasattr方法来判断是否包含指定attribute的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(hasattr(foo, <span class="string">'code'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'name'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'volume'</span>))  <span class="comment"># False</span></span><br><span class="line">print(hasattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 
+<p>然后是使用内置getattr方法来获取指定attribute的value的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'code'</span>))  <span class="comment"># 23</span></span><br><span class="line">print(getattr(foo, <span class="string">'name'</span>))  <span class="comment"># demo</span></span><br><span class="line">print(getattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># 89</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'volume'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>最后一行尝试获取volume属性，由于foo中没有这个属性解释器会抛出错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#39;Foo&#39; object has no attribute &#39;volume&#39;</span><br></pre></td></tr></table></figure>
+
+<p>为了避免错误打断程序向下运行，可以给不存在的属性添加一个默认值。如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(getattr(foo, <span class="string">'volume'</span>, <span class="string">'default_volume'</span>))  <span class="comment"># default_volume</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.python-izm.com/advanced/hasattr/" target="_blank" rel="noopener">https://www.python-izm.com/advanced/hasattr/</a></p>
 
       
 
@@ -218,15 +228,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hasattr</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">subplots</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">getattr</a>
         		</li>
       		
 		</ul>
@@ -293,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/04/30/Matplotlib-07-subplotsDemo/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2020/05/06/Python-58-hasattr-getattr/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -307,18 +313,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/30/Python-33-argparse/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/06/Matplotlib-07-multiple-plots/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Python-33-argparse
+          Matplotlib-07-multiple-plots
         
       </div>
     </a>
   
   
-    <a href="/2018/04/28/Numpy-20-NoneOREmpty/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Numpy-20-NoneOREmpty</div>
+    <a href="/2020/04/30/Blender-01-basic/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Blender-01-basic</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -894,10 +900,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">figure</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">subplots</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1734,6 +1736,42 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">multiple subplots</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">suptitle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tight layout</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">hasattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">getattr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">clip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">noezero</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">where</a>
               </li>
             
             <div class="clearfix"></div>
