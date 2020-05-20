@@ -156,6 +156,779 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-10-Str2Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/18/Java-10-Str2Int/">Java-10-Str2Int</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/18/Java-10-Str2Int/" class="archive-article-date">
+  	<time datetime="2018-03-18T09:58:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-convert-String-to-Integer"><a href="#Java-convert-String-to-Integer" class="headerlink" title="Java convert String to Integer"></a>Java convert String to Integer</h1><p>从java.lang包中的Integer类调用parseInt方法，<code>Integer.parseInt(&quot;Numeric String&quot;)</code>。</p>
+<p><strong>注意：</strong>在使用之前必须判断要转换的字符串是不是“数字的”。</p>
+<p>此外，java.lang是Java的核心组件，包含了Java中最基础的类：包括基本Object类、Class类、String类、基本类型的包装类、基本的数学类等等最基本的类。</p>
+<p><img src="Java-10-Str2Int%5Clang.png" alt="lang.png"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>How do I convert a String to an int in Java?</p>
+<p><a href="https://stackoverflow.com/questions/5585779/how-do-i-convert-a-string-to-an-int-in-java" target="_blank" rel="noopener">https://stackoverflow.com/questions/5585779/how-do-i-convert-a-string-to-an-int-in-java</a></p>
+<p>How to check if a String is numeric in Java</p>
+<p><a href="https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java" target="_blank" rel="noopener">https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java</a></p>
+<p>java.lang - 不用import</p>
+<p><a href="http://www.cnblogs.com/zedosu/p/6518124.html" target="_blank" rel="noopener">http://www.cnblogs.com/zedosu/p/6518124.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">String to integer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/18/Java-10-Str2Int/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-09-ioRedirection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-09-ioRedirection/">Java-09-ioRedirection</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-09-ioRedirection/" class="archive-article-date">
+  	<time datetime="2018-03-17T14:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="io重定向"><a href="#io重定向" class="headerlink" title="io重定向"></a>io重定向</h1><p>一个简单的例子，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PrintStream ps = <span class="keyword">new</span> PrintStream(<span class="string">"./log.txt"</span>);</span><br><span class="line">System.setOut(ps); <span class="comment">// 设置使用新的输出流</span></span><br><span class="line">System.out.println(<span class="string">"我会出现在项目根目录下的log.txt文件中~"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>ing…</p>
+<h1 id="back-to-standard-io"><a href="#back-to-standard-io" class="headerlink" title="back to standard io"></a>back to standard io</h1><p>You can get hold of the file descriptor for standard out through <a href="http://docs.oracle.com/javase/8/docs/api/java/io/FileDescriptor.html#out" target="_blank" rel="noopener"><code>FileDescriptor.out</code></a>. To reset standard out to print to console, you do</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));</span><br></pre></td></tr></table></figure>
+
+<p>Another way is to simply hold on to the original object, as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PrintStream stdout = System.out;</span><br><span class="line">System.setOut(<span class="keyword">new</span> PrintStream(logFile));</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">System.setOut(stdout);                   <span class="comment">// reset to standard output</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java基础-重定向输出流</p>
+<p><a href="http://blog.csdn.net/Young4Dream/article/details/68948947" target="_blank" rel="noopener">http://blog.csdn.net/Young4Dream/article/details/68948947</a></p>
+<p>Resetting Standard output Stream</p>
+<p><a href="https://stackoverflow.com/questions/5339499/resetting-standard-output-stream" target="_blank" rel="noopener">https://stackoverflow.com/questions/5339499/resetting-standard-output-stream</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">io Redirection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-09-ioRedirection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-08-FileNotFoundException" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-08-FileNotFoundException/">Java-08-FileNotFoundException</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-08-FileNotFoundException/" class="archive-article-date">
+  	<time datetime="2018-03-17T13:36:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="文件操作的异常处理"><a href="#文件操作的异常处理" class="headerlink" title="文件操作的异常处理"></a>文件操作的异常处理</h1><p>代码中的相关语句，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PrintStream ps = <span class="keyword">new</span> PrintStream(<span class="string">"./log.txt"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>编译不通过，提示错误为，</p>
+<blockquote>
+<p>Exception in thread “main” java.lang.Error: Unresolved compilation problem:<br>    Unhandled exception type FileNotFoundException</p>
+<pre><code>at ***</code></pre></blockquote>
+<p>字面理解就是打开文件可能会发生异常，必须对这些异常做出处理。</p>
+<p>有两种解决方法：</p>
+<p>一是，在函数后throws Exception信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123; </span><br><span class="line">        Scanner s = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> FileReader(<span class="string">"/Users/daniel/pr/java/readFile/myfile.txt"</span>)); </span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">        <span class="comment">//do something with e, or handle this case</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一个是，try/catch语法结构。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> FileNotFoundException</span>&#123;</span><br><span class="line">    Scanner s = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> FileReader(<span class="string">"/Users/daniel/pr/java/readFile/myfile.txt"</span>)); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Eclipse纠错提示"><a href="#Eclipse纠错提示" class="headerlink" title="Eclipse纠错提示"></a>Eclipse纠错提示</h2><p>按Ctrl+1键会有纠错提示，弹出的提示其实就是上述两中方法。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>FileNotFoundException when creating a Scanner in Eclipse with Java</p>
+<p><a href="https://stackoverflow.com/questions/10452948/filenotfoundexception-when-creating-a-scanner-in-eclipse-with-java" target="_blank" rel="noopener">https://stackoverflow.com/questions/10452948/filenotfoundexception-when-creating-a-scanner-in-eclipse-with-java</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">FileNotFoundException</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-08-FileNotFoundException/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-Eclipse-06-autocomplete" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-Eclipse-06-autocomplete/">Java-Eclipse-06-autocomplete</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-Eclipse-06-autocomplete/" class="archive-article-date">
+  	<time datetime="2018-03-17T06:45:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h1><p>默认情况下，Eclipse仅支持逗号后的自动补全，即输入逗号之后，根据逗号前面的内容提供用于补全的候选内容。</p>
+<p>其实可以修改一下设置实现任何字母后的自动补全提示。</p>
+<p>设置方法：</p>
+<p>Eclipse窗口 &gt; Windows &gt; Preferences &gt; Java &gt; Editor &gt; Content Assist</p>
+<p>右侧下方找到Auto Activation，在Auto activation triggers for Java:设置处可以看到默认只有一个逗号。这就是只有逗号能触发自动补全的原因。</p>
+<p>在逗号后面紧接着继续输入想要触发的字母就可以了。一般可以把大小写字母全部补上，即abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+<p>这样虽然方便，但是个人以为大写字母后的补全不常见，所以只加入了所有的小写字母。</p>
+<p>另外，Auto activation delay也最好根据电脑性能做调整，数值太小会占用太多系统资源。这里，我设置的是300 ms延迟。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Complete</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-06-autocomplete/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-06-Package-JUnitTest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-06-Package-JUnitTest/">Java-07-Package-JUnitTest</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-06-Package-JUnitTest/" class="archive-article-date">
+  	<time datetime="2018-03-17T03:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="导入Unit-Test单元测试"><a href="#导入Unit-Test单元测试" class="headerlink" title="导入Unit Test单元测试"></a>导入Unit Test单元测试</h1><h1 id="JUnit-Test单元测试"><a href="#JUnit-Test单元测试" class="headerlink" title="JUnit Test单元测试"></a>JUnit Test单元测试</h1><p>Eclipse的Package Explore中右键已编辑好的class名，单击 <strong>New &gt; JUnit Test Case</strong>。New JUnit Test Case 向导的第一页将会打开。</p>
+<p>单击 <strong>Next</strong> 接受默认值，出现 Test Methods 对话框，选择要生成测试的一个或多个方法。单击Finish完成，在Package Explore里可以看到生成的JUnit测试的java文件。</p>
+<p>双击打开JUnit测试代码，找到要测试的方法并太你家测试内容。</p>
+<p>下面是一个例子，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Person p = <span class="keyword">new</span> Person(<span class="string">"Joe Q Author"</span>, <span class="number">42</span>, <span class="number">173</span>, <span class="number">82</span>, <span class="string">"Brown"</span>, <span class="string">"MALE"</span>);</span><br><span class="line">  Logger l = Logger.getLogger(Person<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>())</span>;</span><br><span class="line">  l.info(<span class="string">"Name: "</span> + p.getName());</span><br><span class="line">  l.info(<span class="string">"Age:"</span>+ p.getAge());</span><br><span class="line">  l.info(<span class="string">"Height (cm):"</span>+ p.getHeight());</span><br><span class="line">  l.info(<span class="string">"Weight (kg):"</span>+ p.getWeight());</span><br><span class="line">  l.info(<span class="string">"Eye Color:"</span>+ p.getEyeColor());</span><br><span class="line">  l.info(<span class="string">"Gender:"</span>+ p.getGender());</span><br><span class="line">  assertEquals(<span class="string">"Joe Q Author"</span>, p.getName());</span><br><span class="line">  assertEquals(<span class="number">42</span>, p.getAge());</span><br><span class="line">  assertEquals(<span class="number">173</span>, p.getHeight());</span><br><span class="line">  assertEquals(<span class="number">82</span>, p.getWeight());</span><br><span class="line">  assertEquals(<span class="string">"Brown"</span>, p.getEyeColor());</span><br><span class="line">  assertEquals(<span class="string">"MALE"</span>, p.getGender());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h1><p>右键Package Explore中的JUnit测试代码文件，选择 <strong>Run As</strong> &gt; <strong>JUnit Test</strong>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JUnit Testd</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-06-Package-JUnitTest/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-06-Package-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-06-Package-Class/">Java-06-package-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-06-Package-Class/" class="archive-article-date">
+  	<time datetime="2018-03-17T03:26:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类的成员"><a href="#类的成员" class="headerlink" title="类的成员"></a>类的成员</h1><h2 id="成员的访问权限"><a href="#成员的访问权限" class="headerlink" title="成员的访问权限"></a>成员的访问权限</h2><ul>
+<li>private</li>
+<li>(default)</li>
+<li>protected</li>
+<li>public</li>
+</ul>
+<p>比较难记，参考 <a href="https://www.cnblogs.com/jingmengxintang/p/5898900.html" target="_blank" rel="noopener">https://www.cnblogs.com/jingmengxintang/p/5898900.html</a><br>另外需要验证实例是否可以访问类的private成员。</p>
+<p>类的成员包括属性和方法</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>属性定义了类的状态，定义方式如下，</p>
+<p><code>accessSpecifier dataType variableName [= initialValue];</code></p>
+<p>accessSpecifier：访问权限</p>
+<p>dataType：类型</p>
+<p>variableName：属性名</p>
+<p>initialValue：初始化值</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>方法定义了类的行为，分为<strong>构造方法</strong>和<strong>其他方法</strong>。</p>
+<p><strong>构造方法</strong>仅用于创建对象的实例，它的书写有三点要求：</p>
+<ol>
+<li>构造方法的accessSpecifier必须和类的相同</li>
+<li>构造方法名必须和类名相同</li>
+<li>不能含有返回类型，void也不可</li>
+</ol>
+<p>构造方法内，要对实例的属性进行赋值时需要<code>this.attribute</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span>  weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age, <span class="keyword">int</span> height, <span class="keyword">int</span> weight String eyeColor, String gender)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.height = height;</span><br><span class="line">    <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    <span class="keyword">this</span>.eyeColor = eyeColor;</span><br><span class="line">    <span class="keyword">this</span>.gender = gender;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其他方法的命名不要求和class一致，而且可以有自己的返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">       name = value;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>注意如果一个方法没有返回值，也必须加上void关键字，以告知编译器。</p>
+<p>非构造方法又可以分为两类：<strong>静态方法</strong>和<strong>实例方法</strong>。</p>
+<p>静态方法直接通过类调用；而实例方法必须先生成一个实例，然后由实例调用。</p>
+<h1 id="Eclipse操作"><a href="#Eclipse操作" class="headerlink" title="Eclipse操作"></a>Eclipse操作</h1><h2 id="创建package"><a href="#创建package" class="headerlink" title="创建package"></a>创建package</h2><p>单击 <strong>File &gt; New &gt; Package</strong> 启动 Java Package 向导，将 <code>com.makotojava.intro</code> 键入到 Name 文本框中并单击<strong>Finish</strong>。可以在 Package Explorer 中看到创建的新包。</p>
+<h2 id="声明class"><a href="#声明class" class="headerlink" title="声明class"></a>声明class</h2><p>右键上述新建的package，选择 <strong>New &gt; Class…</strong>。New Class 对话框将会打开。</p>
+<p>在 Name 文本框中，键入 <code>Person</code>，然后单击 <strong>Finish</strong>。</p>
+<h2 id="添加class的属性"><a href="#添加class的属性" class="headerlink" title="添加class的属性"></a>添加class的属性</h2><p>得到，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.makotojava.intro;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> weight;</span><br><span class="line">  <span class="keyword">private</span> String eyeColor;</span><br><span class="line">  <span class="keyword">private</span> String gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加class的方法"><a href="#添加class的方法" class="headerlink" title="添加class的方法"></a>添加class的方法</h2><p>包括构造方法和其他方法。</p>
+<p>其他方法中的getter和setter可以由Eclipse快捷添加，右键 &gt; source &gt; generate getter and setter 设置相应选项即可。</p>
+<p>得到，</p>
+<pre><code>package com.makotojava.intro;
+
+public class Person {
+    private String name;
+    private int age;
+    private int height;
+    private int weight;
+    private String eyeColor;
+    private String gender;
+
+    public Person(String name, int age, int height, int weight, String eyeColor, String gender) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.eyeColor = eyeColor;
+        this.gender = gender;
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    ...
+}</code></pre><p>}</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>包含构造方法的类定义<br><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+<p>java构造方法与方法的区别<br><a href="http://blog.csdn.net/lvshihua/article/details/38409121" target="_blank" rel="noopener">http://blog.csdn.net/lvshihua/article/details/38409121</a></p>
+<p>Java 语言基础</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-06-Package-Class/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-Eclipse-05-AutoGenerate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">Java-Eclipse-05-AutoGenerate</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/17/Java-Eclipse-05-AutoGenerate/" class="archive-article-date">
+  	<time datetime="2018-03-17T02:37:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动代码生成器"><a href="#自动代码生成器" class="headerlink" title="自动代码生成器"></a>自动代码生成器</h1><p>使用Eclipse可以给Java代码自动填充代码，比如getter和setter。</p>
+<p>选择class名，右键，然后单击 <strong>Source &gt; Generate Getters and Setters…</strong>。快捷键是Alt+Shift+S</p>
+<p>对话框打开时，单击 <strong>Select All</strong>。<strong>插入点可以选择 **Last member</strong> 并单击 <strong>OK</strong>。</p>
+<p>会按照已经定义的class属性自动填充各属性对应的setter和getter。</p>
+<p>此外，Source选项下面还有好多方便功能，比如Format可以地洞格式化代码块。</p>
+<p>还有调整方法的数序等等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Generate</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-06-Package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -480,768 +1253,9 @@
 
 
   
-    <article id="post-Java-07-ClassCompile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/Java-07-ClassCompile/">Java-07-Class</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/13/Java-07-ClassCompile/" class="archive-article-date">
-  	<time datetime="2018-03-13T11:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Java中类的编译 </p>
-<h2 id="多个类并列存在"><a href="#多个类并列存在" class="headerlink" title="多个类并列存在"></a>多个类并列存在</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Command line:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br></pre></td></tr></table></figure>
-
-<p>编译得到A.class B.class 和 C.class三个字节码文件。</p>
-<h2 id="内部类-nested-class"><a href="#内部类-nested-class" class="headerlink" title="内部类 nested class"></a>内部类 nested class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// </span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译后会生成两个.class文件：A.class和A$B.class</p>
-<h2 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h2><p>编译后也是生成两个.class文件：A.class和A$1.class</p>
-<p>(还没学习到)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>一个.java源文件中可以有多个类吗？（内部类除外）有什么条件？</p>
-<p><a href="http://blog.csdn.net/wikijava/article/details/4064688" target="_blank" rel="noopener">http://blog.csdn.net/wikijava/article/details/4064688</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Compile</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/13/Java-07-ClassCompile/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-04-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/Java-04-Class/">Java-04-Class</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/13/Java-04-Class/" class="archive-article-date">
-  	<time datetime="2018-03-13T11:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Java中的类 </p>
-<p>还是从最经典的例子开始，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述代码定义了一个名为HelloWorld的类。</p>
-<p>针对java文件中只能有一个public类的问题，网上有人这么回答：</p>
-<blockquote>
-<p>每个编译单元(文件)只能有一个public类。这么做的意思是，每个编 </p>
-<p>译单元只能有一个公开的接口，而这个接口就由其public类来表示。</p>
-<p>我想这或是从软件架构设计和安全性设计上得出的结论。或者说是java的设计者们从这方面的考虑。或许这真的是一个规范，但我没有找到相关资料</p>
-<p>不晓得到底有没有这一说话。如果有请知道的同行给出资料来源？</p>
-</blockquote>
-<p><a href="http://topic.csdn.net/t/20060528/22/4784755.html" target="_blank" rel="noopener">http://topic.csdn.net/t/20060528/22/4784755.html</a></p>
-<h2 id="java包含public类时"><a href="#java包含public类时" class="headerlink" title=".java包含public类时"></a>.java包含public类时</h2><p>另外，需要注意的是，包含public类的java源文件必须以public类的名字来命名。</p>
-<p>上面的HelloWorld的例子中，如果把java文件名换成其他，则编译器会报错。</p>
-<p><code>名为xxx的公开类必须在名为xxx.java的文件中声明。</code></p>
-<p>而且，一个java文件中最多只能包含一个public类。</p>
-<p>作为Java的一种设计思想，使public类名和java文件名统一，便于从其他类中调用。</p>
-<h2 id="java不包含public类时"><a href="#java不包含public类时" class="headerlink" title=".java不包含public类时"></a>.java不包含public类时</h2><p>java源文件中可以不包含public类，这时java文件名可以不和其中的任一类名一致。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*C3.java*/</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C2</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Command line:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br><span class="line">&gt;&gt;&gt; java C2</span><br></pre></td></tr></table></figure>
-
-<p>这时，正常输出Hello World.</p>
-<p>反而是运行java C3会报错，因为没有定义C3类，提示找不到该类。</p>
-<p>从上亦可以，main函数不一定非得包含在public类中也可以运行。</p>
-<p>《深入jvm第二版》中有这样一句话：</p>
-<blockquote>
-<p>Java虚拟机实例通过调用某个类的main()来运行一个Java程序，而这个main()必须是public static void 并接收一个字符串数组作为参数，任何拥有这样一个main()的类都可以作为Java程序的起点。</p>
-</blockquote>
-<p>并没有说拥有main()方法的类一定要是public类。</p>
-<p>参考：</p>
-<p>浅谈为什么一个java源文件中只能有一个public类？</p>
-<p><a href="http://blog.csdn.net/bareheadzzq/article/details/6562211" target="_blank" rel="noopener">http://blog.csdn.net/bareheadzzq/article/details/6562211</a></p>
-<h1 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h1><p>main函数中，<br>public定义了函数的访问权限，表示在任何场合都可以被引用，这样JVM就可以找到main方法从而运行javac程序。</p>
-<p>static表示此方法是静态的，是类的方法。可以使用<code>类名.方法名</code>的方式调用。<br>不需要初始化得到实例，再调用实例的方法。</p>
-<p>void和C语言中的规定相同，表示函数没有返回值。</p>
-<p>String[] args表示参数args是一个字符串数组，用于给main函数传递参数。<br>例如，命令行下运行java ClassName xyz abc<br>在main函数体内就可以使用args字符串数组了。<br>args[0]表示第一个元素，即xyz</p>
-<p>String[] args和String args[]运行结果一样，但是应使用前者来避免阅读代码的人的歧义和误读（此处还需深入理解）</p>
-<p>参考：</p>
-<p>在java中public void与public static void有什么区别 ?<br><a href="https://www.zhihu.com/question/39965419" target="_blank" rel="noopener">https://www.zhihu.com/question/39965419</a></p>
-<h2 id="print-println"><a href="#print-println" class="headerlink" title="print/println"></a>print/println</h2><p>此外Java还提供了print函数，和println函数的区别是，println默认在输出的最后加上了换行。</p>
-<p>无论是print还是println，参数内都可以传入运算表达式或者变量。如，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.print(<span class="number">1</span>+<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line">System.out.println(str);</span><br></pre></td></tr></table></figure>
-
-<p>参考：<br><a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/java/java-tutorial.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/13/Java-04-Class/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-03-name" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/Java-03-name/">Java-03-name</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/13/Java-03-name/" class="archive-article-date">
-  	<time datetime="2018-03-13T11:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Java命名规范 </p>
-<p><strong>package:</strong> </p>
-<p>全部小写字母各单词(组织level)之间使用逗号分隔。com.git.prj</p>
-<p><strong>class和interface:</strong> </p>
-<p>首字母大写，其他单词各首字母也大写。MyFirstClass</p>
-<p><strong>class属性/方法:</strong> </p>
-<p>首字母小写，其他单词首字母大写。currentStatus</p>
-<p><strong>常量:</strong> </p>
-<p>全部大写，单词之间用下划线分隔。GLOBAL_TIME</p>
-<p>另外，<strong>数组</strong>的命名规范为 byte[] buffer</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://link.zhihu.com/?target=http%3A//www.runoob.com/java/java-basic-syntax.html">http://www.runoob.com/java/java-basic-syntax.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">name</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/13/Java-03-name/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-03-CheckStyle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-Eclipse-03-CheckStyle/">Java-Eclipse-03-CheckStyle</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-Eclipse-03-CheckStyle/" class="archive-article-date">
-  	<time datetime="2018-03-11T14:44:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This article is about <em>Eclipse Checkstyle</em>.</p>
-<h1 id="setting"><a href="#setting" class="headerlink" title="setting"></a>setting</h1><p>Eclipse -&gt; Preferences -&gt; Checkstyle</p>
-<p>select <em>Google Checks</em> or <em>Sun checks</em></p>
-<p>Right click project name, select <em>Checkstyle active for this project</em></p>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>使用 Eclipse Checkstyle Plugin</p>
-<p><a href="http://www.importnew.com/24350.html" target="_blank" rel="noopener">http://www.importnew.com/24350.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">check style</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-Eclipse-03-CheckStyle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-02-ShortKeys" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">Java-Eclipse-02-ShortKeys</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-Eclipse-02-ShortKeys/" class="archive-article-date">
-  	<time datetime="2018-03-11T14:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This article shows short keys in eclipse.</p>
-<h1 id="content-assist"><a href="#content-assist" class="headerlink" title="content assist"></a>content assist</h1><p>输入关键字，按<code>Alt+/</code>即可显示内容助理(content assist)。双击所需的内容可以自动填充相关代码，非常方便。</p>
-<p>比如class定义时，class内部输入main，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后按下<code>Alt+/</code>，按照提示选择<code>main method</code>，则会自动填充以下内容：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample3_1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>set here:</p>
-<p><em>Window&gt;Preferences&gt;Java&gt;Editor&gt;Content Assist&gt;Advanced</em> </p>
-<p>reference:</p>
-<p>Eclipse自动补全+常用快捷键</p>
-<p><a href="http://blog.csdn.net/bd_matto/article/details/50899032" target="_blank" rel="noopener">http://blog.csdn.net/bd_matto/article/details/50899032</a></p>
-<p>In my case</p>
-<p><a href="https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse" target="_blank" rel="noopener">https://stackoverflow.com/questions/23986750/ctrl-space-not-working-for-content-assist-on-eclipse</a></p>
-<h1 id="copy-to-up-below"><a href="#copy-to-up-below" class="headerlink" title="copy to up/below"></a>copy to up/below</h1><p><code>Ctrl+Alt+UP/DOWN</code></p>
-<p>如果此快捷键和Ubuntu的屏幕切换快捷键冲突的话,参考下面的链接修改Ubuntu快捷键：</p>
-<p><a href="http://blog.csdn.net/hanshileiai/article/details/46412641" target="_blank" rel="noopener">http://blog.csdn.net/hanshileiai/article/details/46412641</a></p>
-<p>Alt+F2键调出命令框，输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down &quot;[&#39;&#39;]&quot;</span><br><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up &quot;[&#39;&#39;]&quot;</span><br></pre></td></tr></table></figure>
-
-<h1 id="自动format"><a href="#自动format" class="headerlink" title="自动format"></a>自动format</h1><p><code>Ctrl+Shift+F</code>将一段未format的代码自动缩进。</p>
-<p>或者选择代码段，右键—Source code—Format也可以实现相同的功能。</p>
-<h1 id="检查-amp-添加未导入的类"><a href="#检查-amp-添加未导入的类" class="headerlink" title="检查&amp;添加未导入的类"></a>检查&amp;添加未导入的类</h1><p>假设在代码块中用到了外部的某个类，但是忘记在头部添加导入语句时，代码块的相应部分会有红色下划线提示。这就需要查找并引用缺失的引用，可以手动查找并添加，或者可以快捷键直接导入。</p>
-<p><code>Ctrl+Shift+O</code></p>
-<p>有重复的类时，会提示选择。</p>
-<h1 id="快速修复"><a href="#快速修复" class="headerlink" title="快速修复"></a>快速修复</h1><p><code>Ctrl+1</code>快速对错误提供修改建议。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">short keys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-Eclipse-02-ShortKeys/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Java-00-Tips/">Java-00-3-Tips</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Java-00-Tips/" class="archive-article-date">
-  	<time datetime="2018-03-11T03:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="运行-class-bytecode"><a href="#运行-class-bytecode" class="headerlink" title="运行.class bytecode"></a>运行.class bytecode</h1><p>命令行下使用<code>java .class</code>运行.class字节码。</p>
-<p>注意：不可以带后缀名。</p>
-<h1 id="Java命名规范"><a href="#Java命名规范" class="headerlink" title="Java命名规范"></a>Java命名规范</h1><p>fileName</p>
-<p>folderName</p>
-<p>niceToMeetYou</p>
-<p>统一使用驼峰式书写规范。</p>
-<h1 id="JLabel背景颜色"><a href="#JLabel背景颜色" class="headerlink" title="JLabel背景颜色"></a>JLabel背景颜色</h1><p>给JLabel对象添加背景颜色时，需要</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set up textJLabel</span></span><br><span class="line">textJLabel = <span class="keyword">new</span> JLabel();</span><br><span class="line">textJLabel.setBackground(Color.MAGENTA);</span><br></pre></td></tr></table></figure>
-
-<p>这样并不能正常显示bg颜色，因为还没设置opaque(不透明显示)，且默认为transparent(透明显示)。</p>
-<p>故需要添加一行，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set up textJLabel</span></span><br><span class="line">textJLabel = <span class="keyword">new</span> JLabel();</span><br><span class="line"><span class="comment">// opaque</span></span><br><span class="line">textJLabel.setOpaque(<span class="keyword">true</span>);</span><br><span class="line">textJLabel.setBackground(Color.MAGENTA);</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tips</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Java-00-Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataSerializationFormat-Compare" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/DataSerializationFormat-Compare/">DataSerializationFormat-Compare</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/DataSerializationFormat-Compare/" class="archive-article-date">
-  	<time datetime="2018-03-10T04:10:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>compare csv/xml/json</p>
-<ul>
-<li>flat</li>
-<li>csv(character separated values)</li>
-<li>xml(eXtensible Hyper Text Markup Language)</li>
-<li>json(javascript object notation)</li>
-</ul>
-<p>之后使用时，继续添加各项内容。。。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>第1回 進化するフォーマット｜CSV、XML、JSON…データフォーマットの変遷について考える</p>
-<p><a href="https://www.gixo.jp/blog/3965/" target="_blank" rel="noopener">https://www.gixo.jp/blog/3965/</a></p>
-<p>还有自己的另一篇关于在Python中实现数据序列化的文章</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-Compare/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/17/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/19/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/17/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/19/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2561,10 +2575,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PuTTY</a>
               </li>
              
@@ -2658,6 +2668,54 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">where</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PIL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">png</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">alpha</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">imread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">imwrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">decrease</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">print</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">end</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flush</a>
               </li>
             
             <div class="clearfix"></div>

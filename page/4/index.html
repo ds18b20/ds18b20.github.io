@@ -156,6 +156,861 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-STM32-01-Timer-Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/STM32-01-Timer-Int/">STM32-01-Timer-Int</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/STM32-01-Timer-Int/" class="archive-article-date">
+  	<time datetime="2020-04-12T04:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="两种定时器服务函数"><a href="#两种定时器服务函数" class="headerlink" title="两种定时器服务函数"></a>两种定时器服务函数</h1><p>如果使用HAL函数开发定时器，注意普通模式下的定时器和PWM模式下的定时器的中断相关函数是有区别的。</p>
+<ul>
+<li>定时器中断开启函数</li>
+<li>定时器中断服务函数</li>
+</ul>
+<h2 id="开启函数"><a href="#开启函数" class="headerlink" title="开启函数"></a>开启函数</h2><p>普通模式下的定时器，开启计时并使能中断应使用<code>HAL_TIM_Base_Start_IT</code>。</p>
+<p>PWM模式下的定时器，开启PWM并使能中断应使用<code>HAL_TIM_PWM_Start_IT</code>。</p>
+<h2 id="中断服务函数"><a href="#中断服务函数" class="headerlink" title="中断服务函数"></a>中断服务函数</h2><p>普通模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PeriodElapsedCallback</code>。</p>
+<p>PWM模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PWM_PulseFinishedCallback</code>。即使提供重写后的前者函数也不会被调用。另外，对于比较输出中断应使用<code>HAL_TIM_OC_DelayElapsedCallback</code>。(普通模式下的比较输出中断也是用这个？)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://matsubara-ui-design.net/2019/09/stm32-hal/" target="_blank" rel="noopener">http://matsubara-ui-design.net/2019/09/stm32-hal/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Timer</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Interrupt</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HAL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/STM32-01-Timer-Int/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-uPython-03-connectWiFi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/ESP32-uPython-03-connectWiFi/">ESP32-uPython-03-connectWiFi</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/ESP32-uPython-03-connectWiFi/" class="archive-article-date">
+  	<time datetime="2020-04-11T23:28:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ESP32站点模式-STA"><a href="#ESP32站点模式-STA" class="headerlink" title="ESP32站点模式(STA)"></a>ESP32站点模式(STA)</h1><h2 id="搜索热点"><a href="#搜索热点" class="headerlink" title="搜索热点"></a>搜索热点</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">wifi = network.WLAN(network.STA_IF) <span class="comment"># 创建一个Wifi站点</span></span><br><span class="line">wifi.active(<span class="literal">True</span>)       <span class="comment"># 激活该站点</span></span><br><span class="line">ap_list = wifi.scan()             <span class="comment"># 扫描周围的可用网络</span></span><br><span class="line"></span><br><span class="line">print(ap_list)</span><br></pre></td></tr></table></figure>
+
+<p>获取当前设备的MAC地址，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.config(<span class="string">"mac"</span>)</span><br><span class="line"><span class="string">b'$o(z*('</span></span><br></pre></td></tr></table></figure>
+
+<p>判断是否已经有效连接，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.isconnected()</span><br></pre></td></tr></table></figure>
+
+<p>连接到热点，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.connect(<span class="string">'ssid'</span>, <span class="string">'password'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>显示当前连接信息，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.ifconfig()  </span><br><span class="line">(<span class="string">'192.168.0.117'</span>, <span class="string">'255.255.255.0'</span>, <span class="string">'192.168.0.1'</span>, <span class="string">'192.168.0.1'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出格式为，</p>
+<ul>
+<li>内外IP</li>
+<li>子网掩码</li>
+<li>网关</li>
+<li>DNS</li>
+</ul>
+<h2 id="连接已知热点"><a href="#连接已知热点" class="headerlink" title="连接已知热点"></a>连接已知热点</h2><p>模块connectWiFi.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> network</span><br><span class="line"> </span><br><span class="line">    ssid = <span class="string">"yourNetworkName"</span></span><br><span class="line">    password =  <span class="string">"yourNetworkPassword"</span></span><br><span class="line"> </span><br><span class="line">    station = network.WLAN(network.STA_IF)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> station.isconnected() == <span class="literal">True</span>:</span><br><span class="line">        print(<span class="string">"Already connected"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"> </span><br><span class="line">    station.active(<span class="literal">True</span>)</span><br><span class="line">    station.connect(ssid, password)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> station.isconnected() == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line">    print(<span class="string">"Connection successful"</span>)</span><br><span class="line">    print(station.ifconfig())</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> connectWiFi <span class="keyword">as</span> wifi</span><br><span class="line"></span><br><span class="line">wifi.connect()</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动时自动连接"><a href="#启动时自动连接" class="headerlink" title="启动时自动连接"></a>启动时自动连接</h2><p>如果要在设备启动时自动连接到WiFi，只需要把连接过程的代码添加到<code>main.py</code>内执行即可。</p>
+<h1 id="ESP32热点模式-AP"><a href="#ESP32热点模式-AP" class="headerlink" title="ESP32热点模式(AP)"></a>ESP32热点模式(AP)</h1><p>将设备配置成热点模式的话，可以在没有专用无线路由器的情况下让其他设备以站点模式接入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">ap = network.wifi(network.AP_IF) <span class="comment"># 创建一个热点</span></span><br><span class="line">ap.active(<span class="literal">True</span>)         <span class="comment"># 激活热点</span></span><br><span class="line">ap.config(essid=<span class="string">'ESP-AP'</span>) <span class="comment"># 为热点配置essid（即热点名称）</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h2><p><code>class network.WLAN(mode)</code></p>
+<p>参数<code>mode</code>：模式</p>
+<ul>
+<li><code>network.STA_IF</code> 站点模式，连接到上游WiFi接入点</li>
+<li><code>network.AP_IF</code> 热点模式，允许其他WiFi客户端连接</li>
+</ul>
+<p>实例化一个WLAN对象，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line">wlan = network.WLAN(network.STA_IF)    <span class="comment">#创建WLAN对象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="wlan-active-is-active"><a href="#wlan-active-is-active" class="headerlink" title="wlan.active(is_active)"></a>wlan.active(is_active)</h3><p>函数说明：带有参数时，为是否激活WiFi，不带参数为查询当前状态。</p>
+<p><code>is_active</code>：是否激活</p>
+<ul>
+<li><code>True</code> 激活网络接口</li>
+<li><code>False</code> 停用网络接口</li>
+</ul>
+<h3 id="wlan-scan"><a href="#wlan-scan" class="headerlink" title="wlan.scan()"></a>wlan.scan()</h3><p>函数说明：扫描可用的无线网络（仅在STA接口上进行扫描），返回有关WiFi接入点信息的元组列表。</p>
+<p><code>(ssid, bssid, channel, RSSI, authmode, hidden)</code><br><code>bssid</code>：接入点的硬件地址，以二进制形式返回为字节对象。可以使用<code>ubinascii.hexlify()</code>将其转换为ASCII格式<br><code>authmode</code>：</p>
+<ul>
+<li><code>AUTH_OPEN = 0</code></li>
+<li><code>AUTH_WEP = 1</code></li>
+<li><code>AUTH_WPA_PSK = 2</code></li>
+<li><code>AUTH_WPA2_PSK = 3</code></li>
+<li><code>AUTH_WPA_WPA2_PSK = 4</code></li>
+<li><code>AUTH_MAX = 6</code></li>
+</ul>
+<p><code>hidden</code>：</p>
+<ul>
+<li><code>False</code> 可见</li>
+<li><code>True</code> 隐藏</li>
+</ul>
+<h3 id="wlan-isconnected"><a href="#wlan-isconnected" class="headerlink" title="wlan.isconnected()"></a>wlan.isconnected()</h3><p>函数说明：检查站点是否连接到AP。<br>在STA模式下，如果连接到WiFi接入点并具有有效的IP地址则返回True，否则返回False。<br>在AP模式下，当站点连接时返回True，否则返回False。</p>
+<h3 id="wlan-connect-essid-password"><a href="#wlan-connect-essid-password" class="headerlink" title="wlan.connect(essid, password)"></a>wlan.connect(essid, password)</h3><p>函数说明：连接到无线网络。</p>
+<p><code>essid</code>：WiFi名称<br><code>password</code>：WiFi密码</p>
+<h3 id="wlan-config-essid-channel"><a href="#wlan-config-essid-channel" class="headerlink" title="wlan.config(essid, channel)"></a>wlan.config(essid, channel)</h3><p>函数说明： 获取接口的MAC adddress或者设置WiFi接入点名称和WiFi通道。</p>
+<p><code>essid</code>：WiFi账户名<br><code>channel</code>：WiFi通道</p>
+<h3 id="wlan-ifconfig-ip-mask-gateway-dns"><a href="#wlan-ifconfig-ip-mask-gateway-dns" class="headerlink" title="wlan.ifconfig([(ip,mask, gateway, dns)])"></a>wlan.ifconfig([(ip,mask, gateway, dns)])</h3><p>函数说明：<br>不带参数时，返回一个4元组(ip, subnet_mask, gateway, DNS_server)。</p>
+<p><code>ip</code>：IP地址<br><code>mask</code>：子网掩码<br><code>gateway</code>：网关</p>
+<p>带参数时，配置静态IP。例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wlan.ifconfig(config = (<span class="string">'192.168.0.4'</span>, <span class="string">'255.255.255.0'</span>, <span class="string">'192.168.0.1'</span>, <span class="string">'8.8.8.8'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="wlan-disconnect"><a href="#wlan-disconnect" class="headerlink" title="wlan.disconnect()"></a>wlan.disconnect()</h3><p>函数说明：断开与当前连接的无线网络的连接。</p>
+<h3 id="wlan-status"><a href="#wlan-status" class="headerlink" title="wlan.status()"></a>wlan.status()</h3><p>函数说明：返回无线连接的当前状态。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/zhangyufeikk/article/details/93202554" target="_blank" rel="noopener">https://blog.csdn.net/zhangyufeikk/article/details/93202554</a></p>
+<p><a href="http://www.1zlab.com/wiki/micropython-esp32/wifi/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/wifi/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WiFi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/ESP32-uPython-03-connectWiFi/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-uPython-02-uPyCraft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">ESP32-uPython-02-uPyCraft</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/ESP32-uPython-02-uPyCraft/" class="archive-article-date">
+  	<time datetime="2020-04-11T23:06:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="uPyCraft"><a href="#uPyCraft" class="headerlink" title="uPyCraft"></a>uPyCraft</h1><p>上一篇介绍了通过串口实现python console的方法，但是只适合简单的验证，如果要正式开发则需要一个方便的IDE环境。这里介绍一个建议的开发环境，叫做uPyCraft。</p>
+<p>uPyCraft本身也是由Python开发，然后生成的二进制可执行程序。源码可以参考这里<a href="https://github.com/DFRobot/uPyCraft_src。" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft_src。</a></p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>熊这里可以得到最新版本的程序<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
+<p>由于这个可执行文件本身包含运行所需的所有资源，所以只要下载对应版本的单个可执行文件，然后本地执行即可。</p>
+<p><strong>注意</strong>，想要参考程序自带的example的时候，会发现点击File-Examples并没有任何选项显示。通过查看源代码发现，默认程序会到本机Document下的某位置寻找Examples文件。位置在<code>C:\Users\&lt;USER_NAME&gt;\AppData\Local\uPyCraft</code>。在<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">github</a>上下载并解压examples文件夹到上述位置，即可看到Examples。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>具体使用方法参见，<a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
+<p><a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">uPyCraft</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-uPython-01-firmware" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/ESP32-uPython-01-firmware/">ESP32-uPython-01-firmware</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/11/ESP32-uPython-01-firmware/" class="archive-article-date">
+  	<time datetime="2020-04-11T14:52:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="烧写uPython固件"><a href="#烧写uPython固件" class="headerlink" title="烧写uPython固件"></a>烧写uPython固件</h1><h2 id="下载固件"><a href="#下载固件" class="headerlink" title="下载固件"></a>下载固件</h2><p>首先从下面链接处下载固件，注意选择硬件对应版本（是否包含外置ram）。</p>
+<p><a href="https://micropython.org/download/#esp32" target="_blank" rel="noopener">https://micropython.org/download/#esp32</a></p>
+<h2 id="安装python包"><a href="#安装python包" class="headerlink" title="安装python包"></a>安装python包</h2><p>首先保证系统内已经安装好python3环境，然后安装烧写用的包<code>esptool</code>。</p>
+<p>使用conda安装，<code>conda install -c conda-forge esptool</code>，</p>
+<p>或者使用pip安装，<code>pip install esptool</code>。</p>
+<h2 id="擦除Flash"><a href="#擦除Flash" class="headerlink" title="擦除Flash"></a>擦除Flash</h2><p>为了确保刷入固件成功，首先擦除Flash。</p>
+<p><code>esptool.py --port &lt;COM端口号&gt; erase_flash</code></p>
+<p>注意，命令执行之后需要按一下开发板的EN按键，不然会报错。</p>
+<h2 id="写入固件"><a href="#写入固件" class="headerlink" title="写入固件"></a>写入固件</h2><p><code>esptool.py --chip esp32 --port &lt;COM端口号&gt; write_flash -z  0x1000 &lt;固件路径.bin&gt;</code></p>
+<p>等待写入完成之后，就可以通过串口工具（例如PuTTY）来连接到开发板。这时就可以像本地的python console一样执行命令并返回结果。</p>
+<p>另外，也可以使用WiFi连接来实现Python console，目前还没有尝试。可以参考<a href="http://www.1zlab.com/wiki/micropython-esp32/webrepl/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/webrepl/</a></p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>可以写一个Hello world，也可以像下面那样点亮一个LED灯。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> machine</span><br><span class="line"></span><br><span class="line">pin2 = machine.Pin(<span class="number">2</span>, machine.Pin.OUT)</span><br><span class="line">pin2.value(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>提示：键入命令时，可以使用TAB键来提示和自动补全。</p>
+<p><strong>快捷键</strong></p>
+<p>在MicroPython的REPL里面有一些控制指令的快捷键。</p>
+<ul>
+<li><code>CTRL + C</code> 中断程序</li>
+<li><code>CTRL + D</code> 软重启</li>
+<li><code>CTRL + E</code> 进入代码片段粘贴模式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CTRL-A        -- on a blank line, enter raw REPL mode</span><br><span class="line">CTRL-B        -- on a blank line, enter normal REPL mode</span><br><span class="line">CTRL-C        -- interrupt a running program</span><br><span class="line">CTRL-D        -- on a blank line, do a soft reset of the board</span><br><span class="line">CTRL-E        -- on a blank line, enter paste mode</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.1zlab.com/wiki/micropython-esp32/webrepl/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/webrepl/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">uPython</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">firmware</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/11/ESP32-uPython-01-firmware/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-56-pyserial" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/06/Python-56-pyserial/">Python-56-pyserial</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/06/Python-56-pyserial/" class="archive-article-date">
+  	<time datetime="2020-04-06T08:21:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PySerial"><a href="#PySerial" class="headerlink" title="PySerial"></a>PySerial</h1><p>使用pyserial发送连续字符串时，两个<code>&quot;&quot;&quot;</code>括起来的字符串内部换行的话，换行处代表一个字符<code>\n</code>。因此如果想要发送<code>\r\n</code>的话，在换行处前面需要一个<code>\r</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_gps_data</span><span class="params">()</span>:</span></span><br><span class="line">    ser = serial.Serial(<span class="string">'COM8'</span>, <span class="number">9600</span>, timeout=<span class="number">10</span>)</span><br><span class="line">    sample_data = <span class="string">"""$GPGSV,3,2,11,08,16,049,26,10,16,077,25,15,41,219,10,21,08,311,31*7F\r</span></span><br><span class="line"><span class="string">$GPGSV,3,3,11,26,75,177,13,29,40,274,46,30,24,070,23*43\r</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">    print(ser)</span><br><span class="line">    print(sample_data)</span><br><span class="line">    print(sample_data.encode())</span><br><span class="line">    ser.write(sample_data.encode())</span><br><span class="line">    ser.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    send_gps_data()</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子保证<code>\r\n</code>被发送。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pyserial</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/06/Python-56-pyserial/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-05-nohup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/16/Linux-05-nohup/">Linux-05-nohup</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/16/Linux-05-nohup/" class="archive-article-date">
+  	<time datetime="2020-03-16T12:29:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="nohup进程守护"><a href="#nohup进程守护" class="headerlink" title="nohup进程守护"></a>nohup进程守护</h1><p>关闭SSH远程连接之后，在该连接下运行的程序也会跟着结束。为了维持程序继续运行，可以使用nohup命令来守护该进程，保证在SSH连接结束之后仍能正常运行。</p>
+<p>最常见的用法如下，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test.py &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>其中 &gt; /dev/null 2&gt;&amp;1表示没有输出。</p>
+<p>而如果想要输出到log文件，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test.py  &gt; log.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://applingo.tokyo/article/1159" target="_blank" rel="noopener">https://applingo.tokyo/article/1159</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/16/Linux-05-nohup/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-04-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/15/Linux-04-shell/">Linux-04-shell</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/15/Linux-04-shell/" class="archive-article-date">
+  	<time datetime="2020-03-15T02:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux执行Shell"><a href="#Linux执行Shell" class="headerlink" title="Linux执行Shell"></a>Linux执行Shell</h1><p>Linux下批处理主要靠Shell脚本来实现，基本步骤是</p>
+<ul>
+<li>编写脚本</li>
+<li>更改脚本执行权限</li>
+<li>执行脚本</li>
+</ul>
+<h2 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h2><p>新建文件<code>touch filename.sh</code></p>
+<p>编辑文件<code>nano filename.sh</code></p>
+<p>脚本第一行要求<code>#!/bin/sh</code>，目的是告诉使用哪个程序来执行脚本文件。</p>
+<p>从二行开始书写具体命令，注释以#开始。</p>
+<h2 id="更改脚本执行权限"><a href="#更改脚本执行权限" class="headerlink" title="更改脚本执行权限"></a>更改脚本执行权限</h2><p><code>chmod 777 filename.sh</code>或者<code>chmod +x filename.sh</code></p>
+<h2 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h2><p><code>sh filename.sh</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/Listron/article/details/32170977" target="_blank" rel="noopener">https://blog.csdn.net/Listron/article/details/32170977</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/15/Linux-04-shell/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL-SQLite-02-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/10/SQL-SQLite-02-tips/">SQL-SQLite-02-tips</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/10/SQL-SQLite-02-tips/" class="archive-article-date">
+  	<time datetime="2020-03-10T08:23:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SQLite-Tips"><a href="#SQLite-Tips" class="headerlink" title="SQLite Tips"></a>SQLite Tips</h1><h2 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h2><p><code>sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 140736583877568 and this is thread id 123145388748800</code></p>
+<p>解决方法，</p>
+<p><code># check_same_threadをFalseにする
+conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)</code></p>
+<p>参考，<a href="https://it.masahiro.me/2019/07/post-2339" target="_blank" rel="noopener">https://it.masahiro.me/2019/07/post-2339</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">SQLite</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/10/SQL-SQLite-02-tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-web-jquery-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -356,774 +1211,9 @@
 
 
   
-    <article id="post-C-02-WarningofConst" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/C-02-WarningofConst/">C-02-WarningofConst</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/C-02-WarningofConst/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="warning-discards-‘const’-qualifiers-from-pointer-target-type"><a href="#warning-discards-‘const’-qualifiers-from-pointer-target-type" class="headerlink" title="warning: discards ‘const’ qualifiers from pointer target type"></a>warning: discards ‘const’ qualifiers from pointer target type</h1><p>首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。</p>
-<p>这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。</p>
-<p><a href="https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type" target="_blank" rel="noopener">https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type</a></p>
-<p><a href="https://blog.csdn.net/qq_36324796/article/details/79021258" target="_blank" rel="noopener">https://blog.csdn.net/qq_36324796/article/details/79021258</a></p>
-<p>另外，关于const修饰，可以参考<a href="https://blog.csdn.net/acorld/article/details/8921374" target="_blank" rel="noopener">https://blog.csdn.net/acorld/article/details/8921374</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">const</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/C-02-WarningofConst/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-03-WeakFunc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/C-03-WeakFunc/">C-03-WeakFunc</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/C-03-WeakFunc/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="error-redefinition-of-weak-func"><a href="#error-redefinition-of-weak-func" class="headerlink" title="error: redefinition of weak func"></a>error: redefinition of <em>weak func</em></h1><p>使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__attribute__(( weak )) <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">__weak <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时注意不能把重写的函数写在同一个c文件里，否则会报错<code>redefinition of function-name</code>。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.microchip.com/forums/m820872.aspx" target="_blank" rel="noopener">https://www.microchip.com/forums/m820872.aspx</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">weak</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/C-03-WeakFunc/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-FreeRTOS-02-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/FreeRTOS-02-delay/">FreeRTOS-02-delay</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/FreeRTOS-02-delay/" class="archive-article-date">
-  	<time datetime="2020-02-11T05:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="两种delay"><a href="#两种delay" class="headerlink" title="两种delay"></a>两种delay</h1><p>FreeRTOS有两种自带的delay函数，一个是vTaskDelay和vTaskDelayUntil。二者的区别就是后者专为精确生成延时而设计的。</p>
-<p>在CubeMX自动生成的代码时，都经过一层封装。</p>
-<ul>
-<li>vTaskDelay被封装成了osDelay</li>
-<li>vTaskDelayUntil被封装成了osDelayUntil</li>
-</ul>
-<p>对于osDelay</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************** Generic Wait Functions *******************************/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief   Wait for Timeout (Time Delay)</span></span><br><span class="line"><span class="comment">* @param   millisec      time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelay</span></span><br><span class="line">  TickType_t ticks = millisec / portTICK_PERIOD_MS;</span><br><span class="line">  </span><br><span class="line">  vTaskDelay(ticks ? ticks : <span class="number">1</span>);          <span class="comment">/* Minimum delay = 1 tick */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于vTaskDelayUntil</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief  Delay a task until a specified time</span></span><br><span class="line"><span class="comment">* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the </span></span><br><span class="line"><span class="comment">*          task was last unblocked. PreviousWakeTime must be initialised with the current time</span></span><br><span class="line"><span class="comment">*          prior to its first use (PreviousWakeTime = osKernelSysTick() )</span></span><br><span class="line"><span class="comment">* @param   millisec    time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelayUntil</span></span><br><span class="line">  TickType_t ticks = (millisec / portTICK_PERIOD_MS);</span><br><span class="line">  vTaskDelayUntil((TickType_t *) PreviousWakeTime, ticks ? ticks : <span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  (<span class="keyword">void</span>) PreviousWakeTime;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>vTaskDelay的延时指的是从delay函数被调用的一刻开始计数，直到计数（计时）结束；</p>
-<p>而vTaskDelayUntil的延时是从Task离开阻塞态开始，到下一次进入就绪态为止的时常。因此可以精确的控制loop的周期，适合需要更精确计时的场合。</p>
-<p>值得注意的是，后者需要多提供一个参数<code>PreviousWakeTime</code>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 只要一个延时长度的参数</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 还需要前一个时间点</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7059790.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7059790.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/FreeRTOS-02-delay/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-FreeRTOS-01-pvParameters" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/FreeRTOS-01-pvParameters/">FreeRTOS-01-pvParameters</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/FreeRTOS-01-pvParameters/" class="archive-article-date">
-  	<time datetime="2020-02-11T05:45:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="给task传递参数"><a href="#给task传递参数" class="headerlink" title="给task传递参数"></a>给task传递参数</h1><p>FreeRTOS通过调用xTaskCreate函数来新建task。使用CubeMX生成的代码则是在xTaskCreate的外面包装了一层。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *para = <span class="string">"Hello World for pvParameters.\r\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Create the thread(s) */</span></span><br><span class="line"><span class="comment">/* definition and creation of vTaskBase */</span></span><br><span class="line">osThreadDef(vTaskBase, StartTaskBase, osPriorityNormal, <span class="number">0</span>, <span class="number">128</span>);</span><br><span class="line">vTaskBaseHandle = osThreadCreate(osThread(vTaskBase), (<span class="keyword">void</span>*)para);  <span class="comment">// osThreadCreate内部调用了xTaskCreate函数</span></span><br></pre></td></tr></table></figure>
-
-<p>新建的Task的定义如下，</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN Header_StartTaskBase */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Function implementing the vTaskBase thread.</span></span><br><span class="line"><span class="comment">  * @param  argument: Not used </span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="comment">/* USER CODE END Header_StartTaskBase */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartTaskBase</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> * argument)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN StartTaskBase */</span></span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="keyword">uint32_t</span> time_out = <span class="number">1000</span> * <span class="built_in">strlen</span>(argument) * (<span class="number">8</span> + <span class="number">1</span>) / (huart3.Init.BaudRate);  <span class="comment">// round to N Ms</span></span><br><span class="line">  <span class="keyword">for</span>(;;)</span><br><span class="line">  &#123;</span><br><span class="line">    osDelay(<span class="number">500</span>);</span><br><span class="line">    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);</span><br><span class="line">    HAL_UART_Transmit(&amp;huart3, (<span class="keyword">uint8_t</span> *) argument, <span class="built_in">strlen</span>(argument), time_out + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END StartTaskBase */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>xTaskCreate函数的定义如下，</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BaseType_t <span class="title">xTaskCreate</span><span class="params">(	TaskFunction_t pxTaskCode,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> pcName,		<span class="comment">/*lint !e971 Unqualified char types are allowed for strings and single characters only. */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> configSTACK_DEPTH_TYPE usStackDepth,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">void</span> * <span class="keyword">const</span> pvParameters,</span></span></span><br><span class="line"><span class="function"><span class="params">                       UBaseType_t uxPriority,</span></span></span><br><span class="line"><span class="function"><span class="params">                       TaskHandle_t * <span class="keyword">const</span> pxCreatedTask )</span></span></span><br></pre></td></tr></table></figure>
-
-<p>该函数的<code>void * const pvParameters</code>参数用来传递参数给Task。</p>
-<p>上面的例子就是初始化一个字符串然后通过pvParameters传递给了新建的Task，并在Task内作为message通过串口打印出来。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7055047.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7055047.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pvparameter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/FreeRTOS-01-pvParameters/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/hello-world/" class="archive-article-date">
-  	<time datetime="2020-02-11T05:38:04.570Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-        
-          <a class="article-more-a" href="/2020/02/11/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web-nginx-static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/02/web-nginx-static/">web-nginx-static</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/02/web-nginx-static/" class="archive-article-date">
-  	<time datetime="2019-11-02T03:36:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="static-web-Nginx-Setting"><a href="#static-web-Nginx-Setting" class="headerlink" title="static web Nginx-Setting"></a>static web Nginx-Setting</h1><p>配置文件的位置在<code>/etc/nginx/nginx.conf</code></p>
-<p>下面是配置文件的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  www.mydomain.com; &#x2F;&#x2F;自己的域名</span><br><span class="line">        root         &#x2F;data&#x2F;www;  &#x2F;&#x2F;网站文件存放的目录</span><br><span class="line"></span><br><span class="line">        include &#x2F;etc&#x2F;nginx&#x2F;default.d&#x2F;*.conf;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 404 &#x2F;404.html;</span><br><span class="line">            location &#x3D; &#x2F;40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 500 502 503 504 &#x2F;50x.html;</span><br><span class="line">            location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当reload时，如果报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -s reload</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -t</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br></pre></td></tr></table></figure>
-
-<p>提示该配置和其他配置有冲突。</p>
-<p>要查看重复设置的位置，可以使用如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ grep -R default_server &#x2F;etc&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen 80 default_server; </span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen [::]:80 default_server;</span><br></pre></td></tr></table></figure>
-
-<p>原来是Nginx有一个默认的配置文件，该默认配置文件和自己的设置发生了冲突。所以把默认配置删除即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;sites-enabled$ ls</span><br><span class="line">default</span><br><span class="line"></span><br><span class="line">sudo rm default</span><br></pre></td></tr></table></figure>
-
-<p>最后别忘了重新加载配置，<code>sudo nginx -s reload</code></p>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p> <a href="https://juejin.im/post/5c286c56e51d451d460342b4" target="_blank" rel="noopener">https://juejin.im/post/5c286c56e51d451d460342b4</a> </p>
-<p><a href="https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error" target="_blank" rel="noopener">https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error</a> </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/02/web-nginx-static/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RaspberryPi-03-temperature" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/30/RaspberryPi-03-temperature/">RaspberryPi-03-temperature</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/30/RaspberryPi-03-temperature/" class="archive-article-date">
-  	<time datetime="2019-06-30T04:22:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="raspberry-pi-CPU-temperature"><a href="#raspberry-pi-CPU-temperature" class="headerlink" title="raspberry pi CPU temperature"></a>raspberry pi CPU temperature</h1><p>有两种方法可以查看CPU温度：</p>
-<ol>
-<li><p>/opt/vc/bin/vcgencmd measure_temp</p>
-<p>temp=41.3’C</p>
-</li>
-<li><p>cat /sys/class/thermal/thermal_zone0/temp</p>
-<p>43470</p>
-<p>注意，这里的单位是1/1000摄氏度</p>
-</li>
-</ol>
-<p>另外可以用代码实现对温度的实时监控，C语言和Python的实现可以参考一下连接：</p>
-<p><a href="https://blog.csdn.net/xukai871105/article/details/38349209" target="_blank" rel="noopener">https://blog.csdn.net/xukai871105/article/details/38349209</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">temperature</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/30/RaspberryPi-03-temperature/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RaspberryPi-02-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/27/RaspberryPi-02-command/">RaspberryPi-02-command</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/27/RaspberryPi-02-command/" class="archive-article-date">
-  	<time datetime="2019-06-27T14:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="command"><a href="#command" class="headerlink" title="command"></a>command</h1><p>查看board版本：</p>
-<p>/proc/cpuinfo</p>
-<p>列出可用i2c设备：</p>
-<p> ls dev *i2c*</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/27/RaspberryPi-02-command/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2443,10 +2533,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PuTTY</a>
               </li>
              
@@ -2540,6 +2626,54 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">where</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PIL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">png</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">alpha</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">imread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">imwrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">decrease</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">print</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">end</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flush</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,771 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-02-WarningofConst" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/C-02-WarningofConst/">C-02-WarningofConst</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/C-02-WarningofConst/" class="archive-article-date">
+  	<time datetime="2020-02-11T10:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="warning-discards-‘const’-qualifiers-from-pointer-target-type"><a href="#warning-discards-‘const’-qualifiers-from-pointer-target-type" class="headerlink" title="warning: discards ‘const’ qualifiers from pointer target type"></a>warning: discards ‘const’ qualifiers from pointer target type</h1><p>首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。</p>
+<p>这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。</p>
+<p><a href="https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type" target="_blank" rel="noopener">https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type</a></p>
+<p><a href="https://blog.csdn.net/qq_36324796/article/details/79021258" target="_blank" rel="noopener">https://blog.csdn.net/qq_36324796/article/details/79021258</a></p>
+<p>另外，关于const修饰，可以参考<a href="https://blog.csdn.net/acorld/article/details/8921374" target="_blank" rel="noopener">https://blog.csdn.net/acorld/article/details/8921374</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">const</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/C-02-WarningofConst/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-C-03-WeakFunc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/C-03-WeakFunc/">C-03-WeakFunc</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/C-03-WeakFunc/" class="archive-article-date">
+  	<time datetime="2020-02-11T10:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="error-redefinition-of-weak-func"><a href="#error-redefinition-of-weak-func" class="headerlink" title="error: redefinition of weak func"></a>error: redefinition of <em>weak func</em></h1><p>使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__attribute__(( weak )) <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">__weak <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时注意不能把重写的函数写在同一个c文件里，否则会报错<code>redefinition of function-name</code>。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.microchip.com/forums/m820872.aspx" target="_blank" rel="noopener">https://www.microchip.com/forums/m820872.aspx</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">weak</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/C-03-WeakFunc/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-FreeRTOS-02-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/FreeRTOS-02-delay/">FreeRTOS-02-delay</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/FreeRTOS-02-delay/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="两种delay"><a href="#两种delay" class="headerlink" title="两种delay"></a>两种delay</h1><p>FreeRTOS有两种自带的delay函数，一个是vTaskDelay和vTaskDelayUntil。二者的区别就是后者专为精确生成延时而设计的。</p>
+<p>在CubeMX自动生成的代码时，都经过一层封装。</p>
+<ul>
+<li>vTaskDelay被封装成了osDelay</li>
+<li>vTaskDelayUntil被封装成了osDelayUntil</li>
+</ul>
+<p>对于osDelay</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************** Generic Wait Functions *******************************/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief   Wait for Timeout (Time Delay)</span></span><br><span class="line"><span class="comment">* @param   millisec      time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelay</span></span><br><span class="line">  TickType_t ticks = millisec / portTICK_PERIOD_MS;</span><br><span class="line">  </span><br><span class="line">  vTaskDelay(ticks ? ticks : <span class="number">1</span>);          <span class="comment">/* Minimum delay = 1 tick */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于vTaskDelayUntil</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief  Delay a task until a specified time</span></span><br><span class="line"><span class="comment">* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the </span></span><br><span class="line"><span class="comment">*          task was last unblocked. PreviousWakeTime must be initialised with the current time</span></span><br><span class="line"><span class="comment">*          prior to its first use (PreviousWakeTime = osKernelSysTick() )</span></span><br><span class="line"><span class="comment">* @param   millisec    time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelayUntil</span></span><br><span class="line">  TickType_t ticks = (millisec / portTICK_PERIOD_MS);</span><br><span class="line">  vTaskDelayUntil((TickType_t *) PreviousWakeTime, ticks ? ticks : <span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  (<span class="keyword">void</span>) PreviousWakeTime;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vTaskDelay的延时指的是从delay函数被调用的一刻开始计数，直到计数（计时）结束；</p>
+<p>而vTaskDelayUntil的延时是从Task离开阻塞态开始，到下一次进入就绪态为止的时常。因此可以精确的控制loop的周期，适合需要更精确计时的场合。</p>
+<p>值得注意的是，后者需要多提供一个参数<code>PreviousWakeTime</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 只要一个延时长度的参数</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 还需要前一个时间点</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7059790.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7059790.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/FreeRTOS-02-delay/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-FreeRTOS-01-pvParameters" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/FreeRTOS-01-pvParameters/">FreeRTOS-01-pvParameters</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/FreeRTOS-01-pvParameters/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:45:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="给task传递参数"><a href="#给task传递参数" class="headerlink" title="给task传递参数"></a>给task传递参数</h1><p>FreeRTOS通过调用xTaskCreate函数来新建task。使用CubeMX生成的代码则是在xTaskCreate的外面包装了一层。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *para = <span class="string">"Hello World for pvParameters.\r\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Create the thread(s) */</span></span><br><span class="line"><span class="comment">/* definition and creation of vTaskBase */</span></span><br><span class="line">osThreadDef(vTaskBase, StartTaskBase, osPriorityNormal, <span class="number">0</span>, <span class="number">128</span>);</span><br><span class="line">vTaskBaseHandle = osThreadCreate(osThread(vTaskBase), (<span class="keyword">void</span>*)para);  <span class="comment">// osThreadCreate内部调用了xTaskCreate函数</span></span><br></pre></td></tr></table></figure>
+
+<p>新建的Task的定义如下，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN Header_StartTaskBase */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Function implementing the vTaskBase thread.</span></span><br><span class="line"><span class="comment">  * @param  argument: Not used </span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="comment">/* USER CODE END Header_StartTaskBase */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartTaskBase</span><span class="params">(<span class="keyword">void</span> <span class="keyword">const</span> * argument)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN StartTaskBase */</span></span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="keyword">uint32_t</span> time_out = <span class="number">1000</span> * <span class="built_in">strlen</span>(argument) * (<span class="number">8</span> + <span class="number">1</span>) / (huart3.Init.BaudRate);  <span class="comment">// round to N Ms</span></span><br><span class="line">  <span class="keyword">for</span>(;;)</span><br><span class="line">  &#123;</span><br><span class="line">    osDelay(<span class="number">500</span>);</span><br><span class="line">    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);</span><br><span class="line">    HAL_UART_Transmit(&amp;huart3, (<span class="keyword">uint8_t</span> *) argument, <span class="built_in">strlen</span>(argument), time_out + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END StartTaskBase */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>xTaskCreate函数的定义如下，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BaseType_t <span class="title">xTaskCreate</span><span class="params">(	TaskFunction_t pxTaskCode,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> pcName,		<span class="comment">/*lint !e971 Unqualified char types are allowed for strings and single characters only. */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> configSTACK_DEPTH_TYPE usStackDepth,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">void</span> * <span class="keyword">const</span> pvParameters,</span></span></span><br><span class="line"><span class="function"><span class="params">                       UBaseType_t uxPriority,</span></span></span><br><span class="line"><span class="function"><span class="params">                       TaskHandle_t * <span class="keyword">const</span> pxCreatedTask )</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该函数的<code>void * const pvParameters</code>参数用来传递参数给Task。</p>
+<p>上面的例子就是初始化一个字符串然后通过pvParameters传递给了新建的Task，并在Task内作为message通过串口打印出来。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7055047.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7055047.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pvparameter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/FreeRTOS-01-pvParameters/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/hello-world/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/hello-world/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:38:04.570Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+        
+          <a class="article-more-a" href="/2020/02/11/hello-world/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/hello-world/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-web-nginx-static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/02/web-nginx-static/">web-nginx-static</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/02/web-nginx-static/" class="archive-article-date">
+  	<time datetime="2019-11-02T03:36:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="static-web-Nginx-Setting"><a href="#static-web-Nginx-Setting" class="headerlink" title="static web Nginx-Setting"></a>static web Nginx-Setting</h1><p>配置文件的位置在<code>/etc/nginx/nginx.conf</code></p>
+<p>下面是配置文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  www.mydomain.com; &#x2F;&#x2F;自己的域名</span><br><span class="line">        root         &#x2F;data&#x2F;www;  &#x2F;&#x2F;网站文件存放的目录</span><br><span class="line"></span><br><span class="line">        include &#x2F;etc&#x2F;nginx&#x2F;default.d&#x2F;*.conf;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 404 &#x2F;404.html;</span><br><span class="line">            location &#x3D; &#x2F;40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 500 502 503 504 &#x2F;50x.html;</span><br><span class="line">            location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当reload时，如果报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -s reload</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -t</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br></pre></td></tr></table></figure>
+
+<p>提示该配置和其他配置有冲突。</p>
+<p>要查看重复设置的位置，可以使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ grep -R default_server &#x2F;etc&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen 80 default_server; </span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen [::]:80 default_server;</span><br></pre></td></tr></table></figure>
+
+<p>原来是Nginx有一个默认的配置文件，该默认配置文件和自己的设置发生了冲突。所以把默认配置删除即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;sites-enabled$ ls</span><br><span class="line">default</span><br><span class="line"></span><br><span class="line">sudo rm default</span><br></pre></td></tr></table></figure>
+
+<p>最后别忘了重新加载配置，<code>sudo nginx -s reload</code></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p> <a href="https://juejin.im/post/5c286c56e51d451d460342b4" target="_blank" rel="noopener">https://juejin.im/post/5c286c56e51d451d460342b4</a> </p>
+<p><a href="https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error" target="_blank" rel="noopener">https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error</a> </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/02/web-nginx-static/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RaspberryPi-03-temperature" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/30/RaspberryPi-03-temperature/">RaspberryPi-03-temperature</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/30/RaspberryPi-03-temperature/" class="archive-article-date">
+  	<time datetime="2019-06-30T04:22:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="raspberry-pi-CPU-temperature"><a href="#raspberry-pi-CPU-temperature" class="headerlink" title="raspberry pi CPU temperature"></a>raspberry pi CPU temperature</h1><p>有两种方法可以查看CPU温度：</p>
+<ol>
+<li><p>/opt/vc/bin/vcgencmd measure_temp</p>
+<p>temp=41.3’C</p>
+</li>
+<li><p>cat /sys/class/thermal/thermal_zone0/temp</p>
+<p>43470</p>
+<p>注意，这里的单位是1/1000摄氏度</p>
+</li>
+</ol>
+<p>另外可以用代码实现对温度的实时监控，C语言和Python的实现可以参考一下连接：</p>
+<p><a href="https://blog.csdn.net/xukai871105/article/details/38349209" target="_blank" rel="noopener">https://blog.csdn.net/xukai871105/article/details/38349209</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">temperature</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/30/RaspberryPi-03-temperature/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-RaspberryPi-02-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/27/RaspberryPi-02-command/">RaspberryPi-02-command</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/27/RaspberryPi-02-command/" class="archive-article-date">
+  	<time datetime="2019-06-27T14:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="command"><a href="#command" class="headerlink" title="command"></a>command</h1><p>查看board版本：</p>
+<p>/proc/cpuinfo</p>
+<p>列出可用i2c设备：</p>
+<p> ls dev *i2c*</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/27/RaspberryPi-02-command/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-RaspberryPi-01-GPIO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -383,780 +1148,9 @@
 
 
   
-    <article id="post-DeepLearning-08-PruneNN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/01/DeepLearning-08-PruneNN/">DeepLearning-08-PruneNN</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/01/DeepLearning-08-PruneNN/" class="archive-article-date">
-  	<time datetime="2019-03-01T14:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="prune-fully-connected-layer"><a href="#prune-fully-connected-layer" class="headerlink" title="prune fully connected layer"></a>prune fully connected layer</h1><p>首先，初次训练2000次，得到一个有一定精度的模型。</p>
-<p><img src="DeepLearning-08-PruneNN%5C1st_train.png" alt=""></p>
-<p>然后，使用threshold = 0.05来prune这个模型。具体是把所有<code>&lt;threshold</code>的W参数强制改成0。得到一个sparse的模型：</p>
-<p><img src="DeepLearning-08-PruneNN%5C1st_train_prune.png" alt=""></p>
-<p>之后，继续对该模型训练2000次，然后得到一个恢复一定程度的模型：</p>
-<p><img src="DeepLearning-08-PruneNN%5C2nd_train.png" alt=""></p>
-<p>最后，可以同样对现在的模型prune一定的参数，同样使用threshold = 0.05，得到：</p>
-<p><img src="DeepLearning-08-PruneNN%5C2nd_train_prune.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">prune neural network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/DeepLearning//" class="article-tag-list-link color3">DeepLearning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/01/DeepLearning-08-PruneNN/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-01-data-type" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/06/C-01-data-type/">C-01-data-type</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/06/C-01-data-type/" class="archive-article-date">
-  	<time datetime="2019-01-06T05:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="data-type-in-STM32"><a href="#data-type-in-STM32" class="headerlink" title="data type in STM32"></a>data type in STM32</h1><p>在stdint.h 里放着C语言的标准表达方式</p>
-<p>下面截取第36行开始的内容：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span>  <span class="keyword">char</span>         <span class="keyword">int8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span> short <span class="keyword">int</span>     <span class="keyword">int16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span>  <span class="keyword">int</span>          <span class="keyword">int32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">signed</span> __int64       <span class="keyword">int64_t</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">char</span>         <span class="keyword">uint8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> short <span class="keyword">int</span>    <span class="keyword">uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span> <span class="keyword">int</span>          <span class="keyword">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">unsigned</span>  __int64     <span class="keyword">uint64_t</span>;</span><br></pre></td></tr></table></figure>
-
-<p>另外，在stm32f10x.h 有如下定义，可能是为了向下兼容</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint32_t</span>   u32;<span class="comment">///32位</span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint16_t</span>   u16;<span class="comment">///16位</span></span><br><span class="line"><span class="keyword">typedef</span>   <span class="keyword">uint8_t</span>     u8;<span class="comment">///8位</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/weibo1230123/article/details/80703788" target="_blank" rel="noopener">https://blog.csdn.net/weibo1230123/article/details/80703788</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STM32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">data type</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/06/C-01-data-type/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Eclipse-01-CopyLine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/29/Eclipse-01-CopyLine/">Eclipse-01-CopyLine</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/29/Eclipse-01-CopyLine/" class="archive-article-date">
-  	<time datetime="2018-12-29T08:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Copy-a-line-in-Eclipse"><a href="#Copy-a-line-in-Eclipse" class="headerlink" title="Copy a line in Eclipse"></a>Copy a line in Eclipse</h1><p>Ctrl+ALT+Down</p>
-<p><a href="https://coderanch.com/t/104462/ide/Editing-Eclipse-shortcut-copy-line" target="_blank" rel="noopener">https://coderanch.com/t/104462/ide/Editing-Eclipse-shortcut-copy-line</a></p>
-<h1 id="short-cut-setting"><a href="#short-cut-setting" class="headerlink" title="short cut setting"></a>short cut setting</h1><p>Go to <code>Windows-Preference-General-Keys</code></p>
-<p>to modify short cuts.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">copy a line</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Eclipse//" class="article-tag-list-link color3">Eclipse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/29/Eclipse-01-CopyLine/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-32-random-choice-replace" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/26/Numpy-32-random-choice-replace/">Numpy-32-random-choice-replace</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/26/Numpy-32-random-choice-replace/" class="archive-article-date">
-  	<time datetime="2018-12-26T13:08:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="numpy-random-choice"><a href="#numpy-random-choice" class="headerlink" title="numpy.random.choice"></a>numpy.random.choice</h1><p><code>numpy.random.choice</code>(<em>a</em>, <em>size=None</em>, <em>replace=True</em>, <em>p=None</em>)</p>
-<p>Generates a random sample from a given 1-D array</p>
-<p>Parameters:    </p>
-<p><strong>a</strong> : 1-D array-like or int</p>
-<p>If an ndarray, a random sample is generated from its elements. If an int, the random sample is generated as if a were np.arange(a)</p>
-<p><strong>size</strong> : int or tuple of ints, optional</p>
-<p>Output shape. If the given shape is, e.g., <code>(m, n, k)</code>, then <code>m * n * k</code> samples are drawn. Default is None, in which case a single value is returned.</p>
-<p><strong>replace</strong> : boolean, optional</p>
-<p>Whether the sample is with or without replacement</p>
-<p><strong>p</strong> : 1-D array-like, optional</p>
-<p>The probabilities associated with each entry in a. If not given the sample assumes a uniform distribution over all entries in a.</p>
-<p>其中replace参数表示，获得的随机序列是否可以包含重复元素。</p>
-<p>具体为，</p>
-<blockquote>
-<p><strong>replace=True</strong>: 可以从<code>a</code> 中反复选取同一个元素。</p>
-<p><strong>replace=False</strong>: <code>a</code> 中同一个元素只能被选取一次。</p>
-</blockquote>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/silverdemon/article/details/77596343" target="_blank" rel="noopener">https://blog.csdn.net/silverdemon/article/details/77596343</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">choice</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">replace</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/26/Numpy-32-random-choice-replace/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web-flask-logging" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/web-flask-logging/">web-flask-logging</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/17/web-flask-logging/" class="archive-article-date">
-  	<time datetime="2018-12-17T13:34:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="flask-logging"><a href="#flask-logging" class="headerlink" title="flask logging"></a>flask logging</h1><p>By default the level for logging is warning. So you won’t see a logging message of level <code>DEBUG</code>. To fix this just enable debug logging with the <code>basicConfig()</code> function of the logging module:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.basicConfig(level=logging.DEBUG)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/44405708/flask-doesnt-print-to-console" target="_blank" rel="noopener">https://stackoverflow.com/questions/44405708/flask-doesnt-print-to-console</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logging</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/web-flask-logging/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-31-npy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/Numpy-31-npy/">Numpy-31-npy</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/17/Numpy-31-npy/" class="archive-article-date">
-  	<time datetime="2018-12-17T13:28:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="numpy-save-load"><a href="#numpy-save-load" class="headerlink" title="numpy save load"></a>numpy save load</h1><p>This example shows how to save and load data.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">d1=&#123;<span class="string">'key1'</span>:[<span class="number">5</span>,<span class="number">10</span>], <span class="string">'key2'</span>:[<span class="number">50</span>,<span class="number">100</span>]&#125;</span><br><span class="line">np.save(<span class="string">"d1.npy"</span>, d1)</span><br><span class="line">d2=np.load(<span class="string">"d1.npy"</span>)</span><br><span class="line">print(d1.get(<span class="string">'key1'</span>))</span><br><span class="line">print(d2.item().get(<span class="string">'key2'</span>))</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/40219946/python-save-dictionaries-through-numpy-save" target="_blank" rel="noopener">https://stackoverflow.com/questions/40219946/python-save-dictionaries-through-numpy-save</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">npy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/Numpy-31-npy/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-20-reduction-indices" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/TensorFlow-20-reduction-indices/">TensorFlow-20-reduction_indices</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/17/TensorFlow-20-reduction-indices/" class="archive-article-date">
-  	<time datetime="2018-11-17T08:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="reduction-indices参数"><a href="#reduction-indices参数" class="headerlink" title="reduction_indices参数"></a>reduction_indices参数</h1><p>使用TF的reduce_sum和reduce_mean方法时，参数中有一项reduction_indices。</p>
-<p>这个参数类似于Numpy中的axis参数，用于指定计算所在的维度。</p>
-<p>![](TensorFlow-20-reduction-indices\reduction indices.png)</p>
-<p>不指定的时候，默认值为None，意为在所有维度上计算，即压缩到0维也就是一个数。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cnblogs.com/likethanlove/p/6547405.html" target="_blank" rel="noopener">http://www.cnblogs.com/likethanlove/p/6547405.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">reduce_sum</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">reduce_mean</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reduction_indices</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/17/TensorFlow-20-reduction-indices/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-30-newaxis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/Numpy-30-newaxis/">Numpy-30-newaxis</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/17/Numpy-30-newaxis/" class="archive-article-date">
-  	<time datetime="2018-11-17T08:34:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="numpy-newaxis"><a href="#numpy-newaxis" class="headerlink" title="numpy.newaxis"></a>numpy.newaxis</h1><p>用numpy.newaxis可以给ndarray对象增加一个维度。</p>
-<p>以下是官方示例的引用：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.newaxis <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.arange(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:, np.newaxis]</span><br><span class="line">array([[<span class="number">0</span>],</span><br><span class="line">       [<span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>另外，如果要压缩某一空白维度，可以参考numpy.squeeze方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numpy.squeeze(a, axis&#x3D;None)[source]</span><br><span class="line">Remove single-dimensional entries from the shape of an array.</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://docs.scipy.org/doc/numpy-1.15.1/reference/constants.html#numpy.newaxis" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.15.1/reference/constants.html#numpy.newaxis</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">newaxis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/17/Numpy-30-newaxis/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2476,10 +2470,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PuTTY</a>
               </li>
              
@@ -2573,6 +2563,54 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">where</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PIL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">png</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">alpha</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">imread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">imwrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">decrease</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">print</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">end</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flush</a>
               </li>
             
             <div class="clearfix"></div>

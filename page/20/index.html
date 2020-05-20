@@ -156,6 +156,876 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-04-dict-get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-04-dict-get/">Python-04-dict-get</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-04-dict-get/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里记录一下，dict获取键值的两种方法，dict[‘key’]和dict.get(‘key’)</p>
+<h1 id="dict-‘key’"><a href="#dict-‘key’" class="headerlink" title="dict[‘key’]"></a>dict[‘key’]</h1><p>有key键存在时，返回键的值；</p>
+<p>key键不存在时，返回KeyError</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># KeyError</span></span><br><span class="line">dataDict[<span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="dict-get-‘key’"><a href="#dict-get-‘key’" class="headerlink" title="dict.get(‘key’)"></a>dict.get(‘key’)</h1><p>有key键存在时，返回键的值；</p>
+<p>key键不存在时，返回None(默认)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># 返回23</span></span><br><span class="line">dataDict.get(<span class="string">'a'</span>)</span><br><span class="line"><span class="comment"># 返回None</span></span><br><span class="line">dataDict.get(<span class="string">'c'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>完整用法为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict.get(key, default=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>key – 字典中要查找的键。</li>
+<li>default – 如果指定键的值不存在时，返回该默认值。</li>
+</ul>
+<p>故可以通过dict.get()方法检验键是否存在，而且不会抛出Error。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">get</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-04-dict-get/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-00-csv2DictList" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-00-csv2DictList/">Python-00-csv2DictList</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-00-csv2DictList/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:25:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇主要是关于csv文件和dict/list类型数据的互相转换。</p>
+<p>涉及到了以下常用的5种场景：</p>
+<ol>
+<li>将一个二重列表[[],[]]写入到csv文件中</li>
+<li>从csv文件中读取返回为列表</li>
+<li>将一字典写入到csv文件中</li>
+<li>从csv文件中读取一个字典</li>
+<li>从csv文件中读取一个计数字典(统计各key出现的次数)</li>
+<li>嵌套多个字典的列表写到csv中</li>
+</ol>
+<h1 id="list-2-csv"><a href="#list-2-csv" class="headerlink" title="list 2 csv"></a>list 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一个二重列表写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createListCSV</span><span class="params">(fileName=<span class="string">""</span>, dataList=[])</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> dataList:</span><br><span class="line">            csvWriter.writerow(data)</span><br></pre></td></tr></table></figure>
+
+<h1 id="csv-2-list"><a href="#csv-2-list" class="headerlink" title="csv 2 list"></a>csv 2 list</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从文本文件中读取返回为列表的形式</span></span><br><span class="line"><span class="comment"># 输入：文件名称，分隔符（默认,）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readListCSV</span><span class="params">(fileName=<span class="string">""</span>, splitsymbol=<span class="string">","</span>)</span>:</span></span><br><span class="line">    dataList = []</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataList.append(tmpList)</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataList</span><br></pre></td></tr></table></figure>
+
+<h1 id="dict-2-csv"><a href="#dict-2-csv" class="headerlink" title="dict 2 csv"></a>dict 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一字典写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据字典</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDictCSV</span><span class="params">(fileName=<span class="string">""</span>, dataDict=&#123;&#125;)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> dataDict.iteritems():</span><br><span class="line">            csvWriter.writerow([k,v])</span><br></pre></td></tr></table></figure>
+
+<h1 id="csv-2-dict"><a href="#csv-2-dict" class="headerlink" title="csv 2 dict"></a>csv 2 dict</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex,valueIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>, valueIndex=<span class="number">1</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataDict[tmpList[keyIndex]] = tmpList[valueIndex]</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
+
+<h1 id="csv-get-key-num"><a href="#csv-get-key-num" class="headerlink" title="csv get key num."></a>csv get key num.</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个计数字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            <span class="keyword">if</span> dataDict.get(tmpList[keyIndex]) == <span class="literal">None</span>:</span><br><span class="line">                dataDict[tmpList[keyIndex]] = <span class="number">0</span></span><br><span class="line">            dataDict[tmpList[keyIndex]] = dataDict.get(tmpList[keyIndex]) + <span class="number">1</span></span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
+
+<h1 id="nested-list-2-csv"><a href="#nested-list-2-csv" class="headerlink" title="nested list 2 csv"></a>nested list 2 csv</h1><p>嵌套多个字典的列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my_list = [&#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Bordeaux'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Sunderland'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Lewis Baker'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'England'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Baker'</span>, <span class="string">'players.player_id'</span>: <span class="string">'9574'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Lewis'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'25/04/1995'</span>, <span class="string">'players.team'</span>: <span class="string">'Vitesse'</span>&#125;</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure>
+
+<p>转 csv的代码，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># write nested list of dict to csv</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nestedlist2csv</span><span class="params">(list, out_file)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(out_file, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        w = csv.writer(f)</span><br><span class="line">        fieldnames=list[<span class="number">0</span>].keys()  <span class="comment"># solve the problem to automatically write the header</span></span><br><span class="line">        w.writerow(fieldnames)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> list:</span><br><span class="line">            w.writerow(row.values())</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="输出csv中包含空白行的问题"><a href="#输出csv中包含空白行的问题" class="headerlink" title="输出csv中包含空白行的问题"></a>输出csv中包含空白行的问题</h1><p>问题在于这一句：open(fileName, “w”)</p>
+<p>在后面加入参数<code>newline=&#39;&#39;</code>即可解决。</p>
+<p>得到：open(fileName, “w”, newline=’’)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>python列表、字典与csv</p>
+<p><a href="https://www.cnblogs.com/moye13/p/5291156.html" target="_blank" rel="noopener">https://www.cnblogs.com/moye13/p/5291156.html</a></p>
+<p>pythonでcsvファイルを整形したいが、一行間隔で空行を出力してしまいハマった話</p>
+<p><a href="http://helloworldryo.hatenablog.com/entry/2014/05/07/031628" target="_blank" rel="noopener">http://helloworldryo.hatenablog.com/entry/2014/05/07/031628</a></p>
+<p>csv文件与字典，列表等之间的转换小结【Python】</p>
+<p><a href="https://segmentfault.com/a/1190000007092479" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007092479</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-00-csv2DictList/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Crawler-02-FindElement" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Crawler-02-FindElement/">Crawler-02-FindElement</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Crawler-02-FindElement/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:21:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本章节主要介绍通过id和XPath定位元素的方法。</p>
+<p>由于id具有唯一性，有id的情况下通过id能最快速精准地得到目标元素。</p>
+<p>但是，并不是所有元素都有唯一的id标示。这时可以使用XPath借助属性定位。</p>
+<p>另外，也顺带说一下其他几种定位方法。</p>
+<h1 id="prepare-html"><a href="#prepare-html" class="headerlink" title="prepare html"></a>prepare html</h1><p>操作对象为<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--- 输入框部分 ---&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bg s_ipt_wr quickdelete-wrap"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"soutu-btn"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"kw"</span> <span class="attr">name</span>=<span class="string">"wd"</span> <span class="attr">class</span>=<span class="string">"s_ipt"</span> <span class="attr">value</span>=<span class="string">""</span> <span class="attr">maxlength</span>=<span class="string">"255"</span> <span class="attr">autocomplete</span>=<span class="string">"off"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">id</span>=<span class="string">"quickdelete"</span> <span class="attr">title</span>=<span class="string">"清空"</span> <span class="attr">class</span>=<span class="string">"quickdelete"</span> <span class="attr">style</span>=<span class="string">"top: 0px; right: 0px; display: none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--- 搜索按钮部分 ---&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bg s_btn_wr"</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">id</span>=<span class="string">"su"</span> <span class="attr">value</span>=<span class="string">"百度一下"</span> <span class="attr">class</span>=<span class="string">"bg s_btn"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>分析上述html编码可知，输入框部分input标签的<code>id: kw</code>，按钮部分input的<code>id: su</code>。</p>
+<h1 id="find-by-id"><a href="#find-by-id" class="headerlink" title="find by id"></a>find by id</h1><p>在定位元素之前，需要获取Web文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">'C:\Windows\System32\chromedriver'</span>)</span><br><span class="line"><span class="comment">#open the Homepage</span></span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后，定位到输入框，并传入搜索关键字selenium</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Find element -&gt; pass keyword</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@id='kw']"</span>).send_keys(<span class="string">'selenium'</span>)</span><br><span class="line">    print(<span class="string">'find by id success!'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'find by id error!'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>之后，定位到搜索按钮，执行搜索</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#click to search</span></span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@id='su']"</span>).click()  </span><br><span class="line">    print(<span class="string">'click success!'</span>)  </span><br><span class="line"><span class="keyword">except</span>:  </span><br><span class="line">    print(<span class="string">'click error!'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，chrome启动，打开<a href="http://www.baidu.com的网页，并且输入关键字，显示出了搜索结果。" target="_blank" rel="noopener">www.baidu.com的网页，并且输入关键字，显示出了搜索结果。</a></p>
+<h2 id="full-code"><a href="#full-code" class="headerlink" title="full code"></a>full code</h2><p>完整版code如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">'C:\Windows\System32\chromedriver'</span>)</span><br><span class="line"><span class="comment">#open the Homepage</span></span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find element -&gt; pass keyword</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    driver.find_element_by_id(<span class="string">'kw'</span>).send_keys(<span class="string">'selenium'</span>)</span><br><span class="line">    print(<span class="string">'find by id success!'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'find by id error!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#click to search</span></span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">    driver.find_element_by_id(<span class="string">'su'</span>).click() </span><br><span class="line">    print(<span class="string">'click success!'</span>)  </span><br><span class="line"><span class="keyword">except</span>:  </span><br><span class="line">    print(<span class="string">'click error!'</span>)</span><br><span class="line"><span class="comment"># 可以用.quit()关闭窗口</span></span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="find-by-XPath"><a href="#find-by-XPath" class="headerlink" title="find by XPath"></a>find by XPath</h1><p>XPath是XML文档中定位元素的语言，selenium中也有类似功能的实现。需要特别注意的是，当同级别存在多个标签时，索引从1开始，并非从0开始。</p>
+<h2 id="绝对路径定位"><a href="#绝对路径定位" class="headerlink" title="绝对路径定位"></a>绝对路径定位</h2><p>语法格式为，xxx.find_element_by_xpath(“绝对路径”)</p>
+<p>例如， xxx.find_element_by_xpath(“/html/body/div[x]/form/input”) </p>
+<p>其中x 代表第x个 div标签，注意索引从1开始而不是0</p>
+<p>此方法最为直接了当，但是随着网页的更新，需要定位的元素位置很可能发生改变，这就给代码的通用性带来很大问题。</p>
+<h2 id="相对路径定位"><a href="#相对路径定位" class="headerlink" title="相对路径定位"></a>相对路径定位</h2><p>相对路径以//开始，后面跟着标签名。其语法格式为，</p>
+<p> xxx.find_element_by_xpath(“//标签”)</p>
+<p>例如，</p>
+<p>xxx.find_element_by_xpath(“//input[x]”) </p>
+<p>定位到第x个input标签,[x]可以省略，<strong>默认为第一个</strong></p>
+<p>也可以增加路径长度，xxx.find_element_by_xpath(“//div[x]/form[x]/input[x]”)</p>
+<h2 id="标签属性定位"><a href="#标签属性定位" class="headerlink" title="标签属性定位"></a>标签属性定位</h2><p>给标签加入限定的属性条件，来实现更精准的查找。如果结果存在多个，默认为第一个。</p>
+<p>xxx.find_element_by_xpath(“//标签[@属性==‘属性值’]”)</p>
+<p>结合<code>相对路径定位</code>可以有以下的方法，</p>
+<p>xxx.find_element_by_xpath(“//标签[@id=’J_login_form’]/dl/dt/input[@id=’J_password’]”)</p>
+<p>如果某一个属性不足以定位时，可以加入多个条件并配以逻辑运算，</p>
+<p>xxx.find_element_by_xpath(“//input[@type=’name’ and @name=’kw1’]”)</p>
+<h2 id="文本定位"><a href="#文本定位" class="headerlink" title="文本定位"></a>文本定位</h2><p>当标签很少，但存在唯一的文本时可以使用文本来定位。</p>
+<p>xxx.find_element_by_xpath(“//标签[contains(text(),’文本值’)]”) </p>
+<h2 id="模糊定位"><a href="#模糊定位" class="headerlink" title="模糊定位"></a>模糊定位</h2><p>属性值太长时，可以采用</p>
+<p>xxx.find_element_by_xpath(“//a[contains(@href, ‘logout’)]”)</p>
+<p>href属性中包含”logout”关键字的a标签。</p>
+<h2 id="动态属性定位"><a href="#动态属性定位" class="headerlink" title="动态属性定位"></a>动态属性定位</h2><p>XPath 关于网页中的动态属性的定位，例如，ASP.NET应用程序中动态生成id属性值，可以有以下四种方法：</p>
+<p>a.starts-with</p>
+<p>例子： input[starts-with(@id,’ctrl’)]</p>
+<p> 解析：匹配以ctrl开始的属性值</p>
+<p> b.ends-with</p>
+<p>例子：input[ends-with(@id,’_userName’)]</p>
+<p>解析：匹配以userName结尾的属性值</p>
+<p> c.contains() </p>
+<p>例子：Input[contains(@id,’userName’)]</p>
+<p>解析：匹配含有userName属性值</p>
+<p><strong>和模糊定位一样</strong></p>
+<h2 id="节点关系定位"><a href="#节点关系定位" class="headerlink" title="节点关系定位"></a>节点关系定位</h2><p>利用其兄弟节点或者父节点等各种可以定位的元素进行定位</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">'C:\Windows\System32\chromedriver'</span>)</span><br><span class="line"><span class="comment">#open the Homepage</span></span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find element -&gt; pass keyword</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@name='wd']"</span>).send_keys(<span class="string">'selenium'</span>)</span><br><span class="line">    <span class="comment"># driver.find_element_by_id('kw').send_keys('selenium')</span></span><br><span class="line">    print(<span class="string">'find by id success!'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'find by id error!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#click to search</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@type='submit']"</span>).click()</span><br><span class="line">    <span class="comment"># driver.find_element_by_id('su').click()</span></span><br><span class="line">    print(<span class="string">'click success!'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'click error!'</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>【windows7】pythonでChromeのブラウザ操作を自動化 　～Selenium WebDriverを利用</p>
+<p>(使用了unittest模块，<strong>值得学习</strong>)</p>
+<p><a href="https://qiita.com/ynishimura0922/items/a3332b5beb394248e44e" target="_blank" rel="noopener">https://qiita.com/ynishimura0922/items/a3332b5beb394248e44e</a></p>
+<p>python selenium xpath定位方式</p>
+<p><a href="http://blog.csdn.net/huiseqiutian/article/details/73739707" target="_blank" rel="noopener">http://blog.csdn.net/huiseqiutian/article/details/73739707</a></p>
+<p>[python爬虫] Selenium常见元素定位方法和操作的学习介绍</p>
+<p><a href="http://blog.csdn.net/eastmount/article/details/48108259" target="_blank" rel="noopener">http://blog.csdn.net/eastmount/article/details/48108259</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Selenium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Install</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Crawler//" class="article-tag-list-link color3">Crawler</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Crawler-02-FindElement/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Crawler-01-SeleniumInstall" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Crawler-01-SeleniumInstall/">Crawler-01-enviroment</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Crawler-01-SeleniumInstall/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:17:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>selenium模块可以模拟浏览器的操作来实现数据的抓取，这种方式可以有效避免网站屏蔽等问题。</p>
+<p>成功抓取需要selenium模块以及浏览器对应的驱动模块。下面介绍所需环境的准备工作。</p>
+<h1 id="selenium-installation"><a href="#selenium-installation" class="headerlink" title="selenium installation"></a>selenium installation</h1><p>可以通过pip命令安装，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
+
+<h1 id="Web-Driver"><a href="#Web-Driver" class="headerlink" title="Web Driver"></a>Web Driver</h1><p>Firefox浏览器默认支持selenium，不需要下载Driver。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要Path参数</span></span><br><span class="line">driver = webdriver.Firfox()</span><br></pre></td></tr></table></figure>
+
+<p>下载浏览器对应的Driver，chrome浏览器可以到<a href="http://chromedriver.storage.googleapis.com/index.html下载合适版本。" target="_blank" rel="noopener">http://chromedriver.storage.googleapis.com/index.html下载合适版本。</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要指定Driver的保存位置</span></span><br><span class="line">driver = webdriver.Chrome(<span class="string">'C:\...\chromedriver'</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Selenium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Install</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Crawler//" class="article-tag-list-link color3">Crawler</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Crawler-01-SeleniumInstall/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-30-multiprocessing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-30-multiprocessing/">Python-30-multiprocessing</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-30-multiprocessing/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:14:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>进程中可以包含多个线程，多个任务并行处理时可以多进程，也可以多线程来实现。</p>
+<h1 id="Python中实现多进程"><a href="#Python中实现多进程" class="headerlink" title="Python中实现多进程"></a>Python中实现多进程</h1><p>Unix/Linux中通过os.fork()实现创建子进程。</p>
+<p>由于windows系统没有fork调用，故跨平台应用时，可使用multiprocessing模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Child process</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run child process %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">'test'</span>,))</span><br><span class="line">    print(<span class="string">'Child process start.'</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'Child process end.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通过向Process函数内传入执行的函数和参数，并用start方法开始执行，用join方法等待子进程结束再往下运行。</p>
+<p>执行结果为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">8808.</span></span><br><span class="line">Child process will start.</span><br><span class="line">Run child process test (<span class="number">7680</span>)...</span><br><span class="line">Child process end.</span><br></pre></td></tr></table></figure>
+
+<h1 id="进程池pool"><a href="#进程池pool" class="headerlink" title="进程池pool"></a>进程池pool</h1><p>使用Pool启动大量进程，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run task %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds.'</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    print(<span class="string">'Waiting for all subprocesses done...'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'All subprocesses done.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>join方法等待所有子进程执行完毕，在join之前必须加入close方法，使之后不能继续添加新的process。</p>
+<p>执行结果为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">4916.</span></span><br><span class="line">Waiting <span class="keyword">for</span> all subprocesses done...</span><br><span class="line">Run task <span class="number">0</span> (<span class="number">6708</span>)...</span><br><span class="line">Run task <span class="number">1</span> (<span class="number">800</span>)...</span><br><span class="line">Run task <span class="number">2</span> (<span class="number">8420</span>)...</span><br><span class="line">Run task <span class="number">3</span> (<span class="number">9724</span>)...</span><br><span class="line">Task <span class="number">2</span> runs <span class="number">1.16</span> seconds.</span><br><span class="line">Run task <span class="number">4</span> (<span class="number">8420</span>)...</span><br><span class="line">Task <span class="number">0</span> runs <span class="number">1.88</span> seconds.</span><br><span class="line">Task <span class="number">1</span> runs <span class="number">1.93</span> seconds.</span><br><span class="line">Task <span class="number">3</span> runs <span class="number">1.92</span> seconds.</span><br><span class="line">Task <span class="number">4</span> runs <span class="number">0.79</span> seconds.</span><br><span class="line">All subprocesses done.</span><br></pre></td></tr></table></figure>
+
+<p>可知，Pool(4)新建了4个进程，其中task 0-3是立刻执行。而task 4则要等待0-3中某一个执行完毕才能开始，因为pool中只开了4个槽，无法同时容纳5个进程。</p>
+<p>不指定的话，pool默认为CPU的内核数目。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>廖雪峰Python3教程</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">multiprocessing</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">pool</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-30-multiprocessing/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-29-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-29-serialization/">Python-29-serialization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-29-serialization/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:11:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>在程序运行的过程中，所有的变量都保存在内存中。程序结束后，所有变量都被操作系统回收。</p>
+<p>为了保存中间产生的数据，需要把内存中的变量转换成可以存储或者传输的数据。这个过程就叫做数据的序列化，即serialization，在Python中称为pickling。</p>
+<p>序列化之后的数据可以存储到磁盘里，或者通过网络传输到其他机器上。反过来的过程叫反序列化，unpickling</p>
+<h1 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h1><p>通过倒入pickle模块来实现。</p>
+<h2 id="pickle-dumps-o"><a href="#pickle-dumps-o" class="headerlink" title="pickle.dumps(o)"></a>pickle.dumps(o)</h2><p>把对象o序列化成一个bytes。</p>
+<p>反序列化使用pickle.loads()</p>
+<h2 id="pickle-dump-o-f"><a href="#pickle-dump-o-f" class="headerlink" title="pickle.dump(o, f)"></a>pickle.dump(o, f)</h2><p>把对象o序列化并保存到一个file-like-object中。</p>
+<p>反序列化使用pickle.load()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use pickle</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = dict(name=<span class="string">'Bob'</span>, age=<span class="number">28</span>, score=<span class="number">95</span>)</span><br><span class="line">    pickle.dump(d, f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = pickle.load(f)</span><br><span class="line">    print(d)</span><br></pre></td></tr></table></figure>
+
+<p>注意，文件的打开方式为wb，因为pickle生成的是bytes类型的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(type(f))</span><br><span class="line"><span class="comment"># 得到&lt;class '_io.BufferedReader'&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(type(f))</span><br><span class="line"><span class="comment"># 得到&lt;class '_io.TextIOWrapper'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，通过python序列化后的bytes文件只能被python解析。而且不同版本的python可能也不兼容，故暂存重要数据时不要使用。</p>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>若要在不同编程语言之间传递数据，需要把对象序列化为标准格式，例如XML和JSON。相比之下JSON更为流行，速度更快。</p>
+<p><strong>JSON本身就是一个字符串。</strong></p>
+<h2 id="json-dumps-o"><a href="#json-dumps-o" class="headerlink" title="json.dumps(o)"></a>json.dumps(o)</h2><p>把对象o序列化成一个str。</p>
+<p>反序列化使用pickle.loads()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">d = dict(name=<span class="string">'Bob'</span>, age=<span class="number">28</span>, score=<span class="number">95</span>)</span><br><span class="line"><span class="comment"># json.dumps(d)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="json-dump-o-f"><a href="#json-dump-o-f" class="headerlink" title="json.dump(o, f)"></a>json.dump(o, f)</h2><p>把对象o序列化并保存到一个file-like-object中。</p>
+<p>反序列化使用pickle.load()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此处最好指定编码类型</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(d, f)</span><br><span class="line"><span class="comment"># 此处最好指定编码类型</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(json.load(f))</span><br></pre></td></tr></table></figure>
+
+<p>JSON标准规定JSON编码是UTF-8</p>
+<p>顺便说一下，对于编码类型的名称，uft-8/utf8/utf8都可以。</p>
+<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p>通过上述例子，可以知道dict可以简单地序列化为一个str。但是对于自己创建的类生成的实例，json模块并不知道怎样处理。这时需要指定转换的方法，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use json</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line">        self.__score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">student2dict</span><span class="params">(std)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'name'</span>: std._Student__name,</span><br><span class="line">        <span class="string">'age'</span>: std._Student__age,</span><br><span class="line">        <span class="string">'score'</span>: std._Student__score,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dict2student</span><span class="params">(d)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Student(d[<span class="string">'name'</span>], d[<span class="string">'age'</span>], d[<span class="string">'score'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 序列化</span></span><br><span class="line">s = Student(<span class="string">'Bob'</span>, <span class="number">28</span>, <span class="number">96</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 或者用lambda表达式</span></span><br><span class="line">    json.dump(s, f,default=student2dict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反序列化</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 得到的是dict对象</span></span><br><span class="line">    print(json.load(f))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dump.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(json.load(f, object_hook=dict2student))</span><br></pre></td></tr></table></figure>
+
+<p>#处可以使用lambda表达式简写为，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.dump(s, f,default=<span class="keyword">lambda</span> obj: obj.__dict__)</span><br></pre></td></tr></table></figure>
+
+<p>因为除了定义了__slot__之外的类的实例都包含__dict__属性。</p>
+<p>Likewise，load函数也可以添加object_hook函数来生成Student实例。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Json module</p>
+<p><a href="https://docs.python.jp/3/library/json.html#module-json" target="_blank" rel="noopener">https://docs.python.jp/3/library/json.html#module-json</a></p>
+<p>Tutorial</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143192607210600a668b5112e4a979dd20e4661cc9c97000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143192607210600a668b5112e4a979dd20e4661cc9c97000</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">serialization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-29-serialization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-02-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Java-02-Install/">Java-02-Install</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Java-02-Install/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="install-java-on-ubuntu"><a href="#install-java-on-ubuntu" class="headerlink" title="install java on ubuntu"></a>install java on ubuntu</h1><p>You have 2 ways to install java on you ubuntu machine.</p>
+<h2 id="by-ppa-源"><a href="#by-ppa-源" class="headerlink" title="by ppa(源)"></a>by ppa(源)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># add ppa</span><br><span class="line">sudo add-apt-repository ppa:webupd8team&#x2F;java</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># install oracle-java-installer</span><br><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+
+<h2 id="set-default-version"><a href="#set-default-version" class="headerlink" title="set default version"></a>set default version</h2><p>set jdk8 as your default jdk:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>If you already have a  jdk7 and installed jdk8, you can change between 7 and 8 by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk8 切换到jdk7</span><br><span class="line">sudo update-java-alternatives -s java-7-oracle</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk7 切换到jdk8</span><br><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>Test if jdk is installed properly,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+<h1 id="by-downloading-package"><a href="#by-downloading-package" class="headerlink" title="by downloading package"></a>by downloading package</h1><ol>
+<li><p>download .gz package from oracle HP.</p>
+</li>
+<li><p>make directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+
+<p>unzip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-7u60-linux-x64.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>modify enviroment variable</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>add,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set oracle jdk environment</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60  ## 这里要注意目录要换成自己解压的jdk 目录</span><br><span class="line">export JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre  </span><br><span class="line">export CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib  </span><br><span class="line">export PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>make modification effective,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>change default jdk version</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javac 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;jar jar &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;jar 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javah javah &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javah 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javap javap &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javap 300</span><br></pre></td></tr></table></figure>
+
+<p>and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+
+<p>If meesages are shown like bellow:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">There is only one alternative in link group java (providing &#x2F;usr&#x2F;bin&#x2F;java):</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java</span><br></pre></td></tr></table></figure>
+
+<p>there is no need to change version.</p>
+</li>
+<li><p>test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h1 id="install-on-windows"><a href="#install-on-windows" class="headerlink" title="install on windows"></a>install on windows</h1><p>参考这篇文章：</p>
+<p>Windows环境下JDK安装与环境变量配置详细的图文教程</p>
+<p><a href="http://www.cnblogs.com/liuhongfeng/p/4177568.html" target="_blank" rel="noopener">http://www.cnblogs.com/liuhongfeng/p/4177568.html</a></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Ubuntu 安装 JDK8 的两种方式</p>
+<p><a href="https://www.cnblogs.com/smiler/p/6939913.html" target="_blank" rel="noopener">https://www.cnblogs.com/smiler/p/6939913.html</a></p>
+<p>修改linux默认jdk版本</p>
+<p><a href="https://www.cnblogs.com/onetwo/p/5095481.html" target="_blank" rel="noopener">https://www.cnblogs.com/onetwo/p/5095481.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">install</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Java-02-Install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-Eclipse-01-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -471,788 +1341,9 @@
 
 
   
-    <article id="post-Linux-01-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/07/Linux-01-command/">Git-07-RM</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/07/Linux-01-command/" class="archive-article-date">
-  	<time datetime="2018-03-07T13:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="list"><a href="#list" class="headerlink" title="list"></a>list</h1><p>ls</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
-
-<p>加入<code>-l</code>参数，用来显示详细信息，包括日期、大小、权限、所有者等信息。</p>
-<h1 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h1><p>rm</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 直接rm 文件夹</span><br><span class="line">rm foldername</span><br></pre></td></tr></table></figure>
-<p>以上命令仅限于文件夹为空的情况。</p>
-<p>当文件夹不为空时，加上参数-rf即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 加上参数-rf</span><br><span class="line">rm -rf foldername</span><br></pre></td></tr></table></figure>
-
-<p>-r表示向下递归，无论有多少下级目录，一并删除。</p>
-<p>-f表示强行删除，没有提示信息。</p>
-<h1 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># add a new file</span><br><span class="line">touch filename</span><br><span class="line"># new as root</span><br><span class="line">sudo touch filename</span><br></pre></td></tr></table></figure>
-
-<h1 id="编辑文件"><a href="#编辑文件" class="headerlink" title="编辑文件"></a>编辑文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># edit by gedit</span><br><span class="line">sudo gedit filename</span><br></pre></td></tr></table></figure>
-
-<h1 id="移动文件"><a href="#移动文件" class="headerlink" title="移动文件"></a>移动文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mv 源 目的地</span><br><span class="line">mv source destination</span><br></pre></td></tr></table></figure>
-
-<h1 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h1><p>上述mv命令同样可以实现重命名的功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># mv 原名 新名</span><br><span class="line">mv oldname newname</span><br></pre></td></tr></table></figure>
-
-<h1 id="拷贝文件"><a href="#拷贝文件" class="headerlink" title="拷贝文件"></a>拷贝文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cp [选项] 源文件或目录 目标文件或目录 </span><br><span class="line">cp -i abc.c &#x2F;usr&#x2F;ds18b20</span><br></pre></td></tr></table></figure>
-
-<p>-i参数，当目标目录存在同名文件时，询问是否覆盖。</p>
-<p>-r参数，当源是目录时，向下复制整个目录。</p>
-<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>链接分为<strong>软链接</strong>和<strong>硬链接</strong>两种</p>
-<p>软链接类似windows下的快捷方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ln -s 源文件 目标文件</span><br><span class="line">ln -s filename &#x2F;usr&#x2F;local&#x2F;bin&#x2F;less</span><br></pre></td></tr></table></figure>
-
-<p>硬链接完整地复制一份源文件到目标地址。</p>
-<p>去掉-s参数得到的就是硬链接。</p>
-<p>无论是软链接还是硬链接，源地址的文件和目标地址的文件都能保持同步。</p>
-<h1 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h1><p>重命名文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename ori-name dest-name</span><br></pre></td></tr></table></figure>
-
-<p>重命名文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv folderA folderB</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="进程查看"><a href="#进程查看" class="headerlink" title="进程查看"></a>进程查看</h1><p><code>ps aux | grep **</code></p>
-<p>**处为进程包含的关键词，比如python</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Ubuntu 命令行教程</p>
-<p><a href="http://teliute.org/linux/Tecli/lesson5/lesson5.html" target="_blank" rel="noopener">http://teliute.org/linux/Tecli/lesson5/lesson5.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Basic Command</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/07/Linux-01-command/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-01-WhatisJava" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/Java-01-WhatisJava/">Java-01-What is Java</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/06/Java-01-WhatisJava/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:25:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="What-is-Java"><a href="#What-is-Java" class="headerlink" title="What is Java"></a>What is Java</h1><p>Java technology is both a programming language and a platform.</p>
-<p>Java programs are compiled and interpreted. Compilation translate Java code to an intermediate language called Java bytecode.  bytecode is in turn parsed and run(interpreted) by the Java Virtual Machine(JVM)-a translator between Java language and a underlying operating system and hardware. A compiled Java bytecode can run on any system that has a version of JVM.</p>
-<p>The Java platform is a software-only platform that can run on top of most hardware platforms. It consists of the JVM and the Java API.</p>
-<p>Java Platform comes in 3 versions:</p>
-<ul>
-<li>Java SE(Java Platform, Standard Edition) for desktop and sever applications.</li>
-<li>Java EE(Java Platform, Enterprise Edition) for web and enterprise applications.</li>
-<li>Java ME(Java Platform, Micro Edition) for applications running on resource-constrained devices(embedded device).</li>
-</ul>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>New to Java programming</p>
-<p><a href="https://www.ibm.com/developerworks/java/newto/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/java/newto/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Start</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/06/Java-01-WhatisJava/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-28-unittest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/25/Python-28-unittest/">Python-28-unittest</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/25/Python-28-unittest/" class="archive-article-date">
-  	<time datetime="2018-02-25T04:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>编写单元测试模块，对自己的代码进行测试。</p>
-<h2 id="对象模块"><a href="#对象模块" class="headerlink" title="对象模块"></a>对象模块</h2><p>例如，先自己写一个模块。具体实现功能为，行哦那个dict类继承得到一个新类Dict，并给它添加一个访问属性的功能。保存为mydict.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加访问属性的功能</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dict</span><span class="params">(dict)</span>:</span></span><br><span class="line">    <span class="comment"># 关键字参数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></span><br><span class="line">        <span class="comment"># 传入一个字典kw</span></span><br><span class="line">        super(Dict, self).__init__(**kw)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">'Dict has no attribute: %s'</span> % key)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        self[key] = value</span><br></pre></td></tr></table></figure>
-
-<h2 id="测试模块"><a href="#测试模块" class="headerlink" title="测试模块"></a>测试模块</h2><p>接下来编写测试模块，保存为mydict_test.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mydict <span class="keyword">import</span> Dict</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_init</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict(a=<span class="number">1</span>, b=<span class="string">'test'</span>)</span><br><span class="line">        self.assertEqual(d.a, <span class="number">1</span>)</span><br><span class="line">        self.assertEqual(d.b, <span class="string">'test'</span>)</span><br><span class="line">        self.assertTrue(isinstance(d, dict))</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_key</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        d[<span class="string">'key'</span>] = <span class="string">'value'</span></span><br><span class="line">        self.assertEqual(d.key, <span class="string">'value'</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attr</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        d.key = <span class="string">'value'</span></span><br><span class="line">        self.assertTrue(<span class="string">'key'</span> <span class="keyword">in</span> d)</span><br><span class="line">        self.assertEqual(d[<span class="string">'key'</span>], <span class="string">'value'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_keyerror</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(KeyError):</span><br><span class="line">            value = d[<span class="string">'empty'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attrerror</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
-
-<p>直接在mydict_dict.py目录下运行此Py文件。</p>
-<p>测试模块中的测试方法，需要以test开头。不然与啊你先那个测试模块时不会自动运行。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令行下</span></span><br><span class="line">python mydict_test.py</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unittest</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/25/Python-28-unittest/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-27-CustomizeClass" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-27-CustomizeClass/">Python-27-CustomizeClass</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-27-CustomizeClass/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:37:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="class中的特殊函数"><a href="#class中的特殊函数" class="headerlink" title="class中的特殊函数"></a>class中的特殊函数</h1><p>在类定义中加入<strong>__slots__属性</strong>可以限制添加到类的属性，加入<strong>__len__()方法</strong>可以让len()函数作用到此类的实例上。比如，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">23</span></span><br><span class="line">len(Student())</span><br></pre></td></tr></table></figure>
-
-<p>其实Python的class中还有很多这样有特殊用途的函数，利用这些特殊函数就可以定制属于自己的类。</p>
-<h1 id="定制一个自己的类"><a href="#定制一个自己的类" class="headerlink" title="定制一个自己的类"></a>定制一个自己的类</h1><h2 id="str"><a href="#str" class="headerlink" title="__str__()"></a>__str__()</h2><p>此方法可以友好地显示实例的信息。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self._name = name</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Student object(name: %s)'</span> % self._name</span><br><span class="line">    </span><br><span class="line">print(Student(<span class="string">'John'</span>))</span><br></pre></td></tr></table></figure>
-
-<p>输出友好的print显示：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student object(name: John)</span><br></pre></td></tr></table></figure>
-
-<p>但是不加print时，显示&lt;<strong>main</strong>.Student at 0x3dbbfb0&gt;，仍然不是很完美。需要加上一句，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self._name = name</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Student object(name: %s)'</span> % self._name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line">Student(<span class="string">'John'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果同上。原因在于，对用户显示用的是__str__()方法，而对程序开发者返回使用的是__repr__()方法。通过<code>__repr__ = __str__</code>实现对用户的显示。</p>
-<h2 id="iter"><a href="#iter" class="headerlink" title="__iter__()"></a>__iter__()</h2><p>要想对一个实例实现类似for * in *的迭代方式，比如迭代list或tuple，就需要在calss内添加__iter__()方法。</p>
-<p>其实，可以dir(list)，可以发现list就包含此方法。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="comment"># 实例本身就是迭代的对象，故返回本身</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">if</span> self.a &gt; <span class="number">10000</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration()</span><br><span class="line">        <span class="keyword">return</span> self.a</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> Fib():</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
-
-<h2 id="getitem"><a href="#getitem" class="headerlink" title="__getitem__()"></a>__getitem__()</h2><p>用于按位置取元素。类似于list[n]</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a, self.b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 实例本身就是迭代的对象，故返回本身</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">return</span> self.a</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line">s = Fib()</span><br><span class="line">s[<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="getattr"><a href="#getattr" class="headerlink" title="__getattr__"></a>__getattr__</h2><p>使用此方法实现链式调用，进而实现动态化调用。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">        self._path = path</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self._path, path))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">path = <span class="string">'www.google.com'</span></span><br><span class="line">c = Chain(path)</span><br><span class="line">c.user.account.net</span><br></pre></td></tr></table></figure>
-
-<p>有参数的时候，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">        self._path = path</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">users</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/users:%s'</span> % (self._path, name))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attr)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self._path, attr))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._path</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">path = <span class="string">'www.google.com'</span></span><br><span class="line">c = Chain(path)</span><br><span class="line"><span class="comment"># c.users.repos</span></span><br><span class="line">c.users(<span class="string">'michael'</span>).repos</span><br></pre></td></tr></table></figure>
-
-<h2 id="call"><a href="#call" class="headerlink" title="\call__"></a><em>\</em>call__</h2><p>实现直接运行实例，instance name()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'My name is %s.'</span> % self.name)</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line">s()</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">My name <span class="keyword">is</span> Tom.</span><br></pre></td></tr></table></figure>
-
-<p>通过callable(ins)来判断对象ins是不是函数。</p>
-<h2 id="eq"><a href="#eq" class="headerlink" title="__eq__"></a>__eq__</h2><p>一般的数值，布尔对象可以直接进行<code>==</code>操作，而自定义的对象并不可以。通过__eq__方法可以使<code>==</code>操作可以直接作用在自定义对象上。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> other <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> isinstance(other, Person):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="comment"># return self.name == other.name and self.age == other.age and self.score == other.score</span></span><br><span class="line">        <span class="keyword">return</span> self.__dict__ == other.__dict__</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__ne__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> self.__eq__(other)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Person(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line">b = Person(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line"><span class="comment"># b = Person('Jerry', 10, 90)</span></span><br><span class="line"></span><br><span class="line">print(a == b)</span><br><span class="line">print(dir(Person))</span><br></pre></td></tr></table></figure>
-
-<p>上例中<code>return self.name == other.name and self.age == other.age and self.score == other.score</code>可以用<code>self.__dict__ == other.__dict__</code>更简洁地实现。</p>
-<p>输出，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>]</span><br></pre></td></tr></table></figure>
-
-<p>从object继承，自定义一个类Foo的话，默认也会有__eq__方法，但是没有定义其==操作的对象时，只有在两个对象id相同时候(a=b)，才会输出<code>True</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = Foo(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line">n = Foo(<span class="string">'Tom'</span>, <span class="number">10</span>, <span class="number">90</span>)</span><br><span class="line"><span class="comment"># n = m</span></span><br><span class="line"></span><br><span class="line">print(m == n)</span><br><span class="line">print(dir(Foo))</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>]</span><br></pre></td></tr></table></figure>
-
-<p>参考，</p>
-<p><a href="https://qiita.com/adatchey/items/1f9acb3e2b66914a435b" target="_blank" rel="noopener">Pythonのクラスで<strong>eq</strong>などを汎用的に実装する</a></p>
-<h2 id="add"><a href="#add" class="headerlink" title="__add__"></a>__add__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AAA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = AAA(<span class="number">3</span>)</span><br><span class="line">n = AAA(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">print(m + n)</span><br></pre></td></tr></table></figure>
-
-<p>输出项加后的结果<code>8</code>。a + b计算过程中，<code>__add__方法</code>定义了前向计算，a中包含该方法，所以可以实现该假发运算。</p>
-<h2 id="radd"><a href="#radd" class="headerlink" title="__radd__"></a>__radd__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="comment"># return X(self.x + other.x)</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="comment"># return X(self.x + other.x)</span></span><br><span class="line">        <span class="keyword">return</span> self.x + other.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = X(<span class="number">5</span>)</span><br><span class="line"><span class="comment"># b = X(10)</span></span><br><span class="line">b = Y(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(a + b)</span><br></pre></td></tr></table></figure>
-
-<p>输出项加后的结果<code>15</code>。反向加法，上例a + b中a没有定义<code>__add__方法</code>，然后会检查b中有没有定义<code>__radd__方法</code>如果有，即可实现加法运算。</p>
-<p>参考，</p>
-<p><a href="https://blog.csdn.net/baidu_21088863/article/details/52214914" target="_blank" rel="noopener">python核心编程学习笔记-2016-08-15-01-左加法<strong>add</strong>和右加法__radd</a></p>
-<p> <a href="https://blog.csdn.net/u011019726/article/details/77834602" target="_blank" rel="noopener">python <strong>add</strong>和<strong>radd</strong></a> </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/zhanghongfeng/p/7227452.html" target="_blank" rel="noopener">流畅的python学习笔记：第十三章：重载运算符<strong>add</strong>,<strong>iadd</strong>,<strong>radd</strong>,<strong>mul</strong>,<strong>rmul</strong>,<strong>neg</strong>,<strong>eq</strong>,<strong>invert</strong>,<strong>pos</strong></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Customize Class</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-27-CustomizeClass/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-00-Tips/">Python-00-Tips</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-00-Tips/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:36:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="a-b-b-a-b"><a href="#a-b-b-a-b" class="headerlink" title="a, b = b, a + b"></a>a, b = b, a + b</h1><p><code>a, b = b, a + b</code>等价于</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = (b, a + b)</span><br><span class="line">a = t[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 这里代入的a没有被更新</span></span><br><span class="line">b = t[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>而不是像C语言中，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"><span class="comment"># a被上面一行更新了</span></span><br><span class="line">b = a + b</span><br></pre></td></tr></table></figure>
-
-<p>这个技巧在Python中可以<strong>用于交换两个变量</strong>，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
-
-<p>仅仅一行就实现了C语言中三行的功能。</p>
-<h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>判断一个元素是否存在于一个序列中，可以使用循环查询来实现。其实Python有个in的语法，可以更方便地达到目的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=range(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> <span class="keyword">in</span> a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">'male'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b <span class="keyword">in</span> [<span class="string">'male'</span>, <span class="string">'female'</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tips</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-00-Tips/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ME-01-LinearGuide" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/ME-01-LinearGuide/">ME-01-LinearGuide</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/ME-01-LinearGuide/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:33:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="有限ストロークタイプ"><a href="#有限ストロークタイプ" class="headerlink" title="有限ストロークタイプ"></a>有限ストロークタイプ</h1><h2 id="構造："><a href="#構造：" class="headerlink" title="構造："></a>構造：</h2><p>有限ストロークタイプ保持器が有り</p>
-<h2 id="特徴："><a href="#特徴：" class="headerlink" title="特徴："></a>特徴：</h2><p>鋼球の循環抵抗がないため摺動抵抗値の変動がきわめて小さく、立軸使用でも軽くてなめらかな摺動を実現できる。</p>
-<p><img src="/ME-01-LinearGuide/LinearGuide.gif" alt="/ME-01-LinearGuide/LinearGuide.gif"></p>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a href="http://www.ikont.co.jp/product/chocudo/chc26.html" target="_blank" rel="noopener">http://www.ikont.co.jp/product/chocudo/chc26.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linear Guide</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ME//" class="article-tag-list-link color3">ME</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/ME-01-LinearGuide/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-24-slot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-24-slot/">Python-24-slot</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-24-slot/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:30:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="绑定属性和方法"><a href="#绑定属性和方法" class="headerlink" title="绑定属性和方法"></a>绑定属性和方法</h1><p>Python是一种动态语言，允许在运行过程中给类和对象添加属性和方法。</p>
-<h2 id="针对实例"><a href="#针对实例" class="headerlink" title="针对实例"></a>针对实例</h2><p>对于某一个实例做的修改只对当前实例有效，其他实例不受影响。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="comment"># 注意需要引用Methodtype函数</span></span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MethodType</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"><span class="comment"># 具体添加</span></span><br><span class="line">s.set_score = MethodType(set_score, s)</span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，</p>
-<p>一是，新创建一个实例，并不会包含上述修改。</p>
-<p>二是，给实例添加方法的时候，如果直接把新函数赋值给实例，会导致函数出错。把实参赋给self了</p>
-<h2 id="针对类"><a href="#针对类" class="headerlink" title="针对类"></a>针对类</h2><p>针对类做的修改会影响到所有新创建的实例。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改类的attribute</span></span><br><span class="line">Student.name = <span class="string">'Tom'</span></span><br><span class="line">print(Student.name)</span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"></span><br><span class="line">Student.set_score = set_score</span><br><span class="line"></span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br><span class="line"></span><br><span class="line">s2 = Student()</span><br><span class="line">print(s2.name)</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line">Tom</span><br><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br><span class="line">Tom</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，给类添加的方法对旧的实例仍然有效。但是新修改的类属性，并不能覆盖旧的实例的属性。</p>
-<h1 id="slot"><a href="#slot" class="headerlink" title="__slot__"></a>__slot__</h1><p>既然可以任意时刻添加属性到类中，有时候就需要给业已添加的属性加上限制。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">  __slot__ = (name, age)</span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加age没有问题</span></span><br><span class="line">s.age = <span class="number">25</span></span><br><span class="line"><span class="comment"># 添加score出错</span></span><br><span class="line"><span class="comment"># 因为不在__slot__内</span></span><br><span class="line">s.score = <span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>值得注意的是</strong>，继承的子类不受父类的slot设置。除非在子类中也加入了slot，这样子类允许定义的属性就是父类slot+子类slot的和集。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">__slot__</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-24-slot/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/19/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/21/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/19/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/21/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2572,10 +2663,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PuTTY</a>
               </li>
              
@@ -2669,6 +2756,54 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">where</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PIL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">png</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">alpha</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">imread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">imwrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">decrease</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">print</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">end</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flush</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,744 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-13-str-strip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/07/Python-13-str-strip/">Python-13-str.strip</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/07/Python-13-str-strip/" class="archive-article-date">
+  	<time datetime="2018-02-07T14:49:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#str.strip()</p>
+<p>用于去除字符串头尾部指定的字符串，默认为空格。</p>
+<p>基本语法为<code>str.strip([chars])</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line">str = <span class="string">"0000000     Runoob  0000000"</span>; </span><br><span class="line"><span class="keyword">print</span> str.strip( <span class="string">'0'</span> );  <span class="comment"># 去除首尾字符 0</span></span><br><span class="line"></span><br><span class="line">str2 = <span class="string">"   Runoob      "</span>;   <span class="comment"># 去除首尾空格</span></span><br><span class="line"><span class="keyword">print</span> str2.strip();</span><br></pre></td></tr></table></figure>
+
+<p>只针对头尾部，中间的内容保留。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">string</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">strip</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/07/Python-13-str-strip/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-12-generator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/07/Python-12-generator/">Python-12-generator</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/07/Python-12-generator/" class="archive-article-date">
+  	<time datetime="2018-02-07T14:46:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>通过列表生成(list comprehension)可以轻松创建一个新的list。</p>
+<p>但是当此list很大时，直接生成的方式未必是个好的选择，因为这会占用大量的内存空间，浪费计算能力。Python中可以通过一边计算一边生成的方式来得到在循环中使用的元素。这就是生成器(generator)</p>
+<h1 id="创建方法1"><a href="#创建方法1" class="headerlink" title="创建方法1"></a>创建方法1</h1><p>创建generator的方式之一，直接把列表生成器的[]换成()即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>G = (x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>G</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x01F91BA0</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>要打印generator的各元素可以一直next(generator)或者generator.next()下去，直到计算到最后一个元素，然后抛出错误。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">25</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">36</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">64</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line"><span class="number">81</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(G)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure>
+
+<p>由于generator对象也是可迭代对象，故可以使用for循环来输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> g:</span><br><span class="line"><span class="meta">... </span>    print(n)</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建方法2-生成器函数"><a href="#创建方法2-生成器函数" class="headerlink" title="创建方法2-生成器函数"></a>创建方法2-生成器函数</h1><p>当推算算法比较复杂时，无法直接通过类似列表生成式的方式实现时，可以通过函数来实现。</p>
+<p>在函数中加入yield关键字来实现。参见</p>
+<p><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Generator</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/07/Python-12-generator/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-11-IteratorIteration" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/07/Python-11-IteratorIteration/">Python-11-IteratorIteration</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/07/Python-11-IteratorIteration/" class="archive-article-date">
+  	<time datetime="2018-02-07T14:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><p>可直接作用于for循环的数据类型有以下两类：</p>
+<p>一类是集合数据类型，如list,tuple,dict,set,str等</p>
+<p>一类是generator，包括简单生成器和带yield的generator function</p>
+<p>上述可以直接使用for循环的对象统称为可迭代对象，iterable</p>
+<p>使用isinstance() 判断一个对象是否Iterable</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance([], Iterable)</span><br></pre></td></tr></table></figure>
+
+<p>而generator的特殊性表现在其不仅可用for循环，而且还可被next()函数不断调用返回下一个值。</p>
+<p>这种可以被next()函数调用并不断计算返回下一个值的对象称为迭代器，Iterator</p>
+<p>使用isinstance() 判断一个对象是否Iterator</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance((x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)), Iterator)</span><br></pre></td></tr></table></figure>
+
+<p>综上，generator都是Iterator，而list之类的集合数据类型则只是Iterable，而不是Iterator</p>
+<p>但是可以使用iter()函数把Iterable变成Iterator。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(iter([]), Iterator)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(iter(<span class="string">'abc'</span>), Iterator)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>具体参见</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000#0" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000#0</a></p>
+<h1 id="iteration"><a href="#iteration" class="headerlink" title="iteration"></a>iteration</h1><p>众所周知，list和tuple可以for循环来迭代(iteration)。Python中只要是可迭代对象就可以通过迭代来遍历，比如dict：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+
+<p>此时的输出结果很可能不是想象中的顺序，因为dict并不是按照list的方式顺序存储。</p>
+<p>默认情况下，dict的迭代输出key。</p>
+<p>若要迭代value，可以<code>for i in d.values()</code></p>
+<p>如果同时迭代key和value可以用<code>for k, v in d.items()</code></p>
+<p>另外要判断一个对象是不是可迭代的（Iterable），可以通过：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(<span class="string">'abc'</span>,Iterable)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],Iterable)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，如果想对list实现像C语言一样的按下标循环。可以使用Python内置函数enumerate()来实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i, value <span class="keyword">in</span> enumerate([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]):</span><br><span class="line"><span class="meta">... </span>    print(i, value)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> a</span><br><span class="line"><span class="number">1</span> b</span><br><span class="line"><span class="number">2</span> c</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">List Comprehension</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/07/Python-11-IteratorIteration/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-10-ListComprehension" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/07/Python-10-ListComprehension/">Python-10-ListComprehension</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/07/Python-10-ListComprehension/" class="archive-article-date">
+  	<time datetime="2018-02-07T14:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Python list comprehension</p>
+<p>列表生成(list comprehension)是一种Python内置的生成式，使用它可以快速方便地创建新的list。</p>
+<p>最简单的创建list的方式，你可能想到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前闭后开</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(range(<span class="number">1</span>, <span class="number">11</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line"><span class="meta">... </span>   L.append(x * x)</span><br></pre></td></tr></table></figure>
+
+<p>使用列表生成式时，可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>)]</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
+
+<p>for之后可以加上if判断，例如这就可以只做偶数的平方</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>) <span class="keyword">if</span> x%<span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">64</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用双层循环，实现全排列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[m + n <span class="keyword">for</span> m <span class="keyword">in</span> <span class="string">'ABC'</span> <span class="keyword">for</span> n <span class="keyword">in</span> <span class="string">'XYZ'</span>]</span><br><span class="line">[<span class="string">'AX'</span>, <span class="string">'AY'</span>, <span class="string">'AZ'</span>, <span class="string">'BX'</span>, <span class="string">'BY'</span>, <span class="string">'BZ'</span>, <span class="string">'CX'</span>, <span class="string">'CY'</span>, <span class="string">'CZ'</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">List Comprehension</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/07/Python-10-ListComprehension/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-09-is" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/Python-09-is/">Python-09-is</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/Python-09-is/" class="archive-article-date">
+  	<time datetime="2018-02-06T13:46:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基础准备"><a href="#基础准备" class="headerlink" title="基础准备"></a>基础准备</h1><p>Python对象包括三个基本要素：id，type和value。其中id用来唯一标示一个对象；type用于标示对象的类型，<code>这里注意一下type()和isinstance()的区别</code>；而value是对象的值。</p>
+<p><code>还有，可以参考一下可变量和不可变量。</code></p>
+<h1 id="和is的区别"><a href="#和is的区别" class="headerlink" title="==和is的区别"></a>==和is的区别</h1><p>简单地讲，<code>a is b</code>用来判断a和b是不是指向同一个对象，依据id()来判断。</p>
+<p>而<code>a == b</code>是判断a和b的value是否相等。比如1 == 1.0，但是id(1) &lt;&gt;id(1.0)</p>
+<p>另外，由于数组是可变对象，故两个包含相同数据的数组==，但不是is</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>在Python中is和==都是用来比较两个对象是否“相等”，但是具体使用上二者区别较大。</p>
+<ul>
+<li>is用于比较两个对象是否完全相同，即二者是不是同一个对象。对于Python来讲就是判断二者的id是否相同。</li>
+<li>==用于比较二者的内容是否相同，而对象的地址可以不相同。对于Python来讲，做==运算时，默认调用对象的__eq__()方法。</li>
+</ul>
+<p>下面的例子中采用引用赋值，id不变所以is的结果为True：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; b &#x3D; a</span><br><span class="line">&gt;&gt;&gt; b is a </span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; b &#x3D;&#x3D; a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">4399987272</span><br><span class="line">&gt;&gt;&gt; id(b)</span><br><span class="line">4399987272</span><br></pre></td></tr></table></figure>
+
+<p>当进行copy赋值时，id不同所以is的结果也变为False：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; b &#x3D; a.copy()</span><br><span class="line">&gt;&gt;&gt; b is a</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; b &#x3D;&#x3D; a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">4399987592</span><br><span class="line">&gt;&gt;&gt; id(b)</span><br><span class="line">4399987464</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="使用区别"><a href="#使用区别" class="headerlink" title="使用区别"></a>使用区别</h2><p>判断内容是否相同时，当让可以直接使用==运算符，这也是最常见的，但是当相比之下is的运算速度更快。这是因为is不能重载，不像==运算需要调用对象内部的eq方法，这就避免了调用函数带来的开销。<br>综上，使用is可以提高执行速度，比如is最常用在判断是不是None：<br><code>a is None</code><br>否逻辑为：<br><code>a is not None</code></p>
+<hr>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>命令行下Python会对较小的整数对象(范围：[-5, 256])进行缓存，下次调用时直接从混存中获取，此时is和==的结果都是True：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; b&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; a&#x3D;&#x3D;b</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a is b</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; x&#x3D;1</span><br><span class="line">&gt;&gt;&gt; y&#x3D;1</span><br><span class="line">&gt;&gt;&gt; x&#x3D;&#x3D;y</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; x is y</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>当整数当取值超过上述范围时，缓存不再有效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; m&#x3D;257</span><br><span class="line">&gt;&gt;&gt; n&#x3D;257</span><br><span class="line">&gt;&gt;&gt; m&#x3D;&#x3D;n</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; m is n</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+<p>另外，在Pycharm中运行或者保存到文件再运行的话，isye不成立，因为解释器进行了一部分优化。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1、is 比较两个对象的 id 值是否相等，是否指向同一个内存地址；<br>2、== 比较的是两个对象的内容是否相等，值是否相等；<br>3、小整数对象[-5,256]在全局解释器范围内被放入缓存供重复使用；<br>4、is 运算符比 == 效率高，在变量和None进行比较时，应该使用 is。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/kiko0o0/p/8135184.html" target="_blank" rel="noopener">Python 中的比较：is 与 ==</a></p>
+<p><a href="https://stackoverflow.com/questions/3588776/how-is-eq-handled-in-python-and-in-what-order" target="_blank" rel="noopener">How is <strong>eq</strong> handled in Python and in what order?</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">is</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/Python-09-is/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-12-ma" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/Numpy-12-ma/">Numpy-12-ma</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/Numpy-12-ma/" class="archive-article-date">
+  	<time datetime="2018-02-06T13:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="掩码数组"><a href="#掩码数组" class="headerlink" title="掩码数组"></a>掩码数组</h1><p>Numpy的ma模块用于把ndarray的一部分mask掉，ndarray长度不变但被mask的地方变成制定的fill_value。</p>
+<p>例如[1,2,3]用[0,1,0]来mask之后得到[1,–,3]</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成元数据的ndarray</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">-1</span>,<span class="number">8</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>, <span class="number">-1</span>,  <span class="number">8</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成mask数组的ndarray</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mask = a&gt;<span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mask</span><br><span class="line">array([<span class="literal">False</span>, <span class="literal">False</span>,  <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>],dtype=bool)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成掩码数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx=np.ma.array(a,mask=mask)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx</span><br><span class="line">masked_array(data = [<span class="number">1</span> <span class="number">2</span> -- -- -- <span class="number">-1</span> --],</span><br><span class="line">             mask = [<span class="literal">False</span> <span class="literal">False</span>  <span class="literal">True</span>  <span class="literal">True</span>  <span class="literal">True</span> <span class="literal">False</span>  <span class="literal">True</span>],</span><br><span class="line">       fill_value = <span class="number">999999</span>)</span><br><span class="line"><span class="comment"># 掩码数组包含三个属性</span></span><br><span class="line"><span class="comment">#  data表示原始数据</span></span><br><span class="line"><span class="comment">#  mask表示生成掩码用的mask数组</span></span><br><span class="line"><span class="comment">#  fill_value表示替换值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.data</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>, <span class="number">-1</span>,  <span class="number">8</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.mask</span><br><span class="line">array([<span class="literal">False</span>, <span class="literal">False</span>,  <span class="literal">True</span>,  <span class="literal">True</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>],dtype=bool)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.fill_value</span><br><span class="line"><span class="number">999999</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .filled()来显示替换后的掩码数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.filled()</span><br><span class="line">array([     <span class="number">1</span>,      <span class="number">2</span>, <span class="number">999999</span>, <span class="number">999999</span>, <span class="number">999999</span>,     <span class="number">-1</span>, <span class="number">999999</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">0</span>] <span class="keyword">is</span> np.ma.masked</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">2</span>] <span class="keyword">is</span> np.ma.masked</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以指定元素修改masked属性</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx[<span class="number">0</span>]=np.ma.masked</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mx.filled()</span><br><span class="line">array([<span class="number">999999</span>,      <span class="number">2</span>, <span class="number">999999</span>, <span class="number">999999</span>, <span class="number">999999</span>,     <span class="number">-1</span>, <span class="number">999999</span>])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>同样适用于多维数组，mask数组也必须和元数据尺寸相同。</p>
+<p>np.ma.asarray(x)把x转换成掩码数组，但不进行具体掩码操作。相当于初始化</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/baoqian1993/article/details/52116510" target="_blank" rel="noopener">http://blog.csdn.net/baoqian1993/article/details/52116510</a></p>
+<p><a href="https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy/reference/maskedarray.baseclass.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ma</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/Numpy-12-ma/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-11-cumsum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/05/Numpy-11-cumsum/">Numpy-11-cumsum</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/05/Numpy-11-cumsum/" class="archive-article-date">
+  	<time datetime="2018-02-05T14:41:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-cumsum"><a href="#Numpy-cumsum" class="headerlink" title="Numpy.cumsum"></a>Numpy.cumsum</h1><p>输入Array，返回由各位置处的累加和组成的新Array。</p>
+<p>numpy.cumsum(a, axis=None, dtype=None, out=None)</p>
+<p>a: 输入ndarray</p>
+<p>axis: 指定计算所在的维度</p>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a)</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">21</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a, dtype=float)     <span class="comment"># specifies type of output value(s)</span></span><br><span class="line">array([  <span class="number">1.</span>,   <span class="number">3.</span>,   <span class="number">6.</span>,  <span class="number">10.</span>,  <span class="number">15.</span>,  <span class="number">21.</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">0</span>)      <span class="comment"># sum over rows for each of the 3 columns</span></span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">1</span>)      <span class="comment"># sum over columns for each of the 2 rows</span></span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">9</span>, <span class="number">15</span>]])</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">cumsum</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/05/Numpy-11-cumsum/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-GoogleAPI-01-QuickStart" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -715,786 +1453,9 @@
 
 
   
-    <article id="post-KalmanFilter-01-Covariance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/KalmanFilter-01-Covariance/">KalmanFilter-01-Covariance</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/11/KalmanFilter-01-Covariance/" class="archive-article-date">
-  	<time datetime="2018-01-11T13:59:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="从方差说起"><a href="#从方差说起" class="headerlink" title="从方差说起"></a>从方差说起</h1><p>首先回顾一下统计学中最常见的几个概念：均值，标准差，方差。</p>
-<ul>
-<li><p>均值<br>$$<br>\bar{X}=\frac{\sum_{i=1}^n  X_{i}}{n}<br>$$<br>​</p>
-</li>
-<li><p>标准差<br>$$<br>s=\sqrt{\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}}<br>$$<br>​</p>
-</li>
-<li><p>方差<br>$$<br>s^2=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$</p>
-</li>
-</ul>
-<p>样本均值X是总体均值U的最优估计值。虽然可以用其他样本统计量来估计总体的均值，比如样本中位数，众数或中列数。但是样本均值通常能提供最优的估计性。理由之一，多个样本的均值拥有比其他统计量更好的一致性（更小的标准差）。理由之二，样本均值X是总体均值U的一个无偏估计量，这意味着样本均值分布的中心趋近于总体均值的中心。（参考《初级统计学》著者: 特里奥拉）</p>
-<p>标准差表示样本中各点到均值的距离的平均，即可以用来评价样本数据的离散程度。标准差越大意味着，离散程度越大，数据分布不集中。标准差公式中分母使用n-1而不是n，这样可以以较小的样本集来更好地逼近总体的标准差，即统计学上的“无偏估计”。方差=标准差的平方</p>
-<p>代码实现：</p>
-<p>直接按公式实现<strong>标准差</strong>，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">sample_avr = np.average(sample)</span><br><span class="line">diff = sample - sample_avr</span><br><span class="line">sigma2 = (diff * diff).sum() / (len(sample)<span class="number">-1</span>)</span><br><span class="line">print(pow(sigma2, (<span class="number">1</span>/<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
-
-<p>或者直接用Numpy的内置函数实现<strong>标准差</strong>，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">print(np.std(array))</span><br><span class="line"><span class="comment"># 非偏估计，用ddof参数指定</span></span><br><span class="line">print(np.std(array, ddof=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-<h1 id="协方差的意义"><a href="#协方差的意义" class="headerlink" title="协方差的意义"></a>协方差的意义</h1><p>通过上面对方差的介绍，可以注意到方差（标准差）只能用来描述一维数据。而具体环境中遇到的数据通常是二维甚至是多维度的，这时候描述这组数据就不应该只是单独计算各组数据的方差，因为各组数据之间很可能包含某种程度的关联。可以通过<code>协方差</code>来反映这种相关关系的程度。</p>
-<p>我们已经知道方差的定义如下：<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$<br>拆开平方，<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (X_{i}-\bar{X})}{n-1}<br>$$<br>再把分子的后项换成第二维度的Y，得到<br>$$<br>var(x,y)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (Y_{i}-\bar{Y})}{n-1}<br>$$<br>※顺便说一下方差的英文是variance，协方差的英文是covariance。</p>
-<p> 由上述定义可知，<br>$$<br>cov(X,X) = var(X)<br>$$</p>
-<p>$$<br>cov(X,Y) = cov(Y,X)<br>$$</p>
-<p>代码实现：</p>
-<p>按定义实现方差，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sample_avr = np.average(array)</span><br><span class="line">diff = array - sample_avr</span><br><span class="line">sigma2_m = (diff * diff).sum() / (len(array)<span class="number">-1</span>)</span><br><span class="line">print(<span class="string">'manual var=&#123;&#125;'</span>.format(sigma2_m))</span><br></pre></td></tr></table></figure>
-
-<p>Numpy函数实现方差，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sigma2_a = np.var(array, ddof=<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'auto var=&#123;&#125;'</span>.format(sigma2_a))</span><br></pre></td></tr></table></figure>
-
-<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>单个协方差用于表示两个维度间的相关关系，当维度增多时就需要多个协方差。数据集的维度为n时，就需要$\frac{n*(n-1)}{2}$个协方差。这些协方差通过矩阵来组织时，就称为协方差矩阵。<br>$$<br>C_{n\times n}=(c_{i,j},c_{i,j}=cov(Dim_{i},Dim_{j}))<br>$$</p>
-<p>$$<br>C =<br>\begin{pmatrix}<br>cov(x,x) &amp; cov(x,y) &amp; cov(x,z) \<br>cov(y,x) &amp; cov(y,y) &amp; cov(y,z) \<br>cov(z,x) &amp; cov(z,y) &amp; cov(z,z) \<br> \end{pmatrix}<br>$$<br>在此也可看到，协方差矩阵是个对称矩阵，且其对角线上是各维度上的方差。</p>
-<p>Py代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证ndArray协方差矩阵</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample_num = <span class="number">10</span></span><br><span class="line">sample_dim = <span class="number">3</span></span><br><span class="line">sample = np.random.randn(sample_num, sample_dim)</span><br><span class="line"></span><br><span class="line">dim0 = sample[:,<span class="number">0</span>]</span><br><span class="line">dim1 = sample[:,<span class="number">1</span>]</span><br><span class="line">dim2 = sample[:,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">dim0_mean = np.average(dim0)</span><br><span class="line">dim1_mean = np.average(dim1)</span><br><span class="line">dim2_mean = np.average(dim2)</span><br><span class="line"></span><br><span class="line">cov01 = ((dim0 - dim0_mean) * (dim1 - dim1_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov02 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov12 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(cov01,cov02,cov12)</span><br></pre></td></tr></table></figure>
-
-<p>直接Numpy函数实现如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证numpy.var-std-cov</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array2 = np.array([[<span class="number">0</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">0</span>]]).T</span><br><span class="line">cov_a = np.cov(array2)</span><br><span class="line">print(<span class="string">'auto cov='</span>)</span><br><span class="line">print(cov_a)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅谈协方差矩阵<a href="http://pinkyjie.com/2010/08/31/covariance/" target="_blank" rel="noopener">http://pinkyjie.com/2010/08/31/covariance/</a></p>
-<p>在线LaTeX编辑<a href="http://latex.codecogs.com/eqneditor/editor.php" target="_blank" rel="noopener">https://www.cnblogs.com/GarfieldEr007/p/5577727.html</a></p>
-<p>numpy.cov：<a href="https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Kalman Filter</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Covariance</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Kalman-Filter//" class="article-tag-list-link color4">Kalman Filter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/11/KalmanFilter-01-Covariance/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-10-Stash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/08/Git-10-Stash/">Git-08-Stash</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/08/Git-10-Stash/" class="archive-article-date">
-  	<time datetime="2018-01-08T11:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Stash"><a href="#Git-Stash" class="headerlink" title="Git Stash"></a>Git Stash</h1><p>If you are working on a branch called <strong>Ver1.0</strong>, and you find a bug in file <strong>AAA</strong> on <strong>master branch</strong> that need to be fixed immediately.</p>
-<p>You can create a new <strong>bug branch</strong> from master, work on this <strong>bug branch</strong> to fix the bug, commit it and switch to master branch and merge the modification. If you commit them all, you will get too many unuseful commits.</p>
-<p>But when you want to add/commit, some modification will be add/commit to <strong>bug branch</strong> if <strong>Ver1.0</strong> is NOT clean. This modification is not what the <strong>bug branch</strong> should have.</p>
-<p>Before you switch to another branch, note that if your working directory or staging area has uncommitted changes that conflict with the branch you’re checking out, Git won’t let you switch branches. So, keep it CLEAN.</p>
-<p>Or, you can stash working directory to <strong>Ver1.0</strong> branch by</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
-
-<p>If you enter <code>git status</code>, you will find the working area is already CLEAN. All modification should be added, but don’n need to be committed.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># on branch Ver1.0</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"># create branch bug from master</span><br><span class="line">git checkout master</span><br><span class="line">git checkout -b bug</span><br><span class="line"></span><br><span class="line">### fix the bug ###</span><br><span class="line">git add AAA</span><br><span class="line">git commit AAA -m &quot;fix bug&quot;</span><br><span class="line"></span><br><span class="line"># merge&#x2F;del bug</span><br><span class="line">git checkout master</span><br><span class="line">git merge bug</span><br><span class="line">git branch -d bug</span><br><span class="line"></span><br><span class="line"># switch to branch Ver1.0</span><br><span class="line">git checkout Ver1.0</span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"># or</span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;0&#125;</span><br><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
-
-<p>Reference:</p>
-<p><a href="https://segmentfault.com/q/1010000000156026" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000156026</a></p>
-<p><a href="https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stash</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/08/Git-10-Stash/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-09-Push" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/08/Git-09-Push/">Git-09-Push</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/08/Git-09-Push/" class="archive-article-date">
-  	<time datetime="2018-01-08T11:22:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h1><p><code>git push</code> command is used to push file from <strong>local repo</strong> to <strong>remote repo</strong>.</p>
-<p>Basically, you can use push command by</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote repo name&gt; &lt;local branch name&gt; &lt;remote branch name&gt;</span><br><span class="line"># example:</span><br><span class="line"># (1st master is local master branch)</span><br><span class="line"># (2nd master is remote master branch)</span><br><span class="line">git push origin master : refs&#x2F;for&#x2F;master</span><br></pre></td></tr></table></figure>
-
-<p>There are 2 ways to use this command.</p>
-<h2 id="I-connect-local-repo-with-remote-repo"><a href="#I-connect-local-repo-with-remote-repo" class="headerlink" title="I.connect local repo with remote repo"></a>I.connect local repo with remote repo</h2><ol>
-<li><p>Create a repo on your Github.</p>
-</li>
-<li><p>Create a local repo on your PC.</p>
-</li>
-<li><p>Name a remote repo as <code>origin</code></p>
-</li>
-</ol>
-<p>under your local repo directory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># origin: remote repo name</span><br><span class="line">git remote add origin git@github.com:yourID&#x2F;project.git</span><br></pre></td></tr></table></figure>
-
-<p>to add a remote repo called <code>origin</code>.</p>
-<ol start="4">
-<li>First push:</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
-<p>Push local repo to remote repo. Here <code>-u</code> is to relate <strong>local master branch</strong> with <strong>remote master branch</strong>.</p>
-<p>Later, you can just enter</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-<p>to push local master branch with the remote branch, that has been related.</p>
-<p>If you want to push the present branch to remote, and the present branch has been related, just enter:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin</span><br></pre></td></tr></table></figure>
-
-<p>If present repo has only one branch, remote repo name can be omitted.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># use git branch -r</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li><code>git push</code> command can be used to delete a branch</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin : &lt;remote branch name&gt;</span><br></pre></td></tr></table></figure>
-
-<p>When push a local repo, if you omit the local branch, remote branch will be deleted.</p>
-<ol start="6">
-<li>Create new remote branch using <code>git push</code></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;local branch name&gt; : &lt;new branch name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="II-clone-from-remote-repo"><a href="#II-clone-from-remote-repo" class="headerlink" title="II.clone from remote repo"></a>II.clone from remote repo</h2><ol>
-<li>clone</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;URL&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>push</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-<h2 id="About-refs-for"><a href="#About-refs-for" class="headerlink" title="About refs/for"></a>About refs/for</h2><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://www.cnblogs.com/qianqiannian/p/6008140.html" target="_blank" rel="noopener">https://www.cnblogs.com/qianqiannian/p/6008140.html</a></p>
-<p><a href="https://www.cnblogs.com/springbarley/archive/2012/11/03/2752984.html" target="_blank" rel="noopener">https://www.cnblogs.com/springbarley/archive/2012/11/03/2752984.html</a></p>
-<p>fetch + merge &gt; pull</p>
-<p><a href="http://www.cnblogs.com/flying_bat/p/3408634.html" target="_blank" rel="noopener">http://www.cnblogs.com/flying_bat/p/3408634.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/08/Git-09-Push/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-08-NewBranch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/08/Git-08-NewBranch/">Git-08-NewBranch</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/08/Git-08-NewBranch/" class="archive-article-date">
-  	<time datetime="2018-01-08T11:20:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-New-Branch"><a href="#Git-New-Branch" class="headerlink" title="Git New Branch"></a>Git New Branch</h1><p>Use <code>git branch</code> to show present branches.</p>
-<p>Use <code>git branch &lt;name&gt;</code> to create a new branch called <name>.</p>
-<p>Use <code>git checkout &lt;name&gt;</code> to switch to <name> branch.</p>
-<p>Use <code>git checkout -b &lt;name&gt;</code> to create new and switch to it.</p>
-<p>Use <code>git merge &lt;name&gt;</code> to merge <name> branch to the present branch. So <code>checkout</code> to the present branch at first. By default, Git will merge in <strong>fast-forward</strong> mode, and new branch information will be lost when you delete this new branch. You can use force Git not to use fast-forward mode by <code>git merge --no-ff -m &quot;comment here&quot; &lt;branchName&gt;</code>, and you can still see branch by <code>git branch</code>.</p>
-<p>Use <code>git branch -d &lt;name&gt;</code> to delete <name> branch.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">New Branch</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/08/Git-08-NewBranch/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-07-RM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-07-RM/">Git-07-RM</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-07-RM/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:37:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-RM"><a href="#Git-RM" class="headerlink" title="Git RM"></a>Git RM</h1><h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm test.txt</span><br><span class="line">git commit -m &quot;delete file&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Go-back"><a href="#Go-back" class="headerlink" title="Go back"></a>Go back</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">rm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-07-RM/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-06-CheckoutReset" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-06-CheckoutReset/">Git-06-CheckoutReset</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-06-CheckoutReset/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:36:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Checkout-amp-Reset"><a href="#Git-Checkout-amp-Reset" class="headerlink" title="Git Checkout &amp; Reset"></a>Git Checkout &amp; Reset</h1><h2 id="Modified-not-Added"><a href="#Modified-not-Added" class="headerlink" title="Modified, not Added"></a>Modified, not Added</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Return: file before modified </p>
-<h2 id="Added-not-Committed"><a href="#Added-not-Committed" class="headerlink" title="Added, not Committed"></a>Added, not Committed</h2><p><strong>not modified -&gt; unstage</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<p>return: file unstaged</p>
-<p><strong>modified -&gt; discard changes</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<p>return: file staged, but not modified</p>
-<p>Then you can use <code>git checkout -- &lt;filename&gt;</code> to make repository clean.</p>
-<h2 id="Committed"><a href="#Committed" class="headerlink" title="Committed"></a>Committed</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
-
-<p>return: file before last commit</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git log --pretty&#x3D;oneline</span><br><span class="line">225ac768ec0c079f03f37421038d63010aee734c line 1 commit</span><br><span class="line">641da51982ad0a39c890032e4233af018601c1e8 line 0 commit</span><br><span class="line"></span><br><span class="line">git reset --hard 225ac</span><br></pre></td></tr></table></figure>
-
-<p>return: file at 225ac…</p>
-<p>If Git window is closed, use <code>reflog</code> to call history commands.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">225ac76 HEAD@&#123;0&#125;: reset: moving to HEAD</span><br><span class="line">225ac76 HEAD@&#123;1&#125;: reset: moving to 225ac</span><br><span class="line">641da51 HEAD@&#123;2&#125;: reset: moving to HEAD</span><br><span class="line">641da51 HEAD@&#123;3&#125;: reset: moving to HEAD^</span><br><span class="line">225ac76 HEAD@&#123;4&#125;: reset: moving to HEAD</span><br><span class="line">225ac76 HEAD@&#123;5&#125;: reset: moving to 225ac</span><br><span class="line">641da51 HEAD@&#123;6&#125;: reset: moving to HEAD^</span><br><span class="line">225ac76 HEAD@&#123;7&#125;: reset: moving to HEAD</span><br><span class="line">225ac76 HEAD@&#123;8&#125;: commit: line 1 commit</span><br><span class="line">641da51 HEAD@&#123;9&#125;: commit (initial): line 0 commit</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Checkout</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Reset</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-06-CheckoutReset/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-05-StatusDiff" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-05-StatusDiff/">Git-05-StatusDiff</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-05-StatusDiff/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:35:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Status-amp-Diff"><a href="#Git-Status-amp-Diff" class="headerlink" title="Git Status &amp; Diff"></a>Git Status &amp; Diff</h1><h2 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h2><p>Show git repository status.</p>
-<p>If nothing changed:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
-
-<p>If file is modified and not be staged:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>If file is modified and staged:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h2><p>If file is modified and not be staged:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a&#x2F;test.txt b&#x2F;test.txt</span><br><span class="line">index 27a13b8..30d9986 100644</span><br><span class="line">--- a&#x2F;test.txt</span><br><span class="line">+++ b&#x2F;test.txt</span><br><span class="line">@@ -1 +1,2 @@</span><br><span class="line">-line 0</span><br><span class="line">\ No newline at end of file</span><br><span class="line">+line 0</span><br><span class="line">+line 1</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Status</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Diff</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-05-StatusDiff/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/22/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/24/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/22/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/24/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2814,10 +2775,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">WINDOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PuTTY</a>
               </li>
              
@@ -2911,6 +2868,54 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">where</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PIL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">png</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">alpha</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">imread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">imwrite</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">decrease</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">print</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">end</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flush</a>
               </li>
             
             <div class="clearfix"></div>
