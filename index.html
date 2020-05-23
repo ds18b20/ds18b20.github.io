@@ -156,6 +156,291 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Pandas-08-read-csv-list" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/Pandas-08-read-csv-list/">Pandas-08-read-csv-list</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/23/Pandas-08-read-csv-list/" class="archive-article-date">
+  	<time datetime="2020-05-22T23:12:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Pandas读入csv后str转list"><a href="#Pandas读入csv后str转list" class="headerlink" title="Pandas读入csv后str转list"></a>Pandas读入csv后str转list</h1><p>使用df.to_csv()方法存储list类型到csv文件后，下一步读入csv时list类型会以str方式读入。</p>
+<p>使用literal_eval()方法可以把str转换成list。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>literal_eval(<span class="string">'[1.23, 2.34]'</span>)</span><br><span class="line">[<span class="number">1.23</span>, <span class="number">2.34</span>]</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/23111990/pandas-dataframe-stored-list-as-string-how-to-convert-back-to-list/23112008" target="_blank" rel="noopener">https://stackoverflow.com/questions/23111990/pandas-dataframe-stored-list-as-string-how-to-convert-back-to-list/23112008</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">read_csv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/23/Pandas-08-read-csv-list/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pandas-07-to-list" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/Pandas-07-to-list/">Pandas-07-to-list</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/23/Pandas-07-to-list/" class="archive-article-date">
+  	<time datetime="2020-05-22T23:04:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Pandas-DataFrame转list"><a href="#Pandas-DataFrame转list" class="headerlink" title="Pandas DataFrame转list"></a>Pandas DataFrame转list</h1><p>先.values然后tolist()方法，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.values.tolist()</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/19585280/convert-pandas-dataframe-into-list-of-lists" target="_blank" rel="noopener">https://stackoverflow.com/questions/19585280/convert-pandas-dataframe-into-list-of-lists</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tolist</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/23/Pandas-07-to-list/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pandas-06-to-csv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/Pandas-06-to-csv/">Pandas-06-to-csv</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/23/Pandas-06-to-csv/" class="archive-article-date">
+  	<time datetime="2020-05-22T21:16:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Pandas不输出index"><a href="#Pandas不输出index" class="headerlink" title="Pandas不输出index"></a>Pandas不输出index</h1><p>从DataFrame输出csv时，默认最左列输出index。可以通过指定index参数为False来关闭。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">'your.csv'</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/20845213/how-to-avoid-python-pandas-creating-an-index-in-a-saved-csv" target="_blank" rel="noopener">https://stackoverflow.com/questions/20845213/how-to-avoid-python-pandas-creating-an-index-in-a-saved-csv</a></p>
+<h1 id="读入csv时指定index"><a href="#读入csv时指定index" class="headerlink" title="读入csv时指定index"></a>读入csv时指定index</h1><p>类似地，读入csv时可以指定index列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">'data.csv'</span>, index_col=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://note.nkmk.me/python-pandas-index-row-column/" target="_blank" rel="noopener">https://note.nkmk.me/python-pandas-index-row-column/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">to_csv</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">index</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/23/Pandas-06-to-csv/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Opencv-05-imread-imwrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -440,10 +725,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">src = cv2.imread(<span class="string">'sample.png'</span>, cv2.IMREAD_UNCHANGED)</span><br><span class="line"></span><br><span class="line">bgr = src[:,:,:<span class="number">3</span>] <span class="comment"># Channels 0..2</span></span><br><span class="line">alpha = src[:,:,<span class="number">3</span>] <span class="comment"># Channel 3</span></span><br><span class="line"></span><br><span class="line">result = np.dstack([bgr, alpha]) <span class="comment"># Add the alpha channel</span></span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">'output.png'</span>, result)</span><br></pre></td></tr></table></figure>
 
 <p><a href="https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python</a></p>
-<h1 id="不考虑alpha的问题"><a href="#不考虑alpha的问题" class="headerlink" title="不考虑alpha的问题"></a>不考虑alpha的问题</h1><p>读入png图像后直接进行下一步处理或者显示的话，会得到意想不到的奇怪颜色。</p>
+<h1 id="忽视alpha的问题"><a href="#忽视alpha的问题" class="headerlink" title="忽视alpha的问题"></a>忽视alpha的问题</h1><p>读入png图像后直接进行下一步处理或者显示的话，会得到意想不到的奇怪颜色。</p>
 <p>通过alpha来对原图像做mask预处理的话，可以参考下面的链接：</p>
 <p><a href="https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil" target="_blank" rel="noopener">https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil</a></p>
-<p>当然，也可以使用numpy的乘法来实现。</p>
+<p>当然，也可以使用numpy的乘法来实现。具体来讲，先提取出来alpha通道，然后二值化生成mask。最后用mask和rbg阵列做乘法运算得到3通道的图像阵列。</p>
 
       
 
@@ -770,303 +1055,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/20/Python-60-print-end-flush/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-59-range-decrease" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/20/Python-59-range-decrease/">Python-59-range-decrease</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/20/Python-59-range-decrease/" class="archive-article-date">
-  	<time datetime="2020-05-20T01:42:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="range-递减输出"><a href="#range-递减输出" class="headerlink" title="range()递减输出"></a>range()递减输出</h1><p>下面的代码按照从10到1，step为-1的方式输出列表。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>, <span class="number">0</span>, <span class="number">-1</span>)<span class="string">':</span></span><br><span class="line"><span class="string">    print(i)</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.runoob.com/python/python-func-range.html" target="_blank" rel="noopener">https://www.runoob.com/python/python-func-range.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">range</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">decrease</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/20/Python-59-range-decrease/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-36-nonezero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/Numpy-36-nonezero/">Numpy-36-nonezero</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/Numpy-36-nonezero/" class="archive-article-date">
-  	<time datetime="2020-05-06T13:42:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>可以看作是一个特化的where方法，限定condition为<em>不等于0</em>。找到满足condition的所有元素的位置并返回。</p>
-<blockquote>
-<p> numpy.nonzero(a)</p>
-<p> Return the indices of the elements that are non-zero.</p>
-<p> Returns a tuple of arrays, one for each dimension of <em>a</em>, containing the indices of the non-zero elements in that dimension. The values in <em>a</em> are always tested and returned in row-major, C-style order. The corresponding non-zero values can be obtained with:</p>
-</blockquote>
-<p>验证如下：</p>
-<p>首先生成一个3X3的随机数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">array([[<span class="number">-0.46079926</span>,  <span class="number">0.71230588</span>, <span class="number">-0.45910822</span>],</span><br><span class="line">       [ <span class="number">0.02227204</span>,  <span class="number">0.69423378</span>,  <span class="number">1.09299065</span>],</span><br><span class="line">       [<span class="number">-0.49647728</span>, <span class="number">-1.18294834</span>,  <span class="number">0.5020136</span> ]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=np.nonzero(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。这一点也和where相同。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">noezero</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/Numpy-36-nonezero/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-35-where" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/Numpy-35-where/">Numpy-35-where</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/Numpy-35-where/" class="archive-article-date">
-  	<time datetime="2020-05-06T13:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>where方法通过给定condition，找到在原ndArray中满足condition的所有元素的位置并返回。</p>
-<blockquote>
-<p> numpy.where(condition[, x, y])</p>
-<p> Return elements chosen from x or y depending on condition.</p>
-</blockquote>
-<p>验证如下：</p>
-<p>首先生成一个3X3的随机数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">-1.15670308</span>, <span class="number">-1.61458477</span>, <span class="number">-0.56441277</span>],</span><br><span class="line">       [<span class="number">-2.31218808</span>, <span class="number">-1.73006636</span>,  <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">-0.46809921</span>, <span class="number">-2.32801438</span>,  <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>如果只有condition参数，则返回所有符合该condition的元素所在的位置。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b=np.where(a&gt;<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">(array([<span class="number">1</span>, <span class="number">2</span>]), array([<span class="number">2</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。</p>
-<h2 id="附带运算"><a href="#附带运算" class="headerlink" title="附带运算"></a>附带运算</h2><p>如果在后面加上可选的两个参数则可以根据condition返回一个新的数组。</p>
-<p>其原理等同于<code>[xv if c else yv for c, xv, yv in zip(condition, x, y)]</code></p>
-<p>具体例子如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.where(a&gt;<span class="number">0</span>, a, -a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1.15670308</span>, <span class="number">1.61458477</span>, <span class="number">0.56441277</span>],</span><br><span class="line">       [<span class="number">2.31218808</span>, <span class="number">1.73006636</span>, <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">0.46809921</span>, <span class="number">2.32801438</span>, <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">where</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/Numpy-35-where/">展开全文 >></a>
         </p>
       
 
@@ -2559,6 +2547,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flush</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to_csv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">index</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tolist</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">read_csv</a>
               </li>
             
             <div class="clearfix"></div>

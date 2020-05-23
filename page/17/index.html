@@ -156,6 +156,379 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-01-InstallandSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/TensorFlow-01-InstallandSetting/">TensorFlow-01-InstallandSetting</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/08/TensorFlow-01-InstallandSetting/" class="archive-article-date">
+  	<time datetime="2018-04-08T02:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CPU-GPU版本"><a href="#CPU-GPU版本" class="headerlink" title="CPU/GPU版本"></a>CPU/GPU版本</h1><p>TensorFlow有CPU和GPU两种安装类型，系统中没有安装NVIDIA的GPU时，只能安装使用CPU版本。但是，起步也可以使用CPU版本。</p>
+<h1 id="Anaconda中安装"><a href="#Anaconda中安装" class="headerlink" title="Anaconda中安装"></a>Anaconda中安装</h1><ol>
+<li><p>首先确定已经已经安装Anaconda</p>
+</li>
+<li><p>建立一个独立的conda开发环境，命名为tensorflow：</p>
+</li>
+</ol>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt; conda create -n tensorflow</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>激活上述conda开发环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt; activate tensorflow</span><br><span class="line">(tensorflow)C:\&gt;  # 你的提示符应该发生变化</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装</p>
+<p>安装CPU版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow)C:\&gt; pip install --ignore-installed --upgrade https:&#x2F;&#x2F;storage.googleapis.com&#x2F;tensorflow&#x2F;windows&#x2F;cpu&#x2F;tensorflow-1.1.0-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
+
+<p>安装支持 GPU 的 TensorFlow（写在一行）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow)C:\&gt; pip install --ignore-installed --upgrade https:&#x2F;&#x2F;storage.googleapis.com&#x2F;tensorflow&#x2F;windows&#x2F;gpu&#x2F;tensorflow_gpu-1.1.0-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h1><p>Mac中的安装顺序：</p>
+<p>使用 Virtualenv 进行安装 </p>
+<ol>
+<li><p>安装pip和virtualenv </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br><span class="line">$ pip install --upgrade virtualenv</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>创建一个virtualenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv --system-site-packages -p python3 targetDirectory # for Python 3.n</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>激活virtualenv</p>
+<p>cd切换到上述targetDirectory目录，键入命令： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Air:~ hq$ cd ~&#x2F;tensorflow</span><br><span class="line">Air:tensorflow hq$ source .&#x2F;bin&#x2F;activate (tensorflow)</span><br><span class="line">Air:tensorflow huangqiying$</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>退出次virtualenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="编写bash文件"><a href="#编写bash文件" class="headerlink" title="编写bash文件"></a>编写bash文件</h2><p>在Mac系统中可以编写bash script来实现类似Windows下的batch file的功能。</p>
+<h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><p>文本文件内编写如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">! &#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">java -cp &quot;.;.&#x2F;supportlibraries&#x2F;Framework_Core.jar;.&#x2F;supportlibraries&#x2F;Framework_DataTable.jar;.&#x2F;supportlibraries&#x2F;Framework_Reporting.jar;.&#x2F;supportlibraries&#x2F;Framework_Utilities.jar;.&#x2F;supportlibraries&#x2F;poi-3.8-20120326.jar;PATH_TO_YOUR_SELENIUM_SERVER_FOLDER&#x2F;selenium-server-standalone-2.19.0.jar&quot; allocator.testTrack</span><br></pre></td></tr></table></figure>
+
+<p>保存为<code>scriptfilename.sh</code></p>
+<h3 id="修改文件属性"><a href="#修改文件属性" class="headerlink" title="修改文件属性"></a>修改文件属性</h3><p>然后通过下面的命令使得此文件可读可写可执行：<br>chmod 775 scriptfilename.sh</p>
+<h3 id="运行bash"><a href="#运行bash" class="headerlink" title="运行bash"></a>运行bash</h3><p>最后cd切换到所在目录执行：<br>bash scriptfilename.sh</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://stackoverflow.com/questions/14065069/equivalent-of-bat-in-mac-os" target="_blank" rel="noopener">https://stackoverflow.com/questions/14065069/equivalent-of-bat-in-mac-os</a></p>
+<h1 id="Training-Data-Set"><a href="#Training-Data-Set" class="headerlink" title="Training Data Set"></a>Training Data Set</h1><h2 id="CIFAR10"><a href="#CIFAR10" class="headerlink" title="CIFAR10:"></a>CIFAR10:</h2><p>10 classes(airplane/automobile/bird…)</p>
+<p>50,000 training images</p>
+<p>10,000 testing images</p>
+<p>32*32 pixels</p>
+<h2 id="MINIST"><a href="#MINIST" class="headerlink" title="MINIST"></a>MINIST</h2><p>10 classes(1/2/3…)</p>
+<p>50,000 training images</p>
+<p>10,000 testing images</p>
+<p>28*28 pixels</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>在 Windows 上安装 TensorFlow</p>
+<p><a href="https://efeiefei.gitbooks.io/tensorflow_documents_zh/install/install_windows.html" target="_blank" rel="noopener">https://efeiefei.gitbooks.io/tensorflow_documents_zh/install/install_windows.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Install</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Setting</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/TensorFlow-01-InstallandSetting/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Math-02-SoftMax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/07/Math-02-SoftMax/">Math-02-SoftMax</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/07/Math-02-SoftMax/" class="archive-article-date">
+  	<time datetime="2018-04-07T05:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h1><p>函数的定义如下，<br>$$<br>\begin{eqnarray}<br>  a^L_j = \frac{e^{z^L_j}}{\sum_k e^{z^L_k}},<br>\tag{1}\end{eqnarray}<br>$$<br>softmax函数的输出有以下特点，</p>
+<ol>
+<li>输出值介于(0, 1]之间；</li>
+<li>输入序列中最大项占序列总和的比例，经过softmax函数后，会大幅度扩大。简言之，大的越大，小的越小。</li>
+</ol>
+<p>代码显示如下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> common.functions <span class="keyword">import</span> softmax</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">10</span>,<span class="number">11</span>,<span class="number">9</span>])</span><br><span class="line"></span><br><span class="line">a = x / np.sum(a)</span><br><span class="line">print(<span class="string">"原始比例: &#123;&#125;"</span>.format(a))</span><br><span class="line">b = softmax(x)</span><br><span class="line">print(<span class="string">"Softmax比例: &#123;&#125;"</span>.format(b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].bar(np.arange(<span class="number">3</span>),a)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].bar(np.arange(<span class="number">3</span>),b, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为，</p>
+<p><img src="Math-02-SoftMax%5Csoftmax.png" alt=""></p>
+<h1 id="注意防止溢出"><a href="#注意防止溢出" class="headerlink" title="注意防止溢出"></a>注意防止溢出</h1><p>$$<br>y_j=\frac{e^{a_{k}}}{\sum^{N}<em>{i=1}e^{a</em>{i}}}<br>$$</p>
+<p>应用softmax函数时，应该注意防止分子分母过大带来的计算溢出。</p>
+<p>由于包含指数运算，当a_i绝对值过大时，e^a_i会指数级增大，这就会带来overflow溢出错误。可以注意到其实各元素的a_i的差值并不是很大，处理方法为，分子分母同时除以一个e^C，其中C = Max(a_i)。<br>$$<br>y_{j}=\frac{e^{a_{k}}-C}{\sum^{N}<em>{i=1}e^{a</em>{i}}-C}<br>$$</p>
+<p>$$<br>C=max({a_{i}})<br>$$</p>
+<p>就可以大幅减小计算数值，这样就基本不会发生overflow了。</p>
+<p>事实上，差值过大时，也不用SoftMax函数来增强输出效果了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Softmax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/07/Math-02-SoftMax/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-16-array-init" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/01/Numpy-16-array-init/">Numpy-16-array-init</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/01/Numpy-16-array-init/" class="archive-article-date">
+  	<time datetime="2018-04-01T04:20:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Initial-array-with-zeros-ones-empty"><a href="#Initial-array-with-zeros-ones-empty" class="headerlink" title="Initial array with zeros/ones/empty"></a>Initial array with zeros/ones/empty</h1><blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html" target="_blank" rel="noopener"><code>numpy.zeros</code></a></p>
+<p>Return a new array of given shape and type, filled with zeros.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ones.html" target="_blank" rel="noopener"><code>numpy.ones</code></a></p>
+<p>Return a new array of given shape and type, filled with ones.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" target="_blank" rel="noopener"><code>numpy.empty</code></a></p>
+<p>Return a new array of given shape and type, without initializing entries.</p>
+</blockquote>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>initialize a numpy array</p>
+<p><a href="https://stackoverflow.com/questions/4535374/initialize-a-numpy-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/4535374/initialize-a-numpy-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array Init</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/01/Numpy-16-array-init/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Matplotlib-06-arrow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -849,374 +1222,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/29/Numpy-00-Errors/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Math-01-DotProduct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/24/Math-01-DotProduct/">Math-01-DotProduct</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/24/Math-01-DotProduct/" class="archive-article-date">
-  	<time datetime="2018-03-24T01:51:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><p>向量，在几何上用一个有向线段表示；在代数上用一个有序数组表示，可以是n行1列或者一行n列。</p>
-<p>类似于标量，向量也有加减运算，<strong>a</strong>+<strong>b</strong>。</p>
-<p>在几何上表现为<strong>b</strong>的起始点平移到<strong>a</strong>的终止点，从而组成一个新向量<strong>c</strong>。</p>
-<p>而减法只要取<strong>b</strong>的反向即可。</p>
-<p>说到乘法，有两种最常见的：点乘和叉乘。</p>
-<h1 id="向量的点积"><a href="#向量的点积" class="headerlink" title="向量的点积"></a>向量的点积</h1><p>向量的点乘又称为向量的内积、数量积。c=<strong>a</strong>●<strong>b</strong></p>
-<p>表现在代数运算上，是两个向量对应位置的元素相乘，然后取所有乘积的和。故最后的结果是一个<strong>标量</strong>。！！！</p>
-<p>a=(a1,a2,…an)</p>
-<p>a=(b1,b2,…bn)</p>
-<p>c=sum(a1<em>b1, a2</em>b2,…an*bn)</p>
-<p>在几何运算上，表现为向量<strong>a</strong>在向量<strong>b</strong>方向上的投影和|b|的乘积。即|a||b|cos(theta)，其中theta为两向量的夹角。</p>
-<p>推理过程ing。。。</p>
-<h1 id="向量的叉乘"><a href="#向量的叉乘" class="headerlink" title="向量的叉乘"></a>向量的叉乘</h1><p>叉乘又称为外积、向量积。<strong>c</strong>=<strong>a</strong> x <strong>b</strong></p>
-<p>运算得到的结果是一个向量，方向和<strong>a</strong>、<strong>b</strong>组成的平面垂直。</p>
-<p>计算公式ing…</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>向量的点乘和叉乘</p>
-<p><a href="https://blog.csdn.net/dcrmg/article/details/52416832" target="_blank" rel="noopener">https://blog.csdn.net/dcrmg/article/details/52416832</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Dot Product</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cross Product</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/24/Math-01-DotProduct/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-04-axes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/Matplotlib-04-axes/">Matplotlib-04-axes</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/22/Matplotlib-04-axes/" class="archive-article-date">
-  	<time datetime="2018-03-22T10:35:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Matplotlib-axes"><a href="#Matplotlib-axes" class="headerlink" title="Matplotlib axes"></a>Matplotlib axes</h1><p>从英文本意的角度上理解axes就是axis的复数形式，但是在matplotlib中axes并不是多个轴的意义。</p>
-<p>讲到axes就离不开另一个概念：figure。figure可以理解为画布或者进程，定义一个figure之后就可以显示一个空白的窗口。即使没有特意生成figure，pyplot也会帮你创建一个（figure 1）。</p>
-<p>有了画布，继续画图时就需要决定在哪里，画多大的图。这一部分的设置就靠axes来表示，因为一个axes就是一个不包含坐标轴的画图区域。位置和尺寸均是用占figure整体尺寸的百分比来表示的，其取值为0-1之间的浮点数。</p>
-<p><img src="Matplotlib-04-axes%5Cfig.png" alt=""></p>
-<p>一个官方的例子如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some data to use for the plot</span></span><br><span class="line">dt = <span class="number">0.001</span></span><br><span class="line">t = np.arange(<span class="number">0.0</span>, <span class="number">10.0</span>, dt)</span><br><span class="line">r = np.exp(-t[:<span class="number">1000</span>]/<span class="number">0.05</span>)               <span class="comment"># impulse response</span></span><br><span class="line">x = np.random.randn(len(t))</span><br><span class="line">s = np.convolve(x, r)[:len(x)]*dt  <span class="comment"># colored noise</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># the main axes is subplot(111) by default</span></span><br><span class="line">plt.plot(t, s)</span><br><span class="line">plt.axis([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1.1</span>*np.amin(s), <span class="number">2</span>*np.amax(s)])</span><br><span class="line">plt.xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'current (nA)'</span>)</span><br><span class="line">plt.title(<span class="string">'Gaussian colored noise'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is an inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">.65</span>, <span class="number">.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">n, bins, patches = plt.hist(s, <span class="number">400</span>, normed=<span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">'Probability'</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is another inset axes over the main axes</span></span><br><span class="line">a = plt.axes([<span class="number">0.2</span>, <span class="number">0.6</span>, <span class="number">.2</span>, <span class="number">.2</span>], facecolor=<span class="string">'y'</span>)</span><br><span class="line">plt.plot(t[:len(r)], r)</span><br><span class="line">plt.title(<span class="string">'Impulse response'</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">0.2</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>结果为，</p>
-<p><img src="Matplotlib-04-axes%5Caxes.png" alt=""></p>
-<h1 id="隐藏坐标轴"><a href="#隐藏坐标轴" class="headerlink" title="隐藏坐标轴"></a>隐藏坐标轴</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig=plt.figure(frameon=<span class="literal">False</span>)</span><br><span class="line">fig.set_size_inches(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">ax = plt.Axes(fig, [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line">ax.set_axis_off()</span><br><span class="line">fig.add_axes(ax)</span><br><span class="line"></span><br><span class="line">I = mpimg.imread(<span class="string">u"sample.png"</span>)</span><br><span class="line">ax.imshow(I)</span><br><span class="line">fig.savefig(<span class="string">u"sample.jpg"</span>, dpi=<span class="number">32</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>pyplot的基础概念</p>
-<p><a href="http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6bba71920102wj2e.html</a></p>
-<p>pylab_examples example code: axes_demo.py</p>
-<p><a href="https://matplotlib.org/examples/pylab_examples/axes_demo.html" target="_blank" rel="noopener">https://matplotlib.org/examples/pylab_examples/axes_demo.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">axes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">figure</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/22/Matplotlib-04-axes/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-11-WrapperClasses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/Java-11-WrapperClasses/">Java-11-WrapperClasses</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/18/Java-11-WrapperClasses/" class="archive-article-date">
-  	<time datetime="2018-03-18T11:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p>Java虽然是支持面向对象的编程，但是还是沿用了一些面向过程的习惯，比如Java的8种基本数据类型并不支持面向对象的编程。这8种基本数据类型没有对象的基本特征–属性和方法，比如一个int变量，不能查看它的属性，也不能调用它的方法。</p>
-<p>这在OOP程序的编程中，由于不统一会带来一些不便。为了解决这个问题，Java引入了包装类的概念，即给每个基本数据类型设计了相应的类（包装类），也称为外覆类或者数据类型类。</p>
-<p><strong>基本数据类型和包装类的对应关系</strong></p>
-<table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>对应的包装类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-</tr>
-<tr>
-<td>int</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>char</td>
-<td>Character</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-</tr>
-</tbody></table>
-<p>每个包装类的对象可以封装一个相应的基本类型的数据，并提供了其它一些有用的方法。包装类对象一经创建，其内容（所封装的基本类型数据值）不可改变。</p>
-<p>基本类型和对应的包装类可以进行<strong>相互转换</strong>：</p>
-<ul>
-<li>装箱：基本类型 &gt; 包装类，如int基本类型转Integer类</li>
-<li>拆箱：基本类型 &gt; 包装类，如Integer类转int基本类型</li>
-</ul>
-<p>例子，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestWrapperClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestWrapperClass.int2integer();</span><br><span class="line">        TestWrapperClass.str2int();</span><br><span class="line">        TestWrapperClass.int2str();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 手动装箱</span></span><br><span class="line">    <span class="comment">// 手动拆箱</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2integer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        Integer obj = <span class="keyword">new</span> Integer(m); <span class="comment">// 手动装箱</span></span><br><span class="line">        <span class="keyword">int</span> n = obj.intValue(); <span class="comment">// 手动拆箱</span></span><br><span class="line">        System.out.println(<span class="string">"n = "</span> + n);</span><br><span class="line">        Integer obj1 = <span class="keyword">new</span> Integer(<span class="number">500</span>);</span><br><span class="line">        System.out.println(<span class="string">"obj equals obj1? "</span> + obj.equals(obj1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// string to int</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">str2int</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str[] = &#123; <span class="string">"123"</span>, <span class="string">"123abc"</span>, <span class="string">"abc123"</span>, <span class="string">"abcxyz"</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (String str1 : str) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> m = Integer.parseInt(str1, <span class="number">10</span>);</span><br><span class="line">                System.out.println(str1 + <span class="string">" 可以转换为整数 "</span> + m);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(str1 + <span class="string">" 无法转换为整数"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// int to string</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2str</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        String s = Integer.toString(m);</span><br><span class="line">        System.out.println(<span class="string">"s = "</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h1><p>Java1.5之后的版本支持自动装箱自动拆箱。这里的自动表现在，基本类型可以直接赋值给对应的包装类型，反之亦然。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">Integer obj = m; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="keyword">int</span> n = obj; <span class="comment">// 自动拆箱</span></span><br><span class="line">System.out.println(<span class="string">"n = "</span> + n);</span><br></pre></td></tr></table></figure>
-
-<p>虽然有自动功能，考虑到代码的可读性，推荐使用手动装箱拆箱。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java包装类、拆箱和装箱详解</p>
-<p><a href="https://www.cnblogs.com/ok932343846/p/6749488.html" target="_blank" rel="noopener">https://www.cnblogs.com/ok932343846/p/6749488.html</a></p>
-<p>Java装箱和拆箱–<strong>这篇比较全面深入地讲解了常见的注意事项</strong></p>
-<p><a href="https://www.cnblogs.com/lsohvaen001/p/7823067.html" target="_blank" rel="noopener">https://www.cnblogs.com/lsohvaen001/p/7823067.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wrapper Classes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/18/Java-11-WrapperClasses/">展开全文 >></a>
         </p>
       
 
@@ -2709,6 +2714,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flush</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to_csv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">index</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tolist</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">read_csv</a>
               </li>
             
             <div class="clearfix"></div>

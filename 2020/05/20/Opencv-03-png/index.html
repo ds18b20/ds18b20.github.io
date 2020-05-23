@@ -16,7 +16,7 @@
 <meta property="og:description" content="PNG alpha通道cv2读入png图像可以得到一个ndarray。该ndarray的最后一个维度表示alpha通道，用来控制透明度。 可以用下面的方式分别提取BGR和alpha。 1234567891011import cv2import numpy as npsrc &#x3D; cv2.imread(&#39;sample.png&#39;, cv2.IMREAD_UNCHANGED)bgr &#x3D; src[:,:,:">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-20T02:31:02.000Z">
-<meta property="article:modified_time" content="2020-05-20T02:42:45.823Z">
+<meta property="article:modified_time" content="2020-05-22T23:35:01.741Z">
 <meta property="article:author" content="wzx">
 <meta property="article:tag" content="png">
 <meta property="article:tag" content="alpha">
@@ -185,10 +185,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">src = cv2.imread(<span class="string">'sample.png'</span>, cv2.IMREAD_UNCHANGED)</span><br><span class="line"></span><br><span class="line">bgr = src[:,:,:<span class="number">3</span>] <span class="comment"># Channels 0..2</span></span><br><span class="line">alpha = src[:,:,<span class="number">3</span>] <span class="comment"># Channel 3</span></span><br><span class="line"></span><br><span class="line">result = np.dstack([bgr, alpha]) <span class="comment"># Add the alpha channel</span></span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">'output.png'</span>, result)</span><br></pre></td></tr></table></figure>
 
 <p><a href="https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python</a></p>
-<h1 id="不考虑alpha的问题"><a href="#不考虑alpha的问题" class="headerlink" title="不考虑alpha的问题"></a>不考虑alpha的问题</h1><p>读入png图像后直接进行下一步处理或者显示的话，会得到意想不到的奇怪颜色。</p>
+<h1 id="忽视alpha的问题"><a href="#忽视alpha的问题" class="headerlink" title="忽视alpha的问题"></a>忽视alpha的问题</h1><p>读入png图像后直接进行下一步处理或者显示的话，会得到意想不到的奇怪颜色。</p>
 <p>通过alpha来对原图像做mask预处理的话，可以参考下面的链接：</p>
 <p><a href="https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil" target="_blank" rel="noopener">https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil</a></p>
-<p>当然，也可以使用numpy的乘法来实现。</p>
+<p>当然，也可以使用numpy的乘法来实现。具体来讲，先提取出来alpha通道，然后二值化生成mask。最后用mask和rbg阵列做乘法运算得到3通道的图像阵列。</p>
 
       
 
@@ -1811,6 +1811,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flush</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to_csv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">index</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tolist</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">read_csv</a>
               </li>
             
             <div class="clearfix"></div>

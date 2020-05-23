@@ -156,6 +156,600 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-08-nditer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/29/Numpy-08-nditer/">Numpy-08-nditer</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/29/Numpy-08-nditer/" class="archive-article-date">
+  	<time datetime="2017-11-28T15:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="numpy-ndarray"><a href="#numpy-ndarray" class="headerlink" title="numpy.ndarray"></a>numpy.ndarray</h1><h2 id="single-array-iteration"><a href="#single-array-iteration" class="headerlink" title="single array iteration"></a>single array iteration</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a):</span><br><span class="line"><span class="meta">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a.T):</span><br><span class="line"><span class="meta">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>As <strong>a</strong> and <strong>a.T</strong> are stored in the same sequence, <strong>np.nditer(a)</strong> and <strong>np.nditer(a.T)</strong> have the same result.</p>
+<h2 id="Control-iteration-sequence"><a href="#Control-iteration-sequence" class="headerlink" title="Control iteration sequence"></a>Control iteration sequence</h2><p><strong>single index:</strong> 单个索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fortran order</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a, order=<span class="string">'F'</span>):</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># C order</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a.T, order=<span class="string">'C'</span>):</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+<p>*<em>multi index: *</em>多重索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># multi_index</span></span><br><span class="line">it = np.nditer(a, flags=[<span class="string">'multi_index'</span>])</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> it.finished:</span><br><span class="line">    print(<span class="string">'element: &#123;&#125;--id: &#123;&#125;'</span>.format(it[<span class="number">0</span>], it.multi_index))</span><br><span class="line">    it.iternext()</span><br></pre></td></tr></table></figure>
+
+<p>既遍历了整个array也同时可以获取每个元素的下标multi_index，便于对元素进行读写操作。</p>
+<p>注意，使用np.nditer进行循环遍历时<strong>一定要记得加上it.iternext()语句</strong>，否则会导致程序假死，无法向下执行。</p>
+<h2 id="Modify-element"><a href="#Modify-element" class="headerlink" title="Modify element"></a>Modify element</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a, op_flags=[<span class="string">'readwrite'</span>]):</span><br><span class="line"><span class="meta">... </span>    x[...] = <span class="number">2</span> * x</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">2</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">6</span>,  <span class="number">8</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>By default, iteration use ‘read-only’. To modify elements of arrays, op_flags should be assigned as ‘readwrite’.</p>
+<h2 id="external-loop"><a href="#external-loop" class="headerlink" title="external_loop"></a>external_loop</h2><p>Use ‘external_loop’</p>
+<p><a href="https://blog.csdn.net/lanchunhui/article/details/55657135" target="_blank" rel="noopener">https://blog.csdn.net/lanchunhui/article/details/55657135</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nditer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/29/Numpy-08-nditer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-07-sum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/27/Numpy-07-sum/">Numpy-07-sum</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/27/Numpy-07-sum/" class="archive-article-date">
+  	<time datetime="2017-11-27T13:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-sum-ndarray-axis-1"><a href="#Numpy-sum-ndarray-axis-1" class="headerlink" title="Numpy.sum(ndarray, axis=1)"></a>Numpy.sum(ndarray, axis=1)</h1><h2 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a)</span><br><span class="line"><span class="number">45</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a,axis=<span class="number">1</span>)</span><br><span class="line">array([<span class="number">10</span>, <span class="number">35</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a,axis=<span class="number">0</span>)</span><br><span class="line">array([ <span class="number">5</span>,  <span class="number">7</span>,  <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="Numpy-07-sum/NumpySum.png" alt="NumpySum.png"></p>
+<p><a href="https://www.cnblogs.com/yyxayz/p/4033736.html" target="_blank" rel="noopener">Image from</a></p>
+<h2 id="average"><a href="#average" class="headerlink" title="average"></a>average</h2><p>类似地，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.average(a,axis=<span class="number">1</span>)</span><br><span class="line">array([<span class="number">2.</span>, <span class="number">7.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.average(a,axis=<span class="number">0</span>)</span><br><span class="line">array([<span class="number">2.5</span>, <span class="number">3.5</span>, <span class="number">4.5</span>, <span class="number">5.5</span>, <span class="number">6.5</span>])</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">random</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/27/Numpy-07-sum/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-06-random" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/Numpy-06-random/">Numpy-06-random</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/15/Numpy-06-random/" class="archive-article-date">
+  	<time datetime="2017-11-15T12:36:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Seed"><a href="#Seed" class="headerlink" title="Seed"></a>Seed</h1><p>计算机生成的随机数并<strong>不是真正的</strong>随机数，因为这些随机数都是根据一定的计算方式得到的。</p>
+<ol>
+<li>生成随机数时需要指定随机种子(Seed)，当这些种子不变时，得到的随机数也不变。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.seed(<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>)</span><br><span class="line">array([ <span class="number">0.69646919</span>,  <span class="number">0.28613933</span>])</span><br><span class="line"><span class="comment"># 每次重新生成随机数之前都需要更新种子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.seed(<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>)</span><br><span class="line">array([ <span class="number">0.69646919</span>,  <span class="number">0.28613933</span>])</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果用户不提供种子，默认由系统时钟（即定时/计数器的值） 提供种子。</li>
+<li>随机数的生成算法和操作系统有关，即使给定相同的种子，在Windows和Linux下会得到不同的随机数。</li>
+</ol>
+<h1 id="简单随机数"><a href="#简单随机数" class="headerlink" title="简单随机数"></a>简单随机数</h1><table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rand(d0, d1, …, dn)</td>
+<td>产生均匀分布的随机数</td>
+<td>dn为第n维数据的维度</td>
+</tr>
+<tr>
+<td>randn(d0, d1, …, dn)</td>
+<td>产生标准正态分布随机数</td>
+<td>dn为第n维数据的维度</td>
+</tr>
+<tr>
+<td>randint(low[, high, size, dtype])</td>
+<td>产生随机整数</td>
+<td>low：最小值；high：最大值；size：数据个数</td>
+</tr>
+<tr>
+<td>random_sample([size])</td>
+<td>在[0,1）内产生随机数</td>
+<td>size：随机数的shape，可以为元祖或者列表，[2,3]表示2维随机数，维度为（2,3）</td>
+</tr>
+<tr>
+<td>random([size])</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>ranf([size])</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>sample([size]))</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>choice(a[, size, replace, p])</td>
+<td>从a中随机选择指定数据</td>
+<td>a：1维数组 size：返回数据形状</td>
+</tr>
+<tr>
+<td>bytes(length)</td>
+<td>返回随机位</td>
+<td>length：位的长度</td>
+</tr>
+</tbody></table>
+<h2 id="numpy-random-rand"><a href="#numpy-random-rand" class="headerlink" title="numpy.random.rand()"></a>numpy.random.rand()</h2><p>numpy.random.rand(d0,d1,…,dn)</p>
+<p>Use .rand to get one or a list of random sample from [0,1).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand()</span><br><span class="line"><span class="number">0.18764147324357994</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">array([[ <span class="number">0.50590041</span>,  <span class="number">0.37166178</span>,  <span class="number">0.86995256</span>],</span><br><span class="line">       [ <span class="number">0.16217236</span>,  <span class="number">0.88082289</span>,  <span class="number">0.98760503</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-randn"><a href="#numpy-random-randn" class="headerlink" title="numpy.random.randn()"></a>numpy.random.randn()</h2><p>numpy.random.randn(d0,d1,…,dn)</p>
+<p>Use .randn to get one or a list of <strong>standard normal distribution</strong> sample.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.randn(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">array([[<span class="number">-0.08735649</span>, <span class="number">-1.20363118</span>, <span class="number">-0.67110949</span>],</span><br><span class="line">       [ <span class="number">0.00484652</span>,  <span class="number">0.22180857</span>,  <span class="number">0.25103274</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-randint"><a href="#numpy-random-randint" class="headerlink" title="numpy.random.randint()"></a>numpy.random.randint()</h2><p>numpy.random.randint(low, high=None, size=None, dtype=’l’)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-choice"><a href="#numpy-random-choice" class="headerlink" title="numpy.random.choice()"></a>numpy.random.choice()</h2><p>numpy.random.choice(a, size=None, replace=True, p=None)</p>
+<blockquote>
+<p>a : 1-D array-like or int If an ndarray, a random sample is generated from its elements.  If an int, the random sample is generated as if a was np.arange(n) </p>
+<p>size : int or tuple of ints, optional  replace : boolean, optional Whether the sample is with or without replacement</p>
+<p>p : 1-D array-like, optional The probabilities associated with each entry in a. If not given the sample assumes a uniform distribution over all entries in a. </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机取一个小于指定数的随机数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="comment"># 随机取n个小于指定数的随机数序列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>,<span class="number">10</span>)</span><br><span class="line">array([<span class="number">3</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="comment"># 随机取形状为(m, n)的小于指定数的随机数矩阵</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">array([[<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">4</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="comment"># 从序列中随机抽取n个元素，组成一个新数列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>classes = [<span class="string">'plane'</span>, <span class="string">'car'</span>, <span class="string">'bird'</span>, <span class="string">'cat'</span>, <span class="string">'deer'</span>, <span class="string">'dog'</span>, <span class="string">'frog'</span>, <span class="string">'horse'</span>, <span class="string">'ship'</span>, <span class="string">'truck'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(classes, <span class="number">2</span>)</span><br><span class="line">array([<span class="string">'deer'</span>, <span class="string">'ship'</span>], dtype=<span class="string">'&lt;U5'</span>)</span><br><span class="line"><span class="comment"># 按照概率分布抽取元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(range(<span class="number">3</span>), p=[<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.9</span>])</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>.choice(x)的参数x可以是Integer也可以是一维数组1-D Array。</p>
+<p><code>np.random.choice(range(3),p=[0.05,0.05,0.9])</code>表示从range(3)序列中按照p参数指定的概率分布随机选择一个元素返回。</p>
+<h1 id="随机生成分布"><a href="#随机生成分布" class="headerlink" title="随机生成分布"></a>随机生成分布</h1><p>各种分布随机数的API：</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beta(a, b[, size])</td>
+<td>贝塔分布样本，在 [0, 1]内。</td>
+<td></td>
+</tr>
+<tr>
+<td>binomial(n, p[, size])</td>
+<td>二项分布的样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>chisquare(df[, size])</td>
+<td>卡方分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>dirichlet(alpha[, size])</td>
+<td>狄利克雷分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>exponential([scale, size])</td>
+<td>指数分布</td>
+<td></td>
+</tr>
+<tr>
+<td>f(dfnum, dfden[, size])</td>
+<td>F分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>gamma(shape[, scale, size])</td>
+<td>伽马分布</td>
+<td></td>
+</tr>
+<tr>
+<td>geometric(p[, size])</td>
+<td>几何分布</td>
+<td></td>
+</tr>
+<tr>
+<td>gumbel([loc, scale, size])</td>
+<td>耿贝尔分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>hypergeometric(ngood, nbad, nsample[, size])</td>
+<td>超几何分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>laplace([loc, scale, size])</td>
+<td>拉普拉斯或双指数分布样本</td>
+<td></td>
+</tr>
+<tr>
+<td>logistic([loc, scale, size])</td>
+<td>Logistic分布样本</td>
+<td></td>
+</tr>
+<tr>
+<td>lognormal([mean, sigma, size])</td>
+<td>对数正态分布</td>
+<td></td>
+</tr>
+<tr>
+<td>logseries(p[, size])</td>
+<td>对数级数分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>multinomial(n, pvals[, size])</td>
+<td>多项分布</td>
+<td></td>
+</tr>
+<tr>
+<td>multivariate_normal(mean, cov[, size])</td>
+<td>多元正态分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>negative_binomial(n, p[, size])</td>
+<td>负二项分布</td>
+<td></td>
+</tr>
+<tr>
+<td>noncentral_chisquare(df, nonc[, size])</td>
+<td>非中心卡方分布</td>
+<td></td>
+</tr>
+<tr>
+<td>noncentral_f(dfnum, dfden, nonc[, size])</td>
+<td>非中心F分布</td>
+<td></td>
+</tr>
+<tr>
+<td>normal([loc, scale, size])</td>
+<td>正态(高斯)分布</td>
+<td></td>
+</tr>
+<tr>
+<td>pareto(a[, size])</td>
+<td>帕累托（Lomax）分布</td>
+<td></td>
+</tr>
+<tr>
+<td>poisson([lam, size])</td>
+<td>泊松分布</td>
+<td></td>
+</tr>
+<tr>
+<td>power(a[, size])</td>
+<td>Draws samples in [0, 1] from a power distribution with positive exponent a - 1.</td>
+<td></td>
+</tr>
+<tr>
+<td>rayleigh([scale, size])</td>
+<td>Rayleigh 分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_cauchy([size])</td>
+<td>标准柯西分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_exponential([size])</td>
+<td>标准的指数分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_gamma(shape[, size])</td>
+<td>标准伽马分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_normal([size])</td>
+<td>标准正态分布 (mean=0, stdev=1).</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_t(df[, size])</td>
+<td>Standard Student’s t distribution with df degrees of freedom.</td>
+<td></td>
+</tr>
+<tr>
+<td>triangular(left, mode, right[, size])</td>
+<td>三角形分布</td>
+<td></td>
+</tr>
+<tr>
+<td>uniform([low, high, size])</td>
+<td>均匀分布</td>
+<td></td>
+</tr>
+<tr>
+<td>vonmises(mu, kappa[, size])</td>
+<td>von Mises分布</td>
+<td></td>
+</tr>
+<tr>
+<td>wald(mean, scale[, size])</td>
+<td>瓦尔德（逆高斯）分布</td>
+<td></td>
+</tr>
+<tr>
+<td>weibull(a[, size])</td>
+<td>Weibull 分布</td>
+<td></td>
+</tr>
+<tr>
+<td>zipf(a[, size])</td>
+<td>齐普夫分布</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="numpy-random-normal"><a href="#numpy-random-normal" class="headerlink" title="numpy.random.normal()"></a>numpy.random.normal()</h2><p>Numpy的随机分布函数中最常用的应该就是normal函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mu = <span class="number">1</span>  <span class="comment">#期望为1</span></span><br><span class="line">sigma = <span class="number">3</span>  <span class="comment">#标准差为3</span></span><br><span class="line">num = <span class="number">10000</span>  <span class="comment">#个数为10000</span></span><br><span class="line"></span><br><span class="line">rand_data = np.random.normal(mu, sigma, num)</span><br><span class="line">count, bins, ignored = plt.hist(rand_data, <span class="number">30</span>, normed=<span class="literal">True</span>)</span><br><span class="line">plt.plot(bins, <span class="number">1</span>/(sigma * np.sqrt(<span class="number">2</span> * np.pi)) *np.exp( - (bins - mu)**<span class="number">2</span> / (<span class="number">2</span> * sigma**<span class="number">2</span>)), linewidth=<span class="number">2</span>, color=<span class="string">'r'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Numpy-06-random%5Cnormal.png" alt=""></p>
+<h2 id="numpy-random-rand-1"><a href="#numpy-random-rand-1" class="headerlink" title="numpy.random.rand()"></a>numpy.random.rand()</h2><p>定义如下，numpy.random.rand(d0, d1, …, dn)</p>
+<blockquote>
+<p>Random values in a given shape.</p>
+<p>Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1).</p>
+<p>Parameters:<br>d0, d1, …, dn : int, optional<br>The dimensions of the returned array, should all be positive. If no argument is given a single Python float is returned.</p>
+<p>Returns:<br>out : ndarray, shape (d0, d1, …, dn)<br>Random values.</p>
+</blockquote>
+<p>按指定形状生成介于[0, 1)的均匀随机分布。</p>
+<h2 id="numpy-random-uniform"><a href="#numpy-random-uniform" class="headerlink" title="numpy.random.uniform()"></a>numpy.random.uniform()</h2><p>numpy.random.uniform(low=0.0, high=1.0, size=None)</p>
+<blockquote>
+<p>Draw samples from a uniform distribution.</p>
+<p>Samples are uniformly distributed over the half-open interval [low, high) (includes low, but excludes high). In other words, any value within the given interval is equally likely to be drawn by uniform.</p>
+<p>Parameters:<br>low : float or array_like of floats, optional<br>Lower boundary of the output interval. All values generated will be greater than or equal to low. The default value is 0.</p>
+<p>high : float or array_like of floats<br>Upper boundary of the output interval. All values generated will be less than high. The default value is 1.0.</p>
+<p>size : int or tuple of ints, optional<br>Output shape. If the given shape is, e.g., (m, n, k), then m * n * k samples are drawn. If size is None (default), a single value is returned if low and high are both scalars. Otherwise, np.broadcast(low, high).size samples are drawn.</p>
+<p>Returns:<br>out : ndarray or scalar<br>Drawn samples from the parameterized uniform distribution.</p>
+</blockquote>
+<p>按指定形状生成介于[low, high)的均匀随机分布。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/xk-bench/p/9079533.html" target="_blank" rel="noopener">https://www.cnblogs.com/xk-bench/p/9079533.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">random</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/15/Numpy-06-random/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-05-log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -829,310 +1423,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/11/11/Numpy-03-broadcasting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-02-MaxandMaximum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/10/Numpy-02-MaxandMaximum/">Numpy-02-MaxandMaximum</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/10/Numpy-02-MaxandMaximum/" class="archive-article-date">
-  	<time datetime="2017-11-10T14:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Max-and-Maximum"><a href="#Max-and-Maximum" class="headerlink" title="Max and Maximum"></a>Max and Maximum</h1><h2 id="numpy-max"><a href="#numpy-max" class="headerlink" title="numpy.max"></a>numpy.max</h2><p><code>np.max：(a, axis=None, out=None, keepdims=False)</code></p>
-<p>To get max from an array:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.max(a)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="numpy-maximum"><a href="#numpy-maximum" class="headerlink" title="numpy.maximum"></a>numpy.maximum</h2><p><code>np.maximum：(X, Y, out=None)</code></p>
-<p>To get ‘max-array’ by comparing each element from two arrays:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">2</span>,<span class="number">1</span>],[<span class="number">5</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.maximum(a,b)</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.maximum(a,<span class="number">1</span>) <span class="comment"># Numpy broadcast</span></span><br><span class="line">array([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">3</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Max</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Maximum</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/10/Numpy-02-MaxandMaximum/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-02-pylab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/10/Matplotlib-02-pylab/">Matplotlib-02-pylab</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/10/Matplotlib-02-pylab/" class="archive-article-date">
-  	<time datetime="2017-11-10T11:55:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="pylab-or-pyplot"><a href="#pylab-or-pyplot" class="headerlink" title="pylab or pyplot"></a>pylab or pyplot</h1><h2 id="pylab"><a href="#pylab" class="headerlink" title="pylab"></a>pylab</h2><p><a href="https://matplotlib.org/faq/usage_faq.html" target="_blank" rel="noopener">Link</a></p>
-<p><code>pylab is a convenience module that bulk imports matplotlib.pyplot (for plotting) and numpy (for mathematics and working with arrays) in a single name space. Although many examples use pylab, it is no longer recommended.</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
-
-<h2 id="pyplot"><a href="#pyplot" class="headerlink" title="pyplot"></a>pyplot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-
-<h2 id="comment"><a href="#comment" class="headerlink" title="comment"></a>comment</h2><p>Try to import <code>plot</code> and <code>numpy</code> separately. Follow the rule of “import explicitly”.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pylab</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pyplot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/10/Matplotlib-02-pylab/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/Numpy-01-Basic/">Numpy-01-Basic</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/08/Numpy-01-Basic/" class="archive-article-date">
-  	<time datetime="2017-11-08T14:43:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Basic-of-Numpy"><a href="#Basic-of-Numpy" class="headerlink" title="Basic of Numpy"></a>Basic of Numpy</h1><h2 id="Create-array"><a href="#Create-array" class="headerlink" title="Create array"></a>Create array</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">X = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="Slicing-and-Indexing"><a href="#Slicing-and-Indexing" class="headerlink" title="Slicing and Indexing"></a>Slicing and Indexing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>X.flatten()</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[range(<span class="number">2</span>)]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[np.array([<span class="number">0</span>,<span class="number">2</span>])]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[<span class="number">0</span>]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> row <span class="keyword">in</span> X:</span><br><span class="line"><span class="meta">... </span>    print(row)</span><br><span class="line">...</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">[<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Change-dimensions"><a href="#Change-dimensions" class="headerlink" title="Change dimensions"></a>Change dimensions</h2><p>Use  to  numpy.ndarray.reshape method to change dimensions.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">A = np.array(L)</span><br><span class="line">B = np.array(L).reshape(<span class="number">3</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Compare-2-ndarrays"><a href="#Compare-2-ndarrays" class="headerlink" title="Compare 2 ndarrays"></a>Compare 2 ndarrays</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">array([<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># compare</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x==y</span><br><span class="line">array([ <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>], dtype=bool)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(x==y).astype(np.int)</span><br><span class="line">array([<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># or use np.sum directly</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(x==y)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Basic</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/08/Numpy-01-Basic/">展开全文 >></a>
         </p>
       
 
@@ -2625,6 +2915,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flush</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to_csv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">index</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tolist</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">read_csv</a>
               </li>
             
             <div class="clearfix"></div>
