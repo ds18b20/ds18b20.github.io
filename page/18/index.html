@@ -156,6 +156,115 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-00-Errors" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/29/Numpy-00-Errors/">Numpy-00-Errors</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/29/Numpy-00-Errors/" class="archive-article-date">
+  	<time datetime="2018-03-29T13:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="dtype的选择"><a href="#dtype的选择" class="headerlink" title="dtype的选择"></a>dtype的选择</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># type</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.int)</span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line">x[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line"></span><br><span class="line">y = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.float)</span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br><span class="line">y[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x: [<span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">x: [<span class="number">3</span> <span class="number">0</span>]</span><br><span class="line">y: [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line">y: [ <span class="number">3.14</span>  <span class="number">0.</span>  ]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，虽然修改x[0]为一个浮点数3.14，但是由于x的类型是np.int，x[0]只保留了3.14的整数部分。</p>
+<p>而y的类型是np.float，修改y[0]为3.14后，小数也能完整保留。</p>
+<h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y).mean()</span><br><span class="line"># or</span><br><span class="line">np.mean(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会提示bool对象不包含mean方法。</p>
+<blockquote>
+<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
+</blockquote>
+<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp &#x3D; y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y  # type: np.ndarray</span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction<br><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Errors</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/29/Numpy-00-Errors/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Math-01-DotProduct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1170,104 +1279,6 @@ public class Person {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/17/Java-06-Package-Class/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-05-AutoGenerate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">Java-Eclipse-05-AutoGenerate</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/17/Java-Eclipse-05-AutoGenerate/" class="archive-article-date">
-  	<time datetime="2018-03-17T02:37:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="自动代码生成器"><a href="#自动代码生成器" class="headerlink" title="自动代码生成器"></a>自动代码生成器</h1><p>使用Eclipse可以给Java代码自动填充代码，比如getter和setter。</p>
-<p>选择class名，右键，然后单击 <strong>Source &gt; Generate Getters and Setters…</strong>。快捷键是Alt+Shift+S</p>
-<p>对话框打开时，单击 <strong>Select All</strong>。<strong>插入点可以选择 **Last member</strong> 并单击 <strong>OK</strong>。</p>
-<p>会按照已经定义的class属性自动填充各属性对应的setter和getter。</p>
-<p>此外，Source选项下面还有好多方便功能，比如Format可以地洞格式化代码块。</p>
-<p>还有调整方法的数序等等。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Auto Generate</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/17/Java-Eclipse-05-AutoGenerate/">展开全文 >></a>
         </p>
       
 
@@ -2776,6 +2787,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">read_csv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">QTimer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">parameter</a>
               </li>
             
             <div class="clearfix"></div>
