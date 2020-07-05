@@ -156,6 +156,115 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-web-nginx-static" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/02/web-nginx-static/">web-nginx-static</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/02/web-nginx-static/" class="archive-article-date">
+  	<time datetime="2019-11-02T03:36:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="static-web-Nginx-Setting"><a href="#static-web-Nginx-Setting" class="headerlink" title="static web Nginx-Setting"></a>static web Nginx-Setting</h1><p>配置文件的位置在<code>/etc/nginx/nginx.conf</code></p>
+<p>下面是配置文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  www.mydomain.com; &#x2F;&#x2F;自己的域名</span><br><span class="line">        root         &#x2F;data&#x2F;www;  &#x2F;&#x2F;网站文件存放的目录</span><br><span class="line"></span><br><span class="line">        include &#x2F;etc&#x2F;nginx&#x2F;default.d&#x2F;*.conf;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 404 &#x2F;404.html;</span><br><span class="line">            location &#x3D; &#x2F;40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 500 502 503 504 &#x2F;50x.html;</span><br><span class="line">            location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当reload时，如果报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -s reload</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ sudo nginx -t</span><br><span class="line">nginx: [emerg] a duplicate default server for 0.0.0.0:80 in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:21</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br></pre></td></tr></table></figure>
+
+<p>提示该配置和其他配置有冲突。</p>
+<p>要查看重复设置的位置，可以使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;conf.d$ grep -R default_server &#x2F;etc&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:       listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen 80 default_server;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default:     listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen 80 default_server; </span><br><span class="line">&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;static-web-server.conf:  listen [::]:80 default_server;</span><br></pre></td></tr></table></figure>
+
+<p>原来是Nginx有一个默认的配置文件，该默认配置文件和自己的设置发生了冲突。所以把默认配置删除即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user@static-web:&#x2F;etc&#x2F;nginx&#x2F;sites-enabled$ ls</span><br><span class="line">default</span><br><span class="line"></span><br><span class="line">sudo rm default</span><br></pre></td></tr></table></figure>
+
+<p>最后别忘了重新加载配置，<code>sudo nginx -s reload</code></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p> <a href="https://juejin.im/post/5c286c56e51d451d460342b4" target="_blank" rel="noopener">https://juejin.im/post/5c286c56e51d451d460342b4</a> </p>
+<p><a href="https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error" target="_blank" rel="noopener">https://stackoverflow.com/questions/30973774/nginx-duplicate-default-server-error</a> </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/02/web-nginx-static/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-RaspberryPi-03-temperature" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1036,98 +1145,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/17/web-flask-logging/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-31-npy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/Numpy-31-npy/">Numpy-31-npy</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/17/Numpy-31-npy/" class="archive-article-date">
-  	<time datetime="2018-12-17T13:28:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="numpy-save-load"><a href="#numpy-save-load" class="headerlink" title="numpy save load"></a>numpy save load</h1><p>This example shows how to save and load data.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">d1=&#123;<span class="string">'key1'</span>:[<span class="number">5</span>,<span class="number">10</span>], <span class="string">'key2'</span>:[<span class="number">50</span>,<span class="number">100</span>]&#125;</span><br><span class="line">np.save(<span class="string">"d1.npy"</span>, d1)</span><br><span class="line">d2=np.load(<span class="string">"d1.npy"</span>)</span><br><span class="line">print(d1.get(<span class="string">'key1'</span>))</span><br><span class="line">print(d2.item().get(<span class="string">'key2'</span>))</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/40219946/python-save-dictionaries-through-numpy-save" target="_blank" rel="noopener">https://stackoverflow.com/questions/40219946/python-save-dictionaries-through-numpy-save</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">npy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/Numpy-31-npy/">展开全文 >></a>
         </p>
       
 
@@ -2644,6 +2661,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">parameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">environ</a>
               </li>
             
             <div class="clearfix"></div>

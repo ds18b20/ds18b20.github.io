@@ -156,6 +156,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-61-os-environ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/04/Python-61-os-environ/">Python-61-os-environ</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/04/Python-61-os-environ/" class="archive-article-date">
+  	<time datetime="2020-07-04T13:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="os-environ"><a href="#os-environ" class="headerlink" title="os.environ"></a>os.environ</h1><p>Python中使用<code>os.environ</code>可以对系统环境变量进行增删改查的操作，但是注意所有的操作仅对当前运行环境有效，重启console之后所有的配置都会被重置。</p>
+<h2 id="读取当前配置"><a href="#读取当前配置" class="headerlink" title="读取当前配置"></a>读取当前配置</h2><p>直接<code>os.environ</code>可以读取当前系统所有的环境变量。</p>
+<p>读取到的数据类型类似于Dict，可以直接使用key值来访问内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line"><span class="string">'D:\\Java\\jre1.8.0_231'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ.get(<span class="string">"JAVA_HOME"</span>)</span><br><span class="line"><span class="string">'D:\\Java\\jre1.8.0_231'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-添加-删除"><a href="#修改-添加-删除" class="headerlink" title="修改 添加 删除"></a>修改 添加 删除</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改/添加</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>] = <span class="string">"AAABBB"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ.get(<span class="string">"JAVA_HOME"</span>)</span><br><span class="line"><span class="string">'AAABBB'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\ProgramData\Anaconda3\envs\py36\lib\os.py"</span>, line <span class="number">669</span>, <span class="keyword">in</span> __getitem__</span><br><span class="line">    <span class="keyword">raise</span> KeyError(key) <span class="keyword">from</span> <span class="literal">None</span></span><br><span class="line">KeyError: <span class="string">'JAVA_HOME'</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://note.nkmk.me/python-os-environ-getenv/" target="_blank" rel="noopener">https://note.nkmk.me/python-os-environ-getenv/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">environ</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/04/Python-61-os-environ/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PyQt-01-QTimer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -951,105 +1043,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/20/Opencv-02-PIL-opencv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Opencv-01-window-size" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/20/Opencv-01-window-size/">Opencv-01-window-size</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/20/Opencv-01-window-size/" class="archive-article-date">
-  	<time datetime="2020-05-20T02:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="cv2-WINDOW"><a href="#cv2-WINDOW" class="headerlink" title="cv2.WINDOW_"></a>cv2.WINDOW_</h1><p>Python: cv2.namedWindow(winname[, flags])</p>
-<ul>
-<li>name: name of the window</li>
-<li>flags: flags of the window<ul>
-<li>WINDOW_NORMAL user can resize the window (no constraint)</li>
-<li>WINDOW_AUTOSIZE the window size is automatically adjusted to fit the displayed image, and you cannot change the window size manually.</li>
-<li>WINDOW_OPENGL</li>
-</ul>
-</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.opencv.org/2.4/modules/highgui/doc/user_interface.html?highlight=namedwindow#cv2.namedWindow" target="_blank" rel="noopener">Opencv User Interface</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">size</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">window</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/20/Opencv-01-window-size/">展开全文 >></a>
         </p>
       
 
@@ -2566,6 +2559,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">parameter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">environ</a>
               </li>
             
             <div class="clearfix"></div>
