@@ -156,6 +156,495 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-09-TFadd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/TensorFlow-09-TFadd/">TensorFlow-09-TFadd</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/TensorFlow-09-TFadd/" class="archive-article-date">
+  	<time datetime="2018-05-12T04:17:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tf-add和-的区别"><a href="#tf-add和-的区别" class="headerlink" title="tf.add和+的区别"></a>tf.add和+的区别</h1><p>tensorflow中定义运算图结构时，加法运算可以用tf.add表示，也可以直接使用加法运算符+表示。</p>
+<p>从结果上讲，两种方式的实现结果相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">x_data = np.random.rand(<span class="number">100</span>).astype(np.float32)</span><br><span class="line">y_data = <span class="number">0.5</span> * x_data + <span class="number">0.3</span></span><br><span class="line"></span><br><span class="line">Weights = tf.Variable(tf.random_uniform([<span class="number">1</span>], <span class="number">-1</span>, <span class="number">1</span>))</span><br><span class="line">biases = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">tf.reset_default_graph()</span><br><span class="line">dtype = tf.int32</span><br><span class="line">a = tf.placeholder(dtype)</span><br><span class="line">b = tf.placeholder(dtype)</span><br><span class="line"><span class="comment"># c = a+b</span></span><br><span class="line">c = tf.add(a, b)</span><br><span class="line">print(tf.get_default_graph().as_graph_def())</span><br><span class="line"></span><br><span class="line">print(dir(tf.Tensor))</span><br></pre></td></tr></table></figure>
+
+<p>返回结果，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"Placeholder"</span></span><br><span class="line">  op: <span class="string">"Placeholder"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"dtype"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"shape"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      shape &#123;</span><br><span class="line">        unknown_rank: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"Placeholder_1"</span></span><br><span class="line">  op: <span class="string">"Placeholder"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"dtype"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"shape"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      shape &#123;</span><br><span class="line">        unknown_rank: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">node &#123;</span><br><span class="line">  <span class="comment"># 注意这里</span></span><br><span class="line">  name: <span class="string">"Add"</span></span><br><span class="line">  op: <span class="string">"Add"</span></span><br><span class="line">  input: <span class="string">"Placeholder"</span></span><br><span class="line">  input: <span class="string">"Placeholder_1"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"T"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">versions &#123;</span><br><span class="line">  producer: <span class="number">26</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="string">'OVERLOADABLE_OPERATORS'</span>, <span class="string">'__abs__'</span>, <span class="string">'__add__'</span>, <span class="string">'__and__'</span>, <span class="string">'__array_priority__'</span>, <span class="string">'__bool__'</span>, <span class="string">'__class__'</span>, <span class="string">'__copy__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__div__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__floordiv__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__init_subclass__'</span>, <span class="string">'__invert__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__matmul__'</span>, <span class="string">'__mod__'</span>, <span class="string">'__module__'</span>, <span class="string">'__mul__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__neg__'</span>, <span class="string">'__new__'</span>, <span class="string">'__nonzero__'</span>, <span class="string">'__or__'</span>, <span class="string">'__pow__'</span>, <span class="string">'__radd__'</span>, <span class="string">'__rand__'</span>, <span class="string">'__rdiv__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__rfloordiv__'</span>, <span class="string">'__rmatmul__'</span>, <span class="string">'__rmod__'</span>, <span class="string">'__rmul__'</span>, <span class="string">'__ror__'</span>, <span class="string">'__rpow__'</span>, <span class="string">'__rsub__'</span>, <span class="string">'__rtruediv__'</span>, <span class="string">'__rxor__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__sub__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__truediv__'</span>, <span class="string">'__weakref__'</span>, <span class="string">'__xor__'</span>, <span class="string">'_add_consumer'</span>, <span class="string">'_as_node_def_input'</span>, <span class="string">'_as_tf_output'</span>, <span class="string">'_c_api_shape'</span>, <span class="string">'_get_input_ops_without_shapes'</span>, <span class="string">'_override_operator'</span>, <span class="string">'_rank'</span>, <span class="string">'_shape'</span>, <span class="string">'_shape_as_list'</span>, <span class="string">'_shape_tuple'</span>, <span class="string">'_tf_api_names'</span>, <span class="string">'consumers'</span>, <span class="string">'device'</span>, <span class="string">'dtype'</span>, <span class="string">'eval'</span>, <span class="string">'get_shape'</span>, <span class="string">'graph'</span>, <span class="string">'name'</span>, <span class="string">'op'</span>, <span class="string">'set_shape'</span>, <span class="string">'shape'</span>, <span class="string">'value_index'</span>]</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果把<code>c = tf.add(a, b)</code>换成<code>c = a+b</code>，tensor量c的node类型名会变成”add”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">node &#123;</span><br><span class="line">  name: <span class="string">"add"</span></span><br><span class="line">  op: <span class="string">"Add"</span></span><br><span class="line">  input: <span class="string">"Placeholder"</span></span><br><span class="line">  input: <span class="string">"Placeholder_1"</span></span><br><span class="line">  attr &#123;</span><br><span class="line">    key: <span class="string">"T"</span></span><br><span class="line">    value &#123;</span><br><span class="line">      type: DT_INT32</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>参考链接1中的解释：</p>
+<blockquote>
+<p>There’s no difference in precision between <code>a+b</code> and <code>tf.add(a, b)</code>. The former translates to <code>a.__add__(b)</code> which gets mapped to <code>tf.add</code> by means of <a href="https://github.com/tensorflow/tensorflow/blob/c43a32d5d0929170a057862e2cd0b59308421444/tensorflow/python/ops/math_ops.py#L845" target="_blank" rel="noopener">following line</a> in math_ops.py</p>
+<p><code>_OverrideBinaryOperatorHelper(gen_math_ops.add, &quot;add&quot;)</code></p>
+<p>The only difference is that node name in the underlying Graph is <code>add</code> instead of <code>Add</code>. </p>
+</blockquote>
+<p>参考链接2中解释了，在x和y中至少有一个是tf.Tensor时，<code>x + y</code>才等价于<code>tf.add(x, y)</code>。这种情况下会生成一个TensorFlow op，而二者中的非Tensor量会被自动转换成tf.Tensor。若二者都不是tf.Tensor量，比如两个Numpy Array，那么不会生成TensorFlow op。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/37900780/in-tensorflow-what-is-the-difference-between-tf-add-and-operator" target="_blank" rel="noopener">In tensorflow what is the difference between tf.add and operator (+)?</a></p>
+<p><a href="https://stackoverflow.com/questions/35094899/tensorflow-operator-overloading" target="_blank" rel="noopener">TensorFlow operator overloading</a></p>
+<p><a href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types" target="_blank" rel="noopener">3.3.7. Emulating numeric types</a></p>
+<p>关于重载可以参见<code>Python-27-CustomizeClass</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">add</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">+</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/TensorFlow-09-TFadd/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-22-flatnonzero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/09/Numpy-22-flatnonzero/">Numpy-22-flatnonzero</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/09/Numpy-22-flatnonzero/" class="archive-article-date">
+  	<time datetime="2018-05-09T10:48:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#np.flatnonzero</p>
+<p><code>numpy.flatnonzero</code>(<em>a</em>)</p>
+<p>Return indices that are non-zero in the flattened version of a.</p>
+<p>This is equivalent to a.ravel().nonzero()[0].</p>
+<table>
+<thead>
+<tr>
+<th>Parameters:</th>
+<th><strong>a</strong> : ndarrayInput array.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Returns:</td>
+<td><strong>res</strong> : ndarrayOutput array, containing the indices of the elements of <em>a.ravel()</em> that are non-zero.</td>
+</tr>
+</tbody></table>
+<h2 id="example"><a href="#example" class="headerlink" title="example"></a>example</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.arange(<span class="number">-2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">-2</span>, <span class="number">-1</span>,  <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.flatnonzero(x)</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>], dtype=int64)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = np.flatnonzero(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[s]</span><br><span class="line">array([<span class="number">-2</span>, <span class="number">-1</span>,  <span class="number">1</span>,  <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>np.flatnonzero(x)静态方法返回序列x中所有非0元素的下标位置，上例[-2, -1,  0,  1,  2]中非零元素的位置为[0, 1, 3, 4]，故返回序列[0, 1, 3, 4]。返回的序列可以继续用来对其他/本序列做slice。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">flatnonzero</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/09/Numpy-22-flatnonzero/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-08-CustomObjectDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/TensorFlow-08-CustomObjectDetection/">TensorFlow-08-CustomObjectDetection</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/06/TensorFlow-08-CustomObjectDetection/" class="archive-article-date">
+  	<time datetime="2018-05-06T14:15:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Custom-Object-Detection"><a href="#Custom-Object-Detection" class="headerlink" title="Custom Object Detection"></a>Custom Object Detection</h1>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Custom Object Detection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/06/TensorFlow-08-CustomObjectDetection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-37-RenameFiles" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/Python-37-RenameFiles/">Python-37-RenameFiles</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/06/Python-37-RenameFiles/" class="archive-article-date">
+  	<time datetime="2018-05-06T04:25:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="rename-file"><a href="#rename-file" class="headerlink" title="rename file"></a>rename file</h1><p>these code will rename all .jpg file to img-No.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob, os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">(dir, pattern, titlePattern)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, pathAndFilename <span class="keyword">in</span> enumerate(glob.iglob(os.path.join(dir, pattern))):</span><br><span class="line">        title, ext = os.path.splitext(os.path.basename(pathAndFilename))</span><br><span class="line">        os.rename(pathAndFilename, os.path.join(dir, titlePattern % i + ext))</span><br><span class="line">                  </span><br><span class="line"><span class="comment"># rename(r'', r'*.jpg', r'img-%d')</span></span><br><span class="line">rename(<span class="string">r''</span>, <span class="string">r'*.png'</span>, <span class="string">r'img-%d'</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Batch Renaming of Files in a Directory</p>
+<p><a href="https://stackoverflow.com/questions/225735/batch-renaming-of-files-in-a-directory" target="_blank" rel="noopener">https://stackoverflow.com/questions/225735/batch-renaming-of-files-in-a-directory</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">rename files</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/06/Python-37-RenameFiles/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-36-PYTHONPATH" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/05/Python-36-PYTHONPATH/">Python-36-PYTHONPATH</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/05/Python-36-PYTHONPATH/" class="archive-article-date">
+  	<time datetime="2018-05-04T22:03:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python的模块化编程"><a href="#Python的模块化编程" class="headerlink" title="Python的模块化编程"></a>Python的模块化编程</h1><p>和其他编程语言相似，Python也支持模块化编程。一般一个程序文件就是一个模块，Python中就是一个个的.py文件，其他语言比如Java中的.java文件或者编译后的.class文件。在模块之上使用包来管理，简单来讲就是多个功能相关联的模块组成一个包。Java中把.class文件打包生成.jr作为包来供外部调用，而Python直接定义一个特殊的文件夹作为包来调用。</p>
+<p>为了使Python能正确识别这些文件夹作为包，需要了解一下Python中对于包的规定。</p>
+<h2 id="Python查找模块的路径"><a href="#Python查找模块的路径" class="headerlink" title="Python查找模块的路径"></a>Python查找模块的路径</h2><p>Python环境下调用sys.path可以查看当前Python的搜索路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Python <span class="number">3.5</span><span class="number">.4</span> |Anaconda, Inc.| (default, Nov  <span class="number">8</span> <span class="number">2017</span>, <span class="number">14</span>:<span class="number">34</span>:<span class="number">30</span>) [MSC v<span class="number">.1900</span> <span class="number">64</span> bi</span><br><span class="line">t (AMD64)] on win32</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\Users\\usr\\Anaconda3'</span>,...]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到第一个路径是<code>&#39;&#39;</code>，这意味着<code>相对路径下的当前路径</code>也在搜索路径之内。</p>
+<p>如果当前路径下没有找到所需的模块，则会按列表顺序继续查找，直到找到目标模块。如果没有找到，则会抛出错误。</p>
+<p>更改查找列表有两种方式：</p>
+<ol>
+<li>导入sys模块，通过sys.path.append(),sys.path.insert()等方法来修改。这种修改只适用于当前程序运行期间，重启之后修改失效。</li>
+<li>在系统环境变量中直接修改/新建PYTHONPATH，这种方式的设置永久有效。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Python中的PYTHONPATH环境变量</p>
+<p><a href="http://www.cnblogs.com/geeklove01/p/7912435.html" target="_blank" rel="noopener">http://www.cnblogs.com/geeklove01/p/7912435.html</a></p>
+<p>Python的模块引用和查找路径</p>
+<p><a href="https://www.cnblogs.com/qingspace/p/5284480.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingspace/p/5284480.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PYTHONPATH</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/05/Python-36-PYTHONPATH/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-07-ObjectDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -696,537 +1185,9 @@
 
 
   
-    <article id="post-TensorFlow-04-deviceCPUorGPU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/">TensorFlow-04-deviceCPUorGPU</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/" class="archive-article-date">
-  	<time datetime="2018-05-02T12:52:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CPU-or-GPU"><a href="#CPU-or-GPU" class="headerlink" title="CPU or GPU?"></a>CPU or GPU?</h1><p>若要判断CPU和GPU是否可用，可以使用以下方法：</p>
-<h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><p>To find out which device is used, you can enable log device placement like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess &#x3D; tf.Session(config&#x3D;tf.ConfigProto(log_device_placement&#x3D;True))</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p>Apart from using <code>sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))</code> which is outlined in other answers as well as in TF official <a href="https://www.tensorflow.org/tutorials/using_gpu" target="_blank" rel="noopener">documentation</a>, you can try to assign a computation to the gpu and see whether you have an error.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">with tf.device(&#39;&#x2F;gpu:0&#39;):</span><br><span class="line">    a &#x3D; tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape&#x3D;[2, 3], name&#x3D;&#39;a&#39;)</span><br><span class="line">    b &#x3D; tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape&#x3D;[3, 2], name&#x3D;&#39;b&#39;)</span><br><span class="line">    c &#x3D; tf.matmul(a, b)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    print (sess.run(c))</span><br></pre></td></tr></table></figure>
-
-<p>Here</p>
-<ul>
-<li>“/cpu:0”: The CPU of your machine.</li>
-<li>“/gpu:0”: The GPU of your machine, if you have one.</li>
-</ul>
-<p>If you have a gpu and can use it, you will see the result. Otherwise you will see an error with a long stacktrace. In the end you will have something like this:</p>
-<blockquote>
-<p>Cannot assign a device to node ‘MatMul’: Could not satisfy explicit device specification ‘/device:GPU:0’ because no devices matching that specification are registered in this process</p>
-</blockquote>
-<p>实测结果如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow) C:\Users\username\PycharmProjects\DeepGTA5&gt;python GTA5_11_tensorflow</span><br><span class="line">_test.py</span><br><span class="line">2018-05-02 21:42:08.599200: I T:\src\github\tensorflow\tensorflow\core\platform\</span><br><span class="line">cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow bi</span><br><span class="line">nary was not compiled to use: AVX2</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1327, in _do_call</span><br><span class="line">    return fn(*args)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1310, in _run_fn</span><br><span class="line">    self._extend_graph()</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1358, in _extend_graph</span><br><span class="line">    graph_def.SerializeToString(), status)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\errors_impl.py&quot;, line 516, in __exit__</span><br><span class="line">    c_api.TF_GetCode(self.status.status))</span><br><span class="line">tensorflow.python.framework.errors_impl.InvalidArgumentError: Cannot assign a de</span><br><span class="line">vice for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0</span><br><span class="line">but available devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make</span><br><span class="line"> sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;GTA5_11_tensorflow_test.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    print (sess.run(c))</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 905, in run</span><br><span class="line">    run_metadata_ptr)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1140, in _run</span><br><span class="line">    feed_dict_tensor, options, run_metadata)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1321, in _do_run</span><br><span class="line">    run_metadata)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\client\session.py&quot;, line 1340, in _do_call</span><br><span class="line">    raise type(e)(node_def, op, message)</span><br><span class="line">tensorflow.python.framework.errors_impl.InvalidArgumentError: Cannot assign a de</span><br><span class="line">vice for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0</span><br><span class="line">but available devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make</span><br><span class="line"> sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br><span class="line"></span><br><span class="line">Caused by op &#39;MatMul&#39;, defined at:</span><br><span class="line">  File &quot;GTA5_11_tensorflow_test.py&quot;, line 8, in &lt;module&gt;</span><br><span class="line">    c &#x3D; tf.matmul(a, b)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\ops\math_ops.py&quot;, line 2108, in matmul</span><br><span class="line">    a, b, transpose_a&#x3D;transpose_a, transpose_b&#x3D;transpose_b, name&#x3D;name)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\ops\gen_math_ops.py&quot;, line 4492, in mat_mul</span><br><span class="line">    name&#x3D;name)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\op_def_library.py&quot;, line 787, in _apply_op_helper</span><br><span class="line">    op_def&#x3D;op_def)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\ops.py&quot;, line 3290, in create_op</span><br><span class="line">    op_def&#x3D;op_def)</span><br><span class="line">  File &quot;C:\Users\ds18b20\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\</span><br><span class="line">python\framework\ops.py&quot;, line 1654, in __init__</span><br><span class="line">    self._traceback &#x3D; self._graph._extract_stack()  # pylint: disable&#x3D;protected-</span><br><span class="line">access</span><br><span class="line"></span><br><span class="line">InvalidArgumentError (see above for traceback): Cannot assign a device for operation &#39;MatMul&#39;: Operation was explicitly assigned to &#x2F;device:GPU:0 but available</span><br><span class="line">devices are [ &#x2F;job:localhost&#x2F;replica:0&#x2F;task:0&#x2F;device:CPU:0 ]. Make sure the device specification refers to a valid device.</span><br><span class="line">         [[Node: MatMul &#x3D; MatMul[T&#x3D;DT_FLOAT, transpose_a&#x3D;false, transpose_b&#x3D;fals</span><br><span class="line">e, _device&#x3D;&quot;&#x2F;device:GPU:0&quot;](a, b)]]</span><br></pre></td></tr></table></figure>
-
-<p>stacktrace提示CPU:0可用，但是代码中指定的是GPU:0，而GPU不可用。</p>
-<blockquote>
-<p>InvalidArgumentError (see above for traceback): Cannot assign a device for operation ‘MatMul’: Operation was explicitly assigned to /device:GPU:0 but available devices are [ /job:localhost/replica:0/task:0/device:CPU:0 ]. Make sure the device specification refers to a valid device.</p>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>How to tell if tensorflow is using gpu acceleration from inside python shell?</p>
-<p><a href="https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell" target="_blank" rel="noopener">https://stackoverflow.com/questions/38009682/how-to-tell-if-tensorflow-is-using-gpu-acceleration-from-inside-python-shell</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPU</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CPU</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/TensorFlow-04-deviceCPUorGPU/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-21-reshape" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/Numpy-21-reshape/">Numpy-21-reshape</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/02/Numpy-21-reshape/" class="archive-article-date">
-  	<time datetime="2018-05-01T22:20:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="shape"><a href="#shape" class="headerlink" title="shape"></a>shape</h1><p>修改ndarray的shape属性可以直接实现尺寸的转换，而且是当前ndarray直接起效。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.shape = (<span class="number">2</span>, <span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="reshape"><a href="#reshape" class="headerlink" title="reshape"></a>reshape</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.reshape([<span class="number">2</span>, <span class="number">5</span>])</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
-
-<p>reshape只是复制原数列并作变形，返回另一个数列，所以需要接受此返回值。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reshape</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shape</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/Numpy-21-reshape/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-34-sysargv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/30/Python-34-sysargv/">Python-34-sysargv</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/30/Python-34-sysargv/" class="archive-article-date">
-  	<time datetime="2018-04-30T13:23:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv"></a>sys.argv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> argv == <span class="literal">None</span>:</span><br><span class="line">        print(<span class="string">'Hello world'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(argv)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main(sys.argv)</span><br><span class="line">    print(type(sys.argv))</span><br></pre></td></tr></table></figure>
-
-<p>sys.argv是命令行下python命令后的所有参数的集合，这个集合组成了一个数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\iPythonFiles&gt;python arg.py -v</span><br><span class="line">[&#39;arg.py&#39;, &#39;-v&#39;]</span><br><span class="line">&lt;class &#39;list&#39;&gt;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sys</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">argv</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/30/Python-34-sysargv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-33-argparse" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/30/Python-33-argparse/">Python-33-argparse</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/30/Python-33-argparse/" class="archive-article-date">
-  	<time datetime="2018-04-30T11:15:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>argparse是Python自带的一个命令行解析库，如字面意思所示可以方便的解析命令行下的参数。</p>
-<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建解析对象</span></span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line"><span class="comment"># 向此对象中添加关注的命令行参数和选项</span></span><br><span class="line">parser.add_argument() </span><br><span class="line"><span class="comment"># 进行解析</span></span><br><span class="line">parser.parse_args()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续处理函数</span></span><br></pre></td></tr></table></figure>
-
-<p>参数主要分为位置参数(positional arguments)和可选参数(optional arguments)，其中位置参数是必要的参数，而可选参数通过<code>-参数名</code>来选择性的传递。</p>
-<h1 id="positional-arguments"><a href="#positional-arguments" class="headerlink" title="positional arguments"></a>positional arguments</h1><p>位置参数不要求在前面加<code>-</code>，直接就可以使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import argparse</span><br><span class="line"></span><br><span class="line">parse &#x3D; argparse.ArgumentParser()</span><br><span class="line">parse.add_argument(&quot;echo&quot;)</span><br><span class="line">args &#x3D; parse.parse_args()</span><br><span class="line"></span><br><span class="line">print(args.echo)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码的输出为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\iPythonFiles&gt;python arg.py positional_argument</span><br><span class="line">positional_argument</span><br></pre></td></tr></table></figure>
-
-<p>通过解析，将参数保存在args.echo之中，可以在后面继续调用。</p>
-<p>上述代码如果不加位置参数会报错，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\iPythonFiles&gt;python arg.py</span><br><span class="line">usage: arg.py [-h] echo</span><br><span class="line">arg.py: error: the following arguments are required: echo</span><br></pre></td></tr></table></figure>
-
-<p>输入-h可以查看帮助信息，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\iPythonFiles&gt;python arg.py -h</span><br><span class="line">usage: arg.py [-h] echo</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line">  echo</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help  show this help message and exit</span><br></pre></td></tr></table></figure>
-
-<h1 id="optional-arguments"><a href="#optional-arguments" class="headerlink" title="optional arguments"></a>optional arguments</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parse = argparse.ArgumentParser()</span><br><span class="line">parse.add_argument(<span class="string">"-v"</span>, <span class="string">"--version"</span>, help=<span class="string">"version to use"</span>)</span><br><span class="line">args = parse.parse_args()</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(args.v)</span></span><br><span class="line">print(args.version)</span><br></pre></td></tr></table></figure>
-
-<p>传递可选参数时，像本例中需要加入-v或者–version提示，然后在后面跟上参数值。没有参数值会报错，而且传递的采纳数只会保存在args.version中，调用args.v会报错。</p>
-<h1 id="action-’store-true’"><a href="#action-’store-true’" class="headerlink" title="action=’store_true’"></a>action=’store_true’</h1><p>加上action限定之后，-v或–verbose之后并不需要接参数，而是直接像-h或–help那样实现一个布尔选择的功能，即True/False。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">"-v"</span>, <span class="string">"--verbose"</span>, help=<span class="string">"increase output verbosity"</span>, action=<span class="string">"store_true"</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.verbose)</span><br><span class="line"><span class="comment"># if args.verbose:</span></span><br><span class="line">        <span class="comment"># print("verbosity turned on")</span></span><br></pre></td></tr></table></figure>
-
-<p>上例输出为True。</p>
-<p>此外还有type(类型检查)，choices=[](备选值)等功能。。。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>python argparse用法总结</p>
-<p><a href="https://www.jianshu.com/p/fef2d215b91d" target="_blank" rel="noopener">https://www.jianshu.com/p/fef2d215b91d</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">argparse</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/30/Python-33-argparse/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-20-NoneOREmpty" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/Numpy-20-NoneOREmpty/">Numpy-20-NoneOREmpty</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/28/Numpy-20-NoneOREmpty/" class="archive-article-date">
-  	<time datetime="2018-04-28T13:51:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="判断一个对象是None还是Numpy-Array"><a href="#判断一个对象是None还是Numpy-Array" class="headerlink" title="判断一个对象是None还是Numpy Array"></a>判断一个对象是None还是Numpy Array</h1><p>OpenCV的Hough直线检测等函数，返回有时候会是None对象。这时候进行下一步数据处理时就需要判断此返回值是None还是array。</p>
-<p>最直接的想法就是判断是不是等于None：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>或者使用type和isinstance判断：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> type(a) <span class="keyword">is</span> np.ndarray:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>ininstance可以判断是不是一个类的子类，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># be careful not to check for np.array but for np.ndarray!</span></span><br><span class="line"><span class="keyword">if</span> isinstance(a, np.ndarray):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<h1 id="判断Array是否为空"><a href="#判断Array是否为空" class="headerlink" title="判断Array是否为空"></a>判断Array是否为空</h1><p>若已知是Numpy Array，要判断内容是否为空的话，可以查看a.size属性。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>ValueError when checking if variable is None or numpy.array</p>
-<p><a href="https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/36783921/valueerror-when-checking-if-variable-is-none-or-numpy-array</a></p>
-<p>How can I check whether the numpy array is empty or not?</p>
-<p><a href="https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not" target="_blank" rel="noopener">https://stackoverflow.com/questions/11295609/how-can-i-check-whether-the-numpy-array-is-empty-or-not</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">None</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">size</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/28/Numpy-20-NoneOREmpty/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2715,6 +2676,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">environ</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">run time</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">iterate column</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
               </li>
             
             <div class="clearfix"></div>

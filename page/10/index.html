@@ -156,6 +156,511 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-09-imshow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/23/Matplotlib-09-imshow/">Matplotlib-09-imshow</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/23/Matplotlib-09-imshow/" class="archive-article-date">
+  	<time datetime="2018-08-23T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib-imshow"><a href="#matplotlib-imshow" class="headerlink" title="matplotlib imshow"></a>matplotlib imshow</h1><p>用matplotlib显示cifar10数据集样本时，输出图片颜色怪异，原因在于用于显示的像素值需要转换成[0, 1]之间的浮点数。</p>
+<h2 id="直接显示raw图像："><a href="#直接显示raw图像：" class="headerlink" title="直接显示raw图像："></a>直接显示raw图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_1.png" alt=""></p>
+<h2 id="压缩到-0-1-后的图像："><a href="#压缩到-0-1-后的图像：" class="headerlink" title="压缩到[0, 1]后的图像："></a>压缩到[0, 1]后的图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_2.png" alt=""></p>
+<p>这是因为imshow函数对输入数据的格式和类型有要求：</p>
+<p><code>matplotlib.pyplot.imshow</code>(<em>X</em>, <em>cmap=None</em>, <em>norm=None</em>, <em>aspect=None</em>, <em>interpolation=None</em>, <em>alpha=None</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>origin=None</em>, <em>extent=None</em>, <em>shape=None</em>, <em>filternorm=1</em>, <em>filterrad=4.0</em>, <em>imlim=None</em>, <em>resample=None</em>, <em>url=None</em>, <em>**, *data=None</em>, <em><em>\</em>kwargs</em>)</p>
+<blockquote>
+<p><strong>X</strong> : array-like or PIL image</p>
+<p>The image data. Supported array shapes are:</p>
+<ul>
+<li>(M, N): an image with scalar data. The data is visualized using a colormap.</li>
+<li>(M, N, 3): an image with RGB values (float or uint8).</li>
+<li>(M, N, 4): an image with RGBA values (float or uint8), i.e. including transparency.</li>
+</ul>
+<p>The first two dimensions (M, N) define the rows and columns of the image.</p>
+<p>The RGB(A) values should be in the range [0 .. 1] for floats or [0 .. 255] for integers. Out-of-range values will be clipped to these bounds.</p>
+</blockquote>
+<p>故，作为显示数据的X必须是[0, 1]的float或者[0, 255]的uint8类型。</p>
+<p>另外一个int的例子是，当数据类型是默认的int32类型时，显示颜色不正常：</p>
+<p><img src="Matplotlib-09-imshow%5Cint32.png" alt=""></p>
+<p>改成uint8类型之后，显示颜色变为正常了：</p>
+<p><img src="Matplotlib-09-imshow%5Cuint8.png" alt=""></p>
+<p>变换函数：<code>numpy_data.astype(&#39;uint8&#39;)</code></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat" target="_blank" rel="noopener">https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat</a><br><a href="https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imshow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/23/Matplotlib-09-imshow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL-MySQL-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/19/SQL-MySQL-error/">SQL-MySQL-error</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/19/SQL-MySQL-error/" class="archive-article-date">
+  	<time datetime="2018-08-18T15:43:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL-error-code-1062"><a href="#MySQL-error-code-1062" class="headerlink" title="MySQL error code 1062"></a>MySQL error code 1062</h1><p>使用Python管理MySQL时出现了<code>pymysql.err.IntegrityError: (1062, &quot;Duplicate entry...</code>的错误。<br>说明规定不能重复的字段内出现了重复值。<br>比如<code>unique key idx_email (email)</code>就规定email字段的值不可重复，当此处值发生重复时就会报错。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.rathishkumar.in/2016/01/how-to-solve-mysql-error-code-1062.html" target="_blank" rel="noopener">https://www.rathishkumar.in/2016/01/how-to-solve-mysql-error-code-1062.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">error</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/19/SQL-MySQL-error/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL-04-Drop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/19/SQL-04-Drop/">SQL-04-Drop</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/19/SQL-04-Drop/" class="archive-article-date">
+  	<time datetime="2018-08-18T15:38:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL-删除数据库-表"><a href="#MySQL-删除数据库-表" class="headerlink" title="MySQL 删除数据库/表"></a>MySQL 删除数据库/表</h1><p>注意：执行删除数据库的命令会直接删除该数据库的所有数据，故删除之前应做好备份工作。</p>
+<h2 id="使用drop方式"><a href="#使用drop方式" class="headerlink" title="使用drop方式"></a>使用drop方式</h2><p>登入SQL环境下可以使用drop命令删除数据库：<br>mysql&gt;<code>drop database &lt;database name&gt;</code></p>
+<p>mysql&gt;<code>drop table &lt;table name&gt;</code></p>
+<h2 id="使用mysqladmin删除"><a href="#使用mysqladmin删除" class="headerlink" title="使用mysqladmin删除"></a>使用mysqladmin删除</h2><p>这种方式不要求进入SQL环境，直接在Terminal下实现：<br>[root@host]# <code>mysqladmin -u root -p drop &lt;databese name&gt;</code><br>接下来会提示输入密码，并且确认是否确定删除。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">drop</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">table</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/19/SQL-04-Drop/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PyCharm-04-shorcut-Mac" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/19/PyCharm-04-shorcut-Mac/">PyCharm-04-shorcut-Mac</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/19/PyCharm-04-shorcut-Mac/" class="archive-article-date">
+  	<time datetime="2018-08-18T15:34:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PyCharm-shortcuts-in-Mac"><a href="#PyCharm-shortcuts-in-Mac" class="headerlink" title="PyCharm shortcuts in Mac"></a>PyCharm shortcuts in Mac</h1><h2 id="常用命令如下："><a href="#常用命令如下：" class="headerlink" title="常用命令如下："></a>常用命令如下：</h2><p>⌘B 跳转到变量/方法的定义处<br>⇧⇧ 双击Shift键 搜索所有内容<br>⌥Space 在浮动窗口打开选中的方法/类的定义<br>⌘Y 在浮动窗口打开光标所在的方法/类的定义</p>
+<p>注：Windows下Ctrl+Q来查看方法/类的定义</p>
+<h2 id="Mac键盘符号和修饰键说明"><a href="#Mac键盘符号和修饰键说明" class="headerlink" title="Mac键盘符号和修饰键说明"></a>Mac键盘符号和修饰键说明</h2><p>⌘ Command</p>
+<p>⇧ Shift</p>
+<p>⌥ Option</p>
+<p>⌃ Control</p>
+<p>↩︎ Return/Enter</p>
+<p>⌫ Delete</p>
+<p>⌦ 向前删除键（Fn+Delete）</p>
+<p>↑ 上箭头</p>
+<p>↓ 下箭头</p>
+<p>← 左箭头</p>
+<p>→ 右箭头</p>
+<p>⇞ Page Up（Fn+↑）</p>
+<p>⇟ Page Down（Fn+↓）</p>
+<p>Home Fn + ←</p>
+<p>End Fn + →</p>
+<p>⇥ 右制表符（Tab键）</p>
+<p>⇤ 左制表符（Shift+Tab）</p>
+<p>⎋ Escape (Esc)</p>
+        
+          <a class="article-more-a" href="/2018/08/19/PyCharm-04-shorcut-Mac/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">shortcut</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Mac</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/19/PyCharm-04-shorcut-Mac/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PyCharm-03-runCurrentFile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/19/PyCharm-03-runCurrentFile/">PyCharm-03-runCurrentFile</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/19/PyCharm-03-runCurrentFile/" class="archive-article-date">
+  	<time datetime="2018-08-18T15:33:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PyCharm-run-current-file"><a href="#PyCharm-run-current-file" class="headerlink" title="PyCharm run current file"></a>PyCharm run current file</h1><p>通常在PyCharm下运行Python代码需要进入右上角的<code>Edit Configuration</code>设置Python版本以及要运行的脚本文件，然后执行运行。<br>如果要临时测试运行另一个文件，反复去切换设置比较浪费时间，可以直接找到左侧导航栏内的当前文件，右键选择<code>Run &#39;your-file-name&#39;</code>。<br>当然也可以直接使用该功能的快捷键<code>⌃（control）+⇧（shift）+R</code>。要修改该快捷键的配置直接打开PyCharm的Preference，进入keymap选项下查找到<code>run context configuration</code>，然后就可以修改其快捷键设置了。<br>如下图：<br><img src="PyCharm-03-runCurrentFile%5CPyCharm_run.png" alt=""></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/43807305/how-can-i-run-the-current-file-in-pycharm" target="_blank" rel="noopener">https://stackoverflow.com/questions/43807305/how-can-i-run-the-current-file-in-pycharm</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">run</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">current file</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/19/PyCharm-03-runCurrentFile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-50-URL-XML-encoding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -815,462 +1320,9 @@
 
 
   
-    <article id="post-PyCharm-02-importError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/PyCharm-02-importError/">PyCharm-02-importError</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/PyCharm-02-importError/" class="archive-article-date">
-  	<time datetime="2018-08-07T14:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="同目录下的py文件无法import"><a href="#同目录下的py文件无法import" class="headerlink" title="同目录下的py文件无法import"></a>同目录下的py文件无法import</h1><p>目录FFF下新建两个.py文件：a.py和b.py。</p>
-<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在b.py内尝试<code>import a.py</code>，结果提示错误无法找到a.py。</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm不会将当前文件目录加入source_path内，所以需要手动加入。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><img src="PyCharm-02-importError%5Cimport.png" alt=""></p>
-<p>Pycharm的导航栏内右击目录–&gt;Mark Directory as–&gt;Source Root即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">import local</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/PyCharm-02-importError/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-45-Coroutine2Asyncio" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/05/Python-45-Coroutine2Asyncio/">Python-45-Coroutine2Asyncio</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/05/Python-45-Coroutine2Asyncio/" class="archive-article-date">
-  	<time datetime="2018-08-05T01:54:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/05/Python-45-Coroutine2Asyncio/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-44-Generator2Coroutine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/05/Python-44-Generator2Coroutine/">Python-44-Generator2Coroutine</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/05/Python-44-Generator2Coroutine/" class="archive-article-date">
-  	<time datetime="2018-08-05T01:54:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/05/Python-44-Generator2Coroutine/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-MySQL-Setup-Windows" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/SQL-MySQL-Setup-Windows/">SQL-MySQL-Setup-Windows</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/01/SQL-MySQL-Setup-Windows/" class="archive-article-date">
-  	<time datetime="2018-08-01T11:59:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Windows非安装版MySQL"><a href="#Windows非安装版MySQL" class="headerlink" title="Windows非安装版MySQL"></a>Windows非安装版MySQL</h1><p>下面介绍Windows系统下非安装版的MySQL的配置方法。</p>
-<h2 id="下载zip版文件"><a href="#下载zip版文件" class="headerlink" title="下载zip版文件"></a>下载zip版文件</h2><p>去官方网站下载zip版的压缩文件，解压缩到指定位置，此位置即MySQL的安装目录。这里我的安装目录是<code>C:\Program Files\mysql-5.6</code>。</p>
-<h2 id="配置设置文件"><a href="#配置设置文件" class="headerlink" title="配置设置文件"></a>配置设置文件</h2><p>默认在安装目录下有名为<code>my-default.ini</code>的配置文件。将此文件复制一份，然后更名为<code>my.ini</code>。</p>
-<p>打开<code>my.ini</code>，做如下修改：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line">[mysqld]</span><br><span class="line">#设置3306端口</span><br><span class="line">port&#x3D;3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir&#x3D;C:\Program Files\mysql-5.6.30-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir&#x3D;C:\Program Files\mysql-5.6.30-winx64\data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections&#x3D;200</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server&#x3D;utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine&#x3D;INNODB</span><br></pre></td></tr></table></figure>
-
-<p>注意，</p>
-<ul>
-<li>basedir和datadir根据自身情况设置</li>
-<li>文件以ANSI形式保存，所以上述配置文件中的#中文部分应该删除。</li>
-</ul>
-<h2 id="修改系统环境变量"><a href="#修改系统环境变量" class="headerlink" title="修改系统环境变量"></a>修改系统环境变量</h2><p>在系统环境变量PATH里添加MySQL的安装目录。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li>以Administrtor身份启动CMD；</li>
-<li>cd到上述安装目录，然后键入<code>mysqld install</code>。（注意是mysqld）如果没有管理员权限会提示<code>Install/Remove of the Service Denied!</code>，正常安装后提示Service <code>successfully installed.</code></li>
-</ol>
-<h2 id="启动MySQL服务"><a href="#启动MySQL服务" class="headerlink" title="启动MySQL服务"></a>启动MySQL服务</h2><p>启动服务命令：<code>net start mysql</code></p>
-<p>关闭服务命令：<code>net stop mysql</code></p>
-<h2 id="运行mysql"><a href="#运行mysql" class="headerlink" title="运行mysql"></a>运行mysql</h2><p>键入<code>mysql -u root -p</code>，默认密码为空，所以提示输入密码时，直接Enter。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/alunchen/p/5526903.html" target="_blank" rel="noopener">MySQL服务器安装配置-非安装版、windows版</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">setup</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/01/SQL-MySQL-Setup-Windows/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SQL-MySQL-Setup-Mac" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/SQL-MySQL-Setup-Mac/">SQL-MySQL-Setup-Mac</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/01/SQL-MySQL-Setup-Mac/" class="archive-article-date">
-  	<time datetime="2018-08-01T11:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL的安装和配置"><a href="#MySQL的安装和配置" class="headerlink" title="MySQL的安装和配置"></a>MySQL的安装和配置</h1><p>这篇主要记录在Mac平台上安装MySQL的过程。</p>
-<h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2><p>到MySQL官网下载Community版的Mac安装文件。<br>我自己下载的是.dmg文件，双击打开可以看到一个pkg文件，双击这个pkg文件打开。<br>最后一直点下一步知道安装结束。</p>
-<h2 id="停止MySQL服务"><a href="#停止MySQL服务" class="headerlink" title="停止MySQL服务"></a>停止MySQL服务</h2><p>如果已经启动来MySQL服务，需要先打开Mac的<code>系统偏好设置</code>。</p>
-<p>在最下面找到MySQL的设置按钮，进入设置并关闭MySQL服务。</p>
-<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><p>安装后默认没有设置密码，Terminal内键入：<code>/usr/local/mysql/bin/mysqladmin -u root password</code><br>按照提示两次键入root账户的密码。</p>
-<p>为防止遗忘，此处设置为root。</p>
-<h2 id="添加系统环境变量"><a href="#添加系统环境变量" class="headerlink" title="添加系统环境变量"></a>添加系统环境变量</h2><p>此时，Terminal内键入<code>mysql</code>会提示找不到命令的错误信息：<code>-bash: mysql: command not found</code>，因为$PATH系统变量内没有记录MySQL的安装目录。</p>
-<blockquote>
-<p>查看 $PATH的方法：</p>
-<p>echo $PATH</p>
-<p>/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</p>
-</blockquote>
-<p>解决方法：</p>
-<ol>
-<li>在Terminal内<code>export PATH=&quot;/usr/local/mysql/bin:$PATH&quot;</code>，但是关闭Terminal后设置消失。</li>
-<li>If you modify the PATH variable in a Terminal session by exporting it (e.g. export PATH=”/usr/local/mysql/bin:$PATH” it will be expired in the next session.<br>So either edit the file ~/.bash_profile or edit /private/etc/paths if you need this PATH for other users also.<br>修改文件的具体操作如下：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>添加两行，<br><code>alias mysql=’/usr/local/mysql/bin/mysql’</code><br><code>alias mysqladmin=’/usr/local/mysql/bin/mysqladmin’</code> </p>
-<p>或者添加<code>export PATH=&quot;/usr/local/mysql/bin:$PATH&quot;</code><br>然后保存。</p>
-<p>再次查看 $PATH确认MySQL所在目录已经被添加：<br><code>echo $PATH</code></p>
-<p><code>/usr/local/mysql/bin:/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</code></p>
-<p><strong>重启终端</strong>输入mysql即可显示欢迎界面。</p>
-<h2 id="修改默认字符集"><a href="#修改默认字符集" class="headerlink" title="修改默认字符集"></a>修改默认字符集</h2><p>涉及到多语言问题时，为了防止显示乱码需要修改默认字符集。<br>首先，检查安装后的默认设置。<br>Terminal内键入mysql进入mysql环境，然后键入<code>show variables like &#39;%char%&#39;;</code><br>得到如下结果，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                     |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8                                                      |</span><br><span class="line">| character_set_connection | utf8                                                      |</span><br><span class="line">| character_set_database   | latin1                                                    |</span><br><span class="line">| character_set_filesystem | binary                                                    |</span><br><span class="line">| character_set_results    | utf8                                                      |</span><br><span class="line">| character_set_server     | latin1                                                    |</span><br><span class="line">| character_set_system     | utf8                                                      |</span><br><span class="line">| character_sets_dir       | &#x2F;usr&#x2F;local&#x2F;mysql-5.6.41-macos10.13-x86_64&#x2F;share&#x2F;charsets&#x2F; |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">8 rows in set (0.03 sec)</span><br></pre></td></tr></table></figure>
-
-<p>可以看到haracter_set_database和character_set_server并不是utf8字符集。接下来要把这两项修改成utf8格式。<br>首先，在系统便好设置里关闭MySQL服务，然后修改配置文件。<br>Mac下MySQL的默认配置文件位置在<code>/etc/my.cnf</code>或者<code>/etc/mysql/my.cnf</code>。<br>如果没有的话，需要从<code>/usr/local/mysql/support-files/my-default.cnf</code>处拷贝过来：<br><code>sudo cp /usr/local/mysql/support-files/my-default.cnf /etc/my.cnf</code><br>然后<code>sudo vi /etc/my.cnf</code>，做如下修改：<br>[client]部分加入：<br><code>default-character-set=utf8</code></p>
-<p>[mysqld]部分加入：<br><code>character-set-server=utf8</code></p>
-<p>修改完毕之后记得重启MySQL服务。</p>
-<p>这时再次查看设置：<code>mysql&gt; show variables like &#39;%char%&#39;;</code><br>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                     |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8                                                      |</span><br><span class="line">| character_set_connection | utf8                                                      |</span><br><span class="line">| character_set_database   | utf8                                                      |</span><br><span class="line">| character_set_filesystem | binary                                                    |</span><br><span class="line">| character_set_results    | utf8                                                      |</span><br><span class="line">| character_set_server     | utf8                                                      |</span><br><span class="line">| character_set_system     | utf8                                                      |</span><br><span class="line">| character_sets_dir       | &#x2F;usr&#x2F;local&#x2F;mysql-5.6.41-macos10.13-x86_64&#x2F;share&#x2F;charsets&#x2F; |</span><br><span class="line">+--------------------------+-----------------------------------------------------------+</span><br><span class="line">8 rows in set (0.02 sec)</span><br></pre></td></tr></table></figure>
-
-<p>修改my.conf配置文件时可以同时修改一下内容：<br>[mysqld]<br><code>default-storage-engine = INNODB</code><br><code>collation-server = utf8_general_ci</code></p>
-<h2 id="忘记初始密码时的操作"><a href="#忘记初始密码时的操作" class="headerlink" title="忘记初始密码时的操作"></a>忘记初始密码时的操作</h2><p><a href="https://blog.csdn.net/u014410695/article/details/50630233" target="_blank" rel="noopener">https://blog.csdn.net/u014410695/article/details/50630233</a></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://apple.stackexchange.com/questions/287476/the-new-created-terminal-can-not-find-the-file-use-which-in-mac" target="_blank" rel="noopener">https://apple.stackexchange.com/questions/287476/the-new-created-terminal-can-not-find-the-file-use-which-in-mac</a><br><a href="https://www.cnblogs.com/mfmdaoyou/p/7233394.html" target="_blank" rel="noopener">https://www.cnblogs.com/mfmdaoyou/p/7233394.html</a><br><a href="https://blog.csdn.net/Waleking/article/details/7620983" target="_blank" rel="noopener">https://blog.csdn.net/Waleking/article/details/7620983</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Mac</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">setup</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/01/SQL-MySQL-Setup-Mac/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2759,6 +2811,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">environ</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">run time</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">iterate column</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
               </li>
             
             <div class="clearfix"></div>

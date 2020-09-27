@@ -156,6 +156,565 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KalmanFilter-01-Covariance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/KalmanFilter-01-Covariance/">KalmanFilter-01-Covariance</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/11/KalmanFilter-01-Covariance/" class="archive-article-date">
+  	<time datetime="2018-01-11T13:59:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从方差说起"><a href="#从方差说起" class="headerlink" title="从方差说起"></a>从方差说起</h1><p>首先回顾一下统计学中最常见的几个概念：均值，标准差，方差。</p>
+<ul>
+<li><p>均值<br>$$<br>\bar{X}=\frac{\sum_{i=1}^n  X_{i}}{n}<br>$$<br>​</p>
+</li>
+<li><p>标准差<br>$$<br>s=\sqrt{\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}}<br>$$<br>​</p>
+</li>
+<li><p>方差<br>$$<br>s^2=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$</p>
+</li>
+</ul>
+<p>样本均值X是总体均值U的最优估计值。虽然可以用其他样本统计量来估计总体的均值，比如样本中位数，众数或中列数。但是样本均值通常能提供最优的估计性。理由之一，多个样本的均值拥有比其他统计量更好的一致性（更小的标准差）。理由之二，样本均值X是总体均值U的一个无偏估计量，这意味着样本均值分布的中心趋近于总体均值的中心。（参考《初级统计学》著者: 特里奥拉）</p>
+<p>标准差表示样本中各点到均值的距离的平均，即可以用来评价样本数据的离散程度。标准差越大意味着，离散程度越大，数据分布不集中。标准差公式中分母使用n-1而不是n，这样可以以较小的样本集来更好地逼近总体的标准差，即统计学上的“无偏估计”。方差=标准差的平方</p>
+<p>代码实现：</p>
+<p>直接按公式实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">sample_avr = np.average(sample)</span><br><span class="line">diff = sample - sample_avr</span><br><span class="line">sigma2 = (diff * diff).sum() / (len(sample)<span class="number">-1</span>)</span><br><span class="line">print(pow(sigma2, (<span class="number">1</span>/<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>或者直接用Numpy的内置函数实现<strong>标准差</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line"></span><br><span class="line">print(np.std(array))</span><br><span class="line"><span class="comment"># 非偏估计，用ddof参数指定</span></span><br><span class="line">print(np.std(array, ddof=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差的意义"><a href="#协方差的意义" class="headerlink" title="协方差的意义"></a>协方差的意义</h1><p>通过上面对方差的介绍，可以注意到方差（标准差）只能用来描述一维数据。而具体环境中遇到的数据通常是二维甚至是多维度的，这时候描述这组数据就不应该只是单独计算各组数据的方差，因为各组数据之间很可能包含某种程度的关联。可以通过<code>协方差</code>来反映这种相关关系的程度。</p>
+<p>我们已经知道方差的定义如下：<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X})^2}{n-1}<br>$$<br>拆开平方，<br>$$<br>var(x)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (X_{i}-\bar{X})}{n-1}<br>$$<br>再把分子的后项换成第二维度的Y，得到<br>$$<br>var(x,y)=\frac{\sum_{i=1}^n (X_{i}-\bar{X}) (Y_{i}-\bar{Y})}{n-1}<br>$$<br>※顺便说一下方差的英文是variance，协方差的英文是covariance。</p>
+<p> 由上述定义可知，<br>$$<br>cov(X,X) = var(X)<br>$$</p>
+<p>$$<br>cov(X,Y) = cov(Y,X)<br>$$</p>
+<p>代码实现：</p>
+<p>按定义实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sample_avr = np.average(array)</span><br><span class="line">diff = array - sample_avr</span><br><span class="line">sigma2_m = (diff * diff).sum() / (len(array)<span class="number">-1</span>)</span><br><span class="line">print(<span class="string">'manual var=&#123;&#125;'</span>.format(sigma2_m))</span><br></pre></td></tr></table></figure>
+
+<p>Numpy函数实现方差，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array = np.array([<span class="number">40</span>,<span class="number">44</span>,<span class="number">38</span>,<span class="number">50</span>,<span class="number">60</span>])</span><br><span class="line">sigma2_a = np.var(array, ddof=<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'auto var=&#123;&#125;'</span>.format(sigma2_a))</span><br></pre></td></tr></table></figure>
+
+<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>单个协方差用于表示两个维度间的相关关系，当维度增多时就需要多个协方差。数据集的维度为n时，就需要$\frac{n*(n-1)}{2}$个协方差。这些协方差通过矩阵来组织时，就称为协方差矩阵。<br>$$<br>C_{n\times n}=(c_{i,j},c_{i,j}=cov(Dim_{i},Dim_{j}))<br>$$</p>
+<p>$$<br>C =<br>\begin{pmatrix}<br>cov(x,x) &amp; cov(x,y) &amp; cov(x,z) \<br>cov(y,x) &amp; cov(y,y) &amp; cov(y,z) \<br>cov(z,x) &amp; cov(z,y) &amp; cov(z,z) \<br> \end{pmatrix}<br>$$<br>在此也可看到，协方差矩阵是个对称矩阵，且其对角线上是各维度上的方差。</p>
+<p>Py代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证ndArray协方差矩阵</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sample_num = <span class="number">10</span></span><br><span class="line">sample_dim = <span class="number">3</span></span><br><span class="line">sample = np.random.randn(sample_num, sample_dim)</span><br><span class="line"></span><br><span class="line">dim0 = sample[:,<span class="number">0</span>]</span><br><span class="line">dim1 = sample[:,<span class="number">1</span>]</span><br><span class="line">dim2 = sample[:,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">dim0_mean = np.average(dim0)</span><br><span class="line">dim1_mean = np.average(dim1)</span><br><span class="line">dim2_mean = np.average(dim2)</span><br><span class="line"></span><br><span class="line">cov01 = ((dim0 - dim0_mean) * (dim1 - dim1_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov02 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line">cov12 = ((dim1 - dim1_mean) * (dim2 - dim2_mean)).sum() / (sample_num - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(cov01,cov02,cov12)</span><br></pre></td></tr></table></figure>
+
+<p>直接Numpy函数实现如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证numpy.var-std-cov</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">array2 = np.array([[<span class="number">0</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">0</span>]]).T</span><br><span class="line">cov_a = np.cov(array2)</span><br><span class="line">print(<span class="string">'auto cov='</span>)</span><br><span class="line">print(cov_a)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅谈协方差矩阵<a href="http://pinkyjie.com/2010/08/31/covariance/" target="_blank" rel="noopener">http://pinkyjie.com/2010/08/31/covariance/</a></p>
+<p>在线LaTeX编辑<a href="http://latex.codecogs.com/eqneditor/editor.php" target="_blank" rel="noopener">https://www.cnblogs.com/GarfieldEr007/p/5577727.html</a></p>
+<p>numpy.cov：<a href="https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy-1.9.0/reference/generated/numpy.cov.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Covariance</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Kalman-Filter//" class="article-tag-list-link color4">Kalman Filter</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/11/KalmanFilter-01-Covariance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-10-Stash" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/08/Git-10-Stash/">Git-08-Stash</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/08/Git-10-Stash/" class="archive-article-date">
+  	<time datetime="2018-01-08T11:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-Stash"><a href="#Git-Stash" class="headerlink" title="Git Stash"></a>Git Stash</h1><p>If you are working on a branch called <strong>Ver1.0</strong>, and you find a bug in file <strong>AAA</strong> on <strong>master branch</strong> that need to be fixed immediately.</p>
+<p>You can create a new <strong>bug branch</strong> from master, work on this <strong>bug branch</strong> to fix the bug, commit it and switch to master branch and merge the modification. If you commit them all, you will get too many unuseful commits.</p>
+<p>But when you want to add/commit, some modification will be add/commit to <strong>bug branch</strong> if <strong>Ver1.0</strong> is NOT clean. This modification is not what the <strong>bug branch</strong> should have.</p>
+<p>Before you switch to another branch, note that if your working directory or staging area has uncommitted changes that conflict with the branch you’re checking out, Git won’t let you switch branches. So, keep it CLEAN.</p>
+<p>Or, you can stash working directory to <strong>Ver1.0</strong> branch by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+
+<p>If you enter <code>git status</code>, you will find the working area is already CLEAN. All modification should be added, but don’n need to be committed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># on branch Ver1.0</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"># create branch bug from master</span><br><span class="line">git checkout master</span><br><span class="line">git checkout -b bug</span><br><span class="line"></span><br><span class="line">### fix the bug ###</span><br><span class="line">git add AAA</span><br><span class="line">git commit AAA -m &quot;fix bug&quot;</span><br><span class="line"></span><br><span class="line"># merge&#x2F;del bug</span><br><span class="line">git checkout master</span><br><span class="line">git merge bug</span><br><span class="line">git branch -d bug</span><br><span class="line"></span><br><span class="line"># switch to branch Ver1.0</span><br><span class="line">git checkout Ver1.0</span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"># or</span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;0&#125;</span><br><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
+
+<p>Reference:</p>
+<p><a href="https://segmentfault.com/q/1010000000156026" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000156026</a></p>
+<p><a href="https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6" target="_blank" rel="noopener">https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stash</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/08/Git-10-Stash/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-09-Push" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/08/Git-09-Push/">Git-09-Push</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/08/Git-09-Push/" class="archive-article-date">
+  	<time datetime="2018-01-08T11:22:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h1><p><code>git push</code> command is used to push file from <strong>local repo</strong> to <strong>remote repo</strong>.</p>
+<p>Basically, you can use push command by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote repo name&gt; &lt;local branch name&gt; &lt;remote branch name&gt;</span><br><span class="line"># example:</span><br><span class="line"># (1st master is local master branch)</span><br><span class="line"># (2nd master is remote master branch)</span><br><span class="line">git push origin master : refs&#x2F;for&#x2F;master</span><br></pre></td></tr></table></figure>
+
+<p>There are 2 ways to use this command.</p>
+<h2 id="I-connect-local-repo-with-remote-repo"><a href="#I-connect-local-repo-with-remote-repo" class="headerlink" title="I.connect local repo with remote repo"></a>I.connect local repo with remote repo</h2><ol>
+<li><p>Create a repo on your Github.</p>
+</li>
+<li><p>Create a local repo on your PC.</p>
+</li>
+<li><p>Name a remote repo as <code>origin</code></p>
+</li>
+</ol>
+<p>under your local repo directory:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># origin: remote repo name</span><br><span class="line">git remote add origin git@github.com:yourID&#x2F;project.git</span><br></pre></td></tr></table></figure>
+
+<p>to add a remote repo called <code>origin</code>.</p>
+<ol start="4">
+<li>First push:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>Push local repo to remote repo. Here <code>-u</code> is to relate <strong>local master branch</strong> with <strong>remote master branch</strong>.</p>
+<p>Later, you can just enter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>to push local master branch with the remote branch, that has been related.</p>
+<p>If you want to push the present branch to remote, and the present branch has been related, just enter:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin</span><br></pre></td></tr></table></figure>
+
+<p>If present repo has only one branch, remote repo name can be omitted.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># use git branch -r</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><code>git push</code> command can be used to delete a branch</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin : &lt;remote branch name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>When push a local repo, if you omit the local branch, remote branch will be deleted.</p>
+<ol start="6">
+<li>Create new remote branch using <code>git push</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;local branch name&gt; : &lt;new branch name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="II-clone-from-remote-repo"><a href="#II-clone-from-remote-repo" class="headerlink" title="II.clone from remote repo"></a>II.clone from remote repo</h2><ol>
+<li>clone</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;URL&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>push</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="About-refs-for"><a href="#About-refs-for" class="headerlink" title="About refs/for"></a>About refs/for</h2><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://www.cnblogs.com/qianqiannian/p/6008140.html" target="_blank" rel="noopener">https://www.cnblogs.com/qianqiannian/p/6008140.html</a></p>
+<p><a href="https://www.cnblogs.com/springbarley/archive/2012/11/03/2752984.html" target="_blank" rel="noopener">https://www.cnblogs.com/springbarley/archive/2012/11/03/2752984.html</a></p>
+<p>fetch + merge &gt; pull</p>
+<p><a href="http://www.cnblogs.com/flying_bat/p/3408634.html" target="_blank" rel="noopener">http://www.cnblogs.com/flying_bat/p/3408634.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Push</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/08/Git-09-Push/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-08-NewBranch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/08/Git-08-NewBranch/">Git-08-NewBranch</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/08/Git-08-NewBranch/" class="archive-article-date">
+  	<time datetime="2018-01-08T11:20:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-New-Branch"><a href="#Git-New-Branch" class="headerlink" title="Git New Branch"></a>Git New Branch</h1><p>Use <code>git branch</code> to show present branches.</p>
+<p>Use <code>git branch &lt;name&gt;</code> to create a new branch called <name>.</p>
+<p>Use <code>git checkout &lt;name&gt;</code> to switch to <name> branch.</p>
+<p>Use <code>git checkout -b &lt;name&gt;</code> to create new and switch to it.</p>
+<p>Use <code>git merge &lt;name&gt;</code> to merge <name> branch to the present branch. So <code>checkout</code> to the present branch at first. By default, Git will merge in <strong>fast-forward</strong> mode, and new branch information will be lost when you delete this new branch. You can use force Git not to use fast-forward mode by <code>git merge --no-ff -m &quot;comment here&quot; &lt;branchName&gt;</code>, and you can still see branch by <code>git branch</code>.</p>
+<p>Use <code>git branch -d &lt;name&gt;</code> to delete <name> branch.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">New Branch</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/08/Git-08-NewBranch/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git-07-RM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/19/Git-07-RM/">Git-07-RM</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/19/Git-07-RM/" class="archive-article-date">
+  	<time datetime="2017-12-18T15:37:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-RM"><a href="#Git-RM" class="headerlink" title="Git RM"></a>Git RM</h1><h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm test.txt</span><br><span class="line">git commit -m &quot;delete file&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go-back"><a href="#Go-back" class="headerlink" title="Go back"></a>Go back</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">rm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/19/Git-07-RM/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Git-06-CheckoutReset" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -662,606 +1221,9 @@
 
 
   
-    <article id="post-Git-01-GitSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-01-GitSetting/">Git-01-GitSetting</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-01-GitSetting/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:29:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-Installation-and-Setting"><a href="#Git-Installation-and-Setting" class="headerlink" title="Git Installation and Setting"></a>Git Installation and Setting</h1><h2 id="Git-installation"><a href="#Git-installation" class="headerlink" title="Git installation"></a>Git installation</h2><p>For Windows:</p>
-<ol>
-<li>Download Git-scm from <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></li>
-<li>Install</li>
-<li>Open <code>Git bash</code> from Windows start menu</li>
-</ol>
-<p>If a command line window pops up, the installation is success.</p>
-<h2 id="Set-user-name-amp-email"><a href="#Set-user-name-amp-email" class="headerlink" title="Set user name &amp; email"></a>Set user name &amp; email</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;Your Email@example.com&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Add-SSH-key-to-your-server"><a href="#Add-SSH-key-to-your-server" class="headerlink" title="Add SSH key to your server"></a>Add SSH key to your server</h2><ol>
-<li><p>Open Git Bash</p>
-</li>
-<li><p>Check if existing SSH keys are present:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Lists the files in your .ssh directory, if they exist</span><br><span class="line">cd ~&#x2F;.ssh</span><br><span class="line">ls</span><br><span class="line"># or use ls ~&#x2F;.ssh</span><br></pre></td></tr></table></figure>
-
-<p>If public and private key pair like <code>id_rsa  id_rsa.pub</code> exist, </p>
-<p>you already have a SSH key.</p>
-<p><code>id_rsa</code> is your private key, and <code>id_rsa.pub</code> is your public key. If you are using Mac OS, you can find them at <code>home/.ssh/</code>. If you are using Windows, they are at <code>C:\Documents and Settings\your-username.ssh\</code> or  <code>C:\Users\your-username.ssh</code>.</p>
-</li>
-<li><p>Generate SSH key</p>
-<p>If SSH keys do not exist, generate keys by:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># -t: key type</span><br><span class="line"># -C: Your Email</span><br><span class="line">ssh-keygen -t rsa -C &quot;Your Email@gmail.com&quot;</span><br><span class="line"># to generate more than one key pairs</span><br><span class="line">$ ssh-keygen -t rsa -C &quot;Email&quot; -f new_key_name</span><br></pre></td></tr></table></figure>
-
-<p>If you don’t want to set password, press SPACE for 3 times.</p>
-</li>
-<li><p>Add your SSH key to the ssh-agent</p>
-<ul>
-<li><p>show your public key:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>You will get the contents of your public key:</p>
-<blockquote>
-<p>ssh-rsa AAAB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322+Au/9yy9oaABBRCrHN/yo88BC0AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322AB3nZaC1aycAAEU+/ZdulUJoeuchOUU02/j18L7fo+ltQ0f322klCi0/aEBBc02N+JJP <a href="mailto:john@example.com">john@example.com</a></p>
-</blockquote>
-</li>
-<li><p>give your public key to Server Administrator or upload it to your Github Server.</p>
-<p>To copy public key quickly:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># on Mac</span><br><span class="line">pbcopy &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br><span class="line"># on Windows</span><br><span class="line">clip &lt; ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>Open your Github, and go to <code>Settings -&gt; SSH and GPG keys -&gt; SSH keys -&gt; New SSH key</code></p>
-<p>Select a <code>Title</code>, and paste your public key to <code>Key</code> area.</p>
-</li>
-<li><p>Verify your setting:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Attempts to ssh to Github</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi username! You&#39;ve successfully authenticated, but GitHub does not # provide shell access.</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>it means your setting is OK.</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="Change-communication-protocol"><a href="#Change-communication-protocol" class="headerlink" title="Change communication protocol"></a>Change communication protocol</h2><p>To change protocol from <code>https</code> to <code>ssh</code>:</p>
-<ol>
-<li><p>show present setting</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
-<p>If you get:</p>
-<blockquote>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (fetch)</p>
-<p>origin <a href="https://github.com/someaccount/someproject.git" target="_blank" rel="noopener">https://github.com/someaccount/someproject.git</a> (push)</p>
-</blockquote>
-<p>you are using <code>hhttps</code>.</p>
-</li>
-<li><p>sign in to your Github account to <code>ssh</code> url.</p>
-<blockquote>
-<p><a href="mailto:git@github.com">git@github.com</a>:someaccount/someproject.git</p>
-</blockquote>
-<p>Then use:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:someaccount&#x2F;someproject.git</span><br></pre></td></tr></table></figure>
-
-<p>to change the setting.</p>
-<p>At last use<code>git remote -v</code> to confirm your new setting.</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-01-GitSetting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Git-00-SourceTreeError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/Git-00-SourceTreeError/">Git-00-SourceTreeError</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/Git-00-SourceTreeError/" class="archive-article-date">
-  	<time datetime="2017-12-18T15:27:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SourceTree-error"><a href="#SourceTree-error" class="headerlink" title="SourceTree error"></a>SourceTree error</h1><p>Mark some bug/error when using Git soft SourceTree.</p>
-<h2 id="“Authentication-via-SSH-keys-failed”"><a href="#“Authentication-via-SSH-keys-failed”" class="headerlink" title="“Authentication via SSH keys failed”"></a>“Authentication via SSH keys failed”</h2><p>When using SourceTree to clone a project from github, you may get this error of “通过SSH密钥认证失败”, or “Authentication via SSH keys failed”. </p>
-<p>Just change the setting like:</p>
-<p><code>Tool -&gt; Option -&gt; SSH client Setting</code> and change SSH client to <code>OpenSSH</code>.</p>
-<p><code>工具-&gt;选项-&gt;SSH客户端配置</code> ,将SSH客户端选择OpenSSH, 再确认.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SourceTree</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/Git-00-SourceTreeError/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-08-InheritancePolymorphism" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/15/Python-08-InheritancePolymorphism/">Python-08-InheritancePolymorphism</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/15/Python-08-InheritancePolymorphism/" class="archive-article-date">
-  	<time datetime="2017-12-15T12:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Inheritance-amp-Polymorphism-in-Python"><a href="#Inheritance-amp-Polymorphism-in-Python" class="headerlink" title="Inheritance &amp; Polymorphism in Python"></a>Inheritance &amp; Polymorphism in Python</h1><p>When program in OOP, Python can create new classes from a present class. The new classes are called <code>Sub class</code>, and inherited class is called <code>Base class</code> or <code>Super class</code>.</p>
-<h2 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h2><p>All member variables and methods are public by default. You can simply make a member public without any special ways. See codes below:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    Dog().run()</span><br><span class="line">    Cat().run()</span><br></pre></td></tr></table></figure>
-
-<p>got:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal <span class="keyword">is</span> running...</span><br><span class="line">Animal <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Polymorphism"><a href="#Polymorphism" class="headerlink" title="Polymorphism"></a>Polymorphism</h2><p>When sub classes have the same method/member with super classes, super classes method/member will be covered by sub classes method/member.</p>
-<p>Like:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line">    	</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is running...'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swim</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is swimming...'</span>)</span><br><span class="line">		</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Cat is running...'</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    Dog().run()</span><br><span class="line">    Cat().run()</span><br></pre></td></tr></table></figure>
-
-<p>got:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dog <span class="keyword">is</span> running...</span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
-
-<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>isinstance()</p>
-<p>issubclass()</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encapsulation</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/15/Python-08-InheritancePolymorphism/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-07-PublicProtectedPrivate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/15/Python-07-PublicProtectedPrivate/">Python-07-PublicProtectedPrivate</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/15/Python-07-PublicProtectedPrivate/" class="archive-article-date">
-  	<time datetime="2017-12-15T12:45:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Public-Protected-amp-Private-in-Python"><a href="#Public-Protected-amp-Private-in-Python" class="headerlink" title="Public Protected &amp; Private in Python"></a>Public Protected &amp; Private in Python</h1><p>Python doesn’t have any mechanisms to restrict you from accessing a variable or calling a method belonging to an instance. But there are culture and convention that should be followed.</p>
-<h2 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h2><p>All member variables and methods are public by default. You can simply make a member public without any special ways. See codes below:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self.content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self.content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup = Cup()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.color = <span class="string">'red'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.content = <span class="string">'coffee'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.content</span><br><span class="line"><span class="string">'coffee'</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Protected"><a href="#Protected" class="headerlink" title="Protected"></a>Protected</h2><p>A protected member is accessible only from within the class and its subclasses. To make a member protected, you can prefix the name of your member with a single underscore. This means “This is a protected member. Don’t touch it, unless you are a subclass.”</p>
-<p>Like:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self._content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self._content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">redCup = Cup()</span><br><span class="line">print(redCup._content)</span><br><span class="line">redCup.color = <span class="string">'red'</span></span><br><span class="line">redCup._content = <span class="string">'coffee'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(redCup._content)</span><br><span class="line"><span class="string">'coffee'</span></span><br></pre></td></tr></table></figure>
-
-<p>Even prefixed with a single underscore, it is still OK to access this member. This method just tell some one not try to access this member.</p>
-<h2 id="Private"><a href="#Private" class="headerlink" title="Private"></a>Private</h2><p>As Python supports a technology called name mangling, you can make a member completely unaccessible by prefixing with at least 2 underscores and suffixing with at most 1 underscore. Python interpreter will change your member name to <code>_&lt;className&gt;__&lt;memberName&gt;</code></p>
-<p>Code:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self.__content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self.__content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">redCup = Cup()</span><br><span class="line">print(redCup.__content)</span><br></pre></td></tr></table></figure>
-
-<p>Error:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"v.py"</span>, line <span class="number">13</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    print(redCup.__content)</span><br><span class="line">AttributeError: <span class="string">'Cup'</span> object has no attribute <span class="string">'__content'</span></span><br></pre></td></tr></table></figure>
-
-<p>You can still access by <code>redCup._Cup__content</code> but DO NOT use this method.</p>
-<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>isinstance()</p>
-<p>issubclass()</p>
-<p>beverage: drinking</p>
-<p>encapsulation: 封装</p>
-<p>prefix: 给…加前缀</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encapsulation</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/15/Python-07-PublicProtectedPrivate/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-10-ArrayMerge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/09/Numpy-10-ArrayMerge/">Numpy-10-ArrayMerge</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/09/Numpy-10-ArrayMerge/" class="archive-article-date">
-  	<time datetime="2017-12-09T05:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Merge-Numpy-Array"><a href="#Merge-Numpy-Array" class="headerlink" title="Merge Numpy Array"></a>Merge Numpy Array</h1><h2 id="Merge-by-row"><a href="#Merge-by-row" class="headerlink" title="Merge by row"></a>Merge by row</h2><p>Stack arrays in sequence vertically (row wise).</p>
-<p><code>numpy.vstack()</code> can be replaced by <code>numpy.row_stack()</code></p>
-<p>CODE:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([[<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],[<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># vstack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.vstack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># row_stack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.row_stack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="Merge-by-column"><a href="#Merge-by-column" class="headerlink" title="Merge by column"></a>Merge by column</h2><p>Stack arrays in sequence horizontally (column wise).</p>
-<p><code>numpy.hstack()</code> can be replaced by <code>numpy.row_stack()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hstack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.hstack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># column_stack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.column_stack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate"></a>numpy.concatenate</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># axis=0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.concatenate((a,b),axis=<span class="number">0</span>)</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># axis=1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.concatenate((a,b),axis=<span class="number">1</span>)</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vstack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">row_stack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hstack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">column_stack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concatenate</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/09/Numpy-10-ArrayMerge/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/24/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/26/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/24/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/26/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2750,6 +2712,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">environ</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">run time</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">iterate column</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
               </li>
             
             <div class="clearfix"></div>
