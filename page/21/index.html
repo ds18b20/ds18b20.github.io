@@ -156,6 +156,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-00-FileClose" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/Python-00-FileClose/">Python-00-FileClose</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/Python-00-FileClose/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章主要测试一下文档的close方法。</p>
+<h1 id="close方法的必要性"><a href="#close方法的必要性" class="headerlink" title="close方法的必要性"></a>close方法的必要性</h1><ol>
+<li>操作系统的每个进程能打开的文件数目是有限的，当超过规定上限时会发生错误。</li>
+<li>另外，调用close方法才能把缓存中的数据同步到磁盘。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line"><span class="comment"># 没有下面的关闭过程的话 调用remove会报错</span></span><br><span class="line"><span class="comment"># f.close()</span></span><br><span class="line"></span><br><span class="line">os.remove(<span class="string">'test.txt'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还有，在一个open过程中不能既写又读。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line"><span class="comment"># 此处错误</span></span><br><span class="line">print(f.read())</span><br><span class="line"></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p>这样会抛出错误：<code>UnsupportedOperation: not readable</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写过程</span></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line">f.close()</span><br><span class="line"><span class="comment"># 读过程</span></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">print(f.read())</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p>读写分时就没有问题了。</p>
+<h1 id="with"><a href="#with" class="headerlink" title="with"></a>with</h1><p>如果想书写更加方便，可以使用with方法省去写close过程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要close()</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'open test'</span>)</span><br><span class="line"></span><br><span class="line">os.remove(<span class="string">'test.txt'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样remove就不会报错。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">file</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">close</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/Python-00-FileClose/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-04-dict-get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1207,111 +1313,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/07/Linux-02-install/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux-03-unzip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/07/Linux-03-unzip/">Git-07-RM</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/07/Linux-03-unzip/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><p><strong>unzip ./FileName.zip</strong></p>
-<p>ubuntu默认安装unzip工具</p>
-<h1 id="rar"><a href="#rar" class="headerlink" title="rar"></a>rar</h1><p>安装unrar，sudo apt install unrar</p>
-<p>解压缩，unrar x ./FileName.rar</p>
-<hr>
-<p>$unrar –help</p>
-<p>用法: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unrar &lt;command&gt; -&lt;switch 1&gt; -&lt;switch N&gt; &lt;archive&gt; &lt;files...&gt;&lt;@listfiles...&gt; &lt;path_to_extract\&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>&lt;命令&gt;<br>  e             解压文件到当前目录<br>  l[t,b]        列出压缩文档信息[technical, bare]<br>  p             打印文件到标准输出<br>  t             测试压缩我俄当<br>  v[t,b]       列出压缩文档的详细信息[technical,bare]<br>  x             解压文件到完整路径 </p>
-<hr>
-<p>卸载unrar，sudo apt remove unrar</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">unzip</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/07/Linux-03-unzip/">展开全文 >></a>
         </p>
       
 
@@ -2844,6 +2845,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
               </li>
             
             <div class="clearfix"></div>

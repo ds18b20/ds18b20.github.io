@@ -156,6 +156,154 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-11-WrapperClasses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/18/Java-11-WrapperClasses/">Java-11-WrapperClasses</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/18/Java-11-WrapperClasses/" class="archive-article-date">
+  	<time datetime="2018-03-18T11:46:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p>Java虽然是支持面向对象的编程，但是还是沿用了一些面向过程的习惯，比如Java的8种基本数据类型并不支持面向对象的编程。这8种基本数据类型没有对象的基本特征–属性和方法，比如一个int变量，不能查看它的属性，也不能调用它的方法。</p>
+<p>这在OOP程序的编程中，由于不统一会带来一些不便。为了解决这个问题，Java引入了包装类的概念，即给每个基本数据类型设计了相应的类（包装类），也称为外覆类或者数据类型类。</p>
+<p><strong>基本数据类型和包装类的对应关系</strong></p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>对应的包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<p>每个包装类的对象可以封装一个相应的基本类型的数据，并提供了其它一些有用的方法。包装类对象一经创建，其内容（所封装的基本类型数据值）不可改变。</p>
+<p>基本类型和对应的包装类可以进行<strong>相互转换</strong>：</p>
+<ul>
+<li>装箱：基本类型 &gt; 包装类，如int基本类型转Integer类</li>
+<li>拆箱：基本类型 &gt; 包装类，如Integer类转int基本类型</li>
+</ul>
+<p>例子，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestWrapperClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestWrapperClass.int2integer();</span><br><span class="line">        TestWrapperClass.str2int();</span><br><span class="line">        TestWrapperClass.int2str();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 手动装箱</span></span><br><span class="line">    <span class="comment">// 手动拆箱</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2integer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        Integer obj = <span class="keyword">new</span> Integer(m); <span class="comment">// 手动装箱</span></span><br><span class="line">        <span class="keyword">int</span> n = obj.intValue(); <span class="comment">// 手动拆箱</span></span><br><span class="line">        System.out.println(<span class="string">"n = "</span> + n);</span><br><span class="line">        Integer obj1 = <span class="keyword">new</span> Integer(<span class="number">500</span>);</span><br><span class="line">        System.out.println(<span class="string">"obj equals obj1? "</span> + obj.equals(obj1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// string to int</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">str2int</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str[] = &#123; <span class="string">"123"</span>, <span class="string">"123abc"</span>, <span class="string">"abc123"</span>, <span class="string">"abcxyz"</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (String str1 : str) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> m = Integer.parseInt(str1, <span class="number">10</span>);</span><br><span class="line">                System.out.println(str1 + <span class="string">" 可以转换为整数 "</span> + m);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(str1 + <span class="string">" 无法转换为整数"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// int to string</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int2str</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">        String s = Integer.toString(m);</span><br><span class="line">        System.out.println(<span class="string">"s = "</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h1><p>Java1.5之后的版本支持自动装箱自动拆箱。这里的自动表现在，基本类型可以直接赋值给对应的包装类型，反之亦然。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">500</span>;</span><br><span class="line">Integer obj = m; <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="keyword">int</span> n = obj; <span class="comment">// 自动拆箱</span></span><br><span class="line">System.out.println(<span class="string">"n = "</span> + n);</span><br></pre></td></tr></table></figure>
+
+<p>虽然有自动功能，考虑到代码的可读性，推荐使用手动装箱拆箱。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Java包装类、拆箱和装箱详解</p>
+<p><a href="https://www.cnblogs.com/ok932343846/p/6749488.html" target="_blank" rel="noopener">https://www.cnblogs.com/ok932343846/p/6749488.html</a></p>
+<p>Java装箱和拆箱–<strong>这篇比较全面深入地讲解了常见的注意事项</strong></p>
+<p><a href="https://www.cnblogs.com/lsohvaen001/p/7823067.html" target="_blank" rel="noopener">https://www.cnblogs.com/lsohvaen001/p/7823067.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wrapper Classes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/18/Java-11-WrapperClasses/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-10-Str2Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1119,111 +1267,6 @@ public class Person {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/14/Java-05-StringChar/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-Eclipse-04-TabSpaces" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">Java-Eclipse-03-CheckStyle</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/13/Java-Eclipse-04-TabSpaces/" class="archive-article-date">
-  	<time datetime="2018-03-13T13:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>新版Eclipse默认Tab不转换为Spaces，为了各编辑器统一起见，推荐替换Tab为4个spaces。</p>
-<h1 id="设置方法"><a href="#设置方法" class="headerlink" title="设置方法"></a>设置方法</h1><p>需要修改两个部分，公共设置和Java语言部分</p>
-<h2 id="公共部分"><a href="#公共部分" class="headerlink" title="公共部分"></a>公共部分</h2><p>Preference–&gt;General-&gt;Editors–&gt;Text Editors，勾上Insert spaces for tabs。</p>
-<h2 id="Java语言设置"><a href="#Java语言设置" class="headerlink" title="Java语言设置"></a>Java语言设置</h2><p>Java–&gt;Code Style–&gt;Formatter–&gt;New 新建一份文件，将Indentation 中的 Tab policy改为Spaces only。</p>
-<p>以后如果添加了其他语言，同样需要在各语言下修改此设置。</p>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p>使用eclipse中Tab格式兼容问题</p>
-<p><a href="http://blog.csdn.net/backend_research/article/details/53332454" target="_blank" rel="noopener">http://blog.csdn.net/backend_research/article/details/53332454</a></p>
-<h1 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h1><p>包括自动添加类的注释之类的方便功能。。。</p>
-<p><a href="http://blog.csdn.net/hotdust/article/details/52205867" target="_blank" rel="noopener">http://blog.csdn.net/hotdust/article/details/52205867</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Tab</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spaces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">展开全文 >></a>
         </p>
       
 
@@ -2756,6 +2799,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Numpy-35-where" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-35-where/">Numpy-35-where</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-35-where/" class="archive-article-date">
+  	<time datetime="2020-05-06T13:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>where方法通过给定condition，找到在原ndArray中满足condition的所有元素的位置并返回。</p>
+<blockquote>
+<p> numpy.where(condition[, x, y])</p>
+<p> Return elements chosen from x or y depending on condition.</p>
+</blockquote>
+<p>验证如下：</p>
+<p>首先生成一个3X3的随机数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">-1.15670308</span>, <span class="number">-1.61458477</span>, <span class="number">-0.56441277</span>],</span><br><span class="line">       [<span class="number">-2.31218808</span>, <span class="number">-1.73006636</span>,  <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">-0.46809921</span>, <span class="number">-2.32801438</span>,  <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>如果只有condition参数，则返回所有符合该condition的元素所在的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b=np.where(a&gt;<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">(array([<span class="number">1</span>, <span class="number">2</span>]), array([<span class="number">2</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。</p>
+<h2 id="附带运算"><a href="#附带运算" class="headerlink" title="附带运算"></a>附带运算</h2><p>如果在后面加上可选的两个参数则可以根据condition返回一个新的数组。</p>
+<p>其原理等同于<code>[xv if c else yv for c, xv, yv in zip(condition, x, y)]</code></p>
+<p>具体例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.where(a&gt;<span class="number">0</span>, a, -a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1.15670308</span>, <span class="number">1.61458477</span>, <span class="number">0.56441277</span>],</span><br><span class="line">       [<span class="number">2.31218808</span>, <span class="number">1.73006636</span>, <span class="number">1.36087472</span>],</span><br><span class="line">       [<span class="number">0.46809921</span>, <span class="number">2.32801438</span>, <span class="number">0.00924579</span>]])</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">where</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-35-where/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-34-clip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1017,100 +1123,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/30/STM32-04-SWD-debug/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sensor-MPU6050" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/26/Sensor-MPU6050/">Sensor-MPU6050</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/26/Sensor-MPU6050/" class="archive-article-date">
-  	<time datetime="2020-04-26T11:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MPU6050"><a href="#MPU6050" class="headerlink" title="MPU6050"></a>MPU6050</h1><p>通过I2C接口可以读取到温度计/加速度计(XYZ)/陀螺仪(XYZ)的数值，其中温度计和加速度计的数值可以直接使用(当然如果需要的话也可以提前做校准)，而陀螺仪的数值必须要校准后才能使用。</p>
-<p>原因是传感器上电之后，陀螺仪数值是一个相对不为0 的数值(偏差)，使用之前必须对这个偏差进行补偿。比如，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g_x_raw: -1399</span><br><span class="line">g_y_raw: 400</span><br><span class="line">g_z_raw: -233</span><br></pre></td></tr></table></figure>
-
-<p>可以在上电之后首先记录多个数值，取平均之后作为补偿值进行校准。</p>
-<p>参考，</p>
-<p><a href="https://www.icxbk.com/ask/detail/19901.html" target="_blank" rel="noopener">https://www.icxbk.com/ask/detail/19901.html</a></p>
-<p><a href="https://forum.arduino.cc/index.php?topic=194358.0" target="_blank" rel="noopener">https://forum.arduino.cc/index.php?topic=194358.0</a></p>
-<p><a href="https://www.i2cdevlib.com/forums/topic/10-why-is-the-dmp-yaw-stable/" target="_blank" rel="noopener">https://www.i2cdevlib.com/forums/topic/10-why-is-the-dmp-yaw-stable/</a></p>
-<h1 id="关于精度计算"><a href="#关于精度计算" class="headerlink" title="关于精度计算"></a>关于精度计算</h1><p>参考<a href="https://blog.csdn.net/u013636775/article/details/69668860" target="_blank" rel="noopener">https://blog.csdn.net/u013636775/article/details/69668860</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MPU6050</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Sensor//" class="article-tag-list-link color2">Sensor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/26/Sensor-MPU6050/">展开全文 >></a>
         </p>
       
 
@@ -2643,6 +2655,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
               </li>
             
             <div class="clearfix"></div>

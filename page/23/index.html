@@ -156,6 +156,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-26-MultipleIheritance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/20/Python-26-MultipleIheritance/">Python-26-MultipleIheritance</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/20/Python-26-MultipleIheritance/" class="archive-article-date">
+  	<time datetime="2018-02-20T14:39:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="python多重继承"><a href="#python多重继承" class="headerlink" title="python多重继承"></a>python多重继承</h1><p>如果对象可以用多种方式分组，当把这些分组统一在一个体系下标识时，分组个数会呈指数级增长。这给组织逻辑带来很大挑战，而且不便于理解。</p>
+<p>可以使用多重继承(Multiple Inheritance)来代替复杂的单一继承关系。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主线大类:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mammal</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 功能类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnableMixIn</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Running...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyableMixIn</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Flying...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多重继承</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Mammal, RunnableMixIn)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">h = dog()</span><br><span class="line">h.run()</span><br></pre></td></tr></table></figure>
+
+<h1 id="具体应用原则"><a href="#具体应用原则" class="headerlink" title="具体应用原则"></a>具体应用原则</h1><p>设计多重继承关系时，可以采用如下原则：</p>
+<p>主线继承采用单一继承，例如Mammal和Bird单一继承自Animal。</p>
+<p>而如果需要给对象搭配“混入”一些功能，则可以加入多重继承。比如，上面例子中给Dog添加Run的功能。习惯上为了便于识别，命名时在最后加上MixIn。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Multiple Inheritance</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/20/Python-26-MultipleIheritance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-25-property" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1241,123 +1336,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/16/Python-14-HighOrderFunction/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-ListHalfOpen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/13/Python-00-ListHalfOpen/">Python-00-ListHalfOpen</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/13/Python-00-ListHalfOpen/" class="archive-article-date">
-  	<time datetime="2018-02-13T13:27:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-列表的两点思考"><a href="#Python-列表的两点思考" class="headerlink" title="Python 列表的两点思考"></a>Python 列表的两点思考</h1><p>Python定义列表(list)时，可以直接用中括号把列表包含的所有元素添加进来，并用逗号隔开。</p>
-<p>当内部元素较多，而且有某种规律时，另一种通过range()函数生成的方式更为直接。</p>
-<p>在使用range(START,END,STEP)时得到的数组包含START，但是不包含END,即左闭右开（前闭后开）。</p>
-<p>当引用列表内元素的时候，第一个元素用下标0表示。多数程序设计语言都是从0开始定位。</p>
-<p>左闭右开 <code>range(start, end)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(range(<span class="number">2</span>, <span class="number">8</span>))</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br></pre></td></tr></table></figure>
-
-<p>上述结果可知，包含2不包含8。这其中的原因，自己思考外加网上的观点如下，</p>
-<ol>
-<li>对于[START, END]，COUNT&lt;&gt;END - START，而是COUNT = END - START + 1，这就给书写和理解带来了困扰。同理(START, END)也不直观。<br>而左开右闭和左闭右开则没有这个问题，COUNT = END - START 更符合正常人类的思考方式</li>
-<li>针对上述的一点补充，划分序列时<br>[1,2),[3,4),[5,6)显然比[1,2],(3,4),[5,6]美观。</li>
-<li>另一点右侧不可为闭的原因是，计算机硬件中迭代器对于比较谁大谁小的运算很麻烦，而判断两者是否相等却很容易做到。<br>这时，如果需要遍历一个闭区间[0, n]，那么需要迭代器实现比较大小的操作。即：i = 0; while(i &lt;= n) do {process(i); i++;} 。而很多抽象的迭代器无法比较大小。<br>如果要遍历一个左开右闭区间(0, n]，则只需要迭代器支持比较相等的操作即可。即：i = 0; while(i != n) do {process(i); i++;}</li>
-</ol>
-<h1 id="第一个元素下标从0开始"><a href="#第一个元素下标从0开始" class="headerlink" title="第一个元素下标从0开始"></a>第一个元素下标从0开始</h1><p>C语言中要获得数组a中元素的地址时候，如果数组下标从0开始，那么&amp;a[b]可以直接写成&amp;a+b<em>sizeof(</em>a)</p>
-<p>不然，如果下标从1开始，那么&amp;a[b]必须写成&amp;a+(b-1)<em>sizeof(</em>a)</p>
-<p>另外C语言中用for语句遍历数组时也是左开右闭原则。</p>
-<p>for(i=1;i&lt;n;i++){}</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>python中的细节—左闭右开原则 - CSDN</p>
-<p><a href="http://blog.csdn.net/HDOJ_lin/article/details/78831868" target="_blank" rel="noopener">http://blog.csdn.net/HDOJ_lin/article/details/78831868</a></p>
-<p>为什么 Python 里面的 range 不包含上界？ - vczh的回答 - 知乎</p>
-<p><a href="https://www.zhihu.com/question/24883243/answer/29315532" target="_blank" rel="noopener">https://www.zhihu.com/question/24883243/answer/29315532</a></p>
-<p>评论区 - cppblog</p>
-<p><a href="http://www.cppblog.com/woaidongmao/archive/2008/12/25/70343.aspx" target="_blank" rel="noopener">http://www.cppblog.com/woaidongmao/archive/2008/12/25/70343.aspx</a></p>
-<p>python中的细节—左闭右开原则</p>
-<p><a href="http://blog.csdn.net/HDOJ_lin/article/details/78831868" target="_blank" rel="noopener">http://blog.csdn.net/HDOJ_lin/article/details/78831868</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Half Open</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/13/Python-00-ListHalfOpen/">展开全文 >></a>
         </p>
       
 
@@ -2890,6 +2868,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">drop duplicates</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
               </li>
             
             <div class="clearfix"></div>
