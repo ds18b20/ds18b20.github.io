@@ -156,6 +156,197 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-59-range-decrease" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Python-59-range-decrease/">Python-59-range-decrease</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/20/Python-59-range-decrease/" class="archive-article-date">
+  	<time datetime="2020-05-20T01:42:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="range-递减输出"><a href="#range-递减输出" class="headerlink" title="range()递减输出"></a>range()递减输出</h1><p>下面的代码按照从10到1，step为-1的方式输出列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>, <span class="number">0</span>, <span class="number">-1</span>)<span class="string">':</span></span><br><span class="line"><span class="string">    print(i)</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/python/python-func-range.html" target="_blank" rel="noopener">https://www.runoob.com/python/python-func-range.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">range</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">decrease</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Python-59-range-decrease/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-36-nonezero" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/Numpy-36-nonezero/">Numpy-36-nonezero</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/Numpy-36-nonezero/" class="archive-article-date">
+  	<time datetime="2020-05-06T13:42:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-where"><a href="#Numpy-where" class="headerlink" title="Numpy.where"></a>Numpy.where</h1><p>可以看作是一个特化的where方法，限定condition为<em>不等于0</em>。找到满足condition的所有元素的位置并返回。</p>
+<blockquote>
+<p> numpy.nonzero(a)</p>
+<p> Return the indices of the elements that are non-zero.</p>
+<p> Returns a tuple of arrays, one for each dimension of <em>a</em>, containing the indices of the non-zero elements in that dimension. The values in <em>a</em> are always tested and returned in row-major, C-style order. The corresponding non-zero values can be obtained with:</p>
+</blockquote>
+<p>验证如下：</p>
+<p>首先生成一个3X3的随机数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= np.random.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">array([[<span class="number">-0.46079926</span>,  <span class="number">0.71230588</span>, <span class="number">-0.45910822</span>],</span><br><span class="line">       [ <span class="number">0.02227204</span>,  <span class="number">0.69423378</span>,  <span class="number">1.09299065</span>],</span><br><span class="line">       [<span class="number">-0.49647728</span>, <span class="number">-1.18294834</span>,  <span class="number">0.5020136</span> ]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=np.nonzero(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，返回的数组格式为[a, b]  ，而实际的元素位置为zip(a, b)。这一点也和where相同。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">noezero</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/Numpy-36-nonezero/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-35-where" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -939,190 +1130,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/30/STM32-05-CubeMX-Cpp/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-57-open3d" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/Python-57-open3d/">Python-57-open3d</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/30/Python-57-open3d/" class="archive-article-date">
-  	<time datetime="2020-04-30T08:32:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="open3d记录"><a href="#open3d记录" class="headerlink" title="open3d记录"></a>open3d记录</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>conda环境下使用命令<code>conda install -c open3d-admin open3d</code>来安装。</p>
-<p>命令行下键入<code>python -c &quot;import open3d&quot;</code>来测试是否安装成功。</p>
-<p>如果出现下面找不到DLL错误，可以参考下面的解决办法。</p>
-<blockquote>
-<p>I also had “ImportError: DLL load failed” error.</p>
-<p>My environments before,<br>Windows 10 64bit, Visual studio 2017,<br>Python 3.7.5 (with Anaconda), Open3D 0.9.0.0 installed from pip</p>
-<p>And then I installed “Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019”.</p>
-<p>First, visit below.<br>And install x86 and x64 packages in “Visual Studio 2015, 2017 and 2019” section.<br><a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads" target="_blank" rel="noopener">https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads</a></p>
-<p>After install packages, reboot windows. Then the Open3D runs normally.</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">open3d</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/30/Python-57-open3d/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32-04-SWD-debug" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/STM32-04-SWD-debug/">STM32-04-SWD-debug</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/30/STM32-04-SWD-debug/" class="archive-article-date">
-  	<time datetime="2020-04-30T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="STM使用SWD方式debug"><a href="#STM使用SWD方式debug" class="headerlink" title="STM使用SWD方式debug"></a>STM使用SWD方式debug</h1><p>Discovery以及Nucleo的ST-Link的SWD接线方式如下，</p>
-<p><img src="STM32-04-SWD-debug%5CSWD.gif" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SWD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">debug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/30/STM32-04-SWD-debug/">展开全文 >></a>
         </p>
       
 
@@ -2659,6 +2666,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ls</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
               </li>
             
             <div class="clearfix"></div>

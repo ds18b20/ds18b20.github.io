@@ -156,6 +156,199 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PyCharm-01-StaticMethod" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/PyCharm-01-StaticMethod/">PyCharm-01-StaticMethod</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/22/PyCharm-01-StaticMethod/" class="archive-article-date">
+  	<time datetime="2018-04-21T16:09:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Method-‘xxx’-may-be-‘static"><a href="#Method-‘xxx’-may-be-‘static" class="headerlink" title="Method ‘xxx’ may be ‘static"></a>Method ‘xxx’ may be ‘static</h1><p>PyCharm “thinks” that you might have <em>wanted</em> to have a static method, but you forgot to declare it to be static.</p>
+<p>PyCharm proposes this because the method does not <em>use</em> <code>self</code> in its body and hence does not actually <em>change the class instance</em>. Hence the method could be static, i.e. callable without having created a class instance before.</p>
+<p>简单讲，就是函数中并没有引用到self的属性或者方法，这就跟class外面的函数作用相同。</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://stackoverflow.com/questions/23554872/why-does-pycharm-propose-to-change-method-to-static" target="_blank" rel="noopener">https://stackoverflow.com/questions/23554872/why-does-pycharm-propose-to-change-method-to-static</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/PyCharm-01-StaticMethod/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-17-serialization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/Numpy-17-serialization/">Numpy-17-serialization</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/22/Numpy-17-serialization/" class="archive-article-date">
+  	<time datetime="2018-04-21T15:57:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy的序列化"><a href="#Numpy的序列化" class="headerlink" title="Numpy的序列化"></a>Numpy的序列化</h1><p>Numpy的ndarray对象无法直接使用json直接序列化，需要先转化成有同样层次结构的List对象，然后再序列化为json文件。</p>
+<p>转换成List对象可以使用Numpy自带的.to_list()方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> codecs, json </span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>) <span class="comment"># a 2 by 5 array</span></span><br><span class="line">b = a.tolist() <span class="comment"># nested lists with same data, indices</span></span><br><span class="line">file_path = <span class="string">"/path.json"</span> <span class="comment">## your path variable</span></span><br><span class="line">json.dump(b, codecs.open(file_path, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>), separators=(<span class="string">','</span>, <span class="string">':'</span>), sort_keys=<span class="literal">True</span>, indent=<span class="number">4</span>) <span class="comment">### this saves the array in .json format</span></span><br></pre></td></tr></table></figure>
+
+<p>In order to unjonsify use</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj_text = codecs.open(file_path, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>).read()</span><br><span class="line">b_new = json.loads(obj_text)</span><br><span class="line">a_new = np.array(b_new)</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>NumPy array is not JSON serializable</p>
+<p><a href="https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable" target="_blank" rel="noopener">https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">serialization</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">json</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/Numpy-17-serialization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Math-03-geometry" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1299,271 +1492,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/08/TensorFlow-02-useGPUs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-01-InstallandSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/08/TensorFlow-01-InstallandSetting/">TensorFlow-01-InstallandSetting</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/08/TensorFlow-01-InstallandSetting/" class="archive-article-date">
-  	<time datetime="2018-04-08T02:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CPU-GPU版本"><a href="#CPU-GPU版本" class="headerlink" title="CPU/GPU版本"></a>CPU/GPU版本</h1><p>TensorFlow有CPU和GPU两种安装类型，系统中没有安装NVIDIA的GPU时，只能安装使用CPU版本。但是，起步也可以使用CPU版本。</p>
-<h1 id="Anaconda中安装"><a href="#Anaconda中安装" class="headerlink" title="Anaconda中安装"></a>Anaconda中安装</h1><ol>
-<li><p>首先确定已经已经安装Anaconda</p>
-</li>
-<li><p>建立一个独立的conda开发环境，命名为tensorflow：</p>
-</li>
-</ol>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt; conda create -n tensorflow</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><p>激活上述conda开发环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt; activate tensorflow</span><br><span class="line">(tensorflow)C:\&gt;  # 你的提示符应该发生变化</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装</p>
-<p>安装CPU版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow)C:\&gt; pip install --ignore-installed --upgrade https:&#x2F;&#x2F;storage.googleapis.com&#x2F;tensorflow&#x2F;windows&#x2F;cpu&#x2F;tensorflow-1.1.0-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
-
-<p>安装支持 GPU 的 TensorFlow（写在一行）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow)C:\&gt; pip install --ignore-installed --upgrade https:&#x2F;&#x2F;storage.googleapis.com&#x2F;tensorflow&#x2F;windows&#x2F;gpu&#x2F;tensorflow_gpu-1.1.0-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h1><p>Mac中的安装顺序：</p>
-<p>使用 Virtualenv 进行安装 </p>
-<ol>
-<li><p>安装pip和virtualenv </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br><span class="line">$ pip install --upgrade virtualenv</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>创建一个virtualenv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv --system-site-packages -p python3 targetDirectory # for Python 3.n</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>激活virtualenv</p>
-<p>cd切换到上述targetDirectory目录，键入命令： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Air:~ hq$ cd ~&#x2F;tensorflow</span><br><span class="line">Air:tensorflow hq$ source .&#x2F;bin&#x2F;activate (tensorflow)</span><br><span class="line">Air:tensorflow huangqiying$</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="4">
-<li><p>退出次virtualenv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="编写bash文件"><a href="#编写bash文件" class="headerlink" title="编写bash文件"></a>编写bash文件</h2><p>在Mac系统中可以编写bash script来实现类似Windows下的batch file的功能。</p>
-<h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><p>文本文件内编写如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">! &#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">java -cp &quot;.;.&#x2F;supportlibraries&#x2F;Framework_Core.jar;.&#x2F;supportlibraries&#x2F;Framework_DataTable.jar;.&#x2F;supportlibraries&#x2F;Framework_Reporting.jar;.&#x2F;supportlibraries&#x2F;Framework_Utilities.jar;.&#x2F;supportlibraries&#x2F;poi-3.8-20120326.jar;PATH_TO_YOUR_SELENIUM_SERVER_FOLDER&#x2F;selenium-server-standalone-2.19.0.jar&quot; allocator.testTrack</span><br></pre></td></tr></table></figure>
-
-<p>保存为<code>scriptfilename.sh</code></p>
-<h3 id="修改文件属性"><a href="#修改文件属性" class="headerlink" title="修改文件属性"></a>修改文件属性</h3><p>然后通过下面的命令使得此文件可读可写可执行：<br>chmod 775 scriptfilename.sh</p>
-<h3 id="运行bash"><a href="#运行bash" class="headerlink" title="运行bash"></a>运行bash</h3><p>最后cd切换到所在目录执行：<br>bash scriptfilename.sh</p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://stackoverflow.com/questions/14065069/equivalent-of-bat-in-mac-os" target="_blank" rel="noopener">https://stackoverflow.com/questions/14065069/equivalent-of-bat-in-mac-os</a></p>
-<h1 id="Training-Data-Set"><a href="#Training-Data-Set" class="headerlink" title="Training Data Set"></a>Training Data Set</h1><h2 id="CIFAR10"><a href="#CIFAR10" class="headerlink" title="CIFAR10:"></a>CIFAR10:</h2><p>10 classes(airplane/automobile/bird…)</p>
-<p>50,000 training images</p>
-<p>10,000 testing images</p>
-<p>32*32 pixels</p>
-<h2 id="MINIST"><a href="#MINIST" class="headerlink" title="MINIST"></a>MINIST</h2><p>10 classes(1/2/3…)</p>
-<p>50,000 training images</p>
-<p>10,000 testing images</p>
-<p>28*28 pixels</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>在 Windows 上安装 TensorFlow</p>
-<p><a href="https://efeiefei.gitbooks.io/tensorflow_documents_zh/install/install_windows.html" target="_blank" rel="noopener">https://efeiefei.gitbooks.io/tensorflow_documents_zh/install/install_windows.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Install</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Setting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/08/TensorFlow-01-InstallandSetting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Math-02-SoftMax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/07/Math-02-SoftMax/">Math-02-SoftMax</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/07/Math-02-SoftMax/" class="archive-article-date">
-  	<time datetime="2018-04-07T05:23:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h1><p>函数的定义如下，<br>$$<br>\begin{eqnarray}<br>  a^L_j = \frac{e^{z^L_j}}{\sum_k e^{z^L_k}},<br>\tag{1}\end{eqnarray}<br>$$<br>softmax函数的输出有以下特点，</p>
-<ol>
-<li>输出值介于(0, 1]之间；</li>
-<li>输入序列中最大项占序列总和的比例，经过softmax函数后，会大幅度扩大。简言之，大的越大，小的越小。</li>
-</ol>
-<p>代码显示如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> common.functions <span class="keyword">import</span> softmax</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">10</span>,<span class="number">11</span>,<span class="number">9</span>])</span><br><span class="line"></span><br><span class="line">a = x / np.sum(a)</span><br><span class="line">print(<span class="string">"原始比例: &#123;&#125;"</span>.format(a))</span><br><span class="line">b = softmax(x)</span><br><span class="line">print(<span class="string">"Softmax比例: &#123;&#125;"</span>.format(b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Two subplots, the axes array is 1-d</span></span><br><span class="line">f, axarr = plt.subplots(<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axarr[<span class="number">0</span>].bar(np.arange(<span class="number">3</span>),a)</span><br><span class="line">axarr[<span class="number">0</span>].set_title(<span class="string">'Sharing X axis'</span>)</span><br><span class="line">axarr[<span class="number">1</span>].bar(np.arange(<span class="number">3</span>),b, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为，</p>
-<p><img src="Math-02-SoftMax%5Csoftmax.png" alt=""></p>
-<h1 id="注意防止溢出"><a href="#注意防止溢出" class="headerlink" title="注意防止溢出"></a>注意防止溢出</h1><p>$$<br>y_j=\frac{e^{a_{k}}}{\sum^{N}<em>{i=1}e^{a</em>{i}}}<br>$$</p>
-<p>应用softmax函数时，应该注意防止分子分母过大带来的计算溢出。</p>
-<p>由于包含指数运算，当a_i绝对值过大时，e^a_i会指数级增大，这就会带来overflow溢出错误。可以注意到其实各元素的a_i的差值并不是很大，处理方法为，分子分母同时除以一个e^C，其中C = Max(a_i)。<br>$$<br>y_{j}=\frac{e^{a_{k}}-C}{\sum^{N}<em>{i=1}e^{a</em>{i}}-C}<br>$$</p>
-<p>$$<br>C=max({a_{i}})<br>$$</p>
-<p>就可以大幅减小计算数值，这样就基本不会发生overflow了。</p>
-<p>事实上，差值过大时，也不用SoftMax函数来增强输出效果了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Softmax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/07/Math-02-SoftMax/">展开全文 >></a>
         </p>
       
 
@@ -3100,6 +3028,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ls</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
               </li>
             
             <div class="clearfix"></div>

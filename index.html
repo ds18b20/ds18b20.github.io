@@ -156,6 +156,193 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux-06-ls" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/04/Linux-06-ls/">Linux-06-ls</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/04/Linux-06-ls/" class="archive-article-date">
+  	<time datetime="2020-11-04T13:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-ls"><a href="#Linux-ls" class="headerlink" title="Linux ls"></a>Linux ls</h1><p>ls的输出结果的分析：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/home/script-user $ ls  –lrt   </span><br><span class="line">-rw-r--r--    1  script-user  Tools    56344   Dec 16     14:37 Joke-and-fun.xt</span><br><span class="line">-rw-r--r--    1  script-user  Tools   105977 Dec 16     15:52  Send_script.sh</span><br><span class="line"> drw-r--r--  2  script-user  Tools      256      Dec 18      21:01 Mail-file</span><br><span class="line">-rw-r--r--    1  script-user  Tools      740      Dec 20      01:03 Rollercoaster</span><br><span class="line">-rw-r--r--    1  script-user  Tools       58        Dec 24     00:40 Jackson_note.tar</span><br></pre></td></tr></table></figure>
+
+<p>The first field here shows file permissions, which are discussed in chmod,</p>
+<p>2nd field is the type of element,(1 for file 2 for directory..etc)</p>
+<p>3rd field gives the owner of the element(file,directory)</p>
+<p>4th field gives the group which the user belongs to.</p>
+<p>5th field gives the size.</p>
+<p>6th,7th and 8th field-modification times.</p>
+<p>9 th field gives the name of the element.</p>
+<p>参考，<a href="http://unixcommandstutorial.blogspot.com/2012/01/ls.html" target="_blank" rel="noopener">http://unixcommandstutorial.blogspot.com/2012/01/ls.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ls</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/04/Linux-06-ls/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-63-bs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/03/Python-63-bs/">Python-63-bs</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/03/Python-63-bs/" class="archive-article-date">
+  	<time datetime="2020-11-03T06:41:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Beautiful-Soup"><a href="#Beautiful-Soup" class="headerlink" title="Beautiful Soup"></a>Beautiful Soup</h1><p>通过以下方式获取字符串中换行符前面的部分内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">html=<span class="string">"""</span></span><br><span class="line"><span class="string">&lt;td&gt;</span></span><br><span class="line"><span class="string">    +421 48/471 78 14</span></span><br><span class="line"><span class="string">    &lt;br /&gt;</span></span><br><span class="line"><span class="string">    &lt;em&gt;(bowling)&lt;/em&gt;</span></span><br><span class="line"><span class="string">&lt;/td&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(html)</span><br><span class="line"><span class="keyword">print</span> soup.find(<span class="string">"td"</span>).contents[<span class="number">0</span>].strip() </span><br><span class="line">+<span class="number">421</span> <span class="number">48</span>/<span class="number">471</span> <span class="number">78</span> <span class="number">14</span></span><br><span class="line"><span class="keyword">print</span> soup.find(<span class="string">"td"</span>).next_element.strip()</span><br><span class="line">+<span class="number">421</span> <span class="number">48</span>/<span class="number">471</span> <span class="number">78</span> <span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<p>参考，<a href="https://stackoverflow.com/questions/25476316/get-text-before-br-python-bs4" target="_blank" rel="noopener">https://stackoverflow.com/questions/25476316/get-text-before-br-python-bs4</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">beautiful soup</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/03/Python-63-bs/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Pandas-11-to-datetime" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -863,191 +1050,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/06/28/PyQt-01-QTimer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Pandas-08-read-csv-list" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/23/Pandas-08-read-csv-list/">Pandas-08-read-csv-list</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/23/Pandas-08-read-csv-list/" class="archive-article-date">
-  	<time datetime="2020-05-22T23:12:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Pandas读入csv后str转list"><a href="#Pandas读入csv后str转list" class="headerlink" title="Pandas读入csv后str转list"></a>Pandas读入csv后str转list</h1><p>使用df.to_csv()方法存储list类型到csv文件后，下一步读入csv时list类型会以str方式读入。</p>
-<p>使用literal_eval()方法可以把str转换成list。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>literal_eval(<span class="string">'[1.23, 2.34]'</span>)</span><br><span class="line">[<span class="number">1.23</span>, <span class="number">2.34</span>]</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/questions/23111990/pandas-dataframe-stored-list-as-string-how-to-convert-back-to-list/23112008" target="_blank" rel="noopener">https://stackoverflow.com/questions/23111990/pandas-dataframe-stored-list-as-string-how-to-convert-back-to-list/23112008</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">read_csv</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/23/Pandas-08-read-csv-list/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Pandas-07-to-list" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/23/Pandas-07-to-list/">Pandas-07-to-list</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/23/Pandas-07-to-list/" class="archive-article-date">
-  	<time datetime="2020-05-22T23:04:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Pandas-DataFrame转list"><a href="#Pandas-DataFrame转list" class="headerlink" title="Pandas DataFrame转list"></a>Pandas DataFrame转list</h1><p>先.values然后tolist()方法，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.values.tolist()</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/questions/19585280/convert-pandas-dataframe-into-list-of-lists" target="_blank" rel="noopener">https://stackoverflow.com/questions/19585280/convert-pandas-dataframe-into-list-of-lists</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tolist</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/23/Pandas-07-to-list/">展开全文 >></a>
         </p>
       
 
@@ -2584,6 +2586,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">to datetime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ls</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
               </li>
             
             <div class="clearfix"></div>
