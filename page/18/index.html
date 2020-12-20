@@ -156,6 +156,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-02-useGPUs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/TensorFlow-02-useGPUs/">TensorFlow-02-useGPUs</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/08/TensorFlow-02-useGPUs/" class="archive-article-date">
+  	<time datetime="2018-04-08T02:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TensorFlow使用GPU"><a href="#TensorFlow使用GPU" class="headerlink" title="TensorFlow使用GPU"></a>TensorFlow使用GPU</h1><p>没有指定使用CPU还是GPU的时候，TF默认寻找机器中的第一个GPU，并且占用该GPU的所有显存资源。如果没有找到GPU那就使用第一个CPU来运算。</p>
+<blockquote>
+<p>TensorFlow对于设备的表示：”/cpu:0”表示第一块CPU，”/gpu:0”表示第一块GPU，其他情况以此类推。</p>
+</blockquote>
+<p>要显示系统的GPU设备时，可以运行NVIDIA自带的nvidia-smi.exe来查看。一般在路径：<code>C:\Program Files\NVIDIA Corporation\NVSMI</code>下可以看到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA Corporation\NVSMI&gt;nvidia-smi.exe</span><br><span class="line">Sun Apr 08 10:51:55 2018</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 388.13                 Driver Version: 388.13                    |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name            TCC&#x2F;WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage&#x2F;Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|   0  GeForce GTX 960    WDDM  | 00000000:01:00.0  On |                  N&#x2F;A |</span><br><span class="line">| 30%   30C    P8    10W &#x2F; 120W |    267MiB &#x2F;  2048MiB |      9%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|</span><br><span class="line">|    0      1932    C+G   C:\Windows\system32\Dwm.exe                N&#x2F;A      |</span><br><span class="line">|    0     10660    C+G   ...6)\Google\Chrome\Application\chrome.exe N&#x2F;A      |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用多GPU"><a href="#使用多GPU" class="headerlink" title="使用多GPU"></a>使用多GPU</h1><p>ing</p>
+<h1 id="手动分配GPU资源"><a href="#手动分配GPU资源" class="headerlink" title="手动分配GPU资源"></a>手动分配GPU资源</h1><p>ing</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>TensorFlow中设置GPU</p>
+<p><a href="http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/" target="_blank" rel="noopener">http://hpzhao.com/2016/10/29/TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AEGPU/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Setting</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPU</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/TensorFlow-02-useGPUs/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TensorFlow-01-InstallandSetting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1131,115 +1230,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/29/Matplotlib-05-3Dplotting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-00-Errors" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/29/Numpy-00-Errors/">Numpy-00-Errors</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/29/Numpy-00-Errors/" class="archive-article-date">
-  	<time datetime="2018-03-29T13:35:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="dtype的选择"><a href="#dtype的选择" class="headerlink" title="dtype的选择"></a>dtype的选择</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># type</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.int)</span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line">x[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"x: &#123;&#125;"</span>.format(x))</span><br><span class="line"></span><br><span class="line">y = np.array([<span class="number">0</span>, <span class="number">0</span>], dtype=np.float)</span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br><span class="line">y[<span class="number">0</span>] = <span class="number">3.14</span></span><br><span class="line">print(<span class="string">"y: &#123;&#125;"</span>.format(y))</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x: [<span class="number">0</span> <span class="number">0</span>]</span><br><span class="line">x: [<span class="number">3</span> <span class="number">0</span>]</span><br><span class="line">y: [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line">y: [ <span class="number">3.14</span>  <span class="number">0.</span>  ]</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，虽然修改x[0]为一个浮点数3.14，但是由于x的类型是np.int，x[0]只保留了3.14的整数部分。</p>
-<p>而y的类型是np.float，修改y[0]为3.14后，小数也能完整保留。</p>
-<h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y).mean()</span><br><span class="line"># or</span><br><span class="line">np.mean(y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码会提示bool对象不包含mean方法。</p>
-<blockquote>
-<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
-</blockquote>
-<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp &#x3D; y_hat.argmax(axis&#x3D;1) &#x3D;&#x3D; y  # type: np.ndarray</span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction<br><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Errors</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/29/Numpy-00-Errors/">展开全文 >></a>
         </p>
       
 
@@ -2784,6 +2774,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

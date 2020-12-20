@@ -156,6 +156,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Git-05-StatusDiff" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/19/Git-05-StatusDiff/">Git-05-StatusDiff</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/19/Git-05-StatusDiff/" class="archive-article-date">
+  	<time datetime="2017-12-18T15:35:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-Status-amp-Diff"><a href="#Git-Status-amp-Diff" class="headerlink" title="Git Status &amp; Diff"></a>Git Status &amp; Diff</h1><h2 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h2><p>Show git repository status.</p>
+<p>If nothing changed:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
+
+<p>If file is modified and not be staged:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>If file is modified and staged:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   test.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h2><p>If file is modified and not be staged:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a&#x2F;test.txt b&#x2F;test.txt</span><br><span class="line">index 27a13b8..30d9986 100644</span><br><span class="line">--- a&#x2F;test.txt</span><br><span class="line">+++ b&#x2F;test.txt</span><br><span class="line">@@ -1 +1,2 @@</span><br><span class="line">-line 0</span><br><span class="line">\ No newline at end of file</span><br><span class="line">+line 0</span><br><span class="line">+line 1</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Status</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Diff</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/19/Git-05-StatusDiff/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Git-04-Add" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1111,146 +1216,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/07/Matplotlib-03-linestyle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-09-ArraySlice" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/30/Numpy-09-ArraySlice/">Numpy-09-ArraySlice</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/30/Numpy-09-ArraySlice/" class="archive-article-date">
-  	<time datetime="2017-11-30T14:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-List-Slice"><a href="#Python-List-Slice" class="headerlink" title="Python List Slice"></a>Python List Slice</h1><p>首先回顾Python的基本切片功能。注：list和tuple都可以进行切片。</p>
-<h2 id="一维数据"><a href="#一维数据" class="headerlink" title="一维数据"></a>一维数据</h2><p>使用[]切片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list切片得到一个新的list</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># tuple切片得到一个新的tuple</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<p>使用slice对象切片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># slice(start,end,step)函数生成一个slice对象 注意函数的参数之间是逗号</span></span><br><span class="line"><span class="comment"># 用slice对象来实现slice</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=slice(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[x]</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="二维数据"><a href="#二维数据" class="headerlink" title="二维数据"></a>二维数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]]</span><br><span class="line"><span class="comment"># 取行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line"><span class="comment"># 取行列</span></span><br><span class="line"><span class="comment"># 直接行列一起取会错误</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: list indices must be integers <span class="keyword">or</span> slices, <span class="keyword">not</span> tuple</span><br><span class="line"><span class="comment"># 可以先行再列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>][<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br></pre></td></tr></table></figure>
-
-<h1 id="Numpy-Array-Slice"><a href="#Numpy-Array-Slice" class="headerlink" title="Numpy Array Slice"></a>Numpy Array Slice</h1><h2 id="一维ndarray"><a href="#一维ndarray" class="headerlink" title="一维ndarray"></a>一维ndarray</h2><p>对于一维的ndarray，Numpy和Python的slice方式相同，可以使用[]或者slice()函数来实现。</p>
-<h3 id="使用slice-函数"><a href="#使用slice-函数" class="headerlink" title="使用slice()函数"></a>使用slice()函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d=np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用[start:end:step]</span></span><br><span class="line"><span class="comment"># 前闭后开 负数表示从后往前数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[:<span class="number">2</span>]</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用slice()函数</span></span><br><span class="line"><span class="comment"># x用的是上面的slice对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[x]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用[]"></a>使用[]</h3><p>正向，stride为正（默认） </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:]                <span class="comment"># [seq[0],   seq[1],          ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:]             <span class="comment"># [seq[low], seq[low+1],      ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:high]            <span class="comment"># [seq[0],   seq[1],          ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:high]         <span class="comment"># [seq[low], seq[low+1],      ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[::stride]         <span class="comment"># [seq[0],   seq[stride],     ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low::stride]      <span class="comment"># [seq[low], seq[low+stride], ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:high:stride]     <span class="comment"># [seq[0],   seq[stride],     ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:high:stride]  <span class="comment"># [seq[low], seq[low+stride], ..., seq[high-1]]</span></span><br></pre></td></tr></table></figure>
-
-<p>Examples:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[::<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>If <code>stride</code> is negative, we will use counting down order:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[::-stride]        <span class="comment"># [seq[-1],   seq[-1-stride],   ..., seq[0]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[high::-stride]    <span class="comment"># [seq[high], seq[high-stride], ..., seq[0]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:low:-stride]     <span class="comment"># [seq[-1],   seq[-1-stride],   ..., seq[low+1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[high:low:-stride] <span class="comment"># [seq[high], seq[high-stride], ..., seq[low+1]]</span></span><br></pre></td></tr></table></figure>
-
-<p>Examples:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">3</span>::<span class="number">-1</span>]</span><br><span class="line">array([[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br></pre></td></tr></table></figure>
-
-<h3 id="用Comma选择列"><a href="#用Comma选择列" class="headerlink" title="用Comma选择列"></a>用Comma选择列</h3><p><code>ndarray[:, 0]</code> means <code>ndarray[first_row:last_row, column_0]</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[::<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line">array([<span class="number">3</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
-
-<h2 id="二维ndarray"><a href="#二维ndarray" class="headerlink" title="二维ndarray"></a>二维ndarray</h2><h3 id="简单取块"><a href="#简单取块" class="headerlink" title="简单取块"></a>简单取块</h3><p>基本语法为ndarray[行操作,列操作]</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>array=np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="comment"># 取行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>]</span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>,:]</span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>:<span class="number">3</span>,:]</span><br><span class="line">array([[ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="comment"># 取列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">       [ <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">9</span>, <span class="number">10</span>]])</span><br><span class="line"><span class="comment"># 取列 保存为行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>])</span><br><span class="line"><span class="comment"># 取列 保存为列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>],</span><br><span class="line">       [<span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Slice-by-2-arrays"><a href="#Slice-by-2-arrays" class="headerlink" title="Slice by 2 arrays"></a>Slice by 2 arrays</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y=np.array([<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[x,y]</span><br><span class="line">array([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>])</span><br></pre></td></tr></table></figure>
-
-<p><img src="Numpy-09-ArraySlice/SlicebyArray.JPG" alt="SlicebyArray"></p>
-<h2 id="三维ndarray"><a href="#三维ndarray" class="headerlink" title="三维ndarray"></a>三维ndarray</h2><p>一个应用的实例如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;np.arange(27).reshape(3,3,3)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[[ 0,  1,  2],</span><br><span class="line">        [ 3,  4,  5],</span><br><span class="line">        [ 6,  7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 9, 10, 11],</span><br><span class="line">        [12, 13, 14],</span><br><span class="line">        [15, 16, 17]],</span><br><span class="line"></span><br><span class="line">       [[18, 19, 20],</span><br><span class="line">        [21, 22, 23],</span><br><span class="line">        [24, 25, 26]]])</span><br></pre></td></tr></table></figure>
-
-<p>假设上述3x3x3的array是一张读入的图片，其中第三维表示各点的RGB通道值。如果要过滤出RGB的某一通道值，那么可以使用array[:, :, n]来单独取出某一通道。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a[:, :, 2]</span><br><span class="line">array([[ 2,  5,  8],</span><br><span class="line">       [11, 14, 17],</span><br><span class="line">       [20, 23, 26]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-…"><a href="#使用-…" class="headerlink" title="使用[…]"></a>使用[…]</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.arange(<span class="number">12</span>).reshape(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>],</span><br><span class="line">        [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]]])</span><br></pre></td></tr></table></figure>
-
-<p>使用冒号省略维度的话，可以</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:, <span class="number">1</span>, :]</span><br><span class="line">array([[ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">       [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:, :, <span class="number">1</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">7</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>如果使用三个点号的话，对于后者<code>x[:, :, 1]</code>可以直接使用<code>x[..., 1]</code>来代替。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[...,<span class="number">1</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">7</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/Sinte-Beuve/p/6573246.html" target="_blank" rel="noopener">https://www.cnblogs.com/Sinte-Beuve/p/6573246.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">slice</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/30/Numpy-09-ArraySlice/">展开全文 >></a>
         </p>
       
 
@@ -2795,6 +2760,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

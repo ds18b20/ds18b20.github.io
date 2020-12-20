@@ -156,6 +156,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python-16-closure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/16/Python-16-closure/">Python-16-closure</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/16/Python-16-closure/" class="archive-article-date">
+  	<time datetime="2018-02-16T05:45:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文从基础开始学习一下Python的闭包。</p>
+<p>首先是如何用代码实现，然后是闭包的一些属性，最后是原理上如何实现。</p>
+<h1 id="怎样实现闭包"><a href="#怎样实现闭包" class="headerlink" title="怎样实现闭包"></a>怎样实现闭包</h1><p>通俗地讲，在一个函数A内嵌套另一个函数B，嵌入的函数B内包含了外部函数A的局部变量x，即实现了闭包。这闭包的局部变量x在外部函数A返回后，仍继续存在，并且可被内嵌函数B继续调用。</p>
+<p>一个例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过函数generate_linear_func(1, 2)返回linear(x)函数</span></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 返回到的linear_1_2就是内建linear(x)的一个引用，地址相同</span></span><br><span class="line">print(<span class="string">"id(linear_1_2): %X"</span> % id(linear_1_2))</span><br><span class="line"><span class="comment"># 向linear(x)函数传入参数10</span></span><br><span class="line">print(<span class="string">"a*x+b = %d"</span> % linear_1_2(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id(a, b): <span class="number">6</span>D576340, <span class="number">6</span>D576360</span><br><span class="line">id(linear): <span class="number">6328</span>D90</span><br><span class="line">id(linear_1_2): <span class="number">6328</span>D90</span><br><span class="line">a*x+b = <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>当移除函数generate_linear_func时，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 从内存中移除generate_linear_func</span></span><br><span class="line"><span class="keyword">del</span> generate_linear_func</span><br><span class="line">print(<span class="string">"a*x+b = %d"</span> % linear_1_2(<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<p>仍然可以顺利调用linear_1_2()得到包含有a和b的返回结果。说明函数generate_linear_func(a, b)的局部变量并未被清除，而是以某种方式保存了下来。</p>
+<h1 id="闭包函数的-closure-属性和cell对象"><a href="#闭包函数的-closure-属性和cell对象" class="headerlink" title="闭包函数的__closure__属性和cell对象"></a>闭包函数的__closure__属性和cell对象</h1><p>闭包的时候，返回函数也是一个对象，这个对象的属性中包含一个名为__closure__的属性。它定义了一个包含cell对象的tuple，tuple中的元素保存了闭包了的变量值。</p>
+<p>例如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a * x + b</span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 元素个数</span></span><br><span class="line">print(<span class="string">"len(cell): %d"</span> % len(linear_1_2.__closure__))</span><br><span class="line"><span class="comment"># 迭代显示各元素</span></span><br><span class="line"><span class="keyword">for</span> i, j <span class="keyword">in</span> enumerate(linear_1_2.__closure__):</span><br><span class="line">    print(<span class="string">"cell[%d]: %d"</span> % (i, j.cell_contents))</span><br></pre></td></tr></table></figure>
+
+<p>如果内建函数并未使用外部函数的局部变量，那么_<em>closure_</em> = None</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_linear_func</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    print(<span class="string">"id(a, b): %X, %X"</span> % (id(a), id(b)))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">linear</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x**<span class="number">2</span></span><br><span class="line">    print(<span class="string">"id(linear): %X"</span> % id(linear))</span><br><span class="line">    <span class="keyword">return</span> linear</span><br><span class="line"></span><br><span class="line">linear_1_2 = generate_linear_func(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(linear_1_2.__closure__)</span><br></pre></td></tr></table></figure>
+
+<h1 id="闭包的内部原理"><a href="#闭包的内部原理" class="headerlink" title="闭包的内部原理"></a>闭包的内部原理</h1><p>关于Python中闭包的具体实现原理，可以参见<a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html" target="_blank" rel="noopener">Python闭包详解</a> 。文中通过分析Python编译后生成的字节码(code object)来分析其内部运作机制。待学习。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>浅显理解 Python 闭包</p>
+<p><a href="https://serholiu.com/python-closures" target="_blank" rel="noopener">https://serholiu.com/python-closures</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Function</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Closure</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/16/Python-16-closure/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-15-FunctionParameter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1133,106 +1248,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/06/Numpy-12-ma/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-11-cumsum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/Numpy-11-cumsum/">Numpy-11-cumsum</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/Numpy-11-cumsum/" class="archive-article-date">
-  	<time datetime="2018-02-05T14:41:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-cumsum"><a href="#Numpy-cumsum" class="headerlink" title="Numpy.cumsum"></a>Numpy.cumsum</h1><p>输入Array，返回由各位置处的累加和组成的新Array。</p>
-<p>numpy.cumsum(a, axis=None, dtype=None, out=None)</p>
-<p>a: 输入ndarray</p>
-<p>axis: 指定计算所在的维度</p>
-<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a)</span><br><span class="line">array([ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">21</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a, dtype=float)     <span class="comment"># specifies type of output value(s)</span></span><br><span class="line">array([  <span class="number">1.</span>,   <span class="number">3.</span>,   <span class="number">6.</span>,  <span class="number">10.</span>,  <span class="number">15.</span>,  <span class="number">21.</span>])</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">0</span>)      <span class="comment"># sum over rows for each of the 3 columns</span></span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.cumsum(a,axis=<span class="number">1</span>)      <span class="comment"># sum over columns for each of the 2 rows</span></span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">3</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">9</span>, <span class="number">15</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">cumsum</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/Numpy-11-cumsum/">展开全文 >></a>
         </p>
       
 
@@ -2777,6 +2792,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

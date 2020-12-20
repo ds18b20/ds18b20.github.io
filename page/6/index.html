@@ -156,6 +156,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux-04-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/15/Linux-04-shell/">Linux-04-shell</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/15/Linux-04-shell/" class="archive-article-date">
+  	<time datetime="2020-03-15T02:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux执行Shell"><a href="#Linux执行Shell" class="headerlink" title="Linux执行Shell"></a>Linux执行Shell</h1><p>Linux下批处理主要靠Shell脚本来实现，基本步骤是</p>
+<ul>
+<li>编写脚本</li>
+<li>更改脚本执行权限</li>
+<li>执行脚本</li>
+</ul>
+<h2 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h2><p>新建文件<code>touch filename.sh</code></p>
+<p>编辑文件<code>nano filename.sh</code></p>
+<p>脚本第一行要求<code>#!/bin/sh</code>，目的是告诉使用哪个程序来执行脚本文件。</p>
+<p>从二行开始书写具体命令，注释以#开始。</p>
+<h2 id="更改脚本执行权限"><a href="#更改脚本执行权限" class="headerlink" title="更改脚本执行权限"></a>更改脚本执行权限</h2><p><code>chmod 777 filename.sh</code>或者<code>chmod +x filename.sh</code></p>
+<h2 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h2><p><code>sh filename.sh</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/Listron/article/details/32170977" target="_blank" rel="noopener">https://blog.csdn.net/Listron/article/details/32170977</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/15/Linux-04-shell/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-SQLite-02-tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -370,7 +471,12 @@ conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)<
 <li><p>从Windows连接时，Win+R输入<code>\\192.168.*.*</code></p>
 </li>
 </ol>
-<p>输入</p>
+<p>Debug</p>
+<blockquote>
+<p>Samba报错：不允许一个用户使用一个以上用户名与服务器或共享资源的多重连接</p>
+</blockquote>
+<p>解决方法，删除Windows凭据→重启Workstation服务。</p>
+<p>参见<a href="https://blog.51cto.com/mengix/1895969" target="_blank" rel="noopener">https://blog.51cto.com/mengix/1895969</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://support.apple.com/zh-cn/HT204445" target="_blank" rel="noopener">https://support.apple.com/zh-cn/HT204445</a></p>
 <p><a href="https://www.jianshu.com/p/4f785ae6c29c" target="_blank" rel="noopener">https://www.jianshu.com/p/4f785ae6c29c</a></p>
 
@@ -985,110 +1091,6 @@ conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)<
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/02/web-nginx-static/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RaspberryPi-03-temperature" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/30/RaspberryPi-03-temperature/">RaspberryPi-03-temperature</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/30/RaspberryPi-03-temperature/" class="archive-article-date">
-  	<time datetime="2019-06-30T04:22:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="raspberry-pi-CPU-temperature"><a href="#raspberry-pi-CPU-temperature" class="headerlink" title="raspberry pi CPU temperature"></a>raspberry pi CPU temperature</h1><p>有两种方法可以查看CPU温度：</p>
-<ol>
-<li><p>/opt/vc/bin/vcgencmd measure_temp</p>
-<p>temp=41.3’C</p>
-</li>
-<li><p>cat /sys/class/thermal/thermal_zone0/temp</p>
-<p>43470</p>
-<p>注意，这里的单位是1/1000摄氏度</p>
-</li>
-</ol>
-<p>另外可以用代码实现对温度的实时监控，C语言和Python的实现可以参考一下连接：</p>
-<p><a href="https://blog.csdn.net/xukai871105/article/details/38349209" target="_blank" rel="noopener">https://blog.csdn.net/xukai871105/article/details/38349209</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">temperature</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/30/RaspberryPi-03-temperature/">展开全文 >></a>
         </p>
       
 
@@ -2633,6 +2635,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

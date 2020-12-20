@@ -156,6 +156,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-RaspberryPi-03-temperature" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/30/RaspberryPi-03-temperature/">RaspberryPi-03-temperature</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/30/RaspberryPi-03-temperature/" class="archive-article-date">
+  	<time datetime="2019-06-30T04:22:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="raspberry-pi-CPU-temperature"><a href="#raspberry-pi-CPU-temperature" class="headerlink" title="raspberry pi CPU temperature"></a>raspberry pi CPU temperature</h1><p>有两种方法可以查看CPU温度：</p>
+<ol>
+<li><p>/opt/vc/bin/vcgencmd measure_temp</p>
+<p>temp=41.3’C</p>
+</li>
+<li><p>cat /sys/class/thermal/thermal_zone0/temp</p>
+<p>43470</p>
+<p>注意，这里的单位是1/1000摄氏度</p>
+</li>
+</ol>
+<p>另外可以用代码实现对温度的实时监控，C语言和Python的实现可以参考一下连接：</p>
+<p><a href="https://blog.csdn.net/xukai871105/article/details/38349209" target="_blank" rel="noopener">https://blog.csdn.net/xukai871105/article/details/38349209</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">temperature</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/30/RaspberryPi-03-temperature/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-RaspberryPi-02-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1024,103 +1128,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/17/Numpy-31-npy/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-20-reduction-indices" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/TensorFlow-20-reduction-indices/">TensorFlow-20-reduction_indices</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/17/TensorFlow-20-reduction-indices/" class="archive-article-date">
-  	<time datetime="2018-11-17T08:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="reduction-indices参数"><a href="#reduction-indices参数" class="headerlink" title="reduction_indices参数"></a>reduction_indices参数</h1><p>使用TF的reduce_sum和reduce_mean方法时，参数中有一项reduction_indices。</p>
-<p>这个参数类似于Numpy中的axis参数，用于指定计算所在的维度。</p>
-<p>![](TensorFlow-20-reduction-indices\reduction indices.png)</p>
-<p>不指定的时候，默认值为None，意为在所有维度上计算，即压缩到0维也就是一个数。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cnblogs.com/likethanlove/p/6547405.html" target="_blank" rel="noopener">http://www.cnblogs.com/likethanlove/p/6547405.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">reduce_sum</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">reduce_mean</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reduction_indices</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/17/TensorFlow-20-reduction-indices/">展开全文 >></a>
         </p>
       
 
@@ -2665,6 +2672,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

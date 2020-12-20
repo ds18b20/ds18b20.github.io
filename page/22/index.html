@@ -156,6 +156,152 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-02-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/07/Java-02-Install/">Java-02-Install</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/07/Java-02-Install/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="install-java-on-ubuntu"><a href="#install-java-on-ubuntu" class="headerlink" title="install java on ubuntu"></a>install java on ubuntu</h1><p>You have 2 ways to install java on you ubuntu machine.</p>
+<h2 id="by-ppa-源"><a href="#by-ppa-源" class="headerlink" title="by ppa(源)"></a>by ppa(源)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># add ppa</span><br><span class="line">sudo add-apt-repository ppa:webupd8team&#x2F;java</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># install oracle-java-installer</span><br><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+
+<h2 id="set-default-version"><a href="#set-default-version" class="headerlink" title="set default version"></a>set default version</h2><p>set jdk8 as your default jdk:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>If you already have a  jdk7 and installed jdk8, you can change between 7 and 8 by</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk8 切换到jdk7</span><br><span class="line">sudo update-java-alternatives -s java-7-oracle</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># jdk7 切换到jdk8</span><br><span class="line">sudo update-java-alternatives -s java-8-oracle</span><br></pre></td></tr></table></figure>
+
+<p>Test if jdk is installed properly,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+<h1 id="by-downloading-package"><a href="#by-downloading-package" class="headerlink" title="by downloading package"></a>by downloading package</h1><ol>
+<li><p>download .gz package from oracle HP.</p>
+</li>
+<li><p>make directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+
+<p>unzip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-7u60-linux-x64.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>modify enviroment variable</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>add,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set oracle jdk environment</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60  ## 这里要注意目录要换成自己解压的jdk 目录</span><br><span class="line">export JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre  </span><br><span class="line">export CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib  </span><br><span class="line">export PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>make modification effective,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>change default jdk version</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javac 300  </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;jar jar &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;jar 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javah javah &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javah 300   </span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;javap javap &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;javap 300</span><br></pre></td></tr></table></figure>
+
+<p>and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+
+<p>If meesages are shown like bellow:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">There is only one alternative in link group java (providing &#x2F;usr&#x2F;bin&#x2F;java):</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.7.0_60&#x2F;bin&#x2F;java</span><br></pre></td></tr></table></figure>
+
+<p>there is no need to change version.</p>
+</li>
+<li><p>test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h1 id="install-on-windows"><a href="#install-on-windows" class="headerlink" title="install on windows"></a>install on windows</h1><p>参考这篇文章：</p>
+<p>Windows环境下JDK安装与环境变量配置详细的图文教程</p>
+<p><a href="http://www.cnblogs.com/liuhongfeng/p/4177568.html" target="_blank" rel="noopener">http://www.cnblogs.com/liuhongfeng/p/4177568.html</a></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Ubuntu 安装 JDK8 的两种方式</p>
+<p><a href="https://www.cnblogs.com/smiler/p/6939913.html" target="_blank" rel="noopener">https://www.cnblogs.com/smiler/p/6939913.html</a></p>
+<p>修改linux默认jdk版本</p>
+<p><a href="https://www.cnblogs.com/onetwo/p/5095481.html" target="_blank" rel="noopener">https://www.cnblogs.com/onetwo/p/5095481.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">install</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/07/Java-02-Install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-Eclipse-01-Install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1112,115 +1258,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/02/21/ME-01-LinearGuide/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-24-slot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/21/Python-24-slot/">Python-24-slot</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/21/Python-24-slot/" class="archive-article-date">
-  	<time datetime="2018-02-21T12:30:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="绑定属性和方法"><a href="#绑定属性和方法" class="headerlink" title="绑定属性和方法"></a>绑定属性和方法</h1><p>Python是一种动态语言，允许在运行过程中给类和对象添加属性和方法。</p>
-<h2 id="针对实例"><a href="#针对实例" class="headerlink" title="针对实例"></a>针对实例</h2><p>对于某一个实例做的修改只对当前实例有效，其他实例不受影响。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="comment"># 注意需要引用Methodtype函数</span></span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MethodType</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"><span class="comment"># 具体添加</span></span><br><span class="line">s.set_score = MethodType(set_score, s)</span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，</p>
-<p>一是，新创建一个实例，并不会包含上述修改。</p>
-<p>二是，给实例添加方法的时候，如果直接把新函数赋值给实例，会导致函数出错。把实参赋给self了</p>
-<h2 id="针对类"><a href="#针对类" class="headerlink" title="针对类"></a>针对类</h2><p>针对类做的修改会影响到所有新创建的实例。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个空的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 一个实例</span></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加attribute</span></span><br><span class="line">s.name = <span class="string">'Jim'</span></span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改类的attribute</span></span><br><span class="line">Student.name = <span class="string">'Tom'</span></span><br><span class="line">print(Student.name)</span><br><span class="line">print(s.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加method</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"></span><br><span class="line">Student.set_score = set_score</span><br><span class="line"></span><br><span class="line">s.set_score(<span class="number">95</span>)</span><br><span class="line">print(s.score)</span><br><span class="line"></span><br><span class="line">s2 = Student()</span><br><span class="line">print(s2.name)</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Jim</span><br><span class="line">Tom</span><br><span class="line">Jim</span><br><span class="line"><span class="number">95</span></span><br><span class="line">Tom</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，给类添加的方法对旧的实例仍然有效。但是新修改的类属性，并不能覆盖旧的实例的属性。</p>
-<h1 id="slot"><a href="#slot" class="headerlink" title="__slot__"></a>__slot__</h1><p>既然可以任意时刻添加属性到类中，有时候就需要给业已添加的属性加上限制。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">  __slot__ = (name, age)</span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line"><span class="comment"># 添加age没有问题</span></span><br><span class="line">s.age = <span class="number">25</span></span><br><span class="line"><span class="comment"># 添加score出错</span></span><br><span class="line"><span class="comment"># 因为不在__slot__内</span></span><br><span class="line">s.score = <span class="number">95</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>值得注意的是</strong>，继承的子类不受父类的slot设置。除非在子类中也加入了slot，这样子类允许定义的属性就是父类slot+子类slot的和集。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">__slot__</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/21/Python-24-slot/">展开全文 >></a>
         </p>
       
 
@@ -2765,6 +2802,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>

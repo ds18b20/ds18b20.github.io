@@ -156,6 +156,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Math-04-DistanceFromPoint2Line" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/Math-04-DistanceFromPoint2Line/">Math-04-DistanceFromPoint2Line</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/25/Math-04-DistanceFromPoint2Line/" class="archive-article-date">
+  	<time datetime="2018-05-25T12:34:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="点到直线的距离"><a href="#点到直线的距离" class="headerlink" title="点到直线的距离"></a>点到直线的距离</h1><p>已知直线上的两点和直线外的一点，计算点到直线的距离。</p>
+<h2 id="向量法"><a href="#向量法" class="headerlink" title="向量法"></a>向量法</h2><p>可以先转换成两个向量：<strong>a</strong>和<strong>b</strong>，这时计算点到直线的距离可以先算出向量<strong>c</strong>的坐标表示，然后距离向量<strong>e</strong>=<strong>a</strong>-<strong>c</strong>，最后对向量<strong>e</strong>取模即可得到距离。</p>
+<p><img src="C:/Users/ds18b20/PycharmProjects/Hexo/source/_posts/Math-04-DistanceFromPoint2Line/diatance.jpg" alt=""><br>$$<br>c = acos\theta\dfrac{b} {|b|}<br>$$</p>
+<p>$$<br>= \dfrac{(a·b)} {|b|}\dfrac{b} {|b|}<br>$$</p>
+<p><a href="https://blog.csdn.net/tracing/article/details/46563383" target="_blank" rel="noopener">https://blog.csdn.net/tracing/article/details/46563383</a></p>
+<h2 id="向量叉乘"><a href="#向量叉乘" class="headerlink" title="向量叉乘"></a>向量叉乘</h2><p>平面上两个向量(<strong>x</strong>, <strong>y</strong>)叉乘得到的结果也是一个向量<strong>z</strong>，<strong>z</strong>的方向垂直于<strong>xy</strong>平面，模等于xy组成的平行四边形的面积。利用这一点可以很方便地计算点到直线的距离，即用平行四边形的面积除以底边的长度。<br>$$<br>d =\dfrac{ |AB\times AC|}{|AB|}<br>$$</p>
+<p>$$<br>V_1(x_1, y_1)\times V_2(x_2, y_2) =x_1y_2 – x_2y_1<br>$$</p>
+<p><a href="https://blog.csdn.net/zxj1988/article/details/6260576" target="_blank" rel="noopener">https://blog.csdn.net/zxj1988/article/details/6260576</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>点乘与叉乘的数学公式</p>
+<p><a href="http://gjunwei.blog.sohu.com/58747706.html" target="_blank" rel="noopener">http://gjunwei.blog.sohu.com/58747706.html</a></p>
+<p><a href="http://www.waitingfy.com/archives/320" target="_blank" rel="noopener">http://www.waitingfy.com/archives/320</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Distance from point to line</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Math//" class="article-tag-list-link color5">Math</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/Math-04-DistanceFromPoint2Line/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Math-05-FFT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1145,112 +1240,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/20/Python-38-chardet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-24-dotVSmul" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/19/Numpy-24-dotVSmul/">Numpy-24-dotVSmul</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/19/Numpy-24-dotVSmul/" class="archive-article-date">
-  	<time datetime="2018-05-18T23:55:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Calculation-speed-up-by-Numpy"><a href="#Calculation-speed-up-by-Numpy" class="headerlink" title="Calculation speed up by Numpy"></a>Calculation speed up by Numpy</h1><p>有两个矩阵a和b，二者有相同的列数。<br>$$<br>a=\left[<br>\begin{matrix}<br>a &amp; b &amp; c\<br>d &amp; e &amp; f<br>\end{matrix}<br>\right]<br>\<br>b=\left[<br>\begin{matrix}<br>1 &amp; 2 &amp; 3 \<br>4 &amp; 5 &amp; 6 \<br>7 &amp; 8 &amp; 9 \<br>10 &amp; 11 &amp; 12<br>\end{matrix}<br>\right]<br>$$<br>矩阵a和b的L2距离的计算结果是一个a.shape[0] * b.shape[0]的新矩阵。<br>$$<br>\begin{array}{c|lcr}<br>n &amp; \text{[1, 2, 3]} &amp; \text{[4, 5, 6]} &amp; \text{[7, 8, 9]} &amp; \text{[10, 11, 12]} \\<br>\hline<br>[a, b, c ]  &amp;\sqrt{ (a-1)^2+(b-2)^2+(c-3)^2} &amp; … &amp; … &amp; … \\<br>[d, e, f ]  &amp; … &amp; … &amp; … &amp; \sqrt{ (d-10)^2+(e-11)^2+(f-12)^2}<br>\end{array}<br>$$<br>具体计算时，有以下几种方式：</p>
-<h2 id="直接按照定义"><a href="#直接按照定义" class="headerlink" title="直接按照定义"></a>直接按照定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">substract = a - b</span><br><span class="line">sum_square = sum(substract**<span class="number">2</span>)</span><br><span class="line">sum_sqrt = sqrt(sum_square)</span><br></pre></td></tr></table></figure>
-
-<p>但是由于a和b的形状不同，所以计算前要进行reshape操作。</p>
-<p>上面的例子中，a的形状为[2, 3]，b的形状为[3, 3]。要进行计算，可以把a的形状reshape为[2, 1, 3]，这样a - b的形状为[2, 3, 3]。</p>
-<p>当a和b的尺寸过大时，用这种方法计算会带来巨大的内存消耗。</p>
-<h2 id="拆开-a-b-2"><a href="#拆开-a-b-2" class="headerlink" title="拆开(a-b)**2"></a>拆开(a-b)**2</h2><p>首先有<br>$$<br>(a-b)^2 = a^2 + b^2 -2ab<br>$$<br>然后<br>$$<br>\sum(a-b)^2 = \sum{a^2} + \sum{b^2} -2\sum{ab}<br>$$</p>
-<h2 id="继续加速计算ab"><a href="#继续加速计算ab" class="headerlink" title="继续加速计算ab"></a>继续加速计算ab</h2><p>sum(ab, axis=-1)的element-wise运算仍然可以使用np.dot方法来对计算进行加速。</p>
-<p><code>a * 1 + b * 2 + c * 3</code>可以转换成<code>[a, b, c]</code>点乘<code>[1, 2, 3].T</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        start_time = time.time()</span><br><span class="line">        ret = func(*args, **kwargs)</span><br><span class="line">        elapsed_time = time.time() - start_time</span><br><span class="line">        print(<span class="string">'function [&#123;&#125;] finished in &#123;&#125; ms'</span>.format(</span><br><span class="line">            func.__name__, int(elapsed_time * <span class="number">1000</span>)))</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    row = a.shape[<span class="number">0</span>]</span><br><span class="line">    ret = np.sum(a.reshape(row, <span class="number">1</span>, <span class="number">-1</span>) * b, axis=<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul_dot</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    ret = np.dot(a, b.T)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    a = np.random.randn(<span class="number">50</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    b = np.random.randn(<span class="number">500</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    print(mul(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    print(mul_dot(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-<p>输出，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function [mul] finished in 435 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br><span class="line">function [mul_dot] finished in 13 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">speed</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dot vs multiply</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/19/Numpy-24-dotVSmul/">展开全文 >></a>
         </p>
       
 
@@ -2795,6 +2784,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">beautiful soup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">level shift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
               </li>
             
             <div class="clearfix"></div>
