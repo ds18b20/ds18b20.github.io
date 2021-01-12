@@ -156,6 +156,383 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Opencv-04-merge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Opencv-04-merge/">Opencv-04-merge</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/20/Opencv-04-merge/" class="archive-article-date">
+  	<time datetime="2020-05-20T02:36:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="cv2中合并图像"><a href="#cv2中合并图像" class="headerlink" title="cv2中合并图像"></a>cv2中合并图像</h1><p>使用<code>mask</code>和<code>mask_inv</code>分别和两幅图像做bitwise，然后再相加</p>
+<p><a href="https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_image_arithmetics/py_image_arithmetics.html#image-arithmetics" target="_blank" rel="noopener">https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_image_arithmetics/py_image_arithmetics.html#image-arithmetics</a></p>
+<h1 id="PIL中合并图像"><a href="#PIL中合并图像" class="headerlink" title="PIL中合并图像"></a>PIL中合并图像</h1><p>使用<code>im = Image.composite(im1, im2, mask)</code>函数来实现。只需要提供im1的mask即可。</p>
+<p><a href="https://note.nkmk.me/python-pillow-composite/" target="_blank" rel="noopener">https://note.nkmk.me/python-pillow-composite/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PIL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">merge</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Opencv-04-merge/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Opencv-03-png" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Opencv-03-png/">Opencv-03-png</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/20/Opencv-03-png/" class="archive-article-date">
+  	<time datetime="2020-05-20T02:31:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PNG-alpha通道"><a href="#PNG-alpha通道" class="headerlink" title="PNG alpha通道"></a>PNG alpha通道</h1><p>cv2读入png图像可以得到一个ndarray。该ndarray的最后一个维度表示alpha通道，用来控制透明度。</p>
+<p>可以用下面的方式分别提取BGR和alpha。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">src = cv2.imread(<span class="string">'sample.png'</span>, cv2.IMREAD_UNCHANGED)</span><br><span class="line"></span><br><span class="line">bgr = src[:,:,:<span class="number">3</span>] <span class="comment"># Channels 0..2</span></span><br><span class="line">alpha = src[:,:,<span class="number">3</span>] <span class="comment"># Channel 3</span></span><br><span class="line"></span><br><span class="line">result = np.dstack([bgr, alpha]) <span class="comment"># Add the alpha channel</span></span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">'output.png'</span>, result)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/53380318/problem-about-background-transparent-png-format-opencv-with-python</a></p>
+<h1 id="忽视alpha的问题"><a href="#忽视alpha的问题" class="headerlink" title="忽视alpha的问题"></a>忽视alpha的问题</h1><p>读入png图像后直接进行下一步处理或者显示的话，会得到意想不到的奇怪颜色。</p>
+<p>通过alpha来对原图像做mask预处理的话，可以参考下面的链接：</p>
+<p><a href="https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil" target="_blank" rel="noopener">https://stackoverflow.com/questions/9166400/convert-rgba-png-to-rgb-with-pil</a></p>
+<p>当然，也可以使用numpy的乘法来实现。具体来讲，先提取出来alpha通道，然后二值化生成mask。最后用mask和rbg阵列做乘法运算得到3通道的图像阵列。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">png</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">alpha</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Opencv-03-png/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Opencv-02-PIL-opencv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Opencv-02-PIL-opencv/">Opencv-02-PIL-opencv</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/20/Opencv-02-PIL-opencv/" class="archive-article-date">
+  	<time datetime="2020-05-20T02:23:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PIL-to-opencv"><a href="#PIL-to-opencv" class="headerlink" title="PIL to opencv"></a>PIL to opencv</h1><p>下面是从PIL转换到cv2(ndarray)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pil_image = PIL.Image.open(<span class="string">'Image.jpg'</span>).convert(<span class="string">'RGB'</span>) </span><br><span class="line">open_cv_image = numpy.array(pil_image) </span><br><span class="line"><span class="comment"># Convert RGB to BGR </span></span><br><span class="line">open_cv_image = open_cv_image[:, :, ::<span class="number">-1</span>].copy()</span><br></pre></td></tr></table></figure>
+
+<p>注意PIL的格式是RGB，而opencv是BGR。</p>
+<p><a href="https://stackoverflow.com/questions/14134892/convert-image-from-pil-to-opencv-format" target="_blank" rel="noopener">https://stackoverflow.com/questions/14134892/convert-image-from-pil-to-opencv-format</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PIL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Opencv-02-PIL-opencv/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Opencv-01-window-size" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/Opencv-01-window-size/">Opencv-01-window-size</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/20/Opencv-01-window-size/" class="archive-article-date">
+  	<time datetime="2020-05-20T02:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="cv2-WINDOW"><a href="#cv2-WINDOW" class="headerlink" title="cv2.WINDOW_"></a>cv2.WINDOW_</h1><p>Python: cv2.namedWindow(winname[, flags])</p>
+<ul>
+<li>name: name of the window</li>
+<li>flags: flags of the window<ul>
+<li>WINDOW_NORMAL user can resize the window (no constraint)</li>
+<li>WINDOW_AUTOSIZE the window size is automatically adjusted to fit the displayed image, and you cannot change the window size manually.</li>
+<li>WINDOW_OPENGL</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.opencv.org/2.4/modules/highgui/doc/user_interface.html?highlight=namedwindow#cv2.namedWindow" target="_blank" rel="noopener">Opencv User Interface</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">size</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">window</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/20/Opencv-01-window-size/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-60-print-end-flush" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -751,417 +1128,6 @@
 
 
   
-    <article id="post-Matplotlib-10-titles" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/Matplotlib-10-titles/">Matplotlib-10-titles</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/Matplotlib-10-titles/" class="archive-article-date">
-  	<time datetime="2020-05-06T10:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="主标题-suptitle-和subplot标题"><a href="#主标题-suptitle-和subplot标题" class="headerlink" title="主标题(suptitle)和subplot标题"></a>主标题(suptitle)和subplot标题</h1><p>下面的sample code可以同时显示主标题和个分图的标题：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    fig.subplots_adjust(wspace=<span class="number">5</span>)</span><br><span class="line">    fig.suptitle(<span class="string">"Title for whole figure"</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">    ax = plt.subplot(<span class="string">"211"</span>)</span><br><span class="line">    ax.set_title(<span class="string">"Title for first plot"</span>)</span><br><span class="line">    ax.plot(data)</span><br><span class="line"></span><br><span class="line">    ax = plt.subplot(<span class="string">"212"</span>)</span><br><span class="line">    ax.set_title(<span class="string">"Title for second plot"</span>)</span><br><span class="line">    ax.plot(data)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># plt.tight_layout()</span></span><br><span class="line">    fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0.0</span>, <span class="number">1</span>, <span class="number">0.9</span>])</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>输出如下Graph，</p>
-<p><img src="Matplotlib-10-titles%5Ctitles.png" alt="titles"></p>
-<p>值得注意的是，如果单纯使用<code>plt.tight_layout()</code>，会导致主标题和subplot的标题严重重叠！</p>
-<p><img src="Matplotlib-10-titles%5Coverlap.png" alt="overlap"></p>
-<p>改为<code>fig.tight_layout(rect=[0.0, 0.0, 1.0, 0.9])</code>即可。原因是默认情况下，自动调整只会考虑ticklabels, axis labels, and titles等元素，而没有考虑suptitle。因此需要手动指定rect(rectangle)。其中rect的指定顺序为左–下–右–上，数值为归一化的0到1之间的float数。</p>
-<p><code>rect=[0.0, 0.0, 1.0, 0.9]</code>表示在 <code>[左0.0][下0.0]</code>到<code>[右1.0][上0.9]</code>范围内做tight调整，上方余下0.1给suptitle。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/8248467/matplotlib-tight-layout-doesnt-take-into-account-figure-suptitle" target="_blank" rel="noopener">https://stackoverflow.com/questions/8248467/matplotlib-tight-layout-doesnt-take-into-account-figure-suptitle</a></p>
-<p><a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.tight_layout.html" target="_blank" rel="noopener">https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.tight_layout.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">suptitle</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">tight layout</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/Matplotlib-10-titles/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-07-multiple-plots" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/Matplotlib-07-multiple-plots/">Matplotlib-07-multiple-plots</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/Matplotlib-07-multiple-plots/" class="archive-article-date">
-  	<time datetime="2020-05-06T04:18:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Matplotlib-Multiple-Subplots"><a href="#Matplotlib-Multiple-Subplots" class="headerlink" title="Matplotlib Multiple Subplots"></a>Matplotlib Multiple Subplots</h1><p>两种方式绘制多图</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">plt.figure(<span class="number">0</span>)</span><br><span class="line">ax_1 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">0</span>), colspan=<span class="number">3</span>)</span><br><span class="line">ax_1.set_title(<span class="string">'ax_1'</span>)  <span class="comment"># 使用set_title方法显示title</span></span><br><span class="line">ax_2 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">0</span>), colspan=<span class="number">2</span>)</span><br><span class="line">ax_3 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">2</span>), rowspan=<span class="number">2</span>)</span><br><span class="line">ax_4 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">0</span>))</span><br><span class="line">ax_5 = plt.subplot2grid((<span class="number">3</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">plt.figure(<span class="number">1</span>)</span><br><span class="line">ax_a = plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">ax_a.set_title(<span class="string">'ax_a'</span>)  <span class="comment"># 使用set_title方法显示title</span></span><br><span class="line">ax_b = plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>第一个Figure：</p>
-<p><img src="Matplotlib-07-multiple-subplots%5Cax_1.png" alt="ax_1"></p>
-<p>第二个Figure：</p>
-<p><img src="Matplotlib-07-multiple-subplots%5Cax_a.png" alt="ax_a"></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/37424530/how-to-make-more-than-10-subplots-in-a-figure/37444059" target="_blank" rel="noopener">https://stackoverflow.com/questions/37424530/how-to-make-more-than-10-subplots-in-a-figure/37444059</a></p>
-<p>关于plt中的figure/ax等部分等关系介绍如下：<br><a href="https://www.cnblogs.com/nju2014/p/5620776.html" target="_blank" rel="noopener">https://www.cnblogs.com/nju2014/p/5620776.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multiple subplots</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/Matplotlib-07-multiple-plots/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-58-hasattr-getattr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/Python-58-hasattr-getattr/">Python-58-hasattr-getattr</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/Python-58-hasattr-getattr/" class="archive-article-date">
-  	<time datetime="2020-05-06T00:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="示例的属性"><a href="#示例的属性" class="headerlink" title="示例的属性"></a>示例的属性</h1><p>这里的属性可以是class attribute，也可以是instance attribute（包括后续赋给的attribute）。</p>
-<p>下面使用内置hasattr方法来判断是否包含指定attribute的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(hasattr(foo, <span class="string">'code'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'name'</span>))  <span class="comment"># True</span></span><br><span class="line">print(hasattr(foo, <span class="string">'volume'</span>))  <span class="comment"># False</span></span><br><span class="line">print(hasattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-
-<p>然后是使用内置getattr方法来获取指定attribute的value的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">()</span>:</span></span><br><span class="line">    class_attr = <span class="number">89</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.code = <span class="number">23</span></span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.name = <span class="string">'demo'</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'code'</span>))  <span class="comment"># 23</span></span><br><span class="line">print(getattr(foo, <span class="string">'name'</span>))  <span class="comment"># demo</span></span><br><span class="line">print(getattr(Foo, <span class="string">'class_attr'</span>))  <span class="comment"># 89</span></span><br><span class="line"></span><br><span class="line">print(getattr(foo, <span class="string">'volume'</span>))</span><br></pre></td></tr></table></figure>
-
-<p>最后一行尝试获取volume属性，由于foo中没有这个属性解释器会抛出错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#39;Foo&#39; object has no attribute &#39;volume&#39;</span><br></pre></td></tr></table></figure>
-
-<p>为了避免错误打断程序向下运行，可以给不存在的属性添加一个默认值。如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(getattr(foo, <span class="string">'volume'</span>, <span class="string">'default_volume'</span>))  <span class="comment"># default_volume</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.python-izm.com/advanced/hasattr/" target="_blank" rel="noopener">https://www.python-izm.com/advanced/hasattr/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hasattr</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">getattr</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/Python-58-hasattr-getattr/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Blender-01-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/Blender-01-basic/">Blender-01-basic</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/30/Blender-01-basic/" class="archive-article-date">
-  	<time datetime="2020-04-30T08:37:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Blender入门记录"><a href="#Blender入门记录" class="headerlink" title="Blender入门记录"></a>Blender入门记录</h1><h2 id="键盘设置"><a href="#键盘设置" class="headerlink" title="键盘设置"></a>键盘设置</h2><p>在没有小键盘的电脑上使用blender时，英文键上方的数字键默认无法使用，需要在设置里激活。</p>
-<p>Edit – Input – Keyboard – Emulate Numpad[check]</p>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
-<li>G键 平移</li>
-<li>S键 缩放</li>
-<li>R键 旋转</li>
-</ul>
-<h2 id="3D-view-header"><a href="#3D-view-header" class="headerlink" title="3D view header"></a>3D view header</h2><p><img src="https://i.stack.imgur.com/sxuKB.jpg" alt=""></p>
-<p>不小心把3D view Header关掉之后，view area的右上角会出现一个向下的小箭头，点击此箭头即可恢复header bar。</p>
-<p>注，上图是老版本界面</p>
-<h2 id="固定camera-view"><a href="#固定camera-view" class="headerlink" title="固定camera view"></a>固定camera view</h2><p>按小键盘的0激活camera view模式，但是默认情况下继续鼠标中键旋转模型的话，会自动退出camera view。</p>
-<p>按N键调出侧边工具，选择View Tab，找到View下面的View Lock下面的Lock Camera to View[check]即可固定camera视角不退出。</p>
-<h2 id="批量修改material"><a href="#批量修改material" class="headerlink" title="批量修改material"></a>批量修改material</h2><p>先选择一个对象设置material；</p>
-<p>A键全选所有元素；</p>
-<p>找到camera和light，按住SHIFT键+左键deselect这两种元素；</p>
-<p>按住SHIFT键+左键deselect最开始设置好的对象；</p>
-<p>在Object Mode下点击Object Tab，Make Links，Materials即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">basic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Blender//" class="article-tag-list-link color3">Blender</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/30/Blender-01-basic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1176,7 +1142,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 wzx
+    		&copy; 2021 wzx
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -2685,6 +2651,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">v4l2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">make</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Build Kernel</a>
               </li>
             
             <div class="clearfix"></div>

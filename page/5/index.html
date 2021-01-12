@@ -156,6 +156,409 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-06-sscanf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/20/C-06-sscanf/">C-06-sscanf</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/20/C-06-sscanf/" class="archive-article-date">
+  	<time datetime="2020-04-20T10:14:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="sscanf"><a href="#sscanf" class="headerlink" title="sscanf"></a>sscanf</h1><p>用一句话来解释sscanf的话，sscanf实现了和sprintf相反功能 的一个函数，而且这两个函数都位于string.h下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">string</span> the_string = <span class="string">"foo -3.6 fum dum 17"</span>;</span><br><span class="line"><span class="built_in">sscanf</span>(the_string, <span class="string">"foo %f fum dum %d"</span>, f, i);</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子，就从<code>the_string</code>中解析得到了两个变量<code>f</code>和<code>i</code>。</p>
+<p>详见，<a href="http://docs.roxen.com/(en)/pike/7.0/tutorial/strings/sscanf.xml" target="_blank" rel="noopener">http://docs.roxen.com/(en)/pike/7.0/tutorial/strings/sscanf.xml</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sscanf</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/20/C-06-sscanf/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-Arduino-02-espnow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/20/ESP32-Arduino-02-espnow/">ESP32-Arduino-02-espnow</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/20/ESP32-Arduino-02-espnow/" class="archive-article-date">
+  	<time datetime="2020-04-20T09:58:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ESPNOW双向通信"><a href="#ESPNOW双向通信" class="headerlink" title="ESPNOW双向通信"></a>ESPNOW双向通信</h1><p>使用ESPNOW协议前，值得注意的是</p>
+<ul>
+<li>传输内容长度有限制，不超过250字节</li>
+<li>无需提前连接WiFi热点</li>
+</ul>
+<p>在Arduino给出的例子中使用到了Mater-Slave的说法。其实在通信时并没有区分主从关系，这里的命名是为了将AP模式下的设备作为接收方；而把STATION模式下的设备作为发送方。而且配置AP热点的目的也只是为了让发送方根据热点名（SSID）获得MAC地址。</p>
+<p>不配置AP直接点对点通信的例子 参见</p>
+<p><a href="https://randomnerdtutorials.com/esp-now-two-way-communication-esp32/" target="_blank" rel="noopener">https://randomnerdtutorials.com/esp-now-two-way-communication-esp32/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Arduino</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">espnow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/20/ESP32-Arduino-02-espnow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-Arduino-01-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/18/ESP32-Arduino-01-delay/">ESP32-Arduino-01-delay</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/18/ESP32-Arduino-01-delay/" class="archive-article-date">
+  	<time datetime="2020-04-18T05:41:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ets-delay-us"><a href="#ets-delay-us" class="headerlink" title="ets_delay_us()"></a>ets_delay_us()</h1><p>The ROM function ets_delay_us() (defined in rom/ets_sys.h) will allow you to busy-wait a specified number of uS.</p>
+<p>Note that this is busy-waiting – it does not allow other tasks to run, it just burns CPU cycles.</p>
+<p>这是一个以循环空指令方式实现us级延时的函数，函数定义在rom/ets_sys.h中。</p>
+<p>参考，<a href="https://esp32developer.com/programming-in-c-c/delays/delays" target="_blank" rel="noopener">https://esp32developer.com/programming-in-c-c/delays/delays</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Arduino</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/18/ESP32-Arduino-01-delay/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-C-05-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/18/C-05-struct/">C-05-struct</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/18/C-05-struct/" class="archive-article-date">
+  	<time datetime="2020-04-18T00:50:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="结构体的定义和初始化"><a href="#结构体的定义和初始化" class="headerlink" title="结构体的定义和初始化"></a>结构体的定义和初始化</h1><p>下面分别以<code>struct</code>以及<code>typedef struct</code>方式来使用结构体。</p>
+<h2 id="struct方式"><a href="#struct方式" class="headerlink" title="struct方式"></a>struct方式</h2><p>最基本的，先定义然后初始化的方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Size</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">int</span> legnth;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">width</span>;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">height</span>;</span><br><span class="line">    &#125;;  <span class="comment">//不要忘了最后这个；</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Size</span> <span class="title">sample</span> = &#123;</span><span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"volume: %d"</span>, sample.legnth*sample.<span class="built_in">width</span>*sample.<span class="built_in">height</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义顺带初始化的方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Size</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">int</span> legnth;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">width</span>;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">height</span>;</span><br><span class="line">    &#125;sample = &#123;<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"volume: %d"</span>, sample.legnth*sample.<span class="built_in">width</span>*sample.<span class="built_in">height</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者先不初始化成员，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Size</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">int</span> legnth;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">width</span>;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">height</span>;</span><br><span class="line">    &#125;sample;</span><br><span class="line">    </span><br><span class="line">    sample.legnth = <span class="number">100</span>;</span><br><span class="line">    sample.<span class="built_in">width</span> = <span class="number">200</span>;</span><br><span class="line">    sample.<span class="built_in">height</span> = <span class="number">300</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"volume: %d"</span>, sample.legnth*sample.<span class="built_in">width</span>*sample.<span class="built_in">height</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="typedef-struct方式"><a href="#typedef-struct方式" class="headerlink" title="typedef struct方式"></a>typedef struct方式</h2><p>直接使用struct方式定义结构体时，生成结构体变量必须加上struct关键词。而typedef struct方式的话，则可以省去这个struct关键词。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Size</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">int</span> legnth;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">width</span>;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">height</span>;</span><br><span class="line">    &#125;Size;</span><br><span class="line">    Size sample = &#123;<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"volume: %d"</span>, sample.legnth*sample.<span class="built_in">width</span>*sample.<span class="built_in">height</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>STM32的库函数就使用这种方法来配置各种外设的寄存器。</p>
+<h1 id="结构体访问成员"><a href="#结构体访问成员" class="headerlink" title="结构体访问成员"></a>结构体访问成员</h1><p>通过结构体变量访问的话，使用点号<code>.</code>访问成员；</p>
+<p>通过结构体指针变量访问的话，使用<code>-&gt;</code>访问成员。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Size</span>  // 此处的结构体类型<span class="title">Size</span>可以省略</span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">int</span> legnth;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">width</span>;</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">height</span>;</span><br><span class="line">    &#125;Size;</span><br><span class="line">    Size sample = &#123;<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>&#125;;</span><br><span class="line">    Size *p_sample = &amp;sample;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"legnth: %d\r\n"</span>, sample.legnth);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"legnth: %d\r\n"</span>, p_sample-&gt;legnth);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="结构体的字符串数组"><a href="#结构体的字符串数组" class="headerlink" title="结构体的字符串数组"></a>结构体的字符串数组</h1><p>定义时初始化，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">char</span> *name;</span><br><span class="line">      <span class="keyword">char</span> color[<span class="number">8</span>];</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    &#125;Info;</span><br><span class="line">    Info info = &#123;<span class="string">"100"</span>, <span class="string">"200"</span>, <span class="number">300</span>&#125;;</span><br><span class="line">    Info *p_info = &amp;info;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name: %s\r\n"</span>, info.name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"color: %s\r\n"</span>, info.color);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name: %s\r\n"</span>, p_info-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"color: %s\r\n"</span>, p_info-&gt;color);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义之后初始化，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">      <span class="keyword">char</span> *name;</span><br><span class="line">      <span class="keyword">char</span> color[<span class="number">8</span>];</span><br><span class="line">      <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    &#125;Info;</span><br><span class="line">    Info info;</span><br><span class="line">    </span><br><span class="line">    info.name = strdup(<span class="string">"abc"</span>);</span><br><span class="line">    <span class="keyword">char</span> tmp[] = <span class="string">"orange"</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(info.color, tmp);</span><br><span class="line">    Info *p_info = &amp;info;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name: %s\r\n"</span>, info.name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"color: %s\r\n"</span>, info.color);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name: %s\r\n"</span>, p_info-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"color: %s\r\n"</span>, p_info-&gt;color);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，strdup和strcpy的区别参见下面的文章。</p>
+<p><a href="https://www.jb51.net/article/71501.htm" target="_blank" rel="noopener">https://www.jb51.net/article/71501.htm</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struct</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/18/C-05-struct/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ESP32-HW-01-TouchSensor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -825,410 +1228,6 @@
 
 
   
-    <article id="post-ESP32-uPython-02-uPyCraft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">ESP32-uPython-02-uPyCraft</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/12/ESP32-uPython-02-uPyCraft/" class="archive-article-date">
-  	<time datetime="2020-04-11T23:06:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="uPyCraft"><a href="#uPyCraft" class="headerlink" title="uPyCraft"></a>uPyCraft</h1><p>上一篇介绍了通过串口实现python console的方法，但是只适合简单的验证，如果要正式开发则需要一个方便的IDE环境。这里介绍一个建议的开发环境，叫做uPyCraft。</p>
-<p>uPyCraft本身也是由Python开发，然后生成的二进制可执行程序。源码可以参考这里<a href="https://github.com/DFRobot/uPyCraft_src。" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft_src。</a></p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>熊这里可以得到最新版本的程序<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
-<p>由于这个可执行文件本身包含运行所需的所有资源，所以只要下载对应版本的单个可执行文件，然后本地执行即可。</p>
-<p><strong>注意</strong>，想要参考程序自带的example的时候，会发现点击File-Examples并没有任何选项显示。通过查看源代码发现，默认程序会到本机Document下的某位置寻找Examples文件。位置在<code>C:\Users\&lt;USER_NAME&gt;\AppData\Local\uPyCraft</code>。在<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">github</a>上下载并解压examples文件夹到上述位置，即可看到Examples。</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>具体使用方法参见，<a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
-<p><a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">uPyCraft</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-uPython-01-firmware" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/11/ESP32-uPython-01-firmware/">ESP32-uPython-01-firmware</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/11/ESP32-uPython-01-firmware/" class="archive-article-date">
-  	<time datetime="2020-04-11T14:52:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="烧写uPython固件"><a href="#烧写uPython固件" class="headerlink" title="烧写uPython固件"></a>烧写uPython固件</h1><h2 id="下载固件"><a href="#下载固件" class="headerlink" title="下载固件"></a>下载固件</h2><p>首先从下面链接处下载固件，注意选择硬件对应版本（是否包含外置ram）。</p>
-<p><a href="https://micropython.org/download/#esp32" target="_blank" rel="noopener">https://micropython.org/download/#esp32</a></p>
-<h2 id="安装python包"><a href="#安装python包" class="headerlink" title="安装python包"></a>安装python包</h2><p>首先保证系统内已经安装好python3环境，然后安装烧写用的包<code>esptool</code>。</p>
-<p>使用conda安装，<code>conda install -c conda-forge esptool</code>，</p>
-<p>或者使用pip安装，<code>pip install esptool</code>。</p>
-<h2 id="擦除Flash"><a href="#擦除Flash" class="headerlink" title="擦除Flash"></a>擦除Flash</h2><p>为了确保刷入固件成功，首先擦除Flash。</p>
-<p><code>esptool.py --port &lt;COM端口号&gt; erase_flash</code></p>
-<p>注意，命令执行之后需要按一下开发板的EN按键，不然会报错。</p>
-<h2 id="写入固件"><a href="#写入固件" class="headerlink" title="写入固件"></a>写入固件</h2><p><code>esptool.py --chip esp32 --port &lt;COM端口号&gt; write_flash -z  0x1000 &lt;固件路径.bin&gt;</code></p>
-<p>等待写入完成之后，就可以通过串口工具（例如PuTTY）来连接到开发板。这时就可以像本地的python console一样执行命令并返回结果。</p>
-<p>另外，也可以使用WiFi连接来实现Python console，目前还没有尝试。可以参考<a href="http://www.1zlab.com/wiki/micropython-esp32/webrepl/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/webrepl/</a></p>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>可以写一个Hello world，也可以像下面那样点亮一个LED灯。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> machine</span><br><span class="line"></span><br><span class="line">pin2 = machine.Pin(<span class="number">2</span>, machine.Pin.OUT)</span><br><span class="line">pin2.value(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>提示：键入命令时，可以使用TAB键来提示和自动补全。</p>
-<p><strong>快捷键</strong></p>
-<p>在MicroPython的REPL里面有一些控制指令的快捷键。</p>
-<ul>
-<li><code>CTRL + C</code> 中断程序</li>
-<li><code>CTRL + D</code> 软重启</li>
-<li><code>CTRL + E</code> 进入代码片段粘贴模式</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CTRL-A        -- on a blank line, enter raw REPL mode</span><br><span class="line">CTRL-B        -- on a blank line, enter normal REPL mode</span><br><span class="line">CTRL-C        -- interrupt a running program</span><br><span class="line">CTRL-D        -- on a blank line, do a soft reset of the board</span><br><span class="line">CTRL-E        -- on a blank line, enter paste mode</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.1zlab.com/wiki/micropython-esp32/webrepl/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/webrepl/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">uPython</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">firmware</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/11/ESP32-uPython-01-firmware/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-56-pyserial" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/06/Python-56-pyserial/">Python-56-pyserial</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/06/Python-56-pyserial/" class="archive-article-date">
-  	<time datetime="2020-04-06T08:21:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PySerial"><a href="#PySerial" class="headerlink" title="PySerial"></a>PySerial</h1><p>使用pyserial发送连续字符串时，两个<code>&quot;&quot;&quot;</code>括起来的字符串内部换行的话，换行处代表一个字符<code>\n</code>。因此如果想要发送<code>\r\n</code>的话，在换行处前面需要一个<code>\r</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_gps_data</span><span class="params">()</span>:</span></span><br><span class="line">    ser = serial.Serial(<span class="string">'COM8'</span>, <span class="number">9600</span>, timeout=<span class="number">10</span>)</span><br><span class="line">    sample_data = <span class="string">"""$GPGSV,3,2,11,08,16,049,26,10,16,077,25,15,41,219,10,21,08,311,31*7F\r</span></span><br><span class="line"><span class="string">$GPGSV,3,3,11,26,75,177,13,29,40,274,46,30,24,070,23*43\r</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">    print(ser)</span><br><span class="line">    print(sample_data)</span><br><span class="line">    print(sample_data.encode())</span><br><span class="line">    ser.write(sample_data.encode())</span><br><span class="line">    ser.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    send_gps_data()</span><br></pre></td></tr></table></figure>
-
-<p>上面的例子保证<code>\r\n</code>被发送。</p>
-<h2 id="非阻塞的串口读写"><a href="#非阻塞的串口读写" class="headerlink" title="非阻塞的串口读写"></a>非阻塞的串口读写</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*-coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SerialPort</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, port, buand)</span>:</span></span><br><span class="line">        self.port = serial.Serial(port, buand)</span><br><span class="line">        self.port.close()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.port.isOpen():</span><br><span class="line">            self.port.open()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">port_open</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.port.isOpen():</span><br><span class="line">            self.port.open()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">port_close</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.port.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_data</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.port.write(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read_data</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">global</span> is_exit</span><br><span class="line">        <span class="keyword">global</span> data_bytes</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> is_exit:</span><br><span class="line">            count = self.port.inWaiting()</span><br><span class="line">            <span class="keyword">if</span> count &gt; <span class="number">0</span>:</span><br><span class="line">                rec_str = self.port.read(count)</span><br><span class="line">                data_bytes=data_bytes+rec_str</span><br><span class="line">                <span class="comment">#print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))</span></span><br><span class="line">                <span class="comment">#print(str(datetime.now()),':',binascii.b2a_hex(rec_str))</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">serialPort = <span class="string">'COM6'</span>  <span class="comment"># 串口</span></span><br><span class="line">baudRate = <span class="number">115200</span>  <span class="comment"># 波特率</span></span><br><span class="line">is_exit=<span class="literal">False</span></span><br><span class="line">data_bytes=bytearray()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment">#打开串口</span></span><br><span class="line">    mSerial = SerialPort(serialPort, baudRate)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#文件写入操作</span></span><br><span class="line">    filename=input(<span class="string">'请输入文件名：比如test.csv:'</span>)</span><br><span class="line">    dt=datetime.now()</span><br><span class="line">    nowtime_str=dt.strftime(<span class="string">'%y-%m-%d %I-%M-%S'</span>)  <span class="comment">#时间</span></span><br><span class="line">    filename=nowtime_str+<span class="string">'_'</span>+filename</span><br><span class="line">    out=open(filename,<span class="string">'a+'</span>)</span><br><span class="line">    csv_writer=csv.writer(out)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始数据读取线程</span></span><br><span class="line">    t1 = threading.Thread(target=mSerial.read_data)</span><br><span class="line">    t1.setDaemon(<span class="literal">True</span>)</span><br><span class="line">    t1.start()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> is_exit:</span><br><span class="line">        <span class="comment">#主线程:对读取的串口数据进行处理</span></span><br><span class="line">        data_len=len(data_bytes)</span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;data_len<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span>(data_bytes[i]==<span class="number">0xFF</span> <span class="keyword">and</span> data_bytes[i+<span class="number">1</span>]==<span class="number">0x5A</span>):</span><br><span class="line">                frame_code=data_bytes[i+<span class="number">2</span>]</span><br><span class="line">                frame_len=struct.unpack(<span class="string">'&lt;H'</span>,data_bytes[i+<span class="number">4</span>:i+<span class="number">6</span>])[<span class="number">0</span>]</span><br><span class="line">                frame_time=struct.unpack(<span class="string">'&lt;I'</span>,data_bytes[i+<span class="number">6</span>:i+<span class="number">10</span>])[<span class="number">0</span>]</span><br><span class="line">                print(<span class="string">'帧类型：'</span>,frame_code,<span class="string">'帧长度：'</span>,frame_len,<span class="string">'时间戳：'</span>,frame_time)</span><br><span class="line">                <span class="comment">#print(frame_code,frame_len,frame_time)</span></span><br><span class="line">                <span class="keyword">if</span> frame_code==<span class="number">0x03</span>:   <span class="comment">#判断帧类型</span></span><br><span class="line">                    <span class="comment">#struct 解析数据帧</span></span><br><span class="line">                    accelerated_x,accelerated_y,accelerated_z,angular_x,angular_y,angular_z,tem,speed_x,speed_y,speed_z,\</span><br><span class="line">                    angular_v_x,angular_v_y,angular_v_z=struct.unpack(<span class="string">'&lt;fffffffffffff'</span>,data_bytes[i+<span class="number">12</span>:i+<span class="number">12</span>+frame_len<span class="number">-6</span>])</span><br><span class="line">                    dt=datetime.now()</span><br><span class="line">                    nowtime_str=dt.strftime(<span class="string">'%y-%m-%d %I:%M:%S'</span>)  <span class="comment">#时间</span></span><br><span class="line">                    loc_str=[nowtime_str,frame_time,accelerated_x,accelerated_y,accelerated_z,angular_x,angular_y,angular_z,tem,speed_x,speed_y,speed_z,\</span><br><span class="line">                    angular_v_x,angular_v_y,angular_v_z]</span><br><span class="line"></span><br><span class="line">                    <span class="comment">#写入csv文件</span></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                       csv_writer.writerow(loc_str)</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                       <span class="keyword">raise</span> e       </span><br><span class="line">                i=i+<span class="number">6</span>+frame_len+<span class="number">3</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                i=i+<span class="number">1</span></span><br><span class="line">        data_bytes[<span class="number">0</span>:i]=<span class="string">b''</span></span><br></pre></td></tr></table></figure>
-
-<p>通过一个专门用于接收的线程，来实现接收和发送的非阻塞。</p>
-<p>参考，<a href="https://www.cnblogs.com/mangojun/p/10558069.html" target="_blank" rel="noopener">python 下串口数据的读取，解析，和保存-</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">pyserial</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/06/Python-56-pyserial/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux-05-nohup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/16/Linux-05-nohup/">Linux-05-nohup</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/16/Linux-05-nohup/" class="archive-article-date">
-  	<time datetime="2020-03-16T12:29:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="nohup进程守护"><a href="#nohup进程守护" class="headerlink" title="nohup进程守护"></a>nohup进程守护</h1><p>关闭SSH远程连接之后，在该连接下运行的程序也会跟着结束。为了维持程序继续运行，可以使用nohup命令来守护该进程，保证在SSH连接结束之后仍能正常运行。</p>
-<p>最常见的用法如下，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test.py &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>其中 &gt; /dev/null 2&gt;&amp;1表示没有输出。</p>
-<p>而如果想要输出到log文件，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test.py  &gt; log.txt</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://applingo.tokyo/article/1159" target="_blank" rel="noopener">https://applingo.tokyo/article/1159</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/16/Linux-05-nohup/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1243,7 +1242,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 wzx
+    		&copy; 2021 wzx
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -2752,6 +2751,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Voltage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">v4l2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">make</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">makefile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Build Kernel</a>
               </li>
             
             <div class="clearfix"></div>
