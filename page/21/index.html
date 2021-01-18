@@ -156,6 +156,571 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-06-Package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/Java-06-Package/">Java-06-Package</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/Java-06-Package/" class="archive-article-date">
+  	<time datetime="2018-03-15T14:43:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="打包-package-类"><a href="#打包-package-类" class="headerlink" title="打包(package)类"></a>打包(package)类</h1><p>Java程序是由每个类互相调用实现功能的，当类数量较多时，怎样合理管理这些类是一个问题。</p>
+<p>Java中类拥有自己专属的名称，为了保持调用的准确性，每个命名空间中类的命名必须具有唯一性。<br>但是当项目较大时，很难保证class的名字不重复。因此引入package的概念来定义命名空间，避免导入时带来的冲突。</p>
+<p>class在package提供的命名空间内不可重复，但是在其外面可以重复。</p>
+<h2 id="定义包"><a href="#定义包" class="headerlink" title="定义包"></a>定义包</h2><p>定义包使用package关键字，其后跟着包的名称，最后需要分号来结尾。包<br>的名称约定用分层的方式定义，即，<br>package orgType.orgName.appName.compoName;</p>
+<p>这个包定义可分解为不同的部分：</p>
+<ul>
+<li>orgType 是组织类型，比如 com、org 或 net。</li>
+<li>orgName 是组织的域名称，比如 makotojava、oracle 或 ibm。</li>
+<li>appName 是应用程序的缩写名称。</li>
+<li>compoName 是组件的名称。</li>
+</ul>
+<h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>导入包使用import关键字，后面跟着要导入的包名，也是以分号结尾。对应于包的定义方式，包的导入也是分层实现，<br>直到能精确定位到类。</p>
+<p>import com.makotojava.Abc;</p>
+<p>导入所有的类时，可以<code>import com.makotojava.*;</code><br>但是并不推荐这样书写，会降低代码的可读性。</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Java 语言基础<br><a href="https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-introtojava1/index.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Package</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/Java-06-Package/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-05-StringChar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/14/Java-05-StringChar/">Java-05-StringChar</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/14/Java-05-StringChar/" class="archive-article-date">
+  	<time datetime="2018-03-14T12:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据类型之字符串和字符</p>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
+<li>字符串用双引号括起来表示</li>
+<li>字符串内要显示”等特殊符号时，需要用反斜杠实现转义(escape)</li>
+</ul>
+<p>注意，使用<code>System.out.print()</code>函数输出字符串时，可以把字符串和数字相加，被加到数字也会变成字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>sum of 111</code></p>
+<p>字符串/String/文字列</p>
+<h1 id="Char"><a href="#Char" class="headerlink" title="Char"></a>Char</h1><ul>
+<li>字符用单引号括起来表示</li>
+<li>只能包含一个字符，转义符(反斜杠)也可以包含进去</li>
+</ul>
+<p>字符串的本质就是integer，具体数值可以查询ASII表。所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">'a'</span> + <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>100</code></p>
+<p>如果不想数字变成字符串，而是以计算结果表示，则应给数字部分加上括号，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"sum of "</span> + (<span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>输出，<code>sum of 3</code></p>
+<p>字符/Char/文字</p>
+<h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><p>无论是String还是Char都可以使用标准输出函数System.out.print()或者System.out.println()来输出。二者不同的是，带ln的输出时末尾自动换行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Char</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/14/Java-05-StringChar/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-Eclipse-04-TabSpaces" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">Java-Eclipse-03-CheckStyle</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Java-Eclipse-04-TabSpaces/" class="archive-article-date">
+  	<time datetime="2018-03-13T13:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新版Eclipse默认Tab不转换为Spaces，为了各编辑器统一起见，推荐替换Tab为4个spaces。</p>
+<h1 id="设置方法"><a href="#设置方法" class="headerlink" title="设置方法"></a>设置方法</h1><p>需要修改两个部分，公共设置和Java语言部分</p>
+<h2 id="公共部分"><a href="#公共部分" class="headerlink" title="公共部分"></a>公共部分</h2><p>Preference–&gt;General-&gt;Editors–&gt;Text Editors，勾上Insert spaces for tabs。</p>
+<h2 id="Java语言设置"><a href="#Java语言设置" class="headerlink" title="Java语言设置"></a>Java语言设置</h2><p>Java–&gt;Code Style–&gt;Formatter–&gt;New 新建一份文件，将Indentation 中的 Tab policy改为Spaces only。</p>
+<p>以后如果添加了其他语言，同样需要在各语言下修改此设置。</p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p>使用eclipse中Tab格式兼容问题</p>
+<p><a href="http://blog.csdn.net/backend_research/article/details/53332454" target="_blank" rel="noopener">http://blog.csdn.net/backend_research/article/details/53332454</a></p>
+<h1 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h1><p>包括自动添加类的注释之类的方便功能。。。</p>
+<p><a href="http://blog.csdn.net/hotdust/article/details/52205867" target="_blank" rel="noopener">http://blog.csdn.net/hotdust/article/details/52205867</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Tab</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spaces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Java-Eclipse-04-TabSpaces/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-07-ClassCompile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Java-07-ClassCompile/">Java-07-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Java-07-ClassCompile/" class="archive-article-date">
+  	<time datetime="2018-03-13T11:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Java中类的编译 </p>
+<h2 id="多个类并列存在"><a href="#多个类并列存在" class="headerlink" title="多个类并列存在"></a>多个类并列存在</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Command line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br></pre></td></tr></table></figure>
+
+<p>编译得到A.class B.class 和 C.class三个字节码文件。</p>
+<h2 id="内部类-nested-class"><a href="#内部类-nested-class" class="headerlink" title="内部类 nested class"></a>内部类 nested class</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// </span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后会生成两个.class文件：A.class和A$B.class</p>
+<h2 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h2><p>编译后也是生成两个.class文件：A.class和A$1.class</p>
+<p>(还没学习到)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>一个.java源文件中可以有多个类吗？（内部类除外）有什么条件？</p>
+<p><a href="http://blog.csdn.net/wikijava/article/details/4064688" target="_blank" rel="noopener">http://blog.csdn.net/wikijava/article/details/4064688</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Compile</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Java-07-ClassCompile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-04-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Java-04-Class/">Java-04-Class</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Java-04-Class/" class="archive-article-date">
+  	<time datetime="2018-03-13T11:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Java中的类 </p>
+<p>还是从最经典的例子开始，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为HelloWorld的类。</p>
+<p>针对java文件中只能有一个public类的问题，网上有人这么回答：</p>
+<blockquote>
+<p>每个编译单元(文件)只能有一个public类。这么做的意思是，每个编 </p>
+<p>译单元只能有一个公开的接口，而这个接口就由其public类来表示。</p>
+<p>我想这或是从软件架构设计和安全性设计上得出的结论。或者说是java的设计者们从这方面的考虑。或许这真的是一个规范，但我没有找到相关资料</p>
+<p>不晓得到底有没有这一说话。如果有请知道的同行给出资料来源？</p>
+</blockquote>
+<p><a href="http://topic.csdn.net/t/20060528/22/4784755.html" target="_blank" rel="noopener">http://topic.csdn.net/t/20060528/22/4784755.html</a></p>
+<h2 id="java包含public类时"><a href="#java包含public类时" class="headerlink" title=".java包含public类时"></a>.java包含public类时</h2><p>另外，需要注意的是，包含public类的java源文件必须以public类的名字来命名。</p>
+<p>上面的HelloWorld的例子中，如果把java文件名换成其他，则编译器会报错。</p>
+<p><code>名为xxx的公开类必须在名为xxx.java的文件中声明。</code></p>
+<p>而且，一个java文件中最多只能包含一个public类。</p>
+<p>作为Java的一种设计思想，使public类名和java文件名统一，便于从其他类中调用。</p>
+<h2 id="java不包含public类时"><a href="#java不包含public类时" class="headerlink" title=".java不包含public类时"></a>.java不包含public类时</h2><p>java源文件中可以不包含public类，这时java文件名可以不和其中的任一类名一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*C3.java*/</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C2</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Command line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; javac C3.java</span><br><span class="line">&gt;&gt;&gt; java C2</span><br></pre></td></tr></table></figure>
+
+<p>这时，正常输出Hello World.</p>
+<p>反而是运行java C3会报错，因为没有定义C3类，提示找不到该类。</p>
+<p>从上亦可以，main函数不一定非得包含在public类中也可以运行。</p>
+<p>《深入jvm第二版》中有这样一句话：</p>
+<blockquote>
+<p>Java虚拟机实例通过调用某个类的main()来运行一个Java程序，而这个main()必须是public static void 并接收一个字符串数组作为参数，任何拥有这样一个main()的类都可以作为Java程序的起点。</p>
+</blockquote>
+<p>并没有说拥有main()方法的类一定要是public类。</p>
+<p>参考：</p>
+<p>浅谈为什么一个java源文件中只能有一个public类？</p>
+<p><a href="http://blog.csdn.net/bareheadzzq/article/details/6562211" target="_blank" rel="noopener">http://blog.csdn.net/bareheadzzq/article/details/6562211</a></p>
+<h1 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h1><p>main函数中，<br>public定义了函数的访问权限，表示在任何场合都可以被引用，这样JVM就可以找到main方法从而运行javac程序。</p>
+<p>static表示此方法是静态的，是类的方法。可以使用<code>类名.方法名</code>的方式调用。<br>不需要初始化得到实例，再调用实例的方法。</p>
+<p>void和C语言中的规定相同，表示函数没有返回值。</p>
+<p>String[] args表示参数args是一个字符串数组，用于给main函数传递参数。<br>例如，命令行下运行java ClassName xyz abc<br>在main函数体内就可以使用args字符串数组了。<br>args[0]表示第一个元素，即xyz</p>
+<p>String[] args和String args[]运行结果一样，但是应使用前者来避免阅读代码的人的歧义和误读（此处还需深入理解）</p>
+<p>参考：</p>
+<p>在java中public void与public static void有什么区别 ?<br><a href="https://www.zhihu.com/question/39965419" target="_blank" rel="noopener">https://www.zhihu.com/question/39965419</a></p>
+<h2 id="print-println"><a href="#print-println" class="headerlink" title="print/println"></a>print/println</h2><p>此外Java还提供了print函数，和println函数的区别是，println默认在输出的最后加上了换行。</p>
+<p>无论是print还是println，参数内都可以传入运算表达式或者变量。如，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.print(<span class="number">1</span>+<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line">System.out.println(str);</span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/java/java-tutorial.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Java-04-Class/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-03-name" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -674,617 +1239,9 @@
 
 
   
-    <article id="post-Python-31-MultiProcessApply" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-31-MultiProcessApply/">Python-31-MultiProcessApply</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-31-MultiProcessApply/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:54:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Python synchronous &amp; asynchronous</p>
-<p>Python的多进程实现中，会用到Pool开启一个进程池。当要启动进程池中的进程时，有两种方法：一是apply()，另一个是apply_async()。最直观的理解就是，apply是阻塞的，而apply_sync是非阻塞的。</p>
-<h1 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h1><p>阻塞，意味着子进程按照顺序依次执行，前一个进程未结束时，后一个进程并不会执行。</p>
-<p>父进程会等待所有子进程执行完毕再执行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>执行结果为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Parent process 6248 start</span><br><span class="line">Child process 0(7432) start</span><br><span class="line">Task 0 runs 1.50 seconds</span><br><span class="line">Child process 1(6476) start</span><br><span class="line">Task 1 runs 2.38 seconds</span><br><span class="line">Child process 2(7064) start</span><br><span class="line">Task 2 runs 2.14 seconds</span><br><span class="line">Child process 3(3820) start</span><br><span class="line">Task 3 runs 0.75 seconds</span><br><span class="line">Child process 4(7432) start</span><br><span class="line">Task 4 runs 2.97 seconds</span><br><span class="line">Wait for all task done</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 10.12 seconds</span><br></pre></td></tr></table></figure>
-
-<p>这等价于按顺序新建5个进程，再依次执行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    p = multiprocessing.Process(target=task, args=(i,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure>
-
-<p><code>join()</code>方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。</p>
-<h1 id="apply-sync"><a href="#apply-sync" class="headerlink" title="apply_sync"></a>apply_sync</h1><p>非阻塞，意味着一定数目的子进程同时开始运行。</p>
-<p>按照顺序依次执行，前一个进程未结束时，后一个进程并不会执行。</p>
-<h2 id="等待子进程结束join"><a href="#等待子进程结束join" class="headerlink" title="等待子进程结束join()"></a>等待子进程结束join()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    <span class="comment"># 此处父进程等待Pool中所有子进程结束</span></span><br><span class="line">    p.join()</span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>Pool对象调用join函数等待所有子进程执行完毕再继续下面的代码。</p>
-<p>得到的输出为，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Parent process 4332 start</span><br><span class="line">Wait for all task done</span><br><span class="line">Child process 0(3000) start</span><br><span class="line">Child process 1(1728) start</span><br><span class="line">Child process 2(4568) start</span><br><span class="line">Child process 3(9368) start</span><br><span class="line">Task 3 runs 0.06 seconds</span><br><span class="line">Child process 4(9368) start</span><br><span class="line">Task 1 runs 2.41 seconds</span><br><span class="line">Task 2 runs 2.59 seconds</span><br><span class="line">Task 0 runs 2.80 seconds</span><br><span class="line">Task 4 runs 2.90 seconds</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 3.48 seconds</span><br></pre></td></tr></table></figure>
-
-<h2 id="不等待子进程结束"><a href="#不等待子进程结束" class="headerlink" title="不等待子进程结束"></a>不等待子进程结束</h2><p>如果不需要等待子进程，父进程会很快执行完毕。如下，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Child process %s(%s) start'</span> % (name, os.getpid()))</span><br><span class="line">    child_start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    child_end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds'</span> % (name, child_end - child_start))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s start'</span> % os.getpid())</span><br><span class="line">    parent_start = time.time()</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(task, args=(i,))</span><br><span class="line">    print(<span class="string">'Wait for all task done'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    <span class="comment"># p.join()</span></span><br><span class="line">    parent_end = time.time()</span><br><span class="line">    print(<span class="string">'All tasks done'</span>)</span><br><span class="line">    print(<span class="string">'main task runs %0.2f seconds'</span> % (parent_end - parent_start))</span><br></pre></td></tr></table></figure>
-
-<p>把join注释掉之后，开启进程池之后，父进程继续向下执行，直到结束都还没来得及切换到子进程。</p>
-<p>结果如下，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process 7868 start</span><br><span class="line">Wait for all task done</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 0.10 seconds</span><br></pre></td></tr></table></figure>
-
-<p>如果让父进程再等待一段时间，比如加上sleep，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">p.close()</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">parent_end = time.time()</span><br><span class="line">print(<span class="string">'All tasks done'</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Parent process 10180 start</span><br><span class="line">Wait for all task done</span><br><span class="line">Child process 0(9860) start</span><br><span class="line">Child process 1(9168) start</span><br><span class="line">Child process 2(7608) start</span><br><span class="line">Child process 3(8148) start</span><br><span class="line">Task 2 runs 0.81 seconds</span><br><span class="line">Child process 4(7608) start</span><br><span class="line">Task 4 runs 0.01 seconds</span><br><span class="line">Task 1 runs 1.49 seconds</span><br><span class="line">All tasks done</span><br><span class="line">main task runs 2.19 seconds</span><br></pre></td></tr></table></figure>
-
-<p>可知，Task 3还没来得及执行，父进程就结束了，整个程序也退出了。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>多进程</p>
-<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431927781401bb47ccf187b24c3b955157bb12c5882d000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431927781401bb47ccf187b24c3b955157bb12c5882d000</a></p>
-<p>python多进程apply与apply_async的区别</p>
-<p><a href="https://www.jianshu.com/p/0a55507f9d9e?open_source=weibo_search" target="_blank" rel="noopener">https://www.jianshu.com/p/0a55507f9d9e?open_source=weibo_search</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apply</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multiprocess</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">apply_async</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-31-MultiProcessApply/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataSerializationFormat-XML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/DataSerializationFormat-XML/">DataSerializationFormat-XML</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/DataSerializationFormat-XML/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>html xhtml xml比较</p>
-<ul>
-<li>html(Hyper Text Markup Language)</li>
-<li>xhtml(eXtensible Hyper Text Markup Language)</li>
-<li>xml(eXtensible Markup Language)</li>
-</ul>
-<p>这三种标记语言都是SGML(Standard Generalized Markup Language)的子集，诞生时间和语法规范有不同。总体来讲，时间上是html-&gt;xhtml-&gt;xml的顺序，语法规范的严格度上讲，xml&gt;xhtml&gt;html。</p>
-<p>下面重点讲解xml和html的区别。</p>
-<h1 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h1><p>eXtensible Markup Language按字面理解：</p>
-<ol>
-<li>可扩展。可以用作任何的场合：配置文件，UI描述文件等。</li>
-<li>是一种标记语言。用来组织文本数据，结构清晰易读。</li>
-</ol>
-<p>应用之一，代替.ini文件写配置文件。方便直观，容易被程序解析（正反序列化）。</p>
-<p><code>既然有了XML那为什么还用JSON呢？</code></p>
-<p>xml功能强大，语法严谨。但是，标记数据时产生很多冗余，这些冗余在网络上进行数据时，浪费大量网络资源。反过来讲，正是这些荣誉信息的存在，xml才更加对人友好。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; ?<span class="attr">xml</span> <span class="attr">version</span>=<span class="string">"1.0"</span> <span class="attr">encoding</span>=<span class="string">"UTF-8"</span>? &gt;</span></span><br><span class="line"><span class="tag">&lt; ?<span class="attr">xml-stylesheet</span> <span class="attr">href</span>=<span class="string">"style.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>? &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">student1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>Tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">student2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>John<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">math</span>&gt;</span>95<span class="tag">&lt;/<span class="name">math</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">biology</span>&gt;</span>93<span class="tag">&lt;/<span class="name">biology</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">student2</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>一个标准的xml文件包含以下部分：</p>
-<h3 id="xml文件宣言"><a href="#xml文件宣言" class="headerlink" title="xml文件宣言"></a>xml文件宣言</h3><blockquote>
-<p>&lt; ?xml version=”1.0” encoding=”UTF-8”? &gt;</p>
-</blockquote>
-<p>说明这是一个xml文件，以及版本号编码方式。</p>
-<h3 id="样式设定"><a href="#样式设定" class="headerlink" title="样式设定"></a>样式设定</h3><blockquote>
-<p>&lt; ?xml-stylesheet href=”style.css” type=”text/css”? &gt;</p>
-</blockquote>
-<p>用来标示xml的格式化显示的设定。如果要使用xsl样式，需要这样写：</p>
-<blockquote>
-<p>&lt; ? xml-stylesheet href=”style.xsl” type=”text/xsl” ? &gt;</p>
-</blockquote>
-<h3 id="元素和属性"><a href="#元素和属性" class="headerlink" title="元素和属性"></a>元素和属性</h3><blockquote>
-<student1>
-  <name>Tom</name>
-  <math>95</math>
-  <biology>93</biology>
-</student1>
-</blockquote>
-<p>&lt;**&gt;称为标签(tags)，可以包含元素(element)和属性(attributes)两部分。</p>
-<p>起始标签：<code>&lt;元素名 属性=&quot;属性值&quot;&gt;</code>注意要有引号！</p>
-<p>结束标签：<code>&lt;/元素名&gt;</code></p>
-<p>上例中的最高层元素student1称为根元素(root element)</p>
-<h1 id="和html的区别"><a href="#和html的区别" class="headerlink" title="和html的区别"></a>和html的区别</h1><ol>
-<li>xml标签区分大小写，html不区分。</li>
-<li>xml要求起始标签和结束标签必须成对存在，html有时候缺少结束标签也可以解析。</li>
-<li>xml空元素需要在右侧尖括号前加上斜杠(如&lt;example/&gt;)。html中的&lt;br&gt;&lt;img&gt;这类标签自成一个单元，在xml中成为空元素。</li>
-<li>xml把空白当成内容的一部分。html则会过滤掉大部分空白。</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>XML入門</p>
-<p><a href="http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/" target="_blank" rel="noopener">http://yes.nctu.edu.tw/Lecture/NewTech/C05_NewEra/XML/IntroXML/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Serialization</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Data//" class="article-tag-list-link color5">Data</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/DataSerializationFormat-XML/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-FileClose" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-00-FileClose/">Python-00-FileClose</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-00-FileClose/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇文章主要测试一下文档的close方法。</p>
-<h1 id="close方法的必要性"><a href="#close方法的必要性" class="headerlink" title="close方法的必要性"></a>close方法的必要性</h1><ol>
-<li>操作系统的每个进程能打开的文件数目是有限的，当超过规定上限时会发生错误。</li>
-<li>另外，调用close方法才能把缓存中的数据同步到磁盘。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line"><span class="comment"># 没有下面的关闭过程的话 调用remove会报错</span></span><br><span class="line"><span class="comment"># f.close()</span></span><br><span class="line"></span><br><span class="line">os.remove(<span class="string">'test.txt'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>还有，在一个open过程中不能既写又读。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line"><span class="comment"># 此处错误</span></span><br><span class="line">print(f.read())</span><br><span class="line"></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<p>这样会抛出错误：<code>UnsupportedOperation: not readable</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写过程</span></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">f.write(<span class="string">'open test'</span>)</span><br><span class="line">f.close()</span><br><span class="line"><span class="comment"># 读过程</span></span><br><span class="line">f = open(<span class="string">'test.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">print(f.read())</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<p>读写分时就没有问题了。</p>
-<h1 id="with"><a href="#with" class="headerlink" title="with"></a>with</h1><p>如果想书写更加方便，可以使用with方法省去写close过程。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要close()</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">'open test'</span>)</span><br><span class="line"></span><br><span class="line">os.remove(<span class="string">'test.txt'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这样remove就不会报错。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">file</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">close</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-00-FileClose/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-04-dict-get" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-04-dict-get/">Python-04-dict-get</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-04-dict-get/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里记录一下，dict获取键值的两种方法，dict[‘key’]和dict.get(‘key’)</p>
-<h1 id="dict-‘key’"><a href="#dict-‘key’" class="headerlink" title="dict[‘key’]"></a>dict[‘key’]</h1><p>有key键存在时，返回键的值；</p>
-<p>key键不存在时，返回KeyError</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># KeyError</span></span><br><span class="line">dataDict[<span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
-
-<h1 id="dict-get-‘key’"><a href="#dict-get-‘key’" class="headerlink" title="dict.get(‘key’)"></a>dict.get(‘key’)</h1><p>有key键存在时，返回键的值；</p>
-<p>key键不存在时，返回None(默认)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataDict = &#123;<span class="string">'a'</span>: <span class="number">23</span>, <span class="string">'b'</span>:<span class="number">89</span>&#125;</span><br><span class="line"><span class="comment"># 返回23</span></span><br><span class="line">dataDict.get(<span class="string">'a'</span>)</span><br><span class="line"><span class="comment"># 返回None</span></span><br><span class="line">dataDict.get(<span class="string">'c'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>完整用法为，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict.get(key, default=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>key – 字典中要查找的键。</li>
-<li>default – 如果指定键的值不存在时，返回该默认值。</li>
-</ul>
-<p>故可以通过dict.get()方法检验键是否存在，而且不会抛出Error。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">get</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-04-dict-get/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-00-csv2DictList" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/Python-00-csv2DictList/">Python-00-csv2DictList</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/Python-00-csv2DictList/" class="archive-article-date">
-  	<time datetime="2018-03-10T03:25:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇主要是关于csv文件和dict/list类型数据的互相转换。</p>
-<p>涉及到了以下常用的5种场景：</p>
-<ol>
-<li>将一个二重列表[[],[]]写入到csv文件中</li>
-<li>从csv文件中读取返回为列表</li>
-<li>将一字典写入到csv文件中</li>
-<li>从csv文件中读取一个字典</li>
-<li>从csv文件中读取一个计数字典(统计各key出现的次数)</li>
-<li>嵌套多个字典的列表写到csv中</li>
-</ol>
-<h1 id="list-2-csv"><a href="#list-2-csv" class="headerlink" title="list 2 csv"></a>list 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一个二重列表写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createListCSV</span><span class="params">(fileName=<span class="string">""</span>, dataList=[])</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> dataList:</span><br><span class="line">            csvWriter.writerow(data)</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-2-list"><a href="#csv-2-list" class="headerlink" title="csv 2 list"></a>csv 2 list</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从文本文件中读取返回为列表的形式</span></span><br><span class="line"><span class="comment"># 输入：文件名称，分隔符（默认,）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readListCSV</span><span class="params">(fileName=<span class="string">""</span>, splitsymbol=<span class="string">","</span>)</span>:</span></span><br><span class="line">    dataList = []</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataList.append(tmpList)</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataList</span><br></pre></td></tr></table></figure>
-
-<h1 id="dict-2-csv"><a href="#dict-2-csv" class="headerlink" title="dict 2 csv"></a>dict 2 csv</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：将一字典写入到csv文件中</span></span><br><span class="line"><span class="comment"># 输入：文件名称，数据字典</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDictCSV</span><span class="params">(fileName=<span class="string">""</span>, dataDict=&#123;&#125;)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        csvWriter = csv.writer(csvFile)</span><br><span class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> dataDict.iteritems():</span><br><span class="line">            csvWriter.writerow([k,v])</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-2-dict"><a href="#csv-2-dict" class="headerlink" title="csv 2 dict"></a>csv 2 dict</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex,valueIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>, valueIndex=<span class="number">1</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            dataDict[tmpList[keyIndex]] = tmpList[valueIndex]</span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
-
-<h1 id="csv-get-key-num"><a href="#csv-get-key-num" class="headerlink" title="csv get key num."></a>csv get key num.</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 功能：从csv文件中读取一个计数字典</span></span><br><span class="line"><span class="comment"># 输入：文件名称，keyIndex</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readDictCSV</span><span class="params">(fileName=<span class="string">""</span>, keyIndex=<span class="number">0</span>)</span>:</span></span><br><span class="line">    dataDict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(fileName, <span class="string">"r"</span>) <span class="keyword">as</span> csvFile:</span><br><span class="line">        dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">while</span> dataLine != <span class="string">""</span>:</span><br><span class="line">            tmpList = dataLine.split(splitsymbol)</span><br><span class="line">            <span class="keyword">if</span> dataDict.get(tmpList[keyIndex]) == <span class="literal">None</span>:</span><br><span class="line">                dataDict[tmpList[keyIndex]] = <span class="number">0</span></span><br><span class="line">            dataDict[tmpList[keyIndex]] = dataDict.get(tmpList[keyIndex]) + <span class="number">1</span></span><br><span class="line">            dataLine = csvFile.readline().strip(<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> dataDict</span><br></pre></td></tr></table></figure>
-
-<h1 id="nested-list-2-csv"><a href="#nested-list-2-csv" class="headerlink" title="nested list 2 csv"></a>nested list 2 csv</h1><p>嵌套多个字典的列表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">my_list = [&#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Bordeaux'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'Tunisia'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Khazri'</span>, <span class="string">'players.player_id'</span>: <span class="string">'989'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Wahbi'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'08/02/1991'</span>, <span class="string">'players.team'</span>: <span class="string">'Sunderland'</span>&#125;,</span><br><span class="line">           &#123;<span class="string">'players.vis_name'</span>: <span class="string">'Lewis Baker'</span>, <span class="string">'players.role'</span>: <span class="string">'Midfielder'</span>, <span class="string">'players.country'</span>: <span class="string">'England'</span>,</span><br><span class="line">            <span class="string">'players.last_name'</span>: <span class="string">'Baker'</span>, <span class="string">'players.player_id'</span>: <span class="string">'9574'</span>, <span class="string">'players.first_name'</span>: <span class="string">'Lewis'</span>,</span><br><span class="line">            <span class="string">'players.date_of_birth'</span>: <span class="string">'25/04/1995'</span>, <span class="string">'players.team'</span>: <span class="string">'Vitesse'</span>&#125;</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure>
-
-<p>转 csv的代码，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># write nested list of dict to csv</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nestedlist2csv</span><span class="params">(list, out_file)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(out_file, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        w = csv.writer(f)</span><br><span class="line">        fieldnames=list[<span class="number">0</span>].keys()  <span class="comment"># solve the problem to automatically write the header</span></span><br><span class="line">        w.writerow(fieldnames)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> list:</span><br><span class="line">            w.writerow(row.values())</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="输出csv中包含空白行的问题"><a href="#输出csv中包含空白行的问题" class="headerlink" title="输出csv中包含空白行的问题"></a>输出csv中包含空白行的问题</h1><p>问题在于这一句：open(fileName, “w”)</p>
-<p>在后面加入参数<code>newline=&#39;&#39;</code>即可解决。</p>
-<p>得到：open(fileName, “w”, newline=’’)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>python列表、字典与csv</p>
-<p><a href="https://www.cnblogs.com/moye13/p/5291156.html" target="_blank" rel="noopener">https://www.cnblogs.com/moye13/p/5291156.html</a></p>
-<p>pythonでcsvファイルを整形したいが、一行間隔で空行を出力してしまいハマった話</p>
-<p><a href="http://helloworldryo.hatenablog.com/entry/2014/05/07/031628" target="_blank" rel="noopener">http://helloworldryo.hatenablog.com/entry/2014/05/07/031628</a></p>
-<p>csv文件与字典，列表等之间的转换小结【Python】</p>
-<p><a href="https://segmentfault.com/a/1190000007092479" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007092479</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/Python-00-csv2DictList/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/20/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/22/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2825,6 +2782,30 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Build Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pandas</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">columns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">filter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">layout</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">pyinstaller</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">exe</a>
               </li>
             
             <div class="clearfix"></div>
