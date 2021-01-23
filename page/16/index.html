@@ -156,6 +156,485 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TensorFlow-12-variable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/TensorFlow-12-variable/">TensorFlow-12-variable</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/20/TensorFlow-12-variable/" class="archive-article-date">
+  	<time datetime="2018-05-20T10:08:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="variable-in-tensorflow"><a href="#variable-in-tensorflow" class="headerlink" title="variable in tensorflow"></a>variable in tensorflow</h1><p>变量是一种特殊的张量的存在，用于暂存运算的状态。变量在TF中要<strong>显式地</strong>定义才能正确地当作变量而不是普通的张量来处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># basic</span></span><br><span class="line">state = tf.Variable(<span class="number">0</span>, name=<span class="string">'state'</span>)</span><br><span class="line"><span class="comment"># print(state.name)</span></span><br><span class="line">one = tf.constant(<span class="number">1</span>, name=<span class="string">'one_con'</span>)</span><br><span class="line"><span class="comment"># update = tf.assign_add(state, one, name='assign_add')</span></span><br><span class="line">new_value = tf.add(state, one, name=<span class="string">'new_val'</span>)</span><br><span class="line">update = tf.assign(state, new_value, name=<span class="string">'assign'</span>)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># show in Tensorboard</span></span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">"./graphs"</span>, sess.graph)</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        print(sess.run(update))</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>可视化效果如下：</p>
+<p><img src="TensorFlow-12-variable%5Cvariable.png" alt=""></p>
+<h1 id="tf-assign-amp-tf-assign-add"><a href="#tf-assign-amp-tf-assign-add" class="headerlink" title="tf.assign &amp; tf.assign_add"></a>tf.assign &amp; tf.assign_add</h1><p>tf.assign用于给Variable赋值，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tf.assign(</span><br><span class="line">    ref,</span><br><span class="line">    value,</span><br><span class="line">    validate_shape=<span class="literal">None</span>,</span><br><span class="line">    use_locking=<span class="literal">None</span>,</span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>tf.assign_add可以对已存在的Variable做加法运算，此运算也可以直接使用<code>+</code>实现，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line"></span><br><span class="line">    a = w + <span class="number">1.0</span></span><br><span class="line">    print(<span class="string">'a:'</span>, sess.run(a))</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">a: [[ 1.  2.  3.  4.]</span><br><span class="line"> [ 5.  6.  7.  8.]</span><br><span class="line"> [ 9. 10. 11. 12.]]</span><br></pre></td></tr></table></figure>
+
+<p>或者，使用tf.assign_add时</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># a = tf.assign_add(w, 1.0)  # 注意这里会报错，提示形状不匹配</span></span><br><span class="line">    a = w.assign_add(np.ones((<span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line">    print(<span class="string">'a:'</span>, sess.run(a))</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">a: [[ 1.  2.  3.  4.]</span><br><span class="line"> [ 5.  6.  7.  8.]</span><br><span class="line"> [ 9. 10. 11. 12.]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="tf-Variable-amp-tf-get-variable"><a href="#tf-Variable-amp-tf-get-variable" class="headerlink" title="tf.Variable &amp;  tf.get_variable"></a>tf.Variable &amp;  tf.get_variable</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ol>
+<li><p>tf.Variable()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(&lt;initial-value&gt;, name=&lt;optional-name&gt;)</span><br></pre></td></tr></table></figure>
+
+<p>用于生成一个初始值为initial-value的变量。必须指定初始化值</p>
+</li>
+<li><p>tf.get_variable()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.get_variable(name, shape=<span class="literal">None</span>, dtype=tf.float32, initializer=<span class="literal">None</span>, regularizer=<span class="literal">None</span>, trainable=<span class="literal">True</span>, collections=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>获取已存在的变量（要求不仅名字，而且初始化方法等各个参数都一样），如果不存在，就新建一个。 </p>
+</li>
+</ol>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相比于tf.Variable，tf.get_variable会检查当前命名空间内是否存在相同name属性的variable，如果存在则检查是否设置为变量共享，如果没有设置则会抛出错误提示name重复。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line">new_w = tf.Variable(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>, <span class="number">4</span>), name=<span class="string">'w'</span>, dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'w:'</span>, sess.run(w))</span><br><span class="line">    print(<span class="string">'new_w:'</span>, sess.run(new_w))</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br><span class="line">new_w: [[ 0.  1.  2.  3.]</span><br><span class="line"> [ 4.  5.  6.  7.]</span><br><span class="line"> [ 8.  9. 10. 11.]]</span><br></pre></td></tr></table></figure>
+
+<p>相比之下，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b = tf.get_variable(name=<span class="string">'bias'</span>, shape=(<span class="number">3</span>,), dtype=tf.float32)</span><br><span class="line">new_b = tf.get_variable(name=<span class="string">'bias'</span>, shape=(<span class="number">3</span>,), dtype=tf.float32)</span><br><span class="line">init_op = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    print(<span class="string">'b:'</span>, sess.run(b))</span><br><span class="line">    print(<span class="string">'new_b:'</span>, sess.run(new_b))</span><br></pre></td></tr></table></figure>
+
+<p>则会报错，提示name重复，是否要共享变量？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Variable bias already exists, disallowed. Did you mean to set reuse&#x3D;True or reuse&#x3D;tf.AUTO_REUSE in VarScope?</span><br></pre></td></tr></table></figure>
+
+<p>综上，应该优先选择使用tf.get_variable方法来避免name重复导致的一些意料之外的bug。</p>
+<h2 id="tf-get-variable的应用"><a href="#tf-get-variable的应用" class="headerlink" title="tf.get_variable的应用"></a>tf.get_variable的应用</h2><p>为了避免上述错误，有两种应用方式：</p>
+<ol>
+<li>使用<code>tf.variable_scope()</code>来分隔命名空间；</li>
+<li>使用<code>reuse=True</code>参数来让相同name的variable实现共享</li>
+</ol>
+<h3 id="tf-variable-scope-添加命名空间"><a href="#tf-variable-scope-添加命名空间" class="headerlink" title="tf.variable_scope()添加命名空间"></a>tf.variable_scope()添加命名空间</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"foo"</span>):</span><br><span class="line">    v = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>]) <span class="comment">#v.name == "foo/v:0"</span></span><br></pre></td></tr></table></figure>
+
+<p>就是给variable外面套上一个level更高的name。</p>
+<h3 id="reuse-True共享变量"><a href="#reuse-True共享变量" class="headerlink" title="reuse=True共享变量"></a>reuse=True共享变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    a = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># a.name == "one/v:0"</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    b = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># 创建两个名字一样的变量会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>在相同的命名空间<code>one</code>内存在两个<code>v</code>变量，导致报错<code>ValueError: Variable one/v already exists</code> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>):</span><br><span class="line">    a = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># a.name == "one/v:0"</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"one"</span>, reuse = <span class="literal">True</span>):  <span class="comment"># 注意reuse的作用。</span></span><br><span class="line">    c = tf.get_variable(<span class="string">"v"</span>, [<span class="number">1</span>])  <span class="comment"># c.name == "one/v:0" 成功共享，因为设置了reuse</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> a == c  <span class="comment"># Assertion is true, they refer to the same object.</span></span><br></pre></td></tr></table></figure>
+
+<p>再看一下tf.Variable方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with tf.variable_scope(&quot;two&quot;):</span><br><span class="line">    d &#x3D; tf.get_variable(&quot;v&quot;, [1])  # d.name &#x3D;&#x3D; &quot;two&#x2F;v:0&quot;</span><br><span class="line">    e &#x3D; tf.Variable(1, name&#x3D;&quot;v&quot;, expected_shape&#x3D;[1])  # e.name &#x3D;&#x3D; &quot;two&#x2F;v_1:0&quot;</span><br><span class="line"></span><br><span class="line">assert d &#x3D;&#x3D; e  # AssertionError: they are different objects</span><br></pre></td></tr></table></figure>
+
+<p>提示： <code>AssertionError</code></p>
+<p>在命名空间<code>two</code>内，在定义v之后，又使用tf.Variable来定义了相同名字<code>v</code>的变量。由于tf.Variable不会检查命名重复，所以后面定义的v会被系统自动修改为<code>v_1</code>。</p>
+<p><a href="https://blog.csdn.net/u012223913/article/details/78533910" target="_blank" rel="noopener">https://blog.csdn.net/u012223913/article/details/78533910</a></p>
+<h1 id="tf-variable-scope和tf-name-scope"><a href="#tf-variable-scope和tf-name-scope" class="headerlink" title="tf.variable_scope和tf.name_scope"></a>tf.variable_scope和tf.name_scope</h1><p>tf.variable_scope</p>
+<p>可以分隔命名空间，对tf.get_variable得到的变量有效，对tf.Variable的变量也有效。</p>
+<p>tf.name_scope</p>
+<p>可以分隔命名空间，对tf.get_variable得到的变量<code>无效</code>，对tf.Variable的变量有效。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'V1'</span>):</span><br><span class="line">    a1 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a2 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'V2'</span>):</span><br><span class="line">    a3 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a4 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(a1.name)</span><br><span class="line">    print(a2.name)</span><br><span class="line">    print(a3.name)</span><br><span class="line">    print(a4.name)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">V1&#x2F;a1:0</span><br><span class="line">V1&#x2F;a2:0</span><br><span class="line">V2&#x2F;a1:0</span><br><span class="line">V2&#x2F;a2:0</span><br></pre></td></tr></table></figure>
+
+<p>使用tf.name_scope，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'V1'</span>):  <span class="comment"># 使用tf.name_scope</span></span><br><span class="line">    a1 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a2 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'V2'</span>):  <span class="comment"># 使用tf.name_scope</span></span><br><span class="line">    a3 = tf.get_variable(name=<span class="string">'a1'</span>, shape=[<span class="number">1</span>], initializer=tf.constant_initializer(<span class="number">1</span>))</span><br><span class="line">    a4 = tf.Variable(tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">1</span>), name=<span class="string">'a2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    print(a1.name)</span><br><span class="line">    print(a2.name)</span><br><span class="line">    print(a3.name)</span><br><span class="line">    print(a4.name)</span><br></pre></td></tr></table></figure>
+
+<p>输出报错，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: Variable a1 already exists, disallowed. Did you mean to set reuse&#x3D;True or reuse&#x3D;tf.AUTO_REUSE in VarScope?</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/UESTC_C2_403/article/details/72328815" target="_blank" rel="noopener">https://blog.csdn.net/UESTC_C2_403/article/details/72328815</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>关于共享变量，参考：</p>
+<p><a href="https://www.tensorflow.org/guide/variables?hl=zh-cn" target="_blank" rel="noopener">https://www.tensorflow.org/guide/variables?hl=zh-cn</a></p>
+<p><a href="http://jermmy.xyz/2017/08/25/2017-8-25-learn-tensorflow-shared-variables/" target="_blank" rel="noopener">http://jermmy.xyz/2017/08/25/2017-8-25-learn-tensorflow-shared-variables/</a></p>
+<p><a href="https://www.cnblogs.com/Charles-Wan/p/6200446.html" target="_blank" rel="noopener">https://www.cnblogs.com/Charles-Wan/p/6200446.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">variable</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/20/TensorFlow-12-variable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TensorFlow-11-constant" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/TensorFlow-11-constant/">TensorFlow-11-constant</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/20/TensorFlow-11-constant/" class="archive-article-date">
+  	<time datetime="2018-05-20T09:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="constant-in-tensorflow"><a href="#constant-in-tensorflow" class="headerlink" title="constant in tensorflow"></a>constant in tensorflow</h1><p>定义一个constant最简单的方式就是调用tf.constant方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># basic</span></span><br><span class="line">a = tf.constant(<span class="number">2</span>, name=<span class="string">'ax'</span>)</span><br><span class="line">b = tf.constant(<span class="number">3</span>, name=<span class="string">'bx'</span>)</span><br><span class="line">x = tf.add(a, b, name=<span class="string">'add'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还有类似Numpy的zeros/zeros_like和ones/ones_like的方式生成全0或全1的张量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># zeros/zeros_like</span></span><br><span class="line">z = tf.zeros([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'z'</span>)</span><br><span class="line">zl = tf.zeros_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'zl'</span>)</span><br><span class="line">zz = tf.multiply(z, zl, name=<span class="string">'multiply'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ones/ones_like</span></span><br><span class="line">o = tf.ones([<span class="number">2</span>, <span class="number">3</span>], dtype=tf.int32, name=<span class="string">'o'</span>)</span><br><span class="line">ol = tf.ones_like(np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>), dtype=tf.int32, name=<span class="string">'ol'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用tf.fill向指定形状的张量内填入数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fill array with a value</span></span><br><span class="line">f = tf.fill(dims=[<span class="number">2</span>, <span class="number">3</span>], value=<span class="number">6</span>, name=<span class="string">'f'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>生成等距张量类似Numpy的range和linspace</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sequences</span></span><br><span class="line"><span class="comment"># start must be float</span></span><br><span class="line"><span class="comment"># [s, e] both s and e are included!!!</span></span><br><span class="line">ls = tf.linspace(start=<span class="number">1.0</span>, stop=<span class="number">10</span>, num=<span class="number">10</span>, name=<span class="string">'ls'</span>)</span><br><span class="line">rg = tf.range(<span class="number">3</span>, name=<span class="string">'rg'</span>) <span class="comment"># [0, 1, 2] same to Numpy</span></span><br></pre></td></tr></table></figure>
+
+<p>生成随机张量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># random</span></span><br><span class="line">rn = tf.random_normal(shape=[<span class="number">2</span>, <span class="number">3</span>], mean=<span class="number">1.0</span>, stddev=<span class="number">1.0</span>, dtype=tf.float32, name=<span class="string">'rn'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>关于随机张量，还有以下多种生成函数：</p>
+<ul>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_normal" target="_blank" rel="noopener"><code>tf.random_normal</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/truncated_normal" target="_blank" rel="noopener"><code>tf.truncated_normal</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_uniform" target="_blank" rel="noopener"><code>tf.random_uniform</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_shuffle" target="_blank" rel="noopener"><code>tf.random_shuffle</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_crop" target="_blank" rel="noopener"><code>tf.random_crop</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/multinomial" target="_blank" rel="noopener"><code>tf.multinomial</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/random_gamma" target="_blank" rel="noopener"><code>tf.random_gamma</code></a></li>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/set_random_seed" target="_blank" rel="noopener"><code>tf.set_random_seed</code></a></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tensorflow.org/api_guides/python/constant_op" target="_blank" rel="noopener">https://www.tensorflow.org/api_guides/python/constant_op</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">constant</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/20/TensorFlow-11-constant/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-38-chardet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/Python-38-chardet/">Python-38-chardet</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/20/Python-38-chardet/" class="archive-article-date">
+  	<time datetime="2018-05-20T01:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="编码方式检测"><a href="#编码方式检测" class="headerlink" title="编码方式检测"></a>编码方式检测</h1><p>使用charset库的detect方法检测网页的编码方式。</p>
+<p>以下代码是检测本地的文本文件的编码方式的一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> chardet</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path=<span class="string">r"C:\Users\...\unicode.txt"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rawdata = open(path, <span class="string">'rb'</span>).read()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = chardet.detect(rawdata)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result</span><br><span class="line">&#123;<span class="string">'encoding'</span>: <span class="string">'GB2312'</span>, <span class="string">'confidence'</span>: <span class="number">0.99</span>, <span class="string">'language'</span>: <span class="string">'Chinese'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/3323770/character-detection-in-a-text-file-in-python-using-the-universal-encoding-detect" target="_blank" rel="noopener">Character detection in a text file in Python using the Universal Encoding Detector (chardet)</a></p>
+<p><a href="http://zoeyyoung.github.io/python-chardet.html" target="_blank" rel="noopener">http://zoeyyoung.github.io/python-chardet.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charset</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/20/Python-38-chardet/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-24-dotVSmul" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/19/Numpy-24-dotVSmul/">Numpy-24-dotVSmul</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/19/Numpy-24-dotVSmul/" class="archive-article-date">
+  	<time datetime="2018-05-18T23:55:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Calculation-speed-up-by-Numpy"><a href="#Calculation-speed-up-by-Numpy" class="headerlink" title="Calculation speed up by Numpy"></a>Calculation speed up by Numpy</h1><p>有两个矩阵a和b，二者有相同的列数。<br>$$<br>a=\left[<br>\begin{matrix}<br>a &amp; b &amp; c\<br>d &amp; e &amp; f<br>\end{matrix}<br>\right]<br>\<br>b=\left[<br>\begin{matrix}<br>1 &amp; 2 &amp; 3 \<br>4 &amp; 5 &amp; 6 \<br>7 &amp; 8 &amp; 9 \<br>10 &amp; 11 &amp; 12<br>\end{matrix}<br>\right]<br>$$<br>矩阵a和b的L2距离的计算结果是一个a.shape[0] * b.shape[0]的新矩阵。<br>$$<br>\begin{array}{c|lcr}<br>n &amp; \text{[1, 2, 3]} &amp; \text{[4, 5, 6]} &amp; \text{[7, 8, 9]} &amp; \text{[10, 11, 12]} \\<br>\hline<br>[a, b, c ]  &amp;\sqrt{ (a-1)^2+(b-2)^2+(c-3)^2} &amp; … &amp; … &amp; … \\<br>[d, e, f ]  &amp; … &amp; … &amp; … &amp; \sqrt{ (d-10)^2+(e-11)^2+(f-12)^2}<br>\end{array}<br>$$<br>具体计算时，有以下几种方式：</p>
+<h2 id="直接按照定义"><a href="#直接按照定义" class="headerlink" title="直接按照定义"></a>直接按照定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">substract = a - b</span><br><span class="line">sum_square = sum(substract**<span class="number">2</span>)</span><br><span class="line">sum_sqrt = sqrt(sum_square)</span><br></pre></td></tr></table></figure>
+
+<p>但是由于a和b的形状不同，所以计算前要进行reshape操作。</p>
+<p>上面的例子中，a的形状为[2, 3]，b的形状为[3, 3]。要进行计算，可以把a的形状reshape为[2, 1, 3]，这样a - b的形状为[2, 3, 3]。</p>
+<p>当a和b的尺寸过大时，用这种方法计算会带来巨大的内存消耗。</p>
+<h2 id="拆开-a-b-2"><a href="#拆开-a-b-2" class="headerlink" title="拆开(a-b)**2"></a>拆开(a-b)**2</h2><p>首先有<br>$$<br>(a-b)^2 = a^2 + b^2 -2ab<br>$$<br>然后<br>$$<br>\sum(a-b)^2 = \sum{a^2} + \sum{b^2} -2\sum{ab}<br>$$</p>
+<h2 id="继续加速计算ab"><a href="#继续加速计算ab" class="headerlink" title="继续加速计算ab"></a>继续加速计算ab</h2><p>sum(ab, axis=-1)的element-wise运算仍然可以使用np.dot方法来对计算进行加速。</p>
+<p><code>a * 1 + b * 2 + c * 3</code>可以转换成<code>[a, b, c]</code>点乘<code>[1, 2, 3].T</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        start_time = time.time()</span><br><span class="line">        ret = func(*args, **kwargs)</span><br><span class="line">        elapsed_time = time.time() - start_time</span><br><span class="line">        print(<span class="string">'function [&#123;&#125;] finished in &#123;&#125; ms'</span>.format(</span><br><span class="line">            func.__name__, int(elapsed_time * <span class="number">1000</span>)))</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    row = a.shape[<span class="number">0</span>]</span><br><span class="line">    ret = np.sum(a.reshape(row, <span class="number">1</span>, <span class="number">-1</span>) * b, axis=<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul_dot</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    ret = np.dot(a, b.T)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    a = np.random.randn(<span class="number">50</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    b = np.random.randn(<span class="number">500</span>, <span class="number">32</span>*<span class="number">32</span>*<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    print(mul(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    print(mul_dot(a, b)[<span class="number">0</span>][<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function [mul] finished in 435 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br><span class="line">function [mul_dot] finished in 13 ms</span><br><span class="line">Return Array[0][0] 104.949466573</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">speed</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dot vs multiply</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/19/Numpy-24-dotVSmul/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Numpy-23-Numpy2NativeType" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -782,430 +1261,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/06/TensorFlow-08-CustomObjectDetection/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-37-RenameFiles" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/06/Python-37-RenameFiles/">Python-37-RenameFiles</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/06/Python-37-RenameFiles/" class="archive-article-date">
-  	<time datetime="2018-05-06T04:25:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="rename-file"><a href="#rename-file" class="headerlink" title="rename file"></a>rename file</h1><p>these code will rename all .jpg file to img-No.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob, os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">(dir, pattern, titlePattern)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, pathAndFilename <span class="keyword">in</span> enumerate(glob.iglob(os.path.join(dir, pattern))):</span><br><span class="line">        title, ext = os.path.splitext(os.path.basename(pathAndFilename))</span><br><span class="line">        os.rename(pathAndFilename, os.path.join(dir, titlePattern % i + ext))</span><br><span class="line">                  </span><br><span class="line"><span class="comment"># rename(r'', r'*.jpg', r'img-%d')</span></span><br><span class="line">rename(<span class="string">r''</span>, <span class="string">r'*.png'</span>, <span class="string">r'img-%d'</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>Batch Renaming of Files in a Directory</p>
-<p><a href="https://stackoverflow.com/questions/225735/batch-renaming-of-files-in-a-directory" target="_blank" rel="noopener">https://stackoverflow.com/questions/225735/batch-renaming-of-files-in-a-directory</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">rename files</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/06/Python-37-RenameFiles/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-36-PYTHONPATH" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/05/Python-36-PYTHONPATH/">Python-36-PYTHONPATH</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/05/Python-36-PYTHONPATH/" class="archive-article-date">
-  	<time datetime="2018-05-04T22:03:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python的模块化编程"><a href="#Python的模块化编程" class="headerlink" title="Python的模块化编程"></a>Python的模块化编程</h1><p>和其他编程语言相似，Python也支持模块化编程。一般一个程序文件就是一个模块，Python中就是一个个的.py文件，其他语言比如Java中的.java文件或者编译后的.class文件。在模块之上使用包来管理，简单来讲就是多个功能相关联的模块组成一个包。Java中把.class文件打包生成.jr作为包来供外部调用，而Python直接定义一个特殊的文件夹作为包来调用。</p>
-<p>为了使Python能正确识别这些文件夹作为包，需要了解一下Python中对于包的规定。</p>
-<h2 id="Python查找模块的路径"><a href="#Python查找模块的路径" class="headerlink" title="Python查找模块的路径"></a>Python查找模块的路径</h2><p>Python环境下调用sys.path可以查看当前Python的搜索路径。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Python <span class="number">3.5</span><span class="number">.4</span> |Anaconda, Inc.| (default, Nov  <span class="number">8</span> <span class="number">2017</span>, <span class="number">14</span>:<span class="number">34</span>:<span class="number">30</span>) [MSC v<span class="number">.1900</span> <span class="number">64</span> bi</span><br><span class="line">t (AMD64)] on win32</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\Users\\usr\\Anaconda3'</span>,...]</span><br></pre></td></tr></table></figure>
-
-<p>可以看到第一个路径是<code>&#39;&#39;</code>，这意味着<code>相对路径下的当前路径</code>也在搜索路径之内。</p>
-<p>如果当前路径下没有找到所需的模块，则会按列表顺序继续查找，直到找到目标模块。如果没有找到，则会抛出错误。</p>
-<p>更改查找列表有两种方式：</p>
-<ol>
-<li>导入sys模块，通过sys.path.append(),sys.path.insert()等方法来修改。这种修改只适用于当前程序运行期间，重启之后修改失效。</li>
-<li>在系统环境变量中直接修改/新建PYTHONPATH，这种方式的设置永久有效。</li>
-</ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Python中的PYTHONPATH环境变量</p>
-<p><a href="http://www.cnblogs.com/geeklove01/p/7912435.html" target="_blank" rel="noopener">http://www.cnblogs.com/geeklove01/p/7912435.html</a></p>
-<p>Python的模块引用和查找路径</p>
-<p><a href="https://www.cnblogs.com/qingspace/p/5284480.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingspace/p/5284480.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PYTHONPATH</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/05/Python-36-PYTHONPATH/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-07-ObjectDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/TensorFlow-07-ObjectDetection/">TensorFlow-07-ObjectDetection</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/04/TensorFlow-07-ObjectDetection/" class="archive-article-date">
-  	<time datetime="2018-05-04T09:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TensorFlow-Object-Detection"><a href="#TensorFlow-Object-Detection" class="headerlink" title="TensorFlow Object Detection"></a>TensorFlow Object Detection</h1><p>Object Detection是TensorFlow自带的一个模型检测的API</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装参考以下链接，</p>
-<p><a href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md" target="_blank" rel="noopener">https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md</a></p>
-<p>安装过程中遇到了<code>object_detection/protos/*.proto: No such file or directory</code>这个错误。</p>
-<p>原因是使用了3.5版本的protoc，导致无法批量处理*.proto文件。(*代表通配符)</p>
-<p>详见<a href="https://github.com/tensorflow/models/issues/2930" target="_blank" rel="noopener">https://github.com/tensorflow/models/issues/2930</a></p>
-<h1 id="from-deployment-import-model-deploy-ModuleNotFoundError-No-module-named-‘deployment’"><a href="#from-deployment-import-model-deploy-ModuleNotFoundError-No-module-named-‘deployment’" class="headerlink" title="from deployment import model_deploy ModuleNotFoundError: No module named ‘deployment’"></a>from deployment import model_deploy ModuleNotFoundError: No module named ‘deployment’</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，弹出此error，无法导入deployment模块。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>经调查可知deployment模块定义在了models/research/slim/目录下。Python执行时没有查找到此处，所以抛出了这个错误。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li><p>添加系统环境变量，在PYTHONPATH条目内添加<code>\tensorflow\models\research</code> and <code>\tensorflow\models\research\slim</code> 的完整路径。</p>
-</li>
-<li><p>cd到slim/目录下可以看到有setup.py文件，使用这个py文件可以安装slim模块到Anaconda的统一管理第三方模块的site-packages目录下。</p>
-<p>安装方法为，切换到slim/目录下，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python setup.py build</span><br><span class="line">python setup.py install</span><br><span class="line"># 这时又抛出了一个错误，提示</span><br><span class="line"># error: could not create &#39;build&#39;: 当文件已存在时，无法创建该文件。</span><br><span class="line"># 解决方法见下文</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>注意，方法1在Linux环境下的命令为，</p>
-<ol>
-<li>If <a href="https://github.com/tensorflow/models" target="_blank" rel="noopener">models</a> is located at /home/tensorflow/models/</li>
-<li>Edit ~/.bashrc and puts<br><code>export PYTHONPATH=&quot;${PYTHONPATH}:/home/tensorflow/models:/home/tensorflow/models/slim/&quot;</code></li>
-</ol>
-<p>经测，方法1在windows下无效，方法2可以完美解决问题。</p>
-<p>安装之后，执行trainer.py，此错误不再抛出。</p>
-<h1 id="error-could-not-create-‘build’-当文件已存在时，无法创建该文件。"><a href="#error-could-not-create-‘build’-当文件已存在时，无法创建该文件。" class="headerlink" title="error: could not create ‘build’: 当文件已存在时，无法创建该文件。"></a>error: could not create ‘build’: 当文件已存在时，无法创建该文件。</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行<code>python setup.py install</code>安装slim模块时，抛出此错误。</p>
-<h2 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h2><p>clone下来的代码库中自带了一个名为BUILD的文件，而install命令需要在当前文件夹下新建一个名为build的目录，此目录名和上述BUILD命名冲突，导致抛出此错误。</p>
-<h2 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h2><p>把BUILD文件重命名为BUILD.bak备份，再执行<code>python setup.py install</code>。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/lgczym/article/details/79272579" target="_blank" rel="noopener">Windows下Tensorflow-silm库使用遇到ImportError: No module named ‘nets’问题的解决方法</a></p>
-<h1 id="TypeError-pred-must-be-a-Tensor-or-a-Python-bool-or-1-or-0-Found-instead-None"><a href="#TypeError-pred-must-be-a-Tensor-or-a-Python-bool-or-1-or-0-Found-instead-None" class="headerlink" title="TypeError: `pred` must be a Tensor, or a Python bool, or 1 or 0. Found instead: None"></a>TypeError: `pred` must be a Tensor, or a Python bool, or 1 or 0. Found instead: None</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，抛出此错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config、</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因-2"><a href="#原因-2" class="headerlink" title="原因"></a>原因</h2><p>bug</p>
-<h2 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h2><blockquote>
-<p>FILE PATH: object_detection\models\</p>
-<p>change 109 line in ssd_mobilenet_v1_feature_extractor.py:<br>from</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">is_training=<span class="literal">None</span>, regularize_depthwise=<span class="literal">True</span>)):</span><br></pre></td></tr></table></figure>
-
-<p>to</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">is_training=<span class="literal">True</span>, regularize_depthwise=<span class="literal">True</span>)):</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>注意，目前ssd_mobilenet_v1_feature_extractor.py肯呢个存在于系统的多个目录下，Python调用的是已经安装到Anaconda下的site-packages目录下的.py。所以应该修改此处的.py文件。</p>
-<h1 id="OOM-when-allocating-tensor-with-shape-…"><a href="#OOM-when-allocating-tensor-with-shape-…" class="headerlink" title="OOM when allocating tensor with shape[*, *, …]"></a>OOM when allocating tensor with shape[*, *, …]</h1><h2 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行trainer.py开始训练时，抛出此错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --logtostderr --train_dir&#x3D;training&#x2F; --pipeline_config_path&#x3D;training&#x2F;ssd_mobilenet_v1_pets.config、</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因-3"><a href="#原因-3" class="headerlink" title="原因"></a>原因</h2><p>出现此错误提示，表示GPU内存不足(GPU ran out of memory)，此时可以手动减小batch_size的大小，默认设置为24。目前我用的机器GPU是GTX 960显存为4GB，batch_size减为10时，没有出现此错误。</p>
-<h2 id="内存消耗计算"><a href="#内存消耗计算" class="headerlink" title="内存消耗计算"></a>内存消耗计算</h2><p>[1,144,144,144,128] 矩阵大小为，1 * 144 * 144 * 128 = 382,205,952</p>
-<p>如果数据类型是默认的32bit，则总占用显存为382,205,952 * 4 = 1 528 823,808</p>
-<p>约为1.5G。所以仅仅tensorflow的计算就要消耗1.5G，还有其他显示消耗加到一起，不能超过显卡的物理内存大小。</p>
-<h2 id="解决方法-3"><a href="#解决方法-3" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li><p>增加显卡物理内存，根据计算量大小，把不同层计算分配到合适的GPU上。参见<a href="https://stackoverflow.com/questions/36313934/is-it-possible-to-split-a-network-across-multiple-gpus-in-tensorflow" target="_blank" rel="noopener">[Is it possible to split a network across multiple GPUs in tensorflow?]</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">"/gpu:0"</span>):</span><br><span class="line">  <span class="comment"># Define first layer.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.device(<span class="string">"/gpu:1"</span>):</span><br><span class="line">  <span class="comment"># Define second layer.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define other layers, etc.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>减小浮点数的精度(floating precision <code>tf.float64 -&gt; tf.float32 -&gt; tf.float16</code> )</p>
-</li>
-<li><p>减小batch_size，ssd_mobilenet_v1_pets.config文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">train_config: &#123;</span><br><span class="line">  # HERE</span><br><span class="line">  batch_size: 10</span><br><span class="line">  optimizer &#123;</span><br><span class="line">    rms_prop_optimizer: &#123;</span><br><span class="line">      learning_rate: &#123;</span><br><span class="line">        exponential_decay_learning_rate &#123;</span><br><span class="line">          initial_learning_rate: 0.004</span><br><span class="line">          decay_steps: 800720</span><br><span class="line">          decay_factor: 0.95</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      momentum_optimizer_value: 0.9</span><br><span class="line">      decay: 0.9</span><br><span class="line">      epsilon: 1.0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>##参考</p>
-<p><a href="https://stackoverflow.com/questions/45704280/oom-when-allocating-tensor-with-shape1-144-144-144-128" target="_blank" rel="noopener">OOM when allocating tensor with shape[1,144,144,144,128]</a></p>
-<h1 id="Windows下查看显存"><a href="#Windows下查看显存" class="headerlink" title="Windows下查看显存"></a>Windows下查看显存</h1><p>Win+R运行dxdiag打开<code>DirectX诊断工具</code>，切换到<code>显示</code>选项卡上即可看到显卡相关参数。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Object Detection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/04/TensorFlow-07-ObjectDetection/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TensorFlow-06-installCUDA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/TensorFlow-06-installCUDA/">TensorFlow-06-installCUDA</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/03/TensorFlow-06-installCUDA/" class="archive-article-date">
-  	<time datetime="2018-05-03T14:58:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Install-CUDA"><a href="#Install-CUDA" class="headerlink" title="Install CUDA"></a>Install CUDA</h1><p>Install CUDA for tensorflow following this article:</p>
-<p><a href="https://blog.csdn.net/weixin_36368407/article/details/54177380" target="_blank" rel="noopener">https://blog.csdn.net/weixin_36368407/article/details/54177380</a></p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>1.8.0版本的TF只能支持到CUDA9.0，最新的9.1版本无法运行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CUDA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/TensorFlow//" class="article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/03/TensorFlow-06-installCUDA/">展开全文 >></a>
         </p>
       
 
@@ -2802,6 +2857,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">exe</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nan</a>
               </li>
             
             <div class="clearfix"></div>

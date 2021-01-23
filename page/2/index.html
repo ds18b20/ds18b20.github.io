@@ -156,6 +156,470 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-RaspberryPi-05-Build-Kernel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/09/RaspberryPi-05-Build-Kernel/">RaspberryPi-05-Build-Kernel</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/09/RaspberryPi-05-Build-Kernel/" class="archive-article-date">
+  	<time datetime="2021-01-09T07:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派Build-Kernel"><a href="#树莓派Build-Kernel" class="headerlink" title="树莓派Build Kernel"></a>树莓派Build Kernel</h1><p>整体参考URL：<a href="https://www.raspberrypi.org/documentation/linux/kernel/building.md" target="_blank" rel="noopener">https://www.raspberrypi.org/documentation/linux/kernel/building.md</a></p>
+<p>其中本地编译的说明中，在.config文件中可以设置CONFIG_LOCALVERSION参数。这个是在执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd linux</span><br><span class="line">KERNEL&#x3D;kernel7</span><br><span class="line">make bcm2709_defconfig</span><br></pre></td></tr></table></figure>
+
+<p>之后，在linux目录下有个隐藏文件名为.config。文件的设置项目很多，在第23行出可以设置CONFIG_LOCALVERSION参数。</p>
+<p>参考：<a href="https://arch.jpn.org/archives/351" target="_blank" rel="noopener">https://arch.jpn.org/archives/351</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Build Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Raspberry-Pi//" class="article-tag-list-link color3">Raspberry Pi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/09/RaspberryPi-05-Build-Kernel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-08-include" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/23/Linux-08-include/">Linux-08-include</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/23/Linux-08-include/" class="archive-article-date">
+  	<time datetime="2020-12-23T06:47:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="include-in-Linux"><a href="#include-in-Linux" class="headerlink" title="include in Linux"></a>include in Linux</h1><p>Linux下C语言编程时，经常是什么都不用想直接<code>#include &lt;stdio.h&gt;</code>，但是这里的头文件究竟是存储在哪里呢？</p>
+<p>其实，Linux下系统的头文件全部保存在同一个路径下，即<strong>/usr/include/</strong></p>
+<p>可以通过<code>ls /usr/include/</code>来查看头文件列表。</p>
+<p>由于系统会默认到此目录下查找头文件，因此真正#include时候不需要书写头文件的全路径。注意，如果全路径反而会报错。</p>
+<p>仔细看的话，会发现<strong>/usr/include/</strong>内还包含子文件夹。要include子文件下的头文件的话，只需加上子文件夹的名字即可。例如，<code>#include &lt;linux/videodev2.h&gt;</code></p>
+<p><a href="https://www.tomorrow.wiki/archives/1738" target="_blank" rel="noopener">https://www.tomorrow.wiki/archives/1738</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">v4l2</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/23/Linux-08-include/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-07-v4l2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/23/Linux-07-v4l2/">Linux-07-v4l2</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/23/Linux-07-v4l2/" class="archive-article-date">
+  	<time datetime="2020-12-23T05:29:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="v4l2"><a href="#v4l2" class="headerlink" title="v4l2"></a>v4l2</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>v4l2是Video for Linux 2的简称，用于/dev/video*和App之间的连接。</p>
+<h2 id="应用层示例代码"><a href="#应用层示例代码" class="headerlink" title="应用层示例代码"></a>应用层示例代码</h2><h3 id="No-1"><a href="#No-1" class="headerlink" title="No.1"></a>No.1</h3><p><a href="https://gist.github.com/bellbind/6813905" target="_blank" rel="noopener">https://gist.github.com/bellbind/6813905</a></p>
+<p>↑jpeg压缩部分还需要调试</p>
+<h3 id="No-2"><a href="#No-2" class="headerlink" title="No.2"></a>No.2</h3><p><a href="https://www.jianshu.com/p/0ac427d267d4" target="_blank" rel="noopener">https://www.jianshu.com/p/0ac427d267d4</a></p>
+<p>↑Makefile的写法值得参考，但是输出格式的设置方法还值得研究</p>
+<h3 id="No-3"><a href="#No-3" class="headerlink" title="No.3"></a>No.3</h3><p><a href="https://blog.csdn.net/eastmoon502136/article/details/8190262" target="_blank" rel="noopener">https://blog.csdn.net/eastmoon502136/article/details/8190262</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Linux V4L2学习<a href="https://work-blog.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://work-blog.readthedocs.io/en/latest/</a></p>
+<p>常用函数介绍：Linux下camera编程 PDF</p>
+<p><a href="http://read.pudn.com/downloads633/sourcecode/embedded/2569370/v4l2%20camara_minigui/Linux%E4%B8%8Bcamera%E7%BC%96%E7%A8%8B.pdf" target="_blank" rel="noopener">http://read.pudn.com/downloads633/sourcecode/embedded/2569370/v4l2%20camara_minigui/Linux%E4%B8%8Bcamera%E7%BC%96%E7%A8%8B.pdf</a></p>
+<p>代码详解<a href="https://www.cnblogs.com/edver/p/7749628.html" target="_blank" rel="noopener">https://www.cnblogs.com/edver/p/7749628.html</a></p>
+<p>内置参数（比如VIDIOC_ENUM_FMT）的介绍：<a href="https://www.kernel.org/doc/html/v4.14/media/uapi/v4l/user-func.html" target="_blank" rel="noopener">https://www.kernel.org/doc/html/v4.14/media/uapi/v4l/user-func.html</a></p>
+<p>内置ImageFormat的列表：<a href="https://www.linuxtv.org/downloads/v4l-dvb-apis/userspace-api/v4l/pixfmt-packed-yuv.html" target="_blank" rel="noopener">https://www.linuxtv.org/downloads/v4l-dvb-apis/userspace-api/v4l/pixfmt-packed-yuv.html</a></p>
+<p>深度格式：<a href="https://www.linuxtv.org/downloads/v4l-dvb-apis/userspace-api/v4l/depth-formats.html" target="_blank" rel="noopener">https://www.linuxtv.org/downloads/v4l-dvb-apis/userspace-api/v4l/depth-formats.html</a></p>
+<h1 id="UVC"><a href="#UVC" class="headerlink" title="UVC"></a>UVC</h1><p>UVC(USB Video Class)类型的视频设备，内部实现了标准的图像传输方法，对应这通用的UVC驱动，因此不需要安装任何驱动就可以即插即用。这些设备不只是摄像头，还包括摄影机，电视卡等。详见Linux对UVC的说明：<a href="http://www.ideasonboard.org/uvc/" target="_blank" rel="noopener">http://www.ideasonboard.org/uvc/</a></p>
+<p>以下方法可以判断一个USB设备是符合UVC规范：</p>
+<blockquote>
+<ol>
+<li><p>使用lsusb命令或其他硬件信息查看工具，找出摄像头的设备号（Vendor ID）和产品号（Product ID）。</p>
+</li>
+<li><p>查找是否有视频类借口信息</p>
+<p>lsusb -d VID：PID -v | grep “14 Video”</p>
+<p>如果兼容UVC，则会输出类似信息</p>
+<p>bFunctionClass 14 Video</p>
+<p>bInterfaceClass 14 Video</p>
+<p>bInterfaceClass 14 Video</p>
+<p>bInterfaceClass 14 Video</p>
+<p>如果没有以上信息，则是non-UVC设备。</p>
+</li>
+</ol>
+</blockquote>
+<p>注意，”USB Video Class(UVC)”：对应的driver是：uvcvideo.ko</p>
+<p><a href="https://blog.csdn.net/fwqlzz/article/details/51126653?spm=a2c4e.10696291.0.0.11d019a4uh39Hk" target="_blank" rel="noopener">https://blog.csdn.net/fwqlzz/article/details/51126653?spm=a2c4e.10696291.0.0.11d019a4uh39Hk</a></p>
+<h1 id="V4L2-vivid"><a href="#V4L2-vivid" class="headerlink" title="V4L2 vivid"></a>V4L2 vivid</h1><p>Virtual Video Device</p>
+<p><a href="https://www.nds-osk.co.jp/forum/freedownload/11/onelcf11_casestudy6.pdf" target="_blank" rel="noopener">https://www.nds-osk.co.jp/forum/freedownload/11/onelcf11_casestudy6.pdf</a></p>
+<h1 id="dev-video"><a href="#dev-video" class="headerlink" title="/dev/video"></a>/dev/video</h1><h2 id="ubuntu18-04一个摄像头在-dev下对应两个video怎么回事"><a href="#ubuntu18-04一个摄像头在-dev下对应两个video怎么回事" class="headerlink" title="ubuntu18.04一个摄像头在/dev下对应两个video怎么回事"></a><a href="https://forum.ubuntu.org.cn/viewtopic.php?f=42&t=490552&sid=d6281d3bcb813cd8da996269c6dce4a7" target="_blank" rel="noopener">ubuntu18.04一个摄像头在/dev下对应两个video怎么回事</a></h2><p>video0是Video Capture用</p>
+<p>video1是Meta Capture用</p>
+<h1 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h1><p>Python wrapper for driver<a href="https://github.com/ArduCAM/MIPI_Camera" target="_blank" rel="noopener">https://github.com/ArduCAM/MIPI_Camera</a></p>
+<p><a href="https://www.arducam.com/use-almost-any-mipi-camera-module-on-raspberry-pi/" target="_blank" rel="noopener">https://www.arducam.com/use-almost-any-mipi-camera-module-on-raspberry-pi/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">v4l2</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/23/Linux-07-v4l2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Make-01-makefile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/23/Make-01-makefile/">Make-01-makefile</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/23/Make-01-makefile/" class="archive-article-date">
+  	<time datetime="2020-12-23T03:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GCC"><a href="#GCC" class="headerlink" title="GCC"></a>GCC</h1><h2 id="c-o"><a href="#c-o" class="headerlink" title="-c -o"></a>-c -o</h2><ul>
+<li>c: compile 只编译生成同名的目标文件而不链接</li>
+<li>o: output 生成指定文件名的可执行文件，如果不指定则生成同名的.out可执行文件</li>
+</ul>
+<p>例如，GCC -c -o hello.bin hello.c 会生成hello.o和hello.bin</p>
+<h1 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h1><h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><p>Target: Prerequisite1 Prerequisite2 Prerequisite3 …</p>
+<p>[TAB]Command</p>
+<ul>
+<li>Target: 可以是目标文件（object file），也可以是可执行文件，还可以是标签（label）</li>
+<li>Prerequisite: 生成Target所需要的文件或者其他Target</li>
+<li>Command: 该Target要执行的命令（任意的shell命令）</li>
+</ul>
+<p><strong>注意</strong>，</p>
+<p>冒号右侧的Prerequisites中任意一个的修改时间比Target新的话，才会执行Command语句。</p>
+<p>可以用反斜杠（\）来换行。</p>
+<p>Command前方一定是Tab，而不是空格。</p>
+<p><a href="https://seisman.github.io/how-to-write-makefile/introduction.html" target="_blank" rel="noopener">https://seisman.github.io/how-to-write-makefile/introduction.html</a></p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ol>
+<li>commandline下执行make命令的话，make会在当前目录下寻找名为Makefile或者makefile的文件。</li>
+<li>如果找到，则解析该makefile的内容，并把第一个Target作为最终的目标文件名。如果当前目录下Target名的文件不存在，或者即使存在但是冒号右侧的依赖文件的修改时间比Target新的话，则执行Command命令。</li>
+<li>根据2 的规则检查/执行所有的命令。</li>
+<li>最后生成目标文件（.o），并生成最后的可执行文件。</li>
+</ol>
+<p><a href="https://seisman.github.io/how-to-write-makefile/introduction.html" target="_blank" rel="noopener">https://seisman.github.io/how-to-write-makefile/introduction.html</a></p>
+<h2 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h2><ul>
+<li><p>$@： 目标文件</p>
+</li>
+<li><p>$^： 所有的以来文件</p>
+</li>
+<li><p>$&lt;： 第一个依赖文件</p>
+</li>
+</ul>
+<p>使用上面三个变量可以简化Makefile文件为：</p>
+<p># 这是简化后的Makefile</p>
+<p>main：main.o mytool1.o mytool2.o</p>
+<p>gcc -o $@ $^</p>
+<p>main.o：main.c mytool1.h mytool2.h</p>
+<p>gcc -c $&lt;</p>
+<p>mytool1.o：mytool1.c mytool1.h</p>
+<p>gcc -c $&lt;</p>
+<p>mytool2.o：mytool2.c mytool2.h</p>
+<p>gcc -c $&lt;</p>
+<p>通过使用特殊变量在一定程度上简化了Makefile，其实还可以通过Makefile的缺省规则作进一步简化。</p>
+<p>.c.o：</p>
+<p>gcc -c $&lt;</p>
+<p>这个规则表示所有的 .o文件都是依赖与相应的.c文件的。例如mytool.o依赖于mytool.c这样Makefile还可以变为：</p>
+<p># 这是再一次简化后的Makefile</p>
+<p>main：main.o mytool1.o mytool2.o</p>
+<p>gcc -o $@ $^</p>
+<p>.c.o：</p>
+<p>gcc -c $&lt;</p>
+<p>参考：<a href="https://www.cnblogs.com/baiduboy/p/6849587.html" target="_blank" rel="noopener">https://www.cnblogs.com/baiduboy/p/6849587.html</a></p>
+<p><a href="https://zhidao.baidu.com/question/1754672434182545188.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/1754672434182545188.html</a></p>
+<h1 id=""><a href="#" class="headerlink" title="=/:= /?=/+="></a>=/:= /?=/+=</h1><p>=是正常的赋值，而且是立即赋值</p>
+<p>:=是搜索到最后再赋值</p>
+<p>?=是如果没有赋值则赋值，否则不会赋值</p>
+<p>+=是在原有赋值的基础上添加赋值</p>
+<p><a href="https://www.cnblogs.com/baiduboy/p/7612488.html" target="_blank" rel="noopener">https://www.cnblogs.com/baiduboy/p/7612488.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">make</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">makefile</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GCC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Make//" class="article-tag-list-link color5">Make</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/23/Make-01-makefile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Elec-01-LevelShift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -683,389 +1147,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/09/11/Arduino-02-run-time/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Arduino-01-Timer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/11/Arduino-01-Timer/">Arduino-01-Timer</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/11/Arduino-01-Timer/" class="archive-article-date">
-  	<time datetime="2020-09-10T15:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Arduino-Timer"><a href="#Arduino-Timer" class="headerlink" title="Arduino Timer"></a>Arduino Timer</h1><p>定时器配置</p>
-<p><a href="https://www.myoschain.com/blog/142736783820455936" target="_blank" rel="noopener">https://www.myoschain.com/blog/142736783820455936</a></p>
-<p>定时器的start和stop</p>
-<p><a href="https://qiita.com/tomkimra/items/0bd8e6d28b9fe5d14e93" target="_blank" rel="noopener">https://qiita.com/tomkimra/items/0bd8e6d28b9fe5d14e93</a></p>
-<h2 id="TimerOne-TimerOne-h"><a href="#TimerOne-TimerOne-h" class="headerlink" title="TimerOne/TimerOne.h"></a><a href="https://github.com/PaulStoffregen/TimerOne" target="_blank" rel="noopener">TimerOne</a>/<strong>TimerOne.h</strong></h2><p><a href="https://github.com/PaulStoffregen/TimerOne/blob/ce0fa0b7965f189925d8b7dbba49d562f7c0a4b3/TimerOne.h#L50" target="_blank" rel="noopener">https://github.com/PaulStoffregen/TimerOne/blob/ce0fa0b7965f189925d8b7dbba49d562f7c0a4b3/TimerOne.h#L50</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Timer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Arduino//" class="article-tag-list-link color3">Arduino</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/11/Arduino-01-Timer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-62-csv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/10/Python-62-csv/">Python-62-csv</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/10/Python-62-csv/" class="archive-article-date">
-  	<time datetime="2020-09-10T14:20:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="csv模块"><a href="#csv模块" class="headerlink" title="csv模块"></a>csv模块</h1><p>本篇记录一下Python自带的csv读写模块的使用方法。</p>
-<h2 id="读出"><a href="#读出" class="headerlink" title="读出"></a>读出</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"sample.csv"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  csv_reader = csv.reader(f, delimiter=<span class="string">','</span>, quotechar=<span class="string">'"'</span>)</span><br><span class="line">  <span class="keyword">for</span> row <span class="keyword">in</span> csv_reader:</span><br><span class="line">    print(row)</span><br></pre></td></tr></table></figure>
-
-<p>delimiter用于指定分隔符；</p>
-<p>quotechar用于指定一种符号，用于包裹一个包含分隔符的内容。</p>
-<h2 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"sample.csv"</span>, <span class="string">"w+"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  csv_writer = csv.writer(f)</span><br><span class="line">  csv_writer.writerow([<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>])</span><br><span class="line">  csv_writer.writerows([[<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>], [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>一般<code>csv_writer.writerow([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])</code>用于指定header。</p>
-<p>输出结果如下，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a,b,c</span><br><span class="line"></span><br><span class="line">1,2,3</span><br><span class="line"></span><br><span class="line">4,5,6</span><br></pre></td></tr></table></figure>
-
-<p>但是注意到每行末尾包含两次换行，表现在excel中就是出现多余的空白行。解决方法是指定参数<code>lineterminator=&#39;\n&#39;</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"sample.csv"</span>, <span class="string">"w+"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  csv_writer = csv.writer(f, lineterminator=<span class="string">'\n'</span>)</span><br><span class="line">  csv_writer.writerow([<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>])</span><br><span class="line">  csv_writer.writerows([[<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>], [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>输出结果如下，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a,b,c</span><br><span class="line">a,b,c</span><br><span class="line">a,b,c</span><br></pre></td></tr></table></figure>
-
-<p>另外还可以指定分隔符，<code>delimiter=&#39;,&#39;</code>。注意，默认分隔符就是逗号。</p>
-<h2 id="添加新行"><a href="#添加新行" class="headerlink" title="添加新行"></a>添加新行</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'file.csv'</span>,newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">    r = csv.reader(f)</span><br><span class="line">    data = [line <span class="keyword">for</span> line <span class="keyword">in</span> r]</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'file.csv'</span>,<span class="string">'w'</span>,newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">    w = csv.writer(f)</span><br><span class="line">    w.writerow([<span class="string">'ColA'</span>,<span class="string">'ColB'</span>])</span><br><span class="line">    w.writerows(data)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Python CSV 文件解析和生成</p>
-<p><a href="https://segmentfault.com/a/1190000006029896" target="_blank" rel="noopener">https://segmentfault.com/a/1190000006029896</a></p>
-<p>PythonでCSVの読み書きを行う方法【初心者向け】</p>
-<p><a href="https://techacademy.jp/magazine/15638" target="_blank" rel="noopener">https://techacademy.jp/magazine/15638</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">csv</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/10/Python-62-csv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-61-os-environ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/04/Python-61-os-environ/">Python-61-os-environ</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/04/Python-61-os-environ/" class="archive-article-date">
-  	<time datetime="2020-07-04T13:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="os-environ"><a href="#os-environ" class="headerlink" title="os.environ"></a>os.environ</h1><p>Python中使用<code>os.environ</code>可以对系统环境变量进行增删改查的操作，但是注意所有的操作仅对当前运行环境有效，重启console之后所有的配置都会被重置。</p>
-<h2 id="读取当前配置"><a href="#读取当前配置" class="headerlink" title="读取当前配置"></a>读取当前配置</h2><p>直接<code>os.environ</code>可以读取当前系统所有的环境变量。</p>
-<p>读取到的数据类型类似于Dict，可以直接使用key值来访问内容。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line"><span class="string">'D:\\Java\\jre1.8.0_231'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ.get(<span class="string">"JAVA_HOME"</span>)</span><br><span class="line"><span class="string">'D:\\Java\\jre1.8.0_231'</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改-添加-删除"><a href="#修改-添加-删除" class="headerlink" title="修改 添加 删除"></a>修改 添加 删除</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改/添加</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>] = <span class="string">"AAABBB"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ.get(<span class="string">"JAVA_HOME"</span>)</span><br><span class="line"><span class="string">'AAABBB'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ[<span class="string">"JAVA_HOME"</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"C:\ProgramData\Anaconda3\envs\py36\lib\os.py"</span>, line <span class="number">669</span>, <span class="keyword">in</span> __getitem__</span><br><span class="line">    <span class="keyword">raise</span> KeyError(key) <span class="keyword">from</span> <span class="literal">None</span></span><br><span class="line">KeyError: <span class="string">'JAVA_HOME'</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://note.nkmk.me/python-os-environ-getenv/" target="_blank" rel="noopener">https://note.nkmk.me/python-os-environ-getenv/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">environ</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/04/Python-61-os-environ/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyQt-01-QTimer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/28/PyQt-01-QTimer/">PyQt-01-QTimer</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/28/PyQt-01-QTimer/" class="archive-article-date">
-  	<time datetime="2020-06-28T01:22:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="给QTimer的callback函数传递参数"><a href="#给QTimer的callback函数传递参数" class="headerlink" title="给QTimer的callback函数传递参数"></a>给QTimer的callback函数传递参数</h1><p>默认QTimer的callback函数只能传递函数名，而无法给callback传递函数。可以使用python自带的偏函数来自定义一个带参数的callback函数，然后通过QTimer调用这个自定义函数即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">from</span> PySide.QtCore <span class="keyword">import</span> QTimer</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">onTimer</span><span class="params">(initParams)</span>:</span></span><br><span class="line">    <span class="comment"># use initParams</span></span><br><span class="line">    <span class="comment"># your code here...</span></span><br><span class="line"></span><br><span class="line">myInitParams = <span class="string">"Init!"</span></span><br><span class="line">timerCallback = functools.partial(onTimer, initParams=myInitParams)</span><br><span class="line">myTimer = QTimer()</span><br><span class="line">myTimer.timeout.connect(timerCallback)</span><br><span class="line">myTimer.start( <span class="number">1000</span>) <span class="comment">#once a sec</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Your QApplication goes below...</span></span><br></pre></td></tr></table></figure>
-
-<p>参考：</p>
-<p><a href="https://stackoverflow.com/questions/13202014/passing-a-parameter-to-qtimer-timeout-signal" target="_blank" rel="noopener">https://stackoverflow.com/questions/13202014/passing-a-parameter-to-qtimer-timeout-signal</a></p>
-<p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017454145929440" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1016959663602400/1017454145929440</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">QTimer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">parameter</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyQt//" class="article-tag-list-link color5">PyQt</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/28/PyQt-01-QTimer/">展开全文 >></a>
         </p>
       
 
@@ -2662,6 +2743,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">exe</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nan</a>
               </li>
             
             <div class="clearfix"></div>
