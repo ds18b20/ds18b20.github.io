@@ -156,6 +156,204 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-01-WhatisJava" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/06/Java-01-WhatisJava/">Java-01-What is Java</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/06/Java-01-WhatisJava/" class="archive-article-date">
+  	<time datetime="2018-03-06T12:25:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="What-is-Java"><a href="#What-is-Java" class="headerlink" title="What is Java"></a>What is Java</h1><p>Java technology is both a programming language and a platform.</p>
+<p>Java programs are compiled and interpreted. Compilation translate Java code to an intermediate language called Java bytecode.  bytecode is in turn parsed and run(interpreted) by the Java Virtual Machine(JVM)-a translator between Java language and a underlying operating system and hardware. A compiled Java bytecode can run on any system that has a version of JVM.</p>
+<p>The Java platform is a software-only platform that can run on top of most hardware platforms. It consists of the JVM and the Java API.</p>
+<p>Java Platform comes in 3 versions:</p>
+<ul>
+<li>Java SE(Java Platform, Standard Edition) for desktop and sever applications.</li>
+<li>Java EE(Java Platform, Enterprise Edition) for web and enterprise applications.</li>
+<li>Java ME(Java Platform, Micro Edition) for applications running on resource-constrained devices(embedded device).</li>
+</ul>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p>New to Java programming</p>
+<p><a href="https://www.ibm.com/developerworks/java/newto/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/java/newto/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Start</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/06/Java-01-WhatisJava/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-28-unittest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/25/Python-28-unittest/">Python-28-unittest</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/25/Python-28-unittest/" class="archive-article-date">
+  	<time datetime="2018-02-25T04:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>编写单元测试模块，对自己的代码进行测试。</p>
+<h2 id="对象模块"><a href="#对象模块" class="headerlink" title="对象模块"></a>对象模块</h2><p>例如，先自己写一个模块。具体实现功能为，从dict类继承得到一个新类Dict，并给它添加一个访问属性的功能。保存为mydict.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加访问属性的功能</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dict</span><span class="params">(dict)</span>:</span></span><br><span class="line">    <span class="comment"># 关键字参数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></span><br><span class="line">        <span class="comment"># 传入一个字典kw</span></span><br><span class="line">        super(Dict, self).__init__(**kw)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">'Dict has no attribute: %s'</span> % key)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        self[key] = value</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试模块"><a href="#测试模块" class="headerlink" title="测试模块"></a>测试模块</h2><p>接下来编写测试模块，保存为mydict_test.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> mydict <span class="keyword">import</span> Dict</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_init</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict(a=<span class="number">1</span>, b=<span class="string">'test'</span>)</span><br><span class="line">        self.assertEqual(d.a, <span class="number">1</span>)</span><br><span class="line">        self.assertEqual(d.b, <span class="string">'test'</span>)</span><br><span class="line">        self.assertTrue(isinstance(d, dict))</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_key</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        d[<span class="string">'key'</span>] = <span class="string">'value'</span></span><br><span class="line">        self.assertEqual(d.key, <span class="string">'value'</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attr</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        d.key = <span class="string">'value'</span></span><br><span class="line">        self.assertTrue(<span class="string">'key'</span> <span class="keyword">in</span> d)</span><br><span class="line">        self.assertEqual(d[<span class="string">'key'</span>], <span class="string">'value'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_keyerror</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(KeyError):</span><br><span class="line">            value = d[<span class="string">'empty'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attrerror</span><span class="params">(self)</span>:</span></span><br><span class="line">        d = Dict()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
+
+<p>直接在mydict_dict.py目录下运行此Py文件。</p>
+<p>测试模块中的测试方法，需要以test开头。不然执行那个测试模块时不会自动运行。</p>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令行下</span></span><br><span class="line">python mydict_test.py</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">unittest</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/25/Python-28-unittest/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-27-CustomizeClass" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1019,214 +1217,9 @@
 
 
   
-    <article id="post-Python-21-ClassAttrInstanceAttr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/19/Python-21-ClassAttrInstanceAttr/">Python-21-ClassAttrInstanceAttr</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/19/Python-21-ClassAttrInstanceAttr/" class="archive-article-date">
-  	<time datetime="2018-02-19T13:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    name = <span class="string">'Student'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部引用</span></span><br><span class="line">Student.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内部引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    name = <span class="string">'Student'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">innerFunc</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(Student.name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">Student.name = <span class="string">'abc'</span></span><br></pre></td></tr></table></figure>
-
-<p>类的属性，无论是内部引用还是外部引用，都要使用<code>Class.attribute</code>的方式。</p>
-<h1 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span></span></span><br><span class="line">        self.name = 'Student'</span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部引用</span></span><br><span class="line">s.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内部引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span></span></span><br><span class="line">        self.name = 'Student'</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.name)</span><br><span class="line">s = Student(<span class="string">'Tom'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="comment"># 只是演示，不推荐这样</span></span><br><span class="line">s.name = <span class="string">'abc'</span></span><br></pre></td></tr></table></figure>
-
-<p>实例的属性，内部引用使用<code>self.attribute</code>，外部引用时使用<code>instance.attribute</code>的方式。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>实现每创建一个实例，计数加一的功能：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        <span class="comment"># 此处就是引用了Class的属性</span></span><br><span class="line">        Student.count += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 测试:</span></span><br><span class="line"><span class="keyword">if</span> Student.count != <span class="number">0</span>:</span><br><span class="line">    print(<span class="string">'测试失败!'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    bart = Student(<span class="string">'Bart'</span>)</span><br><span class="line">    <span class="keyword">if</span> Student.count != <span class="number">1</span>:</span><br><span class="line">        print(<span class="string">'测试失败!'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lisa = Student(<span class="string">'Bart'</span>)</span><br><span class="line">        <span class="keyword">if</span> Student.count != <span class="number">2</span>:</span><br><span class="line">            print(<span class="string">'测试失败!'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'Students:'</span>, Student.count)</span><br><span class="line">            print(<span class="string">'测试通过!'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>由于count是Class属性，故引用时需要Student.count的方式。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Class Attribute</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Instance Attribute</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/19/Python-21-ClassAttrInstanceAttr/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-20-PartialFunction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/18/Python-20-PartialFunction/">Python-20-PartialFunction</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/18/Python-20-PartialFunction/" class="archive-article-date">
-  	<time datetime="2018-02-18T14:35:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="偏函数的应用场合"><a href="#偏函数的应用场合" class="headerlink" title="偏函数的应用场合"></a>偏函数的应用场合</h1><p>利用已有函数，固定一部分参数，得到另一个函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line">int2 = functools.partial(int, base=<span class="number">2</span>)</span><br><span class="line">int2(<span class="string">'1000000'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出为64</p>
-<p>这样就以函数int()得到了一个新函数，名为int2()。</p>
-<p>注意，调用int2()时，可以更改默认你参数base为其他值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>int2(<span class="string">'1000000'</span>, base=<span class="number">10</span>)</span><br><span class="line"><span class="number">1000000</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>其实是把已有函数后的参数，以*args和**kw的方式传入。包含参数名时，以**kw的方式传入。不包含参数名时，以*args的方式传入。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">max2 = functools.partial(max, <span class="number">10</span>)</span><br><span class="line">max2(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)</span><br></pre></td></tr></table></figure>
-
-<p>相当于，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">args = (<span class="number">10</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)</span><br><span class="line">max(*args)</span><br></pre></td></tr></table></figure>
-
-<p>输出为10</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Partial Function</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/18/Python-20-PartialFunction/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/23/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/25/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/23/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/25/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2799,6 +2792,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">nan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">setx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
               </li>
             
             <div class="clearfix"></div>

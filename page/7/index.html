@@ -156,6 +156,265 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ESP32-uPython-03-connectWiFi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/ESP32-uPython-03-connectWiFi/">ESP32-uPython-03-connectWiFi</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/ESP32-uPython-03-connectWiFi/" class="archive-article-date">
+  	<time datetime="2020-04-11T23:28:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ESP32站点模式-STA"><a href="#ESP32站点模式-STA" class="headerlink" title="ESP32站点模式(STA)"></a>ESP32站点模式(STA)</h1><h2 id="搜索热点"><a href="#搜索热点" class="headerlink" title="搜索热点"></a>搜索热点</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">wifi = network.WLAN(network.STA_IF) <span class="comment"># 创建一个Wifi站点</span></span><br><span class="line">wifi.active(<span class="literal">True</span>)       <span class="comment"># 激活该站点</span></span><br><span class="line">ap_list = wifi.scan()             <span class="comment"># 扫描周围的可用网络</span></span><br><span class="line"></span><br><span class="line">print(ap_list)</span><br></pre></td></tr></table></figure>
+
+<p>获取当前设备的MAC地址，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.config(<span class="string">"mac"</span>)</span><br><span class="line"><span class="string">b'$o(z*('</span></span><br></pre></td></tr></table></figure>
+
+<p>判断是否已经有效连接，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.isconnected()</span><br></pre></td></tr></table></figure>
+
+<p>连接到热点，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.connect(<span class="string">'ssid'</span>, <span class="string">'password'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>显示当前连接信息，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>wifi.ifconfig()  </span><br><span class="line">(<span class="string">'192.168.0.117'</span>, <span class="string">'255.255.255.0'</span>, <span class="string">'192.168.0.1'</span>, <span class="string">'192.168.0.1'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出格式为，</p>
+<ul>
+<li>内外IP</li>
+<li>子网掩码</li>
+<li>网关</li>
+<li>DNS</li>
+</ul>
+<h2 id="连接已知热点"><a href="#连接已知热点" class="headerlink" title="连接已知热点"></a>连接已知热点</h2><p>模块connectWiFi.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> network</span><br><span class="line"> </span><br><span class="line">    ssid = <span class="string">"yourNetworkName"</span></span><br><span class="line">    password =  <span class="string">"yourNetworkPassword"</span></span><br><span class="line"> </span><br><span class="line">    station = network.WLAN(network.STA_IF)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> station.isconnected() == <span class="literal">True</span>:</span><br><span class="line">        print(<span class="string">"Already connected"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"> </span><br><span class="line">    station.active(<span class="literal">True</span>)</span><br><span class="line">    station.connect(ssid, password)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> station.isconnected() == <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line">    print(<span class="string">"Connection successful"</span>)</span><br><span class="line">    print(station.ifconfig())</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> connectWiFi <span class="keyword">as</span> wifi</span><br><span class="line"></span><br><span class="line">wifi.connect()</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动时自动连接"><a href="#启动时自动连接" class="headerlink" title="启动时自动连接"></a>启动时自动连接</h2><p>如果要在设备启动时自动连接到WiFi，只需要把连接过程的代码添加到<code>main.py</code>内执行即可。</p>
+<h1 id="ESP32热点模式-AP"><a href="#ESP32热点模式-AP" class="headerlink" title="ESP32热点模式(AP)"></a>ESP32热点模式(AP)</h1><p>将设备配置成热点模式的话，可以在没有专用无线路由器的情况下让其他设备以站点模式接入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line"></span><br><span class="line">ap = network.wifi(network.AP_IF) <span class="comment"># 创建一个热点</span></span><br><span class="line">ap.active(<span class="literal">True</span>)         <span class="comment"># 激活热点</span></span><br><span class="line">ap.config(essid=<span class="string">'ESP-AP'</span>) <span class="comment"># 为热点配置essid（即热点名称）</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h2><p><code>class network.WLAN(mode)</code></p>
+<p>参数<code>mode</code>：模式</p>
+<ul>
+<li><code>network.STA_IF</code> 站点模式，连接到上游WiFi接入点</li>
+<li><code>network.AP_IF</code> 热点模式，允许其他WiFi客户端连接</li>
+</ul>
+<p>实例化一个WLAN对象，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network</span><br><span class="line">wlan = network.WLAN(network.STA_IF)    <span class="comment">#创建WLAN对象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="wlan-active-is-active"><a href="#wlan-active-is-active" class="headerlink" title="wlan.active(is_active)"></a>wlan.active(is_active)</h3><p>函数说明：带有参数时，为是否激活WiFi，不带参数为查询当前状态。</p>
+<p><code>is_active</code>：是否激活</p>
+<ul>
+<li><code>True</code> 激活网络接口</li>
+<li><code>False</code> 停用网络接口</li>
+</ul>
+<h3 id="wlan-scan"><a href="#wlan-scan" class="headerlink" title="wlan.scan()"></a>wlan.scan()</h3><p>函数说明：扫描可用的无线网络（仅在STA接口上进行扫描），返回有关WiFi接入点信息的元组列表。</p>
+<p><code>(ssid, bssid, channel, RSSI, authmode, hidden)</code><br><code>bssid</code>：接入点的硬件地址，以二进制形式返回为字节对象。可以使用<code>ubinascii.hexlify()</code>将其转换为ASCII格式<br><code>authmode</code>：</p>
+<ul>
+<li><code>AUTH_OPEN = 0</code></li>
+<li><code>AUTH_WEP = 1</code></li>
+<li><code>AUTH_WPA_PSK = 2</code></li>
+<li><code>AUTH_WPA2_PSK = 3</code></li>
+<li><code>AUTH_WPA_WPA2_PSK = 4</code></li>
+<li><code>AUTH_MAX = 6</code></li>
+</ul>
+<p><code>hidden</code>：</p>
+<ul>
+<li><code>False</code> 可见</li>
+<li><code>True</code> 隐藏</li>
+</ul>
+<h3 id="wlan-isconnected"><a href="#wlan-isconnected" class="headerlink" title="wlan.isconnected()"></a>wlan.isconnected()</h3><p>函数说明：检查站点是否连接到AP。<br>在STA模式下，如果连接到WiFi接入点并具有有效的IP地址则返回True，否则返回False。<br>在AP模式下，当站点连接时返回True，否则返回False。</p>
+<h3 id="wlan-connect-essid-password"><a href="#wlan-connect-essid-password" class="headerlink" title="wlan.connect(essid, password)"></a>wlan.connect(essid, password)</h3><p>函数说明：连接到无线网络。</p>
+<p><code>essid</code>：WiFi名称<br><code>password</code>：WiFi密码</p>
+<h3 id="wlan-config-essid-channel"><a href="#wlan-config-essid-channel" class="headerlink" title="wlan.config(essid, channel)"></a>wlan.config(essid, channel)</h3><p>函数说明： 获取接口的MAC adddress或者设置WiFi接入点名称和WiFi通道。</p>
+<p><code>essid</code>：WiFi账户名<br><code>channel</code>：WiFi通道</p>
+<h3 id="wlan-ifconfig-ip-mask-gateway-dns"><a href="#wlan-ifconfig-ip-mask-gateway-dns" class="headerlink" title="wlan.ifconfig([(ip,mask, gateway, dns)])"></a>wlan.ifconfig([(ip,mask, gateway, dns)])</h3><p>函数说明：<br>不带参数时，返回一个4元组(ip, subnet_mask, gateway, DNS_server)。</p>
+<p><code>ip</code>：IP地址<br><code>mask</code>：子网掩码<br><code>gateway</code>：网关</p>
+<p>带参数时，配置静态IP。例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wlan.ifconfig(config = (<span class="string">'192.168.0.4'</span>, <span class="string">'255.255.255.0'</span>, <span class="string">'192.168.0.1'</span>, <span class="string">'8.8.8.8'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="wlan-disconnect"><a href="#wlan-disconnect" class="headerlink" title="wlan.disconnect()"></a>wlan.disconnect()</h3><p>函数说明：断开与当前连接的无线网络的连接。</p>
+<h3 id="wlan-status"><a href="#wlan-status" class="headerlink" title="wlan.status()"></a>wlan.status()</h3><p>函数说明：返回无线连接的当前状态。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/zhangyufeikk/article/details/93202554" target="_blank" rel="noopener">https://blog.csdn.net/zhangyufeikk/article/details/93202554</a></p>
+<p><a href="http://www.1zlab.com/wiki/micropython-esp32/wifi/" target="_blank" rel="noopener">http://www.1zlab.com/wiki/micropython-esp32/wifi/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WiFi</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/ESP32-uPython-03-connectWiFi/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ESP32-uPython-02-uPyCraft" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">ESP32-uPython-02-uPyCraft</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/ESP32-uPython-02-uPyCraft/" class="archive-article-date">
+  	<time datetime="2020-04-11T23:06:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="uPyCraft"><a href="#uPyCraft" class="headerlink" title="uPyCraft"></a>uPyCraft</h1><p>上一篇介绍了通过串口实现python console的方法，但是只适合简单的验证，如果要正式开发则需要一个方便的IDE环境。这里介绍一个建议的开发环境，叫做uPyCraft。</p>
+<p>uPyCraft本身也是由Python开发，然后生成的二进制可执行程序。源码可以参考这里<a href="https://github.com/DFRobot/uPyCraft_src。" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft_src。</a></p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>熊这里可以得到最新版本的程序<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
+<p>由于这个可执行文件本身包含运行所需的所有资源，所以只要下载对应版本的单个可执行文件，然后本地执行即可。</p>
+<p><strong>注意</strong>，想要参考程序自带的example的时候，会发现点击File-Examples并没有任何选项显示。通过查看源代码发现，默认程序会到本机Document下的某位置寻找Examples文件。位置在<code>C:\Users\&lt;USER_NAME&gt;\AppData\Local\uPyCraft</code>。在<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">github</a>上下载并解压examples文件夹到上述位置，即可看到Examples。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>具体使用方法参见，<a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">https://github.com/DFRobot/uPyCraft</a></p>
+<p><a href="https://dfrobot.gitbooks.io/upycraft_cn/2.1下载和安装upyCraft.html" target="_blank" rel="noopener">https://dfrobot.gitbooks.io/upycraft_cn/2.1%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85upyCraft.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">uPyCraft</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ESP32//" class="article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/ESP32-uPython-02-uPyCraft/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ESP32-uPython-01-firmware" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -955,208 +1214,9 @@ conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)<
 
 
   
-    <article id="post-C-03-WeakFunc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/C-03-WeakFunc/">C-03-WeakFunc</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/C-03-WeakFunc/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="error-redefinition-of-weak-func"><a href="#error-redefinition-of-weak-func" class="headerlink" title="error: redefinition of weak func"></a>error: redefinition of <em>weak func</em></h1><p>使用下面例子中的方式定义weak类型的函数时，一般需要专门对weak的函数进行重写。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__attribute__(( weak )) <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">__weak <span class="keyword">void</span> function-name(<span class="keyword">void</span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时注意不能把重写的函数写在同一个c文件里，否则会报错<code>redefinition of function-name</code>。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.microchip.com/forums/m820872.aspx" target="_blank" rel="noopener">https://www.microchip.com/forums/m820872.aspx</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">weak</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/C-03-WeakFunc/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-FreeRTOS-02-delay" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/FreeRTOS-02-delay/">FreeRTOS-02-delay</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/FreeRTOS-02-delay/" class="archive-article-date">
-  	<time datetime="2020-02-11T05:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="两种delay"><a href="#两种delay" class="headerlink" title="两种delay"></a>两种delay</h1><p>FreeRTOS有两种自带的delay函数，一个是vTaskDelay和vTaskDelayUntil。二者的区别就是后者专为精确生成延时而设计的。</p>
-<p>在CubeMX自动生成的代码时，都经过一层封装。</p>
-<ul>
-<li>vTaskDelay被封装成了osDelay</li>
-<li>vTaskDelayUntil被封装成了osDelayUntil</li>
-</ul>
-<p>对于osDelay</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************** Generic Wait Functions *******************************/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief   Wait for Timeout (Time Delay)</span></span><br><span class="line"><span class="comment">* @param   millisec      time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelay</span></span><br><span class="line">  TickType_t ticks = millisec / portTICK_PERIOD_MS;</span><br><span class="line">  </span><br><span class="line">  vTaskDelay(ticks ? ticks : <span class="number">1</span>);          <span class="comment">/* Minimum delay = 1 tick */</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于vTaskDelayUntil</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @brief  Delay a task until a specified time</span></span><br><span class="line"><span class="comment">* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the </span></span><br><span class="line"><span class="comment">*          task was last unblocked. PreviousWakeTime must be initialised with the current time</span></span><br><span class="line"><span class="comment">*          prior to its first use (PreviousWakeTime = osKernelSysTick() )</span></span><br><span class="line"><span class="comment">* @param   millisec    time delay value</span></span><br><span class="line"><span class="comment">* @retval  status code that indicates the execution status of the function.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> INCLUDE_vTaskDelayUntil</span></span><br><span class="line">  TickType_t ticks = (millisec / portTICK_PERIOD_MS);</span><br><span class="line">  vTaskDelayUntil((TickType_t *) PreviousWakeTime, ticks ? ticks : <span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osOK;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  (<span class="keyword">void</span>) millisec;</span><br><span class="line">  (<span class="keyword">void</span>) PreviousWakeTime;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> osErrorResource;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>vTaskDelay的延时指的是从delay函数被调用的一刻开始计数，直到计数（计时）结束；</p>
-<p>而vTaskDelayUntil的延时是从Task离开阻塞态开始，到下一次进入就绪态为止的时常。因此可以精确的控制loop的周期，适合需要更精确计时的场合。</p>
-<p>值得注意的是，后者需要多提供一个参数<code>PreviousWakeTime</code>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">osStatus <span class="title">osDelay</span> <span class="params">(<span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 只要一个延时长度的参数</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">osStatus <span class="title">osDelayUntil</span> <span class="params">(<span class="keyword">uint32_t</span> *PreviousWakeTime, <span class="keyword">uint32_t</span> millisec)</span>  <span class="comment">// 还需要前一个时间点</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/yangguang-it/p/7059790.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangguang-it/p/7059790.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">delay</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/FreeRTOS//" class="article-tag-list-link color4">FreeRTOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/FreeRTOS-02-delay/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2729,6 +2789,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">nan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">setx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
               </li>
             
             <div class="clearfix"></div>

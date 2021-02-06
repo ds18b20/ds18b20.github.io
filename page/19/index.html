@@ -156,6 +156,364 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL-SQLite-01-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/SQL-SQLite-01-basic/">Python-SQL-01-SQLite</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/14/SQL-SQLite-01-basic/" class="archive-article-date">
+  	<time datetime="2018-04-14T13:27:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h1><p>SQLite是一个开源的嵌入式数据库，由于其数据库就是一个单独的文件，方便嵌入到各种应用程序中。而且SQLite本身是由C编写而成，所以速度快，体积小。</p>
+<p>主要特点如下，</p>
+<ul>
+<li><p>不需要一个单独的服务器进程或操作的系统（无服务器的）。</p>
+</li>
+<li><p>SQLite 不需要配置，这意味着不需要安装或管理。</p>
+</li>
+<li><p>一个完整的 SQLite 数据库是存储在一个单一的跨平台的磁盘文件。</p>
+</li>
+<li><p>SQLite 是非常小的，是轻量级的，完全配置时小于 400KiB，省略可选功能配置时小于250KiB。</p>
+</li>
+<li><p>SQLite 是自给自足的，这意味着不需要任何外部的依赖。</p>
+</li>
+<li><p>SQLite 事务是完全兼容 ACID 的，允许从多个进程或线程安全访问。</p>
+</li>
+<li><p>SQLite 支持 SQL92（SQL2）标准的大多数查询语言的功能。</p>
+</li>
+<li><p>SQLite 使用 ANSI-C 编写的，并提供了简单和易于使用的 API。</p>
+</li>
+<li><p>SQLite 可在 UNIX（Linux, Mac OS-X, Android, iOS）和 Windows（Win32, WinCE, WinRT）中运行。</p>
+<p><a href="https://wizardforcel.gitbooks.io/tutorialspoint-db/content/sqlite/61.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/tutorialspoint-db/content/sqlite/61.html</a></p>
+</li>
+</ul>
+<h1 id="SQLite命令"><a href="#SQLite命令" class="headerlink" title="SQLite命令"></a>SQLite命令</h1><p>与关系型数据库进行交互的标准SQLite命令类似于SQL命令。主要有CREATE，SELECT，INSERT，UPDATE，DELETE，和DROP。根据它们的操作性质可以分为以下三类：</p>
+<h2 id="DDL-数据定义语言"><a href="#DDL-数据定义语言" class="headerlink" title="DDL - 数据定义语言"></a>DDL - 数据定义语言</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CREATE</td>
+<td>创建一个新的表，一个表的视图，或者数据库中的其他对象。</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>修改数据库中的某个已有的数据库对象，比如一个表。</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>删除整个表，或者表的视图，或者数据库中的其他对象。</td>
+</tr>
+</tbody></table>
+<h2 id="DML-数据操作语言"><a href="#DML-数据操作语言" class="headerlink" title="DML - 数据操作语言"></a>DML - 数据操作语言</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>INSERT</td>
+<td>创建一条记录。</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>修改记录。</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除记录。</td>
+</tr>
+</tbody></table>
+<h2 id="DQL-数据查询语言"><a href="#DQL-数据查询语言" class="headerlink" title="DQL - 数据查询语言"></a>DQL - 数据查询语言</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT</td>
+<td>从一个或多个表中检索某些记录。</td>
+</tr>
+</tbody></table>
+<h1 id="Python操作SQLite"><a href="#Python操作SQLite" class="headerlink" title="Python操作SQLite"></a>Python操作SQLite</h1><p>Python发行版本默认内置了操作SQLite的库sqlite3，使用前直接<code>import sqlite3</code>即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line">conn = sqlite3.connect(<span class="string">'sqlite_test.db'</span>)</span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"></span><br><span class="line">com = <span class="string">"SELECT COUNT(*) FROM sqlite_master WHERE type=\'table\' AND name=\'%s\'"</span> % <span class="string">'shop'</span></span><br><span class="line">print(com)</span><br><span class="line"></span><br><span class="line">cursor.execute(com)</span><br><span class="line">values = cursor.fetchall()</span><br><span class="line">print(values)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+<p>操作数据库之前需要连接到数据库文件，这样的一个连接称为一个Connection。</p>
+<p>成功连接到数据库之后，要执行SQL语句需要先打开游标(cursor)，通过游标执行语句。</p>
+<p>操作完成之后必须关闭cursor和connect。<strong>关于cursor详见参考</strong></p>
+<p>像上面的例子中，查询语句包含参数时，可以使用？通配，并在逗号后按顺序加上参数组成的tuple。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line">conn = sqlite3.connect(<span class="string">'sqlite_test.db'</span>)</span><br><span class="line"></span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"></span><br><span class="line">cursor.execute(<span class="string">"SELECT COUNT(*) FROM sqlite_master WHERE type=? AND name=?"</span>, (<span class="string">'table'</span>, <span class="string">'shop'</span>))</span><br><span class="line">values = cursor.fetchall()</span><br><span class="line">print(values)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+<p>或者使用python自带的字符串格式化方法format来实现类似效果。</p>
+<h2 id="判断表是否存在"><a href="#判断表是否存在" class="headerlink" title="判断表是否存在"></a>判断表是否存在</h2><p>由于一个数据库文件中可以存储多个表，故有时需要判断某个表时候已经创建，这时候可以使用上面例子中的语句来实现。</p>
+<p><code>SELECT COUNT(*) FROM sqlite_master WHERE type=&#39;table&#39; AND name=&#39;&lt;Table Name&gt;&#39;</code></p>
+<p>返回结果为[(1,)]时，则该表<Table Name>已经存在。</p>
+<p>类似地，如果要返回保存表的数目，可以去掉AND后面的name条件，<code>SELECT COUNT(*) FROM sqlite_master WHERE type=&#39;table&#39;</code></p>
+<p><strong>注意，出现引号嵌套时，注意是否需要对引号进行转义处理。</strong></p>
+<h2 id="sqlite-master表"><a href="#sqlite-master表" class="headerlink" title="sqlite_master表"></a>sqlite_master表</h2><p>上文中已经出现了sqlite_master这个表名，它储存了数据库中描述表的关键信息。</p>
+<h2 id="添加表"><a href="#添加表" class="headerlink" title="添加表"></a>添加表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> &lt;表名&gt; (<span class="keyword">id</span> <span class="built_in">varchar</span>(<span class="number">20</span>) PRIMARY <span class="keyword">KEY</span>, <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> &lt;表名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>DROP TABLE会删除表的结构和储存的数据，而且属于SQL中的DDL，执行不需要COMMIT。执行后不能恢复，所以此命令要慎用。删除储存的数据时候可以使用TRUNCATE或者DELETE命令。<strong>详见参考部分内容</strong></p>
+<h2 id="插入行"><a href="#插入行" class="headerlink" title="插入行"></a>插入行</h2><p>语法为<code>INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)]  VALUES (value1, value2, value3,...valueN)</code></p>
+<p>或者插入完整的一行，<code>INSERT INTO TABLE_NAME VALUES (value1,value2,value3,...valueN)</code>，此时要注意value的顺序。</p>
+<h2 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h2><p>语法<code>DELETE FROM 表名称 WHERE 列名称 = 值</code></p>
+<p>删除所有行时，可以<code>DELETE FROM table_name</code>。虽然所有行内容被删除，但是表的结构，属性和索引都是完整的。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>在SqlServer存储过程中使用Cursor（游标）操作记录</p>
+<p><a href="https://blog.csdn.net/yixiaotian1988/article/details/7907431" target="_blank" rel="noopener">https://blog.csdn.net/yixiaotian1988/article/details/7907431</a></p>
+<p>Sql中truncate，delete以及drop的区别</p>
+<p><a href="https://www.cnblogs.com/baibo123/p/7906070.html" target="_blank" rel="noopener">https://www.cnblogs.com/baibo123/p/7906070.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">SQLite</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/14/SQL-SQLite-01-basic/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL-02-Select" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/SQL-02-Select/">SQL-02-Select</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/14/SQL-02-Select/" class="archive-article-date">
+  	<time datetime="2018-04-14T01:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>select用于从数据库中按条件查询，返回一个二维表，这个二维表包含列名和每一行的数据。</p>
+<h2 id="基本查询命令"><a href="#基本查询命令" class="headerlink" title="基本查询命令"></a>基本查询命令</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> &lt;表名&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>上述命令返回<code>&lt;表名&gt;</code>的所有列。</p>
+<p>实际上，<code>FROM 表名</code>部分不是必需的，比如，</p>
+<p><code>SELECT 1+1;</code></p>
+<p>返回结果统一是一个二维表，列名：1+1，值：2</p>
+<p>故可以使用这个小trick检测数据库是否连接成功。</p>
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件<span class="number">1</span>&gt; <span class="keyword">AND</span> &lt;条件<span class="number">2</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>例如<code>SELECT * FROM students WHERE score &gt;= 80 AND gender = &#39;M&#39;;</code></p>
+<h2 id="投影查询"><a href="#投影查询" class="headerlink" title="投影查询"></a>投影查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span>, 列<span class="number">2</span>, 列<span class="number">3</span> <span class="keyword">FROM</span> ...</span><br><span class="line"><span class="keyword">SELECT</span> 列<span class="number">1</span> 别名<span class="number">1</span>, 列<span class="number">2</span> 别名<span class="number">2</span>, 列<span class="number">3</span> 别名<span class="number">3</span> <span class="keyword">FROM</span> ...</span><br></pre></td></tr></table></figure>
+
+<p>指定列名返回结果；</p>
+<p>还可以给列重新命名。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名<span class="number">1</span>&gt; &lt;列名<span class="number">2</span>&gt;;</span><br><span class="line"><span class="keyword">SELECT</span> &lt;列名&gt; <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> &lt;条件&gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;列名&gt; <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在基本查询语句后加上<code>ORDER BY &lt;列名&gt;</code>，默认为从低到高排序；</p>
+<p>加上多个列名来实现多重排序；</p>
+<p>加上<code>DESC</code>来从高到低排序。</p>
+<h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> &lt;表名&gt; <span class="keyword">WHERE</span> ...；</span><br></pre></td></tr></table></figure>
+
+<p>除了COUNT()之外还有其他聚合函数，</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUM</td>
+<td>计算某一列的合计值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>计算某一列的平均值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>计算某一列的最大值</td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>计算某一列的最小值</td>
+</tr>
+</tbody></table>
+<p>注意，MAX和MIN并不局限于数值类型。如果是字符串类型，MAX返回排序最后的字符，MIN相反。</p>
+<p>另外，聚合查询的WHERE条件如果没有匹配到任何结果，那么COUNT会返回0，而MAX/MIN/AVG/SUM会返回null。</p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = <span class="number">2</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> class_id = n;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用GROUP BY分组功能简化上述操作，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> class_id, <span class="keyword">COUNT</span>(*) <span class="keyword">num</span> <span class="keyword">FROM</span> students <span class="keyword">GROUP</span> <span class="keyword">BY</span> class_id;</span><br></pre></td></tr></table></figure>
+
+<p>同样，GROUP BY后可以加多个分组列名，实现多重分组。</p>
+<p><strong>注意：聚合查询的&lt;查询列&gt;中，只能放入分组的列，即GROUP BY后面的列。</strong></p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>SQL允许同时从多张表中查询数据，语法为，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> &lt;表<span class="number">1</span>&gt; &lt;表<span class="number">2</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>返回结果是一个二维表，<strong>行数为表1和表2行数的乘积，列数为二者的和。</strong></p>
+<p>为了避免各表中的列名重复，可以使用上文中投影查询中提到的方法，给列重命名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    students.id <span class="keyword">sid</span>,</span><br><span class="line">    students.name,</span><br><span class="line">    students.gender,</span><br><span class="line">    students.score,</span><br><span class="line">    classes.id cid,</span><br><span class="line">    classes.name cname</span><br><span class="line"><span class="keyword">FROM</span> students, classes;</span><br></pre></td></tr></table></figure>
+
+<p>也可以给表更名，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.id <span class="keyword">sid</span>,</span><br><span class="line">    s.name,</span><br><span class="line">    s.gender,</span><br><span class="line">    s.score,</span><br><span class="line">    c.id cid,</span><br><span class="line">    c.name cname</span><br><span class="line"><span class="keyword">FROM</span> students s, classes c;</span><br></pre></td></tr></table></figure>
+
+<p>加上判断语句，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.id <span class="keyword">sid</span>,</span><br><span class="line">    s.name,</span><br><span class="line">    s.gender,</span><br><span class="line">    s.score,</span><br><span class="line">    c.id cid,</span><br><span class="line">    c.name cname</span><br><span class="line"><span class="keyword">FROM</span> students s, classes c</span><br><span class="line"><span class="keyword">WHERE</span> s.gender = <span class="string">'M'</span> <span class="keyword">AND</span> c.id = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> s.id, s.name, s.class_id, c.name class_name, s.gender, s.score</span><br><span class="line"><span class="keyword">FROM</span> students s</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> classes c</span><br><span class="line"><span class="keyword">ON</span> s.class_id = c.id;</span><br></pre></td></tr></table></figure>
+
+<p>INNER JOIN查询的写法是：</p>
+<ol>
+<li>先确定主表，仍然使用<code>FROM &lt;表1&gt;</code>的语法；</li>
+<li>再确定需要连接的表，使用<code>INNER JOIN &lt;表2&gt;</code>的语法；</li>
+<li>然后确定连接条件，使用<code>ON &lt;条件...&gt;</code>，这里的条件是<code>s.class_id = c.id</code>，表示<code>students</code>表的<code>class_id</code>列与<code>classes</code>表的<code>id</code>列相同的行需要连接；</li>
+<li>可选：加上<code>WHERE</code>子句、<code>ORDER BY</code>等子句。</li>
+</ol>
+<p>ing。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>连接查询</p>
+<p><a href="https://liaoxuefeng.com/wiki/001508284671805d39d23243d884b8b99f440bfae87b0f4000/001509167103179399448cb200549bdab7651a5e9167597000" target="_blank" rel="noopener">https://liaoxuefeng.com/wiki/001508284671805d39d23243d884b8b99f440bfae87b0f4000/001509167103179399448cb200549bdab7651a5e9167597000</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">select</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/14/SQL-02-Select/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1204,212 +1562,9 @@
 
 
   
-    <article id="post-Numpy-15-ravel-flatten-reshape" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/31/Numpy-15-ravel-flatten-reshape/">Numpy-15-ravel-flatten-reshape</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/31/Numpy-15-ravel-flatten-reshape/" class="archive-article-date">
-  	<time datetime="2018-03-31T07:27:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>从结果上看，三者都可以实现把一个多维的array压平为一维。ravel和flatten的区别在于是返回拷贝(copy)还是返回视图(view)，对copy做的修改不会影响原array。</p>
-<p>添加内容中。。。</p>
-<h1 id="ravel"><a href="#ravel" class="headerlink" title="ravel"></a>ravel</h1><h1 id="flatten"><a href="#flatten" class="headerlink" title="flatten"></a>flatten</h1><h1 id="reshape-1"><a href="#reshape-1" class="headerlink" title="reshape(-1)"></a>reshape(-1)</h1><p><code>array.reshape(x, -1)</code>只关注行数x，列数自动计算。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>numpy 辨异 （五）—— numpy.ravel() vs numpy.flatten()</p>
-<p><a href="https://blog.csdn.net/lanchunhui/article/details/50354978" target="_blank" rel="noopener">https://blog.csdn.net/lanchunhui/article/details/50354978</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flatten</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ravel</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reshape</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/31/Numpy-15-ravel-flatten-reshape/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-32-zip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/31/Python-32-zip/">Python-32-zip</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/31/Python-32-zip/" class="archive-article-date">
-  	<time datetime="2018-03-31T06:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">b = (<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">y = list(zip(a, b))</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0, 3), (1, 4), (2, 5)]</span><br></pre></td></tr></table></figure>
-
-<p>a和b长度不同时，按较短的序列长度来组合。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(a,b))</span><br><span class="line">[(<span class="number">0</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">5</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(zip(b,a))</span><br><span class="line">[(<span class="number">3</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">5</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
-
-<h1 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = list(zip(*y))</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
-
-<p>得到，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0, 1, 2), (3, 4, 5)]</span><br></pre></td></tr></table></figure>
-
-<p>可以看到这就是上面输入的a和b。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">zip</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/31/Python-32-zip/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/18/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/20/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/18/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/20/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2982,6 +3137,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">nan</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">setx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
               </li>
             
             <div class="clearfix"></div>
