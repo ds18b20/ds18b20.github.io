@@ -156,27 +156,122 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-os-Windows-02-symbolic-link" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PyQt-03-pyqtgraph-pyqt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/06/os-Windows-02-symbolic-link/">os-Windows-02-symbolic-link</a>
+      <a class="article-title" href="/2021/04/18/PyQt-03-pyqtgraph-pyqt/">PyQt-03-pyqtgraph-pyqt</a>
     </h1>
   
 
         
-        <a href="/2021/02/06/os-Windows-02-symbolic-link/" class="archive-article-date">
-  	<time datetime="2021-02-06T05:39:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-06</time>
+        <a href="/2021/04/18/PyQt-03-pyqtgraph-pyqt/" class="archive-article-date">
+  	<time datetime="2021-04-17T15:32:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Windows下的symbolic-link"><a href="#Windows下的symbolic-link" class="headerlink" title="Windows下的symbolic link"></a>Windows下的symbolic link</h1><p>command：<code>mklink Symbolic_Link Target</code></p>
+        <h1 id="pyqtgraph-pyqt"><a href="#pyqtgraph-pyqt" class="headerlink" title="pyqtgraph + pyqt"></a>pyqtgraph + pyqt</h1><p>sample:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import python standard modules</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># import 3rd party libraries</span></span><br><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore, QtGui</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> pyqtgraph</span><br><span class="line"></span><br><span class="line"><span class="comment">#import local python</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Window</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        super(Window, self).__init__(parent)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Simple Sinc Function UI'</span>)</span><br><span class="line">        self.window = pyqtgraph.GraphicsWindow()</span><br><span class="line">        self.window.setBackground(<span class="string">'w'</span>)</span><br><span class="line">        self.sinc_plot = self.window.addPlot(title=<span class="string">'Sinc Function'</span>)</span><br><span class="line">        self.sinc_plot.showGrid(x=<span class="literal">True</span>, y=<span class="literal">True</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">        self.setCentralWidget(self.window)</span><br><span class="line">        <span class="comment"># add a slider to change the coda of the sinc function</span></span><br><span class="line">        self.slider = QtGui.QSlider(QtCore.Qt.Horizontal)</span><br><span class="line">        <span class="comment"># initialize the time axis (this will not change)</span></span><br><span class="line">        self.t = numpy.linspace(<span class="number">-0.500</span>, <span class="number">0.500</span>, num=<span class="number">1000</span>, endpoint=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># a will change the coda of the sinc function</span></span><br><span class="line">        self.a = <span class="number">1</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># add the menubar with the method createMenuBar()</span></span><br><span class="line">        self.createMenuBar()</span><br><span class="line">        <span class="comment"># add the dock widget with the method createDockWidget()</span></span><br><span class="line">        self.createDockWidget()</span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># first set the default value to a</span></span><br><span class="line">        self.slider.setValue(self.a)</span><br><span class="line">        <span class="comment"># when the slider is changed, it emits a signal and sends an integer value</span></span><br><span class="line">        <span class="comment"># we send that value to a method called slider value changed that updates the value a</span></span><br><span class="line">        self.slider.valueChanged.connect(self.sliderValueChanged)</span><br><span class="line">        <span class="comment"># finally draw the curve</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createMenuBar</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># file menu actions</span></span><br><span class="line">        exit_action = QtGui.QAction(<span class="string">'&amp;Exit'</span>, self)</span><br><span class="line">        exit_action.triggered.connect(self.close)</span><br><span class="line">        <span class="comment"># create an instance of menu bar</span></span><br><span class="line">        menubar = self.menuBar()</span><br><span class="line">        <span class="comment"># add file menu and file menu actions</span></span><br><span class="line">        file_menu = menubar.addMenu(<span class="string">'&amp;File'</span>)</span><br><span class="line">        file_menu.addAction(exit_action)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createDockWidget</span><span class="params">(self)</span>:</span></span><br><span class="line">        my_dock_widget = QtGui.QDockWidget()</span><br><span class="line">        my_dock_widget.setObjectName(<span class="string">'Control Panel'</span>)</span><br><span class="line">        my_dock_widget.setAllowedAreas(QtCore.Qt.TopDockWidgetArea | QtCore.Qt.BottomDockWidgetArea)</span><br><span class="line">        <span class="comment"># create a widget to house user control widgets like sliders</span></span><br><span class="line">        my_house_widget = QtGui.QWidget()</span><br><span class="line">        <span class="comment"># every widget should have a layout, right?</span></span><br><span class="line">        my_house_layout = QtGui.QVBoxLayout()</span><br><span class="line">        <span class="comment"># add the slider initialized in __init__() to the layout</span></span><br><span class="line">        my_house_layout.addWidget(self.slider)</span><br><span class="line">        <span class="comment"># apply the 'house' layout to the 'house' widget</span></span><br><span class="line">        my_house_widget.setLayout(my_house_layout)</span><br><span class="line">        <span class="comment"># set the house widget 'inside' the dock widget</span></span><br><span class="line">        my_dock_widget.setWidget(my_house_widget)</span><br><span class="line">        <span class="comment"># now add the dock widget to the main window</span></span><br><span class="line">        self.addDockWidget(QtCore.Qt.BottomDockWidgetArea, my_dock_widget)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sliderValueChanged</span><span class="params">(self, int_value)</span>:</span></span><br><span class="line">        self.a = int_value</span><br><span class="line">        self.drawCurve()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">drawCurve</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.sinc_plot.clear()</span><br><span class="line">        self.my_sinc = numpy.sin(self.a * numpy.pi * self.t) / (self.a * numpy.pi * self.t)</span><br><span class="line">        self.sinc_plot.plot(self.t, self.my_sinc, pen=<span class="string">'b'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    app.setApplicationName(<span class="string">'Simple Sinc Function UI'</span>)</span><br><span class="line">    window = Window()</span><br><span class="line">    window.show()</span><br><span class="line">    app.exec_()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>GUI界面如下：</p>
+<p><img src="http://4.bp.blogspot.com/-U_PGlNOl2Zg/VikNg-KunPI/AAAAAAAAAbo/tt68kd2GdHM/s320/030_SimpleSincFuntion.png" alt=""></p>
+<p>参考：</p>
+<p>Building Better Python User Interfaces with PyQt and pyqtgraph</p>
+<p><a href="http://compgeophys.blogspot.com/2015/10/building-better-python-user-interfaces.html" target="_blank" rel="noopener">http://compgeophys.blogspot.com/2015/10/building-better-python-user-interfaces.html</a></p>
+<p>Create custom plots in PyQt with PyQtGraph</p>
+<p><a href="https://www.learnpyqt.com/tutorials/plotting-pyqtgraph/" target="_blank" rel="noopener">https://www.learnpyqt.com/tutorials/plotting-pyqtgraph/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/18/PyQt-03-pyqtgraph-pyqt/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Opencv-07-project3Dto2D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/17/Opencv-07-project3Dto2D/">Opencv-07-project3Dto2D</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/17/Opencv-07-project3Dto2D/" class="archive-article-date">
+  	<time datetime="2021-04-17T14:49:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Estimate-pose"><a href="#Estimate-pose" class="headerlink" title="Estimate pose"></a>Estimate pose</h1><p>读入camera mtx和distortion coefficients：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load previously saved data</span></span><br><span class="line"><span class="keyword">with</span> np.load(<span class="string">'B.npz'</span>) <span class="keyword">as</span> X:</span><br><span class="line">    mtx, dist, _, _ = [X[i] <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="string">'mtx'</span>,<span class="string">'dist'</span>,<span class="string">'rvecs'</span>,<span class="string">'tvecs'</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>准备原图上绘制坐标轴的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw</span><span class="params">(img, corners, imgpts)</span>:</span></span><br><span class="line">    corner = tuple(corners[<span class="number">0</span>].ravel())</span><br><span class="line">    img = cv2.line(img, corner, tuple(imgpts[<span class="number">0</span>].ravel()), (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>), <span class="number">5</span>)</span><br><span class="line">    img = cv2.line(img, corner, tuple(imgpts[<span class="number">1</span>].ravel()), (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">5</span>)</span><br><span class="line">    img = cv2.line(img, corner, tuple(imgpts[<span class="number">2</span>].ravel()), (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+
+<p>这里的img是背景图片；</p>
+<p>corners是所有网格焦点的列表，最后选取第一个焦点作为描绘坐标用的起始点；</p>
+<p>imgpts是描绘坐标用的终止点的列表。</p>
+<p>准备工作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, <span class="number">30</span>, <span class="number">0.001</span>)</span><br><span class="line">objp = np.zeros((<span class="number">6</span>*<span class="number">7</span>,<span class="number">3</span>), np.float32)</span><br><span class="line">objp[:,:<span class="number">2</span>] = np.mgrid[<span class="number">0</span>:<span class="number">7</span>,<span class="number">0</span>:<span class="number">6</span>].T.reshape(<span class="number">-1</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">axis = np.float32([[<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>], [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>], [<span class="number">0</span>,<span class="number">0</span>,<span class="number">-3</span>]]).reshape(<span class="number">-1</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意，objp是一个[6, 7, 3]的Array，这个Array作为理想的输入3D坐标点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">array([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">2.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">3.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">4.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">5.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">6.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">2.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">4.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">5.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">6.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       ...</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">1.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">2.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">3.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">5.</span>, <span class="number">5.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">6.</span>, <span class="number">5.</span>, <span class="number">0.</span>]], dtype=float32)</span><br></pre></td></tr></table></figure>
+
+<p>循环处理所有的图像：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> glob.glob(<span class="string">'left*.jpg'</span>):</span><br><span class="line">    img = cv2.imread(fname)</span><br><span class="line">    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</span><br><span class="line">    ret, corners = cv2.findChessboardCorners(gray, (<span class="number">7</span>,<span class="number">6</span>),<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        corners2 = cv2.cornerSubPix(gray,corners,(<span class="number">11</span>,<span class="number">11</span>),(<span class="number">-1</span>,<span class="number">-1</span>),criteria)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Find the rotation and translation vectors.</span></span><br><span class="line">        rvecs, tvecs, inliers = cv2.solvePnPRansac(objp, corners2, mtx, dist)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># project 3D points to image plane</span></span><br><span class="line">        imgpts, jac = cv2.projectPoints(axis, rvecs, tvecs, mtx, dist)</span><br><span class="line"></span><br><span class="line">        img = draw(img,corners2,imgpts)</span><br><span class="line">        cv2.imshow(<span class="string">'img'</span>,img)</span><br><span class="line">        k = cv2.waitKey(<span class="number">0</span>) &amp; <span class="number">0xff</span></span><br><span class="line">        <span class="keyword">if</span> k == <span class="string">'s'</span>:</span><br><span class="line">            cv2.imwrite(fname[:<span class="number">6</span>]+<span class="string">'.png'</span>, img)</span><br><span class="line"></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>其中，cv2.solvePnPRansac用于寻找从3D的objp投影到2D的corners2所需要的旋转矩阵rvecs和平移矩阵tvecs。</p>
+<p>cv2.projectPoints用于将3D的坐标轴<code>axis = np.float32([[3,0,0], [0,3,0], [0,0,-3]]).reshape(-1,3)</code>投影到Chessboard所在的2D平面上。</p>
+<p>得到如下效果：</p>
+<p><img src="http://labs.eecs.tottori-u.ac.jp/sd/Member/oyamada/OpenCV/html/_images/pose_1.jpg" alt=""></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://labs.eecs.tottori-u.ac.jp/sd/Member/oyamada/OpenCV/html/py_tutorials/py_calib3d/py_pose/py_pose.html" target="_blank" rel="noopener">http://labs.eecs.tottori-u.ac.jp/sd/Member/oyamada/OpenCV/html/py_tutorials/py_calib3d/py_pose/py_pose.html</a></p>
+<p><a href="https://blog.csdn.net/panpan_jiang1/article/details/86063152" target="_blank" rel="noopener">https://blog.csdn.net/panpan_jiang1/article/details/86063152</a></p>
 
       
 
@@ -190,11 +285,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">project 3D to 2D</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">symbolic link</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pose estimation</a>
         		</li>
       		
 		</ul>
@@ -206,7 +301,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/os//" class="article-tag-list-link color3">os</a>
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
         		</li>
       		
 		</ul>
@@ -215,7 +310,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/06/os-Windows-02-symbolic-link/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/17/Opencv-07-project3Dto2D/">展开全文 >></a>
         </p>
       
 
@@ -245,75 +340,36 @@
 
 
   
-    <article id="post-os-Windows-01-sets-setx" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Python-66-glob" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/06/os-Windows-01-sets-setx/">os-Windows-01-sets-setx</a>
+      <a class="article-title" href="/2021/04/17/Python-66-glob/">Python-66-glob</a>
     </h1>
   
 
         
-        <a href="/2021/02/06/os-Windows-01-sets-setx/" class="archive-article-date">
-  	<time datetime="2021-02-06T03:36:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-06</time>
+        <a href="/2021/04/17/Python-66-glob/" class="archive-article-date">
+  	<time datetime="2021-04-17T12:56:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Windows下配置系统环境变量"><a href="#Windows下配置系统环境变量" class="headerlink" title="Windows下配置系统环境变量"></a>Windows下配置系统环境变量</h1><p>配置系统环境变量分为两种情况，一种是仅限于当前运行环境时下有效，另一种是永久有效。</p>
-<p>第一种通过commandline或者batchfile的<code>set</code>命令来实现；</p>
-<p>而后者可以通过三种方式来实现：</p>
-<ol>
-<li><code>setx</code>命令</li>
-<li>修改注册表设置</li>
-<li>我的电脑-〉属性-〉高级-〉环境变量，来设置</li>
-</ol>
-<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>直接键入<code>set</code>可以查看当前所有的环境变量。</p>
-<p>键入<code>set 变量名</code>可以指定查看某一变量名，例如<code>set path</code>可以查看path变量名对应的值。</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>键入<code>set 变量名=值</code>可以指定设置某一变量名的值。注意，这种方式会覆盖掉变量名原来的值。如果要给指定变量添加值，应该如下设置：</p>
-<p><code>set 变量名=%变量名%;变量内容</code>， 例如<code>set path=%path%;new_value:</code></p>
-<h2 id="setx"><a href="#setx" class="headerlink" title="setx"></a>setx</h2><p>setx的使用方法和set相同，只是用setx进行的修改会一直有效。</p>
-<h1 id="常用环境变量"><a href="#常用环境变量" class="headerlink" title="常用环境变量"></a>常用环境变量</h1><ul>
-<li>%<strong>AllUsersProfile</strong>%: 局部 返回所有“用户配置文件”的位置。 {所有用户文件目录 – C:\Documents and Settings\All Users}</li>
-<li>%<strong>AppData</strong>%: 局部 返回默认情况下应用程序存储数据的位置。 {当前用户数据文件夹 – C:\Documents and Settings\wy\Application Data}</li>
-<li>%<strong>Cd</strong>%: 局部 返回当前目录字符串。</li>
-<li>%<strong>CmdCmdLine</strong>%: 局部 返回用来启动当前的 Cmd.exe 的准确命令行。</li>
-<li>%<strong>CmdExtVersion</strong>%: 系统 返回当前的“命令处理程序扩展”的版本号。</li>
-<li>%<strong>CommonProgramFiles</strong>%: {文件通用目录 – C:\Program Files\Common Files}</li>
-<li>%<strong>ComputerName</strong>%: 系统 返回计算机的名称。 {计算机名 – IBM-B63851E95C9}</li>
-<li>%<strong>ComSpec</strong>%: 系统 返回命令行解释器可执行程序的准确路径。 C:\WINDOWS\system32\cmd.exe</li>
-<li>%<strong>Date</strong>%: 系统 返回当前日期。使用与 date /t 命令相同的格式。由 Cmd.exe 生成。有关 date 命令的详细信息，请参阅 Date。</li>
-<li>%<strong>ErrorLevel</strong>%: 系统 返回最近使用过的命令的错误代码。通常用非零值表示错误。</li>
-<li>%<strong>HomeDrive</strong>%: 系统 返回连接到用户主目录的本地工作站驱动器号。基于主目录值的设置。用户主目录是在“本地用户和组”中指定的。 {当前用户根目录 – C:}</li>
-<li>%<strong>HomePath</strong>%: 系统 返回用户主目录的完整路径。基于主目录值的设置。用户主目录是在“本地用户和组”中指定的。 {当前用户路径 – \Documents and Settings\wy}</li>
-<li>%<strong>HomeShare</strong>%: 系统 返回用户的共享主目录的网络路径。基于主目录值的设置。用户主目录是在“本地用户和组”中指定的。</li>
-<li>%<strong>LogonSever</strong>%: 局部 返回验证当前登录会话的域控制器的名称。</li>
-<li>%<strong>Number_Of_Processors</strong>%: 系统 指定安装在计算机上的处理器的数目。 {处理器个数 – 1}</li>
-<li>%<strong>Os</strong>%: 系统 返回操作系统的名称。Windows 2000 将操作系统显示为 Windows_NT。 {操作系统名 – Windows_NT}</li>
-<li>%<strong>Path</strong>%: 系统 指定可执行文件的搜索路径。</li>
-<li>%<strong>PathExt</strong>%: 系统 返回操作系统认为可执行的文件扩展名的列表。</li>
-<li>%<strong>Processor_Architecture</strong>%: 系统 返回处理器的芯片体系结构。值: x86，IA64。 {处理器芯片架构 – x86}</li>
-<li>%<strong>Processor_Identfier</strong>%: 系统 返回处理器说明。</li>
-<li>%<strong>Processor_Level</strong>%: 系统 返回计算机上安装的处理器的型号。 {处理器型号 – 6}</li>
-<li>%<strong>Processor_Revision</strong>%: 系统 返回处理器修订号的系统变量。 {处理器修订号 – 0905}</li>
-<li>%<strong>ProgramFiles</strong>%: {程序默认安装目录 – C:\Program Files}</li>
-<li>%<strong>Prompt</strong>%: 局部 返回当前解释程序的命令提示符设置。由 Cmd.exe 生成。 $P$G</li>
-<li>%<strong>Random</strong>%: 系统 返回 0 到 32767 之间的任意十进制数字。由 Cmd.exe 生成。</li>
-<li>%<strong>SystemDrive</strong>%: 系统 返回包含 Windows XP 根目录（即系统根目录）的驱动器。 {系统根目录 – C:}</li>
-<li>%<strong>SystemRoot</strong>%: 系统 返回 Windows XP 根目录的位置。 {系统目录 – C:\WINDOWS}</li>
-<li>%<strong>Temp</strong>%: 系统和用户 返回对当前登录用户可用的应用程序所使用的默认临时目录。有些应用程序需要 TEMP，而其它应用程序则需要 TMP。 {当前用户临时文件夹 – C:\DOCUME<del>1\wy\LOCALS</del>1\Temp}</li>
-<li>%<strong>Time</strong>%: 系统 返回当前时间。使用与 time /t 命令相同的格式。由 Cmd.exe 生成。9:16:25.05</li>
-<li>%<strong>UserDomain</strong>%: 局部 返回包含用户帐户的域的名称。 {包含用户帐号的域 – IBM-B63851E95C9}</li>
-<li>%<strong>UserName</strong>%: 局部 返回当前登录的用户的名称。 {当前用户名 – wy}</li>
-<li>%<strong>UserProfile</strong>%: 局部 返回当前用户的配置文件的位置。 {当前用户目录 – C:\Documents and Settings\wy}</li>
-<li>%<strong>WinDir</strong>%: 系统 返回操作系统目录的位置。 {系统目录 – C:\WINDOWS}</li>
-</ul>
-<p>参考：<a href="https://www.cnblogs.com/springsnow/p/12610417.html" target="_blank" rel="noopener">https://www.cnblogs.com/springsnow/p/12610417.html</a></p>
+        <h1 id="glob-on-MacOS"><a href="#glob-on-MacOS" class="headerlink" title="glob on MacOS"></a>glob on MacOS</h1><p>data文件夹下有001.txt, 002.txt, 003.txt</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line">file_list = glob.glob(<span class="string">"data/*.txt"</span>)</span><br><span class="line">print(file_list)</span><br></pre></td></tr></table></figure>
+
+<p>在MacOS下执行代码后的输出结果：</p>
+<p>[‘data/002.txt’, ‘data/000.txt’, ‘data/001.txt’]</p>
+<p>而在Windows下的输出结果则是：</p>
+<p>[‘data/000.txt’, ‘data/001.txt’, ‘data/002.txt’]</p>
+<p>综上，考虑到平台通用性，最好将glob得到的结果sort之后再输出。<code>sorted(glob.glob(&#39;*.png&#39;))</code></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/6773584/how-is-pythons-glob-glob-ordered" target="_blank" rel="noopener">https://stackoverflow.com/questions/6773584/how-is-pythons-glob-glob-ordered</a></p>
 
       
 
@@ -327,15 +383,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">set</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">setx</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">glob</a>
         		</li>
       		
 		</ul>
@@ -347,7 +395,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/os//" class="article-tag-list-link color3">os</a>
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -356,7 +404,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/06/os-Windows-01-sets-setx/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/17/Python-66-glob/">展开全文 >></a>
         </p>
       
 
@@ -386,30 +434,30 @@
 
 
   
-    <article id="post-Pandas-16-nan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PointCloud-04-gltf2usdz" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/Pandas-16-nan/">Pandas-16-nan</a>
+      <a class="article-title" href="/2021/03/30/PointCloud-04-gltf2usdz/">PointCloud-04-gltf2usdz</a>
     </h1>
   
 
         
-        <a href="/2021/01/23/Pandas-16-nan/" class="archive-article-date">
-  	<time datetime="2021-01-23T05:37:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
+        <a href="/2021/03/30/PointCloud-04-gltf2usdz/" class="archive-article-date">
+  	<time datetime="2021-03-29T15:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Nan"><a href="#Nan" class="headerlink" title="Nan"></a>Nan</h1><p>Pandas中的空元素用Nan来表示，但是判断某元素是不是Nan时，需要注意数据类型。</p>
-<p>如果该列类型是float，那么应该<code>numpy.isnan(元素)</code>或者<code>math.isnan(元素)</code>；</p>
-<p>如果该列类型是str，那么应该<code>元素==&quot;nan&quot;</code>。</p>
-<p>如果需要数据类型转换的话，可以<code>dataframe[&quot;COLUMN_NAME&quot;].astype(int或者str之类的类型)</code></p>
+        <h1 id="convert-3D-data-to-USDZ"><a href="#convert-3D-data-to-USDZ" class="headerlink" title="convert 3D data to USDZ"></a>convert 3D data to USDZ</h1><p>アニメーションを含むUSDZを生成する</p>
+<p><a href="https://qiita.com/noppefoxwolf/items/a2bfd85c902af163cde2" target="_blank" rel="noopener">https://qiita.com/noppefoxwolf/items/a2bfd85c902af163cde2</a></p>
+<p>gltf2usd</p>
+<p><a href="https://github.com/kcoley/gltf2usd" target="_blank" rel="noopener">https://github.com/kcoley/gltf2usd</a></p>
 
       
 
@@ -423,11 +471,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">gltf</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">nan</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">usdz</a>
         		</li>
       		
 		</ul>
@@ -439,7 +487,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        			<a href="/categories/PointCloud//" class="article-tag-list-link color1">PointCloud</a>
         		</li>
       		
 		</ul>
@@ -448,7 +496,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/23/Pandas-16-nan/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/30/PointCloud-04-gltf2usdz/">展开全文 >></a>
         </p>
       
 
@@ -478,32 +526,39 @@
 
 
   
-    <article id="post-Python-00-set" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PointCloud-03-pointcloud2mesh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/Python-00-set/">Python-00-set</a>
+      <a class="article-title" href="/2021/03/30/PointCloud-03-pointcloud2mesh/">PointCloud-03-pointcloud2mesh</a>
     </h1>
   
 
         
-        <a href="/2021/01/23/Python-00-set/" class="archive-article-date">
-  	<time datetime="2021-01-23T05:30:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
+        <a href="/2021/03/30/PointCloud-03-pointcloud2mesh/" class="archive-article-date">
+  	<time datetime="2021-03-29T15:08:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=set(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="open3d-generate-mesh-from-pointcloud"><a href="#open3d-generate-mesh-from-pointcloud" class="headerlink" title="open3d generate mesh from pointcloud"></a>open3d generate mesh from pointcloud</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http://www.open3d.org/docs/latest/tutorial/Advanced/pointcloud_outlier_removal.html</span></span><br><span class="line"><span class="keyword">import</span> open3d <span class="keyword">as</span> o3d</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># import glob</span></span><br><span class="line"><span class="comment"># import os</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_xyz</span><span class="params">(xyz_filename)</span>:</span></span><br><span class="line">    xyz = np.loadtxt(xyz_filename, skiprows=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> xyz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xyz2pcd</span><span class="params">(xyz)</span>:</span></span><br><span class="line">    pcd = o3d.geometry.PointCloud()</span><br><span class="line">    pcd.points = o3d.utility.Vector3dVector(xyz[:,:<span class="number">3</span>])</span><br><span class="line">    pcd.colors = o3d.utility.Vector3dVector(xyz[:,<span class="number">3</span>:<span class="number">6</span>]/<span class="number">255.0</span>)</span><br><span class="line">    pcd.normals = o3d.utility.Vector3dVector(xyz[:,<span class="number">6</span>:<span class="number">9</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> pcd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pcd2mesh</span><span class="params">(pcd, mesh_filename)</span>:</span></span><br><span class="line">    poisson_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd, depth=<span class="number">8</span>, width=<span class="number">0</span>, scale=<span class="number">1.1</span>, linear_fit=<span class="literal">False</span>)[<span class="number">0</span>]</span><br><span class="line">    o3d.io.write_triangle_mesh(mesh_filename, poisson_mesh)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"Load a ply point cloud"</span>)</span><br><span class="line">    xyz_filename=<span class="string">"sample.xyz"</span></span><br><span class="line">    xyz = read_xyz(xyz_filename)</span><br><span class="line">    pcd = xyz2pcd(xyz)</span><br><span class="line">    mesh_filename = <span class="string">"test_mesh.ply"</span></span><br><span class="line">    pcd2mesh(pcd, mesh_filename)</span><br></pre></td></tr></table></figure>
 
-<h2 id="remove"><a href="#remove" class="headerlink" title=".remove()"></a>.remove()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.remove(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://www.programiz.com/python-programming/methods/set/remove" target="_blank" rel="noopener">https://www.programiz.com/python-programming/methods/set/remove</a></p>
-<p>还有set的其他方法介绍</p>
+
+<p>xyz sample DATA: <a href="https://drive.google.com/drive/folders/1Ih_Zz9a6UcbUlaA-puEB_is7DYvXrb4w" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1Ih_Zz9a6UcbUlaA-puEB_is7DYvXrb4w</a></p>
+<p>5-Step Guide to generate 3D meshes from point clouds with Python</p>
+<p><a href="https://towardsdatascience.com/5-step-guide-to-generate-3d-meshes-from-point-clouds-with-python-36bad397d8ba" target="_blank" rel="noopener">https://towardsdatascience.com/5-step-guide-to-generate-3d-meshes-from-point-clouds-with-python-36bad397d8ba</a></p>
+<p>Surface Reconstruction</p>
+<p><a href="http://www.open3d.org/docs/latest/tutorial/Advanced/surface_reconstruction.html" target="_blank" rel="noopener">http://www.open3d.org/docs/latest/tutorial/Advanced/surface_reconstruction.html</a></p>
+<p>法线推定</p>
+<p><a href="https://jp.mathworks.com/help/vision/ref/pcnormals.html" target="_blank" rel="noopener">https://jp.mathworks.com/help/vision/ref/pcnormals.html</a></p>
+<p>Estimating Surface Normals in a PointCloud</p>
+<p><a href="https://blog.csdn.net/Qbinbinbin/article/details/106480148" target="_blank" rel="noopener">https://blog.csdn.net/Qbinbinbin/article/details/106480148</a></p>
 
       
 
@@ -517,85 +572,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/23/Python-00-set/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyQt-00-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/21/PyQt-00-basic/">PyQt-00-basic</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/21/PyQt-00-basic/" class="archive-article-date">
-  	<time datetime="2021-01-20T15:57:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p>PyQt有两个版本并行存在，PyQt4和PyQt5。其中PyQt4可运行在python2.*和python3.*中，而PyQt5只能运行在python3.*中。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">basic</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mesh</a>
         		</li>
       		
 		</ul>
@@ -607,7 +584,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/PyQt//" class="article-tag-list-link color5">PyQt</a>
+        			<a href="/categories/PointCloud//" class="article-tag-list-link color1">PointCloud</a>
         		</li>
       		
 		</ul>
@@ -616,7 +593,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/21/PyQt-00-basic/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/30/PointCloud-03-pointcloud2mesh/">展开全文 >></a>
         </p>
       
 
@@ -646,31 +623,34 @@
 
 
   
-    <article id="post-Pandas-15-astype" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Optics-01-wedge-prism" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/21/Pandas-15-astype/">Pandas-15-astype</a>
+      <a class="article-title" href="/2021/03/07/Optics-01-wedge-prism/">Optics-01-wedge-prism</a>
     </h1>
   
 
         
-        <a href="/2021/01/21/Pandas-15-astype/" class="archive-article-date">
-  	<time datetime="2021-01-20T15:48:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
+        <a href="/2021/03/07/Optics-01-wedge-prism/" class="archive-article-date">
+  	<time datetime="2021-03-07T04:33:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="pandas-astype"><a href="#pandas-astype" class="headerlink" title="pandas.astype"></a>pandas.astype</h1><p>更改所有列的类型：<code>df.astype(str)</code></p>
-<p>更改某一列或多个列的类型：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># using dictionary to convert specific columns </span></span><br><span class="line">convert_dict = &#123;<span class="string">'A'</span>: int, </span><br><span class="line">                <span class="string">'C'</span>: float</span><br><span class="line">               &#125; </span><br><span class="line">  </span><br><span class="line">df = df.astype(convert_dict)</span><br></pre></td></tr></table></figure>
-
-<p>参考：<a href="https://www.geeksforgeeks.org/change-data-type-for-one-or-more-columns-in-pandas-dataframe/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/change-data-type-for-one-or-more-columns-in-pandas-dataframe/</a></p>
+        <h1 id="wedge-prism-楔镜"><a href="#wedge-prism-楔镜" class="headerlink" title="wedge prism 楔镜"></a>wedge prism 楔镜</h1><p>楔镜又称光楔，常用于偏转入射光线的方向。</p>
+<p>偏向角θ=(n-1)A。其中n为光楔介质的折射率，A为光楔镜的顶角。</p>
+<p>光学仪器中常将两光楔组合在一起，使二者相对转动以产生不同的偏向角。</p>
+<p><a href="https://baike.baidu.com/item/%E5%85%89%E6%A5%94" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%85%89%E6%A5%94</a></p>
+<p>组合效果：</p>
+<p><a href="https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_ID=147" target="_blank" rel="noopener">https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_ID=147</a></p>
+<p><a href="http://www.surplus-optics.com/Wedge-Prisms-UV-Fused-Silica-Type-s/288.htm" target="_blank" rel="noopener">http://www.surplus-optics.com/Wedge-Prisms-UV-Fused-Silica-Type-s/288.htm</a></p>
+<p>两光楔偏转角和偏转角的关系，参见论文：<a href="https://www.researchgate.net/publication/236739605_Motion_control_of_the_wedge_prisms_in_Risley-prism-based_beam_steering_system_for_precise_target_tracking" target="_blank" rel="noopener">https://www.researchgate.net/publication/236739605_Motion_control_of_the_wedge_prisms_in_Risley-prism-based_beam_steering_system_for_precise_target_tracking</a></p>
 
       
 
@@ -684,11 +664,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">astype</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">wedge prism</a>
         		</li>
       		
 		</ul>
@@ -700,7 +676,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        			<a href="/categories/Optics//" class="article-tag-list-link color2">Optics</a>
         		</li>
       		
 		</ul>
@@ -709,7 +685,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/21/Pandas-15-astype/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/07/Optics-01-wedge-prism/">展开全文 >></a>
         </p>
       
 
@@ -739,30 +715,30 @@
 
 
   
-    <article id="post-PyQt-02-layout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PointCloud-02-outlier" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/PyQt-02-layout/">PyQt-02-layout</a>
+      <a class="article-title" href="/2021/03/07/PointCloud-02-outlier/">PointCloud-02-outlier</a>
     </h1>
   
 
         
-        <a href="/2021/01/19/PyQt-02-layout/" class="archive-article-date">
-  	<time datetime="2021-01-18T15:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+        <a href="/2021/03/07/PointCloud-02-outlier/" class="archive-article-date">
+  	<time datetime="2021-03-07T03:34:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="nested-layout"><a href="#nested-layout" class="headerlink" title="nested layout"></a>nested layout</h1><h1 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h1><p><img src="https://www.tutorialspoint.com/pyqt/images/example3.jpg" alt=""></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4.QtCore <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> PyQt4.QtGui <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">window</span><span class="params">()</span>:</span></span><br><span class="line">   app = QApplication(sys.argv)</span><br><span class="line">   win = QWidget()</span><br><span class="line"></span><br><span class="line">   b1 = QPushButton(<span class="string">"Button1"</span>)</span><br><span class="line">   b2 = QPushButton(<span class="string">"Button2"</span>)</span><br><span class="line">	</span><br><span class="line">   vbox = QVBoxLayout()</span><br><span class="line">   vbox.addWidget(b1)</span><br><span class="line">   vbox.addStretch()</span><br><span class="line">   vbox.addWidget(b2)</span><br><span class="line">   hbox = QHBoxLayout()</span><br><span class="line">	</span><br><span class="line">   b3 = QPushButton(<span class="string">"Button3"</span>)</span><br><span class="line">   b4 = QPushButton(<span class="string">"Button4"</span>)</span><br><span class="line">   hbox.addWidget(b3)</span><br><span class="line">   hbox.addStretch()</span><br><span class="line">   hbox.addWidget(b4)</span><br><span class="line"></span><br><span class="line">   vbox.addStretch()</span><br><span class="line">   vbox.addLayout(hbox)</span><br><span class="line">   win.setLayout(vbox)</span><br><span class="line"></span><br><span class="line">   win.setWindowTitle(<span class="string">"PyQt"</span>)</span><br><span class="line">   win.show()</span><br><span class="line">   sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">   window()</span><br></pre></td></tr></table></figure>
+        <h1 id="outlier-removal-filter"><a href="#outlier-removal-filter" class="headerlink" title="outlier removal filter"></a>outlier removal filter</h1><p>示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http://www.open3d.org/docs/latest/tutorial/Advanced/pointcloud_outlier_removal.html</span></span><br><span class="line"><span class="keyword">import</span> open3d <span class="keyword">as</span> o3d</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_inlier_outlier</span><span class="params">(cloud, ind)</span>:</span></span><br><span class="line">    inlier_cloud = cloud.select_by_index(ind)</span><br><span class="line">    outlier_cloud = cloud.select_by_index(ind, invert=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Showing outliers (red) and inliers (gray): "</span>)</span><br><span class="line">    outlier_cloud.paint_uniform_color([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">    inlier_cloud.paint_uniform_color([<span class="number">0.8</span>, <span class="number">0.8</span>, <span class="number">0.8</span>])</span><br><span class="line">    o3d.visualization.draw_geometries([inlier_cloud, outlier_cloud],</span><br><span class="line">                                      zoom=<span class="number">0.3412</span>,</span><br><span class="line">                                      front=[<span class="number">0.4257</span>, <span class="number">-0.2125</span>, <span class="number">-0.8795</span>],</span><br><span class="line">                                      lookat=[<span class="number">2.6172</span>, <span class="number">2.0475</span>, <span class="number">1.532</span>],</span><br><span class="line">                                      up=[<span class="number">-0.0694</span>, <span class="number">-0.9768</span>, <span class="number">0.2024</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"Load a ply point cloud, print it, and render it"</span>)</span><br><span class="line">    pcd = o3d.io.read_point_cloud(<span class="string">"0000000.ply"</span>, format=<span class="string">'ply'</span>)</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">"Statistical oulier removal"</span>)</span><br><span class="line">    cl, ind = pcd.remove_statistical_outlier(nb_neighbors=<span class="number">20</span>, std_ratio=<span class="number">10.0</span>)</span><br><span class="line">    <span class="comment"># display_inlier_outlier(pcd, ind)</span></span><br><span class="line">    </span><br><span class="line">    o3d.io.write_point_cloud(<span class="string">"0000000-f.ply"</span>, cl)</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://www.tutorialspoint.com/pyqt/pyqt_qboxlayout_class.htm" target="_blank" rel="noopener">https://www.tutorialspoint.com/pyqt/pyqt_qboxlayout_class.htm</a></p>
+<p>参考：<a href="http://www.open3d.org/docs/latest/tutorial/Advanced/pointcloud_outlier_removal.html" target="_blank" rel="noopener">http://www.open3d.org/docs/latest/tutorial/Advanced/pointcloud_outlier_removal.html</a></p>
 
       
 
@@ -775,104 +751,13 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">QTimer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">layout</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyQt//" class="article-tag-list-link color5">PyQt</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/PyQt-02-layout/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Pandas-14-filter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/Pandas-14-filter/">Pandas-14-filter</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/19/Pandas-14-filter/" class="archive-article-date">
-  	<time datetime="2021-01-18T15:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="pandas-filter"><a href="#pandas-filter" class="headerlink" title="pandas filter"></a>pandas filter</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df1 = df[(df[<span class="string">'Num1'</span>] &gt; <span class="number">3</span>) &amp; (df[<span class="string">'Num2'</span>] &lt; <span class="number">8</span>)]</span><br><span class="line"><span class="keyword">print</span> (df1)</span><br><span class="line">       Num1  Num2</span><br><span class="line">three     <span class="number">5</span>     <span class="number">4</span></span><br><span class="line">four      <span class="number">7</span>     <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/questions/44482095/dataframe-filtering-rows-by-column-values" target="_blank" rel="noopener">https://stackoverflow.com/questions/44482095/dataframe-filtering-rows-by-column-values</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">filter</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">outlier</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -883,7 +768,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/PointCloud//" class="article-tag-list-link color1">PointCloud</a>
         		</li>
       		
 		</ul>
@@ -892,7 +777,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/Pandas-14-filter/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/07/PointCloud-02-outlier/">展开全文 >></a>
         </p>
       
 
@@ -922,30 +807,31 @@
 
 
   
-    <article id="post-Pandas-13-add-new-columns" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Python-65-magic-method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/Pandas-13-add-new-columns/">Pandas-13-add-new-columns</a>
+      <a class="article-title" href="/2021/03/06/Python-65-magic-method/">Python-65-magic-method</a>
     </h1>
   
 
         
-        <a href="/2021/01/19/Pandas-13-add-new-columns/" class="archive-article-date">
-  	<time datetime="2021-01-18T15:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+        <a href="/2021/03/06/Python-65-magic-method/" class="archive-article-date">
+  	<time datetime="2021-03-06T14:57:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="pandas-add-new-columns"><a href="#pandas-add-new-columns" class="headerlink" title="pandas add new columns"></a>pandas add new columns</h1><p>pandas.concat方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">23</span>]:</span><br><span class="line">df = pd.DataFrame(columns=[<span class="string">'A'</span>])</span><br><span class="line">df</span><br><span class="line"></span><br><span class="line">Out[<span class="number">23</span>]:</span><br><span class="line">Empty DataFrame</span><br><span class="line">Columns: [A]</span><br><span class="line">Index: []</span><br><span class="line"></span><br><span class="line">In [<span class="number">24</span>]:    </span><br><span class="line">pd.concat([df,pd.DataFrame(columns=list(<span class="string">'BCD'</span>))])</span><br><span class="line"></span><br><span class="line">Out[<span class="number">24</span>]:</span><br><span class="line">Empty DataFrame</span><br><span class="line">Columns: [A, B, C, D]</span><br><span class="line">Index: []</span><br></pre></td></tr></table></figure>
+        <h1 id="Magic-Method"><a href="#Magic-Method" class="headerlink" title="Magic Method"></a>Magic Method</h1><p>Python中有一类特殊的函数，通常是以双下划线开头的一些特定名称的函数。这些函数约定实现一些class的特殊功能。</p>
+<h2 id="getitem-self-item"><a href="#getitem-self-item" class="headerlink" title="__getitem__(self, item)"></a>__getitem__(self, item)</h2><p>用于执行obj[“item”]操作。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueryWrapper</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        <span class="string">""" self.__getitem__(slice(x, y)) = self[x:y]"""</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(item, slice):</span><br><span class="line">            sql = self.sql + <span class="string">' LIMIT &#123;start&#125;, &#123;num&#125;'</span>.format(start=item.start, num=item.stop - item.start)</span><br><span class="line">            <span class="keyword">return</span> fetchall_to_dict((sql, self.params), db=self.db)</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://stackoverflow.com/questions/30926670/add-multiple-empty-columns-to-pandas-dataframe" target="_blank" rel="noopener">https://stackoverflow.com/questions/30926670/add-multiple-empty-columns-to-pandas-dataframe</a></p>
+<p><a href="https://segmentfault.com/q/1010000021002667" target="_blank" rel="noopener">https://segmentfault.com/q/1010000021002667</a></p>
 
       
 
@@ -959,11 +845,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">columns</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">magic method</a>
         		</li>
       		
 		</ul>
@@ -984,7 +866,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/Pandas-13-add-new-columns/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/06/Python-65-magic-method/">展开全文 >></a>
         </p>
       
 
@@ -1014,29 +896,47 @@
 
 
   
-    <article id="post-Pandas-12-pandas-add-str" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PointCloud-01-file-io" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/19/Pandas-12-pandas-add-str/">Pandas-12-pandas-add-str</a>
+      <a class="article-title" href="/2021/03/06/PointCloud-01-file-io/">PointCloud-01-file-io</a>
     </h1>
   
 
         
-        <a href="/2021/01/19/Pandas-12-pandas-add-str/" class="archive-article-date">
-  	<time datetime="2021-01-18T15:33:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+        <a href="/2021/03/06/PointCloud-01-file-io/" class="archive-article-date">
+  	<time datetime="2021-03-06T12:53:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="pandas-add-string"><a href="#pandas-add-string" class="headerlink" title="pandas add string"></a>pandas add string</h1><p>给一列数据添加前缀或者后缀的方法：</p>
-<p>如果该列数据的类型已经是str，则可以直接<code>df[&#39;col&#39;] = &#39;pre-&#39; + df[&#39;col&#39;]</code>不然，需要先做一次类型转换<code>df[&#39;col&#39;] = &#39;pre-&#39; + df[&#39;col&#39;].astype(str)</code></p>
-<p><a href="https://stackoverflow.com/questions/20025882/add-a-string-prefix-to-each-value-in-a-string-column-using-pandas" target="_blank" rel="noopener">https://stackoverflow.com/questions/20025882/add-a-string-prefix-to-each-value-in-a-string-column-using-pandas</a></p>
+        <h1 id="file-IO"><a href="#file-IO" class="headerlink" title="file IO"></a>file IO</h1><h2 id="use-open3d"><a href="#use-open3d" class="headerlink" title="use open3d"></a>use open3d</h2><p>安装<code>pip install open3d</code></p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> open3d <span class="keyword">as</span> o3d</span><br><span class="line"></span><br><span class="line">pcd = o3d.io.read_point_cloud(<span class="string">"data.pcd"</span>)</span><br><span class="line">print(pcd)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert open3d format to numpy array</span></span><br><span class="line"><span class="comment"># Here, you have the point cloud in numpy format. </span></span><br><span class="line">point_cloud_in_numpy = np.asarray(pcd.points) </span><br><span class="line"></span><br><span class="line">o3d.io.write_point_cloud(<span class="string">"data.pcd"</span>, pcd)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>By default, Open3D tries to infer the file type by the filename extension.</p>
+</blockquote>
+<p>可知，open3d通过文件后缀类型来判断3d point cloud数据的类型。</p>
+<p><a href="http://www.open3d.org/docs/latest/tutorial/Basic/file_io.html" target="_blank" rel="noopener">http://www.open3d.org/docs/latest/tutorial/Basic/file_io.html</a></p>
+<p><a href="https://stackoverflow.com/questions/36920562/python-plyfile-vs-pymesh" target="_blank" rel="noopener">https://stackoverflow.com/questions/36920562/python-plyfile-vs-pymesh</a></p>
+<h2 id="use-plyfile"><a href="#use-plyfile" class="headerlink" title="use plyfile"></a>use plyfile</h2><p>安装<code>pip install plyfile</code></p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> plyfile <span class="keyword">import</span> PlyData</span><br><span class="line"></span><br><span class="line">plydata = PlyData.read(<span class="string">'input.ply'</span>)</span><br><span class="line"></span><br><span class="line">vertex_data = plydata[<span class="string">'vertex'</span>].data <span class="comment"># numpy array with fields ['x', 'y', 'z']</span></span><br><span class="line">pts = np.zeros([vertex_data.size, <span class="number">3</span>])</span><br><span class="line">pts[:, <span class="number">0</span>] = vertex_data[<span class="string">'x'</span>]</span><br><span class="line">pts[:, <span class="number">1</span>] = vertex_data[<span class="string">'y'</span>]</span><br><span class="line">pts[:, <span class="number">2</span>] = vertex_data[<span class="string">'z'</span>]</span><br><span class="line"></span><br><span class="line">ret = np.dot(ROTATION_MATRIX, pts.T)  <span class="comment"># (3, N)</span></span><br><span class="line">plydata0[<span class="string">'vertex'</span>].data[<span class="string">"x"</span>] = ret[<span class="number">0</span>]</span><br><span class="line">plydata0[<span class="string">'vertex'</span>].data[<span class="string">"y"</span>] = ret[<span class="number">1</span>]</span><br><span class="line">plydata0[<span class="string">'vertex'</span>].data[<span class="string">"z"</span>] = ret[<span class="number">2</span>]</span><br><span class="line">plydata0.write(<span class="string">"output.ply"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/dranjan/python-plyfile" target="_blank" rel="noopener">https://github.com/dranjan/python-plyfile</a></p>
+<p><a href="https://www.programcreek.com/python/?CodeExample=read%20ply" target="_blank" rel="noopener">https://www.programcreek.com/python/?CodeExample=read%20ply</a></p>
+<h3 id="Header-in-plyfile"><a href="#Header-in-plyfile" class="headerlink" title="Header in plyfile"></a>Header in plyfile</h3><p>x/y/z：vertex_data[‘x’]/vertex_data[‘y’]/vertex_data[‘z’]</p>
+<p>r/g/b：vertex_data[‘red’]/vertex_data[‘green’]/vertex_data[‘blue’]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ply</span><br><span class="line">format ascii 1.0</span><br><span class="line">element vertex 4</span><br><span class="line">property float x</span><br><span class="line">property float y</span><br><span class="line">property float z</span><br><span class="line">property uchar red</span><br><span class="line">property uchar green</span><br><span class="line">property uchar blue</span><br><span class="line">end_header</span><br><span class="line">0.0 0.0 0.0 0 255 0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/dranjan/python-plyfile/issues/4" target="_blank" rel="noopener">https://github.com/dranjan/python-plyfile/issues/4</a></p>
 
       
 
@@ -1050,11 +950,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">string</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">file IO</a>
         		</li>
       		
 		</ul>
@@ -1066,7 +962,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/PointCloud//" class="article-tag-list-link color1">PointCloud</a>
         		</li>
       		
 		</ul>
@@ -1075,7 +971,151 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/19/Pandas-12-pandas-add-str/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/06/PointCloud-01-file-io/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Opencv-06-lens-calib" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/06/Opencv-06-lens-calib/">Opencv-06-lens-calib</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/06/Opencv-06-lens-calib/" class="archive-article-date">
+  	<time datetime="2021-03-06T12:37:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="lens-distortion-model"><a href="#lens-distortion-model" class="headerlink" title="lens distortion model"></a>lens distortion model</h1><h2 id="Rectilinear-Lens-Distortion-Model"><a href="#Rectilinear-Lens-Distortion-Model" class="headerlink" title="Rectilinear Lens Distortion Model"></a>Rectilinear Lens Distortion Model</h2><p>对于线性镜头模型，存在这两种主要的畸变要素:</p>
+<ul>
+<li>径向畸变（radial distortion）</li>
+<li>切向畸变（tangential distortion）</li>
+</ul>
+<p>$$<br>\begin{split}\begin{pmatrix}x_d\y_d\end{pmatrix} = \left[ 1 + k_1r^2 + k_2r^4 + k_3r^6\right]\begin{pmatrix}x_n\y_n\end{pmatrix} +  \begin{pmatrix}2p_1x_ny_n + p_2(r^2 + 2x_n^2)\p_1(r^2 + 2y^2) + 2p_2x{_n}y{_n}\end{pmatrix},<br>\label{eq:perspective_distortion}\end{split}<br>$$</p>
+<p>其中，<br>$$<br>r = \sqrt{x_n^2 + y_n^2}<br>$$<br>等号左侧是畸变后的像素坐标，等号右侧的第一项是径向畸变，第二项是切向畸变。参考<a href="https://www.qinxing.xyz/posts/b7ea425d/" target="_blank" rel="noopener">https://www.qinxing.xyz/posts/b7ea425d/</a></p>
+<h3 id="径向畸变"><a href="#径向畸变" class="headerlink" title="径向畸变"></a>径向畸变</h3><h4 id="畸变原因"><a href="#畸变原因" class="headerlink" title="畸变原因"></a>畸变原因</h4><p><img src="https://d3i71xaburhd42.cloudfront.net/63164c113128101f76b980487e89953eeac22fbc/2-Figure2-1.png" alt=""></p>
+<p>参考Paper：MODELLING OF CHROMATIC ABERRATION FOR HIGH PRECISION PHOTOGRAMMETRY</p>
+<p><a href="https://www.semanticscholar.org/paper/MODELLING-OF-CHROMATIC-ABERRATION-FOR-HIGH-Luhmann-Hastedt/63164c113128101f76b980487e89953eeac22fbc" target="_blank" rel="noopener">https://www.semanticscholar.org/paper/MODELLING-OF-CHROMATIC-ABERRATION-FOR-HIGH-Luhmann-Hastedt/63164c113128101f76b980487e89953eeac22fbc</a></p>
+<p>类似于下图人眼瞳孔的结构在镜头中引入了光圈的概念，而且光圈的位置并不能像瞳孔那样紧贴在晶状体上，导致以下的现象发生。</p>
+<p>由于标准球面镜对于远离光轴不同距离上的平行光线的折射能力不同（又称球面像差，具体来讲远离光轴处的折射能力更强），使得所有的平行光线无法汇聚到同一个焦点上。这又可以分为两种情况来讨论：</p>
+<ol>
+<li>光圈位于镜头前方时（上图中上方的模型），相比于理想模型（上图中中间的模型）像高变低了，表现在成像上就是桶形畸变；</li>
+<li>光圈位于镜头前方时（上图中下方的模型），相比于理想模型（上图中中间的模型）像高变高了,表现在成像上就是枕形畸变；</li>
+</ol>
+<p>畸变效果如下,</p>
+<p><img src="https://image.qinxing.xyz/20200508170829.jpg" alt=""></p>
+<p>img: <a href="https://www.qinxing.xyz/posts/b7ea425d/" target="_blank" rel="noopener">https://www.qinxing.xyz/posts/b7ea425d/</a></p>
+<h4 id="应对策略"><a href="#应对策略" class="headerlink" title="应对策略"></a>应对策略</h4><p>畸变的应对策略分为硬件方式和软件方式。</p>
+<p>硬件方式：</p>
+<ul>
+<li>调整光圈位置到紧贴镜片处，或者到焦点位置处</li>
+<li>更换球面镜为非球面镜</li>
+</ul>
+<p>软件方式：</p>
+<ul>
+<li>事先使用chessboard校准镜头参数，然后对成像结果进行修正。</li>
+</ul>
+<h3 id="切向畸变"><a href="#切向畸变" class="headerlink" title="切向畸变"></a>切向畸变</h3><h4 id="畸变原因-1"><a href="#畸变原因-1" class="headerlink" title="畸变原因"></a>畸变原因</h4><p>切向畸变是由于图像传感器安装角度存在偏差，使得成像平面和光轴不垂直所导致的。</p>
+<p><img src="https://jp.mathworks.com/help/vision/ref/cameracalibrator_tangentialdistortion.png" alt=""></p>
+<p>img: <a href="https://jp.mathworks.com/help/vision/ref/cameraintrinsics.html" target="_blank" rel="noopener">https://jp.mathworks.com/help/vision/ref/cameraintrinsics.html</a></p>
+<p>这种由于安装角度带来的畸变可以等效于在图像传感器和镜片之间加上一个楔镜（也称光楔，wedge-prism）。</p>
+<p>所谓切向畸变的效果如下图所示：</p>
+<p><img src="https://programming.vip/images/doc/6b3d35d2b6383ee84ef81428c0b53217.jpg" alt=""></p>
+<p>img: <a href="https://programming.vip/docs/fusion-series-of-unmanned-sensors-camera-internal-reference-calibration.html" target="_blank" rel="noopener">https://programming.vip/docs/fusion-series-of-unmanned-sensors-camera-internal-reference-calibration.html</a></p>
+<p><img src="https://www.researchgate.net/profile/Jun-Zhang-344/publication/260728375/figure/fig1/AS:613986148036622@1523397113973/Radial-and-tangential-distortion.png" alt=""></p>
+<p>img: <a href="https://www.researchgate.net/publication/260728375_Laboratory_calibration_of_star_sensor_with_installation_error_using_a_nonlinear_distortion_model" target="_blank" rel="noopener">https://www.researchgate.net/publication/260728375_Laboratory_calibration_of_star_sensor_with_installation_error_using_a_nonlinear_distortion_model</a></p>
+<h4 id="应对策略-1"><a href="#应对策略-1" class="headerlink" title="应对策略"></a>应对策略</h4><p>硬件方式：</p>
+<ul>
+<li>调整图像传感器安装角度，尽量减少角度偏差</li>
+</ul>
+<p>软件方式：</p>
+<ul>
+<li>类似于径向畸变的矫正方式，矫正过程可以一起实现</li>
+</ul>
+<h2 id="Fisheye-Lens-Distirtion-Model"><a href="#Fisheye-Lens-Distirtion-Model" class="headerlink" title="Fisheye Lens Distirtion Model"></a>Fisheye Lens Distirtion Model</h2><p>$$<br>\begin{split}\begin{pmatrix}x_d\y_d\end{pmatrix} = \frac{\theta}{r}\left[ 1 + k_1\theta^2 + k_2\theta^4 + k_3\theta^6 + k_4\theta^8\right]\begin{pmatrix}x_n\y_n\end{pmatrix},<br>\end{split}<br>$$</p>
+<p>其中，<br>$$<br>r = \sqrt{x_n^2 + y_n^2}<br>$$</p>
+<p>$$<br>\theta = \tan^{-1}(r)<br>$$</p>
+<p><a href="https://euratom-software.github.io/calcam/html/intro_theory.html" target="_blank" rel="noopener">https://euratom-software.github.io/calcam/html/intro_theory.html</a></p>
+<h1 id="lens-calib"><a href="#lens-calib" class="headerlink" title="lens calib"></a>lens calib</h1><h2 id="矫正算法"><a href="#矫正算法" class="headerlink" title="矫正算法"></a>矫正算法</h2><h2 id="加速算法"><a href="#加速算法" class="headerlink" title="加速算法"></a>加速算法</h2><p>Lookup Table</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_calibration</span><span class="params">()</span>:</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="comment"># 畸变校正</span></span><br><span class="line">    <span class="comment">#根据内参和畸变系数，建立了一个查找表，map1 map2设置为全局变量，所以这个函数只需要运行一次就好，不需要重复计算查找表。</span></span><br><span class="line">    newCameraMatrix = cv2.getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, <span class="number">1</span>, imageSize, <span class="number">0</span>)</span><br><span class="line">    map1, map2 = cv2.initUndistortRectifyMap(cameraMatrix, distCoeffs, <span class="literal">None</span>, newCameraMatrix[<span class="number">0</span>], imageSize, cv2.CV_16SC2);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 此函数根据map1 map2查找表进行畸变矫正，同一个镜头下的视频中map1 map2可以重复使用</span></span><br><span class="line">    frameCalibration = cv2.remap(frame, map1, map2, cv2.INTER_LINEAR);</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> map1,map2</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.qinxing.xyz/posts/b7ea425d/" target="_blank" rel="noopener">https://www.qinxing.xyz/posts/b7ea425d/</a></p>
+<h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h2 id="人眼结构示意图"><a href="#人眼结构示意图" class="headerlink" title="人眼结构示意图"></a>人眼结构示意图</h2><p><img src="https://acuvuevision.jp/sites/acuvue_jp/files/lp_image_1_085.jpg" alt="img"></p>
+<p>img: <a href="https://acuvuevision.jp/article/085" target="_blank" rel="noopener">https://acuvuevision.jp/article/085</a></p>
+<h2 id="球面像差"><a href="#球面像差" class="headerlink" title="球面像差"></a>球面像差</h2><p><img src="http://image.wangchao.net.cn/baike/1270678723270.jpg" alt=""></p>
+<p>img: <a href="http://tc.wangchao.net.cn/baike/detail_1174584.html" target="_blank" rel="noopener">http://tc.wangchao.net.cn/baike/detail_1174584.html</a></p>
+<h2 id="Calibration-Target"><a href="#Calibration-Target" class="headerlink" title="Calibration Target"></a>Calibration Target</h2><p><a href="https://boofcv.org/index.php?title=Camera_Calibration_Targets" target="_blank" rel="noopener">https://boofcv.org/index.php?title=Camera_Calibration_Targets</a></p>
+<p><a href="https://www.mrpt.org/downloads/camera-calibration-checker-board_9x7.pdf" target="_blank" rel="noopener">https://www.mrpt.org/downloads/camera-calibration-checker-board_9x7.pdf</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">lens calib</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/06/Opencv-06-lens-calib/">展开全文 >></a>
         </p>
       
 
@@ -1107,7 +1147,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2692,6 +2732,50 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wedge prism</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">outlier</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">lens calib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gltf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">usdz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mesh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">file IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">magic method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">project 3D to 2D</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pose estimation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">glob</a>
               </li>
             
             <div class="clearfix"></div>

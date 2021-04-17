@@ -156,27 +156,353 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Numpy-04-argmax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Git-00-SourceTreeError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/Numpy-04-argmax/">Numpy-04-argmax</a>
+      <a class="article-title" href="/2017/12/19/Git-00-SourceTreeError/">Git-00-SourceTreeError</a>
     </h1>
   
 
         
-        <a href="/2017/11/14/Numpy-04-argmax/" class="archive-article-date">
-  	<time datetime="2017-11-14T13:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+        <a href="/2017/12/19/Git-00-SourceTreeError/" class="archive-article-date">
+  	<time datetime="2017-12-18T15:27:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="np-argmax"><a href="#np-argmax" class="headerlink" title="np.argmax"></a>np.argmax</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.argmax(a)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">6</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.argmax(b)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Vertical comparation</span></span><br><span class="line"><span class="comment"># ----</span></span><br><span class="line"><span class="comment"># ----</span></span><br><span class="line"><span class="comment"># ----</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.argmax(b, axis=<span class="number">0</span>)</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], dtype=int64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Horizonal comparation</span></span><br><span class="line"><span class="comment"># ||||</span></span><br><span class="line"><span class="comment"># ||||</span></span><br><span class="line"><span class="comment"># ||||</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.argmax(b, axis=<span class="number">1</span>)</span><br><span class="line">array([<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>], dtype=int64)</span><br></pre></td></tr></table></figure>
+        <h1 id="SourceTree-error"><a href="#SourceTree-error" class="headerlink" title="SourceTree error"></a>SourceTree error</h1><p>Mark some bug/error when using Git soft SourceTree.</p>
+<h2 id="“Authentication-via-SSH-keys-failed”"><a href="#“Authentication-via-SSH-keys-failed”" class="headerlink" title="“Authentication via SSH keys failed”"></a>“Authentication via SSH keys failed”</h2><p>When using SourceTree to clone a project from github, you may get this error of “通过SSH密钥认证失败”, or “Authentication via SSH keys failed”. </p>
+<p>Just change the setting like:</p>
+<p><code>Tool -&gt; Option -&gt; SSH client Setting</code> and change SSH client to <code>OpenSSH</code>.</p>
+<p><code>工具-&gt;选项-&gt;SSH客户端配置</code> ,将SSH客户端选择OpenSSH, 再确认.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SourceTree</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/19/Git-00-SourceTreeError/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-08-InheritancePolymorphism" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/15/Python-08-InheritancePolymorphism/">Python-08-InheritancePolymorphism</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/15/Python-08-InheritancePolymorphism/" class="archive-article-date">
+  	<time datetime="2017-12-15T12:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Inheritance-amp-Polymorphism-in-Python"><a href="#Inheritance-amp-Polymorphism-in-Python" class="headerlink" title="Inheritance &amp; Polymorphism in Python"></a>Inheritance &amp; Polymorphism in Python</h1><p>When program in OOP, Python can create new classes from a present class. The new classes are called <code>Sub class</code>, and inherited class is called <code>Base class</code> or <code>Super class</code>.</p>
+<h2 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h2><p>All member variables and methods are public by default. You can simply make a member public without any special ways. See codes below:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    Dog().run()</span><br><span class="line">    Cat().run()</span><br></pre></td></tr></table></figure>
+
+<p>got:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal <span class="keyword">is</span> running...</span><br><span class="line">Animal <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Polymorphism"><a href="#Polymorphism" class="headerlink" title="Polymorphism"></a>Polymorphism</h2><p>When sub classes have the same method/member with super classes, super classes method/member will be covered by sub classes method/member.</p>
+<p>Like:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line">    	</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is running...'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swim</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is swimming...'</span>)</span><br><span class="line">		</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Cat is running...'</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    Dog().run()</span><br><span class="line">    Cat().run()</span><br></pre></td></tr></table></figure>
+
+<p>got:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dog <span class="keyword">is</span> running...</span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>isinstance()</p>
+<p>issubclass()</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encapsulation</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/15/Python-08-InheritancePolymorphism/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python-07-PublicProtectedPrivate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/15/Python-07-PublicProtectedPrivate/">Python-07-PublicProtectedPrivate</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/15/Python-07-PublicProtectedPrivate/" class="archive-article-date">
+  	<time datetime="2017-12-15T12:45:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Public-Protected-amp-Private-in-Python"><a href="#Public-Protected-amp-Private-in-Python" class="headerlink" title="Public Protected &amp; Private in Python"></a>Public Protected &amp; Private in Python</h1><p>Python doesn’t have any mechanisms to restrict you from accessing a variable or calling a method belonging to an instance. But there are culture and convention that should be followed.</p>
+<h2 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h2><p>All member variables and methods are public by default. You can simply make a member public without any special ways. See codes below:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self.content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self.content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup = Cup()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.color = <span class="string">'red'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.content = <span class="string">'coffee'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>redCup.content</span><br><span class="line"><span class="string">'coffee'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Protected"><a href="#Protected" class="headerlink" title="Protected"></a>Protected</h2><p>A protected member is accessible only from within the class and its subclasses. To make a member protected, you can prefix the name of your member with a single underscore. This means “This is a protected member. Don’t touch it, unless you are a subclass.”</p>
+<p>Like:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self._content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self._content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">redCup = Cup()</span><br><span class="line">print(redCup._content)</span><br><span class="line">redCup.color = <span class="string">'red'</span></span><br><span class="line">redCup._content = <span class="string">'coffee'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(redCup._content)</span><br><span class="line"><span class="string">'coffee'</span></span><br></pre></td></tr></table></figure>
+
+<p>Even prefixed with a single underscore, it is still OK to access this member. This method just tell some one not try to access this member.</p>
+<h2 id="Private"><a href="#Private" class="headerlink" title="Private"></a>Private</h2><p>As Python supports a technology called name mangling, you can make a member completely unaccessible by prefixing with at least 2 underscores and suffixing with at most 1 underscore. Python interpreter will change your member name to <code>_&lt;className&gt;__&lt;memberName&gt;</code></p>
+<p>Code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cup</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.color = <span class="literal">None</span></span><br><span class="line">        self.__content = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill</span><span class="params">(self, beverage)</span>:</span></span><br><span class="line">        self.__content = beverage</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__content = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">redCup = Cup()</span><br><span class="line">print(redCup.__content)</span><br></pre></td></tr></table></figure>
+
+<p>Error:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"v.py"</span>, line <span class="number">13</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    print(redCup.__content)</span><br><span class="line">AttributeError: <span class="string">'Cup'</span> object has no attribute <span class="string">'__content'</span></span><br></pre></td></tr></table></figure>
+
+<p>You can still access by <code>redCup._Cup__content</code> but DO NOT use this method.</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>isinstance()</p>
+<p>issubclass()</p>
+<p>beverage: drinking</p>
+<p>encapsulation: 封装</p>
+<p>prefix: 给…加前缀</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">encapsulation</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/15/Python-07-PublicProtectedPrivate/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-10-ArrayMerge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/09/Numpy-10-ArrayMerge/">Numpy-10-ArrayMerge</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/09/Numpy-10-ArrayMerge/" class="archive-article-date">
+  	<time datetime="2017-12-09T05:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Merge-Numpy-Array"><a href="#Merge-Numpy-Array" class="headerlink" title="Merge Numpy Array"></a>Merge Numpy Array</h1><h2 id="Merge-by-row"><a href="#Merge-by-row" class="headerlink" title="Merge by row"></a>Merge by row</h2><p>Stack arrays in sequence vertically (row wise).</p>
+<p><code>numpy.vstack()</code> can be replaced by <code>numpy.row_stack()</code></p>
+<p>CODE:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([[<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],[<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># vstack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.vstack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># row_stack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.row_stack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Merge-by-column"><a href="#Merge-by-column" class="headerlink" title="Merge by column"></a>Merge by column</h2><p>Stack arrays in sequence horizontally (column wise).</p>
+<p><code>numpy.hstack()</code> can be replaced by <code>numpy.row_stack()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hstack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.hstack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># column_stack</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.column_stack((a,b))</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate"></a>numpy.concatenate</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># axis=0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.concatenate((a,b),axis=<span class="number">0</span>)</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br><span class="line"><span class="comment"># axis=1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.concatenate((a,b),axis=<span class="number">1</span>)</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>]])</span><br></pre></td></tr></table></figure>
 
 
       
@@ -199,7 +525,23 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">argmax</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vstack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">row_stack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hstack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">column_stack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concatenate</a>
         		</li>
       		
 		</ul>
@@ -220,7 +562,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/14/Numpy-04-argmax/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/12/09/Numpy-10-ArrayMerge/">展开全文 >></a>
         </p>
       
 
@@ -250,840 +592,34 @@
 
 
   
-    <article id="post-Python-06-pickle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Matplotlib-03-linestyle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/Python-06-pickle/">Python-06-pickle</a>
+      <a class="article-title" href="/2017/12/07/Matplotlib-03-linestyle/">Matplotlib-03-linestyle</a>
     </h1>
   
 
         
-        <a href="/2017/11/14/Python-06-pickle/" class="archive-article-date">
-  	<time datetime="2017-11-13T15:15:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+        <a href="/2017/12/07/Matplotlib-03-linestyle/" class="archive-article-date">
+  	<time datetime="2017-12-07T14:53:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h1><h2 id="serialization-and-deserialization"><a href="#serialization-and-deserialization" class="headerlink" title="serialization and deserialization"></a>serialization and deserialization</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/evn python</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serialization</span><span class="params">(obj: object, path: str)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        pickle.dump(obj, f)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deserialization</span><span class="params">(path: str, obj: object)</span>:</span></span><br><span class="line">    f_name=open(path,<span class="string">'rb'</span>)</span><br><span class="line">    print(<span class="string">'load result:'</span>,pickle.load(f_name))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>: </span><br><span class="line">    path = <span class="string">'test.txt'</span></span><br><span class="line">    print(<span class="string">'Path: &#123;&#125;'</span>.format(path))</span><br><span class="line">    obj = dict(name=<span class="string">'xiao zhi'</span>,num=<span class="number">1002</span>)</span><br><span class="line">    print(<span class="string">'Obj: &#123;&#125;'</span>.format(obj))</span><br><span class="line">    serialization(obj, path)</span><br><span class="line">    deserialization(path, obj)</span><br></pre></td></tr></table></figure>
+        <h1 id="Matplotlib-linestyle"><a href="#Matplotlib-linestyle" class="headerlink" title="Matplotlib linestyle"></a>Matplotlib linestyle</h1><p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.arange(<span class="number">0</span>,<span class="number">100</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.subplots(<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.plot(x,y,linewidth=<span class="number">1</span>, label=<span class="string">'test'</span>, color=<span class="string">'coral'</span>, linestyle=<span class="string">':'</span>, marker</span><br><span class="line">=<span class="string">'|'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.legend(loc=<span class="string">'upper left'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.show()</span><br></pre></td></tr></table></figure>
 
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pickle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/14/Python-06-pickle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+<p>graph:</p>
+<p><img src="Matplotlib-03-linestyle/plot.png" alt="plot"></p>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
+          <a class="article-more-a" href="/2017/12/07/Matplotlib-03-linestyle/#more">more >></a>
         
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-05-timeit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/13/Python-05-timeit/">Python-05-timeit</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/13/Python-05-timeit/" class="archive-article-date">
-  	<time datetime="2017-11-13T14:47:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/13/Python-05-timeit/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-04-dict" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/13/Python-04-dict/">Python-04-dict</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/13/Python-04-dict/" class="archive-article-date">
-  	<time datetime="2017-11-13T13:20:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-Dict"><a href="#Python-Dict" class="headerlink" title="Python Dict"></a>Python Dict</h1><h2 id="Create-new-dict"><a href="#Create-new-dict" class="headerlink" title="Create new dict"></a>Create new dict</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">'name'</span>:<span class="string">'Tom'</span>, <span class="string">'age'</span>:<span class="number">18</span>&#125;</span><br><span class="line">b = dict(name=<span class="string">'Tom'</span>, age=<span class="string">'18'</span>)</span><br><span class="line">c = dict([(<span class="string">'name'</span>, <span class="string">'Tom'</span>), (<span class="string">'age'</span>, <span class="number">18</span>)])</span><br></pre></td></tr></table></figure>
-
-<p>or by <code>zip</code> method：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keys = <span class="string">'abcde'</span></span><br><span class="line">values = range(<span class="number">1</span>, <span class="number">6</span>)</span><br><span class="line">zip_d = dict(zip(keys, values))</span><br></pre></td></tr></table></figure>
-
-<h2 id="iterate-dict"><a href="#iterate-dict" class="headerlink" title="iterate dict"></a>iterate dict</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a,b <span class="keyword">in</span> zip_d.items():</span><br><span class="line">    print(a,b)</span><br></pre></td></tr></table></figure>
-
-<h2 id="get-pop-keys"><a href="#get-pop-keys" class="headerlink" title="get/pop keys"></a>get/pop keys</h2><p>You can use dict[key] / del dict[key] to get / delete a key. But if key does not exist,  Python will raise an exception that will crash your program.</p>
-<p>So you could use:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>: </span><br><span class="line">    value = my_dic[<span class="number">100</span>]</span><br><span class="line"><span class="keyword">except</span> KeyError:</span><br><span class="line">    print(<span class="string">"key not found in dictionary"</span>)</span><br></pre></td></tr></table></figure>
-
-<p>or you could use get / pop method with default parameter.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_dic.get(<span class="string">'key'</span>, <span class="string">'get error value'</span>)</span><br><span class="line">my_dic.pop(<span class="string">'key'</span>, <span class="string">'pop error value'</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="combine-2-dicts"><a href="#combine-2-dicts" class="headerlink" title="combine 2 dicts"></a>combine 2 dicts</h2><p>Three are 2 ways to combine 2 dicts:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict(dict1.items()+dict2.items())</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">dict(dict1, **dict2)</span><br></pre></td></tr></table></figure>
-
-<p>We can use timeit to evaluate speed of these 2 ways.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m timeit -s <span class="string">'dict1=dict2=dict(a=1,b=2)'</span> <span class="string">'dict3=dict(dict1,**dict2)'</span></span><br><span class="line"></span><br><span class="line">$ python -m timeit -s <span class="string">'dict1=dict2=dict(a=1,b=2)'</span> <span class="string">'dict3=dict(dict1.items()+dict2.items())'</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="dict-copy"><a href="#dict-copy" class="headerlink" title="dict.copy"></a>dict.copy</h2><p>If a dict / list contains another dict / list, be careful to use *.copy() .</p>
-<p>As *.copy is shallow.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line"></span><br><span class="line">dict1 &#x3D; &#123;&#39;a&#39;: [1, 2], &#39;b&#39;: 3&#125;</span><br><span class="line">dict2 &#x3D; dict1</span><br><span class="line">dict3 &#x3D; dict1.copy()</span><br><span class="line">dict4 &#x3D; copy.deepcopy(dict1)</span><br><span class="line"></span><br><span class="line">dict1[&#39;b&#39;] &#x3D; &#39;change&#39;</span><br><span class="line">dict1[&#39;a&#39;].append(&#39;change&#39;)</span><br><span class="line"></span><br><span class="line">print dict1  # &#123;&#39;a&#39;: [1, 2, &#39;change&#39;], &#39;b&#39;: &#39;change&#39;&#125;</span><br><span class="line">print dict2  # &#123;&#39;a&#39;: [1, 2, &#39;change&#39;], &#39;b&#39;: &#39;change&#39;&#125;</span><br><span class="line">print dict3  # &#123;&#39;a&#39;: [1, 2, &#39;change&#39;], &#39;b&#39;: 3&#125;</span><br><span class="line">print dict4  # &#123;&#39;a&#39;: [1, 2], &#39;b&#39;: 3&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The same with a list:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a=[[<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">b=a</span><br><span class="line">c=a.copy()</span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">d=copy.deepcopy(a)</span><br><span class="line"></span><br><span class="line">a[<span class="number">2</span>]=<span class="number">9</span> <span class="comment"># [[1, 2], 3, 9]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>].append(<span class="number">8</span>) <span class="comment"># [[1, 2, 8], 3, 9]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>], <span class="number">3</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>关于dict中key类型的定义可以参见</p>
-<p><a href="https://stackoverflow.com/questions/4348232/python-dictionary-keys-besides-strings-and-integers" target="_blank" rel="noopener">Python dictionary keys besides strings and integers?</a></p>
-<p><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries" target="_blank" rel="noopener">5.5. Dictionaries</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">dict</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/13/Python-04-dict/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-03-os" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/12/Python-03-os/">Python-03-os</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/12/Python-03-os/" class="archive-article-date">
-  	<time datetime="2017-11-12T14:31:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="os-Lib"><a href="#os-Lib" class="headerlink" title="os Lib"></a>os Lib</h1><h2 id="os-path-dirname"><a href="#os-path-dirname" class="headerlink" title="os.path.dirname()"></a>os.path.dirname()</h2><p>Return the path of present Py script file. (without filename)</p>
-<ul>
-<li>This command must be used in a real Py script file. If under command line , you will get an error of  <code>NameError: name &#39;__file__&#39; is not defined</code></li>
-<li>If you type in  <code>python Script.py</code> under command line, nothing will be returned.</li>
-<li>If you type in  <code>python C:\Users\...\Script.py</code> under command line, present file path will be returned.</li>
-</ul>
-<h2 id="os-path-abspath"><a href="#os-path-abspath" class="headerlink" title="os.path.abspath()"></a>os.path.abspath()</h2><p>Return the absolute path of present Py script file. (with filename)</p>
-<ul>
-<li><p>No matter you type in <em>absolute path</em> or <em>relative path</em>, you will get present file path with filename.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.abspath(__file__)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>If you do not need the file name, you can combine with os.path.dirname()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.dirname(os.path.abspath(__file__))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/12/Python-03-os/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-03-broadcasting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/11/Numpy-03-broadcasting/">Numpy-03-broadcasting</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/11/Numpy-03-broadcasting/" class="archive-article-date">
-  	<time datetime="2017-11-11T06:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-Broadcasting"><a href="#Numpy-Broadcasting" class="headerlink" title="Numpy Broadcasting"></a>Numpy Broadcasting</h1><h2 id="Inroduction"><a href="#Inroduction" class="headerlink" title="Inroduction"></a>Inroduction</h2><p><code>The term broadcasting describes how numpy treats arrays with different shapes during arithmetic operations. Subject to certain constraints, the smaller array is “broadcast” across the larger array so that they have compatible shapes.</code></p>
-<p>Nmpy的broadcasting功能应用在两个ndarray的element-wise运算的前提之下。broadcasting功能使得“不同维度”的两个ndarray可以进行shape匹配。但是，这个“不同维度”也需要其中一个维度是1。</p>
-<p>综上，ndarray的element-wise运算（+,-,*,/）要求为以下两种情况之一：</p>
-<p><em>a.完全相同shape</em></p>
-<p><em>b.其中一个维度是1</em></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">3</span>).reshape(<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>],</span><br><span class="line">       [<span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.shape</span><br><span class="line">(<span class="number">2</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a+b</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>此运算相当于：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>],</span><br><span class="line">       [<span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>]])</span><br><span class="line"><span class="comment"># 变为：</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">2</span>]])</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="comment"># 变为：</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>]])</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a+b</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>]])</span><br></pre></td></tr></table></figure>
-
-<p>当不满足上述shape要求时，python解释器会返回错误信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: operands could <span class="keyword">not</span> be broadcast together <span class="keyword">with</span> shapes (<span class="number">8</span>,<span class="number">4</span>,<span class="number">3</span>) (<span class="number">2</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="具体理解"><a href="#具体理解" class="headerlink" title="具体理解"></a>具体理解</h2><p>阵列不需要有相同的维度。例如，如果你有一个256x256x3的RGB阵列，你想要对每一种颜色加一个权重，你就可以乘以一个拥有3个元素的一维阵列。将两个阵列的各维度尺寸展开，从后往前匹配，如果满足了上面的两个条件，则这两个阵列是兼容的。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Image  (3d array): 256 x 256 x 3</span><br><span class="line">Scale  (1d array):             3</span><br><span class="line">Result (3d array): 256 x 256 x 3</span><br></pre></td></tr></table></figure>
-
-<p>有两个矩阵A和B，A为4维矩阵，B为三维矩阵。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A      (4d array):  8 x 1 x 6 x 1</span><br><span class="line">B      (3d array):      7 x 1 x 5</span><br><span class="line">Result (4d array):  8 x 7 x 6 x 5</span><br></pre></td></tr></table></figure>
-
-<p>如果可以进行element-wise运算，则要求各个维度位置上，要么大小相同，要么其中之一为1。上面的例子中7 x 1 x 5的7的左侧没有维度，这是可以的，但是7和5之间的1如果是空位的话则不可以broadcast。7 x 5时必须通过np.reshape方法来转换成7 x 1 x 5维度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],[<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a-b</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: operands could <span class="keyword">not</span> be broadcast together <span class="keyword">with</span> shapes (<span class="number">2</span>,<span class="number">3</span>) (<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aa=a.reshape(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aa-b</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [<span class="number">-1</span>,  <span class="number">0</span>,  <span class="number">1</span>],</span><br><span class="line">        [<span class="number">-2</span>, <span class="number">-1</span>,  <span class="number">0</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">        [ <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>]]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><p>在进行矩阵的乘法（点乘）时，并没有上文所述element-wise运算时的broadcasting功能。</p>
-<p>例如<strong>A·B</strong>如果不满足<strong>A</strong>.shape[1] == <strong>B</strong>.shape[0]，则会返回错误信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: shapes (<span class="number">3</span>,<span class="number">1</span>) <span class="keyword">and</span> (<span class="number">3</span>,<span class="number">3</span>) <span class="keyword">not</span> aligned: <span class="number">1</span> (dim <span class="number">1</span>) != <span class="number">3</span> (dim <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>另外，值得注意的是，当矩阵和一维数组进行矩阵乘法时，一维数组参与运算的方式随着其出现的位置而变化：</p>
-<ul>
-<li>一维数组出现在矩阵<strong>左侧</strong>时，作为<strong>行向量</strong>使用</li>
-<li>一维数组出现在矩阵<strong>右侧</strong>时，作为<strong>列向量</strong>使用</li>
-</ul>
-<p>这就使得运算结果始终为一维数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.shape</span><br><span class="line">(<span class="number">2</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.T</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.T.shape</span><br><span class="line">(<span class="number">2</span>,)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/hongxingabc/article/details/53149655" target="_blank" rel="noopener">Python库numpy中的Broadcasting机制解析</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">broadcasting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/11/Numpy-03-broadcasting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-02-MaxandMaximum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/10/Numpy-02-MaxandMaximum/">Numpy-02-MaxandMaximum</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/10/Numpy-02-MaxandMaximum/" class="archive-article-date">
-  	<time datetime="2017-11-10T14:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Max-and-Maximum"><a href="#Max-and-Maximum" class="headerlink" title="Max and Maximum"></a>Max and Maximum</h1><h2 id="numpy-max"><a href="#numpy-max" class="headerlink" title="numpy.max"></a>numpy.max</h2><p><code>np.max：(a, axis=None, out=None, keepdims=False)</code></p>
-<p>To get max from an array:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.max(a)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="numpy-maximum"><a href="#numpy-maximum" class="headerlink" title="numpy.maximum"></a>numpy.maximum</h2><p><code>np.maximum：(X, Y, out=None)</code></p>
-<p>To get ‘max-array’ by comparing each element from two arrays:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">2</span>,<span class="number">1</span>],[<span class="number">5</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.maximum(a,b)</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.maximum(a,<span class="number">1</span>) <span class="comment"># Numpy broadcast</span></span><br><span class="line">array([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">3</span>]])</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Max</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Maximum</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/10/Numpy-02-MaxandMaximum/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-02-pylab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/10/Matplotlib-02-pylab/">Matplotlib-02-pylab</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/10/Matplotlib-02-pylab/" class="archive-article-date">
-  	<time datetime="2017-11-10T11:55:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="pylab-or-pyplot"><a href="#pylab-or-pyplot" class="headerlink" title="pylab or pyplot"></a>pylab or pyplot</h1><h2 id="pylab"><a href="#pylab" class="headerlink" title="pylab"></a>pylab</h2><p><a href="https://matplotlib.org/faq/usage_faq.html" target="_blank" rel="noopener">Link</a></p>
-<p><code>pylab is a convenience module that bulk imports matplotlib.pyplot (for plotting) and numpy (for mathematics and working with arrays) in a single name space. Although many examples use pylab, it is no longer recommended.</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
-
-<h2 id="pyplot"><a href="#pyplot" class="headerlink" title="pyplot"></a>pyplot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-
-<h2 id="comment"><a href="#comment" class="headerlink" title="comment"></a>comment</h2><p>Try to import <code>plot</code> and <code>numpy</code> separately. Follow the rule of “import explicitly”.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pylab</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pyplot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/10/Matplotlib-02-pylab/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/Numpy-01-Basic/">Numpy-01-Basic</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/08/Numpy-01-Basic/" class="archive-article-date">
-  	<time datetime="2017-11-08T14:43:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Basic-of-Numpy"><a href="#Basic-of-Numpy" class="headerlink" title="Basic of Numpy"></a>Basic of Numpy</h1><h2 id="Create-array"><a href="#Create-array" class="headerlink" title="Create array"></a>Create array</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">X = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br></pre></td></tr></table></figure>
-
-<h2 id="Slicing-and-Indexing"><a href="#Slicing-and-Indexing" class="headerlink" title="Slicing and Indexing"></a>Slicing and Indexing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>X.flatten()</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[range(<span class="number">2</span>)]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[np.array([<span class="number">0</span>,<span class="number">2</span>])]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[<span class="number">0</span>]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> row <span class="keyword">in</span> X:</span><br><span class="line"><span class="meta">... </span>    print(row)</span><br><span class="line">...</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">[<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Change-dimensions"><a href="#Change-dimensions" class="headerlink" title="Change dimensions"></a>Change dimensions</h2><p>Use  to  numpy.ndarray.reshape method to change dimensions.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">A = np.array(L)</span><br><span class="line">B = np.array(L).reshape(<span class="number">3</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Compare-2-ndarrays"><a href="#Compare-2-ndarrays" class="headerlink" title="Compare 2 ndarrays"></a>Compare 2 ndarrays</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">array([<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># compare</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x==y</span><br><span class="line">array([ <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>, <span class="literal">False</span>,  <span class="literal">True</span>], dtype=bool)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(x==y).astype(np.int)</span><br><span class="line">array([<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># or use np.sum directly</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(x==y)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Basic</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/08/Numpy-01-Basic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-01-Basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/Matplotlib-01-Basic/">Matplotlib-01-Basic</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/08/Matplotlib-01-Basic/" class="archive-article-date">
-  	<time datetime="2017-11-08T14:42:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Basic-of-Matplotlib"><a href="#Basic-of-Matplotlib" class="headerlink" title="Basic of Matplotlib"></a>Basic of Matplotlib</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>,<span class="number">6</span>,<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">y1 = np.sin(x)</span><br><span class="line">y2 = np.cos(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw graph</span></span><br><span class="line">plt.plot(x, y1, label=<span class="string">"sin"</span>)</span><br><span class="line">plt.plot(x, y2, linestyle=<span class="string">"--"</span>, label=<span class="string">"cos"</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">"x"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"y"</span>)</span><br><span class="line">plt.title(<span class="string">"sin &amp; cos"</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>Result:</p>
-<p><img src="Matplotlib-01-Basic/01-plot.png" alt="01-plot"></p>
-
       
 
       
@@ -1104,7 +640,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Basic</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linestyle</a>
         		</li>
       		
 		</ul>
@@ -1125,7 +661,844 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/08/Matplotlib-01-Basic/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/12/07/Matplotlib-03-linestyle/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-09-ArraySlice" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/30/Numpy-09-ArraySlice/">Numpy-09-ArraySlice</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/30/Numpy-09-ArraySlice/" class="archive-article-date">
+  	<time datetime="2017-11-30T14:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python-List-Slice"><a href="#Python-List-Slice" class="headerlink" title="Python List Slice"></a>Python List Slice</h1><p>首先回顾Python的基本切片功能。注：list和tuple都可以进行切片。</p>
+<h2 id="一维数据"><a href="#一维数据" class="headerlink" title="一维数据"></a>一维数据</h2><p>使用[]切片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list切片得到一个新的list</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># tuple切片得到一个新的tuple</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用slice对象切片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># slice(start,end,step)函数生成一个slice对象 注意函数的参数之间是逗号</span></span><br><span class="line"><span class="comment"># 用slice对象来实现slice</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=slice(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[x]</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维数据"><a href="#二维数据" class="headerlink" title="二维数据"></a>二维数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]]</span><br><span class="line"><span class="comment"># 取行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line"><span class="comment"># 取行列</span></span><br><span class="line"><span class="comment"># 直接行列一起取会错误</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: list indices must be integers <span class="keyword">or</span> slices, <span class="keyword">not</span> tuple</span><br><span class="line"><span class="comment"># 可以先行再列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">0</span>:<span class="number">2</span>][<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Numpy-Array-Slice"><a href="#Numpy-Array-Slice" class="headerlink" title="Numpy Array Slice"></a>Numpy Array Slice</h1><h2 id="一维ndarray"><a href="#一维ndarray" class="headerlink" title="一维ndarray"></a>一维ndarray</h2><p>对于一维的ndarray，Numpy和Python的slice方式相同，可以使用[]或者slice()函数来实现。</p>
+<h3 id="使用slice-函数"><a href="#使用slice-函数" class="headerlink" title="使用slice()函数"></a>使用slice()函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d=np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用[start:end:step]</span></span><br><span class="line"><span class="comment"># 前闭后开 负数表示从后往前数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[:<span class="number">2</span>]</span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用slice()函数</span></span><br><span class="line"><span class="comment"># x用的是上面的slice对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[x]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用[]"></a>使用[]</h3><p>正向，stride为正（默认） </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:]                <span class="comment"># [seq[0],   seq[1],          ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:]             <span class="comment"># [seq[low], seq[low+1],      ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:high]            <span class="comment"># [seq[0],   seq[1],          ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:high]         <span class="comment"># [seq[low], seq[low+1],      ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[::stride]         <span class="comment"># [seq[0],   seq[stride],     ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low::stride]      <span class="comment"># [seq[low], seq[low+stride], ..., seq[-1]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:high:stride]     <span class="comment"># [seq[0],   seq[stride],     ..., seq[high-1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[low:high:stride]  <span class="comment"># [seq[low], seq[low+stride], ..., seq[high-1]]</span></span><br></pre></td></tr></table></figure>
+
+<p>Examples:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[::<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>If <code>stride</code> is negative, we will use counting down order:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[::-stride]        <span class="comment"># [seq[-1],   seq[-1-stride],   ..., seq[0]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[high::-stride]    <span class="comment"># [seq[high], seq[high-stride], ..., seq[0]    ]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[:low:-stride]     <span class="comment"># [seq[-1],   seq[-1-stride],   ..., seq[low+1]]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq[high:low:-stride] <span class="comment"># [seq[high], seq[high-stride], ..., seq[low+1]]</span></span><br></pre></td></tr></table></figure>
+
+<p>Examples:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">3</span>::<span class="number">-1</span>]</span><br><span class="line">array([[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="用Comma选择列"><a href="#用Comma选择列" class="headerlink" title="用Comma选择列"></a>用Comma选择列</h3><p><code>ndarray[:, 0]</code> means <code>ndarray[first_row:last_row, column_0]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[::<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line">array([<span class="number">3</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维ndarray"><a href="#二维ndarray" class="headerlink" title="二维ndarray"></a>二维ndarray</h2><h3 id="简单取块"><a href="#简单取块" class="headerlink" title="简单取块"></a>简单取块</h3><p>基本语法为ndarray[行操作,列操作]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>array=np.arange(<span class="number">12</span>).reshape((<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="comment"># 取行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>]</span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>,:]</span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[<span class="number">1</span>:<span class="number">3</span>,:]</span><br><span class="line">array([[ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="comment"># 取列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">       [ <span class="number">5</span>,  <span class="number">6</span>],</span><br><span class="line">       [ <span class="number">9</span>, <span class="number">10</span>]])</span><br><span class="line"><span class="comment"># 取列 保存为行</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>]</span><br><span class="line">array([<span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>])</span><br><span class="line"><span class="comment"># 取列 保存为列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array[:,<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">1</span>],</span><br><span class="line">       [<span class="number">5</span>],</span><br><span class="line">       [<span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-by-2-arrays"><a href="#Slice-by-2-arrays" class="headerlink" title="Slice by 2 arrays"></a>Slice by 2 arrays</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y=np.array([<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[x,y]</span><br><span class="line">array([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="Numpy-09-ArraySlice/SlicebyArray.JPG" alt="SlicebyArray"></p>
+<h2 id="三维ndarray"><a href="#三维ndarray" class="headerlink" title="三维ndarray"></a>三维ndarray</h2><p>一个应用的实例如下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;np.arange(27).reshape(3,3,3)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[[ 0,  1,  2],</span><br><span class="line">        [ 3,  4,  5],</span><br><span class="line">        [ 6,  7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 9, 10, 11],</span><br><span class="line">        [12, 13, 14],</span><br><span class="line">        [15, 16, 17]],</span><br><span class="line"></span><br><span class="line">       [[18, 19, 20],</span><br><span class="line">        [21, 22, 23],</span><br><span class="line">        [24, 25, 26]]])</span><br></pre></td></tr></table></figure>
+
+<p>假设上述3x3x3的array是一张读入的图片，其中第三维表示各点的RGB通道值。如果要过滤出RGB的某一通道值，那么可以使用array[:, :, n]来单独取出某一通道。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a[:, :, 2]</span><br><span class="line">array([[ 2,  5,  8],</span><br><span class="line">       [11, 14, 17],</span><br><span class="line">       [20, 23, 26]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-…"><a href="#使用-…" class="headerlink" title="使用[…]"></a>使用[…]</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=np.arange(<span class="number">12</span>).reshape(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>],</span><br><span class="line">        [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]]])</span><br></pre></td></tr></table></figure>
+
+<p>使用冒号省略维度的话，可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:, <span class="number">1</span>, :]</span><br><span class="line">array([[ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">       [ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[:, :, <span class="number">1</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">7</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>如果使用三个点号的话，对于后者<code>x[:, :, 1]</code>可以直接使用<code>x[..., 1]</code>来代替。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[...,<span class="number">1</span>]</span><br><span class="line">array([[ <span class="number">1</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">7</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/Sinte-Beuve/p/6573246.html" target="_blank" rel="noopener">https://www.cnblogs.com/Sinte-Beuve/p/6573246.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">slice</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/30/Numpy-09-ArraySlice/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-08-nditer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/29/Numpy-08-nditer/">Numpy-08-nditer</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/29/Numpy-08-nditer/" class="archive-article-date">
+  	<time datetime="2017-11-28T15:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="numpy-ndarray"><a href="#numpy-ndarray" class="headerlink" title="numpy.ndarray"></a>numpy.ndarray</h1><h2 id="single-array-iteration"><a href="#single-array-iteration" class="headerlink" title="single array iteration"></a>single array iteration</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a):</span><br><span class="line"><span class="meta">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a.T):</span><br><span class="line"><span class="meta">... </span>    print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>As <strong>a</strong> and <strong>a.T</strong> are stored in the same sequence, <strong>np.nditer(a)</strong> and <strong>np.nditer(a.T)</strong> have the same result.</p>
+<h2 id="Control-iteration-sequence"><a href="#Control-iteration-sequence" class="headerlink" title="Control iteration sequence"></a>Control iteration sequence</h2><p><strong>single index:</strong> 单个索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fortran order</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a, order=<span class="string">'F'</span>):</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># C order</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a.T, order=<span class="string">'C'</span>):</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+<p>*<em>multi index: *</em>多重索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># multi_index</span></span><br><span class="line">it = np.nditer(a, flags=[<span class="string">'multi_index'</span>])</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> it.finished:</span><br><span class="line">    print(<span class="string">'element: &#123;&#125;--id: &#123;&#125;'</span>.format(it[<span class="number">0</span>], it.multi_index))</span><br><span class="line">    it.iternext()</span><br></pre></td></tr></table></figure>
+
+<p>既遍历了整个array也同时可以获取每个元素的下标multi_index，便于对元素进行读写操作。</p>
+<p>注意，使用np.nditer进行循环遍历时<strong>一定要记得加上it.iternext()语句</strong>，否则会导致程序假死，无法向下执行。</p>
+<h2 id="Modify-element"><a href="#Modify-element" class="headerlink" title="Modify element"></a>Modify element</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> np.nditer(a, op_flags=[<span class="string">'readwrite'</span>]):</span><br><span class="line"><span class="meta">... </span>    x[...] = <span class="number">2</span> * x</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">2</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">6</span>,  <span class="number">8</span>, <span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>By default, iteration use ‘read-only’. To modify elements of arrays, op_flags should be assigned as ‘readwrite’.</p>
+<h2 id="external-loop"><a href="#external-loop" class="headerlink" title="external_loop"></a>external_loop</h2><p>Use ‘external_loop’</p>
+<p><a href="https://blog.csdn.net/lanchunhui/article/details/55657135" target="_blank" rel="noopener">https://blog.csdn.net/lanchunhui/article/details/55657135</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nditer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/29/Numpy-08-nditer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-07-sum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/27/Numpy-07-sum/">Numpy-07-sum</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/27/Numpy-07-sum/" class="archive-article-date">
+  	<time datetime="2017-11-27T13:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-sum-ndarray-axis-1"><a href="#Numpy-sum-ndarray-axis-1" class="headerlink" title="Numpy.sum(ndarray, axis=1)"></a>Numpy.sum(ndarray, axis=1)</h1><h2 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">       [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a)</span><br><span class="line"><span class="number">45</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a,axis=<span class="number">1</span>)</span><br><span class="line">array([<span class="number">10</span>, <span class="number">35</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.sum(a,axis=<span class="number">0</span>)</span><br><span class="line">array([ <span class="number">5</span>,  <span class="number">7</span>,  <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="Numpy-07-sum/NumpySum.png" alt="NumpySum.png"></p>
+<p><a href="https://www.cnblogs.com/yyxayz/p/4033736.html" target="_blank" rel="noopener">Image from</a></p>
+<h2 id="average"><a href="#average" class="headerlink" title="average"></a>average</h2><p>类似地，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.average(a,axis=<span class="number">1</span>)</span><br><span class="line">array([<span class="number">2.</span>, <span class="number">7.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.average(a,axis=<span class="number">0</span>)</span><br><span class="line">array([<span class="number">2.5</span>, <span class="number">3.5</span>, <span class="number">4.5</span>, <span class="number">5.5</span>, <span class="number">6.5</span>])</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">random</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/27/Numpy-07-sum/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-06-random" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/Numpy-06-random/">Numpy-06-random</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/15/Numpy-06-random/" class="archive-article-date">
+  	<time datetime="2017-11-15T12:36:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Seed"><a href="#Seed" class="headerlink" title="Seed"></a>Seed</h1><p>计算机生成的随机数并<strong>不是真正的</strong>随机数，因为这些随机数都是根据一定的计算方式得到的。</p>
+<ol>
+<li>生成随机数时需要指定随机种子(Seed)，当这些种子不变时，得到的随机数也不变。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.seed(<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>)</span><br><span class="line">array([ <span class="number">0.69646919</span>,  <span class="number">0.28613933</span>])</span><br><span class="line"><span class="comment"># 每次重新生成随机数之前都需要更新种子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.seed(<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>)</span><br><span class="line">array([ <span class="number">0.69646919</span>,  <span class="number">0.28613933</span>])</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果用户不提供种子，默认由系统时钟（即定时/计数器的值） 提供种子。</li>
+<li>随机数的生成算法和操作系统有关，即使给定相同的种子，在Windows和Linux下会得到不同的随机数。</li>
+</ol>
+<h1 id="简单随机数"><a href="#简单随机数" class="headerlink" title="简单随机数"></a>简单随机数</h1><table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rand(d0, d1, …, dn)</td>
+<td>产生均匀分布的随机数</td>
+<td>dn为第n维数据的维度</td>
+</tr>
+<tr>
+<td>randn(d0, d1, …, dn)</td>
+<td>产生标准正态分布随机数</td>
+<td>dn为第n维数据的维度</td>
+</tr>
+<tr>
+<td>randint(low[, high, size, dtype])</td>
+<td>产生随机整数</td>
+<td>low：最小值；high：最大值；size：数据个数</td>
+</tr>
+<tr>
+<td>random_sample([size])</td>
+<td>在[0,1）内产生随机数</td>
+<td>size：随机数的shape，可以为元祖或者列表，[2,3]表示2维随机数，维度为（2,3）</td>
+</tr>
+<tr>
+<td>random([size])</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>ranf([size])</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>sample([size]))</td>
+<td>同random_sample([size])</td>
+<td>同random_sample([size])</td>
+</tr>
+<tr>
+<td>choice(a[, size, replace, p])</td>
+<td>从a中随机选择指定数据</td>
+<td>a：1维数组 size：返回数据形状</td>
+</tr>
+<tr>
+<td>bytes(length)</td>
+<td>返回随机位</td>
+<td>length：位的长度</td>
+</tr>
+</tbody></table>
+<h2 id="numpy-random-rand"><a href="#numpy-random-rand" class="headerlink" title="numpy.random.rand()"></a>numpy.random.rand()</h2><p>numpy.random.rand(d0,d1,…,dn)</p>
+<p>Use .rand to get one or a list of random sample from [0,1).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand()</span><br><span class="line"><span class="number">0.18764147324357994</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">array([[ <span class="number">0.50590041</span>,  <span class="number">0.37166178</span>,  <span class="number">0.86995256</span>],</span><br><span class="line">       [ <span class="number">0.16217236</span>,  <span class="number">0.88082289</span>,  <span class="number">0.98760503</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-randn"><a href="#numpy-random-randn" class="headerlink" title="numpy.random.randn()"></a>numpy.random.randn()</h2><p>numpy.random.randn(d0,d1,…,dn)</p>
+<p>Use .randn to get one or a list of <strong>standard normal distribution</strong> sample.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.randn(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">array([[<span class="number">-0.08735649</span>, <span class="number">-1.20363118</span>, <span class="number">-0.67110949</span>],</span><br><span class="line">       [ <span class="number">0.00484652</span>,  <span class="number">0.22180857</span>,  <span class="number">0.25103274</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-randint"><a href="#numpy-random-randint" class="headerlink" title="numpy.random.randint()"></a>numpy.random.randint()</h2><p>numpy.random.randint(low, high=None, size=None, dtype=’l’)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-random-choice"><a href="#numpy-random-choice" class="headerlink" title="numpy.random.choice()"></a>numpy.random.choice()</h2><p>numpy.random.choice(a, size=None, replace=True, p=None)</p>
+<blockquote>
+<p>a : 1-D array-like or int If an ndarray, a random sample is generated from its elements.  If an int, the random sample is generated as if a was np.arange(n) </p>
+<p>size : int or tuple of ints, optional  replace : boolean, optional Whether the sample is with or without replacement</p>
+<p>p : 1-D array-like, optional The probabilities associated with each entry in a. If not given the sample assumes a uniform distribution over all entries in a. </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机取一个小于指定数的随机数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="comment"># 随机取n个小于指定数的随机数序列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>,<span class="number">10</span>)</span><br><span class="line">array([<span class="number">3</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="comment"># 随机取形状为(m, n)的小于指定数的随机数矩阵</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">array([[<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">4</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="comment"># 从序列中随机抽取n个元素，组成一个新数列</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>classes = [<span class="string">'plane'</span>, <span class="string">'car'</span>, <span class="string">'bird'</span>, <span class="string">'cat'</span>, <span class="string">'deer'</span>, <span class="string">'dog'</span>, <span class="string">'frog'</span>, <span class="string">'horse'</span>, <span class="string">'ship'</span>, <span class="string">'truck'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(classes, <span class="number">2</span>)</span><br><span class="line">array([<span class="string">'deer'</span>, <span class="string">'ship'</span>], dtype=<span class="string">'&lt;U5'</span>)</span><br><span class="line"><span class="comment"># 按照概率分布抽取元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(range(<span class="number">3</span>), p=[<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.9</span>])</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>.choice(x)的参数x可以是Integer也可以是一维数组1-D Array。</p>
+<p><code>np.random.choice(range(3),p=[0.05,0.05,0.9])</code>表示从range(3)序列中按照p参数指定的概率分布随机选择一个元素返回。</p>
+<h1 id="随机生成分布"><a href="#随机生成分布" class="headerlink" title="随机生成分布"></a>随机生成分布</h1><p>各种分布随机数的API：</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beta(a, b[, size])</td>
+<td>贝塔分布样本，在 [0, 1]内。</td>
+<td></td>
+</tr>
+<tr>
+<td>binomial(n, p[, size])</td>
+<td>二项分布的样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>chisquare(df[, size])</td>
+<td>卡方分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>dirichlet(alpha[, size])</td>
+<td>狄利克雷分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>exponential([scale, size])</td>
+<td>指数分布</td>
+<td></td>
+</tr>
+<tr>
+<td>f(dfnum, dfden[, size])</td>
+<td>F分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>gamma(shape[, scale, size])</td>
+<td>伽马分布</td>
+<td></td>
+</tr>
+<tr>
+<td>geometric(p[, size])</td>
+<td>几何分布</td>
+<td></td>
+</tr>
+<tr>
+<td>gumbel([loc, scale, size])</td>
+<td>耿贝尔分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>hypergeometric(ngood, nbad, nsample[, size])</td>
+<td>超几何分布样本。</td>
+<td></td>
+</tr>
+<tr>
+<td>laplace([loc, scale, size])</td>
+<td>拉普拉斯或双指数分布样本</td>
+<td></td>
+</tr>
+<tr>
+<td>logistic([loc, scale, size])</td>
+<td>Logistic分布样本</td>
+<td></td>
+</tr>
+<tr>
+<td>lognormal([mean, sigma, size])</td>
+<td>对数正态分布</td>
+<td></td>
+</tr>
+<tr>
+<td>logseries(p[, size])</td>
+<td>对数级数分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>multinomial(n, pvals[, size])</td>
+<td>多项分布</td>
+<td></td>
+</tr>
+<tr>
+<td>multivariate_normal(mean, cov[, size])</td>
+<td>多元正态分布。</td>
+<td></td>
+</tr>
+<tr>
+<td>negative_binomial(n, p[, size])</td>
+<td>负二项分布</td>
+<td></td>
+</tr>
+<tr>
+<td>noncentral_chisquare(df, nonc[, size])</td>
+<td>非中心卡方分布</td>
+<td></td>
+</tr>
+<tr>
+<td>noncentral_f(dfnum, dfden, nonc[, size])</td>
+<td>非中心F分布</td>
+<td></td>
+</tr>
+<tr>
+<td>normal([loc, scale, size])</td>
+<td>正态(高斯)分布</td>
+<td></td>
+</tr>
+<tr>
+<td>pareto(a[, size])</td>
+<td>帕累托（Lomax）分布</td>
+<td></td>
+</tr>
+<tr>
+<td>poisson([lam, size])</td>
+<td>泊松分布</td>
+<td></td>
+</tr>
+<tr>
+<td>power(a[, size])</td>
+<td>Draws samples in [0, 1] from a power distribution with positive exponent a - 1.</td>
+<td></td>
+</tr>
+<tr>
+<td>rayleigh([scale, size])</td>
+<td>Rayleigh 分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_cauchy([size])</td>
+<td>标准柯西分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_exponential([size])</td>
+<td>标准的指数分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_gamma(shape[, size])</td>
+<td>标准伽马分布</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_normal([size])</td>
+<td>标准正态分布 (mean=0, stdev=1).</td>
+<td></td>
+</tr>
+<tr>
+<td>standard_t(df[, size])</td>
+<td>Standard Student’s t distribution with df degrees of freedom.</td>
+<td></td>
+</tr>
+<tr>
+<td>triangular(left, mode, right[, size])</td>
+<td>三角形分布</td>
+<td></td>
+</tr>
+<tr>
+<td>uniform([low, high, size])</td>
+<td>均匀分布</td>
+<td></td>
+</tr>
+<tr>
+<td>vonmises(mu, kappa[, size])</td>
+<td>von Mises分布</td>
+<td></td>
+</tr>
+<tr>
+<td>wald(mean, scale[, size])</td>
+<td>瓦尔德（逆高斯）分布</td>
+<td></td>
+</tr>
+<tr>
+<td>weibull(a[, size])</td>
+<td>Weibull 分布</td>
+<td></td>
+</tr>
+<tr>
+<td>zipf(a[, size])</td>
+<td>齐普夫分布</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="numpy-random-normal"><a href="#numpy-random-normal" class="headerlink" title="numpy.random.normal()"></a>numpy.random.normal()</h2><p>Numpy的随机分布函数中最常用的应该就是normal函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mu = <span class="number">1</span>  <span class="comment">#期望为1</span></span><br><span class="line">sigma = <span class="number">3</span>  <span class="comment">#标准差为3</span></span><br><span class="line">num = <span class="number">10000</span>  <span class="comment">#个数为10000</span></span><br><span class="line"></span><br><span class="line">rand_data = np.random.normal(mu, sigma, num)</span><br><span class="line">count, bins, ignored = plt.hist(rand_data, <span class="number">30</span>, normed=<span class="literal">True</span>)</span><br><span class="line">plt.plot(bins, <span class="number">1</span>/(sigma * np.sqrt(<span class="number">2</span> * np.pi)) *np.exp( - (bins - mu)**<span class="number">2</span> / (<span class="number">2</span> * sigma**<span class="number">2</span>)), linewidth=<span class="number">2</span>, color=<span class="string">'r'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="Numpy-06-random%5Cnormal.png" alt=""></p>
+<h2 id="numpy-random-rand-1"><a href="#numpy-random-rand-1" class="headerlink" title="numpy.random.rand()"></a>numpy.random.rand()</h2><p>定义如下，numpy.random.rand(d0, d1, …, dn)</p>
+<blockquote>
+<p>Random values in a given shape.</p>
+<p>Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1).</p>
+<p>Parameters:<br>d0, d1, …, dn : int, optional<br>The dimensions of the returned array, should all be positive. If no argument is given a single Python float is returned.</p>
+<p>Returns:<br>out : ndarray, shape (d0, d1, …, dn)<br>Random values.</p>
+</blockquote>
+<p>按指定形状生成介于[0, 1)的均匀随机分布。</p>
+<h2 id="numpy-random-uniform"><a href="#numpy-random-uniform" class="headerlink" title="numpy.random.uniform()"></a>numpy.random.uniform()</h2><p>numpy.random.uniform(low=0.0, high=1.0, size=None)</p>
+<blockquote>
+<p>Draw samples from a uniform distribution.</p>
+<p>Samples are uniformly distributed over the half-open interval [low, high) (includes low, but excludes high). In other words, any value within the given interval is equally likely to be drawn by uniform.</p>
+<p>Parameters:<br>low : float or array_like of floats, optional<br>Lower boundary of the output interval. All values generated will be greater than or equal to low. The default value is 0.</p>
+<p>high : float or array_like of floats<br>Upper boundary of the output interval. All values generated will be less than high. The default value is 1.0.</p>
+<p>size : int or tuple of ints, optional<br>Output shape. If the given shape is, e.g., (m, n, k), then m * n * k samples are drawn. If size is None (default), a single value is returned if low and high are both scalars. Otherwise, np.broadcast(low, high).size samples are drawn.</p>
+<p>Returns:<br>out : ndarray or scalar<br>Drawn samples from the parameterized uniform distribution.</p>
+</blockquote>
+<p>按指定形状生成介于[low, high)的均匀随机分布。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnblogs.com/xk-bench/p/9079533.html" target="_blank" rel="noopener">https://www.cnblogs.com/xk-bench/p/9079533.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">random</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/15/Numpy-06-random/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Numpy-05-log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/Numpy-05-log/">Numpy-05-log</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/15/Numpy-05-log/" class="archive-article-date">
+  	<time datetime="2017-11-15T10:06:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Numpy-log"><a href="#Numpy-log" class="headerlink" title="Numpy.log"></a>Numpy.log</h1><h2 id="numpy-log"><a href="#numpy-log" class="headerlink" title="numpy.log"></a>numpy.log</h2><p>Natural logarithm, <strong>element-wise</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.log(np.e)</span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-log2"><a href="#numpy-log2" class="headerlink" title="numpy.log2"></a>numpy.log2</h2><p>Base-2 logarithm of <em>x</em>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.log2(<span class="number">2</span>)</span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy-log10"><a href="#numpy-log10" class="headerlink" title="numpy.log10"></a>numpy.log10</h2><p>Return the base 10 logarithm of the input array, element-wise.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.log10(<span class="number">10</span>)</span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="ERROR-“Divide-by-zero-encountered-in-log”-when-not-dividing-by-zero"><a href="#ERROR-“Divide-by-zero-encountered-in-log”-when-not-dividing-by-zero" class="headerlink" title="ERROR: “Divide by zero encountered in log” when not dividing by zero"></a>ERROR: “Divide by zero encountered in log” when not dividing by zero</h1><p>由于log函数$y = log(x)$是一条单调递增曲线，且在x=0处y取值为负无穷。所以在计算机中计算log时，要注意避免x=0。<br>计算时可以在x的基础上添加一个微笑的delta，即log(x+delta)。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stackoverflow.com/questions/36229340/divide-by-zero-encountered-in-log-when-not-dividing-by-zero/36229376" target="_blank" rel="noopener">“Divide by zero encountered in log” when not dividing by zero</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">log</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/15/Numpy-05-log/">展开全文 >></a>
         </p>
       
 
@@ -1157,7 +1530,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/28/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/30/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/28/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/30/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2742,6 +3115,50 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wedge prism</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">outlier</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">lens calib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gltf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">usdz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mesh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">file IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">magic method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">project 3D to 2D</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pose estimation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">glob</a>
               </li>
             
             <div class="clearfix"></div>

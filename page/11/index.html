@@ -156,75 +156,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Python-54-findinlist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-web-filezilla" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/07/Python-54-findinlist/">Python-54-findinlist</a>
+      <a class="article-title" href="/2018/11/04/web-filezilla/">web-filezilla</a>
     </h1>
   
 
         
-        <a href="/2018/10/07/Python-54-findinlist/" class="archive-article-date">
-  	<time datetime="2018-10-07T12:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+        <a href="/2018/11/04/web-filezilla/" class="archive-article-date">
+  	<time datetime="2018-11-04T12:32:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="find-in-list"><a href="#find-in-list" class="headerlink" title="find in list"></a>find in list</h1><p>在Python中常会遇到，如何判断某一元素是否在list中；或者从一个list中找到某个元素的位置。</p>
-<h2 id="判断元素是否存在"><a href="#判断元素是否存在" class="headerlink" title="判断元素是否存在"></a>判断元素是否存在</h2><p>最常用的方法是使用<code>in</code>语法，例如<code>2 in [1, 2, 3]</code>。</p>
-<h2 id="筛选出目标元素"><a href="#筛选出目标元素" class="headerlink" title="筛选出目标元素"></a>筛选出目标元素</h2><p>可以使用列表生成的方式列出目标，如果不为空则包含目标元素：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">matches = [x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> fulfills_some_condition(x)]</span><br><span class="line">matches = (x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> x &gt; <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-
-<p>其中第一种方法在Python3中完全可以使用filter方法来实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matches = filter(fulfills_some_condition, lst)</span><br></pre></td></tr></table></figure>
-
-<h2 id="找出第一个符合条件的元素"><a href="#找出第一个符合条件的元素" class="headerlink" title="找出第一个符合条件的元素"></a>找出第一个符合条件的元素</h2><p>可以loop所有元素直到找到目标元素，否则抛出异常。或者可以使用：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next(x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...)</span><br></pre></td></tr></table></figure>
-
-<p>它会返回第一个目标元素，否则抛出错误<code>StopIteration</code>。亦或者，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next((x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...), [default value])</span><br></pre></td></tr></table></figure>
-
-<h2 id="找出目标元素的位置"><a href="#找出目标元素的位置" class="headerlink" title="找出目标元素的位置"></a>找出目标元素的位置</h2><p>使用list的index方法可以返回目标第一次出现时的位置。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">4</span>) <span class="comment"># =&gt; ValueError</span></span><br></pre></td></tr></table></figure>
-
-<p>但是，不能返回后续出现的相同元素。这时可以使用enumerate方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[idx <span class="keyword">for</span> idx, x <span class="keyword">in</span> enumerate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>]) <span class="keyword">if</span> x==<span class="number">2</span>] <span class="comment"># =&gt; [1, 3]</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>以下是原回答：</p>
-<p>As for your first question: that code is perfectly fine and should work if <code>item</code> equals one of the elements inside <code>myList</code>. Maybe you try to find a string that does not <em>exactly</em> match one of the items or maybe you are using a float value which suffers from inaccuracy.</p>
-<p>As for your second question: There’s actually several possible ways if “finding” things in lists.</p>
-<h3 id="Checking-if-something-is-inside"><a href="#Checking-if-something-is-inside" class="headerlink" title="Checking if something is inside"></a>Checking if something is inside</h3><p>This is the use case you describe: Checking whether something is inside a list or not. As you know, you can use the <code>in</code> operator for that:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment"># =&gt; True</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Filtering-a-collection"><a href="#Filtering-a-collection" class="headerlink" title="Filtering a collection"></a>Filtering a collection</h3><p>That is, finding all elements in a sequence that meet a certain condition. You can use list comprehension or generator expressions for that:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">matches = [x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> fulfills_some_condition(x)]</span><br><span class="line">matches = (x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> x &gt; <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-
-<p>The latter will return a <em>generator</em> which you can imagine as a sort of lazy list that will only be built as soon as you iterate through it. By the way, the first one is exactly equivalent to</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matches = filter(fulfills_some_condition, lst)</span><br></pre></td></tr></table></figure>
-
-<p>in Python 2. Here you can see higher-order functions at work. In Python 3, <code>filter</code> doesn’t return a list, but a generator-like object.</p>
-<h3 id="Finding-the-first-occurrence"><a href="#Finding-the-first-occurrence" class="headerlink" title="Finding the first occurrence"></a>Finding the first occurrence</h3><p>If you only want the first thing that matches a condition (but you don’t know what it is yet), it’s fine to use a for loop (possibly using the <code>else</code> clause as well, which is not really well-known). You can also use</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next(x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...)</span><br></pre></td></tr></table></figure>
-
-<p>which will return the first match or raise a <code>StopIteration</code> if none is found. Alternatively, you can use</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next((x <span class="keyword">for</span> x <span class="keyword">in</span> lst <span class="keyword">if</span> ...), [default value])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Finding-the-location-of-an-item"><a href="#Finding-the-location-of-an-item" class="headerlink" title="Finding the location of an item"></a>Finding the location of an item</h3><p>For lists, there’s also the <code>index</code> method that can sometimes be useful if you want to know <em>where</em> a certain element is in the list:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].index(<span class="number">4</span>) <span class="comment"># =&gt; ValueError</span></span><br></pre></td></tr></table></figure>
-
-<p>However, note that if you have duplicates, <code>.index</code> always returns the lowest index:……</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>].index(<span class="number">2</span>) <span class="comment"># =&gt; 1</span></span><br></pre></td></tr></table></figure>
-
-<p>If there are duplicates and you want all the indexes then you can use <code>enumerate()</code> instead:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[i <span class="keyword">for</span> i,x <span class="keyword">in</span> enumerate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>]) <span class="keyword">if</span> x==<span class="number">2</span>] <span class="comment"># =&gt; [1, 3]</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/questions/9542738/python-find-in-list" target="_blank" rel="noopener">find in list</a></p>
+        <h1 id="filezilla"><a href="#filezilla" class="headerlink" title="filezilla"></a>filezilla</h1><p>打开Filezilla-编辑-设置</p>
+<p><img src="web-filezilla%5Csetting.png" alt=""></p>
+<p>具体配置：</p>
+<p><img src="web-filezilla%5Ca.jpg" alt=""></p>
+<p>连接-SFTP-添加密钥文件（选择aws上下载到的pem密钥文件）</p>
+<p>连接：</p>
+<p><img src="web-filezilla%5Cconnect.jpg" alt=""></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>amazon服务器下使用FileZilla上传文件到服务器</p>
+<p><a href="https://blog.csdn.net/zhanlurbh/article/details/51895263" target="_blank" rel="noopener">https://blog.csdn.net/zhanlurbh/article/details/51895263</a></p>
 
       
 
@@ -238,124 +198,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">find in list</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/07/Python-54-findinlist/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Numpy-29-numpy-stack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/03/Numpy-29-numpy-stack/">Numpy-29-numpy-stack</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/03/Numpy-29-numpy-stack/" class="archive-article-date">
-  	<time datetime="2018-09-03T13:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Numpy-stack"><a href="#Numpy-stack" class="headerlink" title="Numpy.stack"></a>Numpy.stack</h1><p>numpy.stack(arrays, axis=0)实现沿着指定新轴axis连接多个序列arrays。</p>
-<p>参数：</p>
-<ul>
-<li>arrays 需要合并的多个序列，要求序列拥有完全相同的shape</li>
-<li>axis 指定合并所沿轴的位置，要求int类型。axis=-1意味着最后一个纬度方向。<br>返回：<br>返回比输入序列增加了一个纬度的新序列。</li>
-</ul>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import numpy as np</span><br><span class="line">&gt;&gt;&gt; a &#x3D; np.array([1,2,3])</span><br><span class="line">&gt;&gt;&gt; b &#x3D; np.array([4,5,6])</span><br><span class="line">&gt;&gt;&gt; a.shape</span><br><span class="line">(3,)</span><br><span class="line">&gt;&gt;&gt; b.shape</span><br><span class="line">(3,)</span><br><span class="line"># 注意把多个序列外加到一个tuple内</span><br><span class="line">&gt;&gt;&gt; np.stack(a,b)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  File &quot;&#x2F;anaconda3&#x2F;lib&#x2F;python3.6&#x2F;site-packages&#x2F;numpy&#x2F;core&#x2F;shape_base.py&quot;, line 356, in stack</span><br><span class="line">    axis &#x3D; normalize_axis_index(axis, result_ndim)</span><br><span class="line">TypeError: only size-1 arrays can be converted to Python scalars</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b))</span><br><span class="line">array([[1, 2, 3],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;0)</span><br><span class="line">array([[1, 2, 3],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;0).shape</span><br><span class="line">(2, 3)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1)</span><br><span class="line">array([[1, 4],</span><br><span class="line">       [2, 5],</span><br><span class="line">       [3, 6]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1).shape</span><br><span class="line">(3, 2)</span><br></pre></td></tr></table></figure>
-
-<p>[1，2，3]和[4，5，6]在axis=0轴上连接后得到新序列形状为shape=(2, 3)。新序列的形状2，3中，2表示两个序列连接，而且是在0轴位置上。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;np.arange(12).reshape(3,4)</span><br><span class="line">&gt;&gt;&gt; b&#x3D;np.arange(12).reshape(3,4)+1</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11]])</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([[ 1,  2,  3,  4],</span><br><span class="line">       [ 5,  6,  7,  8],</span><br><span class="line">       [ 9, 10, 11, 12]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b))</span><br><span class="line">array([[[ 0,  1,  2,  3],</span><br><span class="line">        [ 4,  5,  6,  7],</span><br><span class="line">        [ 8,  9, 10, 11]],</span><br><span class="line"></span><br><span class="line">       [[ 1,  2,  3,  4],</span><br><span class="line">        [ 5,  6,  7,  8],</span><br><span class="line">        [ 9, 10, 11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b)).shape</span><br><span class="line">(2, 3, 4)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1)</span><br><span class="line">array([[[ 0,  1,  2,  3],</span><br><span class="line">        [ 1,  2,  3,  4]],</span><br><span class="line"></span><br><span class="line">       [[ 4,  5,  6,  7],</span><br><span class="line">        [ 5,  6,  7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 8,  9, 10, 11],</span><br><span class="line">        [ 9, 10, 11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;1).shape</span><br><span class="line">(3, 2, 4)</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;2)</span><br><span class="line">array([[[ 0,  1],</span><br><span class="line">        [ 1,  2],</span><br><span class="line">        [ 2,  3],</span><br><span class="line">        [ 3,  4]],</span><br><span class="line"></span><br><span class="line">       [[ 4,  5],</span><br><span class="line">        [ 5,  6],</span><br><span class="line">        [ 6,  7],</span><br><span class="line">        [ 7,  8]],</span><br><span class="line"></span><br><span class="line">       [[ 8,  9],</span><br><span class="line">        [ 9, 10],</span><br><span class="line">        [10, 11],</span><br><span class="line">        [11, 12]]])</span><br><span class="line">&gt;&gt;&gt; np.stack((a,b), axis&#x3D;2).shape</span><br><span class="line">(3, 4, 2)</span><br></pre></td></tr></table></figure>
-
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11]])</span><br><span class="line">&gt;&gt;&gt; b</span><br><span class="line">array([[ 1,  2,  3,  4],</span><br><span class="line">       [ 5,  6,  7,  8],</span><br><span class="line">       [ 9, 10, 11, 12]])</span><br></pre></td></tr></table></figure>
-
-<h3 id="合并前"><a href="#合并前" class="headerlink" title="合并前"></a>合并前</h3><p>a各元素的下标：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, 0) (0, 1) (0, 2) (0, 3)</span><br><span class="line">(1, 0) (1, 1) (1, 2) (1, 3)</span><br><span class="line">(2, 0) (2, 1) (2, 2) (2, 3)</span><br></pre></td></tr></table></figure>
-
-<p>b各元素的下标：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, 0) (0, 1) (0, 2) (0, 3)</span><br><span class="line">(1, 0) (1, 1) (1, 2) (1, 3)</span><br><span class="line">(2, 0) (2, 1) (2, 2) (2, 3)</span><br></pre></td></tr></table></figure>
-
-<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>numpy.stack((a, b), axis=1)在轴axis=1处合并时，<br>a各元素的下标：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;0&#96;, 0) (0, &#96;0&#96;, 1) (0, &#96;0&#96;, 2) (0, &#96;0&#96;, 3)</span><br><span class="line">(1, &#96;0&#96;, 0) (1, &#96;0&#96;, 1) (1, &#96;0&#96;, 2) (1, &#96;0&#96;, 3)</span><br><span class="line">(2, &#96;0&#96;, 0) (2, &#96;0&#96;, 1) (2, &#96;0&#96;, 2) (2, &#96;0&#96;, 3)</span><br></pre></td></tr></table></figure>
-
-<p>b各元素的下标：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;1&#96;, 0) (0, &#96;1&#96;, 1) (0, &#96;1&#96;, 2) (0, &#96;1&#96;, 3)</span><br><span class="line">(1, &#96;1&#96;, 0) (1, &#96;1&#96;, 1) (1, &#96;1&#96;, 2) (1, &#96;1&#96;, 3)</span><br><span class="line">(2, &#96;1&#96;, 0) (2, &#96;1&#96;, 1) (2, &#96;1&#96;, 2) (2, &#96;1&#96;, 3)</span><br></pre></td></tr></table></figure>
-
-<h3 id="合并后"><a href="#合并后" class="headerlink" title="合并后"></a>合并后</h3><p>合并之后，先排满axis=0位置，然后排axis=1位置0-&gt;1：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(0, &#96;0&#96;, 0) (0, &#96;0&#96;, 1) (0, &#96;0&#96;, 2) (0, &#96;0&#96;, 3)</span><br><span class="line">(0, &#96;1&#96;, 0) (0, &#96;1&#96;, 1) (0, &#96;1&#96;, 2) (0, &#96;1&#96;, 3)</span><br><span class="line">(1, &#96;0&#96;, 0) (1, &#96;0&#96;, 1) (1, &#96;0&#96;, 2) (1, &#96;0&#96;, 3)</span><br><span class="line">(1, &#96;1&#96;, 0) (1, &#96;1&#96;, 1) (1, &#96;1&#96;, 2) (1, &#96;1&#96;, 3)</span><br><span class="line">(2, &#96;0&#96;, 0) (2, &#96;0&#96;, 1) (2, &#96;0&#96;, 2) (2, &#96;0&#96;, 3)</span><br><span class="line">(2, &#96;1&#96;, 0) (2, &#96;1&#96;, 1) (2, &#96;1&#96;, 2) (2, &#96;1&#96;, 3)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/qq_17550379/article/details/78934529" target="_blank" rel="noopener">https://blog.csdn.net/qq_17550379/article/details/78934529</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stack</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">filezilla</a>
         		</li>
       		
 		</ul>
@@ -367,7 +214,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
@@ -376,7 +223,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/03/Numpy-29-numpy-stack/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/04/web-filezilla/">展开全文 >></a>
         </p>
       
 
@@ -406,33 +253,51 @@
 
 
   
-    <article id="post-Python-53-class-method-decorator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-web-systemd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/Python-53-class-method-decorator/">Python-53-class-method-decorator</a>
+      <a class="article-title" href="/2018/11/04/web-systemd/">web-systemd</a>
     </h1>
   
 
         
-        <a href="/2018/09/01/Python-53-class-method-decorator/" class="archive-article-date">
-  	<time datetime="2018-09-01T03:38:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+        <a href="/2018/11/04/web-systemd/" class="archive-article-date">
+  	<time datetime="2018-11-04T11:59:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="class-method-decorator"><a href="#class-method-decorator" class="headerlink" title="class method decorator"></a>class method decorator</h1><p>Python 装饰器装饰类中的方法</p>
-<p>decorator中调用被装饰的函数时，在调用函数的参数列表最前面加入self参数的话，下文中就可以直接调用class中的方法self.func()了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">catch_exception</span><span class="params">(origin_func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            u = origin_func(self, *args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> u</span><br><span class="line">        <span class="keyword">except</span> Exception:</span><br><span class="line">            self.revive() <span class="comment">#不用顾虑，直接调用原来的类的方法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'an Exception raised.'</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">revive</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'revive from exception.'</span>)</span><br><span class="line">        <span class="comment"># do something to restore</span></span><br><span class="line"><span class="meta">    @catch_exception</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read_value</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'here I will do something.'</span>)</span><br><span class="line">        <span class="comment"># do something.</span></span><br></pre></td></tr></table></figure>
+        <h1 id="systemd守护进程"><a href="#systemd守护进程" class="headerlink" title="systemd守护进程"></a>systemd守护进程</h1><p>在Python命令行下执行.py脚本后，在关闭命令行之前.py脚本可以保持执行状态。但是，一旦关闭命令行之后相应的脚本程序也会被终止，但是只有让py程序保持运行状态才能随时响应请求。</p>
+<p>有多种方式可以实现对应用进程的守护，可以用linux自带的systemd实现，也可以使用专门的守护工具supervisor。</p>
+<p>下面介绍systemd的实现方式:</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>首先生成一个systemd的配置文件test.service：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;mushroom</span><br><span class="line">After&#x3D;rc-local.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;simple</span><br><span class="line">User&#x3D;root</span><br><span class="line">Group&#x3D;root</span><br><span class="line">WorkingDirectory&#x3D;&#x2F;path for.py file</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;python3 .py filename</span><br><span class="line">Restart&#x3D;always</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
 
+<h1 id="保存位置"><a href="#保存位置" class="headerlink" title="保存位置"></a>保存位置</h1><p>把此配置文件复制到systemd目录下: <code>cp /home/test.service /etc/systemd/system/</code></p>
+<p>这一步非常重要！</p>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>使用以下命令启动该守护进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start test.service</span><br></pre></td></tr></table></figure>
 
+<p>停止该进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop test.service</span><br></pre></td></tr></table></figure>
 
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://kingname.info/2017/04/17/decorate-for-method/" target="_blank" rel="noopener">https://kingname.info/2017/04/17/decorate-for-method/</a></p>
+<h1 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl enable test.service</span><br><span class="line"># 以上命令相当于执行以下命令，把test.service添加到开机启动中</span><br><span class="line">$ sudo ln -s  &#39;&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;test.service&#39;  &#39;&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;test.service&#39;</span><br></pre></td></tr></table></figure>
+
+<p>即可实现开机启动。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>systemd实现python的守护进程</p>
+<p><a href="https://blog.csdn.net/luckytanggu/article/details/53467687" target="_blank" rel="noopener">https://blog.csdn.net/luckytanggu/article/details/53467687</a></p>
+<p>Systemd 入门教程：命令篇</p>
+<p><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html</a></p>
+<p>Systemd 入门教程：实战篇</p>
+<p><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html</a></p>
+<p>linux下python守护进程编写和原理理解</p>
+<p><a href="https://blog.csdn.net/luckytanggu/article/details/51790440" target="_blank" rel="noopener">https://blog.csdn.net/luckytanggu/article/details/51790440</a></p>
 
       
 
@@ -446,7 +311,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">class method decorator</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">systemd</a>
         		</li>
       		
 		</ul>
@@ -458,7 +327,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
@@ -467,7 +336,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/Python-53-class-method-decorator/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/04/web-systemd/">展开全文 >></a>
         </p>
       
 
@@ -497,29 +366,30 @@
 
 
   
-    <article id="post-PyCharm-06-TODO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-web-ec2-ip" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/PyCharm-06-TODO/">PyCharm-06-TODO</a>
+      <a class="article-title" href="/2018/11/04/web-ec2-ip/">web-ec2-ip</a>
     </h1>
   
 
         
-        <a href="/2018/09/01/PyCharm-06-TODO/" class="archive-article-date">
-  	<time datetime="2018-09-01T02:31:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+        <a href="/2018/11/04/web-ec2-ip/" class="archive-article-date">
+  	<time datetime="2018-11-04T11:50:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="PyCharm-TODO"><a href="#PyCharm-TODO" class="headerlink" title="PyCharm TODO"></a>PyCharm TODO</h1><p>在py文件的comment内如果有大写的<code>TODO</code>关键字，这个TODO会被PyCharm识别并加以记录。</p>
-<p>在IDE的下方会有提示当前有几处TODO标记。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.jetbrains.com/pycharm/2013/06/working-with-todo-in-pycharm/" target="_blank" rel="noopener">https://blog.jetbrains.com/pycharm/2013/06/working-with-todo-in-pycharm/</a></p>
+        <h1 id="EC2固定IP"><a href="#EC2固定IP" class="headerlink" title="EC2固定IP"></a>EC2固定IP</h1><p>左侧控制面板-网络与安全-弹性IP</p>
+<p>左上角分配新地址-分配一个新地址（新地址不可以闲置，否则会产生额外费用）</p>
+<p>然后指定一个实例机器</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cmgine.com/archives/708.html" target="_blank" rel="noopener">https://www.cmgine.com/archives/708.html</a></p>
 
       
 
@@ -533,7 +403,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">TODO</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ec2</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ip</a>
         		</li>
       		
 		</ul>
@@ -545,7 +423,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
@@ -554,7 +432,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/PyCharm-06-TODO/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/04/web-ec2-ip/">展开全文 >></a>
         </p>
       
 
@@ -584,32 +462,28 @@
 
 
   
-    <article id="post-Python-52-OSinfo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-web-vim" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/Python-52-OSinfo/">Python-52-OSinfo</a>
+      <a class="article-title" href="/2018/11/04/web-vim/">web-vim</a>
     </h1>
   
 
         
-        <a href="/2018/09/01/Python-52-OSinfo/" class="archive-article-date">
-  	<time datetime="2018-09-01T02:27:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+        <a href="/2018/11/04/web-vim/" class="archive-article-date">
+  	<time datetime="2018-11-04T11:38:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Python查看当前OS"><a href="#Python查看当前OS" class="headerlink" title="Python查看当前OS"></a>Python查看当前OS</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">print(os.name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">print(sys.platform)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> platform</span><br><span class="line">print(platform.system())</span><br></pre></td></tr></table></figure>
+        <h1 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># open</span><br><span class="line">sudo vim filename</span><br><span class="line"></span><br><span class="line"># edit</span><br><span class="line">i</span><br><span class="line"></span><br><span class="line"># close</span><br><span class="line">esc</span><br><span class="line">:w   # save but NOT close</span><br><span class="line">:q   # close</span><br><span class="line">:wq  # save and close</span><br><span class="line">:q!  # force close &amp; not save</span><br><span class="line">:e!  # abort all modification</span><br></pre></td></tr></table></figure>
 
-<p>打印输出：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'nt'</span></span><br><span class="line"><span class="string">'Windows'</span></span><br><span class="line"><span class="string">'Windows'</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/orangleliu/article/details/44907221" target="_blank" rel="noopener">https://blog.csdn.net/orangleliu/article/details/44907221</a></p>
 
       
 
@@ -623,15 +497,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os info</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vim</a>
         		</li>
       		
 		</ul>
@@ -643,7 +513,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
@@ -652,7 +522,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/Python-52-OSinfo/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/04/web-vim/">展开全文 >></a>
         </p>
       
 
@@ -682,233 +552,42 @@
 
 
   
-    <article id="post-Git-11-untrackFile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-web-domain" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/Git-11-untrackFile/">Git-11-untrackFile</a>
+      <a class="article-title" href="/2018/11/04/web-domain/">web-domain</a>
     </h1>
   
 
         
-        <a href="/2018/09/01/Git-11-untrackFile/" class="archive-article-date">
-  	<time datetime="2018-09-01T02:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
+        <a href="/2018/11/04/web-domain/" class="archive-article-date">
+  	<time datetime="2018-11-04T09:44:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="停止追踪新文件"><a href="#停止追踪新文件" class="headerlink" title="停止追踪新文件"></a>停止追踪新文件</h1><p>修改.gitignore文件来实现忽略对未add的文件的追踪。</p>
-<h1 id="取消对已添加的文件的追踪"><a href="#取消对已添加的文件的追踪" class="headerlink" title="取消对已添加的文件的追踪"></a>取消对已添加的文件的追踪</h1><p>对于已经add的文件，停止对其追踪需要使用<code>git rm --cached &lt;file&gt;</code>来实现。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">untrack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">file</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/Git-11-untrackFile/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-51-getFunctionNameClassName" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/Python-51-getFunctionNameClassName/">Python-51-getFunctionNameClassName</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/01/Python-51-getFunctionNameClassName/" class="archive-article-date">
-  	<time datetime="2018-09-01T01:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="get-function-name"><a href="#get-function-name" class="headerlink" title="get function name"></a>get function name</h1><p>代码示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> inspect</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_current_function_name</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> inspect.stack()[<span class="number">1</span>][<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_attrs</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Module:'</span>, __name__)</span><br><span class="line">    print(<span class="string">'File path: '</span>, __file__)</span><br><span class="line">    print(<span class="string">'File name: '</span>, os.path.basename(__file__))</span><br><span class="line">    print(<span class="string">'Current line No.: '</span>, sys._getframe().f_lineno)</span><br><span class="line">    print(<span class="string">'Func name: '</span>, sys._getframe().f_code.co_name)</span><br><span class="line">    print(<span class="string">'Func name: '</span>, get_current_function_name())</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># get function name</span></span><br><span class="line">    get_attrs()</span><br></pre></td></tr></table></figure>
-
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Module: __main__</span><br><span class="line">File path:  C:&#x2F;Users&#x2F;ds18b20&#x2F;PycharmProjects&#x2F;DeepLearning&#x2F;test&#x2F;test.py</span><br><span class="line">File name:  test.py</span><br><span class="line">Current line No.:  16</span><br><span class="line">Func name:  get_attrs</span><br><span class="line">Func name:  get_attrs</span><br></pre></td></tr></table></figure>
-
-<p>Python以文件的方式组织模块，每个.py文件都是一个最基本的Python模块。当模块直接被执行时，模块内的__name__属性被置为__main__，而当模块被import时，__name__属性就是模块的文件名。</p>
-<h1 id="get-class-name"><a href="#get-class-name" class="headerlink" title="get class name"></a>get class name</h1><p>代码示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a = <span class="string">"xxx"</span></span><br><span class="line">        self.b = <span class="string">"yyy"</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    f = Foo()</span><br><span class="line">    print(f.__class__.__name__)</span><br><span class="line">    print(f.__dict__)</span><br><span class="line">    print(<span class="string">'&#123;a&#125;, &#123;b&#125;'</span>.format(**f.__dict__))</span><br></pre></td></tr></table></figure>
-
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Foo</span><br><span class="line">&#123;&#39;a&#39;: &#39;xxx&#39;, &#39;b&#39;: &#39;yyy&#39;&#125;</span><br><span class="line">xxx, yyy</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/yongche_shi/article/details/50554015" target="_blank" rel="noopener">https://blog.csdn.net/yongche_shi/article/details/50554015</a></p>
-<p><a href="https://blog.csdn.net/meta_cpp/article/details/80506588" target="_blank" rel="noopener">https://blog.csdn.net/meta_cpp/article/details/80506588</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">function name</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class name</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">line number</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/Python-51-getFunctionNameClassName/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyCharm-05-ndarray" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/PyCharm-05-ndarray/">PyCharm-05-ndarray</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/01/PyCharm-05-ndarray/" class="archive-article-date">
-  	<time datetime="2018-09-01T01:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Unresolved-attribute-reference-‘mean’-for-class-‘bool’"><a href="#Unresolved-attribute-reference-‘mean’-for-class-‘bool’" class="headerlink" title="Unresolved attribute reference ‘mean’ for class ‘bool’"></a>Unresolved attribute reference ‘mean’ for class ‘bool’</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(y_hat.argmax(axis=<span class="number">1</span>) == y).mean()</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">np.mean(y_hat.argmax(axis=<span class="number">1</span>) == y)</span><br></pre></td></tr></table></figure>
-
-<p>上述代码会提示bool对象不包含mean方法。</p>
+        <h1 id="Register"><a href="#Register" class="headerlink" title="Register"></a>Register</h1><p>网上有许多域名代理商，下面是目前在用的一个，</p>
+<p><a href="http://www.namesilo.com" target="_blank" rel="noopener">www.namesilo.com</a></p>
+<h1 id="Manage"><a href="#Manage" class="headerlink" title="Manage"></a>Manage</h1><p>下面记录一下Domain绑定IP的设置方法：</p>
 <blockquote>
-<p>Unresolved attribute reference ‘mean’ for class ‘bool’</p>
+<ul>
+<li><strong>A Records</strong>Using an A record, you can associate a hostname with an IPv4 address. For example, as of this writing, the A record for <a href="http://www.namesilo.com" target="_blank" rel="noopener">www.namesilo.com</a> has 74.206.115.250 as its IPv4 address.</li>
+<li><strong>AAAA Records</strong><br>Using an A record, you can associate a hostname with an IPv6 address. For example, as of this writing, the AAAA record for ipv6.l.google.com has 2001:4860:8011::63 as its IPv6 address.</li>
+<li><strong>CNAME Records</strong><br>Using a CNAME record, you can associate a hostname with another hostname. This record type is commonly used when you need to associate a hostname with another service provider. For example, if you wanted to use Google Sites to host/manage your web site, you would create a CNAME record with “ghs.google.com” as the hostname value.<br>A common problem encountered with CNAME records when integrating with 3rd party site hosting services is that <a href="http://www.domain.com" target="_blank" rel="noopener">www.domain.com</a> CNAME records are easily created, but creating the CNAME record for just domain.com (to capture traffic when people don’t type in “www.”) cannot be done since that goes against <a href="http://tools.ietf.org/html/rfc1034" target="_blank" rel="noopener">RFC1034</a>. We have a work around for customers with this issue - our domain parking system redirects any “naked” domains (i.e. the SLD - domain.com) to the <a href="http://www.domain.com" target="_blank" rel="noopener">www.domain.com</a> equivalent. Therefore, all that must be done is to create an A record to our parking IP (which can be done by applying the parking/forwarding DNS template) for the SLD hostname.</li>
+<li><strong>MX Records</strong><br>Using an MX record (commonly referred to as a mail exchanger), you can associate a hostname which will be responsible for handling email processing. A MX record should be properly configured if you wish to receive email through a specific domain. MX records require a <a href="http://en.wikipedia.org/wiki/MX_record#MX_preference.2C_distance.2C_and_priority" target="_blank" rel="noopener">distance value</a> which controls delivery of mail; if no value is specified, it defaults to 10.</li>
+<li><strong>TXT Records</strong><br>Using a TXT record, you can associate arbitrary text with a specific hostname. In practice, this is most commonly used to create <a href="http://en.wikipedia.org/wiki/Sender_Policy_Framework" target="_blank" rel="noopener">SPF records</a>. If you need help creating a SPF record, you should first get familiar with SPF - you can also utilize this <a href="http://www.microsoft.com/mscorp/safety/content/technologies/senderid/wizard/" target="_blank" rel="noopener">SPF Wizard</a>.</li>
+<li><strong>SRV Records</strong><br>Using a SRV record allows you to associate the hostname and port number of servers for specified services. They are commonly used for VOIP/SIP applications. The hostname must begin with a format looking like _SERVICE._PROTOCOL. For example: _sip._tcp</li>
+</ul>
 </blockquote>
-<p>原因是PyCharm不能很好的识别numpy.ndarray对象，也就把上述==计算的结果存储为bool对象，进而提示bool不包含mean方法。<br>解决方法，可以在表达式后面加上# type: np.ndarray来提示IDE表达式结果的类型。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp = y_hat.argmax(axis=<span class="number">1</span>) == y  <span class="comment"># type: np.ndarray</span></span><br><span class="line">np.mean(tmp)</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Expected type ‘Union[ndarray, Iterable]’ warning in Python instruction<br><a href="https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction" target="_blank" rel="noopener">https://stackoverflow.com/questions/30599676/expected-type-unionndarray-iterable-warning-in-python-instruction</a></p>
+<p>最常用的是上面的A/AAAA/CNAME，其中Domain绑定IPv4时用A绑定；而绑定IPv6时使用AAAA绑定；绑定到另一个hostname时使用CNAME绑定。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>CNAME</p>
+<p><a href="https://xianhuo.org/namesilo-yumingjiexijiaocheng.html" target="_blank" rel="noopener">https://xianhuo.org/namesilo-yumingjiexijiaocheng.html</a></p>
 
       
 
@@ -922,7 +601,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ndarray</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">domain</a>
         		</li>
       		
 		</ul>
@@ -934,7 +617,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
+        			<a href="/categories/web//" class="article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
@@ -943,7 +626,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/PyCharm-05-ndarray/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/04/web-domain/">展开全文 >></a>
         </p>
       
 
@@ -973,37 +656,27 @@
 
 
   
-    <article id="post-Numpy-28-memoryUse" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Python-55-class-mutable-immutable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/23/Numpy-28-memoryUse/">Numpy-28-memoryUse</a>
+      <a class="article-title" href="/2018/10/15/Python-55-class-mutable-immutable/">Python-55-class-mutable-immutable</a>
     </h1>
   
 
         
-        <a href="/2018/08/23/Numpy-28-memoryUse/" class="archive-article-date">
-  	<time datetime="2018-08-23T14:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+        <a href="/2018/10/15/Python-55-class-mutable-immutable/" class="archive-article-date">
+  	<time datetime="2018-10-15T12:56:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Numpy-ndarray-memory-use"><a href="#Numpy-ndarray-memory-use" class="headerlink" title="Numpy.ndarray memory use"></a>Numpy.ndarray memory use</h1><p>使用Numpy进行科学计算时，经常需要预估数据所占的内存容量，从而避免Memory错误。</p>
-<ul>
-<li>要查看各对象的内存占用可以使用sys模块的getsizeof方法。</li>
-<li>要查看Numpy对象内部的元素所占的空间可以使用numpy.ndarray.nbytes来查看所有数组占用的空间大小；使用numpy.ndarray.itemsize来查看单个元素占用的空间大小。</li>
-</ul>
-<h2 id="sys-getsizeof"><a href="#sys-getsizeof" class="headerlink" title="sys.getsizeof"></a>sys.getsizeof</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位整型</span></span><br><span class="line">ai32 = np.array([], dtype=np.int32)</span><br><span class="line">bi32 = np.arange(<span class="number">1</span>, dtype=np.int32)</span><br><span class="line">ci32 = np.arange(<span class="number">5</span>, dtype=np.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位整型</span></span><br><span class="line">ai64 = np.array([], dtype=np.int64)</span><br><span class="line">bi64 = np.arange(<span class="number">1</span>, dtype=np.int64)</span><br><span class="line">ci64 = np.arange(<span class="number">5</span>, dtype=np.int64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位浮点数</span></span><br><span class="line">af32 = np.array([], dtype=np.float32)</span><br><span class="line">bf32 = np.arange(<span class="number">1</span>, dtype=np.float32)</span><br><span class="line">cf32 = np.arange(<span class="number">5</span>, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 64位浮点数</span></span><br><span class="line">af64 = np.array([], dtype=np.float64)</span><br><span class="line">bf64 = np.arange(<span class="number">1</span>, dtype=np.float64)</span><br><span class="line">cf64 = np.arange(<span class="number">5</span>, dtype=np.float64)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int32 number: %s"</span> % sys.getsizeof(ai32))</span><br><span class="line">print(<span class="string">"size of 1 int32 number: %s"</span> % sys.getsizeof(bi32))</span><br><span class="line">print(<span class="string">"size of 5 int32 numbers: %s"</span> % sys.getsizeof(ci32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 int64 number: %s"</span> % sys.getsizeof(ai64))</span><br><span class="line">print(<span class="string">"size of 1 int64 number: %s"</span> % sys.getsizeof(bi64))</span><br><span class="line">print(<span class="string">"size of 5 int64 numbers: %s"</span> % sys.getsizeof(ci64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float32 number: %s"</span> % sys.getsizeof(af32))</span><br><span class="line">print(<span class="string">"size of 1 float32 number: %s"</span> % sys.getsizeof(bf32))</span><br><span class="line">print(<span class="string">"size of 5 float32 numbers: %s"</span> % sys.getsizeof(cf32), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 float64 number: %s"</span> % sys.getsizeof(af64))</span><br><span class="line">print(<span class="string">"size of 1 float64 number: %s"</span> % sys.getsizeof(bf64))</span><br><span class="line">print(<span class="string">"size of 5 float64 numbers: %s"</span> % sys.getsizeof(cf64), end=<span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"size of 0 chars: %s"</span> % sys.getsizeof(<span class="string">''</span>))</span><br><span class="line">print(<span class="string">"size of 1 chars: %s"</span> % sys.getsizeof(<span class="string">'1'</span>))</span><br><span class="line">print(<span class="string">"size of 5 chars: %s"</span> % sys.getsizeof(<span class="string">'12345'</span>), end=<span class="string">'\n\n'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>打印输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">size of 0 int32 number: 96</span><br><span class="line">size of 1 int32 number: 100</span><br><span class="line">size of 5 int32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 int64 number: 96</span><br><span class="line">size of 1 int64 number: 104</span><br><span class="line">size of 5 int64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 float32 number: 96</span><br><span class="line">size of 1 float32 number: 100</span><br><span class="line">size of 5 float32 numbers: 116</span><br><span class="line"></span><br><span class="line">size of 0 float64 number: 96</span><br><span class="line">size of 1 float64 number: 104</span><br><span class="line">size of 5 float64 numbers: 136</span><br><span class="line"></span><br><span class="line">size of 0 chars: 49</span><br><span class="line">size of 1 chars: 50</span><br><span class="line">size of 5 chars: 54</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7" target="_blank" rel="noopener">https://blog.csdn.net/u010099080/article/details/53411703?fps=1&amp;locationNum=7</a><br><a href="https://www.draketo.de/english/python-memory-numpy-list-array" target="_blank" rel="noopener">https://www.draketo.de/english/python-memory-numpy-list-array</a></p>
+        <h1 id="class-parameter"><a href="#class-parameter" class="headerlink" title="class parameter"></a>class parameter</h1><p>类生成实例时，类的参数传递要注意</p>
 
       
 
@@ -1017,11 +690,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Numpy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">memory use</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">immutable</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mutable</a>
         		</li>
       		
 		</ul>
@@ -1042,7 +719,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/23/Numpy-28-memoryUse/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/10/15/Python-55-class-mutable-immutable/">展开全文 >></a>
         </p>
       
 
@@ -1072,49 +749,135 @@
 
 
   
-    <article id="post-Matplotlib-09-imshow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Pandas-04-apply" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/23/Matplotlib-09-imshow/">Matplotlib-09-imshow</a>
+      <a class="article-title" href="/2018/10/08/Pandas-04-apply/">Pandas-04-apply</a>
     </h1>
   
 
         
-        <a href="/2018/08/23/Matplotlib-09-imshow/" class="archive-article-date">
-  	<time datetime="2018-08-23T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+        <a href="/2018/10/08/Pandas-04-apply/" class="archive-article-date">
+  	<time datetime="2018-10-08T05:17:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="matplotlib-imshow"><a href="#matplotlib-imshow" class="headerlink" title="matplotlib imshow"></a>matplotlib imshow</h1><p>用matplotlib显示cifar10数据集样本时，输出图片颜色怪异，原因在于用于显示的像素值需要转换成[0, 1]之间的浮点数。</p>
-<h2 id="直接显示raw图像："><a href="#直接显示raw图像：" class="headerlink" title="直接显示raw图像："></a>直接显示raw图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_1.png" alt=""></p>
-<h2 id="压缩到-0-1-后的图像："><a href="#压缩到-0-1-后的图像：" class="headerlink" title="压缩到[0, 1]后的图像："></a>压缩到[0, 1]后的图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_2.png" alt=""></p>
-<p>这是因为imshow函数对输入数据的格式和类型有要求：</p>
-<p><code>matplotlib.pyplot.imshow</code>(<em>X</em>, <em>cmap=None</em>, <em>norm=None</em>, <em>aspect=None</em>, <em>interpolation=None</em>, <em>alpha=None</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>origin=None</em>, <em>extent=None</em>, <em>shape=None</em>, <em>filternorm=1</em>, <em>filterrad=4.0</em>, <em>imlim=None</em>, <em>resample=None</em>, <em>url=None</em>, <em>**, *data=None</em>, <em><em>\</em>kwargs</em>)</p>
+        <h1 id="pandas-DataFrame-apply"><a href="#pandas-DataFrame-apply" class="headerlink" title="pandas.DataFrame.apply"></a>pandas.DataFrame.apply</h1><p>定义如下，</p>
 <blockquote>
-<p><strong>X</strong> : array-like or PIL image</p>
-<p>The image data. Supported array shapes are:</p>
-<ul>
-<li>(M, N): an image with scalar data. The data is visualized using a colormap.</li>
-<li>(M, N, 3): an image with RGB values (float or uint8).</li>
-<li>(M, N, 4): an image with RGBA values (float or uint8), i.e. including transparency.</li>
-</ul>
-<p>The first two dimensions (M, N) define the rows and columns of the image.</p>
-<p>The RGB(A) values should be in the range [0 .. 1] for floats or [0 .. 255] for integers. Out-of-range values will be clipped to these bounds.</p>
+<p><code>DataFrame.``apply</code>(<em>func</em>, <em>axis=0</em>, <em>broadcast=None</em>, <em>raw=False</em>, <em>reduce=None</em>, <em>result_type=None</em>, <em>args=()</em>, <em><em>\</em>kwds</em>)<a href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L5837-L6014" target="_blank" rel="noopener">[source]</a></p>
+<p>Apply a function along an axis of the DataFrame.</p>
+<p>Objects passed to the function are Series objects whose index is either the DataFrame’s index (<code>axis=0</code>) or the DataFrame’s columns (<code>axis=1</code>). By default (<code>result_type=None</code>), the final return type is inferred from the return type of the applied function. Otherwise, it depends on the result_type argument.</p>
 </blockquote>
-<p>故，作为显示数据的X必须是[0, 1]的float或者[0, 255]的uint8类型。</p>
-<p>另外一个int的例子是，当数据类型是默认的int32类型时，显示颜色不正常：</p>
-<p><img src="Matplotlib-09-imshow%5Cint32.png" alt=""></p>
-<p>改成uint8类型之后，显示颜色变为正常了：</p>
-<p><img src="Matplotlib-09-imshow%5Cuint8.png" alt=""></p>
-<p>变换函数：<code>numpy_data.astype(&#39;uint8&#39;)</code></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat" target="_blank" rel="noopener">https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat</a><br><a href="https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array</a></p>
+<p>例子，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame([[<span class="number">4</span>, <span class="number">9</span>],] * <span class="number">3</span>, columns=[<span class="string">'A'</span>, <span class="string">'B'</span>])</span><br><span class="line">df.apply(np.sqrt)</span><br></pre></td></tr></table></figure>
+
+<h2 id="not-in-place-operation"><a href="#not-in-place-operation" class="headerlink" title="not in-place operation"></a>not in-place operation</h2><p><code>.apply()</code> is not an in-place operation(i.e., it returns a new object rather than modifying the original)</p>
+<p>注意，apply不是一个in-place操作函数，即不会修改当前数据集内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame([[<span class="number">4</span>, <span class="number">9</span>],] * <span class="number">3</span>, columns=[<span class="string">'A'</span>, <span class="string">'B'</span>])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<p>apply之后的原df数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.apply(np.sqrt)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>输出，并没有变化：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<p>需要把apply的结果赋值给另一个变量来使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = df.apply(np.sqrt)</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html" target="_blank" rel="noopener">http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html</a></p>
+<p><a href="https://stackoverflow.com/questions/41006982/pandas-apply-function-not-working-consistently-python-3#" target="_blank" rel="noopener">https://stackoverflow.com/questions/41006982/pandas-apply-function-not-working-consistently-python-3#</a></p>
 
       
 
@@ -1128,15 +891,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imshow</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apply</a>
         		</li>
       		
 		</ul>
@@ -1148,7 +903,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
         		</li>
       		
 		</ul>
@@ -1157,7 +912,581 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/23/Matplotlib-09-imshow/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/10/08/Pandas-04-apply/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pandas-03-reindex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Pandas-03-reindex/">Pandas-03-reindex</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Pandas-03-reindex/" class="archive-article-date">
+  	<time datetime="2018-10-07T13:34:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pandas-reindex"><a href="#pandas-reindex" class="headerlink" title="pandas.reindex"></a>pandas.reindex</h1><p>reindex方法只是根据参数来更改原数组的排列顺序，而不会修改原有数据。如果参数中指定的名称在原数组中不存在，则用NaN代替。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">obj = pd.Series(range(<span class="number">4</span>), index=[<span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>])</span><br><span class="line"><span class="keyword">print</span> obj</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d    0</span><br><span class="line">b    1</span><br><span class="line">a    2</span><br><span class="line">c    3</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>使用reindex修改排列顺序后，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.reindex([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a    2.0</span><br><span class="line">b    1.0</span><br><span class="line">c    3.0</span><br><span class="line">d    0.0</span><br><span class="line">e    NaN</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>同样地，DataFrame也有reindex方法来修改行或者列的顺序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">9</span>).reshape((<span class="number">3</span>, <span class="number">3</span>)), index=[<span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>], columns=[<span class="string">'c1'</span>, <span class="string">'c2'</span>, <span class="string">'c3'</span>])</span><br><span class="line"></span><br><span class="line">states = [<span class="string">'c1'</span>, <span class="string">'b2'</span>, <span class="string">'c3'</span>]</span><br><span class="line">frame.reindex(columns=states)</span><br><span class="line"></span><br><span class="line">frame_na=frame.reindex(index=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>], method=<span class="string">'ffill'</span>, columns=states)</span><br></pre></td></tr></table></figure>
+
+<p>针对NaN值可以使用fillna方法来填充，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame_na.fillna(method=<span class="string">'ffill'</span>,axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.csdn.net/LY_ysys629/article/details/55005201" target="_blank" rel="noopener">https://blog.csdn.net/LY_ysys629/article/details/55005201</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">reindex</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Pandas-03-reindex/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pandas-02-concat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Pandas-02-concat/">Pandas-02-concat</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Pandas-02-concat/" class="archive-article-date">
+  	<time datetime="2018-10-07T13:34:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pandas-concat"><a href="#pandas-concat" class="headerlink" title="pandas.concat"></a>pandas.concat</h1><p>函数定义如下：</p>
+<blockquote>
+<p>pandas.concat</p>
+<p><code>pandas.concat</code>(<em>objs</em>, <em>axis=0</em>, <em>join=’outer’</em>, <em>join_axes=None</em>, <em>ignore_index=False</em>, <em>keys=None</em>, <em>levels=None</em>, <em>names=None</em>, <em>verify_integrity=False</em>, <em>sort=None</em>, <em>copy=True</em>)<a href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/reshape/concat.py#L21-L226" target="_blank" rel="noopener">[source]</a></p>
+<p>Concatenate pandas objects along a particular axis with optional set logic along the other axes.</p>
+<p>Can also add a layer of hierarchical indexing on the concatenation axis, which may be useful if the labels are the same (or overlapping) on the passed axis number.</p>
+</blockquote>
+<p>值得注意的是，要组合concat的数组要先组成一个tuple或者list然后传递给<em>objs</em>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frames = [df1, df2, df3]</span><br><span class="line">result = pd.concat(frames)</span><br></pre></td></tr></table></figure>
+
+<p>分开传入时会报错。</p>
+<h2 id="ignore-index"><a href="#ignore-index" class="headerlink" title="ignore_index"></a>ignore_index</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s_3 = pd.concat((s_1, s_2), ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样可以clear掉原有的index，并填上默认的index。</p>
+<p>或者，可以使用reset_index方法来重置index。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result2= result.reset_index()</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.concat.html#pandas-concat" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.concat.html#pandas-concat</a></p>
+<p><a href="https://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="noopener">https://blog.csdn.net/stevenkwong/article/details/52528616</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Pandas-02-concat/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pandas-01-SeriesDataFrame" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/07/Pandas-01-SeriesDataFrame/">Pandas-01-SeriesDataFrame</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/07/Pandas-01-SeriesDataFrame/" class="archive-article-date">
+  	<time datetime="2018-10-07T12:53:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Pandas基本数据结构"><a href="#Pandas基本数据结构" class="headerlink" title="Pandas基本数据结构"></a>Pandas基本数据结构</h1><p>Series和DataFrame是Pandas的两种基本数据结构，下面分别介绍。</p>
+<h2 id="Pandas-Series类型"><a href="#Pandas-Series类型" class="headerlink" title="Pandas.Series类型"></a>Pandas.Series类型</h2><p>Series类似于一维数组对象，包含一个数组的数据对象(values)，和一个与该数组相关联的数据标签，该标签被称为索引(index)。</p>
+<p>可以使用pandas.Series.values和pandas.Series.index来分别获取数组数据和索引，使用pandas.Series.dtypes来获取数据类型。<br>参考: <a href="https://pda.readthedocs.io/en/latest/chp5.html" target="_blank" rel="noopener">https://pda.readthedocs.io/en/latest/chp5.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入 numpy和pandas</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series, DataFrame</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pd.Series</span></span><br><span class="line">obj = Series([<span class="number">4</span>, <span class="number">7</span>, <span class="number">-5</span>, <span class="number">3</span>])</span><br><span class="line">obj</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0    4</span><br><span class="line">1    7</span><br><span class="line">2   -5</span><br><span class="line">3    3</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>查看values属性，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.values</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([ 4,  7, -5,  3], dtype&#x3D;int64)</span><br></pre></td></tr></table></figure>
+
+<p>查看index属性，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.index</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RangeIndex(start&#x3D;0, stop&#x3D;4, step&#x3D;1)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据类型，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.dtypes</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype(&#39;int64&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>关于Series数据的类型，当所有数据的类型统一时输出就是当前数据的类型；当数据类型不统一时Pandas自动选择能够代表所有类型的数据类型，比如同时包含integer和float时会统一使用float来统一化。</p>
+<p>值得注意的是，当数据中包含string或者nan时，obj.dtypes统一格式为object。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">series = pd.Series([np.nan, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">series.dtypes</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype(&#39;float64&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>添加index，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj2 = Series([<span class="number">4</span>, <span class="number">7</span>, <span class="number">-5</span>, <span class="number">3</span>], index=[<span class="string">'d'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>])</span><br><span class="line">obj2</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">a   -5</span><br><span class="line">c    3</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h3 id="Slice-Series"><a href="#Slice-Series" class="headerlink" title="Slice Series"></a>Slice Series</h3><p>下面测试Pandas的Slice功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用数组slice</span></span><br><span class="line">s = obj2[[<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>上文讲到Series可以看作一维数组，所以可以使用位置来引用。并且Series还可以使用索引值来引用，因此也可以把Series看成字典来处理。可以使用类似key的index来引用，而且可以使用in语法来判断index是否存在。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用索引slice</span></span><br><span class="line">ss = obj2[[<span class="string">'d'</span>, <span class="string">'b'</span>]]</span><br><span class="line">print(ss)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'d'</span> <span class="keyword">in</span> obj2)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>使用布尔值索引，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用布尔数据集slice</span></span><br><span class="line">sss = obj2[obj2&gt;<span class="number">3</span>]</span><br><span class="line">print(sss)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d    4</span><br><span class="line">b    7</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>dict内部数据没有顺序，但是使用dict生成的Series则有顺序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdata = &#123;<span class="string">'Ohio'</span>: <span class="number">35000</span>, <span class="string">'Texas'</span>: <span class="number">71000</span>, <span class="string">'Oregon'</span>: <span class="number">16000</span>, <span class="string">'Utah'</span>: <span class="number">5000</span>&#125;</span><br><span class="line">obj3 = Series(sdata)</span><br><span class="line">obj3</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Ohio      35000</span><br><span class="line">Oregon    16000</span><br><span class="line">Texas     71000</span><br><span class="line">Utah       5000</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加index"><a href="#添加index" class="headerlink" title="添加index"></a>添加index</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">states = [<span class="string">'California'</span>, <span class="string">'Ohio'</span>, <span class="string">'Oregon'</span>, <span class="string">'Texas'</span>]</span><br><span class="line">obj4 = Series(sdata, index=states)</span><br><span class="line">obj4</span><br></pre></td></tr></table></figure>
+
+<p>输出，注意在data中没有对应的California列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California        NaN</span><br><span class="line">Ohio          35000.0</span><br><span class="line">Oregon        16000.0</span><br><span class="line">Texas         71000.0</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下， sdata 中的3个值被放在了合适的位置，但因为没有发现对应于 ‘California’ 的值，就出现了 NaN （不是一个数），这在pandas中被用来标记数据缺失或 NA 值。我使用“missing”或“NA”来表示数度丢失。在pandas中用函数 isnull 和 notnull 来检测数据丢失：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.isnull(obj4)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California     True</span><br><span class="line">Ohio          False</span><br><span class="line">Oregon        False</span><br><span class="line">Texas         False</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>测试notnull，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.notnull(obj4)</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California    False</span><br><span class="line">Ohio           True</span><br><span class="line">Oregon         True</span><br><span class="line">Texas          True</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>Series对象内也包含该方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj4.isnull()</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">California     True</span><br><span class="line">Ohio          False</span><br><span class="line">Oregon        False</span><br><span class="line">Texas         False</span><br><span class="line">dtype: bool</span><br></pre></td></tr></table></figure>
+
+<h2 id="DataFrame类型"><a href="#DataFrame类型" class="headerlink" title="DataFrame类型"></a>DataFrame类型</h2><p>DataFrame可以看作是一个二维数组结构，它由多个共享同一个行索引的多个数据列组成。各个列有自己的名称和数据类型。下面使用字典来生成一个DataFrame：<br>(注意各dict内的各个数据列必须有相同的长度)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>],</span><br><span class="line">        <span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2001</span>, <span class="number">2002</span>],</span><br><span class="line">        <span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>]&#125;</span><br><span class="line">frame = DataFrame(data)</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop</th>
+      <th>state</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.5</td>
+      <td>Ohio</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.7</td>
+      <td>Ohio</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.6</td>
+      <td>Ohio</td>
+      <td>2002</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.4</td>
+      <td>Nevada</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.9</td>
+      <td>Nevada</td>
+      <td>2002</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="添加columns"><a href="#添加columns" class="headerlink" title="添加columns"></a>添加columns</h3><p>生成DataFrame时，默认包含一定的顺序。另外，可以通过加入columns参数来指定列的排列顺序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame1 = DataFrame(data, columns=[<span class="string">'state'</span>, <span class="string">'year'</span>, <span class="string">'pop'</span>])</span><br><span class="line">frame1</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>1.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>3.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>2.9</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>通过columns属性来查看columns列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame1.columns</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Index([&#39;state&#39;, &#39;year&#39;, &#39;pop&#39;], dtype&#x3D;&#39;object&#39;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加index-1"><a href="#添加index-1" class="headerlink" title="添加index"></a>添加index</h3><p>类似和Series一样，如果你传递了一个行，但在data中没有包含对应名称的列，结果中它会表示为NA值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index 参数用于指定行索引</span></span><br><span class="line">frame2 = DataFrame(data, columns=[<span class="string">'state'</span>, <span class="string">'year'</span>, <span class="string">'pop'</span>, <span class="string">'area'</span>], index=[<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>, <span class="string">'five'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>pop</th>
+      <th>area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>1.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>three</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>3.6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>four</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>2.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>five</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>2.9</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>###Slice DataFrame</p>
+<p>和Series一样，在DataFrame中的一列可以通过字典记法或属性来检索：<br>(此时返回的列就是上文所述的一个Series，可以通过type查看)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2[<span class="string">'state'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0      Ohio</span><br><span class="line">1      Ohio</span><br><span class="line">2      Ohio</span><br><span class="line">3    Nevada</span><br><span class="line">4    Nevada</span><br><span class="line">Name: state, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用属性方式，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.state</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0      Ohio</span><br><span class="line">1      Ohio</span><br><span class="line">2      Ohio</span><br><span class="line">3    Nevada</span><br><span class="line">4    Nevada</span><br><span class="line">Name: state, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用字典方式，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(frame2[<span class="string">'state'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandas.core.series.Series</span><br></pre></td></tr></table></figure>
+
+<p>下面是行的索引方法，即取出满足条件的某一行的记录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.ix[<span class="string">'three'</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ds18b20\Anaconda3\lib\site-packages\ipykernel\__main__.py:1: DeprecationWarning: </span><br><span class="line">.ix is deprecated. Please use</span><br><span class="line">.loc for label based indexing or</span><br><span class="line">.iloc for positional indexing</span><br><span class="line"></span><br><span class="line">See the documentation here:</span><br><span class="line">http:&#x2F;&#x2F;pandas.pydata.org&#x2F;pandas-docs&#x2F;stable&#x2F;indexing.html#ix-indexer-is-deprecated</span><br><span class="line">  if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>最新的方式为使用loc和iloc，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.loc[<span class="string">'three'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>使用iloc，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.iloc[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">state    Ohio</span><br><span class="line">year     2002</span><br><span class="line">pop       3.6</span><br><span class="line">area      NaN</span><br><span class="line">Name: three, dtype: object</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Series</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">DataFrame</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/Pandas-01-SeriesDataFrame/">展开全文 >></a>
         </p>
       
 
@@ -1189,7 +1518,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2774,6 +3103,50 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wedge prism</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">outlier</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">lens calib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gltf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">usdz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mesh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">file IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">magic method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">project 3D to 2D</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pose estimation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">glob</a>
               </li>
             
             <div class="clearfix"></div>

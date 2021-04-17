@@ -16,7 +16,7 @@
 <meta property="og:description" content="Basic of PythonCheck the version of Python1&gt;&gt;&gt;python --version  or 123&gt;&gt;&gt;pythonimport syssys.version  Arithmetic Calculations123451+11&#x2F;21&#x2F;&#x2F;21%22**3  Data Type1type(&quot;Strings&quot;)  Exit P">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-11-08T14:42:30.000Z">
-<meta property="article:modified_time" content="2017-11-08T15:45:55.702Z">
+<meta property="article:modified_time" content="2021-03-06T14:28:27.471Z">
 <meta property="article:author" content="wzx">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Basic">
@@ -190,6 +190,19 @@
 <h2 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(<span class="string">"Strings"</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Exit-Python-interpreter"><a href="#Exit-Python-interpreter" class="headerlink" title="Exit Python interpreter"></a>Exit Python interpreter</h2><p><code>Ctrl + D for Linux or Mac OS</code><br><code>Ctrl + Z for Windows</code></p>
+<h2 id="a-b-b-a-b"><a href="#a-b-b-a-b" class="headerlink" title="a, b = b, a + b"></a>a, b = b, a + b</h2><p><code>a, b = b, a + b</code>等价于</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = (b, a + b)</span><br><span class="line">a = t[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 这里代入的a没有被更新</span></span><br><span class="line">b = t[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>而不是像C语言中，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"><span class="comment"># a被上面一行更新了</span></span><br><span class="line">b = a + b</span><br></pre></td></tr></table></figure>
+
+<p>这个技巧在Python中可以<strong>用于交换两个变量</strong>，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
+
+<p>仅仅一行就实现了C语言中三行的功能。</p>
+<h2 id="in"><a href="#in" class="headerlink" title="in"></a>in</h2><p>判断一个元素是否存在于一个序列中，可以使用循环查询来实现。其实Python有个in的语法，可以更方便地达到目的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=range(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> <span class="keyword">in</span> a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">'male'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b <span class="keyword">in</span> [<span class="string">'male'</span>, <span class="string">'female'</span>]</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -1936,6 +1949,50 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">symbolic link</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">wedge prism</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">outlier</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">lens calib</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gltf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">usdz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mesh</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">file IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">magic method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">project 3D to 2D</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pose estimation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">glob</a>
               </li>
             
             <div class="clearfix"></div>
