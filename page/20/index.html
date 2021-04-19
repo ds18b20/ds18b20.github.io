@@ -156,6 +156,136 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL-03-Commit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/15/SQL-03-Commit/">SQL-03-Commit</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/15/SQL-03-Commit/" class="archive-article-date">
+  	<time datetime="2018-04-15T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SQL语言分类"><a href="#SQL语言分类" class="headerlink" title="SQL语言分类"></a>SQL语言分类</h1><p>按照COMMIT和ROLLBACK的用法来分类时，SQL语言可以分成DDL，DML和DCL三大类。</p>
+<ol>
+<li><p>DDL（Data Definition Language） 数据定义语言</p>
+<p>用于定义和管理 SQL 数据库中的所有对象的语言 。</p>
+<p>CREATE—创建表</p>
+<p>ALTER—修改表</p>
+<p>DROP—删除表</p>
+</li>
+<li><p>DML（Data Manipulation Language） 数据操纵语言</p>
+<p>SQL中具体操作数据的语言。 </p>
+<p>INSERT—数据的插入</p>
+<p>DELETE—数据的删除</p>
+<p>UPDATE—数据的修改</p>
+<p>SELECT—数据的查询</p>
+</li>
+<li><p>DCL（Data Control Language）数据控制语言</p>
+<p>用来授予或回收访问数据库的某种特权，并控制数据库操纵事务发生的时间及效果，对数据库实行监视等。</p>
+<p>GRANT—授权。</p>
+<p>ROLLBACK—回滚</p>
+<p>COMMIT—提交。 </p>
+</li>
+</ol>
+<h1 id="需要Commit的情况"><a href="#需要Commit的情况" class="headerlink" title="需要Commit的情况"></a>需要Commit的情况</h1><p>在上述DML语言之后，需要执行COMMIT / ROLLBACK把数据从内存写到硬盘上。具体说来，DML语句执行之后数据转移到回滚段(除了SELECT)，等待用户进行提交(COMMIT)或者回滚(ROLLBACK)后，放在回滚段中的数据会被清除。<strong>Commit可以使用Python的上下文功能来实现，具体见参考2。</strong></p>
+<p>SELECT语句执行后，数据暂存在共享池。当其他人查询相同数据时，可以直接从共享池中提取，而不用重新从数据库中查询，从而提高了查询速度。</p>
+<h1 id="Commit方式"><a href="#Commit方式" class="headerlink" title="Commit方式"></a>Commit方式</h1><p>提交(COMMIT)数据有三种类型：</p>
+<ol>
+<li><p>显式提交</p>
+<p>直接显式的写出COMMIT命令来完成提交</p>
+</li>
+<li><p>隐式提交</p>
+<p>用SQL命令间接完成的提交为隐式提交。这些命令是：</p>
+<p>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME</p>
+</li>
+<li><p>自动提交</p>
+<p>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，</p>
+<p>系统将自动进行提交，这就是自动提交。其格式为： SQL&gt;SET AUTOCOMMIT ON；</p>
+</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>COMMIT和ROLLBACK的用法</p>
+<p><a href="https://blog.csdn.net/yjtgod/article/details/9447379" target="_blank" rel="noopener">https://blog.csdn.net/yjtgod/article/details/9447379</a></p>
+<p>You do have to commit after inserting:</p>
+<p><a href="https://stackoverflow.com/questions/22488763/sqlite-insert-query-not-working-with-python" target="_blank" rel="noopener">https://stackoverflow.com/questions/22488763/sqlite-insert-query-not-working-with-python</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">commit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/SQL//" class="article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/15/SQL-03-Commit/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-SQLite-01-basic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1437,102 +1567,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/01/Numpy-16-array-init/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Matplotlib-06-arrow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/01/Matplotlib-06-arrow/">Matplotlib-06-arrow</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/01/Matplotlib-06-arrow/" class="archive-article-date">
-  	<time datetime="2018-04-01T03:01:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="matplotlib显示箭头"><a href="#matplotlib显示箭头" class="headerlink" title="matplotlib显示箭头"></a>matplotlib显示箭头</h1><p>梯度下降法中要可视化显示梯度变化情况时，通过matplotlib可以直观地输出结果。<br>以下是实现方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">5</span>,<span class="number">5</span>),dpi=<span class="number">80</span>)</span><br><span class="line">ax = plt.axes()</span><br><span class="line">ax.set_xlim(<span class="number">-10</span>, <span class="number">10</span>)</span><br><span class="line">ax.set_ylim(<span class="number">-10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">ax.arrow( <span class="number">-0.0</span>, <span class="number">-0.0</span>, <span class="number">1.0</span>, <span class="number">-1.0</span>, fc=<span class="string">"k"</span>, ec=<span class="string">"k"</span>, head_width=<span class="number">0.5</span>, head_length=<span class="number">0.5</span> )</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="Matplotlib-06-arrow/arrow.png" alt="png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">arrow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/01/Matplotlib-06-arrow/">展开全文 >></a>
         </p>
       
 
@@ -3193,6 +3227,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">glob</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kbuild</a>
               </li>
             
             <div class="clearfix"></div>

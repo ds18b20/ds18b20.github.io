@@ -156,6 +156,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-STM32-03-Printf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/24/STM32-03-Printf/">STM32-03-Printf</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/24/STM32-03-Printf/" class="archive-article-date">
+  	<time datetime="2020-04-24T05:51:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Use-printf-in-TrueStudio"><a href="#Use-printf-in-TrueStudio" class="headerlink" title="Use printf in TrueStudio"></a>Use printf in TrueStudio</h1><p>在TrueStudio中直接使用printf函数打印到串口，需要按照以下步骤设置：</p>
+<ol>
+<li><p>确认在项目包含的有效目录(比如main.c同目录)下有syscalls.c源文件；</p>
+</li>
+<li><p>在main.c中作为Private includes，添加<code>#include &lt;stdio.h&gt;</code>；</p>
+</li>
+<li><p>在main.c中作为Private define，添加如下代码段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __GNUC__ */</span></span></span><br><span class="line"><span class="keyword">void</span> __io_putchar(<span class="keyword">uint8_t</span> ch) &#123;</span><br><span class="line">  HAL_UART_Transmit(&amp;huart3, &amp;ch, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，此处<code>huart3</code>改成项目对应的外设变量。</p>
+</li>
+</ol>
+<p>然后就可以在main.c中使用printf函数打印输出到串口了。如果在其他c文件中使用，同样需要在文件头部添加<code>#include &lt;stdio.h&gt;</code>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">TrueStudio</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">printf</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/24/STM32-03-Printf/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-STM32-03-Printf-Float" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1034,108 +1124,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/12/C-04-stdlib/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32-01-Timer-Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/12/STM32-01-Timer-Int/">STM32-01-Timer-Int</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/12/STM32-01-Timer-Int/" class="archive-article-date">
-  	<time datetime="2020-04-12T04:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="两种定时器服务函数"><a href="#两种定时器服务函数" class="headerlink" title="两种定时器服务函数"></a>两种定时器服务函数</h1><p>如果使用HAL函数开发定时器，注意普通模式下的定时器和PWM模式下的定时器的中断相关函数是有区别的。</p>
-<ul>
-<li>定时器中断开启函数</li>
-<li>定时器中断服务函数</li>
-</ul>
-<h2 id="开启函数"><a href="#开启函数" class="headerlink" title="开启函数"></a>开启函数</h2><p>普通模式下的定时器，开启计时并使能中断应使用<code>HAL_TIM_Base_Start_IT</code>。</p>
-<p>PWM模式下的定时器，开启PWM并使能中断应使用<code>HAL_TIM_PWM_Start_IT</code>。</p>
-<h2 id="中断服务函数"><a href="#中断服务函数" class="headerlink" title="中断服务函数"></a>中断服务函数</h2><p>普通模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PeriodElapsedCallback</code>。</p>
-<p>PWM模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PWM_PulseFinishedCallback</code>。即使提供重写后的前者函数也不会被调用。另外，对于比较输出中断应使用<code>HAL_TIM_OC_DelayElapsedCallback</code>。(普通模式下的比较输出中断也是用这个？)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://matsubara-ui-design.net/2019/09/stm32-hal/" target="_blank" rel="noopener">http://matsubara-ui-design.net/2019/09/stm32-hal/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Timer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Interrupt</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HAL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/12/STM32-01-Timer-Int/">展开全文 >></a>
         </p>
       
 
@@ -2796,6 +2784,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">glob</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kbuild</a>
               </li>
             
             <div class="clearfix"></div>

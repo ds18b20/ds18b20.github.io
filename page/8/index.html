@@ -156,6 +156,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-STM32-01-Timer-Int" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/STM32-01-Timer-Int/">STM32-01-Timer-Int</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/STM32-01-Timer-Int/" class="archive-article-date">
+  	<time datetime="2020-04-12T04:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="两种定时器服务函数"><a href="#两种定时器服务函数" class="headerlink" title="两种定时器服务函数"></a>两种定时器服务函数</h1><p>如果使用HAL函数开发定时器，注意普通模式下的定时器和PWM模式下的定时器的中断相关函数是有区别的。</p>
+<ul>
+<li>定时器中断开启函数</li>
+<li>定时器中断服务函数</li>
+</ul>
+<h2 id="开启函数"><a href="#开启函数" class="headerlink" title="开启函数"></a>开启函数</h2><p>普通模式下的定时器，开启计时并使能中断应使用<code>HAL_TIM_Base_Start_IT</code>。</p>
+<p>PWM模式下的定时器，开启PWM并使能中断应使用<code>HAL_TIM_PWM_Start_IT</code>。</p>
+<h2 id="中断服务函数"><a href="#中断服务函数" class="headerlink" title="中断服务函数"></a>中断服务函数</h2><p>普通模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PeriodElapsedCallback</code>。</p>
+<p>PWM模式下的定时器，计数溢出中断应使用<code>HAL_TIM_PWM_PulseFinishedCallback</code>。即使提供重写后的前者函数也不会被调用。另外，对于比较输出中断应使用<code>HAL_TIM_OC_DelayElapsedCallback</code>。(普通模式下的比较输出中断也是用这个？)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://matsubara-ui-design.net/2019/09/stm32-hal/" target="_blank" rel="noopener">http://matsubara-ui-design.net/2019/09/stm32-hal/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Timer</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Interrupt</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HAL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/STM32//" class="article-tag-list-link color1">STM32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/STM32-01-Timer-Int/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ESP32-uPython-03-connectWiFi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1092,99 +1194,6 @@ conn = sqlite3.connect(&quot;../../wnjpn-0.9.db&quot;, check_same_thread=False)<
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/06/RaspberryPi-04-NAS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-02-WarningofConst" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/C-02-WarningofConst/">C-02-WarningofConst</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/11/C-02-WarningofConst/" class="archive-article-date">
-  	<time datetime="2020-02-11T10:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="warning-discards-‘const’-qualifiers-from-pointer-target-type"><a href="#warning-discards-‘const’-qualifiers-from-pointer-target-type" class="headerlink" title="warning: discards ‘const’ qualifiers from pointer target type"></a>warning: discards ‘const’ qualifiers from pointer target type</h1><p>首先这句警告的意思是，代码中把一个不可修改的指针类型const char * 转换成了char *，即移除了const修饰词。</p>
-<p>这就使本来不能修改的const类型变量变成了可以修改的一般变量了，因此抛出了该警告。</p>
-<p><a href="https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type" target="_blank" rel="noopener">https://stackoverflow.com/questions/37160873/warning-discards-const-qualifiers-from-pointer-target-type</a></p>
-<p><a href="https://blog.csdn.net/qq_36324796/article/details/79021258" target="_blank" rel="noopener">https://blog.csdn.net/qq_36324796/article/details/79021258</a></p>
-<p>另外，关于const修饰，可以参考<a href="https://blog.csdn.net/acorld/article/details/8921374" target="_blank" rel="noopener">https://blog.csdn.net/acorld/article/details/8921374</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">const</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/11/C-02-WarningofConst/">展开全文 >></a>
         </p>
       
 
@@ -2845,6 +2854,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">glob</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kbuild</a>
               </li>
             
             <div class="clearfix"></div>

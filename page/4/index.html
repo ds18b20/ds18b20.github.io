@@ -156,6 +156,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Pandas-10-drop-duplicates" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/27/Pandas-10-drop-duplicates/">Pandas-10-drop-duplicates</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/27/Pandas-10-drop-duplicates/" class="archive-article-date">
+  	<time datetime="2020-09-27T13:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="drop-duplicates"><a href="#drop-duplicates" class="headerlink" title="drop_duplicates"></a>drop_duplicates</h1><p><strong>DataFrame.drop_duplicates(subset=None, keep=’first’, inplace=False)</strong></p>
+<p>subset：用来指定特定的列，默认是所有列</p>
+<p>keep：指定处理重复值的方法：</p>
+<ul>
+<li>first：保留第一次出现的值</li>
+<li>last：保留最后一次出现的值</li>
+<li>False：删除所有重复值</li>
+</ul>
+<p>inplace：是直接在原来数据上修改还是保留一个副本</p>
+<p><a href="https://www.jianshu.com/p/8673cbcf732b" target="_blank" rel="noopener">https://www.jianshu.com/p/8673cbcf732b</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">drop duplicates</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Pandas//" class="article-tag-list-link color2">Pandas</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/27/Pandas-10-drop-duplicates/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Pandas-09-iterate-column" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -972,103 +1066,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/23/Pandas-06-to-csv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Opencv-05-imread-imwrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/20/Opencv-05-imread-imwrite/">Opencv-05-imread-imwrite</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/20/Opencv-05-imread-imwrite/" class="archive-article-date">
-  	<time datetime="2020-05-20T03:01:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="cv2读图片"><a href="#cv2读图片" class="headerlink" title="cv2读图片"></a>cv2读图片</h1><p>im = cv2.imwrite(path)</p>
-<h1 id="cv2写图片"><a href="#cv2写图片" class="headerlink" title="cv2写图片"></a>cv2写图片</h1><p>cv2.imwrite(path, im)</p>
-<p>注意，写入jpg的时候可以通过<code>cv2.IMWRITE_JPEG_QUALITY</code>指定图片质量[0, 100]，默认为95。</p>
-<p>例如，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imwrite(<span class="string">'lena.jpg'</span>, im, [cv2.IMWRITE_JPEG_QUALITY, <span class="number">50</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://note.nkmk.me/python-opencv-imread-imwrite/" target="_blank" rel="noopener">https://note.nkmk.me/python-opencv-imread-imwrite/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imread</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">imwrite</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Opencv//" class="article-tag-list-link color2">Opencv</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/20/Opencv-05-imread-imwrite/">展开全文 >></a>
         </p>
       
 
@@ -2729,6 +2726,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">glob</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kbuild</a>
               </li>
             
             <div class="clearfix"></div>

@@ -156,6 +156,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Matplotlib-09-imshow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/23/Matplotlib-09-imshow/">Matplotlib-09-imshow</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/23/Matplotlib-09-imshow/" class="archive-article-date">
+  	<time datetime="2018-08-23T14:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="matplotlib-imshow"><a href="#matplotlib-imshow" class="headerlink" title="matplotlib imshow"></a>matplotlib imshow</h1><p>用matplotlib显示cifar10数据集样本时，输出图片颜色怪异，原因在于用于显示的像素值需要转换成[0, 1]之间的浮点数。</p>
+<h2 id="直接显示raw图像："><a href="#直接显示raw图像：" class="headerlink" title="直接显示raw图像："></a>直接显示raw图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_1.png" alt=""></p>
+<h2 id="压缩到-0-1-后的图像："><a href="#压缩到-0-1-后的图像：" class="headerlink" title="压缩到[0, 1]后的图像："></a>压缩到[0, 1]后的图像：</h2><p><img src="Matplotlib-09-imshow%5Cfigure_2.png" alt=""></p>
+<p>这是因为imshow函数对输入数据的格式和类型有要求：</p>
+<p><code>matplotlib.pyplot.imshow</code>(<em>X</em>, <em>cmap=None</em>, <em>norm=None</em>, <em>aspect=None</em>, <em>interpolation=None</em>, <em>alpha=None</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>origin=None</em>, <em>extent=None</em>, <em>shape=None</em>, <em>filternorm=1</em>, <em>filterrad=4.0</em>, <em>imlim=None</em>, <em>resample=None</em>, <em>url=None</em>, <em>**, *data=None</em>, <em><em>\</em>kwargs</em>)</p>
+<blockquote>
+<p><strong>X</strong> : array-like or PIL image</p>
+<p>The image data. Supported array shapes are:</p>
+<ul>
+<li>(M, N): an image with scalar data. The data is visualized using a colormap.</li>
+<li>(M, N, 3): an image with RGB values (float or uint8).</li>
+<li>(M, N, 4): an image with RGBA values (float or uint8), i.e. including transparency.</li>
+</ul>
+<p>The first two dimensions (M, N) define the rows and columns of the image.</p>
+<p>The RGB(A) values should be in the range [0 .. 1] for floats or [0 .. 255] for integers. Out-of-range values will be clipped to these bounds.</p>
+</blockquote>
+<p>故，作为显示数据的X必须是[0, 1]的float或者[0, 255]的uint8类型。</p>
+<p>另外一个int的例子是，当数据类型是默认的int32类型时，显示颜色不正常：</p>
+<p><img src="Matplotlib-09-imshow%5Cint32.png" alt=""></p>
+<p>改成uint8类型之后，显示颜色变为正常了：</p>
+<p><img src="Matplotlib-09-imshow%5Cuint8.png" alt=""></p>
+<p>变换函数：<code>numpy_data.astype(&#39;uint8&#39;)</code></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat" target="_blank" rel="noopener">https://stackoverflow.com/questions/35420749/imshow-inverts-colors-after-using-astypefloat</a><br><a href="https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array" target="_blank" rel="noopener">https://stackoverflow.com/questions/24739769/matplotlib-imshow-plots-different-if-using-colormap-or-rgb-array</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">imshow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/23/Matplotlib-09-imshow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SQL-MySQL-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1176,95 +1291,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/08/11/SQL-02-Syntax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PyCharm-02-importError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/PyCharm-02-importError/">PyCharm-02-importError</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/PyCharm-02-importError/" class="archive-article-date">
-  	<time datetime="2018-08-07T14:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="同目录下的py文件无法import"><a href="#同目录下的py文件无法import" class="headerlink" title="同目录下的py文件无法import"></a>同目录下的py文件无法import</h1><p>目录FFF下新建两个.py文件：a.py和b.py。</p>
-<h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>在b.py内尝试<code>import a.py</code>，结果提示错误无法找到a.py。</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Pycharm不会将当前文件目录加入source_path内，所以需要手动加入。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p><img src="PyCharm-02-importError%5Cimport.png" alt=""></p>
-<p>Pycharm的导航栏内右击目录–&gt;Mark Directory as–&gt;Source Root即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">import local</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PyCharm//" class="article-tag-list-link color3">PyCharm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/PyCharm-02-importError/">展开全文 >></a>
         </p>
       
 
@@ -2925,6 +2951,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">glob</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kbuild</a>
               </li>
             
             <div class="clearfix"></div>
